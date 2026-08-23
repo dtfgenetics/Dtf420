@@ -6,6 +6,8 @@ New application codebase for the DTF420 platform.
 
 Bootstrap validation in progress. The current milestone proves that Next.js, TypeScript, and Phaser can build together cleanly before full Burn Buds gameplay, multiplayer, education, tools, or content migration are added.
 
+The bootstrap branch is verified by GitHub Actions before it can be considered for merge.
+
 ## Stack
 
 - Node.js 22
