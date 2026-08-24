@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THC Living Plant Atlas</title>
+  <meta name="description" content="Teaching Healthy Cultivation Living Plant Atlas: clickable cannabis plant education, diagnostics, measurements, and field cards." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <p class="eyebrow">Teaching Healthy Cultivation</p>
+    <h1>THC Living Plant Atlas</h1>
+    <p class="intro">A clickable plant interface connecting anatomy, physiology, diagnostics, measurements, images, and field cards.</p>
+  </header>
+
+  <main class="layout">
+    <section class="plant-stage" aria-label="Clickable plant atlas">
+      <div class="sun"></div>
+      <div class="flower"></div>
+      <div class="leaf leaf-a"></div>
+      <div class="leaf leaf-b"></div>
+      <div class="leaf leaf-c"></div>
+      <div class="leaf leaf-d"></div>
+      <div class="node node-a"></div>
+      <div class="node node-b"></div>
+      <div class="node node-c"></div>
+      <div class="stem"></div>
+      <div class="soil"></div>
+      <div class="root"><span></span><i></i></div>
+
+      <button class="hotspot seed" data-section="seed_germination">Seed</button>
+      <button class="hotspot roots" data-section="root_system">Roots</button>
+      <button class="hotspot stem-target" data-section="stem_vascular">Stem</button>
+      <button class="hotspot nodes" data-section="nodes_branching">Nodes</button>
+      <button class="hotspot leaves active" data-section="leaves">Leaves</button>
+      <button class="hotspot flowers" data-section="flowers">Flowers</button>
+      <button class="hotspot trichomes" data-section="trichomes_resin">Trichomes</button>
+      <button class="hotspot sex" data-section="sex_pollen_seed">Sex / Seed</button>
+      <button class="hotspot environment" data-section="environment_overlay">Environment</button>
+      <button class="hotspot diagnostics" data-section="diagnostic_overlay">Diagnostics</button>
+    </section>
+
+    <section class="info-panel" id="info-panel" aria-live="polite"></section>
+  </main>
+
+  <section class="module" id="leaf-module">
+    <div class="module-head">
+      <p class="eyebrow">First Production Module</p>
+      <h2>Leaf Module v1</h2>
+      <p>Leaves are the first build because most visible problems show up on leaves first. These starter pages support diagnostics, image analysis, and field-card education.</p>
+    </div>
+    <div class="cards" id="leaf-cards"></div>
+  </section>
+
+  <footer>
+    <p>THC — Teaching Healthy Cultivation. Observation first. Diagnosis second.</p>
+  </footer>
+
+  <script src="atlas-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
