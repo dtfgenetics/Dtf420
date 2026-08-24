@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { AtlasAssetRecord } from "@/lib/atlas-assets";
-import { AtlasPriorityVisual, isAtlasPriorityVisual } from "./AtlasPriorityVisual";
+import { AtlasPriorityVisual } from "./AtlasPriorityVisual";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -11,8 +11,16 @@ const statusLabels: Record<AtlasAssetRecord["status"], string> = {
   review: "Visual under review",
 };
 
+const priorityInteractiveAssetIds = new Set([
+  "atlas-seed-anatomy-v1",
+  "atlas-root-architecture-v1",
+  "atlas-healthy-leaf-baseline-v1",
+  "atlas-female-flower-anatomy-v1",
+  "atlas-trichome-types-v1",
+]);
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
-  const priorityInteractive = isAtlasPriorityVisual(asset.assetId);
+  const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
