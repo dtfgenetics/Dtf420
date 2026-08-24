@@ -1,0 +1,58 @@
+{
+  "seed_germination": {
+    "title": "Seed-to-Seedling Sequence Lab",
+    "principle": "Germination is a developmental sequence driven by hydration, metabolism, embryo growth, and emergence. Stage is more informative than elapsed time alone.",
+    "stages": [
+      {"id":"dry_seed","label":"Dry seed","visible":"Intact seed coat; no radicle visible.","biology":"The mature seed is metabolically quiet compared with active germination. Viability depends on embryo condition and storage history.","observe":"Seed coat integrity, storage history, obvious damage or mold."},
+      {"id":"imbibition","label":"Imbibition","visible":"Seed hydrates and swells before visible emergence.","biology":"Water uptake rehydrates tissues and supports renewed enzyme and metabolic activity.","observe":"Consistent moisture without prolonged waterlogging; temperature and oxygen context."},
+      {"id":"coat_split","label":"Seed coat split","visible":"The testa opens as the embryo expands.","biology":"Embryo growth produces enough force to separate the seed coat as germination progresses.","observe":"Do not confuse natural splitting with physical damage or decay."},
+      {"id":"radicle","label":"Radicle emergence","visible":"The embryonic root exits first and grows downward relative to gravity.","biology":"The radicle establishes the first root axis and begins anchorage and water uptake.","observe":"Radicle color, direction, damage, and whether surrounding media remains aerated."},
+      {"id":"emergence","label":"Shoot emergence","visible":"Hypocotyl elongation lifts the seedling toward the surface.","biology":"Stored seed reserves support early growth while the seedling transitions toward photosynthetic independence.","observe":"Stem stretch, media resistance, light availability after emergence, and damping-off symptoms."},
+      {"id":"cotyledons","label":"Cotyledons open","visible":"Cotyledons expand and the first true leaves begin forming.","biology":"Photosynthesis increases while the root system and first true leaves take over from seed reserves.","observe":"Cotyledon color, first true leaf shape, stem posture, root-zone moisture, and early growth rate."}
+    ]
+  },
+  "nodes_branching": {
+    "title": "Canopy Architecture Lab",
+    "principle": "Branching pattern is shaped by genetics, light, resource status, hormones, node development, and training. Training changes architecture; it does not create energy by itself.",
+    "modes": [
+      {"id":"natural","label":"Natural","effect":"The main shoot remains dominant while axillary branches develop according to genotype and environment.","watch":"Internode length, branch angle, light distribution, and vigor."},
+      {"id":"topping","label":"Topping","effect":"Removing the shoot apex interrupts apical dominance and allows nearby axillary branches to compete more strongly for growth.","watch":"Recovery at the cut, symmetry of responding branches, and plant vigor before further training."},
+      {"id":"lst","label":"LST","effect":"Bending and positioning shoots changes orientation and light exposure without removing the main apex.","watch":"Stem stress, tie pressure, branch spacing, and whether the canopy actually receives more even light."},
+      {"id":"scrog","label":"SCROG","effect":"A screen is used to distribute many shoots across a wider horizontal canopy so growing points occupy separate light zones.","watch":"Crowding below the screen, airflow, access, branch support, and continued stretch."}
+    ]
+  },
+  "leaves": {
+    "title": "Leaf Pattern Interpretation Lab",
+    "principle": "A leaf symptom is a pattern to describe before it is a cause to name. Location, distribution, progression, root-zone context, pests, and environment determine what the pattern means.",
+    "patterns": [
+      {"id":"healthy","label":"Healthy baseline","description":"Uniform green appropriate to the cultivar, intact margins, normal posture, and no expanding lesions.","firstChecks":["Compare new and old leaves","Check upper and lower surfaces","Use this as the visual baseline"]},
+      {"id":"interveinal","label":"Interveinal chlorosis","description":"Leaf tissue between veins becomes lighter while veins remain comparatively greener.","firstChecks":["Old or new growth first?","How quickly is it spreading?","Check pH, EC, roots, and recent feed history"]},
+      {"id":"marginal","label":"Marginal necrosis","description":"Dead or browning tissue develops along leaf edges or serrations.","firstChecks":["Dry/crisp or wet/soft?","High EC or severe dryback?","Heat, airflow, disease, and root-zone context"]},
+      {"id":"tip","label":"Tip burn","description":"Damage begins at leaflet tips and may progress inward if the underlying stress continues.","firstChecks":["Is the damage uniform across the canopy?","Check EC and irrigation history","Look for simultaneous margin or root symptoms"]},
+      {"id":"posture","label":"Curl / posture change","description":"Tacoing, canoeing, clawing, drooping, twisting, or cupping changes leaf orientation without being a diagnosis by itself.","firstChecks":["Upward or downward?","Upper or lower canopy?","Light cycle timing, moisture status, temperature, RH, and airflow"]},
+      {"id":"stippling","label":"Stippling / feeding marks","description":"Many small pale points or silvered areas can indicate surface or cell-feeding damage, but magnified inspection is needed.","firstChecks":["Inspect underside closely","Look for webbing, insects, eggs, frass, or silvering","Compare random vs patterned distribution"]}
+    ]
+  },
+  "environment_overlay": {
+    "title": "Environment Relationship Lab",
+    "principle": "The plant experiences a coupled environment. Light changes leaf energy load; temperature and humidity shape evaporative demand; airflow alters boundary layers; root water supply must support the canopy response.",
+    "factors": [
+      {"id":"light","label":"Light / PPFD","connections":["leaf_temperature","water","co2"],"summary":"More incident light can increase photosynthetic opportunity and leaf energy load. Response depends on CO₂, temperature, water supply, nutrition, acclimation, and genetics."},
+      {"id":"leaf_temperature","label":"Leaf temperature","connections":["light","rh","vpd","airflow"],"summary":"Leaf temperature can differ from air temperature and directly affects saturation vapor pressure at the leaf surface and therefore plant evaporative demand."},
+      {"id":"rh","label":"Relative humidity","connections":["leaf_temperature","vpd","airflow"],"summary":"RH describes air moisture relative to temperature. Its biological effect must be interpreted with leaf temperature and air temperature rather than in isolation."},
+      {"id":"vpd","label":"VPD","connections":["leaf_temperature","rh","water","airflow"],"summary":"VPD represents the vapor-pressure difference driving transpiration. It is a derived relationship, not a standalone environmental knob."},
+      {"id":"airflow","label":"Airflow","connections":["leaf_temperature","vpd","rh"],"summary":"Air movement influences leaf boundary layers, heat exchange, gas exchange, and local humidity. Excessive or poorly distributed airflow can also stress tissue."},
+      {"id":"water","label":"Root water supply","connections":["vpd","light","ec"],"summary":"Canopy demand must be matched by root water uptake. Media moisture, oxygen, EC, roots, and irrigation timing all affect the supply side."},
+      {"id":"co2","label":"CO₂","connections":["light","leaf_temperature"],"summary":"CO₂ availability interacts with light and temperature in photosynthesis. Added CO₂ does not compensate for poor water, light, temperature, or root-zone management."},
+      {"id":"ec","label":"Root-zone EC","connections":["water"],"summary":"Ionic concentration affects osmotic conditions around roots and must be interpreted with irrigation, dryback, media, crop stage, and measurement method."}
+    ]
+  },
+  "diagnostic_overlay": {
+    "title": "Observation-First Diagnostic Lab",
+    "principle": "The goal is not to guess a deficiency from a picture. Build an evidence profile first, then rank plausible causes and decide what measurement or inspection would discriminate between them.",
+    "locations":["newest growth","upper canopy","middle canopy","older/lower leaves","one branch","whole plant","root zone"],
+    "patterns":["uniform yellowing","interveinal yellowing","tip/margin damage","spots or lesions","curl/posture change","wilting","stunting or slow growth","visible pest signs"],
+    "speeds":["slow over many days","noticeable over several days","rapid within a day or two","sudden after a recent change"],
+    "context":["media currently dry","media evenly moist","media staying wet","unknown moisture pattern"]
+  }
+}
