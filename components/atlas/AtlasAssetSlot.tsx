@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { AtlasAssetRecord } from "@/lib/atlas-assets";
+import { AtlasPriorityVisual, isAtlasPriorityVisual } from "./AtlasPriorityVisual";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -11,6 +12,8 @@ const statusLabels: Record<AtlasAssetRecord["status"], string> = {
 };
 
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
+  const priorityInteractive = isAtlasPriorityVisual(asset.assetId);
+
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
       <div className={styles.topline}>
@@ -18,7 +21,9 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
         <small>{asset.assetId} · v{asset.version}</small>
       </div>
 
-      {asset.path ? (
+      {priorityInteractive ? (
+        <AtlasPriorityVisual assetId={asset.assetId} />
+      ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />
         </div>
