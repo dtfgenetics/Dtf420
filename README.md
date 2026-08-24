@@ -1,22 +1,35 @@
-# Dtf420 — THC Living Plant Atlas
+# DTF420
 
-Static starter site for **Teaching Healthy Cultivation**.
+New application codebase for the DTF420 platform.
 
-## What is included
+## Status
 
-- `index.html` — clickable Living Plant Atlas interface.
-- `styles.css` — responsive atlas styling.
-- `atlas-data.js` — atlas sections and Leaf Module content.
-- `content/atlas-sections.json` — source data for the 10 atlas sections.
-- `content/leaf-module-pages.json` — first 10 Leaf Module page outlines.
-- `content/diagnostic-framework.json` — observation-first diagnostic framework.
-- `configuration/image-placement-map.csv` — first image production map.
-- `downloadables/thc-leaf-diagnostic-field-card.md` — first field card copy.
+Bootstrap validation in progress. The current milestone proves that Next.js, TypeScript, and Phaser can build together cleanly before full Burn Buds gameplay, multiplayer, education, tools, or content migration are added.
 
-## Build direction
+The bootstrap branch is verified by GitHub Actions before it can be considered for merge.
 
-The plant itself is the interface. Users click plant structures or overlays to reach educational content, diagnostics, measurements, images, and field cards.
+## Stack
 
-## Diagnostic rule
+- Node.js 22
+- Next.js 16
+- React 19
+- TypeScript
+- Phaser 4
 
-A symptom is evidence, not proof. The system separates observation from diagnosis and requires context from environment, root zone, plant stage, pest inspection, and recent grower actions.
+## Local commands
+
+```bash
+npm install
+npm run dev
+npm run verify
+```
+
+`npm run verify` runs ESLint, TypeScript checking, and a production Next.js build.
+
+## Project boundaries
+
+- DTF420 owns games, education, tools, and community features.
+- DTFSeeds remains a separate repository and production site.
+- Multiplayer WebSocket hosting will be a separate service; it will not be embedded into Hostinger Business Web Hosting.
+
+See `docs/ARCHITECTURE.md` and `docs/DEPLOYMENT.md`.
