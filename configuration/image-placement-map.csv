@@ -1,0 +1,10 @@
+asset_id,section,page_slug,asset_type,placement,description,style,priority,status
+leaves_hero_001,leaves,,section hero,hero,Healthy fan leaf reference plate,academic studio quality,high,needed
+leaf_anatomy_001,leaves,leaf-anatomy,labeled diagram,hero,"Labeled fan leaf showing leaflet, serrations, veins, midrib, petiole, upper/lower surface",academic vector,high,needed
+stomata_open_closed_001,leaves,stomata,diagram,hero,Open vs closed stomata with guard cells and CO2/water vapor arrows,microscope-style illustration,high,needed
+transpiration_flow_001,leaves,transpiration,infographic,hero,Water movement from media to roots through xylem to leaves and out stomata,academic flow diagram,high,needed
+chlorosis_patterns_001,leaves,chlorosis,comparison chart,hero,"Uniform yellowing, interveinal yellowing, marginal yellowing, old-growth vs new-growth patterns",diagnostic reference chart,high,needed
+necrosis_patterns_001,leaves,necrosis,comparison chart,hero,"Tip burn, marginal burn, rust spots, blotches, spreading lesions",diagnostic reference chart,high,needed
+leaf_curl_patterns_001,leaves,leaf-curl,comparison chart,hero,"Tacoing/canoeing, clawing, drooping, twisting, cupping",diagnostic reference chart,high,needed
+pest_damage_001,leaves,pest-damage-on-leaves,comparison chart,hero,"Stippling, webbing, miner trails, thrips silvering, eggs underside, chewed edges",diagnostic reference chart,high,needed
+environment_leaf_stress_001,leaves,environmental-stress-on-leaves,map,hero,"Canopy map showing heat, light, airflow, and humidity stress zones",semi-realistic diagnostic map,high,needed
