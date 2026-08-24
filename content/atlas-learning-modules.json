@@ -1,0 +1,122 @@
+[
+  {
+    "id": "seed_germination",
+    "label": "Seed & Germination",
+    "learningGoals": ["Identify external and internal seed structures", "Follow imbibition through radicle emergence", "Recognize healthy cotyledon transition", "Separate environmental failure points from seed viability problems"],
+    "lessons": [
+      {"title":"Seed anatomy","summary":"Locate the seed coat, embryo, cotyledon tissue, radicle, and micropyle and connect each structure to germination.","visual":"Cutaway seed anatomy plate"},
+      {"title":"Imbibition","summary":"See how water uptake rehydrates seed tissues and restarts metabolic activity before visible germination.","visual":"Hydration sequence diagram"},
+      {"title":"Radicle emergence","summary":"Follow the radicle as the first root organ emerges and establishes the direction of early seedling growth.","visual":"Time-sequence germination strip"},
+      {"title":"Cotyledon transition","summary":"Track emergence from the seed shell through cotyledon opening and the first true leaves.","visual":"Seedling transition timeline"},
+      {"title":"Germination failure patterns","summary":"Compare stalled seeds, damping-off risk, shell retention, excessive moisture, and temperature-related delays without assuming one cause from appearance alone.","visual":"Failure-pattern comparison card"}
+    ]
+  },
+  {
+    "id": "root_system",
+    "label": "Root System",
+    "learningGoals": ["Distinguish primary, lateral, and fine absorbing roots", "Understand root hairs and rhizosphere exchange", "Connect root oxygen and water status to whole-plant behavior", "Recognize root-zone warning signs"],
+    "lessons": [
+      {"title":"Root architecture","summary":"Follow primary roots, lateral branching, fine roots, and root hairs through the occupied media volume.","visual":"Root-zone cutaway"},
+      {"title":"Root hairs & absorption","summary":"See where most short-lived absorbing surface develops and how root hairs increase contact with the surrounding solution and media.","visual":"Root-hair microscope diagram"},
+      {"title":"Rhizosphere","summary":"Explore the narrow root-influenced zone where water, ions, microbes, exudates, and oxygen conditions interact.","visual":"Rhizosphere interaction map"},
+      {"title":"Water & nutrient uptake","summary":"Connect substrate moisture, ion availability, root membrane transport, transpiration demand, and vascular movement.","visual":"Root-to-shoot uptake flow"},
+      {"title":"Root stress","summary":"Compare low oxygen, persistent saturation, excessive dryback, salt stress, temperature stress, and visible root decline as patterns that require context.","visual":"Healthy vs stressed root comparison"}
+    ]
+  },
+  {
+    "id": "stem_vascular",
+    "label": "Stem & Vascular System",
+    "learningGoals": ["Identify major stem tissues", "Separate xylem and phloem functions", "Understand internodal elongation", "Connect training damage to vascular recovery"],
+    "lessons": [
+      {"title":"Stem cross-section","summary":"Identify epidermal, cortex, vascular, and pith regions in a simplified cannabis stem cross-section.","visual":"Labeled stem cross-section"},
+      {"title":"Xylem transport","summary":"Follow water and dissolved mineral movement from roots toward transpiring shoots and leaves.","visual":"Xylem upward-flow animation"},
+      {"title":"Phloem transport","summary":"Follow movement of photosynthate from source tissues toward growing and storage sinks throughout the plant.","visual":"Source-to-sink phloem map"},
+      {"title":"Internodal spacing","summary":"Connect internode length to developmental stage, genetics, light environment, temperature, and growth rate rather than treating it as a single-variable trait.","visual":"Internode comparison ruler"},
+      {"title":"Damage & recovery","summary":"See how bending, crushing, pruning, and breakage affect support and transport and why damage severity matters.","visual":"Stem damage response sequence"}
+    ]
+  },
+  {
+    "id": "nodes_branching",
+    "label": "Nodes & Branching",
+    "learningGoals": ["Locate nodes, internodes, and axillary buds", "Understand apical dominance", "Predict branch response after pruning", "Compare major canopy-training approaches"],
+    "lessons": [
+      {"title":"Node anatomy","summary":"Locate the leaf attachment, axillary bud, branch origin, and adjoining internodes at a cannabis node.","visual":"Node anatomy close-up"},
+      {"title":"Apical dominance","summary":"Understand how the shoot apex influences lateral growth and why removing or repositioning the apex changes branching behavior.","visual":"Apical dominance flow diagram"},
+      {"title":"Topping & FIM","summary":"Compare removal points and the resulting redistribution of active shoot growth without treating every plant response as identical.","visual":"Cut-location comparison"},
+      {"title":"LST & directional growth","summary":"See how branch orientation and light exposure can redistribute canopy height while preserving tissue continuity.","visual":"LST before-and-after canopy map"},
+      {"title":"Mainlining & SCROG","summary":"Compare structured branch selection with screen-based canopy distribution as different ways to organize growing points.","visual":"Training-system comparison"}
+    ]
+  },
+  {
+    "id": "leaves",
+    "label": "Leaves",
+    "learningGoals": ["Use a healthy leaf as the diagnostic baseline", "Understand photosynthesis, stomata, and transpiration", "Describe symptom pattern precisely", "Separate visual observation from diagnosis"],
+    "lessons": [
+      {"title":"Healthy leaf baseline","summary":"Use leaflet shape, venation, petiole, surface condition, color distribution, and posture as the reference before judging abnormality.","visual":"Healthy fan leaf reference plate"},
+      {"title":"Photosynthesis","summary":"Connect light capture, carbon dioxide entry, water status, chloroplast function, and carbohydrate production.","visual":"Leaf photosynthesis flow"},
+      {"title":"Stomata & transpiration","summary":"Link stomatal opening, vapor pressure conditions, carbon dioxide exchange, and water loss.","visual":"Stomata and transpiration composite"},
+      {"title":"Symptom pattern language","summary":"Describe chlorosis, necrosis, spotting, curl, wilt, and texture by location and distribution before assigning a cause.","visual":"Leaf symptom pattern atlas"},
+      {"title":"Leaf inspection workflow","summary":"Inspect upper and lower surfaces, new and old growth, margins, veins, petioles, pests, residue, and progression over time.","visual":"Leaf inspection field card"}
+    ]
+  },
+  {
+    "id": "flowers",
+    "label": "Flowers",
+    "learningGoals": ["Identify major female flower structures", "Follow flower development", "Recognize pollination-related changes", "Use multiple maturity signals instead of one visual cue"],
+    "lessons": [
+      {"title":"Female flower anatomy","summary":"Locate bracts, stigmas, pistillate structures, sugar leaves, and dense floral clusters using a labeled reference.","visual":"Female flower anatomy plate"},
+      {"title":"Flower initiation","summary":"Follow the transition from preflower expression into expanding floral sites and stacked inflorescences.","visual":"Early-flower timeline"},
+      {"title":"Bud development","summary":"Track changes in bract expansion, stigma appearance, resin coverage, density, and senescence across maturation.","visual":"Flower development sequence"},
+      {"title":"Pollination response","summary":"See how successful pollination redirects development toward seed formation and changes the appearance of individual floral structures.","visual":"Pollinated vs unpollinated comparison"},
+      {"title":"Maturity & risk inspection","summary":"Combine trichome condition, flower development, senescence, cultivar behavior, and mold inspection rather than relying on stigma color alone.","visual":"Maturity inspection checklist"}
+    ]
+  },
+  {
+    "id": "trichomes_resin",
+    "label": "Trichomes & Resin",
+    "learningGoals": ["Distinguish major glandular trichome forms", "Identify the resin head and stalk", "Use magnification correctly", "Interpret maturity observations cautiously"],
+    "lessons": [
+      {"title":"Trichome types","summary":"Compare capitate-stalked, capitate-sessile, and bulbous glandular trichome forms by scale and structure.","visual":"Trichome type microscope plate"},
+      {"title":"Gland anatomy","summary":"Identify the stalk, gland head, secretory region, and cuticular storage space in a simplified glandular trichome model.","visual":"Trichome gland cutaway"},
+      {"title":"Where to inspect","summary":"Compare trichomes on bracts and nearby sugar leaves and avoid treating every visible gland as equally representative of floral maturity.","visual":"Microscope sampling map"},
+      {"title":"Clear, cloudy & amber","summary":"Use apparent optical condition as one observation among several, recognizing that lighting, focus, tissue sampled, and cultivar can affect interpretation.","visual":"Trichome appearance comparison"},
+      {"title":"Microscope workflow","summary":"Standardize magnification, sample location, lighting, and repeated observations so maturity comparisons are more consistent.","visual":"Microscope inspection field card"}
+    ]
+  },
+  {
+    "id": "sex_pollen_seed",
+    "label": "Sex, Pollen & Seeds",
+    "learningGoals": ["Distinguish common male and female reproductive structures", "Recognize mixed-sex expression", "Understand pollen transfer and fertilization", "Follow seed development to maturity"],
+    "lessons": [
+      {"title":"Male vs female preflowers","summary":"Compare developing staminate and pistillate structures at nodes using multiple views and developmental stages.","visual":"Male/female comparison plate"},
+      {"title":"Mixed-sex expression","summary":"Identify anthers or staminate structures appearing on otherwise female plants and distinguish observations from assumptions about cause.","visual":"Mixed-sex structure reference"},
+      {"title":"Pollen biology","summary":"Follow pollen production, release, transport, stigma contact, and the first steps toward fertilization.","visual":"Pollen pathway diagram"},
+      {"title":"Seed formation","summary":"Track ovule fertilization through developing seed coat, embryo, filling, and physical maturity.","visual":"Seed development cutaway series"},
+      {"title":"Controlled pollination","summary":"Map isolation, pollen handling, target selection, labeling, and record keeping as the core observational workflow for intentional crosses.","visual":"Controlled-pollination workflow"}
+    ]
+  },
+  {
+    "id": "environment_overlay",
+    "label": "Environment Overlay",
+    "learningGoals": ["See environment as interacting variables", "Connect leaf and root responses to atmospheric demand", "Relate light and temperature to transpiration", "Use measurements as context instead of isolated targets"],
+    "lessons": [
+      {"title":"Light distribution","summary":"Map high- and low-light zones across the canopy and connect PPFD distribution to leaf position and canopy architecture.","visual":"Canopy PPFD overlay"},
+      {"title":"Temperature & humidity","summary":"See how air temperature and relative humidity combine to shape evaporative demand rather than acting as independent numbers.","visual":"Temperature/RH interaction overlay"},
+      {"title":"VPD & transpiration","summary":"Connect vapor pressure deficit to stomatal behavior, leaf temperature, water movement, and changing plant demand.","visual":"Whole-plant VPD flow"},
+      {"title":"Airflow & boundary layer","summary":"Visualize air movement around leaves and the still-air boundary layer that influences heat and vapor exchange.","visual":"Leaf boundary-layer animation"},
+      {"title":"Root-zone interaction","summary":"Overlay media moisture, oxygen, pH, EC, root temperature, and atmospheric demand to show why plant response depends on the whole system.","visual":"Environment-to-root interaction map"}
+    ]
+  },
+  {
+    "id": "diagnostic_overlay",
+    "label": "Diagnostic Overlay",
+    "learningGoals": ["Locate symptoms before naming causes", "Use old-vs-new and upper-vs-lower growth patterns", "Collect environmental and root-zone context", "Build a differential rather than a single visual guess"],
+    "lessons": [
+      {"title":"Symptom location","summary":"Mark whether the first visible problem begins on old leaves, new growth, upper canopy, lower canopy, one branch, roots, or the whole plant.","visual":"Whole-plant symptom locator"},
+      {"title":"Pattern description","summary":"Describe uniform, interveinal, marginal, spotted, tip-focused, twisted, wilted, or asymmetric symptoms before assigning cause.","visual":"Pattern vocabulary panel"},
+      {"title":"Progression over time","summary":"Compare sudden, gradual, stable, spreading, and recovering patterns and record what changed before symptoms appeared.","visual":"Symptom progression timeline"},
+      {"title":"Measurement context","summary":"Bring pH, EC, substrate moisture, temperature, RH, VPD, PPFD, and feed/water history into the same diagnostic record.","visual":"Diagnostic measurement dashboard"},
+      {"title":"Differential workflow","summary":"Rank plausible environmental, root-zone, nutritional, pest, pathogen, and physical explanations and use new observations to narrow them.","visual":"Observation-to-differential decision map"}
+    ]
+  }
+]
