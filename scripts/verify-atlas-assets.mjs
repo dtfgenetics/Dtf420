@@ -2,8 +2,15 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const modules = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-learning-modules.json"), "utf8"));
-const overrides = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-asset-overrides.json"), "utf8"));
+const contentDir = path.join(root, "content");
+const modules = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-learning-modules.json"), "utf8"));
+const manifestFiles = fs
+  .readdirSync(contentDir)
+  .filter((name) => name.startsWith("atlas-asset-overrides") && name.endsWith(".json"))
+  .sort();
+const overrides = manifestFiles.flatMap((name) =>
+  JSON.parse(fs.readFileSync(path.join(contentDir, name), "utf8")),
+);
 
 function slugify(value) {
   return value
@@ -50,4 +57,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Atlas asset registry verified: ${validKeys.size} lesson slots, ${overrides.length} production overrides.`);
+console.log(`Atlas asset registry verified: ${validKeys.size} lesson slots, ${overrides.length} production overrides across ${manifestFiles.length} manifest files.`);
