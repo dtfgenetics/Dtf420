@@ -1,0 +1,72 @@
+[
+  {
+    "key": "seed-germination__cotyledon-transition",
+    "assetId": "atlas-cotyledon-transition-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-seedling-transition",
+    "path": null,
+    "altText": "Interactive seedling transition showing shell release, cotyledon expansion, hypocotyl extension, first true leaves, and the developmental handoff toward true-leaf photosynthesis.",
+    "productionBrief": "Academic seedling transition sequence from seed-coat release through cotyledon expansion and first true leaves. Keep cotyledons distinct from true leaves and present later cotyledon senescence as developmental context rather than an automatic deficiency diagnosis."
+  },
+  {
+    "key": "root-system__root-stress",
+    "assetId": "atlas-root-stress-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-root-stress-comparison",
+    "path": null,
+    "altText": "Interactive root stress comparison covering healthy context, low oxygen, excessive dryback, high ionic concentration, and temperature stress.",
+    "productionBrief": "Side-by-side root-zone stress comparison. Include healthy context, low oxygen or saturation, excessive dryback, high root-zone ionic concentration, and root temperature stress. Avoid claiming root color alone diagnoses a condition and note that multiple stresses can produce overlapping shoot symptoms."
+  },
+  {
+    "key": "stem-vascular__internodal-spacing",
+    "assetId": "atlas-internode-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-internode-comparison",
+    "path": null,
+    "altText": "Interactive internode comparison showing nodes, compact and extended spacing, light context, and the need to compare equivalent developmental positions.",
+    "productionBrief": "Botanical stem comparison emphasizing node-to-node distance. Show compact and extended examples alongside light context, while stating that genetics, stage, temperature, spectrum and growth rate interact. Avoid equating one spacing pattern with universally healthy or unhealthy growth."
+  },
+  {
+    "key": "nodes-branching__topping-and-fim",
+    "assetId": "atlas-topping-fim-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-cut-location-comparison",
+    "path": null,
+    "altText": "Interactive topping and partial-apex-removal comparison showing the intact apex, topping cut, FIM-style partial removal, lateral response, and recovery period.",
+    "productionBrief": "Training diagram comparing a clean topping cut with partial shoot-tip removal commonly called FIM. Show which meristematic tissues remain and resulting lateral growth as variable responses. Do not guarantee a fixed number of new shoots and include recovery context."
+  },
+  {
+    "key": "nodes-branching__lst-and-directional-growth",
+    "assetId": "atlas-lst-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-lst-canopy-map",
+    "path": null,
+    "altText": "Interactive low-stress-training diagram showing a gentle bend, anchor point, redistributed light exposure, shoot reorientation, and canopy organization.",
+    "productionBrief": "Before-and-after low-stress-training diagram showing shoot repositioning without intentional stem severing, a non-constricting anchor, changing light exposure, gravitropic or phototropic reorientation and canopy distribution. Avoid claiming a guaranteed yield increase."
+  },
+  {
+    "key": "diagnostic-overlay__symptom-location",
+    "assetId": "atlas-symptom-location-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-whole-plant-symptom-locator",
+    "path": null,
+    "altText": "Interactive whole-plant symptom locator distinguishing new growth, older leaves, upper canopy, a localized branch or sector, and root or whole-plant patterns.",
+    "productionBrief": "Whole-plant symptom locator used before diagnosis. Provide selectable new growth, older or lower leaves, upper canopy, one branch or sector, roots and whole-plant patterns. The graphic must teach location as evidence without mapping any location directly to a single nutrient, pest or disease."
+  },
+  {
+    "key": "diagnostic-overlay__progression-over-time",
+    "assetId": "atlas-progression-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-symptom-timeline",
+    "path": null,
+    "altText": "Interactive symptom timeline distinguishing onset, active spread, stable old damage, recovery in new growth, and time-aligned grow actions or measurements.",
+    "productionBrief": "Diagnostic time-series visual separating first onset, spreading symptoms, stable old damage and recovery indicators. Align irrigation, feeding, environmental changes, sprays, training and measurements with symptom time so learners do not expect dead or damaged tissue to return to normal."
+  }
+]
