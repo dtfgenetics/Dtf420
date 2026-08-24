@@ -7,6 +7,7 @@ import { AtlasCrossSystemVisual } from "./AtlasCrossSystemVisual";
 import { AtlasCoreStructureVisual } from "./AtlasCoreStructureVisual";
 import { AtlasGrowthDiagnosticVisual } from "./AtlasGrowthDiagnosticVisual";
 import { AtlasFinalVisualA } from "./AtlasFinalVisualA";
+import { AtlasFinalVisualB } from "./AtlasFinalVisualB";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -81,6 +82,16 @@ const finalAInteractiveAssetIds = new Set([
   "atlas-trichome-appearance-v1",
 ]);
 
+const finalBInteractiveAssetIds = new Set([
+  "atlas-microscope-workflow-v1",
+  "atlas-preflowers-v1",
+  "atlas-mixed-sex-v1",
+  "atlas-controlled-pollination-v1",
+  "atlas-temp-rh-v1",
+  "atlas-boundary-layer-v1",
+  "atlas-pattern-description-v1",
+]);
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
   const processInteractive = processInteractiveAssetIds.has(asset.assetId);
@@ -89,6 +100,7 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const coreStructureInteractive = coreStructureInteractiveAssetIds.has(asset.assetId);
   const growthDiagnosticInteractive = growthDiagnosticInteractiveAssetIds.has(asset.assetId);
   const finalAInteractive = finalAInteractiveAssetIds.has(asset.assetId);
+  const finalBInteractive = finalBInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
@@ -111,6 +123,8 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
         <AtlasGrowthDiagnosticVisual assetId={asset.assetId} />
       ) : finalAInteractive ? (
         <AtlasFinalVisualA assetId={asset.assetId} />
+      ) : finalBInteractive ? (
+        <AtlasFinalVisualB assetId={asset.assetId} />
       ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />
