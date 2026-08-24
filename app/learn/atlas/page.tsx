@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LivingPlantAtlas } from "@/components/atlas/LivingPlantAtlas";
+import { AtlasVisualOverlays } from "@/components/atlas/AtlasVisualOverlays";
 import { AtlasLearningModules } from "@/components/atlas/AtlasLearningModules";
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export default function AtlasPage() {
   return (
     <section className="shell page-section">
       <LivingPlantAtlas />
+      <AtlasVisualOverlays />
       <AtlasLearningModules />
     </section>
   );
