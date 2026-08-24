@@ -1,0 +1,52 @@
+[
+  {
+    "key": "seed-germination__seed-anatomy",
+    "assetId": "atlas-seed-anatomy-v1",
+    "status": "brief_ready",
+    "version": 1,
+    "assetType": "academic-cutaway",
+    "path": null,
+    "altText": "Scientific cutaway of a cannabis seed labeling the seed coat, cotyledon tissue, embryo axis, radicle, and micropyle.",
+    "productionBrief": "Academic studio botanical plate. Single mature cannabis seed shown intact beside a precise cutaway. Label seed coat, cotyledon tissue, embryo axis, radicle, and micropyle. Neutral cream-to-charcoal background, realistic botanical texture, clean leader lines, no decorative cannabis imagery, no yellow cast, no exaggerated embryo anatomy."
+  },
+  {
+    "key": "root-system__root-architecture",
+    "assetId": "atlas-root-architecture-v1",
+    "status": "brief_ready",
+    "version": 1,
+    "assetType": "root-zone-cutaway",
+    "path": null,
+    "altText": "Cannabis root-zone cutaway showing the main root axis, lateral roots, fine absorbing roots, root hairs, and occupied substrate volume.",
+    "productionBrief": "High-detail academic root-zone cutaway of a healthy cannabis plant in an inert generic substrate profile. Clearly distinguish primary axis, lateral roots, fine roots and root-hair zone. Show realistic branching density without implying every root is visibly white. Include scale context and labeled callouts. No nutrient-brand imagery and no decorative yellow grading."
+  },
+  {
+    "key": "leaves__healthy-leaf-baseline",
+    "assetId": "atlas-healthy-leaf-baseline-v1",
+    "status": "brief_ready",
+    "version": 1,
+    "assetType": "reference-plate",
+    "path": null,
+    "altText": "Healthy cannabis fan leaf reference plate showing leaflet shape, serrations, venation, midrib, petiole, upper surface, and lower surface.",
+    "productionBrief": "Academic studio reference plate of a healthy mature cannabis fan leaf. Include top and underside views plus detail callouts for leaflet, serration, midrib, secondary veins and petiole. Natural healthy green variation, realistic texture, calibrated neutral lighting, no glossy artificial look, no yellow filter."
+  },
+  {
+    "key": "flowers__female-flower-anatomy",
+    "assetId": "atlas-female-flower-anatomy-v1",
+    "status": "brief_ready",
+    "version": 1,
+    "assetType": "anatomy-plate",
+    "path": null,
+    "altText": "Female cannabis flower anatomy plate labeling bracts, stigmas, pistillate structures, sugar leaves, and clustered floral tissue.",
+    "productionBrief": "High-resolution botanical anatomy plate of a female cannabis inflorescence using a realistic representative flower cluster. Label bracts, paired stigmas emerging from pistillate flowers, sugar leaves and clustered floral structure. Avoid calling the whole bract a calyx. Do not invent visible ovaries or exaggerated resin. Neutral studio lighting and scientifically restrained labeling."
+  },
+  {
+    "key": "trichomes-resin__trichome-types",
+    "assetId": "atlas-trichome-types-v1",
+    "status": "brief_ready",
+    "version": 1,
+    "assetType": "microscope-comparison",
+    "path": null,
+    "altText": "Microscope comparison of bulbous, capitate-sessile, and capitate-stalked glandular cannabis trichomes with relative scale.",
+    "productionBrief": "Scientific microscope-style comparison plate of glandular cannabis trichome types: bulbous, capitate-sessile and capitate-stalked. Show relative scale and morphology without presenting them as equal size. Include stalk and gland-head labels where applicable. Realistic translucent tissue and resin appearance, neutral color balance, no psychedelic styling."
+  }
+]

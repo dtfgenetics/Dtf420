@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "verify": "npm run lint && npm run typecheck && npm run build"
+    "verify:atlas-assets": "node scripts/verify-atlas-assets.mjs",
+    "verify": "npm run verify:atlas-assets && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.2",

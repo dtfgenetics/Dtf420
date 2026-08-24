@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import modules from "@/content/atlas-learning-modules.json";
 import atlasSections from "@/content/atlas-sections.json";
 import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
+import { AtlasAssetSlot } from "@/components/atlas/AtlasAssetSlot";
+import { getAtlasAsset } from "@/lib/atlas-assets";
 import styles from "./page.module.css";
 
 function slugify(value: string) {
@@ -62,6 +64,9 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
   const lessonIndex = atlasModule.lessons.findIndex((item) => slugify(item.title) === lesson);
   if (lessonIndex < 0) notFound();
   const selectedLesson = atlasModule.lessons[lessonIndex];
+  const asset = getAtlasAsset(atlasModule.id, selectedLesson.title);
+  if (!asset) notFound();
+
   const section = atlasSections.find((item) => item.id === atlasModule.id);
   const previous = atlasModule.lessons[lessonIndex - 1];
   const next = atlasModule.lessons[lessonIndex + 1];
@@ -85,17 +90,14 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
             <div className={styles.tags}>
               <span>{atlasModule.label}</span>
               <span>{selectedLesson.visual}</span>
+              <span>asset: {asset.status.replaceAll("_", " ")}</span>
             </div>
           </div>
           <AtlasSystemGraphic systemId={atlasModule.id} />
         </header>
 
         <section className={styles.visualFocus}>
-          <div className={styles.visualPlaceholder}>
-            <span>Primary visual reference</span>
-            <strong>{selectedLesson.visual}</strong>
-            <p>This slot is wired to the lesson route so the production asset can be replaced later without changing the lesson URL or curriculum structure.</p>
-          </div>
+          <AtlasAssetSlot asset={asset} />
           <aside>
             <p>Observation prompts</p>
             <h2>What to look for</h2>
