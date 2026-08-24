@@ -1,0 +1,72 @@
+[
+  {
+    "key": "trichomes-resin__microscope-workflow",
+    "assetId": "atlas-microscope-workflow-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-microscope-workflow",
+    "path": null,
+    "altText": "Interactive microscope workflow covering representative tissue selection, view stabilization, controlled lighting, consistent focus, and repeat image records.",
+    "productionBrief": "Microscope inspection field workflow for glandular trichomes. Standardize tissue sampled, sample stability, lighting and white balance, magnification and focus, then save repeated observations with date and canopy location. Avoid treating poorly focused or differently illuminated images as equivalent observations."
+  },
+  {
+    "key": "sex-pollen-seed__male-vs-female-preflowers",
+    "assetId": "atlas-preflowers-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-preflower-comparison",
+    "path": null,
+    "altText": "Interactive node-level comparison of developing pistillate and staminate cannabis preflowers with developmental-stage context.",
+    "productionBrief": "Botanical node close-up comparing developing pistillate and staminate reproductive structures across early stages. Show bract and emerging stigma context for pistillate structures and developing staminate primordia for male structures. Emphasize that very early structures can be ambiguous and multiple nodes should be inspected."
+  },
+  {
+    "key": "sex-pollen-seed__mixed-sex-expression",
+    "assetId": "atlas-mixed-sex-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-mixed-sex-reference",
+    "path": null,
+    "altText": "Interactive mixed-sex reproductive reference showing pistillate flower baseline, exposed anthers, staminate structures, multiple-site inspection, and the distinction between observation and cause.",
+    "productionBrief": "Scientific mixed-sex structure reference showing otherwise pistillate floral tissue alongside exposed anthers and, separately, more complete staminate structures. Teach learners to record location and frequency and explicitly avoid inferring genetic or environmental cause from one structure alone."
+  },
+  {
+    "key": "sex-pollen-seed__controlled-pollination",
+    "assetId": "atlas-controlled-pollination-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-controlled-pollination-record-map",
+    "path": null,
+    "altText": "Interactive controlled-pollination record workflow covering donor identity, exposure control, labeled target sites, cross records, and later verification of seed development.",
+    "productionBrief": "Breeding-record workflow focused on traceability: donor identity, controlled exposure, clearly labeled target flower sites, date and parent records, and preservation of labels through seed development and handling. Keep intentional exposure distinct from guaranteed fertilization."
+  },
+  {
+    "key": "environment-overlay__temperature-and-humidity",
+    "assetId": "atlas-temp-rh-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-temperature-rh-comparison",
+    "path": null,
+    "altText": "Interactive temperature and relative humidity visual explaining saturation vapor pressure, same-RH comparisons at different temperatures, leaf temperature, and whole-system context.",
+    "productionBrief": "Academic temperature/RH interaction visual. Show that relative humidity is temperature-dependent, compare equal RH at different air temperatures, add leaf-temperature context, and connect to vapor-pressure interpretation without prescribing universal target values."
+  },
+  {
+    "key": "environment-overlay__airflow-and-boundary-layer",
+    "assetId": "atlas-boundary-layer-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-boundary-layer-flow",
+    "path": null,
+    "altText": "Interactive leaf airflow visual comparing a thicker low-air-movement boundary layer with a thinner boundary layer under moderate air movement and canopy-distribution context.",
+    "productionBrief": "Leaf-scale airflow and boundary-layer visual. Compare low and moderate air movement, show the still-air boundary layer and its influence on heat and vapor exchange, and include sheltered canopy zones. Avoid implying that maximum airflow is always beneficial."
+  },
+  {
+    "key": "diagnostic-overlay__pattern-description",
+    "assetId": "atlas-pattern-description-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-diagnostic-pattern-vocabulary",
+    "path": null,
+    "altText": "Interactive diagnostic pattern vocabulary comparing uniform, interveinal, marginal or tip-focused, spotted or localized, and twisted, wilted, or asymmetric symptom patterns.",
+    "productionBrief": "Diagnostic vocabulary panel that teaches spatial description before diagnosis. Compare uniform, interveinal, marginal or tip-focused, spotted or localized, and posture or shape changes. Do not map any one visible pattern directly to a single nutrient, pest, pathogen, or environmental cause."
+  }
+]
