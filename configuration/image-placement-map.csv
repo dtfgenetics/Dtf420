@@ -1,10 +1,51 @@
 asset_id,section,page_slug,asset_type,placement,description,style,priority,status
-leaves_hero_001,leaves,,section hero,hero,Healthy fan leaf reference plate,academic studio quality,high,needed
-leaf_anatomy_001,leaves,leaf-anatomy,labeled diagram,hero,"Labeled fan leaf showing leaflet, serrations, veins, midrib, petiole, upper/lower surface",academic vector,high,needed
+atlas_whole_plant_001,atlas,,interactive reference,hero,Whole cannabis plant anatomy plate with selectable seed roots stem nodes leaves flowers trichomes and reproductive structures,academic studio quality,critical,needed
+lifecycle_stages_001,lifecycle,,comparison sequence,hero,Germination seedling vegetative transition flowering and maturation side-by-side morphology sequence,academic botanical illustration,critical,needed
+seed_anatomy_001,seed_germination,seed-anatomy,labeled cutaway,hero,Seed coat embryo cotyledons radicle and micropyle shown in one clear cutaway,academic botanical plate,high,needed
+seed_germination_sequence_001,seed_germination,germination-sequence,time sequence,hero,Imbibition seed cracking radicle emergence hypocotyl rise cotyledon opening and first true leaf,academic time-sequence illustration,high,needed
+seed_failure_patterns_001,seed_germination,germination-failures,comparison chart,body,Stalled seed shell retention tissue collapse damping-off risk and excessive moisture pattern comparison,diagnostic reference chart,high,needed
+roots_cutaway_001,root_system,root-architecture,cutaway diagram,hero,Container root-zone cutaway showing primary roots lateral roots fine roots root hairs media water and air pores,academic studio cutaway,critical,needed
+root_hairs_001,root_system,root-hairs,microscope diagram,body,Root tip and root-hair zone with absorbing surface highlighted,microscope-style illustration,high,needed
+rhizosphere_map_001,root_system,rhizosphere,interaction map,hero,Root surface exudates microbes ions water oxygen and media interactions in rhizosphere,academic systems diagram,high,needed
+root_uptake_flow_001,root_system,water-nutrient-uptake,flow diagram,body,Water and dissolved-ion path from substrate to root surface into vascular tissue,academic flow diagram,high,needed
+root_stress_001,root_system,root-stress,comparison plate,hero,Healthy roots compared with low oxygen saturation excessive dryback salt stress and tissue decline,diagnostic reference chart,high,needed
+stem_cross_section_001,stem_vascular,stem-cross-section,labeled cross-section,hero,Epidermis cortex vascular tissues xylem phloem cambium region and pith in simplified cannabis stem,academic botanical plate,critical,needed
+xylem_phloem_001,stem_vascular,vascular-transport,animated flow reference,hero,Xylem water/mineral upward movement and phloem source-to-sink transport shown simultaneously,academic flow diagram,critical,needed
+internode_comparison_001,stem_vascular,internodal-spacing,comparison chart,body,Short moderate and elongated internodes with measurement reference and contextual variables,academic comparison chart,high,needed
+stem_damage_001,stem_vascular,damage-recovery,time sequence,body,Bent crushed split and recovering stem tissues with support and transport implications,semi-realistic botanical sequence,medium,needed
+node_anatomy_001,nodes_branching,node-anatomy,labeled diagram,hero,Node internode petiole axillary bud branch origin and apical shoot relationship,academic botanical diagram,critical,needed
+apical_dominance_001,nodes_branching,apical-dominance,flow diagram,body,Apical tip influence on lateral bud activity before and after apex removal or repositioning,academic physiology diagram,high,needed
+training_comparison_001,nodes_branching,training-systems,comparison chart,hero,Topping FIM LST mainlining and SCROG shown with cut or bend points and resulting canopy geometry,academic training reference,high,needed
+leaves_hero_001,leaves,,section hero,hero,Healthy fan leaf reference plate,academic studio quality,critical,needed
+leaf_anatomy_001,leaves,leaf-anatomy,labeled diagram,hero,"Labeled fan leaf showing leaflet, serrations, veins, midrib, petiole, upper/lower surface",academic vector,critical,needed
 stomata_open_closed_001,leaves,stomata,diagram,hero,Open vs closed stomata with guard cells and CO2/water vapor arrows,microscope-style illustration,high,needed
-transpiration_flow_001,leaves,transpiration,infographic,hero,Water movement from media to roots through xylem to leaves and out stomata,academic flow diagram,high,needed
-chlorosis_patterns_001,leaves,chlorosis,comparison chart,hero,"Uniform yellowing, interveinal yellowing, marginal yellowing, old-growth vs new-growth patterns",diagnostic reference chart,high,needed
-necrosis_patterns_001,leaves,necrosis,comparison chart,hero,"Tip burn, marginal burn, rust spots, blotches, spreading lesions",diagnostic reference chart,high,needed
-leaf_curl_patterns_001,leaves,leaf-curl,comparison chart,hero,"Tacoing/canoeing, clawing, drooping, twisting, cupping",diagnostic reference chart,high,needed
-pest_damage_001,leaves,pest-damage-on-leaves,comparison chart,hero,"Stippling, webbing, miner trails, thrips silvering, eggs underside, chewed edges",diagnostic reference chart,high,needed
+transpiration_flow_001,leaves,transpiration,infographic,hero,Water movement from media to roots through xylem to leaves and out stomata,academic flow diagram,critical,needed
+photosynthesis_leaf_001,leaves,photosynthesis,process diagram,body,Light CO2 water chloroplast sugar production and oxygen release integrated into leaf cross-section,academic physiology diagram,high,needed
+chlorosis_patterns_001,leaves,chlorosis,comparison chart,hero,"Uniform yellowing, interveinal yellowing, marginal yellowing, old-growth vs new-growth patterns",diagnostic reference chart,critical,needed
+necrosis_patterns_001,leaves,necrosis,comparison chart,hero,"Tip burn, marginal burn, rust spots, blotches, spreading lesions",diagnostic reference chart,critical,needed
+leaf_curl_patterns_001,leaves,leaf-curl,comparison chart,hero,"Tacoing/canoeing, clawing, drooping, twisting, cupping",diagnostic reference chart,critical,needed
+pest_damage_001,leaves,pest-damage-on-leaves,comparison chart,hero,"Stippling, webbing, miner trails, thrips silvering, eggs underside, chewed edges",diagnostic reference chart,critical,needed
 environment_leaf_stress_001,leaves,environmental-stress-on-leaves,map,hero,"Canopy map showing heat, light, airflow, and humidity stress zones",semi-realistic diagnostic map,high,needed
+flower_anatomy_001,flowers,flower-anatomy,labeled macro plate,hero,Female floral cluster showing bracts stigmas sugar leaves floral sites and glandular trichomes,academic macro botanical plate,critical,needed
+flower_development_001,flowers,flower-development,time sequence,hero,Preflower early flower expansion stacking maturation and senescence sequence,academic photographic sequence,critical,needed
+pollination_response_001,flowers,pollination-response,comparison plate,body,Pollinated and unpollinated floral structures with seed-development changes,academic comparison plate,high,needed
+flower_mold_risk_001,flowers,maturity-risk,inspection map,hero,Dense flower cross-section highlighting trapped moisture airflow limitations and hidden mold inspection zones,diagnostic studio cutaway,high,needed
+trichome_types_001,trichomes_resin,trichome-types,microscope comparison,hero,Capitate-stalked capitate-sessile and bulbous glandular trichomes at consistent scale,microscope reference plate,critical,needed
+trichome_cutaway_001,trichomes_resin,gland-anatomy,labeled cutaway,body,Stalk gland head secretory region and cuticular storage space,academic microscope cutaway,high,needed
+trichome_sampling_001,trichomes_resin,where-to-inspect,sampling map,body,Bract versus sugar-leaf sampling locations and representative microscope fields,academic sampling diagram,high,needed
+trichome_maturity_001,trichomes_resin,trichome-appearance,comparison chart,hero,Clear cloudy and amber apparent trichome conditions under standardized lighting and focus,microscope comparison chart,critical,needed
+sex_comparison_001,sex_pollen_seed,male-female,comparison plate,hero,Male staminate and female pistillate preflowers at nodes across multiple developmental stages,academic macro comparison,critical,needed
+mixed_sex_001,sex_pollen_seed,mixed-sex-expression,reference plate,body,Anthers and staminate structures on otherwise female floral tissue with multiple views,academic macro reference,high,needed
+pollen_pathway_001,sex_pollen_seed,pollen-biology,flow diagram,body,Pollen formation release travel stigma contact pollen-tube growth and fertilization path,academic reproductive diagram,high,needed
+seed_development_001,sex_pollen_seed,seed-formation,cutaway sequence,hero,Fertilized ovule through developing embryo filling seed coat hardening and mature seed,academic botanical sequence,critical,needed
+controlled_pollination_001,sex_pollen_seed,controlled-pollination,workflow diagram,body,Isolation pollen handling target branch labeling application cleanup and records,academic workflow diagram,medium,needed
+environment_system_map_001,environment_overlay,environment-interactions,systems map,hero,Whole-plant map linking light leaf temperature air temperature RH VPD airflow CO2 water root oxygen pH and EC,academic systems infographic,critical,needed
+canopy_ppfd_001,environment_overlay,light-distribution,heatmap,body,Top and side canopy PPFD distribution with high middle and shaded zones,semi-realistic canopy heatmap,high,needed
+vpd_transpiration_001,environment_overlay,vpd-transpiration,flow diagram,hero,Leaf-air vapor gradient stomata transpiration roots and xylem shown as one connected process,academic physiology diagram,critical,needed
+boundary_layer_001,environment_overlay,airflow-boundary-layer,diagram,body,Still-air boundary layer around leaf with low and high airflow comparison,academic airflow illustration,high,needed
+root_environment_001,environment_overlay,root-zone-interaction,map,body,Substrate moisture oxygen pH EC root temperature and atmospheric demand interaction map,academic systems diagram,critical,needed
+diagnostic_locator_001,diagnostic_overlay,symptom-location,whole-plant map,hero,Whole plant divided into newest growth upper canopy middle canopy lower/older leaves branch-localized whole-plant and root-zone symptom regions,diagnostic reference map,critical,needed
+diagnostic_pattern_vocab_001,diagnostic_overlay,pattern-description,comparison chart,hero,Uniform interveinal marginal spotted tip-focused twisted wilted and asymmetric symptom patterns,diagnostic reference chart,critical,needed
+diagnostic_progression_001,diagnostic_overlay,progression-over-time,time sequence,body,Sudden gradual stable spreading and recovering symptom progression examples,diagnostic time-series chart,high,needed
+diagnostic_dashboard_001,diagnostic_overlay,measurement-context,dashboard diagram,body,pH EC moisture temperature RH VPD PPFD and recent action context arranged around symptom evidence,academic diagnostic dashboard,critical,needed
+differential_workflow_001,diagnostic_overlay,differential-workflow,decision map,hero,Observation to evidence collection to ranked environmental root-zone nutritional pest pathogen and physical differentials,academic decision map,critical,needed

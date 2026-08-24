@@ -1,0 +1,62 @@
+[
+  {
+    "id": "germination",
+    "label": "Germination",
+    "stageNumber": 1,
+    "summary": "The seed hydrates, metabolism resumes, the radicle emerges, and the embryo transitions from stored reserves toward an independent seedling.",
+    "visibleStructures": ["seed coat", "radicle", "hypocotyl", "cotyledons"],
+    "activeSystems": ["seed_germination", "root_system"],
+    "observe": ["seed coat opening", "radicle direction", "cotyledon emergence", "excess moisture or tissue collapse"],
+    "biology": ["imbibition", "respiration resumes", "radicle growth", "stored reserve use"]
+  },
+  {
+    "id": "seedling",
+    "label": "Seedling",
+    "stageNumber": 2,
+    "summary": "Cotyledons support the first days of growth while the first true leaves expand, roots branch, and photosynthetic independence increases.",
+    "visibleStructures": ["cotyledons", "first true leaves", "young stem", "early lateral roots"],
+    "activeSystems": ["root_system", "stem_vascular", "leaves"],
+    "observe": ["cotyledon condition", "first true-leaf shape", "stem stretch", "root-zone moisture", "early color or posture changes"],
+    "biology": ["photosynthetic transition", "root branching", "vascular expansion", "leaf-area increase"]
+  },
+  {
+    "id": "vegetative",
+    "label": "Vegetative Growth",
+    "stageNumber": 3,
+    "summary": "Leaf area, root volume, stems, nodes, and lateral branches expand rapidly as the plant builds the architecture that will support later reproductive growth.",
+    "visibleStructures": ["fan leaves", "nodes", "internodes", "axillary branches", "expanded root system"],
+    "activeSystems": ["root_system", "stem_vascular", "nodes_branching", "leaves", "environment_overlay"],
+    "observe": ["internodal spacing", "branch symmetry", "leaf posture", "canopy density", "root-zone dryback", "new-vs-old growth color"],
+    "biology": ["canopy expansion", "apical dominance", "source-sink growth", "increased transpiration", "root-shoot coordination"]
+  },
+  {
+    "id": "transition",
+    "label": "Transition / Preflower",
+    "stageNumber": 4,
+    "summary": "The plant shifts toward reproductive development. Internodes may elongate, preflowers become easier to inspect, and developing sites reorganize the canopy.",
+    "visibleStructures": ["preflowers", "rapidly extending shoots", "new floral sites", "sex-expression structures"],
+    "activeSystems": ["stem_vascular", "nodes_branching", "sex_pollen_seed", "environment_overlay"],
+    "observe": ["sex expression", "stretch pattern", "new shoot spacing", "canopy crowding", "localized stress during rapid growth"],
+    "biology": ["developmental transition", "reproductive meristem formation", "continued stem elongation", "changing source-sink demand"]
+  },
+  {
+    "id": "flowering",
+    "label": "Flower Development",
+    "stageNumber": 5,
+    "summary": "Floral clusters expand, bracts and stigmas become prominent, resin coverage increases, and reproductive tissues become major metabolic sinks.",
+    "visibleStructures": ["flower clusters", "bracts", "stigmas", "sugar leaves", "glandular trichomes"],
+    "activeSystems": ["flowers", "trichomes_resin", "stem_vascular", "leaves", "environment_overlay"],
+    "observe": ["flower density", "airflow through the canopy", "trichome development", "leaf-to-flower balance", "mold-risk zones", "pollination signs"],
+    "biology": ["flower expansion", "resin-gland development", "carbohydrate allocation", "continued water and mineral transport"]
+  },
+  {
+    "id": "maturation",
+    "label": "Maturation",
+    "stageNumber": 6,
+    "summary": "Flower tissues approach cultivar-specific maturity, some leaves may senesce, trichome appearance changes, and seed development continues where pollination occurred.",
+    "visibleStructures": ["mature floral clusters", "senescing leaves", "developed trichomes", "maturing seeds where pollinated"],
+    "activeSystems": ["flowers", "trichomes_resin", "sex_pollen_seed", "diagnostic_overlay"],
+    "observe": ["trichome sampling consistency", "flower tissue condition", "senescence pattern", "mold or decay", "seed maturity where applicable"],
+    "biology": ["floral maturation", "senescence", "continued resin chemistry changes", "seed filling where fertilization occurred"]
+  }
+]
