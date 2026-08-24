@@ -1,5 +1,5 @@
 import modules from "@/content/atlas-learning-modules.json";
-import overrides from "@/content/atlas-asset-overrides.json";
+import { atlasAssetOverrides } from "@/lib/atlas-asset-manifests";
 
 export type AtlasAssetStatus = "needed" | "brief_ready" | "in_production" | "ready" | "review";
 
@@ -27,7 +27,7 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-const overrideMap = new Map(overrides.map((item) => [item.key, item]));
+const overrideMap = new Map(atlasAssetOverrides.map((item) => [item.key, item]));
 
 export const atlasAssetRegistry: AtlasAssetRecord[] = modules.flatMap((atlasModule) =>
   atlasModule.lessons.map((lesson) => {
