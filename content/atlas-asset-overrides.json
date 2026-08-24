@@ -158,5 +158,65 @@
     "path": null,
     "altText": "Interactive whole-plant VPD diagram connecting leaf vapor pressure, ambient air vapor pressure, the vapor-pressure gradient, stomatal response, transpiration, and root water supply.",
     "productionBrief": "Whole-plant VPD process visual. Show leaf vapor pressure as temperature-dependent and near saturation inside healthy leaf air spaces, ambient vapor pressure from temperature and RH, the resulting gradient, stomatal regulation, transpiration and root/xylem water supply. Avoid fixed universal VPD targets and avoid treating VPD as the sole control of transpiration."
+  },
+  {
+    "key": "root-system__rhizosphere",
+    "assetId": "atlas-rhizosphere-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-rhizosphere-map",
+    "path": null,
+    "altText": "Interactive rhizosphere map showing the root surface, root exudates, microbial communities, water and dissolved ions, and oxygen conditions in the root-influenced zone.",
+    "productionBrief": "Academic rhizosphere cross-section around a living fine root. Show a narrow root-influenced zone with water films, dissolved ions, root exudates, representative bacteria and fungi, and oxygen diffusion. Avoid portraying all microbes as beneficial or the rhizosphere as a uniform fixed layer."
+  },
+  {
+    "key": "stem-vascular__phloem-transport",
+    "assetId": "atlas-phloem-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-source-sink-map",
+    "path": null,
+    "altText": "Interactive phloem transport map showing a source leaf, regulated loading, sieve transport pathways, growing sinks, and source-dependent transport direction.",
+    "productionBrief": "Whole-plant source-to-sink phloem diagram. Identify source leaves, loading into phloem, sieve elements and representative sinks such as growing shoots, roots, flowers or seeds. Emphasize that different pathways can carry assimilates in different directions and avoid depicting phloem as a passive gravity-driven downward pipe."
+  },
+  {
+    "key": "sex-pollen-seed__pollen-biology",
+    "assetId": "atlas-pollen-pathway-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-pollen-pathway",
+    "path": null,
+    "altText": "Interactive pollen pathway showing production in staminate anthers, release and transport, stigma contact, pollen-tube growth, and fertilization context.",
+    "productionBrief": "Botanical reproductive process diagram separating pollen production, release or transport, compatible stigma contact, pollen germination, pollen-tube growth and fertilization. Keep pollination distinct from successful fertilization and do not imply every pollen grain reaching a stigma produces a seed."
+  },
+  {
+    "key": "environment-overlay__light-distribution",
+    "assetId": "atlas-ppfd-overlay-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-ppfd-map",
+    "path": null,
+    "altText": "Interactive canopy PPFD map showing the light source, a measurement grid, high-light zones, shaded zones, and spatial uniformity across the canopy.",
+    "productionBrief": "Top-and-side canopy lighting diagram with an explicit PPFD measurement grid. Show fixture geometry, canopy surface, high and low zones, leaf overlap and spatial uniformity. Use relative or example values rather than universal intensity prescriptions, and make clear that one center measurement cannot represent the full canopy."
+  },
+  {
+    "key": "trichomes-resin__where-to-inspect",
+    "assetId": "atlas-trichome-sampling-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-sampling-map",
+    "path": null,
+    "altText": "Interactive trichome sampling map comparing flower bracts and sugar leaves, multiple flower sites, standardized optics, and repeated observations over time.",
+    "productionBrief": "Microscope sampling guide showing representative flower bracts versus surrounding sugar leaves, several canopy sampling locations, consistent magnification and lighting, and repeat observation over time. Avoid presenting sugar-leaf trichomes as interchangeable with bract trichomes for floral maturity assessment."
+  },
+  {
+    "key": "diagnostic-overlay__differential-workflow",
+    "assetId": "atlas-differential-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-differential-workflow",
+    "path": null,
+    "altText": "Interactive diagnostic workflow progressing from precise observation to context collection, ranked hypotheses, discriminating checks, and evidence-based updates.",
+    "productionBrief": "Diagnostic decision map beginning with symptom description, then environmental and root-zone context, a ranked differential across environmental, root-zone, nutritional, pest, pathogen and physical causes, a discriminating measurement or inspection, and iterative updating. Do not collapse the workflow into one-image diagnosis."
   }
 ]
