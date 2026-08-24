@@ -6,6 +6,9 @@ on:
     branches:
       - main
       - "bootstrap/**"
+      - "fix/**"
+      - "feature/**"
+      - "dependabot/**"
   pull_request:
     branches:
       - main
