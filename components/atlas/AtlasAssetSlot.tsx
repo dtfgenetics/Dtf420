@@ -4,6 +4,7 @@ import { AtlasPriorityVisual } from "./AtlasPriorityVisual";
 import { AtlasProcessVisual } from "./AtlasProcessVisual";
 import { AtlasConceptVisual } from "./AtlasConceptVisual";
 import { AtlasCrossSystemVisual } from "./AtlasCrossSystemVisual";
+import { AtlasCoreStructureVisual } from "./AtlasCoreStructureVisual";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -48,11 +49,22 @@ const crossSystemInteractiveAssetIds = new Set([
   "atlas-differential-v1",
 ]);
 
+const coreStructureInteractiveAssetIds = new Set([
+  "atlas-radicle-v1",
+  "atlas-root-uptake-v1",
+  "atlas-stem-cross-section-v1",
+  "atlas-node-anatomy-v1",
+  "atlas-pollination-response-v1",
+  "atlas-rootzone-interaction-v1",
+  "atlas-measurement-context-v1",
+]);
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
   const processInteractive = processInteractiveAssetIds.has(asset.assetId);
   const conceptInteractive = conceptInteractiveAssetIds.has(asset.assetId);
   const crossSystemInteractive = crossSystemInteractiveAssetIds.has(asset.assetId);
+  const coreStructureInteractive = coreStructureInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
@@ -69,6 +81,8 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
         <AtlasConceptVisual assetId={asset.assetId} />
       ) : crossSystemInteractive ? (
         <AtlasCrossSystemVisual assetId={asset.assetId} />
+      ) : coreStructureInteractive ? (
+        <AtlasCoreStructureVisual assetId={asset.assetId} />
       ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />

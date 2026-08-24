@@ -1,0 +1,72 @@
+[
+  {
+    "key": "seed-germination__radicle-emergence",
+    "assetId": "atlas-radicle-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-germination-sequence",
+    "path": null,
+    "altText": "Interactive radicle-emergence sequence showing seed-coat opening, embryonic root emergence, downward root orientation, early lateral branching, and transition toward seedling establishment.",
+    "productionBrief": "Academic germination sequence focused on radicle emergence after imbibition. Show seed-coat opening, embryonic root extension, gravitropic orientation, early root elongation and later lateral branching. Avoid implying every emerged radicle becomes a vigorous seedling."
+  },
+  {
+    "key": "root-system__water-and-nutrient-uptake",
+    "assetId": "atlas-root-uptake-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-root-to-shoot-flow",
+    "path": null,
+    "altText": "Interactive root-to-shoot uptake diagram connecting root-zone solution, fine-root surface area, selective membrane transport, movement toward xylem, and shoot transpiration demand.",
+    "productionBrief": "Whole-root uptake process diagram linking accessible root-zone water and dissolved ions to fine roots and root hairs, selective membrane transport across living tissues, radial movement toward xylem and whole-plant demand. Do not depict mineral ions as freely diffusing through all membranes or transpiration as the only determinant of uptake."
+  },
+  {
+    "key": "stem-vascular__stem-cross-section",
+    "assetId": "atlas-stem-cross-section-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-stem-anatomy",
+    "path": null,
+    "altText": "Interactive simplified cannabis stem cross-section distinguishing epidermis, cortex, phloem, xylem, and central pith.",
+    "productionBrief": "Simplified academic cross-section of a young cannabis stem using dicot organization. Distinguish epidermis, cortex, vascular region with phloem external to xylem, and central pith. Keep the diagram explicitly simplified and avoid implying every developmental stage has identical tissue proportions."
+  },
+  {
+    "key": "nodes-branching__node-anatomy",
+    "assetId": "atlas-node-anatomy-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-node-closeup",
+    "path": null,
+    "altText": "Interactive cannabis node close-up identifying the node, adjoining internodes, petiole, axillary bud, and lateral branch origin.",
+    "productionBrief": "Botanical node close-up showing the main stem, node, internodes above and below, leaf petiole, axillary bud and an emerging lateral branch. Preserve realistic attachment relationships and avoid decorative stylization that obscures the axil."
+  },
+  {
+    "key": "flowers__pollination-response",
+    "assetId": "atlas-pollination-response-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-pollination-comparison",
+    "path": null,
+    "altText": "Interactive pollination-response comparison showing stigma contact, pollen-tube growth, fertilization context, developing seed formation, and comparison with unpollinated floral tissue.",
+    "productionBrief": "Academic flower-level pollination response diagram. Separate pollen contact, pollen-tube growth and successful fertilization, then show developing seed tissue inside the surrounding floral structure. Compare with unpollinated context without implying external appearance alone proves fertilization."
+  },
+  {
+    "key": "environment-overlay__root-zone-interaction",
+    "assetId": "atlas-rootzone-interaction-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-rootzone-system-map",
+    "path": null,
+    "altText": "Interactive root-zone system map connecting moisture, oxygen, pH and EC, root temperature, and atmospheric transpiration demand around the same root system.",
+    "productionBrief": "Whole-system root-zone diagram centered on living roots. Overlay substrate moisture, gas-filled pore space and oxygen, pH and EC context, root temperature, and canopy atmospheric demand. Emphasize interactions rather than universal target numbers and keep measurement-method context explicit."
+  },
+  {
+    "key": "diagnostic-overlay__measurement-context",
+    "assetId": "atlas-measurement-context-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-diagnostic-dashboard",
+    "path": null,
+    "altText": "Interactive diagnostic context dashboard combining root-zone readings, air temperature and humidity, light measurements, irrigation or feed history, and symptom timing.",
+    "productionBrief": "Diagnostic context dashboard that brings substrate moisture, pH, EC, air temperature, RH, VPD, PPFD, photoperiod, irrigation/feed history and symptom timing into one record. The design should emphasize consistent methods and time alignment rather than presenting isolated numbers as diagnoses."
+  }
+]
