@@ -48,5 +48,55 @@
     "path": null,
     "altText": "Microscope comparison of bulbous, capitate-sessile, and capitate-stalked glandular cannabis trichomes with relative scale.",
     "productionBrief": "Scientific microscope-style comparison plate of glandular cannabis trichome types: bulbous, capitate-sessile and capitate-stalked. Show relative scale and morphology without presenting them as equal size. Include stalk and gland-head labels where applicable. Realistic translucent tissue and resin appearance, neutral color balance, no psychedelic styling."
+  },
+  {
+    "key": "root-system__root-hairs-and-absorption",
+    "assetId": "atlas-root-absorption-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-process-diagram",
+    "path": null,
+    "altText": "Interactive root-hair absorption diagram connecting water films, root hairs, selective membrane transport, oxygen availability, and inward movement toward xylem.",
+    "productionBrief": "Academic process diagram showing a fine root with root hairs in a generic substrate pore network. Connect water films, dissolved ions, root-zone oxygen, membrane transport and movement toward xylem. Avoid depicting nutrients as freely passing through membranes or implying root hairs are permanent structures."
+  },
+  {
+    "key": "stem-vascular__xylem-transport",
+    "assetId": "atlas-xylem-transport-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-transport-diagram",
+    "path": null,
+    "altText": "Interactive xylem transport diagram showing root uptake, a continuous water column, cohesion, transpiration pull, and delivery to shoots.",
+    "productionBrief": "Whole-plant transport diagram emphasizing xylem from roots through stem to leaves. Show root uptake, conduit continuity, cohesion-tension context, transpiration-driven pull and shoot delivery. Do not depict xylem as an active pump."
+  },
+  {
+    "key": "leaves__stomata-and-transpiration",
+    "assetId": "atlas-stomata-transpiration-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-gas-exchange-diagram",
+    "path": null,
+    "altText": "Interactive stomatal diagram showing guard cells, an open pore, carbon dioxide entry, water-vapor exit, and temperature-humidity vapor-pressure context.",
+    "productionBrief": "Scientific leaf-surface diagram centered on a stomatal complex. Show paired guard cells, pore, CO2 diffusion inward and water-vapor diffusion outward. Explain that guard-cell regulation is physiological and that temperature plus humidity shape vapor-pressure conditions."
+  },
+  {
+    "key": "flowers__bud-development",
+    "assetId": "atlas-flower-development-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-development-sequence",
+    "path": null,
+    "altText": "Interactive structural sequence from flower initiation through cluster expansion, bract expansion, resin development, and maturation.",
+    "productionBrief": "Development sequence based on visible structural progression rather than fixed week numbers. Show initiation, cluster expansion, bract expansion, increasing glandular coverage, and maturation. Keep cultivar variability explicit and avoid using stigma color alone as a maturity endpoint."
+  },
+  {
+    "key": "trichomes-resin__gland-anatomy",
+    "assetId": "atlas-trichome-gland-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-gland-cutaway",
+    "path": null,
+    "altText": "Interactive cutaway of a capitate-stalked cannabis trichome showing the stalk, secretory disc, subcuticular storage space, cuticle, and epidermal surface.",
+    "productionBrief": "Simplified academic cutaway of a capitate-stalked glandular trichome. Label multicellular stalk, secretory disc cells, subcuticular storage cavity, cuticle and epidermal origin. Preserve the distinction between secretory tissue and stored resin."
   }
 ]
