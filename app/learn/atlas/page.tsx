@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LivingPlantAtlas } from "@/components/atlas/LivingPlantAtlas";
+import { AtlasLearningModules } from "@/components/atlas/AtlasLearningModules";
 
 export const metadata: Metadata = {
   title: "THC Living Plant Atlas",
@@ -10,6 +11,7 @@ export default function AtlasPage() {
   return (
     <section className="shell page-section">
       <LivingPlantAtlas />
+      <AtlasLearningModules />
     </section>
   );
 }
