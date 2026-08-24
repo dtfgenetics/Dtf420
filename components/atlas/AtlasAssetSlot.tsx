@@ -5,6 +5,7 @@ import { AtlasProcessVisual } from "./AtlasProcessVisual";
 import { AtlasConceptVisual } from "./AtlasConceptVisual";
 import { AtlasCrossSystemVisual } from "./AtlasCrossSystemVisual";
 import { AtlasCoreStructureVisual } from "./AtlasCoreStructureVisual";
+import { AtlasGrowthDiagnosticVisual } from "./AtlasGrowthDiagnosticVisual";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -59,12 +60,23 @@ const coreStructureInteractiveAssetIds = new Set([
   "atlas-measurement-context-v1",
 ]);
 
+const growthDiagnosticInteractiveAssetIds = new Set([
+  "atlas-cotyledon-transition-v1",
+  "atlas-root-stress-v1",
+  "atlas-internode-v1",
+  "atlas-topping-fim-v1",
+  "atlas-lst-v1",
+  "atlas-symptom-location-v1",
+  "atlas-progression-v1",
+]);
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
   const processInteractive = processInteractiveAssetIds.has(asset.assetId);
   const conceptInteractive = conceptInteractiveAssetIds.has(asset.assetId);
   const crossSystemInteractive = crossSystemInteractiveAssetIds.has(asset.assetId);
   const coreStructureInteractive = coreStructureInteractiveAssetIds.has(asset.assetId);
+  const growthDiagnosticInteractive = growthDiagnosticInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
@@ -83,6 +95,8 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
         <AtlasCrossSystemVisual assetId={asset.assetId} />
       ) : coreStructureInteractive ? (
         <AtlasCoreStructureVisual assetId={asset.assetId} />
+      ) : growthDiagnosticInteractive ? (
+        <AtlasGrowthDiagnosticVisual assetId={asset.assetId} />
       ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />
