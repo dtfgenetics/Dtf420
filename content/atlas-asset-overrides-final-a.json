@@ -1,0 +1,72 @@
+[
+  {
+    "key": "seed-germination__germination-failure-patterns",
+    "assetId": "atlas-germination-failure-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-failure-pattern-comparison",
+    "path": null,
+    "altText": "Interactive comparison of stalled germination, excessive moisture, shell retention, temperature-related delay, and post-emergence collapse risk.",
+    "productionBrief": "Academic germination troubleshooting comparison. Show stalled progress, excessive moisture context, retained seed coat or membrane, temperature-related delay, and post-emergence collapse or damping-off risk. Keep each as a pattern requiring context rather than a one-image diagnosis."
+  },
+  {
+    "key": "stem-vascular__damage-and-recovery",
+    "assetId": "atlas-stem-damage-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-stem-damage-sequence",
+    "path": null,
+    "altText": "Interactive stem damage sequence comparing an intact stem, localized bending or crushing, a partial break, supported wound response, and functional recovery checks.",
+    "productionBrief": "Botanical stem injury sequence comparing intact tissue, localized crushing or bending, partial breakage, support and wound response, and recovery assessment. Emphasize vascular continuity and function rather than treating callus swelling as proof of complete recovery."
+  },
+  {
+    "key": "nodes-branching__mainlining-and-scrog",
+    "assetId": "atlas-mainline-scrog-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-training-system-comparison",
+    "path": null,
+    "altText": "Interactive comparison of structured mainline branch selection and screen-based SCROG canopy distribution.",
+    "productionBrief": "Side-by-side canopy architecture diagram comparing mainlining and SCROG. Mainlining should emphasize selected branch structure and repeated framework; SCROG should emphasize screen-guided spatial distribution. Avoid implying identical branch vigor or guaranteed yield gains."
+  },
+  {
+    "key": "leaves__leaf-inspection-workflow",
+    "assetId": "atlas-leaf-inspection-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-leaf-inspection-card",
+    "path": null,
+    "altText": "Interactive leaf inspection workflow covering canopy position, upper and lower surfaces, margins and veins, pests or residue, and repeat observations over time.",
+    "productionBrief": "Field-style leaf inspection guide. Walk through canopy position and leaf age, upper and lower surfaces, margins, veins and petiole, pests or residue, and repeat comparison over time. Keep observation separate from diagnosis."
+  },
+  {
+    "key": "flowers__flower-initiation",
+    "assetId": "atlas-flower-initiation-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-early-flower-sequence",
+    "path": null,
+    "altText": "Interactive early-flower sequence from node-level preflower expression through pistillate structures, multiple floral sites, cluster expansion, and structural stage context.",
+    "productionBrief": "Academic early-flower developmental sequence from node-level reproductive expression to expanding floral sites and clustered inflorescence. Use visible structural progression instead of fixed week numbers and preserve cultivar variability."
+  },
+  {
+    "key": "flowers__maturity-and-risk-inspection",
+    "assetId": "atlas-maturity-risk-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-maturity-risk-checklist",
+    "path": null,
+    "altText": "Interactive flower maturity and risk checklist combining trichome observations, flower development, senescence context, mold inspection, and combined evidence.",
+    "productionBrief": "Maturity and flower-health inspection visual that combines representative bract trichome observations, overall flower development, senescence context, cultivar behavior and mold or tissue-risk inspection. Avoid stigma color or trichome appearance as a single universal endpoint."
+  },
+  {
+    "key": "trichomes-resin__clear-cloudy-and-amber",
+    "assetId": "atlas-trichome-appearance-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-trichome-optics-comparison",
+    "path": null,
+    "altText": "Interactive comparison of clear-appearing, cloudy-appearing, and amber-appearing glandular trichome heads with sampling and interpretation cautions.",
+    "productionBrief": "Microscope-style optical comparison of clear-, cloudy- and amber-appearing glandular trichome heads. Keep lighting and white balance neutral, distinguish sampling tissue, and state that optical appearance is not a direct cannabinoid or potency assay."
+  }
+]
