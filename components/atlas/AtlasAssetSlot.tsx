@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { AtlasAssetRecord } from "@/lib/atlas-assets";
 import { AtlasPriorityVisual } from "./AtlasPriorityVisual";
+import { AtlasProcessVisual } from "./AtlasProcessVisual";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -19,8 +20,17 @@ const priorityInteractiveAssetIds = new Set([
   "atlas-trichome-types-v1",
 ]);
 
+const processInteractiveAssetIds = new Set([
+  "atlas-root-absorption-v1",
+  "atlas-xylem-transport-v1",
+  "atlas-stomata-transpiration-v1",
+  "atlas-flower-development-v1",
+  "atlas-trichome-gland-v1",
+]);
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
+  const processInteractive = processInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
@@ -31,6 +41,8 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
 
       {priorityInteractive ? (
         <AtlasPriorityVisual assetId={asset.assetId} />
+      ) : processInteractive ? (
+        <AtlasProcessVisual assetId={asset.assetId} />
       ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />
