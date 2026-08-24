@@ -6,6 +6,7 @@ import { AtlasConceptVisual } from "./AtlasConceptVisual";
 import { AtlasCrossSystemVisual } from "./AtlasCrossSystemVisual";
 import { AtlasCoreStructureVisual } from "./AtlasCoreStructureVisual";
 import { AtlasGrowthDiagnosticVisual } from "./AtlasGrowthDiagnosticVisual";
+import { AtlasFinalVisualA } from "./AtlasFinalVisualA";
 import styles from "./AtlasAssetSlot.module.css";
 
 const statusLabels: Record<AtlasAssetRecord["status"], string> = {
@@ -70,6 +71,16 @@ const growthDiagnosticInteractiveAssetIds = new Set([
   "atlas-progression-v1",
 ]);
 
+const finalAInteractiveAssetIds = new Set([
+  "atlas-germination-failure-v1",
+  "atlas-stem-damage-v1",
+  "atlas-mainline-scrog-v1",
+  "atlas-leaf-inspection-v1",
+  "atlas-flower-initiation-v1",
+  "atlas-maturity-risk-v1",
+  "atlas-trichome-appearance-v1",
+]);
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
   const processInteractive = processInteractiveAssetIds.has(asset.assetId);
@@ -77,6 +88,7 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const crossSystemInteractive = crossSystemInteractiveAssetIds.has(asset.assetId);
   const coreStructureInteractive = coreStructureInteractiveAssetIds.has(asset.assetId);
   const growthDiagnosticInteractive = growthDiagnosticInteractiveAssetIds.has(asset.assetId);
+  const finalAInteractive = finalAInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
@@ -97,6 +109,8 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
         <AtlasCoreStructureVisual assetId={asset.assetId} />
       ) : growthDiagnosticInteractive ? (
         <AtlasGrowthDiagnosticVisual assetId={asset.assetId} />
+      ) : finalAInteractive ? (
+        <AtlasFinalVisualA assetId={asset.assetId} />
       ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />
