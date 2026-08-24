@@ -190,7 +190,7 @@ export function AtlasVisualOverlays() {
 
       <div className={styles.index} aria-label="Overlay index">
         {points.map((point) => (
-          <span key={point.id}>{"label" in point ? point.label : point.id}</span>
+          <span key={point.id}>{point.label}</span>
         ))}
       </div>
     </section>
