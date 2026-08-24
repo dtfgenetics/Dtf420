@@ -8,16 +8,20 @@ import { AtlasInteractiveLab } from "@/components/atlas/AtlasInteractiveLab";
 import { AtlasCoreInteractiveLab } from "@/components/atlas/AtlasCoreInteractiveLab";
 import styles from "./page.module.css";
 
-function slugFor(id: string) {
-  return id.replaceAll("_", "-");
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replaceAll("&", "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function findAtlasModule(slug: string) {
-  return modules.find((item) => slugFor(item.id) === slug);
+  return modules.find((item) => slugify(item.id) === slug);
 }
 
 export function generateStaticParams() {
-  return modules.map((item) => ({ system: slugFor(item.id) }));
+  return modules.map((item) => ({ system: slugify(item.id) }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ system: string }> }): Promise<Metadata> {
@@ -91,15 +95,21 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
 
           <div className={styles.lessons}>
             {atlasModule.lessons.map((lesson, index) => (
-              <article key={lesson.title} id={`lesson-${index + 1}`}>
-                <div className={styles.lessonIndex}>Lesson {String(index + 1).padStart(2, "0")}</div>
-                <h3>{lesson.title}</h3>
-                <p>{lesson.summary}</p>
-                <div className={styles.visualReference}>
-                  <span>Planned / linked visual</span>
-                  <strong>{lesson.visual}</strong>
-                </div>
-              </article>
+              <Link
+                key={lesson.title}
+                href={`/learn/atlas/${system}/${slugify(lesson.title)}`}
+                style={{ color: "inherit", textDecoration: "none", display: "block" }}
+              >
+                <article id={`lesson-${index + 1}`} style={{ height: "100%" }}>
+                  <div className={styles.lessonIndex}>Lesson {String(index + 1).padStart(2, "0")}</div>
+                  <h3>{lesson.title}</h3>
+                  <p>{lesson.summary}</p>
+                  <div className={styles.visualReference}>
+                    <span>Open visual lesson</span>
+                    <strong>{lesson.visual}</strong>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         </section>
@@ -123,7 +133,7 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
           </div>
           <div className={styles.relatedGrid}>
             {related.map((item) => (
-              <Link key={item.id} href={`/learn/atlas/${slugFor(item.id)}`}>
+              <Link key={item.id} href={`/learn/atlas/${slugify(item.id)}`}>
                 <span>{item.label}</span>
                 <small>{item.lessons.length} lessons</small>
               </Link>
