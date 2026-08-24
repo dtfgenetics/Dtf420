@@ -2,7 +2,7 @@
   {
     "key": "seed-germination__seed-anatomy",
     "assetId": "atlas-seed-anatomy-v1",
-    "status": "brief_ready",
+    "status": "review",
     "version": 1,
     "assetType": "academic-cutaway",
     "path": null,
@@ -12,7 +12,7 @@
   {
     "key": "root-system__root-architecture",
     "assetId": "atlas-root-architecture-v1",
-    "status": "brief_ready",
+    "status": "review",
     "version": 1,
     "assetType": "root-zone-cutaway",
     "path": null,
@@ -22,7 +22,7 @@
   {
     "key": "leaves__healthy-leaf-baseline",
     "assetId": "atlas-healthy-leaf-baseline-v1",
-    "status": "brief_ready",
+    "status": "review",
     "version": 1,
     "assetType": "reference-plate",
     "path": null,
@@ -32,7 +32,7 @@
   {
     "key": "flowers__female-flower-anatomy",
     "assetId": "atlas-female-flower-anatomy-v1",
-    "status": "brief_ready",
+    "status": "review",
     "version": 1,
     "assetType": "anatomy-plate",
     "path": null,
@@ -42,7 +42,7 @@
   {
     "key": "trichomes-resin__trichome-types",
     "assetId": "atlas-trichome-types-v1",
-    "status": "brief_ready",
+    "status": "review",
     "version": 1,
     "assetType": "microscope-comparison",
     "path": null,
