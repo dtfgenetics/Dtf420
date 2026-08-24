@@ -98,5 +98,65 @@
     "path": null,
     "altText": "Interactive cutaway of a capitate-stalked cannabis trichome showing the stalk, secretory disc, subcuticular storage space, cuticle, and epidermal surface.",
     "productionBrief": "Simplified academic cutaway of a capitate-stalked glandular trichome. Label multicellular stalk, secretory disc cells, subcuticular storage cavity, cuticle and epidermal origin. Preserve the distinction between secretory tissue and stored resin."
+  },
+  {
+    "key": "seed-germination__imbibition",
+    "assetId": "atlas-imbibition-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-hydration-sequence",
+    "path": null,
+    "altText": "Interactive seed imbibition sequence showing a dry cannabis seed taking up water, swelling, restarting metabolism, and approaching radicle emergence.",
+    "productionBrief": "Academic germination sequence showing hydration before visible radicle emergence. Distinguish dry seed, water uptake, seed-coat hydration, tissue swelling, metabolic restart, and subsequent radicle emergence. Do not imply imbibition guarantees viability or completed germination."
+  },
+  {
+    "key": "nodes-branching__apical-dominance",
+    "assetId": "atlas-apical-dominance-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-branch-response-diagram",
+    "path": null,
+    "altText": "Interactive apical-dominance diagram comparing an intact shoot apex with lateral bud response after apex removal.",
+    "productionBrief": "Botanical architecture diagram comparing an intact dominant shoot apex with a topped plant. Show axillary buds, changed branch growth and a restrained hormone-signaling context. Avoid presenting auxin as a single direct off-switch for lateral buds; note interaction with other hormonal and resource signals."
+  },
+  {
+    "key": "leaves__photosynthesis",
+    "assetId": "atlas-photosynthesis-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-photosynthesis-flow",
+    "path": null,
+    "altText": "Interactive leaf photosynthesis diagram connecting light capture, carbon dioxide entry, water supply, chloroplast function, and carbohydrate production.",
+    "productionBrief": "Academic leaf-level process diagram showing usable light reaching the leaf, CO2 diffusing through stomata, xylem water supply, chloroplast-scale photosynthetic activity and carbohydrate output. Avoid implying that photosynthesis is controlled by light alone or that all fixed carbon immediately becomes glucose exported from the leaf."
+  },
+  {
+    "key": "leaves__symptom-pattern-language",
+    "assetId": "atlas-symptom-pattern-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-symptom-vocabulary",
+    "path": null,
+    "altText": "Interactive leaf symptom vocabulary comparing chlorosis, necrosis, spotting, curl or distortion, and symptom location patterns.",
+    "productionBrief": "Diagnostic vocabulary plate using representative cannabis leaves. Compare chlorosis, necrosis, spotting or lesions, curl or distortion, and old-versus-new or upper-versus-lower location. This is descriptive training, not a nutrient-deficiency identification chart; avoid mapping any single pattern to one diagnosis."
+  },
+  {
+    "key": "sex-pollen-seed__seed-formation",
+    "assetId": "atlas-seed-formation-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-seed-development-sequence",
+    "path": null,
+    "altText": "Interactive seed-development sequence from pollination and fertilization through embryo development, seed-coat differentiation, and physical maturity.",
+    "productionBrief": "Botanical reproductive sequence connecting compatible pollination to fertilization, embryo development, maternal seed-coat differentiation, filling and physical maturity. Keep pollen contact distinct from successful fertilization and avoid implying mature external appearance guarantees seed viability."
+  },
+  {
+    "key": "environment-overlay__vpd-and-transpiration",
+    "assetId": "atlas-vpd-flow-v1",
+    "status": "review",
+    "version": 1,
+    "assetType": "interactive-whole-plant-environment-flow",
+    "path": null,
+    "altText": "Interactive whole-plant VPD diagram connecting leaf vapor pressure, ambient air vapor pressure, the vapor-pressure gradient, stomatal response, transpiration, and root water supply.",
+    "productionBrief": "Whole-plant VPD process visual. Show leaf vapor pressure as temperature-dependent and near saturation inside healthy leaf air spaces, ambient vapor pressure from temperature and RH, the resulting gradient, stomatal regulation, transpiration and root/xylem water supply. Avoid fixed universal VPD targets and avoid treating VPD as the sole control of transpiration."
   }
 ]
