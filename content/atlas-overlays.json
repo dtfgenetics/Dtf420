@@ -1,0 +1,32 @@
+{
+  "environment": {
+    "title": "Environment interaction map",
+    "principle": "Plant response comes from interacting conditions, not isolated numbers. Read the canopy, air, root zone, and recent change together.",
+    "factors": [
+      {"id":"light","label":"Light / PPFD","zone":"canopy","summary":"Light drives photosynthesis but also adds leaf heat load. Distribution across the canopy matters as much as a single reading.","connectsTo":["leaf_temperature","transpiration","photosynthesis"]},
+      {"id":"leaf_temperature","label":"Leaf temperature","zone":"canopy","summary":"Leaf temperature can differ from room temperature and directly influences vapor pressure at the leaf surface.","connectsTo":["vpd","stomata","transpiration"]},
+      {"id":"temperature","label":"Air temperature","zone":"air","summary":"Air temperature affects metabolism and the vapor-pressure relationship that shapes atmospheric drying demand.","connectsTo":["rh","vpd","growth_rate"]},
+      {"id":"rh","label":"Relative humidity","zone":"air","summary":"Relative humidity describes how close air is to saturation at its current temperature and must be interpreted with temperature.","connectsTo":["vpd","transpiration","mold_risk"]},
+      {"id":"vpd","label":"VPD","zone":"air","summary":"Vapor pressure deficit is a useful description of evaporative demand between leaf and air, not a diagnosis by itself.","connectsTo":["stomata","water_uptake","transpiration"]},
+      {"id":"airflow","label":"Airflow","zone":"air","summary":"Air movement changes the leaf boundary layer and influences heat and vapor exchange around foliage.","connectsTo":["leaf_temperature","transpiration","disease_risk"]},
+      {"id":"co2","label":"CO₂","zone":"air","summary":"Carbon dioxide availability interacts with light, stomatal behavior, temperature, and plant capacity for photosynthesis.","connectsTo":["photosynthesis","stomata","growth_rate"]},
+      {"id":"water","label":"Root-zone water","zone":"roots","summary":"Water availability must be interpreted with substrate aeration, root condition, container volume, and atmospheric demand.","connectsTo":["root_oxygen","water_uptake","turgor"]},
+      {"id":"root_oxygen","label":"Root oxygen","zone":"roots","summary":"Roots require oxygen for respiration. Persistent saturation can reduce gas exchange even when water is abundant.","connectsTo":["root_health","nutrient_uptake","water_uptake"]},
+      {"id":"ph","label":"pH","zone":"roots","summary":"Root-zone pH influences chemical form and availability of nutrients, but must be read with media type, irrigation, and EC.","connectsTo":["nutrient_availability","root_health"]},
+      {"id":"ec","label":"EC","zone":"roots","summary":"Electrical conductivity estimates dissolved ionic concentration. Trend, runoff context, source water, and substrate matter.","connectsTo":["osmotic_stress","nutrient_supply","root_health"]}
+    ]
+  },
+  "diagnostics": {
+    "title": "Whole-plant symptom locator",
+    "principle": "Location is evidence. Record where a symptom starts, how it is patterned, and how it changes before ranking possible causes.",
+    "zones": [
+      {"id":"new_growth","label":"Newest growth","position":"top","questions":["Is new growth pale, distorted, twisted, or stalled?","Are veins and tissue affected differently?","Is damage symmetrical across growing tips?","What changed in root-zone pH, EC, environment, or inputs?"]},
+      {"id":"upper_canopy","label":"Upper canopy","position":"upper","questions":["Is damage strongest nearest the light source?","Do leaf edges taco upward or bleach?","Is leaf temperature elevated?","Is only the exposed canopy affected?"]},
+      {"id":"middle_canopy","label":"Middle canopy","position":"middle","questions":["Is the pattern spreading upward or downward?","Is spotting random, interveinal, marginal, or tip-focused?","Are pests or residues visible on leaf undersides?","Are multiple branches equally affected?"]},
+      {"id":"older_lower","label":"Older / lower leaves","position":"lower","questions":["Did symptoms begin on the oldest leaves?","Is yellowing uniform or between veins?","Are margins, tips, or entire leaves affected?","Is the plant reallocating mobile nutrients during rapid growth or senescence?"]},
+      {"id":"one_branch","label":"One branch / sector","position":"branch","questions":["Is the rest of the plant normal?","Is there local stem damage or restriction?","Are pests, infection, or physical injury localized?","Does irrigation reach this sector equally?"]},
+      {"id":"whole_plant","label":"Whole plant","position":"whole","questions":["Was onset sudden or gradual?","Is the media too wet or too dry?","Did environment, irrigation, feed strength, or lighting change recently?","Are roots healthy and are measurements credible?"]},
+      {"id":"root_zone","label":"Root zone","position":"roots","questions":["What is substrate moisture now and over the last cycle?","Is there adequate aeration and drainage?","What are pH and EC trends?","Are roots white/tan and firm, or dark/soft with odor or sloughing?"]}
+    ]
+  }
+}
