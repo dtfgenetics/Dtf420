@@ -1,8 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import modules from "@/content/atlas-learning-modules.json";
 import styles from "./AtlasLearningModules.module.css";
+
+function slugFor(id: string) {
+  return id.replaceAll("_", "-");
+}
 
 export function AtlasLearningModules() {
   const [selectedId, setSelectedId] = useState(modules[0].id);
@@ -42,6 +47,9 @@ export function AtlasLearningModules() {
             <div>
               <p>Selected learning system</p>
               <h3>{selected.label}</h3>
+              <Link className={styles.moduleLink} href={`/learn/atlas/${slugFor(selected.id)}`}>
+                Open full visual module
+              </Link>
             </div>
             <div className={styles.goals}>
               {selected.learningGoals.map((goal) => <span key={goal}>{goal}</span>)}
