@@ -5,6 +5,7 @@ import modules from "@/content/atlas-learning-modules.json";
 import atlasSections from "@/content/atlas-sections.json";
 import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasInteractiveLab } from "@/components/atlas/AtlasInteractiveLab";
+import { AtlasCoreInteractiveLab } from "@/components/atlas/AtlasCoreInteractiveLab";
 import styles from "./page.module.css";
 
 function slugFor(id: string) {
@@ -64,6 +65,7 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
         </section>
 
         <AtlasInteractiveLab systemId={atlasModule.id} />
+        <AtlasCoreInteractiveLab systemId={atlasModule.id} />
 
         <section className={styles.goalsSection}>
           <header>
