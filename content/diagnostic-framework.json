@@ -1,0 +1,48 @@
+{
+  "diagnostic_rule": "Do not diagnose from a single symptom. Use symptom pattern, plant stage, environment, root-zone readings, pest inspection, and recent actions.",
+  "observation_fields": [
+    "plant_stage",
+    "symptom_location",
+    "symptom_pattern",
+    "symptom_speed",
+    "old_or_new_growth",
+    "upper_or_lower_canopy",
+    "recent_environment_change",
+    "recent_feed_or_water_change",
+    "pH",
+    "EC",
+    "substrate_moisture",
+    "temperature",
+    "relative_humidity",
+    "VPD",
+    "PPFD",
+    "pest_inspection"
+  ],
+  "symptom_groups": [
+    {
+      "id": "yellowing",
+      "preferred_term": "chlorosis",
+      "first_questions": ["Old or new growth?", "Uniform or interveinal?", "Margins or full leaf?", "pH and EC checked?"]
+    },
+    {
+      "id": "browning",
+      "preferred_term": "necrosis",
+      "first_questions": ["Tip, margin, spots, or blotches?", "Is it spreading?", "Any pest evidence?", "Any high EC or heat/VPD issue?"]
+    },
+    {
+      "id": "curling",
+      "preferred_term": "leaf posture change",
+      "first_questions": ["Upward taco, downward claw, droop, twist, or cup?", "Where on the plant?", "When during the light cycle?", "What changed recently?"]
+    },
+    {
+      "id": "spots",
+      "preferred_term": "leaf spotting",
+      "first_questions": ["Random or patterned?", "Raised, sunken, dry, wet, or silvery?", "Underside checked?", "Splashing or pest signs?"]
+    },
+    {
+      "id": "wilting",
+      "preferred_term": "loss of turgor / wilt",
+      "first_questions": ["Media wet or dry?", "Roots healthy?", "High VPD?", "Whole plant or one branch?"]
+    }
+  ]
+}
