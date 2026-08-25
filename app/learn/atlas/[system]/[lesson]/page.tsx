@@ -90,7 +90,6 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
             <div className={styles.tags}>
               <span>{atlasModule.label}</span>
               <span>{selectedLesson.visual}</span>
-              <span>asset: {asset.status.replaceAll("_", " ")}</span>
             </div>
           </div>
           <AtlasSystemGraphic systemId={atlasModule.id} />
