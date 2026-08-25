@@ -263,6 +263,15 @@
   max-width: 38rem;
 }
 
+.links > div:first-child small,
+.links > div:first-child span {
+  display: block;
+}
+
+.links > div:first-child span {
+  margin-top: 0.35rem;
+}
+
 .links > div:last-child,
 .footer {
   display: flex;
