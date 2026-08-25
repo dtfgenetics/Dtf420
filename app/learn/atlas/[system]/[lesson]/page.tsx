@@ -3,12 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import modules from "@/content/atlas-learning-modules.json";
 import atlasSections from "@/content/atlas-sections.json";
-import knowledgeChecks from "@/content/atlas-knowledge-checks.json";
 import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasAssetSlot } from "@/components/atlas/AtlasAssetSlot";
 import { AtlasLessonProgress } from "@/components/atlas/AtlasLearningProgress";
 import { AtlasLessonKnowledgeCheck } from "@/components/atlas/AtlasMastery";
 import { getAtlasAsset } from "@/lib/atlas-assets";
+import { getAtlasKnowledgeCheck } from "@/lib/atlas-knowledge-checks";
 import styles from "./page.module.css";
 
 function slugify(value: string) {
@@ -81,7 +81,7 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
   const next = atlasModule.lessons[lessonIndex + 1];
   const prompts = observationPrompts(atlasModule.id);
   const currentRoute = `/learn/atlas/${system}/${lesson}`;
-  const knowledgeCheck = knowledgeChecks.find((check) => check.route === currentRoute);
+  const knowledgeCheck = getAtlasKnowledgeCheck(currentRoute);
   if (!knowledgeCheck) notFound();
   const allRoutes = orderedLessonRoutes();
   const globalLessonIndex = allRoutes.indexOf(currentRoute);
