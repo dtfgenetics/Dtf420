@@ -1,0 +1,57 @@
+name: Browser QA
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-qa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  atlas-browser-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked application dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install pinned browser test runner
+        run: npm install --no-save --package-lock=false @playwright/test@1.62.1
+
+      - name: Install Chromium runtime
+        run: npx playwright install --with-deps chromium
+
+      - name: Build production application
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Run Atlas responsive browser QA
+        run: npx playwright test
+        env:
+          CI: true
+
+      - name: Upload browser QA evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: atlas-browser-qa-${{ github.run_id }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
