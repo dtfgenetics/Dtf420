@@ -10,14 +10,6 @@ import { AtlasFinalVisualA } from "./AtlasFinalVisualA";
 import { AtlasFinalVisualB } from "./AtlasFinalVisualB";
 import styles from "./AtlasAssetSlot.module.css";
 
-const statusLabels: Record<AtlasAssetRecord["status"], string> = {
-  needed: "Visual needed",
-  brief_ready: "Production brief ready",
-  in_production: "In production",
-  ready: "Production visual",
-  review: "Visual under review",
-};
-
 const priorityInteractiveAssetIds = new Set([
   "atlas-seed-anatomy-v1",
   "atlas-root-architecture-v1",
@@ -104,11 +96,6 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
-      <div className={styles.topline}>
-        <span>{statusLabels[asset.status]}</span>
-        <small>{asset.assetId} · v{asset.version}</small>
-      </div>
-
       {priorityInteractive ? (
         <AtlasPriorityVisual assetId={asset.assetId} />
       ) : processInteractive ? (
