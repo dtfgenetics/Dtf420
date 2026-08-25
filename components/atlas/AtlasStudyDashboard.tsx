@@ -128,68 +128,34 @@ export function AtlasStudyDashboard() {
       </section>
 
       <section className={styles.metrics} aria-label="Atlas study metrics">
-        <article>
-          <small>Lessons</small>
-          <strong>{completedCount}/{lessons.length}</strong>
-          <span>{percentage(completedCount, lessons.length)}% complete</span>
-        </article>
-        <article>
-          <small>Knowledge</small>
-          <strong>{masteredCount}/{atlasKnowledgeChecks.length}</strong>
-          <span>{percentage(masteredCount, atlasKnowledgeChecks.length)}% mastered</span>
-        </article>
-        <article>
-          <small>Recent misses</small>
-          <strong>{recentMisses.length}</strong>
-          <span>{recentMisses.length === 0 ? "Review queue is clear" : "Prioritized in Review Lab"}</span>
-        </article>
-        <article>
-          <small>Path badges</small>
-          <strong>{unlockedPathBadges}/{guidedPaths.length}</strong>
-          <span>80%+ path quiz required</span>
-        </article>
+        <article><small>Lessons</small><strong>{completedCount}/{lessons.length}</strong><span>{percentage(completedCount, lessons.length)}% complete</span></article>
+        <article><small>Knowledge</small><strong>{masteredCount}/{atlasKnowledgeChecks.length}</strong><span>{percentage(masteredCount, atlasKnowledgeChecks.length)}% mastered</span></article>
+        <article><small>Recent misses</small><strong>{recentMisses.length}</strong><span>{recentMisses.length === 0 ? "Review queue is clear" : "Prioritized in Review Lab"}</span></article>
+        <article><small>Path badges</small><strong>{unlockedPathBadges}/{guidedPaths.length}</strong><span>80%+ path quiz required</span></article>
       </section>
 
       <section className={styles.recommendation} aria-label="Recommended Atlas study action">
-        <div>
-          <small>{recommendation.eyebrow}</small>
-          <h2>{recommendation.title}</h2>
-          <p>{recommendation.copy}</p>
-        </div>
+        <div><small>{recommendation.eyebrow}</small><h2>{recommendation.title}</h2><p>{recommendation.copy}</p></div>
         <Link href={recommendation.href}>{recommendation.action}</Link>
       </section>
 
       <div className={styles.grid}>
         <section className={styles.panel} aria-label="Continue Atlas learning">
-          <small>Continue Learning</small>
-          <h2>{continueLesson?.title ?? "Living Plant Atlas"}</h2>
+          <small>Continue Learning</small><h2>{continueLesson?.title ?? "Living Plant Atlas"}</h2>
           <p>{continueLesson ? `${continueLesson.systemLabel} · Resume the next unfinished lesson saved on this device.` : "Choose any Atlas lesson to continue."}</p>
           <Link href={continueLesson?.route ?? "/learn/atlas"}>Open next lesson</Link>
         </section>
-
         <section className={styles.panel} aria-label="Closest guided learning path">
-          <small>Closest guided path</small>
-          <h2>{closestPath.title}</h2>
+          <small>Closest guided path</small><h2>{closestPath.title}</h2>
           <p>{closestPath.completedLessons}/{closestPath.lessons.length} lessons complete · {closestPath.masteredLessons}/{closestPath.lessons.length} checks mastered</p>
-          <div
-            className={styles.track}
-            role="progressbar"
-            aria-label={`${closestPath.title} dashboard progress`}
-            aria-valuemin={0}
-            aria-valuemax={closestPath.lessons.length}
-            aria-valuenow={closestPath.completedLessons}
-          >
-            <span style={{ width: `${closestPath.progressPercent}%` }} />
-          </div>
-          <div className={styles.panelActions}>
-            <Link href={closestPath.nextRoute}>Continue path</Link>
-            <Link href="/learn/atlas/paths">View all paths</Link>
-          </div>
+          <div className={styles.track} role="progressbar" aria-label={`${closestPath.title} dashboard progress`} aria-valuemin={0} aria-valuemax={closestPath.lessons.length} aria-valuenow={closestPath.completedLessons}><span style={{ width: `${closestPath.progressPercent}%` }} /></div>
+          <div className={styles.panelActions}><Link href={closestPath.nextRoute}>Continue path</Link><Link href="/learn/atlas/paths">View all paths</Link></div>
         </section>
       </div>
 
       <section className={styles.tools} aria-label="Atlas study tools">
         <Link href="/learn/atlas/notebook"><strong>Observation Notebook</strong><span>Record field observations, measurements, differentials, and the next check.</span></Link>
+        <Link href="/learn/atlas/notebook/compare"><strong>Compare Saved Observations</strong><span>Compare two field notes and see what evidence or measurements changed.</span></Link>
         <Link href="/learn/atlas/cases"><strong>Diagnostic Case Lab</strong><span>Practice observation-first reasoning with realistic plant cases.</span></Link>
         <Link href="/learn/atlas/review"><strong>Mastery Review Lab</strong><span>Practice recent misses and unmastered checks.</span></Link>
         <Link href="/learn/atlas/compare"><strong>Compare & Contrast</strong><span>Study related structures and processes side by side.</span></Link>

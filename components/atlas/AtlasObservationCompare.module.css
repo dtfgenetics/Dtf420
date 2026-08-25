@@ -1,0 +1,326 @@
+.shell {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.hero,
+.selectors,
+.summary article,
+.matrix,
+.measurements,
+.narrative,
+.needMore,
+.footer {
+  border: 1px solid rgba(138, 181, 149, 0.22);
+  background: rgba(8, 20, 13, 0.82);
+  border-radius: 1.2rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(16rem, 0.55fr);
+  gap: 1.5rem;
+  align-items: end;
+  padding: clamp(1.25rem, 3vw, 2.1rem);
+}
+
+.hero small,
+.summary small,
+.measurements small,
+.narrative small {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero h1 {
+  margin: 0.35rem 0 0.7rem;
+  max-width: 19ch;
+}
+
+.hero p,
+.scope span,
+.summary p,
+.needMore p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero p,
+.summary p,
+.needMore p {
+  margin: 0;
+}
+
+.scope {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.selectors {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: end;
+  padding: 1rem;
+}
+
+.selectors label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.selectors label > span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.selectors select {
+  min-width: 0;
+  width: 100%;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid rgba(180, 220, 188, 0.22);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: inherit;
+  font: inherit;
+}
+
+.selectors select option {
+  color: #101710;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.summary article {
+  padding: 1rem;
+}
+
+.summary h2 {
+  margin: 0.3rem 0 0.45rem;
+}
+
+.matrix {
+  overflow: hidden;
+}
+
+.matrix > header,
+.row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.72fr) minmax(0, 1fr) minmax(0, 1fr) minmax(5rem, 0.42fr);
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.8rem 1rem;
+}
+
+.matrix > header {
+  color: var(--muted);
+  font-size: 0.82rem;
+  border-bottom: 1px solid rgba(138, 181, 149, 0.18);
+}
+
+.row + .row {
+  border-top: 1px solid rgba(138, 181, 149, 0.12);
+}
+
+.row span {
+  line-height: 1.45;
+}
+
+.row b {
+  justify-self: start;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
+
+.changed {
+  background: rgba(174, 137, 64, 0.16);
+  border: 1px solid rgba(220, 184, 104, 0.28);
+}
+
+.same {
+  background: rgba(72, 132, 87, 0.13);
+  border: 1px solid rgba(133, 193, 147, 0.26);
+}
+
+.measurements {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
+}
+
+.measurements h2 {
+  margin: 0.3rem 0 0;
+}
+
+.measurementGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.measurementGrid article {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.measurementGrid article > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.measurementGrid article > div span:last-child {
+  text-align: right;
+}
+
+.temperature span {
+  overflow-wrap: anywhere;
+}
+
+.narrative {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.narrative > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.narrative > header > span {
+  color: var(--muted);
+}
+
+.narrative > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.narrative article {
+  padding: 0.85rem;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.narrative p {
+  margin: 0.4rem 0 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.needMore {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.2rem;
+}
+
+.needMore a,
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(180, 220, 188, 0.24);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.needMore a {
+  justify-self: start;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .measurementGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .hero,
+  .selectors,
+  .summary,
+  .narrative > div,
+  .measurementGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+
+  .matrix {
+    display: grid;
+    gap: 0.7rem;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+  }
+
+  .matrix > header {
+    display: none;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    border: 1px solid rgba(138, 181, 149, 0.22) !important;
+    border-radius: 0.9rem;
+    background: rgba(8, 20, 13, 0.82);
+  }
+
+  .row span:nth-of-type(1)::before {
+    content: "Baseline: ";
+    color: var(--muted);
+  }
+
+  .row span:nth-of-type(2)::before {
+    content: "Follow-up: ";
+    color: var(--muted);
+  }
+
+  .narrative > header,
+  .footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .footer a,
+  .needMore a {
+    width: 100%;
+  }
+}
