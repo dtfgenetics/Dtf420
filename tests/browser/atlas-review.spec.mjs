@@ -70,9 +70,9 @@ test("review lab prioritizes recent misses and updates shared mastery", async ({
   });
 });
 
-test("Atlas hub exposes the mastery review lab", async ({ page }) => {
-  await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  const link = page.getByRole("link", { name: "Open mastery review lab" });
+test("Practice hub exposes the mastery review lab", async ({ page }) => {
+  await page.goto("/learn/atlas/practice", { waitUntil: "networkidle" });
+  const link = page.getByRole("link", { name: "Review weak concepts" });
   await expect(link).toHaveAttribute("href", "/learn/atlas/review");
   await link.click();
   await expect(page).toHaveURL(/\/learn\/atlas\/review$/);

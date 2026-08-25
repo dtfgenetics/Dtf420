@@ -58,15 +58,19 @@ test("Diagnostic Case Lab explains weak reasoning and reveals the differential a
   });
 });
 
-test("Atlas hub and Study Dashboard expose the Diagnostic Case Lab", async ({ page }) => {
+test("Practice hub and Study Dashboard expose the Diagnostic Case Lab", async ({ page }) => {
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  const hubLink = page.getByRole("link", { name: "Practice diagnostic cases" });
-  await expect(hubLink).toHaveAttribute("href", "/learn/atlas/cases");
+  const atlasNav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
+  await atlasNav.getByRole("link", { name: "Practice", exact: true }).click();
+  await expect(page).toHaveURL(/\/learn\/atlas\/practice$/);
 
-  await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
-  const dashboardLink = page.getByRole("link", { name: /Diagnostic Case Lab/i });
-  await expect(dashboardLink).toHaveAttribute("href", "/learn/atlas/cases");
-  await dashboardLink.click();
+  const practiceLink = page.getByRole("link", { name: "Practice diagnostic reasoning" });
+  await expect(practiceLink).toHaveAttribute("href", "/learn/atlas/cases");
+  await practiceLink.click();
   await expect(page).toHaveURL(/\/learn\/atlas\/cases$/);
   await expect(page.locator('section[aria-label="Diagnostic case lab introduction"]')).toBeVisible();
+
+  await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
+  const dashboardLink = page.getByRole("link", { name: /Open Practice Hub/i });
+  await expect(dashboardLink).toHaveAttribute("href", "/learn/atlas/practice");
 });

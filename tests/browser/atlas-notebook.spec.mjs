@@ -91,9 +91,10 @@ test("Observation Notebook filters, exports, and deletes saved notes", async ({ 
   await expectNoHorizontalOverflow(page);
 });
 
-test("Atlas hub, Study Dashboard, and Diagnostic Case Lab expose the Observation Notebook", async ({ page }) => {
+test("Atlas navigation, Study Dashboard, and Diagnostic Case Lab expose the Observation Notebook", async ({ page }) => {
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  await expect(page.getByRole("link", { name: "Open observation notebook" })).toHaveAttribute("href", "/learn/atlas/notebook");
+  const atlasNav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
+  await expect(atlasNav.getByRole("link", { name: "Notebook", exact: true })).toHaveAttribute("href", "/learn/atlas/notebook");
 
   await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
   await expect(page.getByRole("link", { name: /Observation Notebook/i })).toHaveAttribute("href", "/learn/atlas/notebook");

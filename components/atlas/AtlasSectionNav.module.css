@@ -1,0 +1,119 @@
+.wrap {
+  position: sticky;
+  top: 72px;
+  z-index: 18;
+  border-bottom: 1px solid rgba(183, 226, 93, 0.12);
+  background: rgba(7, 16, 10, 0.94);
+  backdrop-filter: blur(14px);
+}
+
+.nav {
+  width: min(calc(100% - 32px), var(--max-width));
+  min-height: 58px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.brand span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.15rem;
+  height: 2.15rem;
+  padding-inline: 0.45rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(183, 226, 93, 0.22);
+  background: rgba(183, 226, 93, 0.08);
+  color: var(--accent-strong);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.brand strong {
+  white-space: nowrap;
+}
+
+.scroller {
+  min-width: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.scroller > a {
+  flex: 0 0 auto;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.72rem;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.83rem;
+  font-weight: 800;
+}
+
+.scroller > a:hover,
+.scroller > a:focus-visible {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.scroller > a.active {
+  background: rgba(183, 226, 93, 0.12);
+  color: var(--accent-strong);
+  box-shadow: inset 0 0 0 1px rgba(183, 226, 93, 0.2);
+}
+
+@media (max-width: 800px) {
+  .wrap {
+    position: relative;
+    top: auto;
+  }
+
+  .nav {
+    width: 100%;
+    min-height: auto;
+    padding: 0.6rem 1rem 0.7rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .brand {
+    padding-inline: 0.15rem;
+  }
+
+  .brand span {
+    min-width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .scroller {
+    width: 100%;
+    margin-left: 0;
+    padding-bottom: 0.05rem;
+  }
+
+  .scroller > a {
+    min-height: 36px;
+  }
+}

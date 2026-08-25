@@ -71,15 +71,20 @@ test("all 50 Atlas lesson routes respond successfully", async ({ request }, test
   }
 });
 
-test("Atlas hub renders cleanly without viewport overflow", async ({ page }, testInfo) => {
+test("Atlas Explore renders cleanly with consolidated navigation", async ({ page }, testInfo) => {
   const errors = watchRuntimeErrors(page);
   const response = await page.goto("/learn/atlas", { waitUntil: "networkidle" });
 
   expect(response?.status()).toBe(200);
   await expect(page.locator("h1").first()).toBeVisible();
   await expect(page.locator("body")).toContainText("Living Plant Atlas");
-  await expect(page.getByRole("link", { name: "Compare plant systems side by side" })).toBeVisible();
-  await expect(page.locator('section[aria-label="Atlas learning progress"]')).toBeVisible();
+  const atlasNav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
+  for (const label of ["Dashboard", "Explore", "Paths", "Practice", "Notebook", "Mastery"]) {
+    await expect(atlasNav.getByRole("link", { name: label, exact: true })).toBeVisible();
+  }
+  await expect(atlasNav.getByRole("link", { name: "Explore", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(page.locator('section[aria-label="Atlas learning progress"]')).toHaveCount(0);
+  await expect(page.locator("body")).not.toContainText("Atlas expansion path");
   await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
@@ -89,7 +94,7 @@ test("Atlas hub renders cleanly without viewport overflow", async ({ page }, tes
   });
 });
 
-test("Atlas lesson completion persists and Continue Learning advances", async ({ page }, testInfo) => {
+test("Atlas lesson completion persists and Dashboard Continue Learning advances", async ({ page }, testInfo) => {
   const errors = watchRuntimeErrors(page);
   await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
   await page.evaluate((key) => window.localStorage.removeItem(key), PROGRESS_KEY);
@@ -110,12 +115,12 @@ test("Atlas lesson completion persists and Continue Learning advances", async ({
   await page.reload({ waitUntil: "networkidle" });
   await expect(page.locator('section[aria-label="Lesson completion"]').getByRole("button", { name: "Completed ✓" })).toHaveAttribute("aria-pressed", "true");
 
-  await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  const overview = page.locator('section[aria-label="Atlas learning progress"]');
-  await expect(overview).toContainText("1 of 50 lessons complete");
-  await expect(overview.getByRole("progressbar", { name: "Atlas lessons completed" })).toHaveAttribute("aria-valuenow", "1");
-  await expect(overview).toContainText("Continue with Seed & Germination: Imbibition");
-  await expect(overview.getByRole("link", { name: "Continue learning" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");
+  await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
+  const metrics = page.locator('section[aria-label="Atlas study metrics"]');
+  await expect(metrics).toContainText("1/50");
+  const continuePanel = page.locator('section[aria-label="Continue Atlas learning"]');
+  await expect(continuePanel).toContainText("Imbibition");
+  await expect(continuePanel.getByRole("link", { name: "Open next lesson" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");
   await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 

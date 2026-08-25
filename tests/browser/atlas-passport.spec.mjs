@@ -23,13 +23,14 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("mastery passport route and hub entry are available", async ({ page, request }, testInfo) => {
+test("mastery passport route and Atlas navigation entry are available", async ({ page, request }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Run route check once.");
   const response = await request.get("/learn/atlas/mastery");
   expect(response.status()).toBe(200);
 
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  await expect(page.getByRole("link", { name: "View mastery passport" })).toHaveAttribute("href", "/learn/atlas/mastery");
+  const atlasNav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
+  await expect(atlasNav.getByRole("link", { name: "Mastery", exact: true })).toHaveAttribute("href", "/learn/atlas/mastery");
 });
 
 test("mastery passport starts locked and explains its educational scope", async ({ page }, testInfo) => {

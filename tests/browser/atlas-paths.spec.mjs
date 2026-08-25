@@ -33,7 +33,7 @@ test("guided path manifest points only to live Atlas lessons", async ({ request 
   }
 });
 
-test("Atlas hub exposes guided paths and all six path views render cleanly", async ({ page }, testInfo) => {
+test("Atlas navigation exposes guided paths and all six path views render cleanly", async ({ page }, testInfo) => {
   const errors = [];
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(`console: ${message.text()}`);
@@ -41,8 +41,8 @@ test("Atlas hub exposes guided paths and all six path views render cleanly", asy
   page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
 
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  const guidedLink = page.getByRole("link", { name: "Follow guided learning paths" });
-  await expect(guidedLink).toBeVisible();
+  const atlasNav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
+  const guidedLink = atlasNav.getByRole("link", { name: "Paths", exact: true });
   await expect(guidedLink).toHaveAttribute("href", "/learn/atlas/paths");
   await guidedLink.click();
   await expect(page).toHaveURL(/\/learn\/atlas\/paths$/);

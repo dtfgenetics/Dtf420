@@ -78,7 +78,7 @@ async function seedEntries(page, entries) {
   await page.reload({ waitUntil: "networkidle" });
 }
 
-test("Compare Saved Observations shows stable and changed evidence plus numeric deltas", async ({ page }, testInfo) => {
+test("Compare Field Observations shows stable and changed evidence plus numeric deltas", async ({ page }, testInfo) => {
   await seedEntries(page, [followup, baseline]);
 
   await expect(page.locator('section[aria-label="Observation comparison introduction"]')).toContainText("Track change from recorded evidence, not memory.");
@@ -110,7 +110,7 @@ test("Compare Saved Observations shows stable and changed evidence plus numeric 
   });
 });
 
-test("Compare Saved Observations can switch the follow-up note without allowing self-comparison", async ({ page }) => {
+test("Compare Field Observations can switch the follow-up note without allowing self-comparison", async ({ page }) => {
   await seedEntries(page, [third, followup, baseline]);
 
   const baselineSelect = page.getByLabel("Baseline observation");
@@ -134,7 +134,7 @@ test("Compare Saved Observations can switch the follow-up note without allowing 
   await expectNoHorizontalOverflow(page);
 });
 
-test("Compare Saved Observations explains when fewer than two notes exist", async ({ page }) => {
+test("Compare Field Observations explains when fewer than two notes exist", async ({ page }) => {
   await seedEntries(page, [baseline]);
   const needMore = page.locator('section[aria-label="Observation comparison needs more notes"]');
   await expect(needMore).toContainText("Save one more observation to begin comparing.");
@@ -145,12 +145,9 @@ test("Compare Saved Observations explains when fewer than two notes exist", asyn
   await expect(page.locator('section[aria-label="Observation comparison needs more notes"]')).toContainText("Save two observations to begin comparing.");
 });
 
-test("Atlas hub and Study Dashboard expose saved observation comparison", async ({ page }) => {
-  await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  await expect(page.getByRole("link", { name: "Compare saved observations" })).toHaveAttribute("href", "/learn/atlas/notebook/compare");
-
+test("Study Dashboard exposes Compare Field Observations", async ({ page }) => {
   await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
-  const dashboardLink = page.getByRole("link", { name: /Compare Saved Observations/i });
+  const dashboardLink = page.getByRole("link", { name: /Compare Field Observations/i });
   await expect(dashboardLink).toHaveAttribute("href", "/learn/atlas/notebook/compare");
   await dashboardLink.click();
   await expect(page).toHaveURL(/\/learn\/atlas\/notebook\/compare$/);
