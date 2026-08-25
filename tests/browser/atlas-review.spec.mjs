@@ -42,7 +42,9 @@ test("review lab prioritizes recent misses and updates shared mastery", async ({
   const practice = page.locator('section[aria-label="Atlas review practice"]');
   await expect(practice).toContainText("Seed anatomy");
   await expect(practice).toContainText("Which seed structure becomes the first root organ after germination begins?");
-  await expect(practice).toContainText("1 previous attempt");
+  const attempts = practice.locator('[aria-label="Previous attempts"]');
+  await expect(attempts.getByText("1", { exact: true })).toBeVisible();
+  await expect(attempts).toContainText("previous attempt");
 
   await practice.getByRole("radio", { name: /Radicle/ }).click();
   await practice.getByRole("button", { name: "Check answer" }).click();
