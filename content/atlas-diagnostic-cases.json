@@ -1,0 +1,188 @@
+[
+  {
+    "id": "upper-canopy-chlorosis",
+    "title": "Upper-canopy chlorosis",
+    "focus": "Location + root-zone chemistry",
+    "scenario": "A plant develops pale new leaves near the top while older leaves remain noticeably greener. The grower is tempted to add more micronutrients immediately.",
+    "observations": [
+      { "label": "Location", "value": "Newest leaves and upper growing points" },
+      { "label": "Pattern", "value": "Pale tissue with veins remaining somewhat more visible" },
+      { "label": "Progression", "value": "Appeared first on recent growth" },
+      { "label": "Known context", "value": "No root-zone pH or EC measurement has been taken yet" }
+    ],
+    "question": "What is the strongest next step before changing the nutrient recipe?",
+    "options": [
+      { "label": "Add a concentrated micronutrient supplement immediately", "rationale": "Appearance alone does not establish whether a nutrient is absent, unavailable, or whether root function is limiting uptake." },
+      { "label": "Measure root-zone pH and EC with a consistent method", "rationale": "This directly tests whether chemical availability or salt concentration could explain why young tissue is affected before changing inputs." },
+      { "label": "Remove every pale leaf and wait for replacement growth", "rationale": "Removing evidence does not identify the process driving the pattern and can make progression harder to track." },
+      { "label": "Increase irrigation frequency without measuring the root zone", "rationale": "More water can worsen some root-zone problems and does not test the leading competing explanations." }
+    ],
+    "correctIndex": 1,
+    "differential": [
+      "Root-zone pH affecting micronutrient availability",
+      "Root stress limiting uptake even when nutrients are present",
+      "A true micronutrient shortage in the supplied solution"
+    ],
+    "takeaway": "Young-growth chlorosis narrows the field, but location does not prove a nutrient deficiency. Measure the root-zone context before changing the formula.",
+    "links": [
+      { "label": "Symptom location", "route": "/learn/atlas/diagnostic-overlay/symptom-location" },
+      { "label": "Measurement context", "route": "/learn/atlas/diagnostic-overlay/measurement-context" },
+      { "label": "Root-zone interaction", "route": "/learn/atlas/environment-overlay/root-zone-interaction" }
+    ]
+  },
+  {
+    "id": "lower-leaf-yellowing",
+    "title": "Lower-leaf yellowing",
+    "focus": "Mobility + progression",
+    "scenario": "Several older lower leaves are becoming uniformly yellow while the newest growth remains green. The change has progressed upward slowly over several days.",
+    "observations": [
+      { "label": "Location", "value": "Oldest leaves first" },
+      { "label": "Pattern", "value": "Mostly uniform yellowing rather than isolated spots" },
+      { "label": "Progression", "value": "Slowly moving upward from the lower canopy" },
+      { "label": "Known context", "value": "No recent record of input EC, root-zone EC, or feeding trend" }
+    ],
+    "question": "Which observation would most improve the differential?",
+    "options": [
+      { "label": "Only compare the leaf to an online deficiency photo", "rationale": "Photo matching ignores progression, plant stage, root-zone chemistry, and several causes that can create similar yellowing." },
+      { "label": "Record input and root-zone EC together with the recent feeding trend", "rationale": "That adds context about nutrient supply and accumulation while preserving the useful clue that older tissue is affected first." },
+      { "label": "Increase every nutrient because the leaf is yellow", "rationale": "A broad increase can compound excess salts and does not distinguish shortage from uptake or root-zone problems." },
+      { "label": "Ignore which leaves were affected first", "rationale": "Tissue age and progression are among the most useful observations for separating competing explanations." }
+    ],
+    "correctIndex": 1,
+    "differential": [
+      "Remobilization of a mobile nutrient from older tissue",
+      "Insufficient nutrient supply relative to plant demand",
+      "Root-zone conditions reducing effective uptake"
+    ],
+    "takeaway": "Older-leaf-first symptoms are valuable because mobile resources can be remobilized, but the feeding and root-zone record is still needed before deciding why it is happening.",
+    "links": [
+      { "label": "Symptom pattern language", "route": "/learn/atlas/leaves/symptom-pattern-language" },
+      { "label": "Pattern description", "route": "/learn/atlas/diagnostic-overlay/pattern-description" },
+      { "label": "Differential workflow", "route": "/learn/atlas/diagnostic-overlay/differential-workflow" }
+    ]
+  },
+  {
+    "id": "tip-burn-after-feed-change",
+    "title": "Tip burn after a feed change",
+    "focus": "Timeline + EC",
+    "scenario": "Leaf tips begin browning across multiple parts of the canopy shortly after the nutrient concentration was increased. New growth is still expanding.",
+    "observations": [
+      { "label": "Location", "value": "Tips on leaves across several canopy levels" },
+      { "label": "Pattern", "value": "Small necrotic tips with otherwise intact leaf blades" },
+      { "label": "Progression", "value": "Began after a known increase in feed strength" },
+      { "label": "Known context", "value": "Root-zone EC has not been checked since the change" }
+    ],
+    "question": "What measurement best tests the strongest timeline-based hypothesis?",
+    "options": [
+      { "label": "Measure root-zone EC and compare it with the input EC", "rationale": "The timing makes salt concentration or accumulation a plausible explanation, and the input/root-zone comparison directly tests it." },
+      { "label": "Add another supplement to cover possible deficiencies", "rationale": "Adding more dissolved salts before checking EC can worsen the very condition suggested by the timeline." },
+      { "label": "Judge the entire root zone from one damaged leaf tip", "rationale": "The tip is evidence of stress, not a direct measurement of the root-zone cause." },
+      { "label": "Change the light schedule because the tips are brown", "rationale": "Nothing in the current timeline specifically points to photoperiod as the best discriminating variable." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Elevated root-zone EC after the feed increase",
+      "Rapid change in osmotic conditions",
+      "A separate environmental stress coinciding with the feed change"
+    ],
+    "takeaway": "A strong timeline clue should shape the next measurement. When symptoms follow a feed-strength change, compare input and root-zone EC before adding more nutrients.",
+    "links": [
+      { "label": "Measurement context", "route": "/learn/atlas/diagnostic-overlay/measurement-context" },
+      { "label": "Root-zone interaction", "route": "/learn/atlas/environment-overlay/root-zone-interaction" },
+      { "label": "Differential workflow", "route": "/learn/atlas/diagnostic-overlay/differential-workflow" }
+    ]
+  },
+  {
+    "id": "droop-after-irrigation",
+    "title": "Droop after irrigation",
+    "focus": "Water status + root oxygen",
+    "scenario": "A plant repeatedly droops soon after irrigation. The medium remains wet for a long time and the plant improves only after the root zone has dried somewhat.",
+    "observations": [
+      { "label": "Location", "value": "Whole plant rather than one branch" },
+      { "label": "Pattern", "value": "Leaves and petioles lose posture without a localized lesion" },
+      { "label": "Progression", "value": "Consistently follows irrigation events" },
+      { "label": "Known context", "value": "Long wet periods and slow dryback" }
+    ],
+    "question": "Which next check best separates water shortage from a saturated root-zone problem?",
+    "options": [
+      { "label": "Irrigate again immediately because the plant is drooping", "rationale": "The timing and long wet period make additional water a poor test and potentially a worsening factor." },
+      { "label": "Measure root-zone moisture/dryback and inspect drainage/aeration", "rationale": "This tests whether the roots are remaining saturated and whether oxygen availability or drainage is limiting root function." },
+      { "label": "Diagnose a nutrient deficiency from droop alone", "rationale": "Loss of posture is nonspecific and must be interpreted with water status, timing, and root-zone conditions." },
+      { "label": "Remove healthy leaves to reduce the visible droop", "rationale": "Removing tissue does not identify whether the root system is short of water or short of oxygen." }
+    ],
+    "correctIndex": 1,
+    "differential": [
+      "Saturated root zone reducing oxygen availability",
+      "Poor drainage or insufficient air-filled porosity",
+      "Less likely true water shortage given the repeated post-irrigation timing"
+    ],
+    "takeaway": "Droop is not synonymous with thirst. Timing relative to irrigation and the root zone's wet/dry cycle can reverse the interpretation.",
+    "links": [
+      { "label": "Water & nutrient uptake", "route": "/learn/atlas/root-system/water-and-nutrient-uptake" },
+      { "label": "Root stress", "route": "/learn/atlas/root-system/root-stress" },
+      { "label": "Root-zone interaction", "route": "/learn/atlas/environment-overlay/root-zone-interaction" }
+    ]
+  },
+  {
+    "id": "midday-upper-leaf-curl",
+    "title": "Midday upper-leaf curl",
+    "focus": "Canopy microclimate",
+    "scenario": "Upper leaves curl upward most strongly during the brightest, warmest part of the light cycle and relax later. Lower leaves show much less of the effect.",
+    "observations": [
+      { "label": "Location", "value": "Upper canopy closest to the light" },
+      { "label": "Pattern", "value": "Upward edge curl without the same severity below" },
+      { "label": "Progression", "value": "Strongest during peak light/heat and partially reversible" },
+      { "label": "Known context", "value": "No leaf-temperature, PPFD, or canopy RH readings have been compared yet" }
+    ],
+    "question": "Which measurement set best tests the spatial and time-of-day pattern?",
+    "options": [
+      { "label": "Leaf temperature, PPFD, RH/VPD, and light distance at the affected canopy", "rationale": "These measurements directly test the microclimate variables that change with canopy height and time of day." },
+      { "label": "Only the nutrient bottle label", "rationale": "The label cannot explain why symptoms are strongest near the light and vary through the day." },
+      { "label": "Only the room temperature measured far from the canopy", "rationale": "A distant air reading can miss leaf temperature and the microclimate actually experienced by the affected tissue." },
+      { "label": "Immediately raise nutrient EC", "rationale": "The spatial and reversible pattern points first toward canopy environment, not a reason to increase dissolved salts." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Excess leaf temperature or radiant load at the upper canopy",
+      "High evaporative demand relative to water delivery",
+      "Airflow or boundary-layer differences near the affected leaves"
+    ],
+    "takeaway": "A symptom that tracks canopy position and time of day should be investigated as a microclimate problem before it is treated as a nutrient problem.",
+    "links": [
+      { "label": "Light distribution", "route": "/learn/atlas/environment-overlay/light-distribution" },
+      { "label": "Temperature & humidity", "route": "/learn/atlas/environment-overlay/temperature-and-humidity" },
+      { "label": "VPD & transpiration", "route": "/learn/atlas/environment-overlay/vpd-and-transpiration" }
+    ]
+  },
+  {
+    "id": "single-branch-wilt",
+    "title": "One branch wilts while the rest looks normal",
+    "focus": "Localized vs systemic pattern",
+    "scenario": "One branch loses posture and slows while the rest of the plant remains vigorous. The grower is considering changing the nutrient mix for the whole plant.",
+    "observations": [
+      { "label": "Location", "value": "One branch and its attached leaves" },
+      { "label": "Pattern", "value": "Localized rather than distributed through the canopy" },
+      { "label": "Progression", "value": "The affected branch worsens while neighboring branches remain normal" },
+      { "label": "Known context", "value": "The branch junction and local stem have not been inspected closely" }
+    ],
+    "question": "What should be inspected before changing whole-plant nutrition?",
+    "options": [
+      { "label": "The branch junction, stem tissue, and local vascular continuity", "rationale": "A one-branch pattern strongly supports checking for a localized structural or transport problem before changing systemic nutrition." },
+      { "label": "Increase fertilizer for the entire root zone", "rationale": "A whole-plant nutrient change is poorly matched to a symptom confined to one branch." },
+      { "label": "Assume every leaf on the plant has the same problem", "rationale": "Spatial distribution is evidence; ignoring it removes one of the strongest clues in the case." },
+      { "label": "Change the photoperiod immediately", "rationale": "Photoperiod is a whole-plant variable and does not explain why only one branch is affected." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Localized stem or branch damage affecting transport",
+      "A branch-specific vascular restriction",
+      "A localized biological injury rather than a systemic nutrient problem"
+    ],
+    "takeaway": "Localized symptoms deserve localized inspection. Distribution across the plant often tells you whether to investigate a whole-system variable or a specific structure.",
+    "links": [
+      { "label": "Symptom location", "route": "/learn/atlas/diagnostic-overlay/symptom-location" },
+      { "label": "Stem cross-section", "route": "/learn/atlas/stem-vascular/stem-cross-section" },
+      { "label": "Xylem transport", "route": "/learn/atlas/stem-vascular/xylem-transport" }
+    ]
+  }
+]
