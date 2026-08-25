@@ -6,7 +6,9 @@ import atlasSections from "@/content/atlas-sections.json";
 import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasAssetSlot } from "@/components/atlas/AtlasAssetSlot";
 import { AtlasLessonProgress } from "@/components/atlas/AtlasLearningProgress";
+import { AtlasLessonKnowledgeCheck } from "@/components/atlas/AtlasMastery";
 import { getAtlasAsset } from "@/lib/atlas-assets";
+import { getAtlasKnowledgeCheck } from "@/lib/atlas-knowledge-checks";
 import styles from "./page.module.css";
 
 function slugify(value: string) {
@@ -79,6 +81,8 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
   const next = atlasModule.lessons[lessonIndex + 1];
   const prompts = observationPrompts(atlasModule.id);
   const currentRoute = `/learn/atlas/${system}/${lesson}`;
+  const knowledgeCheck = getAtlasKnowledgeCheck(currentRoute);
+  if (!knowledgeCheck) notFound();
   const allRoutes = orderedLessonRoutes();
   const globalLessonIndex = allRoutes.indexOf(currentRoute);
   const nextRoute = globalLessonIndex >= 0 ? allRoutes[globalLessonIndex + 1] : undefined;
@@ -115,6 +119,7 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
           </aside>
         </section>
 
+        <AtlasLessonKnowledgeCheck check={knowledgeCheck} />
         <AtlasLessonProgress route={currentRoute} nextRoute={nextRoute} />
 
         <section className={styles.context}>

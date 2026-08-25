@@ -1,0 +1,402 @@
+[
+  {
+    "id": "atlas-check-01",
+    "route": "/learn/atlas/seed-germination/seed-anatomy",
+    "prompt": "Which seed structure becomes the first root organ after germination begins?",
+    "options": ["Cotyledon", "Radicle", "Seed coat", "Micropyle"],
+    "correctIndex": 1,
+    "explanation": "The radicle is the embryonic root and is typically the first root organ to emerge."
+  },
+  {
+    "id": "atlas-check-02",
+    "route": "/learn/atlas/seed-germination/imbibition",
+    "prompt": "What best describes imbibition?",
+    "options": ["Pollen landing on a stigma", "Water uptake that rehydrates seed tissues before visible emergence", "The first true leaf opening", "The stem beginning secondary growth"],
+    "correctIndex": 1,
+    "explanation": "Imbibition is the early uptake of water by the dry seed, which rehydrates tissues and helps restart metabolism."
+  },
+  {
+    "id": "atlas-check-03",
+    "route": "/learn/atlas/seed-germination/radicle-emergence",
+    "prompt": "What is the clearest sign that radicle emergence has occurred?",
+    "options": ["A root-like embryonic structure has exited the seed", "The first true leaf is fully expanded", "The stem has formed several nodes", "A flower bract has developed"],
+    "correctIndex": 0,
+    "explanation": "Radicle emergence means the embryonic root has visibly emerged from the seed."
+  },
+  {
+    "id": "atlas-check-04",
+    "route": "/learn/atlas/seed-germination/cotyledon-transition",
+    "prompt": "What is the main role of cotyledons during the earliest seedling stage?",
+    "options": ["They are mature flowers", "They support early seedling development before true leaves take over most photosynthesis", "They transport pollen", "They form the permanent root system"],
+    "correctIndex": 1,
+    "explanation": "Cotyledons support the young seedling early in development, while true leaves later become the main photosynthetic surfaces."
+  },
+  {
+    "id": "atlas-check-05",
+    "route": "/learn/atlas/seed-germination/germination-failure-patterns",
+    "prompt": "Why is a single stalled seed not enough to identify the cause of germination failure?",
+    "options": ["All stalled seeds have the same cause", "Appearance alone cannot separate seed viability from moisture, oxygen, temperature, or disease-related problems", "The seed coat always reveals the cause", "Timing never matters"],
+    "correctIndex": 1,
+    "explanation": "A stalled seed can reflect several different causes, so environmental context and tissue condition matter before drawing a conclusion."
+  },
+  {
+    "id": "atlas-check-06",
+    "route": "/learn/atlas/root-system/root-architecture",
+    "prompt": "Which structures contribute most directly to expanding the root system's contact with the surrounding media?",
+    "options": ["Only the primary root", "Lateral roots, fine roots, and root hairs", "Only the stem pith", "Flower stigmas"],
+    "correctIndex": 1,
+    "explanation": "Lateral branching, fine roots, and root hairs greatly increase the surface area that contacts water, nutrients, oxygen, and the rhizosphere."
+  },
+  {
+    "id": "atlas-check-07",
+    "route": "/learn/atlas/root-system/root-hairs-and-absorption",
+    "prompt": "Why are root hairs important?",
+    "options": ["They produce pollen", "They increase contact between the root and the surrounding solution or media", "They replace the xylem", "They prevent all water loss"],
+    "correctIndex": 1,
+    "explanation": "Root hairs are short-lived extensions that increase absorptive surface area and contact with the immediate root environment."
+  },
+  {
+    "id": "atlas-check-08",
+    "route": "/learn/atlas/root-system/rhizosphere",
+    "prompt": "What is the rhizosphere?",
+    "options": ["The air space above the canopy", "The narrow zone around roots strongly influenced by root activity, microbes, water, ions, and exudates", "The flower's resin head", "The seed coat"],
+    "correctIndex": 1,
+    "explanation": "The rhizosphere is the root-influenced zone where roots, microbes, water, dissolved ions, oxygen, and root exudates interact."
+  },
+  {
+    "id": "atlas-check-09",
+    "route": "/learn/atlas/root-system/water-and-nutrient-uptake",
+    "prompt": "Which statement best represents water and nutrient uptake as a whole-plant process?",
+    "options": ["It depends on one root-zone number only", "It reflects root contact, available water and ions, membrane transport, and whole-plant demand", "It occurs only in leaves", "It is unrelated to transpiration"],
+    "correctIndex": 1,
+    "explanation": "Uptake depends on root-zone conditions and root physiology, while demand elsewhere in the plant also affects transport."
+  },
+  {
+    "id": "atlas-check-10",
+    "route": "/learn/atlas/root-system/root-stress",
+    "prompt": "Why can persistent saturation become stressful to roots?",
+    "options": ["It can reduce oxygen availability around roots", "It always increases root oxygen", "It stops all leaf transpiration immediately", "It turns phloem into xylem"],
+    "correctIndex": 0,
+    "explanation": "When pores remain filled with water, oxygen diffusion can be restricted, which can impair root respiration and root function."
+  },
+  {
+    "id": "atlas-check-11",
+    "route": "/learn/atlas/stem-vascular/stem-cross-section",
+    "prompt": "Where are xylem and phloem found in a simplified stem cross-section?",
+    "options": ["Within the vascular tissues", "Only in the seed coat", "Only in trichome heads", "Only in the leaf margin"],
+    "correctIndex": 0,
+    "explanation": "Xylem and phloem are vascular tissues that transport water, minerals, and photosynthates through the plant."
+  },
+  {
+    "id": "atlas-check-12",
+    "route": "/learn/atlas/stem-vascular/xylem-transport",
+    "prompt": "What does xylem primarily transport?",
+    "options": ["Water and dissolved mineral ions from roots toward shoots", "Pollen from flowers to roots", "Only sugars from leaves to sinks", "Air through the stem"],
+    "correctIndex": 0,
+    "explanation": "Xylem is the main pathway for water and dissolved mineral movement from roots toward transpiring shoots and leaves."
+  },
+  {
+    "id": "atlas-check-13",
+    "route": "/learn/atlas/stem-vascular/phloem-transport",
+    "prompt": "What does phloem primarily move?",
+    "options": ["Only water upward", "Photosynthates from source tissues toward growing or storage sinks", "Pollen through roots", "Oxygen into the leaf boundary layer"],
+    "correctIndex": 1,
+    "explanation": "Phloem distributes sugars and other assimilates from source tissues to sinks that are growing, using, or storing them."
+  },
+  {
+    "id": "atlas-check-14",
+    "route": "/learn/atlas/stem-vascular/internodal-spacing",
+    "prompt": "Why should internodal spacing not be interpreted from one variable alone?",
+    "options": ["Because genetics, developmental stage, light, temperature, and growth rate can all contribute", "Because internodes do not change", "Because only root color controls internode length", "Because spacing is unrelated to plant development"],
+    "correctIndex": 0,
+    "explanation": "Internode length is shaped by multiple interacting biological and environmental factors, so a single-cause explanation is usually too simple."
+  },
+  {
+    "id": "atlas-check-15",
+    "route": "/learn/atlas/stem-vascular/damage-and-recovery",
+    "prompt": "What matters most when judging the significance of stem damage?",
+    "options": ["Only whether the stem looks bent", "Damage severity, vascular continuity, support, and recovery over time", "The color of nearby trichomes only", "Whether one leaf is large"],
+    "correctIndex": 1,
+    "explanation": "The biological consequence depends on how much support and vascular continuity were disrupted and how the tissue recovers."
+  },
+  {
+    "id": "atlas-check-16",
+    "route": "/learn/atlas/nodes-branching/node-anatomy",
+    "prompt": "Where is an axillary bud located?",
+    "options": ["At a node near the junction of a leaf and stem", "Inside a trichome head", "At the root tip only", "Inside the seed coat"],
+    "correctIndex": 0,
+    "explanation": "Axillary buds occur at nodes and can give rise to lateral shoots or reproductive structures depending on developmental context."
+  },
+  {
+    "id": "atlas-check-17",
+    "route": "/learn/atlas/nodes-branching/apical-dominance",
+    "prompt": "What is apical dominance?",
+    "options": ["The influence of the active shoot apex on the growth of lateral buds", "The movement of pollen through xylem", "Root-hair formation", "Trichome cloudiness"],
+    "correctIndex": 0,
+    "explanation": "Apical dominance describes how the shoot apex influences lateral bud outgrowth and overall branching pattern."
+  },
+  {
+    "id": "atlas-check-18",
+    "route": "/learn/atlas/nodes-branching/topping-and-fim",
+    "prompt": "What is the main biological idea behind removing or partially disrupting the shoot apex?",
+    "options": ["Redistributing active shoot growth among remaining growing points", "Turning phloem into roots", "Stopping photosynthesis permanently", "Changing trichomes into stomata"],
+    "correctIndex": 0,
+    "explanation": "Changing the dominant apex can redistribute growth among lateral shoots, although the exact response varies by plant and developmental context."
+  },
+  {
+    "id": "atlas-check-19",
+    "route": "/learn/atlas/nodes-branching/lst-and-directional-growth",
+    "prompt": "What does low-stress directional training primarily change?",
+    "options": ["Branch orientation and canopy position while keeping tissues connected", "The seed embryo", "Pollen genetics", "Root-hair anatomy"],
+    "correctIndex": 0,
+    "explanation": "Directional training changes branch position and light exposure while preserving vascular continuity."
+  },
+  {
+    "id": "atlas-check-20",
+    "route": "/learn/atlas/nodes-branching/mainlining-and-scrog",
+    "prompt": "What do mainlining and screen-based canopy organization have in common?",
+    "options": ["Both organize the distribution of growing points across the canopy", "Both are types of pollen", "Both occur only inside seeds", "Both eliminate all lateral growth"],
+    "correctIndex": 0,
+    "explanation": "They use different approaches, but both aim to organize growing points and canopy structure rather than leaving architecture entirely unmanaged."
+  },
+  {
+    "id": "atlas-check-21",
+    "route": "/learn/atlas/leaves/healthy-leaf-baseline",
+    "prompt": "Why establish a healthy leaf baseline before diagnosing a problem?",
+    "options": ["It provides a reference for normal color, shape, venation, texture, and posture", "It guarantees the cause of every symptom", "It replaces environmental measurements", "It shows pollen viability"],
+    "correctIndex": 0,
+    "explanation": "Diagnosis is more reliable when abnormal observations are compared with a clear reference for normal leaf structure and appearance."
+  },
+  {
+    "id": "atlas-check-22",
+    "route": "/learn/atlas/leaves/photosynthesis",
+    "prompt": "Which combination is directly involved in photosynthesis?",
+    "options": ["Light, carbon dioxide, and water", "Pollen, seed coat, and root hairs only", "Xylem alone", "Airflow without leaf tissue"],
+    "correctIndex": 0,
+    "explanation": "Photosynthesis uses light energy to help convert carbon dioxide and water into carbohydrates, with oxygen released as a byproduct."
+  },
+  {
+    "id": "atlas-check-23",
+    "route": "/learn/atlas/leaves/stomata-and-transpiration",
+    "prompt": "Why are stomata important to both photosynthesis and transpiration?",
+    "options": ["They regulate gas exchange, allowing carbon dioxide entry while water vapor can exit", "They are roots on the leaf surface", "They transport pollen", "They are seed storage tissues"],
+    "correctIndex": 0,
+    "explanation": "Stomata regulate gas exchange, connecting carbon dioxide uptake with water-vapor loss and plant water relations."
+  },
+  {
+    "id": "atlas-check-24",
+    "route": "/learn/atlas/leaves/symptom-pattern-language",
+    "prompt": "What should come before assigning a cause to a leaf symptom?",
+    "options": ["Describe its pattern, location, distribution, and appearance", "Guess a nutrient immediately", "Ignore whether it is on new or old growth", "Look only at one photograph"],
+    "correctIndex": 0,
+    "explanation": "Precise observation reduces premature diagnosis and helps separate multiple plausible causes."
+  },
+  {
+    "id": "atlas-check-25",
+    "route": "/learn/atlas/leaves/leaf-inspection-workflow",
+    "prompt": "Which inspection approach gives the strongest context?",
+    "options": ["Compare upper and lower surfaces, new and old growth, margins, veins, petioles, pests, and progression", "Inspect one leaf tip only", "Look only at the oldest leaf", "Ignore the underside of leaves"],
+    "correctIndex": 0,
+    "explanation": "A consistent inspection across surfaces, ages, locations, and time produces much stronger diagnostic evidence."
+  },
+  {
+    "id": "atlas-check-26",
+    "route": "/learn/atlas/flowers/female-flower-anatomy",
+    "prompt": "Which structures are characteristic parts of a female cannabis flower?",
+    "options": ["Bracts and stigmas", "Root hairs and root caps only", "Xylem vessels only", "Cotyledons only"],
+    "correctIndex": 0,
+    "explanation": "Female flowers include bracts and pistillate structures with stigmas, along with nearby floral and leaf tissues."
+  },
+  {
+    "id": "atlas-check-27",
+    "route": "/learn/atlas/flowers/flower-initiation",
+    "prompt": "What best describes flower initiation?",
+    "options": ["The transition from preflower expression into expanding floral sites", "The first water uptake by a seed", "Root-hair death", "Phloem becoming xylem"],
+    "correctIndex": 0,
+    "explanation": "Flower initiation is the developmental transition in which reproductive sites begin expanding into recognizable floral growth."
+  },
+  {
+    "id": "atlas-check-28",
+    "route": "/learn/atlas/flowers/bud-development",
+    "prompt": "Why is flower development better judged from several structural changes instead of one sign?",
+    "options": ["Bract expansion, stigma changes, resin coverage, density, and senescence can change together over time", "Only one structure changes during flowering", "Roots stop affecting flowers", "Stigma color measures chemistry directly"],
+    "correctIndex": 0,
+    "explanation": "Flower maturation is a multi-feature developmental process, so multiple observations provide better context than a single cue."
+  },
+  {
+    "id": "atlas-check-29",
+    "route": "/learn/atlas/flowers/pollination-response",
+    "prompt": "What is a major developmental consequence of successful pollination?",
+    "options": ["Development is redirected toward seed formation in the fertilized flower", "The radicle re-enters the seed", "All stomata close permanently", "Xylem stops transporting water"],
+    "correctIndex": 0,
+    "explanation": "After fertilization, reproductive development shifts toward forming and maturing seeds."
+  },
+  {
+    "id": "atlas-check-30",
+    "route": "/learn/atlas/flowers/maturity-and-risk-inspection",
+    "prompt": "Why should flower maturity not be judged from stigma color alone?",
+    "options": ["Maturity assessment is stronger when flower development, trichome observations, senescence, cultivar behavior, and risk inspection are combined", "Stigmas never change", "Stigma color measures exact cannabinoid concentration", "Only roots determine maturity"],
+    "correctIndex": 0,
+    "explanation": "Stigma appearance is only one observation; a more reliable assessment integrates several developmental and risk-related observations."
+  },
+  {
+    "id": "atlas-check-31",
+    "route": "/learn/atlas/trichomes-resin/trichome-types",
+    "prompt": "Which set contains three glandular trichome forms commonly discussed in cannabis anatomy?",
+    "options": ["Capitate-stalked, capitate-sessile, and bulbous", "Xylem, phloem, and pith", "Radicle, cotyledon, and seed coat", "Stigma, root hair, and node"],
+    "correctIndex": 0,
+    "explanation": "Capitate-stalked, capitate-sessile, and bulbous are three glandular trichome forms distinguished by scale and structure."
+  },
+  {
+    "id": "atlas-check-32",
+    "route": "/learn/atlas/trichomes-resin/gland-anatomy",
+    "prompt": "Which structures belong to a simplified glandular trichome model?",
+    "options": ["Stalk and gland head", "Radicle and cotyledon", "Xylem ring and root cap only", "Pollen sac and seed coat only"],
+    "correctIndex": 0,
+    "explanation": "A simplified glandular trichome includes a stalk or base and a glandular head containing secretory tissues and storage space."
+  },
+  {
+    "id": "atlas-check-33",
+    "route": "/learn/atlas/trichomes-resin/where-to-inspect",
+    "prompt": "Why should microscope sampling location stay consistent?",
+    "options": ["Trichome appearance can differ between flower bracts and nearby leaf tissue", "Every tissue always looks identical", "Sampling location cannot affect observations", "Only roots have trichomes"],
+    "correctIndex": 0,
+    "explanation": "Different tissues can show different trichome populations and apparent maturity, so consistent sampling improves comparability."
+  },
+  {
+    "id": "atlas-check-34",
+    "route": "/learn/atlas/trichomes-resin/clear-cloudy-and-amber",
+    "prompt": "Why should apparent clear, cloudy, or amber trichomes be interpreted cautiously?",
+    "options": ["Lighting, focus, tissue sampled, and cultivar can affect what is seen", "They directly report exact chemistry without error", "Only amber trichomes are glandular", "Microscope lighting never matters"],
+    "correctIndex": 0,
+    "explanation": "Optical appearance is useful observational evidence, but it is influenced by imaging conditions, tissue choice, and biological variation."
+  },
+  {
+    "id": "atlas-check-35",
+    "route": "/learn/atlas/trichomes-resin/microscope-workflow",
+    "prompt": "What improves consistency when comparing trichomes over time?",
+    "options": ["Standardize magnification, lighting, and sample location", "Change magnification and lighting every time", "Inspect random tissues only", "Ignore focus"],
+    "correctIndex": 0,
+    "explanation": "Keeping magnification, lighting, focus, and sampling location consistent makes repeated observations more comparable."
+  },
+  {
+    "id": "atlas-check-36",
+    "route": "/learn/atlas/sex-pollen-seed/male-vs-female-preflowers",
+    "prompt": "What is the most reliable way to compare male and female preflowers?",
+    "options": ["Use multiple structures and developmental stages rather than one ambiguous early view", "Judge from one leaf shape", "Use root color", "Use trichome clarity only"],
+    "correctIndex": 0,
+    "explanation": "Preflowers are easier to identify when several nodes and developmental stages are compared rather than relying on one uncertain structure."
+  },
+  {
+    "id": "atlas-check-37",
+    "route": "/learn/atlas/sex-pollen-seed/mixed-sex-expression",
+    "prompt": "What does mixed-sex expression mean observationally?",
+    "options": ["Staminate or anther structures appear on an otherwise female plant", "Roots become leaves", "A seed absorbs water", "Xylem reverses into pollen"],
+    "correctIndex": 0,
+    "explanation": "Mixed-sex expression describes reproductive structures of both types appearing on the same plant; observation should be separated from assumptions about cause."
+  },
+  {
+    "id": "atlas-check-38",
+    "route": "/learn/atlas/sex-pollen-seed/pollen-biology",
+    "prompt": "What must occur before fertilization can begin?",
+    "options": ["Pollen must reach a receptive pistillate structure such as a stigma", "A cotyledon must become a root", "Xylem must stop", "A trichome must turn amber"],
+    "correctIndex": 0,
+    "explanation": "Pollen transfer to a receptive stigma is part of the sequence that can lead to pollen germination, pollen-tube growth, and fertilization."
+  },
+  {
+    "id": "atlas-check-39",
+    "route": "/learn/atlas/sex-pollen-seed/seed-formation",
+    "prompt": "What follows successful fertilization during seed development?",
+    "options": ["Embryo and seed tissues develop and mature", "The seed coat disappears immediately", "The root system becomes pollen", "All leaves become cotyledons"],
+    "correctIndex": 0,
+    "explanation": "After fertilization, the developing seed forms and matures its embryo, protective seed coat, and associated storage tissues."
+  },
+  {
+    "id": "atlas-check-40",
+    "route": "/learn/atlas/sex-pollen-seed/controlled-pollination",
+    "prompt": "Which practice is most important for interpreting an intentional pollination later?",
+    "options": ["Clear isolation, target labeling, and records of what was pollinated", "Relying on memory alone", "Removing all labels", "Ignoring where pollen was applied"],
+    "correctIndex": 0,
+    "explanation": "Clear isolation and record keeping preserve the identity and context of an intentional cross so later observations can be interpreted accurately."
+  },
+  {
+    "id": "atlas-check-41",
+    "route": "/learn/atlas/environment-overlay/light-distribution",
+    "prompt": "Why can PPFD differ within the same canopy?",
+    "options": ["Leaf position, canopy structure, distance, and shading create different light zones", "Every leaf always receives identical light", "Only roots determine PPFD", "PPFD is a seed trait"],
+    "correctIndex": 0,
+    "explanation": "Canopy architecture and position create gradients of incident light, so measurements can differ substantially across leaves and heights."
+  },
+  {
+    "id": "atlas-check-42",
+    "route": "/learn/atlas/environment-overlay/temperature-and-humidity",
+    "prompt": "Why should temperature and relative humidity be considered together?",
+    "options": ["Together they help determine atmospheric vapor pressure demand", "They are always unrelated", "Humidity determines genetics", "Temperature only affects roots"],
+    "correctIndex": 0,
+    "explanation": "Temperature and relative humidity jointly shape vapor pressure relationships and therefore the evaporative demand experienced by leaves."
+  },
+  {
+    "id": "atlas-check-43",
+    "route": "/learn/atlas/environment-overlay/vpd-and-transpiration",
+    "prompt": "What does VPD help describe?",
+    "options": ["The atmospheric vapor-pressure difference related to plant water loss and transpiration demand", "Exact nutrient concentration in roots", "Seed viability", "Pollen genotype"],
+    "correctIndex": 0,
+    "explanation": "VPD is an atmospheric-demand concept that helps connect air conditions with leaf water loss and transpiration."
+  },
+  {
+    "id": "atlas-check-44",
+    "route": "/learn/atlas/environment-overlay/airflow-and-boundary-layer",
+    "prompt": "How does stronger air movement around a leaf generally affect the still-air boundary layer?",
+    "options": ["It tends to reduce boundary-layer thickness", "It always makes the boundary layer thicker", "It turns stomata into roots", "It has no relationship to leaf gas exchange"],
+    "correctIndex": 0,
+    "explanation": "Air movement disrupts the still layer of air next to the leaf surface, which can change heat and vapor exchange."
+  },
+  {
+    "id": "atlas-check-45",
+    "route": "/learn/atlas/environment-overlay/root-zone-interaction",
+    "prompt": "Why is a whole-system view useful when interpreting plant response?",
+    "options": ["Root moisture, oxygen, pH, EC, temperature, and atmospheric demand can interact", "Only one measurement ever matters", "Roots and leaves function independently", "Environment has no effect on transport"],
+    "correctIndex": 0,
+    "explanation": "Plant response emerges from interacting root-zone and atmospheric conditions, so isolated numbers can be misleading."
+  },
+  {
+    "id": "atlas-check-46",
+    "route": "/learn/atlas/diagnostic-overlay/symptom-location",
+    "prompt": "Why record where a symptom appears first?",
+    "options": ["Location can help distinguish patterns such as old versus new growth or local versus whole-plant problems", "Location never matters", "All causes begin on the same leaf", "Only flower color matters"],
+    "correctIndex": 0,
+    "explanation": "The first affected tissue and its location are important clues in an observation-first differential."
+  },
+  {
+    "id": "atlas-check-47",
+    "route": "/learn/atlas/diagnostic-overlay/pattern-description",
+    "prompt": "Which is the best diagnostic description before naming a cause?",
+    "options": ["Interveinal chlorosis beginning on older lower leaves", "It needs nutrients", "The plant looks bad", "Something is wrong"],
+    "correctIndex": 0,
+    "explanation": "A location- and pattern-based description is more useful evidence than an early causal label."
+  },
+  {
+    "id": "atlas-check-48",
+    "route": "/learn/atlas/diagnostic-overlay/progression-over-time",
+    "prompt": "What can symptom progression tell you?",
+    "options": ["Whether the pattern is sudden, gradual, stable, spreading, or recovering", "The exact cause by itself every time", "Only the plant's genotype", "Nothing useful"],
+    "correctIndex": 0,
+    "explanation": "How symptoms change over time adds diagnostic evidence and helps relate them to environmental changes or recent events."
+  },
+  {
+    "id": "atlas-check-49",
+    "route": "/learn/atlas/diagnostic-overlay/measurement-context",
+    "prompt": "Which set best represents useful measurement context for plant diagnosis?",
+    "options": ["pH, EC, moisture, temperature, RH/VPD, light, and recent water/feed history", "Leaf color alone", "Only plant height", "Only calendar date"],
+    "correctIndex": 0,
+    "explanation": "Combining plant observations with root-zone, environmental, and recent-history measurements produces stronger diagnostic context."
+  },
+  {
+    "id": "atlas-check-50",
+    "route": "/learn/atlas/diagnostic-overlay/differential-workflow",
+    "prompt": "What is a differential workflow?",
+    "options": ["Rank plausible causes and use additional observations or measurements to narrow them", "Choose the first cause that looks familiar", "Ignore competing explanations", "Treat every symptom as a single nutrient issue"],
+    "correctIndex": 0,
+    "explanation": "A differential keeps multiple plausible explanations active and uses new evidence to eliminate or prioritize them."
+  }
+]
