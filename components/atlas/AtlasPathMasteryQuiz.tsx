@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import guidedPaths from "@/content/atlas-guided-paths.json";
 import knowledgeChecks from "@/content/atlas-knowledge-checks.json";
 import { useAtlasMastery } from "@/components/atlas/AtlasMastery";
-import styles from "./AtlasMastery.module.css";
+import styles from "./AtlasPathMasteryQuiz.module.css";
 
 const checkByRoute = new Map(knowledgeChecks.map((check) => [check.route, check] as const));
 
