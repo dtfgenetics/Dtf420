@@ -126,7 +126,10 @@ test("Compare Saved Observations can switch the follow-up note without allowing 
   await expect(page.locator('section[aria-label="Measurement comparison"]')).toContainText("Δ +0.1");
 
   const baselineOptionForThird = baselineSelect.locator(`option[value="${third.id}"]`);
-  await expect(baselineOptionForThird).toBeDisabled();
+  await expect(baselineOptionForThird).toHaveAttribute("disabled", "");
+  const baselineBeforeBlockedSelection = await baselineSelect.inputValue();
+  await baselineSelect.selectOption(third.id).catch(() => undefined);
+  await expect(baselineSelect).toHaveValue(baselineBeforeBlockedSelection);
   await expectNoHorizontalOverflow(page);
 });
 
