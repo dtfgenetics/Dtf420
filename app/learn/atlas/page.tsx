@@ -17,7 +17,8 @@ export default function AtlasPage() {
     <section className="shell page-section">
       <LivingPlantAtlas />
       <div className="hero__actions">
-        <Link className="button button--primary" href="/learn/atlas/paths">Follow guided learning paths</Link>
+        <Link className="button button--primary" href="/learn/atlas/dashboard">Open study dashboard</Link>
+        <Link className="button" href="/learn/atlas/paths">Follow guided learning paths</Link>
         <Link className="button" href="/learn/atlas/review">Open mastery review lab</Link>
         <Link className="button" href="/learn/atlas/compare">Compare plant systems side by side</Link>
         <Link className="button" href="/learn/atlas/mastery">View mastery passport</Link>
