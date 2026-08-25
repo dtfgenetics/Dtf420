@@ -80,7 +80,7 @@ test("lesson knowledge check explains mistakes, retries, and persists mastery", 
   await expectNoHorizontalOverflow(page);
 });
 
-test("Atlas hub and guided paths reflect shared mastery state", async ({ page }, testInfo) => {
+test("Study Dashboard and guided paths reflect shared mastery state", async ({ page }, testInfo) => {
   await clearMastery(page);
   await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
   const check = page.locator('section[aria-label="Lesson knowledge check"]');
@@ -88,10 +88,12 @@ test("Atlas hub and guided paths reflect shared mastery state", async ({ page },
   await check.getByRole("button", { name: "Check answer" }).click();
   await expect(check.getByRole("status")).toContainText("Correct.");
 
-  await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  const overview = page.locator('section[aria-label="Atlas mastery overview"]');
-  await expect(overview).toContainText("1 of 50 checks mastered");
-  await expect(overview.getByRole("progressbar", { name: "Atlas checks mastered" })).toHaveAttribute("aria-valuenow", "1");
+  await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
+  const metrics = page.locator('section[aria-label="Atlas study metrics"]');
+  await expect(metrics).toContainText("Knowledge");
+  await expect(metrics).toContainText("1/50");
+  const destinations = page.locator('section[aria-label="Atlas learner destinations"]');
+  await expect(destinations.getByRole("link", { name: /Mastery Passport/i })).toHaveAttribute("href", "/learn/atlas/mastery");
 
   await page.goto("/learn/atlas/paths", { waitUntil: "networkidle" });
   const summary = page.locator('[aria-label="Path mastery summary"]');
