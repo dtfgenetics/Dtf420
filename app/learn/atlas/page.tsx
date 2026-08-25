@@ -4,6 +4,7 @@ import { LivingPlantAtlas } from "@/components/atlas/LivingPlantAtlas";
 import { AtlasGrowthStages } from "@/components/atlas/AtlasGrowthStages";
 import { AtlasVisualOverlays } from "@/components/atlas/AtlasVisualOverlays";
 import { AtlasLearningModules } from "@/components/atlas/AtlasLearningModules";
+import { AtlasProgressOverview } from "@/components/atlas/AtlasLearningProgress";
 
 export const metadata: Metadata = {
   title: "THC Living Plant Atlas",
@@ -17,6 +18,7 @@ export default function AtlasPage() {
       <div className="hero__actions">
         <Link className="button button--primary" href="/learn/atlas/compare">Compare plant systems side by side</Link>
       </div>
+      <AtlasProgressOverview />
       <AtlasGrowthStages />
       <AtlasVisualOverlays />
       <AtlasLearningModules />
