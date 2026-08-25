@@ -75,7 +75,7 @@ const topics: CompareTopic[] = [
         "Loss of vascular continuity can rapidly affect tissues above an injury.",
       ],
       measure: "Relate root water availability, leaf temperature, atmospheric demand, and vascular injury.",
-      href: "/learn/atlas/stem-vascular/xylem-and-water-flow",
+      href: "/learn/atlas/stem-vascular/xylem-transport",
       linkLabel: "Open xylem lesson",
     },
     right: {
@@ -88,7 +88,7 @@ const topics: CompareTopic[] = [
         "Source and sink roles can change with development and plant condition.",
       ],
       measure: "Interpret growth demand, source leaf condition, developmental stage, and recent tissue damage together.",
-      href: "/learn/atlas/stem-vascular/phloem-and-source-sink-flow",
+      href: "/learn/atlas/stem-vascular/phloem-transport",
       linkLabel: "Open phloem lesson",
     },
     shared: [
@@ -162,7 +162,7 @@ const topics: CompareTopic[] = [
         "Track whether the pattern moves upward over time.",
       ],
       measure: "Record canopy position, leaf age, symptom progression, feed/root-zone data, and recent plant stage changes.",
-      href: "/learn/atlas/diagnostic-overlay/symptom-progression",
+      href: "/learn/atlas/diagnostic-overlay/progression-over-time",
       linkLabel: "Open symptom progression",
     },
     shared: [
@@ -223,7 +223,7 @@ const topics: CompareTopic[] = [
         "Compare multiple representative sites rather than one photogenic gland.",
       ],
       measure: "Standardize magnification, light direction, tissue type, and sample location before estimating appearance distribution.",
-      href: "/learn/atlas/trichomes-resin/clear-cloudy-amber-appearance",
+      href: "/learn/atlas/trichomes-resin/clear-cloudy-and-amber",
       linkLabel: "Open appearance lesson",
     },
     right: {
