@@ -47,12 +47,13 @@ test("study dashboard summarizes shared state and prioritizes recent misses", as
   await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
 
   const summary = page.locator('section[aria-label="Atlas study dashboard summary"]');
-  await expect(summary).toContainText("Atlas Study Dashboard");
+  await expect(summary).toContainText("Study Dashboard");
+  await expect(summary).toContainText("Continue with what matters most.");
 
   const metrics = page.locator('section[aria-label="Atlas study metrics"]');
   await expect(metrics).toContainText("2/50");
   await expect(metrics).toContainText("1/50");
-  await expect(metrics).toContainText("Recent misses");
+  await expect(metrics).toContainText("Review");
   await expect(metrics).toContainText("1/6");
 
   const recommendation = page.locator('section[aria-label="Recommended Atlas study action"]');
@@ -66,6 +67,14 @@ test("study dashboard summarizes shared state and prioritizes recent misses", as
   const pathPanel = page.locator('section[aria-label="Closest guided learning path"]');
   await expect(pathPanel).toContainText("Plant Foundations");
   await expect(pathPanel).toContainText("2/7 lessons complete");
+
+  const destinations = page.locator('section[aria-label="Atlas learner destinations"]');
+  await expect(destinations).toContainText("Learn");
+  await expect(destinations).toContainText("Practice");
+  await expect(destinations).toContainText("Observe");
+  await expect(destinations).toContainText("Track");
+  await expect(destinations.getByRole("link", { name: /Open Practice Hub/i })).toHaveAttribute("href", "/learn/atlas/practice");
+  await expect(destinations.getByRole("link", { name: /Compare Field Observations/i })).toHaveAttribute("href", "/learn/atlas/notebook/compare");
 
   await expectNoHorizontalOverflow(page);
   await page.screenshot({
@@ -99,9 +108,10 @@ test("study dashboard falls back to continue learning when review queue is clear
   await expect(recommendation.getByRole("link", { name: "Continue lesson" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");
 });
 
-test("Atlas hub exposes the study dashboard", async ({ page }) => {
+test("Atlas section navigation exposes the study dashboard", async ({ page }) => {
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-  const link = page.getByRole("link", { name: "Open study dashboard" });
+  const nav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
+  const link = nav.getByRole("link", { name: "Dashboard", exact: true });
   await expect(link).toHaveAttribute("href", "/learn/atlas/dashboard");
   await link.click();
   await expect(page).toHaveURL(/\/learn\/atlas\/dashboard$/);
