@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import modules from "@/content/atlas-learning-modules.json";
 import guidedPaths from "@/content/atlas-guided-paths.json";
 import { useAtlasProgress } from "@/components/atlas/AtlasLearningProgress";
+import { PathMasterySummary } from "@/components/atlas/AtlasMastery";
 import styles from "./AtlasGuidedPaths.module.css";
 
 type LessonMeta = {
@@ -87,6 +88,8 @@ export function AtlasGuidedPaths() {
           <small>Learning outcome</small>
           <p>{selectedPath.outcome}</p>
         </div>
+
+        <PathMasterySummary pathId={selectedPath.id} lessons={selectedPath.lessons} />
 
         <ol className={styles.sequence} aria-label={`${selectedPath.title} lesson sequence`}>
           {selectedPath.lessons.map((route, index) => {
