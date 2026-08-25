@@ -5,6 +5,7 @@ import modules from "@/content/atlas-learning-modules.json";
 import atlasSections from "@/content/atlas-sections.json";
 import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasAssetSlot } from "@/components/atlas/AtlasAssetSlot";
+import { AtlasLessonProgress } from "@/components/atlas/AtlasLearningProgress";
 import { getAtlasAsset } from "@/lib/atlas-assets";
 import styles from "./page.module.css";
 
@@ -34,6 +35,12 @@ function observationPrompts(systemId: string) {
     diagnostic_overlay: ["Record symptom location, pattern, progression, and plant stage.", "Check root-zone readings, environment, pests, and recent actions.", "Choose the next measurement that can separate plausible causes."],
   };
   return prompts[systemId] ?? ["Observe the structure carefully.", "Compare more than one plant region.", "Use measurements and context before drawing conclusions."];
+}
+
+function orderedLessonRoutes() {
+  return modules.flatMap((atlasModule) =>
+    atlasModule.lessons.map((item) => `/learn/atlas/${slugify(atlasModule.id)}/${slugify(item.title)}`),
+  );
 }
 
 export function generateStaticParams() {
@@ -71,6 +78,10 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
   const previous = atlasModule.lessons[lessonIndex - 1];
   const next = atlasModule.lessons[lessonIndex + 1];
   const prompts = observationPrompts(atlasModule.id);
+  const currentRoute = `/learn/atlas/${system}/${lesson}`;
+  const allRoutes = orderedLessonRoutes();
+  const globalLessonIndex = allRoutes.indexOf(currentRoute);
+  const nextRoute = globalLessonIndex >= 0 ? allRoutes[globalLessonIndex + 1] : undefined;
 
   return (
     <section className="shell page-section">
@@ -103,6 +114,8 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
             <div>{prompts.map((prompt, index) => <span key={prompt}><b>{index + 1}</b>{prompt}</span>)}</div>
           </aside>
         </section>
+
+        <AtlasLessonProgress route={currentRoute} nextRoute={nextRoute} />
 
         <section className={styles.context}>
           <div>
