@@ -9,7 +9,7 @@ const STORAGE_KEY = "dtf420.atlas.progress.v1";
 const CHANGE_EVENT = "dtf420-atlas-progress-change";
 const EMPTY_SNAPSHOT = "";
 
-type AtlasProgressState = {
+export type AtlasProgressState = {
   completed: string[];
   continueRoute?: string;
 };
@@ -84,7 +84,7 @@ function saveProgress(next: AtlasProgressState) {
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
-function useAtlasProgress() {
+export function useAtlasProgress() {
   const snapshot = useSyncExternalStore(subscribeToProgress, getProgressSnapshot, getServerSnapshot);
   const progress = useMemo(() => parseProgressSnapshot(snapshot), [snapshot]);
   const update = useCallback((next: AtlasProgressState) => saveProgress(next), []);

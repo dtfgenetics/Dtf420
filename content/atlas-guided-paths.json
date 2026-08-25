@@ -1,0 +1,92 @@
+[
+  {
+    "id": "plant-foundations",
+    "title": "Plant Foundations",
+    "summary": "Build a whole-plant mental model by moving from seed structure through roots, stems, nodes, leaves, flowers, and trichomes.",
+    "outcome": "Identify the major plant structures and explain how each fits into the cannabis plant as a connected biological system.",
+    "lessons": [
+      "/learn/atlas/seed-germination/seed-anatomy",
+      "/learn/atlas/root-system/root-architecture",
+      "/learn/atlas/stem-vascular/stem-cross-section",
+      "/learn/atlas/nodes-branching/node-anatomy",
+      "/learn/atlas/leaves/healthy-leaf-baseline",
+      "/learn/atlas/flowers/female-flower-anatomy",
+      "/learn/atlas/trichomes-resin/trichome-types"
+    ]
+  },
+  {
+    "id": "water-transport",
+    "title": "Water & Transport",
+    "summary": "Follow water from the root surface through vascular transport and leaf water loss, then connect that flow to atmospheric and root-zone demand.",
+    "outcome": "Explain how root absorption, xylem flow, stomata, transpiration, VPD, and root-zone conditions interact.",
+    "lessons": [
+      "/learn/atlas/root-system/root-hairs-and-absorption",
+      "/learn/atlas/root-system/water-and-nutrient-uptake",
+      "/learn/atlas/stem-vascular/xylem-transport",
+      "/learn/atlas/leaves/stomata-and-transpiration",
+      "/learn/atlas/environment-overlay/vpd-and-transpiration",
+      "/learn/atlas/environment-overlay/root-zone-interaction"
+    ]
+  },
+  {
+    "id": "diagnostic-reasoning",
+    "title": "Diagnostic Reasoning",
+    "summary": "Learn an observation-first workflow that moves from a healthy baseline to symptom description, measurement context, and a ranked differential.",
+    "outcome": "Describe plant symptoms precisely and choose measurements that separate plausible causes instead of diagnosing from appearance alone.",
+    "lessons": [
+      "/learn/atlas/leaves/healthy-leaf-baseline",
+      "/learn/atlas/leaves/symptom-pattern-language",
+      "/learn/atlas/leaves/leaf-inspection-workflow",
+      "/learn/atlas/diagnostic-overlay/symptom-location",
+      "/learn/atlas/diagnostic-overlay/pattern-description",
+      "/learn/atlas/diagnostic-overlay/measurement-context",
+      "/learn/atlas/diagnostic-overlay/differential-workflow"
+    ]
+  },
+  {
+    "id": "canopy-architecture",
+    "title": "Canopy Architecture",
+    "summary": "Connect nodes, apical dominance, training responses, light distribution, and airflow to understand how canopy structure develops.",
+    "outcome": "Predict how branch orientation and training alter growing-point distribution, light exposure, and air exchange.",
+    "lessons": [
+      "/learn/atlas/nodes-branching/node-anatomy",
+      "/learn/atlas/nodes-branching/apical-dominance",
+      "/learn/atlas/nodes-branching/topping-and-fim",
+      "/learn/atlas/nodes-branching/lst-and-directional-growth",
+      "/learn/atlas/nodes-branching/mainlining-and-scrog",
+      "/learn/atlas/environment-overlay/light-distribution",
+      "/learn/atlas/environment-overlay/airflow-and-boundary-layer"
+    ]
+  },
+  {
+    "id": "reproduction-breeding-biology",
+    "title": "Reproduction & Breeding Biology",
+    "summary": "Follow reproductive development from preflower identification through pollen movement, pollination response, seed formation, and controlled crosses.",
+    "outcome": "Identify reproductive structures and explain the biological sequence from pollen production through seed development.",
+    "lessons": [
+      "/learn/atlas/sex-pollen-seed/male-vs-female-preflowers",
+      "/learn/atlas/sex-pollen-seed/mixed-sex-expression",
+      "/learn/atlas/sex-pollen-seed/pollen-biology",
+      "/learn/atlas/flowers/female-flower-anatomy",
+      "/learn/atlas/flowers/pollination-response",
+      "/learn/atlas/sex-pollen-seed/seed-formation",
+      "/learn/atlas/sex-pollen-seed/controlled-pollination"
+    ]
+  },
+  {
+    "id": "flower-trichome-observation",
+    "title": "Flower & Trichome Observation",
+    "summary": "Track flower development and learn a repeatable microscope workflow that treats trichome appearance as one maturity observation among several.",
+    "outcome": "Inspect representative floral tissue consistently and combine flower development, trichome observations, and risk inspection without overclaiming chemistry.",
+    "lessons": [
+      "/learn/atlas/flowers/flower-initiation",
+      "/learn/atlas/flowers/bud-development",
+      "/learn/atlas/flowers/female-flower-anatomy",
+      "/learn/atlas/trichomes-resin/trichome-types",
+      "/learn/atlas/trichomes-resin/where-to-inspect",
+      "/learn/atlas/trichomes-resin/clear-cloudy-and-amber",
+      "/learn/atlas/trichomes-resin/microscope-workflow",
+      "/learn/atlas/flowers/maturity-and-risk-inspection"
+    ]
+  }
+]
