@@ -33,7 +33,7 @@ export function AtlasMasteryPassport() {
         </div>
       </section>
 
-      <section className={styles.notice} aria-label="Mastery passport scope">
+      <section className={styles.notice} aria-label="Atlas mastery passport scope">
         <strong>Educational achievement record</strong>
         <span>This passport is saved on this device. It documents progress inside the THC Living Plant Atlas and is not a professional license, accreditation, or regulated credential.</span>
       </section>
