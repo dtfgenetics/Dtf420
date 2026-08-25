@@ -76,11 +76,52 @@ test("Atlas hub renders cleanly without viewport overflow", async ({ page }, tes
   expect(response?.status()).toBe(200);
   await expect(page.locator("h1").first()).toBeVisible();
   await expect(page.locator("body")).toContainText("Living Plant Atlas");
+  await expect(page.getByRole("link", { name: "Compare plant systems side by side" })).toBeVisible();
   await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
   await page.screenshot({
     path: testInfo.outputPath(`${testInfo.project.name}-atlas-hub.png`),
+    fullPage: true,
+  });
+});
+
+test("Compare & Contrast mode switches evidence sets and keeps lesson links valid", async ({ page, request }, testInfo) => {
+  const errors = watchRuntimeErrors(page);
+  const response = await page.goto("/learn/atlas/compare", { waitUntil: "networkidle" });
+
+  expect(response?.status()).toBe(200);
+  await expect(page.getByRole("heading", { name: "Compare & Contrast" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Healthy roots vs root stress" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Healthy root pattern" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Root stress pattern" })).toBeVisible();
+  await expectNoHorizontalOverflow(page);
+
+  const topicNav = page.getByRole("navigation", { name: "Atlas comparison topics" });
+  const topicButtons = topicNav.getByRole("button");
+  await expect(topicButtons).toHaveCount(6);
+
+  for (let index = 0; index < await topicButtons.count(); index += 1) {
+    await topicButtons.nth(index).click();
+    const comparison = page.locator('section[aria-label$=" comparison"]');
+    await expect(comparison).toBeVisible();
+    const hrefs = await comparison.locator("a").evaluateAll((links) => links.map((link) => link.getAttribute("href")).filter(Boolean));
+    expect(hrefs).toHaveLength(2);
+    for (const href of hrefs) {
+      const linkedResponse = await request.get(href);
+      expect(linkedResponse.status(), `${href} should return HTTP 200`).toBe(200);
+    }
+    await expectNoHorizontalOverflow(page);
+  }
+
+  await topicNav.getByRole("button", { name: "Xylem vs phloem" }).click();
+  await expect(page.getByRole("heading", { name: "Xylem", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Phloem", exact: true })).toBeVisible();
+  await expect(page.getByText(/Source-to-sink transport can occur in different directions/i)).toBeVisible();
+  expect(errors, errors.join("\n")).toEqual([]);
+
+  await page.screenshot({
+    path: testInfo.outputPath(`${testInfo.project.name}-atlas-compare.png`),
     fullPage: true,
   });
 });
