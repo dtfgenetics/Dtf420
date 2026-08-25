@@ -86,7 +86,7 @@ test("Atlas hub renders cleanly without viewport overflow", async ({ page }, tes
   });
 });
 
-test("Compare & Contrast mode switches evidence sets cleanly", async ({ page }, testInfo) => {
+test("Compare & Contrast mode switches evidence sets and keeps lesson links valid", async ({ page, request }, testInfo) => {
   const errors = watchRuntimeErrors(page);
   const response = await page.goto("/learn/atlas/compare", { waitUntil: "networkidle" });
 
@@ -98,12 +98,26 @@ test("Compare & Contrast mode switches evidence sets cleanly", async ({ page }, 
   await expectNoHorizontalOverflow(page);
 
   const topicNav = page.getByRole("navigation", { name: "Atlas comparison topics" });
-  await expect(topicNav.getByRole("button")).toHaveCount(6);
+  const topicButtons = topicNav.getByRole("button");
+  await expect(topicButtons).toHaveCount(6);
+
+  for (let index = 0; index < await topicButtons.count(); index += 1) {
+    await topicButtons.nth(index).click();
+    const comparison = page.locator('section[aria-label$=" comparison"]');
+    await expect(comparison).toBeVisible();
+    const hrefs = await comparison.locator("a").evaluateAll((links) => links.map((link) => link.getAttribute("href")).filter(Boolean));
+    expect(hrefs).toHaveLength(2);
+    for (const href of hrefs) {
+      const linkedResponse = await request.get(href);
+      expect(linkedResponse.status(), `${href} should return HTTP 200`).toBe(200);
+    }
+    await expectNoHorizontalOverflow(page);
+  }
+
   await topicNav.getByRole("button", { name: "Xylem vs phloem" }).click();
   await expect(page.getByRole("heading", { name: "Xylem" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Phloem" })).toBeVisible();
   await expect(page.getByText(/Source-to-sink transport can occur in different directions/i)).toBeVisible();
-  await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
   await page.screenshot({
