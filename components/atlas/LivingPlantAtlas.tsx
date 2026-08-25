@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import atlasSections from "@/content/atlas-sections.json";
-import leafModulePages from "@/content/leaf-module-pages.json";
+import learningModules from "@/content/atlas-learning-modules.json";
 import diagnosticFramework from "@/content/diagnostic-framework.json";
 import styles from "./LivingPlantAtlas.module.css";
 
 type AtlasMode = "anatomy" | "environment" | "diagnostics";
-
 type AtlasSection = (typeof atlasSections)[number];
 
 type HotspotPosition = {
@@ -40,10 +39,16 @@ const anatomicalIds = new Set([
   "sex_pollen_seed",
 ]);
 
+const lessonCount = learningModules.reduce((total, module) => total + module.lessons.length, 0);
+
 function sectionForMode(mode: AtlasMode, section: AtlasSection) {
   if (mode === "anatomy") return anatomicalIds.has(section.id);
   if (mode === "environment") return section.id === "environment_overlay" || anatomicalIds.has(section.id);
   return section.id === "diagnostic_overlay" || anatomicalIds.has(section.id);
+}
+
+function sectionRoute(section: AtlasSection) {
+  return `/learn/atlas/${section.id.replaceAll("_", "-")}`;
 }
 
 export function LivingPlantAtlas() {
@@ -67,17 +72,17 @@ export function LivingPlantAtlas() {
     <div className={styles.atlasShell}>
       <section className={styles.hero}>
         <div>
-          <p className={styles.kicker}>Teaching Healthy Cultivation</p>
+          <p className={styles.kicker}>Explore</p>
           <h1>THC Living Plant Atlas</h1>
           <p className={styles.heroCopy}>
-            Explore the plant as a connected biological system. Select a structure, switch learning lenses,
-            and move from anatomy to physiology, environment, and observation-first diagnostics.
+            Explore the plant as one connected biological system. Select a structure, switch lenses,
+            then open the system lessons when you are ready to go deeper.
           </p>
         </div>
         <div className={styles.heroStats} aria-label="Atlas scope">
           <span><strong>{atlasSections.length}</strong> plant systems</span>
-          <span><strong>{leafModulePages.length}</strong> leaf lessons</span>
-          <span><strong>{diagnosticFramework.observation_fields.length}</strong> diagnostic observations</span>
+          <span><strong>{lessonCount}</strong> structured lessons</span>
+          <span><strong>{diagnosticFramework.observation_fields.length}</strong> observation fields</span>
         </div>
       </section>
 
@@ -208,12 +213,12 @@ export function LivingPlantAtlas() {
           <p>{selected.summary}</p>
 
           <div className={styles.assetCallout}>
-            <span>Primary visual reference</span>
+            <span>Visual focus</span>
             <strong>{selected.firstAsset}</strong>
           </div>
 
           <div>
-            <h3>Learn this system</h3>
+            <h3>What this system covers</h3>
             <div className={styles.topicGrid}>
               {selected.topics.map((topic) => <span key={topic}>{topic}</span>)}
             </div>
@@ -227,8 +232,8 @@ export function LivingPlantAtlas() {
           ) : null}
 
           <div className={styles.panelActions}>
-            {selected.id === "leaves" ? <a href="#leaf-module">Open leaf module</a> : null}
-            {selected.id === "diagnostic_overlay" ? <a href="#diagnostic-workflow">Open diagnostic workflow</a> : null}
+            <Link href={sectionRoute(selected)}>Open system lessons</Link>
+            {selected.id === "diagnostic_overlay" ? <Link href="/learn/atlas/practice">Open practice tools</Link> : null}
           </div>
         </aside>
       </section>
@@ -240,80 +245,6 @@ export function LivingPlantAtlas() {
             <small>{section.topics.length} topics</small>
           </button>
         ))}
-      </section>
-
-      <section className={styles.learningSection} id="leaf-module">
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.kicker}>First deep-dive module</p>
-            <h2>Leaves: anatomy, function & visible stress</h2>
-          </div>
-          <p>
-            The leaf module starts with healthy structure, then connects gas exchange and transpiration to the visual patterns growers actually inspect.
-          </p>
-        </div>
-        <div className={styles.lessonGrid}>
-          {leafModulePages.map((lesson, index) => (
-            <article key={lesson.slug} className={styles.lessonCard}>
-              <div className={styles.lessonNumber}>{String(index + 1).padStart(2, "0")}</div>
-              <p className={styles.lessonType}>{lesson.type}</p>
-              <h3>{lesson.title}</h3>
-              <p>{lesson.summary}</p>
-              <div className={styles.lessonAsset}>{lesson.asset}</div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.diagnosticSection} id="diagnostic-workflow">
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.kicker}>Diagnostic workflow</p>
-            <h2>Observe before assigning a cause</h2>
-          </div>
-          <p>{diagnosticFramework.diagnostic_rule}</p>
-        </div>
-
-        <div className={styles.diagnosticLayout}>
-          <div className={styles.observationCard}>
-            <h3>Capture these observations</h3>
-            <div className={styles.observationGrid}>
-              {diagnosticFramework.observation_fields.map((field, index) => (
-                <span key={field}><b>{index + 1}</b>{field.replaceAll("_", " ")}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.symptomCards}>
-            {diagnosticFramework.symptom_groups.map((group) => (
-              <article key={group.id}>
-                <p>{group.id}</p>
-                <h3>{group.preferred_term}</h3>
-                <ul>
-                  {group.first_questions.map((question) => <li key={question}>{question}</li>)}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.nextBuild}>
-        <div>
-          <p className={styles.kicker}>Atlas expansion path</p>
-          <h2>Every hotspot becomes its own visual lesson system.</h2>
-        </div>
-        <div className={styles.nextBuildGrid}>
-          <span>Root-zone cutaway + rhizosphere</span>
-          <span>Xylem / phloem transport animation</span>
-          <span>Node + training response simulator</span>
-          <span>Flower development timeline</span>
-          <span>Trichome microscope comparison</span>
-          <span>Sex / pollen / seed anatomy</span>
-          <span>VPD / light / water environment overlay</span>
-          <span>Whole-plant symptom location explorer</span>
-        </div>
-        <Link className={styles.backLink} href="/learn">Back to Learn</Link>
       </section>
     </div>
   );
