@@ -3,16 +3,16 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import guidedPaths from "@/content/atlas-guided-paths.json";
-import knowledgeChecks from "@/content/atlas-knowledge-checks.json";
+import { atlasKnowledgeChecks } from "@/lib/atlas-knowledge-checks";
 import { useAtlasMastery } from "@/components/atlas/AtlasMastery";
 import styles from "./AtlasPathMasteryQuiz.module.css";
 
-const checkByRoute = new Map(knowledgeChecks.map((check) => [check.route, check] as const));
+const checkByRoute = new Map(atlasKnowledgeChecks.map((check) => [check.route, check] as const));
 
 export function AtlasPathMasteryQuiz({ pathId }: { pathId: string }) {
   const path = guidedPaths.find((item) => item.id === pathId);
   const checks = useMemo(
-    () => path?.lessons.map((route) => checkByRoute.get(route)).filter((check): check is (typeof knowledgeChecks)[number] => Boolean(check)) ?? [],
+    () => path?.lessons.map((route) => checkByRoute.get(route)).filter((check): check is (typeof atlasKnowledgeChecks)[number] => Boolean(check)) ?? [],
     [path],
   );
   const { mastery, update } = useAtlasMastery();
