@@ -1,0 +1,269 @@
+.overview {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(130, 160, 140, 0.24);
+  border-radius: 1rem;
+  background: rgba(9, 22, 14, 0.82);
+}
+
+.overview small,
+.lessonCheck small,
+.pathSummary small {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #9bb7a4;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overview h2 {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+}
+
+.overview p {
+  margin: 0.45rem 0 0;
+  color: #b9c9be;
+}
+
+.overviewScore {
+  display: flex;
+  min-width: 5.5rem;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.overviewScore strong {
+  font-size: 1.8rem;
+}
+
+.overviewScore span {
+  color: #9bb7a4;
+  font-size: 0.8rem;
+}
+
+.track {
+  grid-column: 1 / -1;
+  height: 0.55rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #63c174, #b2d78e);
+}
+
+.lessonCheck {
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  border: 1px solid rgba(130, 160, 140, 0.24);
+  border-radius: 1.2rem;
+  background: rgba(7, 18, 11, 0.9);
+}
+
+.lessonCheck header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.lessonCheck h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.masteredBadge,
+.practiceBadge {
+  flex: 0 0 auto;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.masteredBadge {
+  background: rgba(99, 193, 116, 0.16);
+  color: #a9e0b3;
+}
+
+.practiceBadge {
+  background: rgba(255, 255, 255, 0.06);
+  color: #b8c8bd;
+}
+
+.prompt {
+  margin: 1.25rem 0 0.9rem;
+  color: #eff6f0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.options {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.options button {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: inherit;
+  text-align: left;
+}
+
+.options button:not(:disabled) {
+  cursor: pointer;
+}
+
+.options button b {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #cfe7d4;
+}
+
+.options button span {
+  align-self: center;
+  line-height: 1.45;
+}
+
+.selectedOption {
+  border-color: rgba(126, 204, 139, 0.65) !important;
+  background: rgba(99, 193, 116, 0.09) !important;
+}
+
+.correctOption {
+  border-color: rgba(99, 193, 116, 0.7) !important;
+  background: rgba(99, 193, 116, 0.14) !important;
+}
+
+.incorrectOption {
+  border-color: rgba(225, 122, 108, 0.72) !important;
+  background: rgba(225, 122, 108, 0.1) !important;
+}
+
+.submit,
+.feedbackCorrect button,
+.feedbackIncorrect button {
+  margin-top: 1rem;
+  padding: 0.72rem 1rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #d9e9cf;
+  color: #102016;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.feedbackCorrect,
+.feedbackIncorrect {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.85rem;
+}
+
+.feedbackCorrect {
+  background: rgba(99, 193, 116, 0.12);
+}
+
+.feedbackIncorrect {
+  background: rgba(225, 122, 108, 0.1);
+}
+
+.feedbackCorrect strong,
+.feedbackIncorrect strong {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.feedbackCorrect p,
+.feedbackIncorrect p {
+  margin: 0;
+  color: #d1ddd4;
+  line-height: 1.55;
+}
+
+.pathSummary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  gap: 0.75rem;
+  align-items: stretch;
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(130, 160, 140, 0.22);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.pathSummary > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pathSummary strong {
+  font-size: 1.05rem;
+}
+
+.pathSummary span {
+  margin-top: 0.15rem;
+  color: #9fb1a4;
+  font-size: 0.82rem;
+}
+
+.pathSummary a {
+  align-self: center;
+  padding: 0.68rem 0.85rem;
+  border-radius: 0.72rem;
+  background: #d9e9cf;
+  color: #102016;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .overview {
+    grid-template-columns: 1fr;
+  }
+
+  .overviewScore {
+    align-items: flex-start;
+  }
+
+  .lessonCheck header {
+    flex-direction: column;
+  }
+
+  .pathSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .pathSummary a {
+    justify-self: stretch;
+    text-align: center;
+  }
+}
