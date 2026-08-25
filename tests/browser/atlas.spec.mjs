@@ -49,6 +49,14 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
+async function expectNoInternalProductionLabels(page) {
+  const visibleText = await page.locator("body").evaluate((element) => element.innerText);
+  expect(visibleText).not.toMatch(/visual under review/i);
+  expect(visibleText).not.toMatch(/review build/i);
+  expect(visibleText).not.toMatch(/asset:\s*(review|needed|brief ready|in production|ready)/i);
+  expect(visibleText).not.toMatch(/atlas-[a-z0-9-]+-v\d+/i);
+}
+
 test("all 50 Atlas lesson routes respond successfully", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Run the route sweep once.");
   expect(lessonRoutes).toHaveLength(50);
@@ -88,6 +96,7 @@ test("representative Atlas lessons render and interactive visuals change state",
     const visual = page.locator('section[aria-label="Atlas primary visual"]');
     await expect(visual, `${route} visual`).toBeVisible();
     await expectNoHorizontalOverflow(page);
+    await expectNoInternalProductionLabels(page);
 
     const buttons = visual.locator("button");
     const buttonCount = await buttons.count();
@@ -105,6 +114,7 @@ test("representative Atlas lessons render and interactive visuals change state",
   await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
   const visual = page.locator('section[aria-label="Atlas primary visual"]');
   await visual.locator("button").nth(1).click();
+  await expectNoInternalProductionLabels(page);
   await page.screenshot({
     path: testInfo.outputPath(`${testInfo.project.name}-seed-anatomy-interaction.png`),
     fullPage: true,
