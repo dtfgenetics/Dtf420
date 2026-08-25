@@ -1,0 +1,415 @@
+.shell {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.hero,
+.editor,
+.guide,
+.saved,
+.footer {
+  border: 1px solid rgba(138, 181, 149, 0.22);
+  background: rgba(8, 20, 13, 0.82);
+  border-radius: 1.2rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.55fr);
+  gap: 1.5rem;
+  align-items: end;
+  padding: clamp(1.25rem, 3vw, 2.1rem);
+}
+
+.hero small,
+.editor small,
+.guide small,
+.saved small,
+.entry small,
+.noteBlock small,
+.nextCheck small {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero h1 {
+  margin: 0.35rem 0 0.7rem;
+  max-width: 18ch;
+}
+
+.hero p,
+.saved header p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.heroStats div {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.heroStats strong {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.heroStats span {
+  color: var(--muted);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.34fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.editor,
+.guide,
+.saved {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.editor {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.editor > header,
+.saved > header,
+.entry > header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.editor h2,
+.guide h2,
+.saved h2,
+.entry h3 {
+  margin: 0.3rem 0 0;
+}
+
+.editor > header button,
+.savedActions button,
+.entryActions button,
+.primaryAction {
+  min-height: 2.65rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(180, 220, 188, 0.28);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.primaryAction {
+  background: rgba(74, 141, 91, 0.18);
+  border-color: rgba(151, 211, 163, 0.5);
+}
+
+.savedActions button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.formGrid label,
+.savedActions label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.formGrid label > span,
+.savedActions label > span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.formGrid input,
+.formGrid select,
+.formGrid textarea,
+.savedActions select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgba(180, 220, 188, 0.2);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: inherit;
+  padding: 0.72rem 0.8rem;
+  font: inherit;
+}
+
+.formGrid textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.formGrid input::placeholder,
+.formGrid textarea::placeholder {
+  color: rgba(219, 230, 220, 0.48);
+}
+
+.formGrid select option,
+.savedActions select option {
+  color: #101710;
+}
+
+.spanTwo {
+  grid-column: 1 / -1;
+}
+
+.editor fieldset {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid rgba(138, 181, 149, 0.16);
+  border-radius: 1rem;
+}
+
+.editor legend {
+  padding: 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.editorFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.editorFooter [role="status"] {
+  min-height: 1.5rem;
+  color: var(--muted);
+}
+
+.guide {
+  display: grid;
+  gap: 0.85rem;
+  position: sticky;
+  top: 5.5rem;
+}
+
+.guide ol {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.guide li {
+  padding-left: 0.2rem;
+}
+
+.guide li strong,
+.guide li span {
+  display: block;
+}
+
+.guide li span {
+  margin-top: 0.2rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.guide a,
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(180, 220, 188, 0.24);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.saved {
+  display: grid;
+  gap: 1rem;
+}
+
+.saved > header > div:first-child {
+  max-width: 42rem;
+}
+
+.savedActions {
+  display: flex;
+  gap: 0.65rem;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.savedActions select {
+  min-width: 11rem;
+}
+
+.emptyState {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.emptyState span {
+  color: var(--muted);
+}
+
+.entries {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.entry {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid rgba(138, 181, 149, 0.18);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.entry > header span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.entryActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.evidenceGrid div {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.75rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.noteBlock,
+.nextCheck {
+  padding: 0.85rem;
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.noteBlock p,
+.nextCheck p {
+  margin: 0.4rem 0 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.nextCheck {
+  border: 1px solid rgba(151, 211, 163, 0.28);
+  background: rgba(74, 141, 91, 0.09);
+}
+
+.measurements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.measurements span {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.measurements b {
+  color: var(--muted);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 0.75rem;
+}
+
+@media (max-width: 960px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .guide {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero,
+  .formGrid,
+  .evidenceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .spanTwo {
+    grid-column: auto;
+  }
+
+  .editor > header,
+  .saved > header,
+  .entry > header,
+  .editorFooter,
+  .footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .heroStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .savedActions,
+  .entryActions {
+    width: 100%;
+  }
+
+  .savedActions label,
+  .savedActions button,
+  .entryActions button,
+  .primaryAction,
+  .footer a {
+    width: 100%;
+  }
+
+  .savedActions select {
+    min-width: 0;
+  }
+}

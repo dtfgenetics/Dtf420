@@ -189,6 +189,7 @@ export function AtlasStudyDashboard() {
       </div>
 
       <section className={styles.tools} aria-label="Atlas study tools">
+        <Link href="/learn/atlas/notebook"><strong>Observation Notebook</strong><span>Record field observations, measurements, differentials, and the next check.</span></Link>
         <Link href="/learn/atlas/cases"><strong>Diagnostic Case Lab</strong><span>Practice observation-first reasoning with realistic plant cases.</span></Link>
         <Link href="/learn/atlas/review"><strong>Mastery Review Lab</strong><span>Practice recent misses and unmastered checks.</span></Link>
         <Link href="/learn/atlas/compare"><strong>Compare & Contrast</strong><span>Study related structures and processes side by side.</span></Link>

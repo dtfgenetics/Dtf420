@@ -165,6 +165,7 @@ export function AtlasDiagnosticCaseLab() {
 
       <footer className={styles.footer}>
         <Link href="/learn/atlas/dashboard">Back to Study Dashboard</Link>
+        <Link href="/learn/atlas/notebook">Record field observation</Link>
         <Link href="/learn/atlas/review">Practice knowledge checks</Link>
       </footer>
     </div>

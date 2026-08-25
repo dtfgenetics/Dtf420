@@ -18,6 +18,7 @@ export default function AtlasPage() {
       <LivingPlantAtlas />
       <div className="hero__actions">
         <Link className="button button--primary" href="/learn/atlas/dashboard">Open study dashboard</Link>
+        <Link className="button" href="/learn/atlas/notebook">Open observation notebook</Link>
         <Link className="button" href="/learn/atlas/cases">Practice diagnostic cases</Link>
         <Link className="button" href="/learn/atlas/paths">Follow guided learning paths</Link>
         <Link className="button" href="/learn/atlas/review">Open mastery review lab</Link>
