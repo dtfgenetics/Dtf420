@@ -160,7 +160,7 @@ export function AtlasReviewLab() {
               <small>{activeMeta?.systemLabel ?? "Atlas lesson"}</small>
               <h2>{activeMeta?.title ?? "Review check"}</h2>
             </div>
-            <div className={styles.attempts}>
+            <div className={styles.attempts} aria-label="Previous attempts">
               <strong>{activeRecord?.attempts ?? 0}</strong>
               <span>previous attempt{(activeRecord?.attempts ?? 0) === 1 ? "" : "s"}</span>
             </div>
