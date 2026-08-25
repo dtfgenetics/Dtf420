@@ -2,10 +2,27 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import cases from "@/content/atlas-diagnostic-cases.json";
+import rawCases from "@/content/atlas-diagnostic-cases.json";
 import styles from "./AtlasDiagnosticCaseLab.module.css";
 
 type Result = "correct" | "incorrect" | null;
+type DiagnosticCase = (typeof rawCases)[number];
+
+function balanceAnswerPosition(item: DiagnosticCase, index: number): DiagnosticCase {
+  const targetIndex = index % item.options.length;
+  const correctOption = item.options[item.correctIndex];
+  const distractors = item.options.filter((_, optionIndex) => optionIndex !== item.correctIndex);
+  const options = [...distractors];
+  options.splice(targetIndex, 0, correctOption);
+
+  return {
+    ...item,
+    options,
+    correctIndex: targetIndex,
+  };
+}
+
+const cases = rawCases.map(balanceAnswerPosition);
 
 export function AtlasDiagnosticCaseLab() {
   const [selectedId, setSelectedId] = useState(cases[0].id);
