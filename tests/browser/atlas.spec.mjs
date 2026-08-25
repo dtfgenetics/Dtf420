@@ -115,8 +115,8 @@ test("Compare & Contrast mode switches evidence sets and keeps lesson links vali
   }
 
   await topicNav.getByRole("button", { name: "Xylem vs phloem" }).click();
-  await expect(page.getByRole("heading", { name: "Xylem" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Phloem" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Xylem", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Phloem", exact: true })).toBeVisible();
   await expect(page.getByText(/Source-to-sink transport can occur in different directions/i)).toBeVisible();
   expect(errors, errors.join("\n")).toEqual([]);
 
