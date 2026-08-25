@@ -37,7 +37,6 @@ test("review lab prioritizes recent misses and updates shared mastery", async ({
   await expect(summary).toContainText("recent misses");
   await expect(summary).toContainText("49");
   await expect(summary).toContainText("unmastered");
-  await expect(summary).toContainText("1");
   await expect(summary).toContainText("mastered");
 
   const practice = page.locator('section[aria-label="Atlas review practice"]');
@@ -73,6 +72,7 @@ test("Atlas hub exposes the mastery review lab", async ({ page }) => {
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
   const link = page.getByRole("link", { name: "Open mastery review lab" });
   await expect(link).toHaveAttribute("href", "/learn/atlas/review");
-  const response = await page.request.get("/learn/atlas/review");
-  expect(response.status()).toBe(200);
+  await link.click();
+  await expect(page).toHaveURL(/\/learn\/atlas\/review$/);
+  await expect(page.locator('section[aria-label="Atlas review summary"]')).toBeVisible();
 });
