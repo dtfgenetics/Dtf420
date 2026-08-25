@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
-import knowledgeChecks from "@/content/atlas-knowledge-checks.json";
 import guidedPaths from "@/content/atlas-guided-paths.json";
+import { atlasKnowledgeChecks, type AtlasKnowledgeCheck } from "@/lib/atlas-knowledge-checks";
 import styles from "./AtlasMastery.module.css";
 
 const STORAGE_KEY = "dtf420.atlas.mastery.v1";
@@ -27,16 +27,7 @@ export type AtlasMasteryState = {
   paths: Record<string, PathMasteryRecord>;
 };
 
-export type AtlasKnowledgeCheck = {
-  id: string;
-  route: string;
-  prompt: string;
-  options: string[];
-  correctIndex: number;
-  explanation: string;
-};
-
-const validRoutes = new Set(knowledgeChecks.map((check) => check.route));
+const validRoutes = new Set(atlasKnowledgeChecks.map((check) => check.route));
 const validPathIds = new Set(guidedPaths.map((path) => path.id));
 
 function normalizeState(value: unknown): AtlasMasteryState {
@@ -120,20 +111,20 @@ export function useAtlasMastery() {
 export function AtlasMasteryOverview() {
   const { mastery } = useAtlasMastery();
   const mastered = Object.values(mastery.lessons).filter((record) => record.mastered).length;
-  const percent = Math.round((mastered / knowledgeChecks.length) * 100);
+  const percent = Math.round((mastered / atlasKnowledgeChecks.length) * 100);
 
   return (
     <section className={styles.overview} aria-label="Atlas mastery overview">
       <div>
         <small>Knowledge mastery</small>
-        <h2>{mastered} of {knowledgeChecks.length} checks mastered</h2>
+        <h2>{mastered} of {atlasKnowledgeChecks.length} checks mastered</h2>
         <p>Correct responses are saved on this device and count across lessons and guided paths.</p>
       </div>
       <div className={styles.overviewScore}>
         <strong>{percent}%</strong>
         <span>mastered</span>
       </div>
-      <div className={styles.track} role="progressbar" aria-label="Atlas checks mastered" aria-valuemin={0} aria-valuemax={knowledgeChecks.length} aria-valuenow={mastered}>
+      <div className={styles.track} role="progressbar" aria-label="Atlas checks mastered" aria-valuemin={0} aria-valuemax={atlasKnowledgeChecks.length} aria-valuenow={mastered}>
         <span style={{ width: `${percent}%` }} />
       </div>
     </section>
