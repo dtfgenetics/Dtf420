@@ -115,6 +115,16 @@ test("representative Atlas lessons render and interactive visuals change state",
   const visual = page.locator('section[aria-label="Atlas primary visual"]');
   await visual.locator("button").nth(1).click();
   await expectNoInternalProductionLabels(page);
+
+  const explanation = page.getByText(
+    "Embryonic leaf tissue that supports the seedling during the earliest stage after emergence.",
+    { exact: true },
+  );
+  await expect(explanation).toBeVisible();
+  const explanationBox = await explanation.boundingBox();
+  expect(explanationBox, "selected-structure explanation should have a measurable layout box").not.toBeNull();
+  expect(explanationBox.width, "selected-structure explanation should remain comfortably readable").toBeGreaterThan(150);
+
   await page.screenshot({
     path: testInfo.outputPath(`${testInfo.project.name}-seed-anatomy-interaction.png`),
     fullPage: true,
