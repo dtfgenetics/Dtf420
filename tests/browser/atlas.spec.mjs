@@ -33,6 +33,8 @@ const representativeRoutes = [
   "/learn/atlas/diagnostic-overlay/differential-workflow",
 ];
 
+const PROGRESS_KEY = "dtf420.atlas.progress.v1";
+
 function watchRuntimeErrors(page) {
   const errors = [];
   page.on("console", (message) => {
@@ -77,11 +79,48 @@ test("Atlas hub renders cleanly without viewport overflow", async ({ page }, tes
   await expect(page.locator("h1").first()).toBeVisible();
   await expect(page.locator("body")).toContainText("Living Plant Atlas");
   await expect(page.getByRole("link", { name: "Compare plant systems side by side" })).toBeVisible();
+  await expect(page.locator('section[aria-label="Atlas learning progress"]')).toBeVisible();
   await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
   await page.screenshot({
     path: testInfo.outputPath(`${testInfo.project.name}-atlas-hub.png`),
+    fullPage: true,
+  });
+});
+
+test("Atlas lesson completion persists and Continue Learning advances", async ({ page }, testInfo) => {
+  const errors = watchRuntimeErrors(page);
+  await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
+  await page.evaluate((key) => window.localStorage.removeItem(key), PROGRESS_KEY);
+  await page.reload({ waitUntil: "networkidle" });
+
+  const completion = page.locator('section[aria-label="Lesson completion"]');
+  await expect(completion).toBeVisible();
+  const completeButton = completion.getByRole("button", { name: "Mark lesson complete" });
+  await expect(completeButton).toBeEnabled();
+  await completeButton.click();
+  await expect(completion.getByRole("button", { name: "Completed ✓" })).toHaveAttribute("aria-pressed", "true");
+  await expect(completion.getByRole("link", { name: "Continue to next lesson" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");
+
+  const stored = await page.evaluate((key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"), PROGRESS_KEY);
+  expect(stored.completed).toContain("/learn/atlas/seed-germination/seed-anatomy");
+  expect(stored.continueRoute).toBe("/learn/atlas/seed-germination/imbibition");
+
+  await page.reload({ waitUntil: "networkidle" });
+  await expect(page.locator('section[aria-label="Lesson completion"]').getByRole("button", { name: "Completed ✓" })).toHaveAttribute("aria-pressed", "true");
+
+  await page.goto("/learn/atlas", { waitUntil: "networkidle" });
+  const overview = page.locator('section[aria-label="Atlas learning progress"]');
+  await expect(overview).toContainText("1 of 50 lessons complete");
+  await expect(overview.getByRole("progressbar", { name: "Atlas lessons completed" })).toHaveAttribute("aria-valuenow", "1");
+  await expect(overview).toContainText("Continue with Seed & Germination: Imbibition");
+  await expect(overview.getByRole("link", { name: "Continue learning" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");
+  await expectNoHorizontalOverflow(page);
+  expect(errors, errors.join("\n")).toEqual([]);
+
+  await page.screenshot({
+    path: testInfo.outputPath(`${testInfo.project.name}-atlas-progress.png`),
     fullPage: true,
   });
 });
