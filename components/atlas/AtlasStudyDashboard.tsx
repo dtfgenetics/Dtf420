@@ -111,7 +111,7 @@ export function AtlasStudyDashboard() {
           : {
               eyebrow: "Atlas mastery",
               title: "Your current Atlas mastery goals are complete",
-              copy: "Revisit the Review Lab, Compare mode, or any system whenever you want to reinforce the material.",
+              copy: "Revisit the Review Lab, Compare mode, Diagnostic Case Lab, or any system whenever you want to reinforce the material.",
               href: "/learn/atlas/mastery",
               action: "View Mastery Passport",
             };
@@ -189,6 +189,7 @@ export function AtlasStudyDashboard() {
       </div>
 
       <section className={styles.tools} aria-label="Atlas study tools">
+        <Link href="/learn/atlas/cases"><strong>Diagnostic Case Lab</strong><span>Practice observation-first reasoning with realistic plant cases.</span></Link>
         <Link href="/learn/atlas/review"><strong>Mastery Review Lab</strong><span>Practice recent misses and unmastered checks.</span></Link>
         <Link href="/learn/atlas/compare"><strong>Compare & Contrast</strong><span>Study related structures and processes side by side.</span></Link>
         <Link href="/learn/atlas/paths"><strong>Guided Paths</strong><span>Follow six curated cross-system learning sequences.</span></Link>
