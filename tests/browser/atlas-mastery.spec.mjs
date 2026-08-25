@@ -105,7 +105,7 @@ test("Atlas hub and guided paths reflect shared mastery state", async ({ page },
   });
 });
 
-test("path mastery quiz scores, explains, and saves a full correct attempt", async ({ page }, testInfo) => {
+test("path mastery quiz scores, explains, saves, and unlocks its passport badge", async ({ page }, testInfo) => {
   await clearMastery(page);
   const pathData = guidedPaths.find((item) => item.id === "plant-foundations");
   expect(pathData).toBeTruthy();
@@ -128,6 +128,7 @@ test("path mastery quiz scores, explains, and saves a full correct attempt", asy
   const result = page.locator('section[aria-label="Path mastery result"]');
   await expect(result).toContainText("Mastery achieved");
   await expect(result).toContainText("100%");
+  await expect(result).toContainText("unlocked its Atlas Mastery Passport badge");
   await expect(page.getByText("Correct", { exact: true })).toHaveCount(pathData.lessons.length);
 
   const stored = await page.evaluate((key) => JSON.parse(window.localStorage.getItem(key) ?? "{}"), MASTERY_KEY);
@@ -140,4 +141,11 @@ test("path mastery quiz scores, explains, and saves a full correct attempt", asy
     path: testInfo.outputPath(`${testInfo.project.name}-atlas-mastery-quiz.png`),
     fullPage: true,
   });
+
+  await result.getByRole("link", { name: "View mastery passport" }).click();
+  await expect(page).toHaveURL(/\/learn\/atlas\/mastery$/);
+  const plantBadge = page.locator('section[aria-label="Atlas path mastery badges"] article').filter({ hasText: "Plant Systems" });
+  await expect(plantBadge).toContainText("Unlocked ✓");
+  await expect(plantBadge).toContainText("Best score 100%");
+  await expectNoHorizontalOverflow(page);
 });

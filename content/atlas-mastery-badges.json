@@ -1,0 +1,44 @@
+[
+  {
+    "id": "plant-foundations",
+    "title": "Plant Systems",
+    "shortLabel": "Foundations",
+    "mark": "PS",
+    "description": "Recognizes mastery of the connected structural systems that carry the plant from seed anatomy through roots, stems, leaves, flowers, and trichomes."
+  },
+  {
+    "id": "water-transport",
+    "title": "Flow Dynamics",
+    "shortLabel": "Water & Transport",
+    "mark": "FD",
+    "description": "Recognizes mastery of root absorption, vascular movement, stomatal exchange, transpiration demand, and root-zone interactions."
+  },
+  {
+    "id": "diagnostic-reasoning",
+    "title": "Diagnostic Observer",
+    "shortLabel": "Diagnostics",
+    "mark": "DO",
+    "description": "Recognizes an observation-first diagnostic workflow built around pattern description, measurement context, and differential reasoning."
+  },
+  {
+    "id": "canopy-architecture",
+    "title": "Canopy Architect",
+    "shortLabel": "Canopy",
+    "mark": "CA",
+    "description": "Recognizes mastery of nodes, apical dominance, directional growth, training response, canopy light distribution, and airflow."
+  },
+  {
+    "id": "reproduction-breeding-biology",
+    "title": "Reproductive Biology",
+    "shortLabel": "Reproduction",
+    "mark": "RB",
+    "description": "Recognizes mastery of preflowers, pollen biology, pollination response, seed formation, and controlled reproductive observation."
+  },
+  {
+    "id": "flower-trichome-observation",
+    "title": "Floral Observer",
+    "shortLabel": "Flower & Trichome",
+    "mark": "FO",
+    "description": "Recognizes a repeatable approach to flower development, trichome sampling, microscope observation, and maturity-risk inspection."
+  }
+]

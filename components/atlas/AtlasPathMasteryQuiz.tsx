@@ -139,10 +139,11 @@ export function AtlasPathMasteryQuiz({ pathId }: { pathId: string }) {
           <div>
             <small>{passed ? "Mastery achieved" : "Keep reviewing"}</small>
             <strong>{score}%</strong>
-            <p>{passed ? "You met the 80% mastery target for this path." : "Review the explanations and linked lessons, then try again when you are ready."}</p>
+            <p>{passed ? "You met the 80% mastery target for this path and unlocked its Atlas Mastery Passport badge." : "Review the explanations and linked lessons, then try again when you are ready."}</p>
           </div>
           <div className={styles.resultActions}>
             <button type="button" onClick={reset}>Retake quiz</button>
+            {passed ? <Link href="/learn/atlas/mastery">View mastery passport</Link> : null}
             <Link href="/learn/atlas/paths">Back to guided paths</Link>
           </div>
         </section>

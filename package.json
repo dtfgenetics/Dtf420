@@ -15,7 +15,8 @@
     "verify:atlas-assets": "node scripts/verify-atlas-assets.mjs",
     "verify:atlas-paths": "node scripts/verify-atlas-guided-paths.mjs",
     "verify:atlas-checks": "node scripts/verify-atlas-knowledge-checks.mjs",
-    "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run lint && npm run typecheck && npm run build"
+    "verify:atlas-badges": "node scripts/verify-atlas-mastery-badges.mjs",
+    "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.2",
