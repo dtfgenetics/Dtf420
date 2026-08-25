@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LivingPlantAtlas } from "@/components/atlas/LivingPlantAtlas";
 import { AtlasGrowthStages } from "@/components/atlas/AtlasGrowthStages";
 import { AtlasVisualOverlays } from "@/components/atlas/AtlasVisualOverlays";
@@ -13,6 +14,9 @@ export default function AtlasPage() {
   return (
     <section className="shell page-section">
       <LivingPlantAtlas />
+      <div className="hero__actions">
+        <Link className="button button--primary" href="/learn/atlas/compare">Compare plant systems side by side</Link>
+      </div>
       <AtlasGrowthStages />
       <AtlasVisualOverlays />
       <AtlasLearningModules />
