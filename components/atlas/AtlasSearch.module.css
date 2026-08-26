@@ -99,6 +99,11 @@
   font-size: 1.05rem;
 }
 
+.inputWrap input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .inputWrap input::placeholder {
   color: #829085;
 }
@@ -250,11 +255,14 @@
 
 @media (max-width: 520px) {
   .inputWrap {
-    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.45rem;
+    padding-left: 0.7rem;
   }
 
   .inputWrap button {
-    grid-column: 1 / -1;
+    min-height: 2.45rem;
+    padding-inline: 0.65rem;
+    font-size: 0.86rem;
   }
 
   .resultHeader {
