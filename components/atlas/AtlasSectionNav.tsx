@@ -24,6 +24,7 @@ function activeKey(pathname: string) {
   ) return "practice";
   if (pathname.startsWith("/learn/atlas/notebook")) return "notebook";
   if (pathname.startsWith("/learn/atlas/mastery")) return "mastery";
+  if (pathname.startsWith("/learn/atlas/search")) return "search";
   return "explore";
 }
 
@@ -53,6 +54,14 @@ export function AtlasSectionNav() {
             );
           })}
         </div>
+        <Link
+          className={`${styles.searchLink} ${current === "search" ? styles.searchActive : ""}`}
+          href="/learn/atlas/search"
+          aria-current={current === "search" ? "page" : undefined}
+        >
+          <span aria-hidden="true">⌕</span>
+          Search
+        </Link>
       </nav>
     </div>
   );

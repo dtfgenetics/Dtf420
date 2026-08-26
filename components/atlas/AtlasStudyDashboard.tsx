@@ -116,6 +116,8 @@ export function AtlasStudyDashboard() {
               action: "View Mastery Passport",
             };
 
+  const resumeHref = continueLesson?.route ?? "/learn/atlas";
+
   return (
     <div className={styles.shell}>
       <section className={styles.hero} aria-label="Atlas study dashboard summary">
@@ -139,11 +141,43 @@ export function AtlasStudyDashboard() {
         <Link href={recommendation.href}>{recommendation.action}</Link>
       </section>
 
+      <section className={styles.startHere} aria-label="Atlas start here choices">
+        <header>
+          <small>Start here</small>
+          <div>
+            <h2>What are you here to do?</h2>
+            <Link href="/learn/atlas/search">Search instead</Link>
+          </div>
+        </header>
+        <div className={styles.intentGrid}>
+          <Link href="/learn/atlas">
+            <small>Understand</small>
+            <strong>Learn how the plant works</strong>
+            <span>Explore anatomy, physiology, lifecycle, environment, and connected plant systems.</span>
+          </Link>
+          <Link href="/learn/atlas/paths">
+            <small>Begin</small>
+            <strong>Start from the beginning</strong>
+            <span>Use Plant Foundations and the guided paths for an ordered learning sequence.</span>
+          </Link>
+          <Link href="/learn/atlas/cases">
+            <small>Investigate</small>
+            <strong>Figure out what I am seeing</strong>
+            <span>Practice observation-first reasoning before changing inputs or naming a cause.</span>
+          </Link>
+          <Link href={resumeHref}>
+            <small>Resume</small>
+            <strong>Continue where I left off</strong>
+            <span>{continueLesson ? `${continueLesson.systemLabel} · ${continueLesson.title}` : "Open the next unfinished Atlas lesson."}</span>
+          </Link>
+        </div>
+      </section>
+
       <div className={styles.grid}>
         <section className={styles.panel} aria-label="Continue Atlas learning">
           <small>Continue Learning</small><h2>{continueLesson?.title ?? "Living Plant Atlas"}</h2>
           <p>{continueLesson ? `${continueLesson.systemLabel} · Next unfinished lesson.` : "Choose any Atlas lesson to continue."}</p>
-          <Link href={continueLesson?.route ?? "/learn/atlas"}>Open next lesson</Link>
+          <Link href={resumeHref}>Open next lesson</Link>
         </section>
         <section className={styles.panel} aria-label="Closest guided learning path">
           <small>Closest guided path</small><h2>{closestPath.title}</h2>
