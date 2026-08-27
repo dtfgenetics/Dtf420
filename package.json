@@ -12,6 +12,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "assets:thc:import": "node scripts/import-thc-project-images.mjs",
+    "assets:thc:verify": "node scripts/import-thc-project-images.mjs --verify-only",
     "verify:atlas-assets": "node scripts/verify-atlas-assets.mjs",
     "verify:atlas-paths": "node scripts/verify-atlas-guided-paths.mjs",
     "verify:atlas-checks": "node scripts/verify-atlas-knowledge-checks.mjs",
