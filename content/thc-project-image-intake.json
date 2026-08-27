@@ -1,0 +1,102 @@
+[
+  {
+    "assetId": "thc-growing-factors-cultivation-foundations",
+    "title": "6 Factors That Affect Growing",
+    "sourceDriveId": "17BWVLFNuJNz2BKKgoZl8Cjm91sZQuckQ",
+    "sourceName": "THC_Growing_Factors_Cultivation_Foundations_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "foundations",
+    "targetPath": "/images/thc-project/education/foundations/thc-growing-factors-cultivation-foundations.jpg"
+  },
+  {
+    "assetId": "thc-bud-wash-harvest-postharvest",
+    "title": "Bud Washing",
+    "sourceDriveId": "1Bqni1JUarHhgTynVo2bQXsNGC8iK-Jsx",
+    "sourceName": "THC_Bud_Wash_Harvest_Postharvest_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "harvest",
+    "targetPath": "/images/thc-project/education/harvest/thc-bud-wash-harvest-postharvest.jpg"
+  },
+  {
+    "assetId": "thc-airflow-co2-leaf-climate",
+    "title": "Air and the Plant",
+    "sourceDriveId": "1co5Jd2bafzlu3T-KR2IDdC_LNTwHgfLU",
+    "sourceName": "THC_Airflow_CO2_Leaf_Climate_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "plant-biology",
+    "targetPath": "/images/thc-project/education/plant-biology/thc-airflow-co2-leaf-climate.jpg"
+  },
+  {
+    "assetId": "thc-root-zone-humic-fulvic-acids",
+    "title": "Humic and Fulvic Acids",
+    "sourceDriveId": "1-jWuplFnBfgkA2e0G9tJlW3oEbBEA0No",
+    "sourceName": "THC_Root_Zone_Humic_Fulvic_Acids_Nutrition_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "nutrition",
+    "targetPath": "/images/thc-project/education/nutrition/thc-root-zone-humic-fulvic-acids.jpg"
+  },
+  {
+    "assetId": "thc-trichomes-secretory-biology",
+    "title": "Anatomy of Cannabis Trichomes",
+    "sourceDriveId": "1w3iaJ4oHxrRnlqHbIOSBsI7e2OWCNbAj",
+    "sourceName": "THC_Trichomes_Secretory_Biology_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "plant-biology",
+    "targetPath": "/images/thc-project/education/plant-biology/thc-trichomes-secretory-biology.jpg"
+  },
+  {
+    "assetId": "thc-root-zone-mycorrhizae",
+    "title": "Fungi and Mycorrhizae",
+    "sourceDriveId": "1DmaiJUzkyX4FYrc1NAdiozH5zudQEXVj",
+    "sourceName": "THC_Root_Zone_Mycorrhizae_Nutrition_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "nutrition",
+    "targetPath": "/images/thc-project/education/nutrition/thc-root-zone-mycorrhizae.jpg"
+  },
+  {
+    "assetId": "thc-plant-training-canopy",
+    "title": "Plant Training Basics",
+    "sourceDriveId": "1ohuggG-K8Mn0cHslOWON07aEAVcFywxu",
+    "sourceName": "THC_Plant_Training_Canopy_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "training",
+    "targetPath": "/images/thc-project/education/training/thc-plant-training-canopy.jpg"
+  },
+  {
+    "assetId": "thc-nutrient-deficiencies-diagnosis",
+    "title": "Nutrient Deficiencies",
+    "sourceDriveId": "1YiG5q_uwCl0T2yo7OQqDGoLeMTOPk6Ti",
+    "sourceName": "THC_Nutrient_Deficiencies_Diagnosis_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "diagnostics",
+    "targetPath": "/images/thc-project/education/diagnostics/thc-nutrient-deficiencies-diagnosis.jpg"
+  },
+  {
+    "assetId": "thc-seed-anatomy-germination",
+    "title": "Anatomy of a Cannabis Seed",
+    "sourceDriveId": "1DaxzFIVh9cgBCAkoW8-qhlUCOKdZEzbM",
+    "sourceName": "THC_Seed_Anatomy_Germination_Approved.png",
+    "sourceMimeType": "image/jpeg",
+    "selectionStatus": "approved",
+    "category": "plant-biology",
+    "targetPath": "/images/thc-project/education/plant-biology/thc-seed-anatomy-germination.jpg"
+  },
+  {
+    "assetId": "thc-c007-leaf-anatomy-gas-exchange",
+    "title": "Leaf Anatomy and Gas Exchange",
+    "sourceDriveId": "1pieHgJVN11mF4jMxd5kMjA2eKm5AFnJj",
+    "sourceName": "THC-C007_Infographic_Leaf_Anatomy_Gas_Exchange_300dpi.png",
+    "sourceMimeType": "image/png",
+    "selectionStatus": "final-no-warning",
+    "category": "plant-biology",
+    "targetPath": "/images/thc-project/education/plant-biology/thc-c007-leaf-anatomy-gas-exchange.png"
+  }
+]
