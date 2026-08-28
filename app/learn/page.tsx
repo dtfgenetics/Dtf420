@@ -2,6 +2,14 @@ import Link from "next/link";
 
 const learningModes = [
   {
+    eyebrow: "Find anything",
+    title: "Search Teaching Healthy Cultivation",
+    description:
+      "Search Atlas lessons, plant-health references, symptom differentials, greenhouse and outdoor science, post-harvest topics, and printable field tools from one place.",
+    href: "/learn/search",
+    action: "Search all education",
+  },
+  {
     eyebrow: "Interactive visual learning",
     title: "THC Living Plant Atlas",
     description:
