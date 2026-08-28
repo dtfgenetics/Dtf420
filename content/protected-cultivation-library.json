@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "greenhouse-energy-and-heat-balance",
+    "title": "Greenhouse Energy & Heat Balance",
+    "category": "Protected Cultivation",
+    "summary": "Protected structures gain, store, and lose heat through solar radiation, glazing, air exchange, equipment, crop transpiration, and outside weather; temperature control is therefore an energy-balance problem, not a thermostat-only problem.",
+    "keyConcepts": ["Solar gain can raise interior temperature rapidly even when outdoor air is mild", "Glazing material and structure geometry affect heat gain and loss", "Plants and wet surfaces add latent heat and water vapor to the air", "Ventilation, shade, evaporative cooling, heating, and dehumidification each change more than one environmental variable"],
+    "measureObserve": ["Log inside and outside temperature through the day", "Compare sunny and cloudy periods", "Identify hot zones near glazing or poor air mixing", "Record equipment operation alongside environmental changes"],
+    "commonMistakes": ["Treating air temperature as spatially uniform", "Adding cooling without checking humidity consequences", "Ignoring night heat loss and cold surfaces", "Using one sensor as the entire greenhouse"],
+    "visualNeeds": ["Greenhouse heat-balance diagram", "Solar gain and heat-loss cross section", "Day/night temperature profile", "Sensor-location heat map"]
+  },
+  {
+    "slug": "ventilation-air-exchange-and-circulation",
+    "title": "Ventilation, Air Exchange & Circulation",
+    "category": "Protected Cultivation",
+    "summary": "Ventilation replaces greenhouse air with outside air while circulation mixes air inside the structure; both matter, but they solve different problems.",
+    "keyConcepts": ["Air exchange can remove heat and water vapor when outside conditions allow", "Horizontal or vertical circulation reduces stagnant zones without necessarily exchanging outside air", "Canopy density changes resistance to air movement", "Openings, fans, screens, and structure geometry influence airflow patterns"],
+    "measureObserve": ["Compare temperature and RH at crop height in several locations", "Use lightweight indicators or smoke testing where safe to observe air paths", "Inspect dead zones behind dense canopy or structural barriers", "Record vent and fan state with sensor data"],
+    "commonMistakes": ["Calling circulation fans ventilation", "Pointing high-velocity airflow directly at one crop zone", "Ignoring blocked intake paths", "Assuming fan rating equals delivered airflow through the real structure"],
+    "visualNeeds": ["Ventilation-versus-circulation diagram", "Airflow path map", "Canopy resistance cross section", "Fan and inlet placement comparison"]
+  },
+  {
+    "slug": "humidity-condensation-and-dew-point",
+    "title": "Humidity, Condensation & Dew-Point Risk",
+    "category": "Protected Cultivation",
+    "summary": "Condensation forms when a surface reaches or falls below the air's dew point. In protected structures, cold glazing, leaves, pipes, and dense flower zones can become wet even when bulk-air RH appears acceptable.",
+    "keyConcepts": ["Relative humidity changes with temperature even when absolute moisture is unchanged", "Cold surfaces can reach dew point before room air appears saturated", "Night cooling often raises condensation risk", "Persistent leaf or flower wetness can increase disease risk"],
+    "measureObserve": ["Track temperature and RH overnight", "Inspect glazing and crop surfaces near dawn", "Compare air temperature with leaf or surface temperature when possible", "Note locations where condensation repeatedly forms"],
+    "commonMistakes": ["Using daytime RH as the only disease-risk metric", "Assuming visible wall condensation is the only meaningful condensation", "Heating without considering moisture removal", "Dehumidifying one zone while leaving stagnant canopy pockets"],
+    "visualNeeds": ["Dew-point concept diagram", "Night condensation sequence", "Cold-surface risk map", "Leaf versus air temperature graphic"]
+  },
+  {
+    "slug": "greenhouse-sensor-placement-and-data-quality",
+    "title": "Greenhouse Sensor Placement & Data Quality",
+    "category": "Protected Cultivation",
+    "summary": "A greenhouse can contain large microclimate differences. Sensor location, shielding, calibration, response time, and maintenance determine whether data describe the crop or merely the sensor's immediate surroundings.",
+    "keyConcepts": ["Radiant heat can bias exposed temperature sensors", "Crop-height measurements are often more representative than ceiling measurements", "Multiple zones may require multiple sensors", "Calibration drift can turn precise-looking numbers into misleading data"],
+    "measureObserve": ["Map sensor height and location", "Compare two instruments side by side periodically", "Shield sensors from direct radiation when appropriate", "Review implausible sudden jumps before acting on them"],
+    "commonMistakes": ["Mounting the only sensor next to a heater, vent, door, or wet wall", "Never checking calibration", "Changing controls from one anomalous reading", "Assuming dashboard precision equals measurement accuracy"],
+    "visualNeeds": ["Good-versus-bad sensor placement", "Greenhouse microclimate map", "Radiation-shield diagram", "Calibration-check workflow"]
+  },
+  {
+    "slug": "protected-cultivation-irrigation-and-drainage",
+    "title": "Protected-Cultivation Irrigation & Drainage",
+    "category": "Protected Cultivation",
+    "summary": "Protected structures remove rainfall from the crop but do not remove water-management complexity. Irrigation uniformity, substrate storage, drainage, runoff, root oxygen, and crop demand must be tracked together.",
+    "keyConcepts": ["Emitter uniformity can change over time", "Drainage fraction alone does not describe root-zone moisture distribution", "Protected structures can accumulate salts where natural rainfall never leaches the root zone", "Standing water and chronically wet floors can increase humidity and sanitation problems"],
+    "measureObserve": ["Catch-test emitters for distribution differences", "Inspect moisture at several substrate positions", "Track input and representative drainage EC where applicable", "Keep floors and drains functioning and observable"],
+    "commonMistakes": ["Assuming equal irrigation time means equal delivered volume", "Ignoring clogged or displaced emitters", "Allowing runoff to pool", "Using one container as the only irrigation reference"],
+    "visualNeeds": ["Emitter-uniformity test", "Root-zone moisture cross section", "Drainage and runoff map", "Salt-accumulation concept graphic"]
+  },
+  {
+    "slug": "insect-exclusion-screening-and-airflow-tradeoffs",
+    "title": "Insect Exclusion Screening & Airflow Tradeoffs",
+    "category": "Protected Cultivation",
+    "summary": "Screens can reduce pest entry, but finer screening also adds resistance to airflow. Exclusion must therefore be designed together with ventilation capacity, pressure, maintenance, and pest size.",
+    "keyConcepts": ["Screen aperture determines which pests can be excluded", "Finer mesh generally creates more airflow resistance", "Dirty screens progressively reduce airflow", "Doors, vents, tears, and service openings can defeat otherwise good screening"],
+    "measureObserve": ["Inspect screens for tears and blocked areas", "Compare vent performance before and after screen installation", "Record temperature rise during peak ventilation demand", "Check door and intake pathways for bypass entry"],
+    "commonMistakes": ["Selecting the finest mesh without evaluating ventilation penalty", "Installing screens but leaving unscreened bypass routes", "Failing to clean screens", "Assuming screening eliminates the need for scouting"],
+    "visualNeeds": ["Mesh-size versus airflow concept chart", "Screened vent cross section", "Pest bypass map", "Screen maintenance checklist"]
+  },
+  {
+    "slug": "incoming-plant-quarantine-and-clean-stock",
+    "title": "Incoming Plant Quarantine & Clean Stock",
+    "category": "Protected Cultivation",
+    "summary": "Incoming clones, plugs, liners, mother stock, and other living material can introduce arthropods and pathogens before obvious symptoms appear. Separation and observation reduce the chance of moving an unseen problem into the main crop.",
+    "keyConcepts": ["Asymptomatic material can still carry pests or pathogens", "Vegetative propagation can preserve and spread systemic infections", "A physically separated observation area is more useful than a label alone", "Records should connect source, date, lot, observations, and disposition"],
+    "measureObserve": ["Inspect incoming material under magnification", "Check upper and lower leaf surfaces and root zones", "Record supplier and lot information", "Keep suspect material separated until evidence supports release or removal"],
+    "commonMistakes": ["Moving new plants directly into established crops", "Relying only on visible leaf symptoms", "Sharing tools between quarantine and production without sanitation", "Losing lot identity after unpacking"],
+    "visualNeeds": ["Quarantine-zone layout", "Incoming inspection workflow", "Clean-to-dirty movement map", "Lot-traceability record example"]
+  },
+  {
+    "slug": "greenhouse-scouting-and-hotspot-mapping",
+    "title": "Greenhouse Scouting & Hotspot Mapping",
+    "category": "Protected Cultivation",
+    "summary": "Effective greenhouse IPM depends on repeated, mapped observations. Sticky cards, plant inspections, magnification, and records reveal where pest pressure begins and whether it is changing.",
+    "keyConcepts": ["Sticky cards monitor some flying adults but do not replace plant inspection", "Pest life stage matters for identification and management timing", "Maps make recurring hotspots visible", "Scouting should begin when plant material enters the structure"],
+    "measureObserve": ["Number and date monitoring cards", "Inspect a consistent set of plants or zones", "Record eggs, immatures, adults, damage, and beneficial organisms separately", "Mark hotspots and revisit them after any intervention"],
+    "commonMistakes": ["Counting sticky-card insects without checking plants", "Moving traps without recording location", "Scouting only after visible damage becomes widespread", "Recording presence without abundance or life stage"],
+    "visualNeeds": ["Greenhouse scouting map", "Sticky-card placement example", "Pest life-stage record sheet", "Hotspot progression map"]
+  },
+  {
+    "slug": "biological-control-program-design",
+    "title": "Biological Control Program Design",
+    "category": "Protected Cultivation",
+    "summary": "Biological control works best as a planned IPM component: correctly identify the pest, match a beneficial organism to the pest and life stage, introduce it early enough, and verify establishment through scouting.",
+    "keyConcepts": ["Different beneficial organisms target different pests and life stages", "Environmental conditions affect beneficial performance", "Preventive or early releases can be more effective than waiting for heavy infestations", "Broad-spectrum pesticide residues can disrupt beneficial populations"],
+    "measureObserve": ["Confirm pest identity before selecting a biological control", "Track beneficial releases by date and location", "Scout for both pest and beneficial populations", "Review pesticide compatibility before combining tactics"],
+    "commonMistakes": ["Releasing a beneficial without confirming the target pest", "Expecting immediate knockdown from a population-based biological program", "Ignoring temperature and humidity requirements", "Using incompatible pesticide residues without checking effects on beneficials"],
+    "visualNeeds": ["Pest-to-beneficial matching matrix", "Preventive-release timeline", "Scouting feedback loop", "Compatibility decision diagram"]
+  },
+  {
+    "slug": "high-tunnel-versus-greenhouse-environment",
+    "title": "High Tunnel vs Greenhouse Environment",
+    "category": "Protected Cultivation",
+    "summary": "High tunnels and actively controlled greenhouses both modify the crop environment, but their ventilation, heating, humidity control, automation, and pest dynamics can differ substantially.",
+    "keyConcepts": ["High tunnels often depend heavily on passive ventilation", "Rain exclusion changes leaf wetness and irrigation dependence", "Protected environments can favor pest complexes that differ from open-field production", "Management decisions must match the actual level of environmental control"],
+    "measureObserve": ["Document which controls are active versus passive", "Track inside/outside temperature and RH", "Record vent-opening patterns and rain exclusion", "Compare pest pressure with nearby outdoor crops where relevant"],
+    "commonMistakes": ["Applying greenhouse assumptions to a minimally controlled tunnel", "Assuming rain exclusion eliminates disease", "Ignoring rapid daytime overheating", "Treating a protected structure as pest-proof"],
+    "visualNeeds": ["High tunnel versus greenhouse comparison", "Passive versus active ventilation diagram", "Rain-exclusion water balance", "Protected-environment pest pathway map"]
+  }
+]
