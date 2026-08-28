@@ -4,11 +4,26 @@ import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://dtfseeds.com"),
   title: {
     default: "DTF420",
     template: "%s | DTF420",
   },
   description: "DTF420 games, cultivation education, tools, and community.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "DTF420",
+    title: "DTF420",
+    description: "Cultivation education, interactive learning, tools, games, and community.",
+    url: "https://dtfseeds.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
