@@ -52,8 +52,8 @@
     "priority": "P1",
     "area": "Protected cultivation",
     "title": "Add greenhouse and protected-cultivation branch",
-    "status": "in_progress",
-    "acceptanceCriteria": ["Ventilation and heat load", "Humidity, dew point and condensation", "Sensor placement and data quality", "Irrigation and drainage", "Screening and exclusion", "Quarantine and scouting", "Biological control", "High-tunnel versus greenhouse tradeoffs", "Add dedicated supplemental-lighting integration lesson"]
+    "status": "implemented",
+    "acceptanceCriteria": ["Ventilation and heat load", "Humidity, dew point and condensation", "Sensor placement and data quality", "Irrigation and drainage", "Screening and exclusion", "Quarantine and scouting", "Biological control", "High-tunnel versus greenhouse tradeoffs", "Supplemental lighting and DLI", "Photoperiod integrity and light-leak management"]
   },
   {
     "id": "EDU-P1-004",
