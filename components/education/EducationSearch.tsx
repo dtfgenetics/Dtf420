@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import academyCourses from "@/content/academy-courses.json";
 import atlasModules from "@/content/atlas-learning-modules.json";
 import plantHealthCore from "@/content/plant-health-library.json";
 import plantHealthExpanded from "@/content/plant-health-expanded.json";
@@ -17,7 +18,7 @@ import learningTools from "@/content/learning-tools.json";
 import evidenceSources from "@/content/education-sources.json";
 import styles from "./EducationSearch.module.css";
 
-type SearchKind = "Atlas lesson" | "Plant health" | "Cultivation science" | "Symptom differential" | "Printable tool" | "Evidence source";
+type SearchKind = "Academy course" | "Atlas lesson" | "Plant health" | "Cultivation science" | "Symptom differential" | "Printable tool" | "Evidence source";
 
 type SearchItem = {
   kind: SearchKind;
@@ -41,6 +42,15 @@ function slugify(value: string) {
 function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
+
+const academyItems: SearchItem[] = academyCourses.map((course) => ({
+  kind: "Academy course" as const,
+  title: course.title,
+  context: `${course.units.length} guided units`,
+  summary: course.summary,
+  href: `/learn/academy#${course.slug}`,
+  terms: course.units.map((unit) => `${unit.title} ${unit.description}`).join(" "),
+}));
 
 const atlasItems: SearchItem[] = atlasModules.flatMap((atlasModule) =>
   atlasModule.lessons.map((lesson) => ({
@@ -112,9 +122,9 @@ const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
   terms: `${source.publisher} ${source.sourceType} ${source.scope} ${"year" in source && source.year ? source.year : ""}`,
 }));
 
-const searchItems = [...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems];
-const kinds: Array<"All" | SearchKind> = ["All", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source"];
-const examples = ["yellow lower leaves", "whiteflies", "stomatal conductance", "source sink", "PPFD", "water activity", "HLVd research", "replication"];
+const searchItems = [...academyItems, ...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems];
+const kinds: Array<"All" | SearchKind> = ["All", "Academy course", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source"];
+const examples = ["plant health course", "stomatal conductance", "source sink", "yellow lower leaves", "PPFD", "water activity", "HLVd research", "replication"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -161,7 +171,7 @@ export function EducationSearch() {
         <div>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Search Education</h1>
-          <p>Search Atlas lessons, plant-health references, whole-plant physiology, symptom differentials, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, printable field tools, and evidence sources from one place.</p>
+          <p>Search Academy courses, Atlas lessons, plant-health references, whole-plant physiology, symptom differentials, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, printable field tools, and evidence sources from one place.</p>
         </div>
         <Link href="/learn">Back to Learn</Link>
       </section>
@@ -174,7 +184,7 @@ export function EducationSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try stomatal conductance, HLVd research, water activity…"
+            placeholder="Try plant health course, stomatal conductance, water activity…"
             autoComplete="off"
           />
           <select aria-label="Filter education search" value={kind} onChange={(event) => setKind(event.target.value as "All" | SearchKind)}>
@@ -190,7 +200,7 @@ export function EducationSearch() {
         {!searching ? (
           <div className={styles.empty}>Enter at least two characters to search across {searchItems.length} indexed learning resources.</div>
         ) : results.length === 0 ? (
-          <div className={styles.empty}>No matches yet. Try a broader plant structure, physiology, symptom, pest, measurement, environment, workflow, research, or post-harvest term.</div>
+          <div className={styles.empty}>No matches yet. Try a broader course, plant structure, physiology, symptom, pest, measurement, environment, workflow, research, or post-harvest term.</div>
         ) : (
           <>
             <header className={styles.resultHeader}>
