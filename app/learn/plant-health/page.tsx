@@ -24,6 +24,9 @@ export default function PlantHealthPage() {
           <Link className="button button--primary" href="/learn/plant-health/diagnostic-foundations">
             Start with diagnostic foundations
           </Link>
+          <Link className="button" href="/learn/symptoms">
+            Open symptom differentials
+          </Link>
           <Link className="button" href="/learn/atlas/cases">
             Open diagnostic cases
           </Link>
