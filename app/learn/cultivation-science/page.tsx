@@ -6,6 +6,7 @@ import protectedLighting from "@/content/protected-cultivation-lighting.json";
 import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
+import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
@@ -16,15 +17,17 @@ const library = [
   ...outdoorExpanded,
   ...postharvestExpanded,
   ...advancedExpanded,
+  ...plantPhysiologyExpanded,
 ];
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Cultivation Science Reference Library",
-  description: "Advanced cultivation references covering outdoor and protected cultivation, post-harvest science, plant architecture, flowering, and measurement science.",
+  description: "Advanced cultivation references covering plant physiology, outdoor and protected cultivation, post-harvest science, plant architecture, flowering, and measurement science.",
   path: "/learn/cultivation-science",
 });
 
 const categories = [
+  "Plant Physiology & Development",
   "Outdoor & Protected Cultivation",
   "Protected Cultivation",
   "Harvest & Post-Harvest",
@@ -40,7 +43,7 @@ export default function CultivationSciencePage() {
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Cultivation Science Reference Library</h1>
         <p className="lede">
-          Deep subject branches for outdoor and protected cultivation, greenhouse environment and lighting, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement and experimental science.
+          Deep subject branches for whole-plant physiology, outdoor and protected cultivation, greenhouse environment and lighting, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement and experimental science.
         </p>
         <div className={styles.heroActions}>
           <Link className="button button--primary" href="/learn/atlas">Open the Living Plant Atlas</Link>
