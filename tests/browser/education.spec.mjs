@@ -17,9 +17,10 @@ async function expectLearningResourceJsonLd(page) {
   expect(payloads.some((payload) => payload.includes('"@type":"LearningResource"'))).toBeTruthy();
 }
 
-test("Learn hub exposes search, evidence, Atlas, health, science, and tools", async ({ page }) => {
+test("Learn hub exposes Academy, search, evidence, Atlas, health, science, and tools", async ({ page }) => {
   await page.goto("/learn", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: /THC Academy/i })).toHaveAttribute("href", "/learn/academy");
   await expect(page.getByRole("link", { name: /Search Teaching Healthy Cultivation/i })).toHaveAttribute("href", "/learn/search");
   await expect(page.getByRole("link", { name: /THC Living Plant Atlas/i })).toHaveAttribute("href", "/learn/atlas");
   await expect(page.getByRole("link", { name: /Plant Health, IPM & Disease Library/i })).toHaveAttribute("href", "/learn/plant-health");
@@ -30,9 +31,29 @@ test("Learn hub exposes search, evidence, Atlas, health, science, and tools", as
   await expectNoHorizontalOverflow(page);
 });
 
-test("Unified education search finds lessons, tools, and evidence sources", async ({ page }) => {
+test("THC Academy renders guided courses and working unit links", async ({ page }) => {
+  await page.goto("/learn/academy", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { name: "THC Academy", exact: true })).toBeVisible();
+  await expect(page.getByText("12", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("60", { exact: true }).first()).toBeVisible();
+  const firstCourse = page.getByRole("heading", { name: "Evidence, Observation & Diagnosis", exact: true });
+  await expect(firstCourse).toBeVisible();
+  await expect(page.getByRole("link", { name: /Symptom location/i }).first()).toHaveAttribute("href", "/learn/atlas/diagnostic-overlay/symptom-location");
+  await expectCanonical(page, "/learn/academy");
+  await expectNoHorizontalOverflow(page);
+});
+
+test("Unified education search finds Academy, physiology, lessons, tools, and evidence sources", async ({ page }) => {
   await page.goto("/learn/search", { waitUntil: "networkidle" });
   const search = page.getByLabel("Search the education system");
+
+  await search.fill("plant health course");
+  await page.getByLabel("Filter education search").selectOption("Academy course");
+  await expect(page.getByText("Plant Health, IPM & Biosecurity", { exact: true }).first()).toBeVisible();
+
+  await page.getByLabel("Filter education search").selectOption("All");
+  await search.fill("stomatal conductance");
+  await expect(page.getByText("Stomatal Conductance & Gas Exchange", { exact: true }).first()).toBeVisible();
 
   await search.fill("HLVd");
   await expect(page.getByText("Hop Latent Viroid (HLVd)", { exact: true }).first()).toBeVisible();
@@ -62,6 +83,17 @@ test("Plant health lesson renders evidence, canonical metadata, and LearningReso
   await expect(page.getByRole("heading", { name: "Hop Latent Viroid (HLVd)", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources connected to this lesson", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: /Transmission, Spread, Longevity and Management of Hop Latent Viroid/i })).toBeVisible();
+  await expectCanonical(page, path);
+  await expectLearningResourceJsonLd(page);
+  await expectNoHorizontalOverflow(page);
+});
+
+test("Plant physiology lesson renders as a first-class science reference", async ({ page }) => {
+  const path = "/learn/cultivation-science/source-sink-carbon-allocation";
+  await page.goto(path, { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { name: "Source–Sink Carbon Allocation", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Key concepts", exact: true })).toBeVisible();
+  await expect(page.getByText("Plant Physiology & Development", { exact: true })).toBeVisible();
   await expectCanonical(page, path);
   await expectLearningResourceJsonLd(page);
   await expectNoHorizontalOverflow(page);
@@ -99,7 +131,9 @@ test("robots and sitemap expose education discovery routes", async ({ request })
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.ok()).toBeTruthy();
   const xml = await sitemap.text();
+  expect(xml).toContain("https://dtfseeds.com/learn/academy");
   expect(xml).toContain("https://dtfseeds.com/learn/sources");
   expect(xml).toContain("https://dtfseeds.com/learn/plant-health/hop-latent-viroid");
+  expect(xml).toContain("https://dtfseeds.com/learn/cultivation-science/source-sink-carbon-allocation");
   expect(xml).toContain("https://dtfseeds.com/learn/cultivation-science/humidity-condensation-and-dew-point");
 });
