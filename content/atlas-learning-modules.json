@@ -8,7 +8,8 @@
       {"title":"Imbibition","summary":"See how water uptake rehydrates seed tissues and restarts metabolic activity before visible germination.","visual":"Hydration sequence diagram"},
       {"title":"Radicle emergence","summary":"Follow the radicle as the first root organ emerges and establishes the direction of early seedling growth.","visual":"Time-sequence germination strip"},
       {"title":"Cotyledon transition","summary":"Track emergence from the seed shell through cotyledon opening and the first true leaves.","visual":"Seedling transition timeline"},
-      {"title":"Germination failure patterns","summary":"Compare stalled seeds, damping-off risk, shell retention, excessive moisture, and temperature-related delays without assuming one cause from appearance alone.","visual":"Failure-pattern comparison card"}
+      {"title":"Germination failure patterns","summary":"Compare stalled seeds, damping-off risk, shell retention, excessive moisture, and temperature-related delays without assuming one cause from appearance alone.","visual":"Failure-pattern comparison card"},
+      {"title":"Reserve mobilization","summary":"Follow stored lipids, proteins, and other seed reserves as germination restarts metabolism and supports embryo growth before expanding leaves become the dominant current carbon source.","visual":"Seed reserve mobilization cutaway and flow map"}
     ]
   },
   {
@@ -20,7 +21,8 @@
       {"title":"Root hairs & absorption","summary":"See where most short-lived absorbing surface develops and how root hairs increase contact with the surrounding solution and media.","visual":"Root-hair microscope diagram"},
       {"title":"Rhizosphere","summary":"Explore the narrow root-influenced zone where water, ions, microbes, exudates, and oxygen conditions interact.","visual":"Rhizosphere interaction map"},
       {"title":"Water & nutrient uptake","summary":"Connect substrate moisture, ion availability, root membrane transport, transpiration demand, and vascular movement.","visual":"Root-to-shoot uptake flow"},
-      {"title":"Root stress","summary":"Compare low oxygen, persistent saturation, excessive dryback, salt stress, temperature stress, and visible root decline as patterns that require context.","visual":"Healthy vs stressed root comparison"}
+      {"title":"Root stress","summary":"Compare low oxygen, persistent saturation, excessive dryback, salt stress, temperature stress, and visible root decline as patterns that require context.","visual":"Healthy vs stressed root comparison"},
+      {"title":"Root-zone oxygen diffusion","summary":"Compare air-filled and water-filled pore space to understand why oxygen replenishment can become limiting when media remains saturated and root or microbial respiration continues.","visual":"Root-zone pore-space oxygen diffusion diagram"}
     ]
   },
   {
@@ -32,7 +34,8 @@
       {"title":"Xylem transport","summary":"Follow water and dissolved mineral movement from roots toward transpiring shoots and leaves.","visual":"Xylem upward-flow animation"},
       {"title":"Phloem transport","summary":"Follow movement of photosynthate from source tissues toward growing and storage sinks throughout the plant.","visual":"Source-to-sink phloem map"},
       {"title":"Internodal spacing","summary":"Connect internode length to developmental stage, genetics, light environment, temperature, and growth rate rather than treating it as a single-variable trait.","visual":"Internode comparison ruler"},
-      {"title":"Damage & recovery","summary":"See how bending, crushing, pruning, and breakage affect support and transport and why damage severity matters.","visual":"Stem damage response sequence"}
+      {"title":"Damage & recovery","summary":"See how bending, crushing, pruning, and breakage affect support and transport and why damage severity matters.","visual":"Stem damage response sequence"},
+      {"title":"Source-sink integration","summary":"Connect mature exporting leaves with changing sinks such as expanding shoots, roots, flowers, and developing seeds to understand how phloem allocation shifts through development.","visual":"Whole-plant source-sink allocation network"}
     ]
   },
   {
@@ -44,7 +47,8 @@
       {"title":"Apical dominance","summary":"Understand how the shoot apex influences lateral growth and why removing or repositioning the apex changes branching behavior.","visual":"Apical dominance flow diagram"},
       {"title":"Topping & FIM","summary":"Compare removal points and the resulting redistribution of active shoot growth without treating every plant response as identical.","visual":"Cut-location comparison"},
       {"title":"LST & directional growth","summary":"See how branch orientation and light exposure can redistribute canopy height while preserving tissue continuity.","visual":"LST before-and-after canopy map"},
-      {"title":"Mainlining & SCROG","summary":"Compare structured branch selection with screen-based canopy distribution as different ways to organize growing points.","visual":"Training-system comparison"}
+      {"title":"Mainlining & SCROG","summary":"Compare structured branch selection with screen-based canopy distribution as different ways to organize growing points.","visual":"Training-system comparison"},
+      {"title":"Branch angle & mechanical support","summary":"Treat branches as loaded structures by connecting attachment angle, diameter, leverage, tissue condition, supported mass, movement, and external support instead of using angle alone as a strength score.","visual":"Branch load and support force diagram"}
     ]
   },
   {
@@ -56,7 +60,8 @@
       {"title":"Photosynthesis","summary":"Connect light capture, carbon dioxide entry, water status, chloroplast function, and carbohydrate production.","visual":"Leaf photosynthesis flow"},
       {"title":"Stomata & transpiration","summary":"Link stomatal opening, vapor pressure conditions, carbon dioxide exchange, and water loss.","visual":"Stomata and transpiration composite"},
       {"title":"Symptom pattern language","summary":"Describe chlorosis, necrosis, spotting, curl, wilt, and texture by location and distribution before assigning a cause.","visual":"Leaf symptom pattern atlas"},
-      {"title":"Leaf inspection workflow","summary":"Inspect upper and lower surfaces, new and old growth, margins, veins, petioles, pests, residue, and progression over time.","visual":"Leaf inspection field card"}
+      {"title":"Leaf inspection workflow","summary":"Inspect upper and lower surfaces, new and old growth, margins, veins, petioles, pests, residue, and progression over time.","visual":"Leaf inspection field card"},
+      {"title":"Leaf temperature & energy balance","summary":"See how absorbed radiation, convective exchange, airflow, stomatal behavior, and evaporative cooling can make leaf temperature differ from surrounding air temperature.","visual":"Leaf energy-balance and temperature diagram"}
     ]
   },
   {
@@ -68,7 +73,8 @@
       {"title":"Flower initiation","summary":"Follow the transition from preflower expression into expanding floral sites and stacked inflorescences.","visual":"Early-flower timeline"},
       {"title":"Bud development","summary":"Track changes in bract expansion, stigma appearance, resin coverage, density, and senescence across maturation.","visual":"Flower development sequence"},
       {"title":"Pollination response","summary":"See how successful pollination redirects development toward seed formation and changes the appearance of individual floral structures.","visual":"Pollinated vs unpollinated comparison"},
-      {"title":"Maturity & risk inspection","summary":"Combine trichome condition, flower development, senescence, cultivar behavior, and mold inspection rather than relying on stigma color alone.","visual":"Maturity inspection checklist"}
+      {"title":"Maturity & risk inspection","summary":"Combine trichome condition, flower development, senescence, cultivar behavior, and mold inspection rather than relying on stigma color alone.","visual":"Maturity inspection checklist"},
+      {"title":"Photoperiod sensing & floral transition","summary":"Separate the plant's response to day and night length from the later appearance of visible flowers by following signaling, shoot-apex change, internode response, and progressive inflorescence development.","visual":"Photoperiod signal to visible flower transition timeline"}
     ]
   },
   {
@@ -80,7 +86,8 @@
       {"title":"Gland anatomy","summary":"Identify the stalk, gland head, secretory region, and cuticular storage space in a simplified glandular trichome model.","visual":"Trichome gland cutaway"},
       {"title":"Where to inspect","summary":"Compare trichomes on bracts and nearby sugar leaves and avoid treating every visible gland as equally representative of floral maturity.","visual":"Microscope sampling map"},
       {"title":"Clear, cloudy & amber","summary":"Use apparent optical condition as one observation among several, recognizing that lighting, focus, tissue sampled, and cultivar can affect interpretation.","visual":"Trichome appearance comparison"},
-      {"title":"Microscope workflow","summary":"Standardize magnification, sample location, lighting, and repeated observations so maturity comparisons are more consistent.","visual":"Microscope inspection field card"}
+      {"title":"Microscope workflow","summary":"Standardize magnification, sample location, lighting, and repeated observations so maturity comparisons are more consistent.","visual":"Microscope inspection field card"},
+      {"title":"Secretory disk & storage cavity","summary":"Zoom into the gland head to connect secretory disk cells, the expanding cuticle, and the subcuticular cavity where secreted resin accumulates.","visual":"Gland-head secretory disk and storage-cavity cutaway"}
     ]
   },
   {
@@ -92,7 +99,8 @@
       {"title":"Mixed-sex expression","summary":"Identify anthers or staminate structures appearing on otherwise female plants and distinguish observations from assumptions about cause.","visual":"Mixed-sex structure reference"},
       {"title":"Pollen biology","summary":"Follow pollen production, release, transport, stigma contact, and the first steps toward fertilization.","visual":"Pollen pathway diagram"},
       {"title":"Seed formation","summary":"Track ovule fertilization through developing seed coat, embryo, filling, and physical maturity.","visual":"Seed development cutaway series"},
-      {"title":"Controlled pollination","summary":"Map isolation, pollen handling, target selection, labeling, and record keeping as the core observational workflow for intentional crosses.","visual":"Controlled-pollination workflow"}
+      {"title":"Controlled pollination","summary":"Map isolation, pollen handling, target selection, labeling, and record keeping as the core observational workflow for intentional crosses.","visual":"Controlled-pollination workflow"},
+      {"title":"Fertilization & seed filling","summary":"Separate pollen arrival from successful fertilization, then follow embryo development, reserve accumulation, seed-coat maturation, and the progression toward physical seed maturity.","visual":"Pollen contact to embryo and seed-filling sequence"}
     ]
   },
   {
@@ -104,7 +112,8 @@
       {"title":"Temperature & humidity","summary":"See how air temperature and relative humidity combine to shape evaporative demand rather than acting as independent numbers.","visual":"Temperature/RH interaction overlay"},
       {"title":"VPD & transpiration","summary":"Connect vapor pressure deficit to stomatal behavior, leaf temperature, water movement, and changing plant demand.","visual":"Whole-plant VPD flow"},
       {"title":"Airflow & boundary layer","summary":"Visualize air movement around leaves and the still-air boundary layer that influences heat and vapor exchange.","visual":"Leaf boundary-layer animation"},
-      {"title":"Root-zone interaction","summary":"Overlay media moisture, oxygen, pH, EC, root temperature, and atmospheric demand to show why plant response depends on the whole system.","visual":"Environment-to-root interaction map"}
+      {"title":"Root-zone interaction","summary":"Overlay media moisture, oxygen, pH, EC, root temperature, and atmospheric demand to show why plant response depends on the whole system.","visual":"Environment-to-root interaction map"},
+      {"title":"Leaf temperature vs air temperature","summary":"Compare measured leaf and air temperatures and connect their difference to radiation, airflow, transpiration, humidity, and the vapor-pressure gradient at the leaf surface.","visual":"Leaf-versus-air temperature and vapor-pressure comparison"}
     ]
   },
   {
@@ -116,7 +125,8 @@
       {"title":"Pattern description","summary":"Describe uniform, interveinal, marginal, spotted, tip-focused, twisted, wilted, or asymmetric symptoms before assigning cause.","visual":"Pattern vocabulary panel"},
       {"title":"Progression over time","summary":"Compare sudden, gradual, stable, spreading, and recovering patterns and record what changed before symptoms appeared.","visual":"Symptom progression timeline"},
       {"title":"Measurement context","summary":"Bring pH, EC, substrate moisture, temperature, RH, VPD, PPFD, and feed/water history into the same diagnostic record.","visual":"Diagnostic measurement dashboard"},
-      {"title":"Differential workflow","summary":"Rank plausible environmental, root-zone, nutritional, pest, pathogen, and physical explanations and use new observations to narrow them.","visual":"Observation-to-differential decision map"}
+      {"title":"Differential workflow","summary":"Rank plausible environmental, root-zone, nutritional, pest, pathogen, and physical explanations and use new observations to narrow them.","visual":"Observation-to-differential decision map"},
+      {"title":"Genotype × environment context","summary":"Use cultivar baselines, repeatability, developmental stage, environment, and plant-to-plant comparison to distinguish a stable phenotype from a newly emerging stress or disease pattern.","visual":"Genotype-by-environment diagnostic comparison matrix"}
     ]
   }
 ]
