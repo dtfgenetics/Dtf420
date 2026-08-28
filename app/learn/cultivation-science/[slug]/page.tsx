@@ -8,6 +8,8 @@ import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
+import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
+import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../../plant-health/page.module.css";
 
 const library = [
@@ -32,10 +34,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const entry = getEntry(slug);
   if (!entry) return { title: "Cultivation Science Reference" };
 
-  return {
+  return buildEducationMetadata({
     title: `${entry.title} — Cultivation Science`,
     description: entry.summary,
-  };
+    path: `/learn/cultivation-science/${slug}`,
+  });
 }
 
 function TopicPanel({ title, items, className = "" }: { title: string; items: string[]; className?: string }) {
@@ -54,9 +57,17 @@ export default async function CultivationScienceReferencePage({ params }: { para
   const entry = getEntry(slug);
   if (!entry) notFound();
   const path = `/learn/cultivation-science/${slug}`;
+  const structuredData = buildLearningResourceJsonLd({
+    name: entry.title,
+    description: entry.summary,
+    path,
+    learningResourceType: "Cultivation science reference",
+    about: entry.category,
+  });
 
   return (
     <section className="shell page-section">
+      <LearningResourceJsonLd data={structuredData} />
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/learn">Learn</Link>
         <span>/</span>
