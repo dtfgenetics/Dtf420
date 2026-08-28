@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "supplemental-lighting-and-dli-in-greenhouses",
+    "title": "Supplemental Lighting & DLI in Greenhouses",
+    "category": "Protected Cultivation",
+    "summary": "Greenhouse crops receive changing amounts of natural photosynthetic light across the day and season. Supplemental lighting should be evaluated as part of total daily light integral, canopy distribution, photoperiod, energy use, and crop response rather than as a fixed fixture setting.",
+    "keyConcepts": ["DLI integrates photosynthetic photon flux over time", "Greenhouse glazing, structure, season, cloud cover, and shade reduce or redistribute natural light", "Supplemental lighting can fill a light deficit but also adds heat and electrical load", "A crop-level light plan should distinguish total light quantity from photoperiod signaling"],
+    "measureObserve": ["Measure or log DLI at crop height in representative zones", "Map PPFD from both sunlight and fixtures at several times or conditions", "Record fixture schedules and dimming state", "Track crop response alongside total daily light and temperature"],
+    "commonMistakes": ["Using one instantaneous PPFD reading as the daily light total", "Ignoring seasonal changes in natural greenhouse light", "Adding light without checking heat load and canopy uniformity", "Treating a DLI target from another crop or system as universal"],
+    "visualNeeds": ["Natural plus supplemental DLI timeline", "Greenhouse PPFD distribution map", "Glazing and structure shading diagram", "Light-energy-heat interaction graphic"]
+  },
+  {
+    "slug": "photoperiod-integrity-and-light-leaks",
+    "title": "Photoperiod Integrity, Blackout & Light Leaks",
+    "category": "Protected Cultivation",
+    "summary": "Photoperiod-sensitive flowering depends on the timing and duration of light and darkness. Protected structures can introduce unintended night lighting from fixtures, work lights, nearby buildings, incomplete blackout, or control failures.",
+    "keyConcepts": ["Photoperiod is a timing signal separate from total DLI", "Night interruption can alter photoperiod responses in sensitive plants", "Blackout systems must control light while still accounting for heat, humidity, and airflow", "Timers, sensors, curtains, and human activity can all create schedule failures"],
+    "measureObserve": ["Audit the structure during the intended dark period", "Check curtain edges, doors, vents, indicator lights, and neighboring light sources", "Record actual fixture and blackout schedules rather than assumed schedules", "Inspect temperature and RH changes after blackout closure"],
+    "commonMistakes": ["Assuming a closed curtain means complete darkness", "Ignoring work lights and equipment indicators", "Closing blackout without planning for heat and humidity buildup", "Changing photoperiod and light quantity at the same time without documenting both"],
+    "visualNeeds": ["Light-leak audit map", "Photoperiod versus DLI comparison", "Blackout curtain airflow tradeoff", "Night-interruption timeline"]
+  }
+]
