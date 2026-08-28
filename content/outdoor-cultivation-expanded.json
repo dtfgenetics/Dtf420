@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "hardening-transplant-and-outdoor-establishment",
+    "title": "Hardening, Transplant & Outdoor Establishment",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Plants moved from protected conditions into outdoor sun, wind, temperature swings, and lower humidity need an establishment period. Acclimation should be evaluated through plant response rather than a fixed number of days.",
+    "keyConcepts": ["Protected-grown leaves may be poorly acclimated to full solar and wind exposure", "Root disturbance and atmospheric demand can compound transplant stress", "Gradual exposure allows new growth to develop under the destination environment", "Container root condition and soil moisture at transplant strongly influence establishment"],
+    "measureObserve": ["Track exposure duration and weather during acclimation", "Inspect midday leaf posture and recovery by evening", "Check root-zone moisture before and after transplant", "Record new-growth condition rather than judging recovery from old damaged leaves"],
+    "commonMistakes": ["Moving plants directly from low light to full sun", "Transplanting into dry soil and then trying to correct later", "Interpreting temporary acclimation stress as a nutrient deficiency", "Ignoring wind exposure during hardening"],
+    "visualNeeds": ["Protected-to-outdoor acclimation sequence", "Transplant root-zone diagram", "Sun and wind exposure ladder", "Establishment observation checklist"]
+  },
+  {
+    "slug": "frost-heat-and-seasonal-extremes",
+    "title": "Frost, Heat & Seasonal Extremes",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor crops experience radiative cooling, frost pockets, heat waves, hot surfaces, and abrupt weather transitions. Risk depends on plant stage, local topography, soil and ground cover, wind, humidity, and duration of exposure.",
+    "keyConcepts": ["Low areas can accumulate colder air on calm nights", "Soil moisture, texture, and ground cover change heat storage and nighttime release", "Heat stress depends on radiation, leaf temperature, water supply, and air movement", "Weather-station readings may not represent the crop microclimate"],
+    "measureObserve": ["Record canopy-level minimum and maximum temperature", "Identify low spots and exposed slopes", "Measure or estimate leaf temperature during heat events", "Inspect recovery after an extreme event before making unrelated corrections"],
+    "commonMistakes": ["Using only regional forecast temperature", "Assuming mulch always reduces frost risk", "Increasing irrigation blindly during heat without checking root oxygen", "Diagnosing weather injury as nutrition from appearance alone"],
+    "visualNeeds": ["Cold-air pooling diagram", "Soil heat-storage comparison", "Leaf-temperature heat-stress map", "Frost versus heat injury differential"]
+  },
+  {
+    "slug": "native-soil-testing-and-amendment-decisions",
+    "title": "Native Soil Testing & Amendment Decisions",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor soil decisions should start with physical and chemical evidence. Texture, structure, drainage, pH, salinity, organic matter, and nutrient tests answer different questions and should not be replaced by a generic amendment recipe.",
+    "keyConcepts": ["Soil texture and aggregation affect drainage, aeration, and water storage", "Laboratory nutrient values depend on the extraction method used", "pH influences chemical availability but does not diagnose every plant symptom", "Adding amendments without a measured need can create excesses or imbalance"],
+    "measureObserve": ["Collect a representative soil sample using a documented pattern", "Record texture and infiltration separately from laboratory chemistry", "Review pH, soluble salts or EC, organic matter, and nutrient results with the lab method", "Retest after major changes when meaningful"],
+    "commonMistakes": ["Testing one handful from an unusual spot", "Treating bagged amendment instructions as a soil diagnosis", "Adding lime or sulfur without measured pH context", "Ignoring drainage because a nutrient test looks acceptable"],
+    "visualNeeds": ["Representative soil-sampling map", "Texture-structure-drainage diagram", "Soil-test interpretation flow", "Amend-only-with-evidence decision tree"]
+  },
+  {
+    "slug": "mulch-groundcover-and-soil-surface-management",
+    "title": "Mulch, Groundcover & Soil-Surface Management",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "The soil surface affects evaporation, temperature, weed competition, splash, traffic, and frost heat exchange. Mulch and groundcover can be useful, but their effects change with material, thickness, weather, and season.",
+    "keyConcepts": ["Mulch can reduce surface evaporation and splash", "Organic surface layers can alter soil temperature and moisture patterns", "Dense groundcover competes for water and can change nighttime heat exchange", "Surface management also affects access for scouting and irrigation inspection"],
+    "measureObserve": ["Check moisture beneath and beyond the mulch layer", "Record soil temperature at comparable depths", "Inspect for persistent saturation or pest shelter", "Observe splash and erosion during heavy rain"],
+    "commonMistakes": ["Assuming mulch is always beneficial in every season", "Letting mulch contact stems continuously", "Using surface appearance to infer deeper moisture", "Ignoring groundcover water use"],
+    "visualNeeds": ["Mulched versus bare soil water balance", "Soil-temperature profile", "Rain-splash comparison", "Stem-clearance mulch diagram"]
+  },
+  {
+    "slug": "wildlife-herbivory-and-physical-protection",
+    "title": "Wildlife, Herbivory & Physical Protection",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor plant loss can come from browsing, digging, chewing, trampling, birds, rodents, or larger wildlife. Damage pattern and site evidence should guide exclusion rather than assuming every missing leaf is an insect problem.",
+    "keyConcepts": ["Different animals leave different feeding and movement evidence", "Young plants can be disproportionately vulnerable", "Physical barriers are usually more predictable than repellents alone", "Protection should not block airflow, light, drainage, or routine inspection"],
+    "measureObserve": ["Photograph tracks, droppings, bite patterns, or disturbed soil", "Record time of day when damage appears", "Inspect barrier gaps and digging points", "Separate wildlife damage from insect chewing and mechanical breakage"],
+    "commonMistakes": ["Applying insect treatments to vertebrate damage", "Installing barriers that shade or restrict plants", "Ignoring underground digging", "Waiting for repeated losses before mapping entry routes"],
+    "visualNeeds": ["Herbivory damage comparison", "Barrier design examples", "Wildlife entry-route map", "Animal versus insect chewing differential"]
+  },
+  {
+    "slug": "pollen-drift-and-outdoor-pollination-risk",
+    "title": "Pollen Drift & Outdoor Pollination Risk",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Airborne pollen can move beyond the source plant. Outdoor pollination risk depends on flowering synchrony, source abundance, wind and turbulence, distance, terrain, and local plantings; visual distance alone cannot guarantee isolation.",
+    "keyConcepts": ["Cannabis pollen can be transported by air", "Risk is highest when viable pollen release overlaps receptive flowers", "Wind direction changes over time", "Physical distance lowers but does not make risk zero"],
+    "measureObserve": ["Record nearby known pollen sources when possible", "Track male or pollen-producing flower development", "Document prevailing and event-specific wind direction", "Inspect receptive flowers and later seed formation across the site"],
+    "commonMistakes": ["Treating a single isolation distance as a guarantee", "Ignoring neighboring volunteer or unmanaged plants", "Using average wind direction instead of actual flowering-period conditions", "Assuming absence of visible pollen means no exposure"],
+    "visualNeeds": ["Pollen-source risk map", "Flowering-overlap timeline", "Wind-plume concept diagram", "Pollination outcome sampling map"]
+  },
+  {
+    "slug": "wildfire-smoke-dust-and-surface-contamination",
+    "title": "Wildfire Smoke, Dust & Surface Contamination",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor foliage and flowers can collect ash, dust, soil particles, spray drift, and other airborne material. Visible residue should be documented as exposure evidence rather than assumed to be a disease or nutrient symptom.",
+    "keyConcepts": ["Particle deposition depends on source, wind, canopy position, and surface characteristics", "Residues can interfere with visual pest and disease inspection", "Flowers are difficult to clean without potentially changing quality or adding moisture", "Exposure history matters for deciding whether testing or rejection is appropriate"],
+    "measureObserve": ["Document air-quality or dust events and wind direction", "Compare protected and exposed plant surfaces", "Use magnification to distinguish particles from fungal structures", "Keep affected lots identifiable through harvest"],
+    "commonMistakes": ["Calling all pale surface material powdery mildew", "Spraying water onto dense flowers without considering wetness risk", "Mixing heavily exposed material into unaffected lots", "Ignoring neighboring soil or road dust sources"],
+    "visualNeeds": ["Dust-versus-fungal-growth microscopy comparison", "Particle deposition canopy map", "Exposure record workflow", "Lot-separation diagram"]
+  },
+  {
+    "slug": "outdoor-ipm-beneficials-and-edge-scouting",
+    "title": "Outdoor IPM, Beneficials & Edge Scouting",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor pest pressure is dynamic because crops are connected to surrounding vegetation and beneficial organisms. Edge scouting, organism identification, and population trends are more informative than reacting to every insect found on a plant.",
+    "keyConcepts": ["Crop edges can receive different pest pressure than interior plants", "Predators, parasitoids, pollinators, and neutral arthropods should not all be treated as pests", "Weather can rapidly change pest and beneficial populations", "Damage level and population trend matter alongside presence"],
+    "measureObserve": ["Scout edge and interior zones separately", "Record pest and beneficial organisms", "Inspect multiple life stages and damage patterns", "Revisit hotspots after weather or management changes"],
+    "commonMistakes": ["Treating all insects as harmful", "Scouting only the easiest plants to reach", "Applying a control before identifying the organism", "Ignoring surrounding host vegetation"],
+    "visualNeeds": ["Outdoor edge-scouting map", "Pest-beneficial field plate", "Population-trend record", "Surrounding-host landscape diagram"]
+  },
+  {
+    "slug": "rainfall-irrigation-and-water-source-integration",
+    "title": "Rainfall, Irrigation & Water-Source Integration",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor irrigation should account for effective rainfall, root-zone storage, runoff, evapotranspirative demand, and source-water quality. Rainfall amount alone does not reveal how much water actually reached the active root zone.",
+    "keyConcepts": ["Rain can run off, evaporate, or wet only part of the root volume", "Containers and raised beds respond differently from field soil", "Source-water chemistry can change through the season", "Repeated shallow irrigation can produce a different root distribution than deeper wetting"],
+    "measureObserve": ["Use a rain gauge or reliable local precipitation record", "Check moisture at root depth after rain", "Track irrigation volume and distribution", "Periodically characterize source water when it changes or symptoms suggest a need"],
+    "commonMistakes": ["Skipping irrigation because rain occurred without checking root depth", "Counting forecast rainfall as delivered water", "Ignoring seasonal source-water changes", "Watering only at the stem base as the root system expands"],
+    "visualNeeds": ["Rainfall-to-root-zone water balance", "Container-versus-field wetting profile", "Seasonal water-source record", "Root-zone expansion irrigation map"]
+  },
+  {
+    "slug": "topography-microclimate-and-cold-air-drainage",
+    "title": "Topography, Microclimate & Cold-Air Drainage",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Slope, aspect, structures, vegetation, soil moisture, and cold-air movement can make nearby outdoor sites behave differently. Microclimate mapping helps explain repeated hot, humid, windy, or frost-prone zones.",
+    "keyConcepts": ["Cold dense air can settle in low areas during calm clear nights", "South- and west-facing exposures can experience different heat loads than shaded aspects", "Walls and fences can create both shelter and stagnant air", "Vegetation alters shade, wind, humidity, and competition"],
+    "measureObserve": ["Place temporary sensors in suspected hot and cold spots", "Map slope and aspect", "Record morning dew persistence", "Compare wind exposure across the site"],
+    "commonMistakes": ["Assuming one yard equals one microclimate", "Placing the only sensor near a building", "Ignoring cold-air drainage", "Treating recurring location-specific stress as a cultivar problem"],
+    "visualNeeds": ["Topographic microclimate map", "Cold-air drainage cross section", "Aspect and solar-load diagram", "Dew-persistence site comparison"]
+  }
+]
