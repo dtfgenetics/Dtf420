@@ -1,0 +1,102 @@
+[
+  {
+    "id": "seed-radicle",
+    "systemId": "seed_germination",
+    "systemLabel": "Seed & Germination",
+    "prompt": "Which visible transition marks the beginning of the seedling root axis?",
+    "options": ["Cotyledon greening", "Radicle emergence", "Seed-coat darkening", "First serrated leaf"],
+    "correctIndex": 1,
+    "explanation": "The radicle is the embryonic root. Its emergence establishes the first root axis before the seedling develops a larger branched root system.",
+    "href": "/learn/atlas/seed-germination/radicle-emergence"
+  },
+  {
+    "id": "root-absorbing-surface",
+    "systemId": "root_system",
+    "systemLabel": "Root System",
+    "prompt": "Which structure most directly increases short-lived absorbing surface near young root regions?",
+    "options": ["Root hairs", "Stem pith", "Leaf petioles", "Flower bracts"],
+    "correctIndex": 0,
+    "explanation": "Root hairs extend from epidermal cells and greatly increase contact with water films and the surrounding root-zone solution.",
+    "href": "/learn/atlas/root-system/root-hairs-and-absorption"
+  },
+  {
+    "id": "stem-xylem",
+    "systemId": "stem_vascular",
+    "systemLabel": "Stem & Vascular System",
+    "prompt": "Which vascular tissue is most directly associated with the upward transport pathway for water and dissolved mineral nutrients?",
+    "options": ["Phloem", "Pith", "Xylem", "Epidermis"],
+    "correctIndex": 2,
+    "explanation": "Xylem provides the principal long-distance pathway for water and mineral transport from roots toward transpiring shoots and leaves.",
+    "href": "/learn/atlas/stem-vascular/xylem-transport"
+  },
+  {
+    "id": "node-axillary-bud",
+    "systemId": "nodes_branching",
+    "systemLabel": "Nodes & Branching",
+    "prompt": "At a node, which structure can develop into a lateral shoot when conditions and growth regulation allow?",
+    "options": ["Axillary bud", "Root cap", "Stigma", "Trichome head"],
+    "correctIndex": 0,
+    "explanation": "Axillary buds occur at nodes near leaf attachments and can develop into lateral shoots as apical dominance and other growth signals change.",
+    "href": "/learn/atlas/nodes-branching/node-anatomy"
+  },
+  {
+    "id": "leaf-petiole",
+    "systemId": "leaves",
+    "systemLabel": "Leaves",
+    "prompt": "Which visible leaf structure connects the blade to the stem or branch?",
+    "options": ["Petiole", "Radicle", "Anther", "Root hair"],
+    "correctIndex": 0,
+    "explanation": "The petiole connects the leaf blade to the shoot and contains vascular continuity between the leaf and the rest of the plant.",
+    "href": "/learn/atlas/leaves/healthy-leaf-baseline"
+  },
+  {
+    "id": "flower-stigma",
+    "systemId": "flowers",
+    "systemLabel": "Flowers",
+    "prompt": "Which external reproductive structures are specialized to receive compatible pollen in pistillate cannabis flowers?",
+    "options": ["Root hairs", "Stigmas", "Internodes", "Trichome stalks"],
+    "correctIndex": 1,
+    "explanation": "Stigmas are receptive structures of the pistillate flower. Pollen contact is a step toward fertilization, but contact alone does not guarantee a seed will form.",
+    "href": "/learn/atlas/flowers/female-flower-anatomy"
+  },
+  {
+    "id": "trichome-capitate-stalked",
+    "systemId": "trichomes_resin",
+    "systemLabel": "Trichomes & Resin",
+    "prompt": "Which glandular trichome form is characterized by a prominent multicellular stalk supporting a relatively large gland head?",
+    "options": ["Bulbous", "Capitate-sessile", "Capitate-stalked", "Non-glandular root hair"],
+    "correctIndex": 2,
+    "explanation": "Capitate-stalked glandular trichomes have a conspicuous stalk and gland head. Their morphology and scale differ from sessile and bulbous forms.",
+    "href": "/learn/atlas/trichomes-resin/trichome-types"
+  },
+  {
+    "id": "sex-pistillate",
+    "systemId": "sex_pollen_seed",
+    "systemLabel": "Sex, Pollen & Seeds",
+    "prompt": "Which visual combination is most consistent with a pistillate reproductive structure?",
+    "options": ["Bract with emerging stigmas", "Cluster of hanging pollen sacs", "Root tip with root hairs", "Node with no reproductive structure"],
+    "correctIndex": 0,
+    "explanation": "Pistillate flowers include a bract enclosing reproductive tissues with stigmas extending outward. Staminate structures instead develop pollen-producing anthers within male flowers.",
+    "href": "/learn/atlas/sex-pollen-seed/male-vs-female-preflowers"
+  },
+  {
+    "id": "environment-temp-rh",
+    "systemId": "environment_overlay",
+    "systemLabel": "Environment Overlay",
+    "prompt": "Which two air measurements must be interpreted together when describing atmospheric vapor-pressure conditions?",
+    "options": ["Air temperature and relative humidity", "pH and node count", "Seed mass and branch angle", "Stem diameter and stigma color"],
+    "correctIndex": 0,
+    "explanation": "Relative humidity depends on temperature. Interpreting air temperature and RH together is essential for understanding vapor-pressure relationships and atmospheric drying demand.",
+    "href": "/learn/atlas/environment-overlay/temperature-and-humidity"
+  },
+  {
+    "id": "diagnostic-location-first",
+    "systemId": "diagnostic_overlay",
+    "systemLabel": "Diagnostic Overlay",
+    "prompt": "What should the whole-plant symptom map establish before you name a likely cause?",
+    "options": ["The symptom location and distribution", "A fertilizer brand", "A single nutrient diagnosis", "A universal treatment"],
+    "correctIndex": 0,
+    "explanation": "Location and distribution are evidence. They help narrow a differential, but they do not prove a nutrient, pest, disease, or environmental diagnosis by themselves.",
+    "href": "/learn/atlas/diagnostic-overlay/symptom-location"
+  }
+]
