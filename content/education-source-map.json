@@ -1,0 +1,65 @@
+{
+  "/learn/plant-health/hop-latent-viroid": [
+    "hlvd-transmission-management-2025",
+    "hlvd-review-2023",
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/plant-health/powdery-mildew": [
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/plant-health/botrytis-gray-mold": [
+    "cannabis-greenhouse-pathogens-2024",
+    "cannabis-microbial-loads-2023"
+  ],
+  "/learn/plant-health/root-disease-complex": [
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/plant-health/scouting-and-sampling": [
+    "okstate-greenhouse-ipm",
+    "ontario-greenhouse-ipm-2025",
+    "penn-state-greenhouse-biocontrol-2026"
+  ],
+  "/learn/plant-health/sanitation-and-quarantine": [
+    "okstate-greenhouse-ipm",
+    "cfia-greenhouse-biosecurity"
+  ],
+  "/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock": [
+    "okstate-greenhouse-ipm",
+    "cfia-greenhouse-biosecurity",
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping": [
+    "penn-state-greenhouse-biocontrol-2026",
+    "ontario-greenhouse-ipm-2025",
+    "okstate-greenhouse-ipm"
+  ],
+  "/learn/cultivation-science/biological-control-program-design": [
+    "penn-state-greenhouse-biocontrol-2026",
+    "ontario-greenhouse-ipm-2025"
+  ],
+  "/learn/cultivation-science/insect-exclusion-screening-and-airflow-tradeoffs": [
+    "missouri-greenhouse-ipm",
+    "ontario-greenhouse-ipm-2025"
+  ],
+  "/learn/cultivation-science/humidity-condensation-and-dew-point": [
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/cultivation-science/drying-temperature-rh-and-airflow": [
+    "postharvest-drying-curing-2025",
+    "cannabis-microbial-loads-2023",
+    "postharvest-operations-review-2022"
+  ],
+  "/learn/cultivation-science/water-activity-and-equilibration": [
+    "postharvest-drying-curing-2025",
+    "cannabis-microbial-loads-2023",
+    "postharvest-operations-review-2022"
+  ],
+  "/learn/cultivation-science/curing-and-moisture-equilibration": [
+    "postharvest-drying-curing-2025",
+    "postharvest-operations-review-2022"
+  ],
+  "/learn/cultivation-science/microbial-sampling-and-testing": [
+    "cannabis-microbial-loads-2023",
+    "postharvest-drying-curing-2025"
+  ]
+}
