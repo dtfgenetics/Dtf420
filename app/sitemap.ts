@@ -10,6 +10,7 @@ import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
+import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
 
@@ -68,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...postharvestExpanded,
     ...advancedExpanded,
     ...plantPhysiologyExpanded,
+    ...propagationNutritionGenetics,
   ].map((entry) => item(`/learn/cultivation-science/${entry.slug}`, 0.78, "monthly"));
 
   const symptoms = symptomLibrary.map((entry) => item(`/learn/symptoms/${entry.slug}`, 0.8, "monthly"));
