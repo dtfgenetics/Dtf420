@@ -1,0 +1,252 @@
+[
+  {
+    "slug": "cutting-selection-and-source-plant-health",
+    "title": "Cutting Selection & Source-Plant Health",
+    "category": "Propagation & Cloning",
+    "summary": "A cutting begins with the physiological and health status of its source tissue. Node position, tissue maturity, hydration, pest or pathogen status, and source-plant history all influence what the propagule carries into rooting.",
+    "keyConcepts": ["A clone preserves the genotype of the source plant but not a guarantee of identical performance under different environments", "Source plants can transmit pests and systemic pathogens without obvious symptoms", "Very soft, very old, damaged, or stressed tissue can behave differently during rooting", "Lot identity should connect every cutting back to its source plant"],
+    "measureObserve": ["Record source plant ID and health status", "Inspect cutting tissue and nodes before removal", "Use magnification when arthropods are plausible", "Keep batches separated by source and date"],
+    "commonMistakes": ["Taking cuttings from unverified source material", "Mixing cuttings from different source plants under one label", "Assuming healthy appearance proves pathogen-free status", "Ignoring source-plant stress history"],
+    "visualNeeds": ["Source-plant selection map", "Good-versus-poor cutting tissue comparison", "Cutting lot-traceability diagram", "Incoming health inspection plate"]
+  },
+  {
+    "slug": "cutting-wound-response-and-adventitious-rooting",
+    "title": "Cutting Wound Response & Adventitious Rooting",
+    "category": "Propagation & Cloning",
+    "summary": "Rooting a cutting requires living stem tissues to survive excision, reorganize growth, and initiate adventitious roots. Wound response, carbohydrate status, hormones, oxygen, water balance, and temperature interact during this transition.",
+    "keyConcepts": ["A detached cutting must maintain water balance before a new root system is functional", "Adventitious roots arise from responsive tissues near the stem base and vascular regions", "Hormonal signals interact with tissue age and carbohydrate status", "Root initiation and visible root emergence are different stages"],
+    "measureObserve": ["Record cutting date and first visible root date", "Inspect stem-base condition without repeatedly damaging tissue", "Track turgor and leaf posture", "Compare rooting speed among batches without assuming one cause for variation"],
+    "commonMistakes": ["Equating callus with guaranteed root formation", "Repeatedly pulling cuttings from media to check roots", "Treating rooting as only a humidity problem", "Ignoring stem-base decay or oxygen limitation"],
+    "visualNeeds": ["Adventitious-root initiation cutaway", "Wound-to-root timeline", "Callus-versus-root distinction", "Stem-base tissue sequence"]
+  },
+  {
+    "slug": "propagation-humidity-transpiration-and-water-balance",
+    "title": "Propagation Humidity, Transpiration & Water Balance",
+    "category": "Propagation & Cloning",
+    "summary": "Unrooted cuttings have leaves that can lose water before roots can replace it. Propagation humidity and airflow therefore need to reduce excessive water loss without creating continuously wet, stagnant tissues.",
+    "keyConcepts": ["Leaf area continues to exchange heat and water after excision", "High humidity can reduce atmospheric demand but does not replace stem hydration or root formation", "Condensation and stagnant wetness can increase disease risk", "Acclimation should increase atmospheric demand gradually as roots become functional"],
+    "measureObserve": ["Track temperature and RH near cutting height", "Inspect leaf posture and recovery", "Observe condensation on leaves and enclosure surfaces", "Record changes when vents or covers are opened"],
+    "commonMistakes": ["Keeping leaves continuously wet", "Opening a high-humidity enclosure abruptly", "Using one room RH reading to represent the propagation microclimate", "Assuming wilt always means the media is too dry"],
+    "visualNeeds": ["Unrooted cutting water-balance diagram", "Humidity enclosure cross section", "Condensation-risk panel", "Acclimation sequence"]
+  },
+  {
+    "slug": "rooting-media-moisture-oxygen-and-temperature",
+    "title": "Rooting Media: Moisture, Oxygen & Temperature",
+    "category": "Propagation & Cloning",
+    "summary": "Rooting media must hold enough water to prevent desiccation while retaining pore space and oxygen. Media temperature also changes metabolic rate, water demand, and pathogen pressure.",
+    "keyConcepts": ["Saturation reduces air-filled pore space", "Different media retain and release water differently", "Warm media can accelerate metabolism while excessive heat can increase stress and disease pressure", "The best moisture state depends on media properties, container geometry, and cutting demand"],
+    "measureObserve": ["Compare media mass or moisture over time", "Inspect drainage and standing water", "Record media/root-zone temperature", "Check whether rooting failures cluster by tray position or media batch"],
+    "commonMistakes": ["Keeping propagation media continuously saturated", "Judging internal moisture from surface color alone", "Ignoring tray-edge versus tray-center differences", "Changing humidity and media moisture simultaneously without records"],
+    "visualNeeds": ["Water-air pore-space diagram", "Media moisture profiles", "Propagation tray hotspot map", "Root-zone temperature workflow"]
+  },
+  {
+    "slug": "clone-sanitation-and-cross-contamination",
+    "title": "Clone Sanitation & Cross-Contamination",
+    "category": "Propagation & Cloning",
+    "summary": "Propagation concentrates many wounds, tools, hands, surfaces, and young plants into a small area. A clean-to-dirty workflow and traceable batches reduce the chance of moving pests or pathogens through an entire clone population.",
+    "keyConcepts": ["Cutting tools can move biological material from plant to plant", "Shared trays, domes, benches, and runoff can connect otherwise separate batches", "Sanitation needs a defined method and contact process rather than an unlabeled spray bottle", "Batch identity makes later investigation possible"],
+    "measureObserve": ["Document tool-cleaning steps", "Label trays by source and date", "Inspect work surfaces between batches", "Record any batch with unusual losses or symptoms"],
+    "commonMistakes": ["Using one tool continuously across all source plants", "Reusing dirty propagation equipment", "Combining weak and healthy batches", "Losing source identity after roots appear"],
+    "visualNeeds": ["Clean-to-dirty workflow", "Tool sanitation sequence", "Propagation cross-contamination map", "Batch labeling example"]
+  },
+  {
+    "slug": "clone-acclimation-and-rooted-cutting-transition",
+    "title": "Clone Acclimation & Rooted-Cutting Transition",
+    "category": "Propagation & Cloning",
+    "summary": "A newly rooted cutting is not automatically ready for the light, airflow, root-zone volume, and atmospheric demand of vegetative production. Acclimation should follow new root function and plant response.",
+    "keyConcepts": ["Root presence does not mean maximum root function", "New leaves formed during acclimation can differ from leaves developed under propagation conditions", "Light and VPD increases change water demand together", "Transplant timing should consider root distribution and media condition"],
+    "measureObserve": ["Inspect new-root distribution", "Track leaf posture after environmental changes", "Increase light or airflow in documented steps", "Record recovery after transplant"],
+    "commonMistakes": ["Moving rooted cuttings directly into much higher light", "Increasing light, VPD, and irrigation strength all at once", "Judging readiness only by roots visible at one hole", "Allowing propagation roots to become severely root-bound before transition"],
+    "visualNeeds": ["Propagation-to-vegetative acclimation ladder", "Root-distribution readiness examples", "Light/VPD transition chart", "Transplant recovery timeline"]
+  },
+  {
+    "slug": "mother-plant-management-and-propagation-consistency",
+    "title": "Mother-Plant Management & Propagation Consistency",
+    "category": "Propagation & Cloning",
+    "summary": "Source plants used repeatedly for cuttings should be managed as tracked biological stock. Their health, age, architecture, nutrition, pest status, testing history, and cutting demand can affect propagation consistency.",
+    "keyConcepts": ["Mother plants are production sources, not just large vegetative plants", "Repeated cutting changes canopy architecture and source-sink relationships", "Systemic pathogens can spread through every cutting taken from infected stock", "Source-plant replacement should preserve identity and testing history"],
+    "measureObserve": ["Track source plant ID and age", "Record cutting counts by date", "Maintain health and testing records", "Compare rooting outcomes by source plant"],
+    "commonMistakes": ["Keeping source plants indefinitely without health review", "Ignoring declining rooting performance by source", "Mixing replacement plants without lineage records", "Taking cuttings immediately after severe stress"],
+    "visualNeeds": ["Mother-stock record map", "Cutting-demand timeline", "Source-to-clone traceability tree", "Mother replacement workflow"]
+  },
+  {
+    "slug": "propagation-batch-metrics-and-rooting-success",
+    "title": "Propagation Batch Metrics & Rooting Success",
+    "category": "Propagation & Cloning",
+    "summary": "Propagation performance is more informative when measured by batch and time rather than described as simply successful or unsuccessful. Rooting percentage, time to first roots, losses, abnormalities, and post-transplant survival describe different outcomes.",
+    "keyConcepts": ["Rooting percentage and rooting speed are separate metrics", "Survival after transplant can reveal weaknesses not visible at first root emergence", "Batch comparisons need similar starting material and environment to be interpretable", "Small samples can make percentages look more precise than they are"],
+    "measureObserve": ["Count total cuttings and rooted cuttings", "Record first-root and ready-to-transplant dates", "Track abnormal or lost cuttings separately", "Compare post-transplant survival by batch"],
+    "commonMistakes": ["Reporting only the best tray", "Changing batch definitions midway", "Ignoring post-transplant losses", "Comparing different source plants as though genotype and source condition were controlled"],
+    "visualNeeds": ["Propagation batch dashboard", "Rooting percentage versus speed graph", "Batch comparison table", "Propagation funnel diagram"]
+  },
+  {
+    "slug": "essential-elements-and-plant-nutrition-framework",
+    "title": "Essential Elements & the Plant-Nutrition Framework",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Plant nutrition is the study of essential elements, their chemical forms, uptake, transport, metabolism, and interactions with the root environment. Fertilizer labels are inputs; plant nutrition is the biological system responding to them.",
+    "keyConcepts": ["Essentiality describes whether an element is required for a plant to complete its life cycle", "Nutrient demand changes with growth rate, tissue, developmental stage, and environment", "Availability in solution is not the same as successful uptake or use", "Excesses can be as important as shortages"],
+    "measureObserve": ["Know the elemental composition of major inputs when possible", "Track pH and EC in context", "Observe where symptoms begin and how they progress", "Compare plant response with root-zone conditions and growth stage"],
+    "commonMistakes": ["Treating every yellow leaf as one nutrient deficiency", "Adding several supplements before measuring the root zone", "Assuming a complete fertilizer prevents all nutrition problems", "Ignoring antagonism, salinity, and water quality"],
+    "visualNeeds": ["Essential-element function map", "Input-to-uptake-to-metabolism flow", "Deficiency/excess concept diagram", "Nutrition diagnostic evidence map"]
+  },
+  {
+    "slug": "nitrogen-assimilation-and-remobilization",
+    "title": "Nitrogen Assimilation & Remobilization",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Nitrogen is incorporated into amino acids, proteins, nucleic acids, chlorophyll-associated systems, and many other compounds. Its forms, uptake, assimilation, and movement within the plant matter more than leaf color alone.",
+    "keyConcepts": ["Plants absorb inorganic nitrogen primarily in nitrate and ammonium forms under many cultivation systems", "Assimilation requires energy and carbon skeletons", "Nitrogen can be remobilized from older tissues under changing supply and developmental demand", "Excess nitrogen can alter growth and tissue characteristics"],
+    "measureObserve": ["Record fertilizer nitrogen form and concentration context", "Observe old-versus-new tissue patterns", "Track growth rate and canopy color over time", "Review root-zone EC, pH, irrigation, and environmental demand before changing nitrogen"],
+    "commonMistakes": ["Diagnosing nitrogen status from one leaf", "Assuming darker green always means better nutrition", "Ignoring nitrogen form", "Adding nitrogen without checking overall EC and root function"],
+    "visualNeeds": ["Nitrogen uptake/assimilation pathway", "Older-to-younger remobilization concept", "Nitrogen form comparison", "Nitrogen differential panel"]
+  },
+  {
+    "slug": "phosphorus-energy-transfer-and-development",
+    "title": "Phosphorus, Energy Transfer & Development",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Phosphorus participates in energy transfer, nucleic acids, membranes, phosphorylation, and many metabolic processes. Tissue pigmentation or slow growth alone cannot establish phosphorus limitation.",
+    "keyConcepts": ["Phosphate chemistry changes strongly with pH and root-zone conditions", "Phosphorus participates in ATP-related energy transfer and nucleic-acid structure", "Low root-zone temperature or poor root function can reduce uptake even when phosphorus is present", "Excess phosphorus can interact with micronutrient availability"],
+    "measureObserve": ["Review pH, root temperature, moisture, and root condition", "Track growth rate and tissue distribution of symptoms", "Use solution or tissue data where appropriate", "Document phosphorus additions before increasing input"],
+    "commonMistakes": ["Calling all purple pigmentation phosphorus deficiency", "Increasing phosphorus without root-zone evidence", "Ignoring cold or damaged roots", "Treating bloom-stage marketing ratios as universal physiology"],
+    "visualNeeds": ["Phosphate chemistry versus pH concept", "ATP/phosphorylation overview", "Cold-root uptake diagram", "Purple-pigment differential"]
+  },
+  {
+    "slug": "potassium-osmotic-regulation-and-stomatal-function",
+    "title": "Potassium, Osmotic Regulation & Stomatal Function",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Potassium is a major osmotic ion involved in enzyme activation, charge balance, water relations, and guard-cell function. Its role connects nutrition directly to plant water regulation.",
+    "keyConcepts": ["Potassium is not built into organic molecules in the same way as nitrogen or phosphorus", "Guard-cell ion movement contributes to stomatal opening and closing", "Potassium demand interacts with water movement and growth", "High concentrations of one cation can affect uptake of others"],
+    "measureObserve": ["Review total root-zone EC and cation balance context", "Observe leaf margins and tissue age without diagnosing from appearance alone", "Track irrigation and atmospheric demand", "Compare root health before changing potassium"],
+    "commonMistakes": ["Treating marginal injury as potassium-specific", "Adding potassium without checking salinity", "Ignoring calcium and magnesium interactions", "Separating potassium nutrition from water relations"],
+    "visualNeeds": ["Guard-cell potassium diagram", "Osmotic regulation overview", "Cation interaction map", "Marginal-injury differential"]
+  },
+  {
+    "slug": "calcium-transport-cell-walls-and-signaling",
+    "title": "Calcium Transport, Cell Walls & Signaling",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Calcium contributes to cell-wall and membrane function and also acts in cellular signaling. Because calcium movement is closely tied to water flow and tissue transpiration, local symptoms can involve transport as well as supply.",
+    "keyConcepts": ["Calcium has limited remobilization from older tissues compared with highly mobile nutrients", "Young tissues depend on continuing delivery", "Root health, water movement, humidity, and tissue transpiration influence distribution", "Adding more calcium does not correct every calcium-like symptom"],
+    "measureObserve": ["Inspect new growth and rapidly expanding tissues", "Review irrigation continuity and root condition", "Consider humidity, airflow, and leaf temperature", "Review source water and fertilizer calcium before supplementation"],
+    "commonMistakes": ["Diagnosing calcium from one necrotic spot", "Ignoring root or transpiration constraints", "Adding calcium into already high EC", "Assuming every cultivar distributes calcium identically"],
+    "visualNeeds": ["Calcium transport pathway", "Young-tissue delivery diagram", "Supply-versus-transport differential", "Cell-wall/signaling overview"]
+  },
+  {
+    "slug": "magnesium-chlorophyll-and-enzyme-function",
+    "title": "Magnesium, Chlorophyll & Enzyme Function",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Magnesium sits at the center of chlorophyll and supports many enzyme systems and phosphate-related reactions. Interveinal chlorosis on older tissue can be consistent with magnesium limitation, but it is not unique to it.",
+    "keyConcepts": ["Magnesium is structurally central to chlorophyll", "It is relatively mobile within the plant", "High potassium or calcium conditions can affect magnesium uptake balance", "Root-zone pH and function influence availability"],
+    "measureObserve": ["Note whether interveinal symptoms begin on older or younger tissue", "Review root-zone pH and EC", "Review calcium, potassium, and magnesium input balance", "Compare symptom progression after measured changes"],
+    "commonMistakes": ["Calling all interveinal chlorosis magnesium deficiency", "Adding magnesium without reviewing pH", "Ignoring cation competition", "Using leaf color without tissue-age context"],
+    "visualNeeds": ["Chlorophyll magnesium diagram", "Old-versus-new interveinal pattern", "Cation balance concept", "Magnesium look-alike panel"]
+  },
+  {
+    "slug": "micronutrients-cofactors-and-root-zone-chemistry",
+    "title": "Micronutrients, Cofactors & Root-Zone Chemistry",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Iron, manganese, zinc, copper, boron, molybdenum, chlorine, and nickel are required in smaller quantities but participate in essential enzymes, redox reactions, structure, and metabolism. Small required amounts also mean excess can become important quickly.",
+    "keyConcepts": ["Micronutrient availability is strongly influenced by pH and chemical form", "Different micronutrients vary in mobility within the plant", "Chelation can influence metal solubility and delivery", "Deficiency-like symptoms can arise from root-zone chemistry even when total input is adequate"],
+    "measureObserve": ["Record tissue age where symptoms begin", "Review root-zone pH and EC", "Check source-water and fertilizer micronutrient content", "Avoid changing several trace elements at once when diagnosis is uncertain"],
+    "commonMistakes": ["Treating every new-growth chlorosis as iron-specific", "Stacking multiple micronutrient supplements", "Ignoring pH-driven availability", "Confusing total concentration with plant-available form"],
+    "visualNeeds": ["Micronutrient function matrix", "Mobility pattern map", "pH availability concept", "New-growth chlorosis differential"]
+  },
+  {
+    "slug": "ph-alkalinity-and-root-zone-buffering",
+    "title": "pH, Alkalinity & Root-Zone Buffering",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "pH describes hydrogen-ion activity at a moment in time, while alkalinity describes acid-neutralizing capacity. Source-water alkalinity, media chemistry, fertilizer form, and biological activity can therefore drive root-zone pH over time.",
+    "keyConcepts": ["pH and alkalinity are different measurements", "Water with similar pH can have very different buffering capacity", "Media and irrigation frequency influence how chemistry accumulates", "pH adjustment without alkalinity context can be temporary"],
+    "measureObserve": ["Measure source-water pH and alkalinity when possible", "Track root-zone pH trends rather than one isolated reading", "Record fertilizer and acid/base additions", "Compare input and representative root-zone measurements"],
+    "commonMistakes": ["Using source-water pH alone to judge buffering", "Chasing every small pH change", "Ignoring alkalinity in repeated irrigation", "Assuming runoff pH perfectly represents the whole root zone"],
+    "visualNeeds": ["pH-versus-alkalinity diagram", "Root-zone buffering flow", "Repeated-irrigation chemistry timeline", "Input-to-root-zone comparison"]
+  },
+  {
+    "slug": "ec-salinity-and-osmotic-stress",
+    "title": "EC, Salinity & Osmotic Stress",
+    "category": "Nutrition & Root-Zone Chemistry",
+    "summary": "Electrical conductivity estimates the ionic strength of a solution but does not identify which ions are present. High root-zone salinity can reduce the plant's ability to take up water even when the medium is physically wet.",
+    "keyConcepts": ["EC is a bulk conductivity measurement, not a nutrient recipe", "Higher dissolved-salt concentration lowers water potential", "Salinity can interact with heat and atmospheric demand", "Different ion mixtures can produce similar EC values"],
+    "measureObserve": ["Track input and representative root-zone EC", "Record irrigation volume and drainage behavior", "Observe wilt or tip/margin injury in context", "Check source-water contribution to EC"],
+    "commonMistakes": ["Treating EC as a direct measure of nutrient balance", "Responding to high EC by adding more fertilizer", "Ignoring uneven salt accumulation", "Assuming wet media means water is equally available to roots"],
+    "visualNeeds": ["EC versus ion identity graphic", "Osmotic water-potential diagram", "Salt-accumulation profile", "Salinity stress differential"]
+  },
+  {
+    "slug": "genotype-phenotype-and-environment",
+    "title": "Genotype, Phenotype & Environment",
+    "category": "Genetics & Breeding",
+    "summary": "A genotype is an organism's genetic constitution; phenotype is the observed result of genotype interacting with development and environment. Breeding decisions become stronger when traits are measured across replicated environments rather than assumed to be purely genetic.",
+    "keyConcepts": ["The same genotype can express differently across environments", "Different genotypes can respond differently to the same environment", "Trait expression can change with developmental stage", "Selection should distinguish repeatable genetic differences from temporary environmental effects"],
+    "measureObserve": ["Use consistent trait definitions", "Record environment with phenotype scores", "Repeat observations across time or locations when possible", "Keep plant identity connected to every measurement"],
+    "commonMistakes": ["Calling every observed difference genetic", "Selecting from one stressed environment without context", "Changing scoring criteria during a population evaluation", "Losing plant identity after harvest"],
+    "visualNeeds": ["Genotype-environment-phenotype triangle", "Same genotype/different environment comparison", "Trait scoring workflow", "Selection evidence map"]
+  },
+  {
+    "slug": "alleles-homozygosity-and-heterozygosity",
+    "title": "Alleles, Homozygosity & Heterozygosity",
+    "category": "Genetics & Breeding",
+    "summary": "Diploid loci can carry two copies of an allele that are the same or different. Homozygosity and heterozygosity are locus-specific concepts that help explain segregation, uniformity, and the persistence of variation across generations.",
+    "keyConcepts": ["Homozygous and heterozygous describe allele state at a locus, not the whole plant in one word", "Dominance affects phenotype but does not erase the hidden allele", "Many important traits are influenced by multiple loci", "Population history changes expected heterozygosity"],
+    "measureObserve": ["Track parentage and generation", "Use trait segregation as evidence rather than assuming genotype from appearance", "Separate single-gene examples from polygenic traits", "Use molecular data when genotype at a specific locus actually matters"],
+    "commonMistakes": ["Calling an entire line homozygous from one visible trait", "Assuming dominant means more common or better", "Applying simple Mendelian ratios to every quantitative trait", "Ignoring linkage and population size"],
+    "visualNeeds": ["Allele-pair diagrams", "Homozygous versus heterozygous examples", "Dominance phenotype table", "Single-gene versus polygenic comparison"]
+  },
+  {
+    "slug": "f1-f2-segregation-and-selection",
+    "title": "F1, F2 Segregation & Selection",
+    "category": "Genetics & Breeding",
+    "summary": "Crossing genetically different parents creates an F1 population whose descendants can segregate widely in the F2. The amount and pattern of variation depend on the parents, loci involved, dominance, linkage, and population size.",
+    "keyConcepts": ["F1 uniformity depends on parental genetic structure", "F2 populations reveal recombined allele combinations", "Rare combinations require larger populations to observe reliably", "Selection changes which individuals contribute to the next generation"],
+    "measureObserve": ["Preserve parent and family identity", "Score traits consistently across the full population", "Record population size and selection count", "Retain data on rejected as well as selected individuals when feasible"],
+    "commonMistakes": ["Expecting every F1 from seed to be identical", "Evaluating only selected plants", "Calling an F2 stabilized after one generation", "Ignoring population size when searching for rare combinations"],
+    "visualNeeds": ["P1-F1-F2 generation diagram", "Segregation example grid", "Population-size probability concept", "Selection funnel"]
+  },
+  {
+    "slug": "backcrossing-and-recurrent-parent-recovery",
+    "title": "Backcrossing & Recurrent-Parent Recovery",
+    "category": "Genetics & Breeding",
+    "summary": "A backcross mates a hybrid descendant back to a selected parent or related recurrent line. It can increase the contribution of the recurrent background while selection attempts to retain a target trait from the donor side.",
+    "keyConcepts": ["Backcrossing is a mating design, not a guarantee that every desired recurrent-parent trait returns", "Selection between backcross generations matters", "Linked donor DNA can remain around a target locus", "Phenotype-only backcrossing can be slower or less precise for traits that are difficult to measure"],
+    "measureObserve": ["Record recurrent and donor parent identity", "Track each backcross generation clearly", "Define the target trait and recurrent-background traits before selection", "Use molecular markers when appropriate and available"],
+    "commonMistakes": ["Labeling a cross BX without identifying the recurrent parent", "Assuming one backcross recreates the recurrent parent", "Selecting only the target trait while ignoring background performance", "Losing generation records"],
+    "visualNeeds": ["Backcross pedigree diagram", "Recurrent-parent contribution concept", "Target-trait retention workflow", "BX generation labeling guide"]
+  },
+  {
+    "slug": "selfing-inbreeding-and-line-development",
+    "title": "Selfing, Inbreeding & Line Development",
+    "category": "Genetics & Breeding",
+    "summary": "Self-fertilization and other forms of inbreeding increase homozygosity over generations while exposing recessive variation and potentially concentrating both desirable and undesirable alleles.",
+    "keyConcepts": ["Selfing changes genotype frequencies and increases homozygosity", "Greater uniformity for some traits does not mean all loci are fixed", "Inbreeding can reveal recessive deleterious combinations", "Selection and population management determine which lineages continue"],
+    "measureObserve": ["Track selfed generation labels accurately", "Record vigor, fertility, morphology, and target traits", "Compare multiple siblings rather than only one survivor", "Preserve line identity through seed storage"],
+    "commonMistakes": ["Calling an S1 genetically identical to its parent", "Assuming selfing only makes traits more stable", "Ignoring inbreeding depression", "Dropping records for weak or failed families"],
+    "visualNeeds": ["Selfing generation tree", "Homozygosity increase concept", "Recessive-expression diagram", "Line-development record example"]
+  },
+  {
+    "slug": "population-size-selection-intensity-and-genetic-drift",
+    "title": "Population Size, Selection Intensity & Genetic Drift",
+    "category": "Genetics & Breeding",
+    "summary": "Small breeding populations can lose alleles by chance, while strong selection can intentionally narrow diversity. Population size and selection intensity therefore shape what variation remains available in later generations.",
+    "keyConcepts": ["Genetic drift is stronger in small populations", "Selecting very few parents creates a bottleneck", "Rare alleles can disappear even without negative selection", "Maintaining multiple families can preserve options for later comparison"],
+    "measureObserve": ["Record total population and selected parent counts", "Track family representation", "Document why each selected parent was retained", "Preserve seed from alternate lines when diversity matters"],
+    "commonMistakes": ["Treating ten plants as representative of a highly variable population", "Selecting one standout without considering family structure", "Confusing random loss with intentional selection", "Discarding all unselected lineages before evaluation is complete"],
+    "visualNeeds": ["Population bottleneck diagram", "Selection-intensity funnel", "Genetic drift simulation graphic", "Family representation chart"]
+  },
+  {
+    "slug": "heritability-repeatability-and-trait-selection",
+    "title": "Heritability, Repeatability & Trait Selection",
+    "category": "Genetics & Breeding",
+    "summary": "A trait can be strongly influenced by genetics, environment, or both. Heritability is population- and environment-specific and should not be interpreted as a universal percentage describing one individual plant.",
+    "keyConcepts": ["Heritability describes variation within a defined population and environment", "High environmental noise makes phenotypic selection less reliable", "Repeated measurements can improve confidence for variable traits", "Correlated traits can respond together under selection"],
+    "measureObserve": ["Define the population and environment", "Use repeatable trait measurements", "Record replicate or family data when possible", "Separate measurement error from biological variation"],
+    "commonMistakes": ["Applying a published heritability value to every population", "Using one subjective score for a complex trait", "Ignoring environment-by-genotype interactions", "Assuming a heritable trait is easy to select visually"],
+    "visualNeeds": ["Genetic-versus-environmental variation diagram", "Repeatability example", "Trait measurement noise graphic", "Selection response concept"]
+  },
+  {
+    "slug": "breeding-records-pedigrees-and-seed-lot-traceability",
+    "title": "Breeding Records, Pedigrees & Seed-Lot Traceability",
+    "category": "Genetics & Breeding",
+    "summary": "A breeding program is only as reconstructable as its records. Parent IDs, generation labels, pollination events, harvest lots, storage, phenotype data, and seed distribution should remain linked through stable identifiers.",
+    "keyConcepts": ["Names alone are not unique identifiers", "Generation labels must reflect the actual mating event", "Seed lots should connect to both parents and the pollination record", "Phenotype data is more useful when linked back to seed lot and family"],
+    "measureObserve": ["Assign stable plant and seed-lot IDs", "Record parent roles and pollination date", "Keep harvest and storage labels redundant", "Link phenotype scorecards to plant and family IDs"],
+    "commonMistakes": ["Renaming plants without preserving prior IDs", "Mixing seed from separate pollination events", "Using F/BX/S labels inconsistently", "Keeping phenotype notes that cannot be traced back to a seed lot"],
+    "visualNeeds": ["Pedigree and lot-ID diagram", "Generation-label decision tree", "Pollination-to-seed-lot workflow", "Breeding database relationship map"]
+  }
+]
