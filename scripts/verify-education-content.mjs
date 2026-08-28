@@ -61,6 +61,10 @@ function withSource(records, file) {
   return records.map((record) => ({ ...record, __file: file }));
 }
 
+function isExpandedFile(file) {
+  return file.includes("expanded") || file === "protected-cultivation-library.json" || file === "protected-cultivation-lighting.json";
+}
+
 const plantHealth = plantHealthFiles.flatMap((file) => withSource(readJson(file), file));
 const cultivation = cultivationFiles.flatMap((file) => withSource(readJson(file), file));
 const symptoms = symptomFiles.flatMap((file) => withSource(readJson(file), file));
@@ -73,11 +77,12 @@ verifyUniqueSlugs(tools, "printable tools");
 
 for (const item of plantHealth) {
   const id = `${item.__file}:${item.slug}`;
+  const expanded = item.__file === "plant-health-expanded.json";
   assertText(item.title, `${id}.title`);
   assertText(item.category, `${id}.category`);
   assertText(item.summary, `${id}.summary`);
   assertStringArray(item.whatToLookFor, `${id}.whatToLookFor`, 3);
-  assertStringArray(item.lookAlikes, `${id}.lookAlikes`, 3);
+  assertStringArray(item.lookAlikes, `${id}.lookAlikes`, expanded ? 3 : 2);
   assertStringArray(item.confirmWith, `${id}.confirmWith`, 3);
   assertStringArray(item.managementPrinciples, `${id}.managementPrinciples`, 3);
   assertStringArray(item.prevention, `${id}.prevention`, 3);
@@ -95,13 +100,14 @@ const validCultivationCategories = new Set([
 
 for (const item of cultivation) {
   const id = `${item.__file}:${item.slug}`;
+  const expanded = isExpandedFile(item.__file);
   assertText(item.title, `${id}.title`);
   assertText(item.category, `${id}.category`);
   if (item.category && !validCultivationCategories.has(item.category)) errors.push(`Unknown cultivation category: ${id} -> ${item.category}`);
   assertText(item.summary, `${id}.summary`);
   assertStringArray(item.keyConcepts, `${id}.keyConcepts`, 4);
-  assertStringArray(item.measureObserve, `${id}.measureObserve`, 4);
-  assertStringArray(item.commonMistakes, `${id}.commonMistakes`, 4);
+  assertStringArray(item.measureObserve, `${id}.measureObserve`, expanded ? 4 : 3);
+  assertStringArray(item.commonMistakes, `${id}.commonMistakes`, expanded ? 4 : 3);
   assertStringArray(item.visualNeeds, `${id}.visualNeeds`, 4);
 }
 
