@@ -1,0 +1,50 @@
+{
+  "seed_germination": [
+    "cannabis-seed-ultrastructure-2023",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "root_system": [
+    "root-hairs-review-2014",
+    "cannabis-drought-physiology-2025",
+    "cannabis-photosynthesis-2008"
+  ],
+  "stem_vascular": [
+    "phloem-transport-review-2017",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "nodes_branching": [
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-florogenesis-2019",
+    "cannabis-photoperiod-flowering-2024"
+  ],
+  "leaves": [
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-photosynthesis-2008",
+    "vpd-stomatal-response-2015"
+  ],
+  "flowers": [
+    "cannabis-florogenesis-2019",
+    "cannabis-photoperiod-flowering-2024",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "trichomes_resin": [
+    "cannabis-trichomes-2021",
+    "cannabis-trichome-sampling-2025",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "sex_pollen_seed": [
+    "cannabis-sex-plasticity-2026",
+    "cannabis-florogenesis-2019",
+    "cannabis-photoperiod-flowering-2024"
+  ],
+  "environment_overlay": [
+    "cannabis-photosynthesis-2008",
+    "vpd-stomatal-response-2015",
+    "cannabis-drought-physiology-2025"
+  ],
+  "diagnostic_overlay": [
+    "cannabis-drought-physiology-2025",
+    "cannabis-greenhouse-pathogens-2024",
+    "cannabis-life-cycle-morphology-2023"
+  ]
+}
