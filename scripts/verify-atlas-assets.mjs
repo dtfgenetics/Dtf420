@@ -12,6 +12,16 @@ const overrides = manifestFiles.flatMap((name) =>
   JSON.parse(fs.readFileSync(path.join(contentDir, name), "utf8")),
 );
 
+const disallowedEducationalPathPatterns = [
+  /strain[-_ ]?card/i,
+  /seed[-_ ]?card/i,
+  /product[-_ ]?card/i,
+  /packaging/i,
+  /merch/i,
+  /\/products?\//i,
+  /\/strains?\//i,
+];
+
 function slugify(value) {
   return value
     .toLowerCase()
@@ -43,6 +53,11 @@ for (const item of overrides) {
 
   if (item.path) {
     if (!item.path.startsWith("/")) errors.push(`Asset path must begin with '/': ${item.assetId}`);
+
+    if (disallowedEducationalPathPatterns.some((pattern) => pattern.test(item.path))) {
+      errors.push(`Commercial or strain artwork cannot be used as an Atlas lesson visual: ${item.assetId} -> ${item.path}`);
+    }
+
     const diskPath = path.join(root, "public", item.path.replace(/^\//, ""));
     if (!fs.existsSync(diskPath)) errors.push(`Asset file not found: ${item.assetId} -> ${diskPath}`);
   }
