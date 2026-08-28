@@ -13,7 +13,7 @@
     "area": "Learn navigation",
     "title": "Surface Living Plant Atlas and interactive learning modes",
     "status": "implemented",
-    "acceptanceCriteria": ["Learn hub links directly to Living Plant Atlas", "Diagnostic cases, practice, review, guided paths, subject libraries, and printable tools are discoverable from Learn"]
+    "acceptanceCriteria": ["Learn hub links directly to Living Plant Atlas", "Diagnostic cases, practice, review, guided paths, subject libraries, unified search, and printable tools are discoverable from Learn"]
   },
   {
     "id": "EDU-P0-003",
@@ -116,7 +116,7 @@
     "priority": "P3",
     "area": "Search and SEO",
     "title": "Strengthen internal linking and search discovery",
-    "status": "queued",
-    "acceptanceCriteria": ["Every reference links to related Atlas systems and practice", "Topic clusters expose descriptive metadata", "Search covers new reference branches", "Structured content avoids duplicate thin pages"]
+    "status": "in_progress",
+    "acceptanceCriteria": ["Unified Learn search covers Atlas, Plant Health, symptom differentials, cultivation science, protected cultivation, and printable tools", "Every reference links to related Atlas systems and practice", "Topic clusters expose descriptive metadata", "Structured content avoids duplicate thin pages", "Continue internal-link and structured-data improvements"]
   }
 ]
