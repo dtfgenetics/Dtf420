@@ -1,0 +1,252 @@
+[
+  {
+    "slug": "outdoor-site-and-sun-mapping",
+    "title": "Outdoor Site Selection & Sun Mapping",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Evaluate direct sun, seasonal shade, drainage, wind exposure, access, and local microclimates before placing plants.",
+    "keyConcepts": ["Solar exposure changes through the season", "Nearby trees, buildings, fences, and terrain can create moving shade", "Slope and low spots affect drainage, frost exposure, and cold-air pooling", "Convenient access matters for irrigation, inspection, and storm response"],
+    "measureObserve": ["Map direct-sun hours at several dates or use a solar-path tool", "Inspect the site after heavy rain", "Record prevailing winds and strong gust corridors", "Identify reflective surfaces and heat-trapping areas"],
+    "commonMistakes": ["Choosing a site from one midday observation", "Ignoring late-season shade", "Assuming a sunny site automatically has good drainage", "Placing plants where routine inspection is difficult"],
+    "visualNeeds": ["Seasonal sun-path overlay", "Site-selection checklist", "Slope and drainage diagram", "Microclimate comparison map"]
+  },
+  {
+    "slug": "latitude-photoperiod-and-seasonal-timing",
+    "title": "Latitude, Photoperiod & Seasonal Timing",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Outdoor flowering behavior is shaped by genotype and changing day/night length, not a universal calendar date.",
+    "keyConcepts": ["Day length varies with latitude and date", "Plants respond to photoperiod through biological signaling rather than a simple clock date", "Cultivars can differ in the critical photoperiod that promotes flowering", "Seasonal temperature and frost risk interact with flowering duration"],
+    "measureObserve": ["Track local sunrise and sunset through the season", "Record first preflower and sustained floral development", "Compare cultivars grown in the same location", "Record local first-frost and heat history"],
+    "commonMistakes": ["Using another region's flowering calendar as a guarantee", "Treating all photoperiod cultivars as identical", "Ignoring artificial night lighting near the crop"],
+    "visualNeeds": ["Latitude/day-length chart", "Seasonal flowering timeline", "Night-interruption concept diagram", "Cultivar-response comparison"]
+  },
+  {
+    "slug": "outdoor-root-zone-drainage-and-irrigation",
+    "title": "Outdoor Root Zone, Drainage & Irrigation",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Root-zone structure, water-holding capacity, drainage, oxygen, irrigation distribution, and rooting volume should be evaluated as one system.",
+    "keyConcepts": ["Texture and structure influence water retention and aeration", "Raised beds and containers change drainage and root temperature", "Irrigation should wet the intended root volume rather than only the stem base", "Mulch can reduce evaporation while also changing surface moisture and temperature"],
+    "measureObserve": ["Inspect soil texture and infiltration", "Observe how deeply irrigation wets the root zone", "Check moisture at several depths and distances from the stem", "Record runoff, ponding, and emitter uniformity"],
+    "commonMistakes": ["Watering by surface appearance alone", "Assuming more frequent irrigation always improves uptake", "Ignoring emitter clogging or uneven distribution", "Allowing mulch to hide persistent saturation"],
+    "visualNeeds": ["Outdoor root-zone cutaway", "Emitter wetting-pattern diagram", "Drainage comparison", "Mulch water-balance diagram"]
+  },
+  {
+    "slug": "rain-dew-and-flower-disease-risk",
+    "title": "Rain, Dew & Flower Disease Risk",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Flower disease risk rises when susceptible tissue stays wet or humid for extended periods, especially inside dense floral clusters with limited air exchange.",
+    "keyConcepts": ["Dew can wet flowers even without rainfall", "Dense canopies create local humidity different from weather-station readings", "Cool nights can increase condensation risk", "Dead or damaged tissue can provide infection sites"],
+    "measureObserve": ["Inspect flowers after rain and heavy dew", "Record overnight RH and temperature when possible", "Check dense interior flower zones", "Track periods of persistent cloud, fog, or repeated wetting"],
+    "commonMistakes": ["Using daytime humidity as the only risk indicator", "Assuming outdoor wind reaches the interior of every flower", "Waiting for obvious gray sporulation before inspecting"],
+    "visualNeeds": ["Dew formation diagram", "Flower microclimate cutaway", "Wetness-duration timeline", "Disease-risk inspection map"]
+  },
+  {
+    "slug": "wind-storms-and-structural-support",
+    "title": "Wind, Storms & Structural Support",
+    "category": "Outdoor & Protected Cultivation",
+    "summary": "Wind loading increases with plant height, canopy area, wet flowers, and storm intensity; support should distribute load without creating abrasion or constriction.",
+    "keyConcepts": ["Wet foliage and flowers add mass", "Long branches create leverage at attachment points", "Repeated rubbing can injure stems", "Support systems should allow growth and inspection"],
+    "measureObserve": ["Identify prevailing wind direction", "Inspect major branch unions before flowering mass increases", "Check ties for constriction and rubbing", "Reinspect after storms"],
+    "commonMistakes": ["Adding support only after branches begin failing", "Using thin ties that cut into stems", "Creating rigid supports that transfer stress to one weak point"],
+    "visualNeeds": ["Wind-load diagram", "Branch leverage illustration", "Safe tie comparison", "Storm-preparation checklist"]
+  },
+  {
+    "slug": "harvest-maturity-sampling",
+    "title": "Representative Harvest Maturity Sampling",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Maturity assessment is more reliable when observations are standardized across representative flower sites and repeated over time.",
+    "keyConcepts": ["Sugar-leaf trichomes can mature differently from bract trichomes", "Upper and lower canopy sites can differ", "Lighting and magnification change apparent trichome color", "Maturity should combine gland observations with flower development and plant condition"],
+    "measureObserve": ["Use the same magnification and lighting", "Sample comparable bract locations", "Inspect several representative flowers", "Record changes over multiple dates"],
+    "commonMistakes": ["Judging the whole plant from one sugar leaf", "Using stigma color as a single harvest trigger", "Changing microscope lighting between observations"],
+    "visualNeeds": ["Bract-versus-sugar-leaf sampling map", "Representative canopy sampling", "Standardized microscope workflow", "Multi-signal maturity checklist"]
+  },
+  {
+    "slug": "harvest-handling-and-sanitation",
+    "title": "Harvest Handling & Sanitation",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Harvest creates many opportunities for physical damage and microbial contamination, so clean tools, clean surfaces, gentle handling, and separation of suspect material matter.",
+    "keyConcepts": ["Freshly cut tissue remains biologically active", "Dirty tools and bins can transfer contaminants", "Compression and bruising damage flowers", "Moldy material should be separated rather than mixed into healthy product"],
+    "measureObserve": ["Inspect harvest tools and contact surfaces", "Check flowers for visible mold before combining lots", "Record harvest lots and locations", "Limit unnecessary handling"],
+    "commonMistakes": ["Using harvest bins that are difficult to clean", "Stacking fresh flowers deeply enough to compress or heat", "Combining suspect flowers with clean material"],
+    "visualNeeds": ["Clean harvest workflow", "Tool and bin sanitation sequence", "Lot-separation diagram", "Gentle handling comparison"]
+  },
+  {
+    "slug": "drying-temperature-rh-and-airflow",
+    "title": "Drying: Temperature, RH & Airflow",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Drying rate is governed by moisture gradients, surrounding vapor pressure, temperature, tissue structure, and air movement; direct high-velocity airflow can overdry surfaces while interiors remain wetter.",
+    "keyConcepts": ["Water moves from wetter internal tissue toward the surface", "Air temperature and RH determine vapor-pressure conditions around the flower", "Air movement reduces the local boundary layer but too much direct airflow can create uneven drying", "Dense flowers can retain internal moisture longer than their surface suggests"],
+    "measureObserve": ["Measure room temperature and RH at representative locations", "Check airflow distribution rather than one fan setting", "Track mass or other consistent drying indicators over time", "Inspect for condensation, odor changes, or mold"],
+    "commonMistakes": ["Pointing strong fans directly at flowers", "Relying on one room sensor", "Assuming a dry-feeling exterior means moisture is uniform internally"],
+    "visualNeeds": ["Flower moisture-gradient cutaway", "Room airflow map", "Boundary-layer diagram", "Surface-versus-interior drying comparison"]
+  },
+  {
+    "slug": "water-activity-and-equilibration",
+    "title": "Water Activity & Moisture Equilibration",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Water activity describes the availability of water for chemical and microbial processes and is not the same measurement as total moisture content.",
+    "keyConcepts": ["Two samples with similar moisture content can have different water activity", "Moisture redistributes within stored flower after packaging", "Equilibration takes time", "Microbial risk depends strongly on available water"],
+    "measureObserve": ["Use a calibrated water-activity meter when precise control is required", "Allow representative samples to equilibrate before interpreting readings", "Track readings across a lot rather than one flower when uniformity is uncertain"],
+    "commonMistakes": ["Treating container RH as identical to a validated water-activity measurement", "Assuming one reading represents an uneven batch", "Confusing water activity with percent moisture"],
+    "visualNeeds": ["Water activity versus moisture content diagram", "Equilibration sequence", "Sampling workflow", "Microbial-risk concept chart"]
+  },
+  {
+    "slug": "storage-light-oxygen-temperature-and-packaging",
+    "title": "Storage: Light, Oxygen, Temperature & Packaging",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Storage quality changes over time through oxidation, volatilization, light exposure, temperature-dependent reactions, moisture exchange, and physical handling.",
+    "keyConcepts": ["Higher temperature generally accelerates many degradation reactions", "Light can contribute to chemical change", "Oxygen exposure supports oxidation", "Packaging controls moisture and gas exchange to different degrees"],
+    "measureObserve": ["Record storage temperature", "Minimize unnecessary opening and headspace exchange", "Check seal integrity", "Monitor aroma, texture, visible mold, and validated moisture indicators"],
+    "commonMistakes": ["Assuming colder is always better without considering condensation", "Ignoring repeated package opening", "Using transparent packaging in bright storage", "Treating all packaging films as equivalent barriers"],
+    "visualNeeds": ["Storage degradation pathway map", "Packaging barrier comparison", "Condensation risk diagram", "Light/oxygen/temperature interaction graphic"]
+  },
+  {
+    "slug": "apical-dominance-and-topping",
+    "title": "Apical Dominance & Topping",
+    "category": "Training & Plant Architecture",
+    "summary": "The shoot apex influences lateral growth through interacting hormonal and resource signals. Removing it changes branch competition but does not guarantee a fixed number of replacement tops.",
+    "keyConcepts": ["Axillary buds already exist at nodes", "Removing the shoot apex changes hormonal relationships and resource distribution", "Plant response depends on genotype, stage, health, and environment", "Cuts create wounds that require recovery"],
+    "measureObserve": ["Record node number at topping", "Track which axillary shoots accelerate afterward", "Inspect wound closure and stem support", "Compare canopy height distribution before and after"],
+    "commonMistakes": ["Describing auxin as a simple on/off switch", "Topping severely stressed plants", "Assuming topping automatically increases yield"],
+    "visualNeeds": ["Apical dominance flow diagram", "Topping cut-location sequence", "Axillary response timeline", "Intact-versus-topped architecture"]
+  },
+  {
+    "slug": "low-stress-training",
+    "title": "Low-Stress Training (LST)",
+    "category": "Training & Plant Architecture",
+    "summary": "LST repositions intact shoots to redistribute height and light exposure without intentionally severing or crushing the stem.",
+    "keyConcepts": ["Shoots reorient through gravitropic and phototropic responses", "Bending changes which leaves and shoots receive direct light", "Anchors must avoid girdling", "Repeated small adjustments can be safer than one severe bend"],
+    "measureObserve": ["Track canopy height before and after repositioning", "Inspect tie points for constriction", "Observe branch reorientation over subsequent days", "Compare light distribution across the canopy"],
+    "commonMistakes": ["Using wire or ties that cut into stems", "Bending brittle branches abruptly", "Assuming more horizontal always means better light distribution"],
+    "visualNeeds": ["LST before/after canopy map", "Safe anchor examples", "Shoot reorientation sequence", "Light redistribution overlay"]
+  },
+  {
+    "slug": "supercropping-and-stem-recovery",
+    "title": "Supercropping & Stem Recovery",
+    "category": "Training & Plant Architecture",
+    "summary": "High-stress bending intentionally deforms stem tissues. Severity matters because vascular continuity, structural integrity, and recovery can vary from a controlled bend to a damaging break.",
+    "keyConcepts": ["Stem crushing damages cells and support tissues", "Xylem and phloem continuity can be disrupted", "Plants form wound and support tissue during recovery", "A fully severed branch is different from a controlled bend"],
+    "measureObserve": ["Inspect the bend immediately for splitting", "Monitor leaf turgor above the injury", "Support damaged stems if needed", "Track callus and structural recovery"],
+    "commonMistakes": ["Crushing young or weak stems excessively", "Ignoring wilt above a damaged transport pathway", "Repeating severe injury before recovery"],
+    "visualNeeds": ["Stem tissue injury cutaway", "Controlled bend versus break", "Recovery timeline", "Support method examples"]
+  },
+  {
+    "slug": "mainlining-and-structured-branch-selection",
+    "title": "Mainlining & Structured Branch Selection",
+    "category": "Training & Plant Architecture",
+    "summary": "Mainlining uses repeated pruning and branch selection to create a symmetrical framework, trading time and recovery for a deliberately organized canopy.",
+    "keyConcepts": ["Symmetry is created through branch selection, not guaranteed by the plant", "Repeated pruning extends recovery time", "Equal branch number does not guarantee equal vigor", "Root health and environmental consistency influence recovery"],
+    "measureObserve": ["Record each pruning stage", "Compare branch diameter and growth rate", "Correct dominant branches gradually", "Track total recovery time"],
+    "commonMistakes": ["Following a fixed node recipe regardless of plant vigor", "Removing too much tissue from a stressed plant", "Assuming symmetry guarantees equal yield"],
+    "visualNeeds": ["Mainline build sequence", "Branch selection map", "Symmetry versus vigor comparison", "Recovery checkpoints"]
+  },
+  {
+    "slug": "scrog-and-canopy-distribution",
+    "title": "SCROG & Canopy Distribution",
+    "category": "Training & Plant Architecture",
+    "summary": "A screen can redistribute growing shoots across horizontal space, but canopy quality still depends on branch vigor, leaf area, light distribution, airflow, and access.",
+    "keyConcepts": ["The screen is a positioning tool, not a biological requirement", "Filling every opening can reduce airflow and access", "Uniform canopy height can improve light uniformity only if fixture distribution is also appropriate", "Late repositioning can damage stiff flowering branches"],
+    "measureObserve": ["Map occupied screen area", "Measure light across several canopy positions", "Check airflow below and through the canopy", "Maintain access for inspection"],
+    "commonMistakes": ["Overfilling the screen", "Using one center PPFD reading", "Losing access to lower stems and root zones", "Training rigid branches too late"],
+    "visualNeeds": ["SCROG top-down map", "Canopy PPFD overlay", "Airflow cross section", "Access and inspection layout"]
+  },
+  {
+    "slug": "floral-transition-and-photoperiod-sensing",
+    "title": "Floral Transition & Photoperiod Sensing",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Photoperiodic flowering reflects plant perception of day/night cycles and genotype-specific signaling, followed by a developmental transition at shoot meristems.",
+    "keyConcepts": ["The uninterrupted dark period can matter to photoperiodic signaling", "Genotypes differ in flowering response", "Visible flowers appear after internal developmental signaling has begun", "Stress or stray night lighting can alter reproductive development"],
+    "measureObserve": ["Record actual light and dark schedule", "Inspect preflower sites consistently", "Check for unintended night illumination", "Track developmental changes rather than only calendar days"],
+    "commonMistakes": ["Calling the first day of a changed light schedule the first day of visible flowering", "Assuming every cultivar transitions at the same rate", "Ignoring low-level night interruptions"],
+    "visualNeeds": ["Photoperiod signaling timeline", "Meristem transition diagram", "Night-interruption concept", "Cultivar transition comparison"]
+  },
+  {
+    "slug": "preflowers-sex-expression-and-monitoring",
+    "title": "Preflowers, Sex Expression & Monitoring",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Reproductive structures should be identified from morphology and developmental stage, with repeated node inspections when structures are still immature.",
+    "keyConcepts": ["Immature structures can be ambiguous", "Staminate and pistillate structures develop differently", "Mixed-sex expression can occur", "Sex expression and the cause of mixed-sex traits are separate questions"],
+    "measureObserve": ["Inspect multiple nodes with magnification", "Photograph structures over time", "Record plant identity and branch location", "Separate morphology from assumptions about cause"],
+    "commonMistakes": ["Calling stipules sex organs", "Diagnosing from one blurred structure", "Assuming any unusual flower shape proves a genetic cause"],
+    "visualNeeds": ["Node anatomy comparison", "Male/female preflower sequence", "Mixed-sex reference plate", "Stipule versus reproductive structure panel"]
+  },
+  {
+    "slug": "flower-stretch-and-architecture",
+    "title": "Flower Stretch & Architecture",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Early flowering often includes continued stem and internode elongation; the magnitude depends on genotype, prior structure, temperature, light environment, and overall growth rate.",
+    "keyConcepts": ["Stretch is not a fixed multiplier", "Internode length changes canopy density", "Light distribution and temperature can influence elongation", "Support needs increase as flowers gain mass"],
+    "measureObserve": ["Measure plant and branch height at transition and weekly afterward", "Record internode length at comparable positions", "Map canopy light distribution", "Install support before branch loading becomes severe"],
+    "commonMistakes": ["Using a universal 2x or 3x stretch assumption", "Training aggressively after stems become rigid", "Ignoring support until flowers are heavy"],
+    "visualNeeds": ["Stretch measurement timeline", "Internode comparison", "Canopy architecture progression", "Support timing diagram"]
+  },
+  {
+    "slug": "pollination-fertilization-and-seed-development",
+    "title": "Pollination, Fertilization & Seed Development",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Pollination is pollen transfer to receptive floral tissue; successful fertilization is a later biological event that initiates seed development.",
+    "keyConcepts": ["Pollination and fertilization are not synonymous", "Pollen must remain viable and compatible", "Seed coat is maternal tissue while the embryo results from fertilization", "Seed development redirects resources within pollinated floral tissue"],
+    "measureObserve": ["Label pollinated branches and dates", "Prevent unintended pollen movement", "Track developing seeds over time", "Record parent identities accurately"],
+    "commonMistakes": ["Assuming pollen contact guarantees seed", "Handling pollen without contamination controls", "Losing parentage records"],
+    "visualNeeds": ["Pollen pathway", "Fertilization diagram", "Seed cutaway development sequence", "Controlled-pollination workflow"]
+  },
+  {
+    "slug": "senescence-and-maturity-assessment",
+    "title": "Senescence & Maturity Assessment",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Late-flower senescence includes aging and resource redistribution, but stress, root problems, disease, and environmental injury can create similar visual changes.",
+    "keyConcepts": ["Some leaf aging is developmentally normal", "Rapid or patchy decline may indicate stress or disease", "Flower maturity and whole-plant senescence are related but not identical", "Harvest decisions should combine several observations"],
+    "measureObserve": ["Track which leaves change first", "Inspect roots and flowers when decline is unusual", "Standardize trichome sampling", "Record rate of progression"],
+    "commonMistakes": ["Calling every yellowing leaf normal fade", "Treating amber trichomes as a universal single-variable endpoint", "Ignoring mold inspection late in flower"],
+    "visualNeeds": ["Normal versus abnormal senescence panel", "Whole-plant progression map", "Maturity multi-signal checklist", "Late-flower disease differential"]
+  },
+  {
+    "slug": "ppfd-mapping-and-dli",
+    "title": "PPFD Mapping & Daily Light Integral",
+    "category": "Measurement & Experimental Science",
+    "summary": "One light reading cannot describe a canopy. A spatial PPFD map and photoperiod together provide a better description of delivered photosynthetic light.",
+    "keyConcepts": ["PPFD is an instantaneous photon-flux-density measurement", "DLI integrates PPFD over time", "Canopy geometry creates high and low zones", "Sensor orientation and spectral response affect measurements"],
+    "measureObserve": ["Use a repeatable grid at canopy height", "Keep the sensor level and orientation consistent", "Record photoperiod", "Calculate mean, minimum, maximum, and spatial variation where useful"],
+    "commonMistakes": ["Taking only a center reading", "Comparing measurements made at different heights", "Ignoring photoperiod when discussing total daily light", "Treating one target as universal across all conditions"],
+    "visualNeeds": ["PPFD measurement grid", "DLI calculation diagram", "Height comparison", "Uniformity heat map"]
+  },
+  {
+    "slug": "ph-ec-calibration-and-measurement-quality",
+    "title": "pH/EC Calibration & Measurement Quality",
+    "category": "Measurement & Experimental Science",
+    "summary": "pH and EC values are only useful when the meter, calibration, sampling method, temperature context, and sample handling are trustworthy.",
+    "keyConcepts": ["Calibration checks instrument response against known standards", "pH electrodes require appropriate storage and maintenance", "EC reflects ionic conductivity, not the identity of individual nutrients", "Different sampling methods can produce different root-zone values"],
+    "measureObserve": ["Calibrate at a documented frequency", "Use fresh standards and clean containers", "Record sampling method and temperature context", "Rinse probes appropriately between samples"],
+    "commonMistakes": ["Treating an uncalibrated meter as precise", "Storing a pH electrode dry", "Comparing runoff, slurry, and direct-media readings as if they are identical methods", "Using EC to infer exact nutrient composition"],
+    "visualNeeds": ["Calibration workflow", "pH electrode care diagram", "Sampling-method comparison", "EC interpretation graphic"]
+  },
+  {
+    "slug": "sensor-placement-and-microclimates",
+    "title": "Sensor Placement & Microclimates",
+    "category": "Measurement & Experimental Science",
+    "summary": "A sensor reports conditions at its own location. Radiation, airflow, height, walls, lights, wet surfaces, and canopy density can make that location unrepresentative.",
+    "keyConcepts": ["Canopy microclimates differ from room averages", "Radiant heating can influence exposed sensors", "Leaf temperature can differ from air temperature", "One sensor cannot reveal spatial variation"],
+    "measureObserve": ["Place sensors near representative canopy conditions", "Shield temperature/RH sensors from inappropriate radiant exposure when required", "Compare several locations periodically", "Document sensor height and placement"],
+    "commonMistakes": ["Mounting a sensor beside a humidifier or heater", "Using wall temperature as canopy air temperature", "Moving sensors without recording the change"],
+    "visualNeeds": ["Good-versus-bad sensor placement", "Canopy microclimate map", "Radiant heating concept", "Multi-sensor comparison"]
+  },
+  {
+    "slug": "representative-sampling-replication-and-controls",
+    "title": "Representative Sampling, Replication & Controls",
+    "category": "Measurement & Experimental Science",
+    "summary": "Reliable cultivation comparisons require representative sampling and enough replication to separate a treatment effect from natural plant-to-plant variation.",
+    "keyConcepts": ["A single plant can be atypical", "Randomization reduces systematic placement bias", "A control provides a reference condition", "Replication improves confidence but does not fix a biased design"],
+    "measureObserve": ["Define the experimental unit before starting", "Randomize or balance positions when possible", "Measure the same traits with the same method", "Record excluded or failed samples transparently"],
+    "commonMistakes": ["Treating multiple leaves on one plant as multiple independent plants", "Comparing different cultivars as if genetics were controlled", "Changing several variables at once"],
+    "visualNeeds": ["Replication diagram", "Randomized layout example", "Control-versus-treatment design", "Pseudoreplication warning graphic"]
+  },
+  {
+    "slug": "accuracy-precision-and-uncertainty",
+    "title": "Accuracy, Precision & Measurement Uncertainty",
+    "category": "Measurement & Experimental Science",
+    "summary": "Measurements contain uncertainty. Precision describes repeatability; accuracy describes closeness to a true or accepted reference, and the two are not the same.",
+    "keyConcepts": ["A precise instrument can still be biased", "Resolution is not the same as accuracy", "Biological measurements add sampling variability", "Report methods and units so values can be interpreted"],
+    "measureObserve": ["Repeat measurements to estimate short-term variability", "Check instruments against standards where possible", "Use consistent units and significant digits", "Record sensor model and method for important datasets"],
+    "commonMistakes": ["Reporting more decimal places than the method supports", "Calling two slightly different readings biologically meaningful without context", "Ignoring calibration drift"],
+    "visualNeeds": ["Accuracy-versus-precision target diagram", "Resolution-versus-accuracy example", "Uncertainty range graphic", "Calibration drift timeline"]
+  }
+]
