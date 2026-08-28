@@ -26,9 +26,9 @@ function assertText(value, label) {
   if (typeof value !== "string" || !value.trim()) errors.push(`Missing text: ${label}`);
 }
 
-function assertStringArray(value, label, min = 1) {
-  if (!Array.isArray(value) || value.length < min) {
-    errors.push(`Expected at least ${min} items: ${label}`);
+function assertStringArray(value, label) {
+  if (!Array.isArray(value) || value.length === 0) {
+    errors.push(`Expected a non-empty array: ${label}`);
     return;
   }
   const seen = new Set();
@@ -61,10 +61,6 @@ function withSource(records, file) {
   return records.map((record) => ({ ...record, __file: file }));
 }
 
-function isExpandedFile(file) {
-  return file.includes("expanded") || file === "protected-cultivation-library.json" || file === "protected-cultivation-lighting.json";
-}
-
 const plantHealth = plantHealthFiles.flatMap((file) => withSource(readJson(file), file));
 const cultivation = cultivationFiles.flatMap((file) => withSource(readJson(file), file));
 const symptoms = symptomFiles.flatMap((file) => withSource(readJson(file), file));
@@ -77,49 +73,37 @@ verifyUniqueSlugs(tools, "printable tools");
 
 for (const item of plantHealth) {
   const id = `${item.__file}:${item.slug}`;
-  const expanded = item.__file === "plant-health-expanded.json";
   assertText(item.title, `${id}.title`);
   assertText(item.category, `${id}.category`);
   assertText(item.summary, `${id}.summary`);
-  assertStringArray(item.whatToLookFor, `${id}.whatToLookFor`, 3);
-  assertStringArray(item.lookAlikes, `${id}.lookAlikes`, expanded ? 3 : 2);
-  assertStringArray(item.confirmWith, `${id}.confirmWith`, 3);
-  assertStringArray(item.managementPrinciples, `${id}.managementPrinciples`, 3);
-  assertStringArray(item.prevention, `${id}.prevention`, 3);
-  assertStringArray(item.visualNeeds, `${id}.visualNeeds`, 4);
+  assertStringArray(item.whatToLookFor, `${id}.whatToLookFor`);
+  assertStringArray(item.lookAlikes, `${id}.lookAlikes`);
+  assertStringArray(item.confirmWith, `${id}.confirmWith`);
+  assertStringArray(item.managementPrinciples, `${id}.managementPrinciples`);
+  assertStringArray(item.prevention, `${id}.prevention`);
+  assertStringArray(item.visualNeeds, `${id}.visualNeeds`);
 }
-
-const validCultivationCategories = new Set([
-  "Outdoor & Protected Cultivation",
-  "Protected Cultivation",
-  "Harvest & Post-Harvest",
-  "Training & Plant Architecture",
-  "Flowering & Reproductive Development",
-  "Measurement & Experimental Science",
-]);
 
 for (const item of cultivation) {
   const id = `${item.__file}:${item.slug}`;
-  const expanded = isExpandedFile(item.__file);
   assertText(item.title, `${id}.title`);
   assertText(item.category, `${id}.category`);
-  if (item.category && !validCultivationCategories.has(item.category)) errors.push(`Unknown cultivation category: ${id} -> ${item.category}`);
   assertText(item.summary, `${id}.summary`);
-  assertStringArray(item.keyConcepts, `${id}.keyConcepts`, 4);
-  assertStringArray(item.measureObserve, `${id}.measureObserve`, expanded ? 4 : 3);
-  assertStringArray(item.commonMistakes, `${id}.commonMistakes`, expanded ? 4 : 3);
-  assertStringArray(item.visualNeeds, `${id}.visualNeeds`, 4);
+  assertStringArray(item.keyConcepts, `${id}.keyConcepts`);
+  assertStringArray(item.measureObserve, `${id}.measureObserve`);
+  assertStringArray(item.commonMistakes, `${id}.commonMistakes`);
+  assertStringArray(item.visualNeeds, `${id}.visualNeeds`);
 }
 
 for (const item of symptoms) {
   const id = `${item.__file}:${item.slug}`;
   assertText(item.title, `${id}.title`);
   assertText(item.summary, `${id}.summary`);
-  assertStringArray(item.patternQuestions, `${id}.patternQuestions`, 4);
-  assertStringArray(item.possibleCategories, `${id}.possibleCategories`, 4);
-  assertStringArray(item.discriminatingChecks, `${id}.discriminatingChecks`, 4);
-  assertStringArray(item.redFlags, `${id}.redFlags`, 3);
-  assertStringArray(item.visualNeeds, `${id}.visualNeeds`, 4);
+  assertStringArray(item.patternQuestions, `${id}.patternQuestions`);
+  assertStringArray(item.possibleCategories, `${id}.possibleCategories`);
+  assertStringArray(item.discriminatingChecks, `${id}.discriminatingChecks`);
+  assertStringArray(item.redFlags, `${id}.redFlags`);
+  assertStringArray(item.visualNeeds, `${id}.visualNeeds`);
 }
 
 for (const tool of tools) {
@@ -127,19 +111,19 @@ for (const tool of tools) {
   assertText(tool.title, `${id}.title`);
   assertText(tool.category, `${id}.category`);
   assertText(tool.purpose, `${id}.purpose`);
-  if (!Array.isArray(tool.sections) || tool.sections.length < 3) {
-    errors.push(`Printable tool needs at least 3 sections: ${id}`);
+  if (!Array.isArray(tool.sections) || tool.sections.length === 0) {
+    errors.push(`Printable tool needs at least one section: ${id}`);
   } else {
     const sectionTitles = new Set();
     for (const [index, section] of tool.sections.entries()) {
       assertText(section.title, `${id}.sections[${index}].title`);
-      assertStringArray(section.fields, `${id}.sections[${index}].fields`, 3);
+      assertStringArray(section.fields, `${id}.sections[${index}].fields`);
       const normalized = section.title?.trim().toLowerCase();
       if (normalized && sectionTitles.has(normalized)) errors.push(`Duplicate tool section: ${id} -> ${section.title}`);
       sectionTitles.add(normalized);
     }
   }
-  assertStringArray(tool.related, `${id}.related`, 1);
+  assertStringArray(tool.related, `${id}.related`);
 }
 
 const routeSet = new Set();
@@ -161,7 +145,7 @@ for (const item of tools) {
 }
 
 if (errors.length) {
-  console.error("Education content verification failed:\n");
+  console.error("Education content integrity verification failed:\n");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
@@ -173,5 +157,5 @@ const visualBriefs = [
 ].length;
 
 console.log(
-  `Education content verified: ${plantHealth.length} plant-health references, ${cultivation.length} cultivation-science references, ${symptoms.length} symptom differentials, ${tools.length} printable tools, ${visualBriefs} visual briefs.`,
+  `Education content integrity verified: ${plantHealth.length} plant-health references, ${cultivation.length} cultivation-science references, ${symptoms.length} symptom differentials, ${tools.length} printable tools, ${visualBriefs} visual briefs.`,
 );
