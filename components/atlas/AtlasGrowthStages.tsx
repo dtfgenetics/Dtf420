@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import stages from "@/content/atlas-growth-stages.json";
 import atlasSections from "@/content/atlas-sections.json";
@@ -8,6 +9,10 @@ import styles from "./AtlasGrowthStages.module.css";
 type StageId = (typeof stages)[number]["id"];
 
 const systemLabels = new Map(atlasSections.map((section) => [section.id, section.label]));
+
+function systemRoute(systemId: string) {
+  return `/learn/atlas/${systemId.replaceAll("_", "-")}`;
+}
 
 function SeedGraphic() {
   return (
@@ -137,6 +142,7 @@ export function AtlasGrowthStages() {
             key={stage.id}
             type="button"
             className={stage.id === selected.id ? styles.active : ""}
+            aria-pressed={stage.id === selected.id}
             onClick={() => setSelectedId(stage.id as StageId)}
           >
             <b>{stage.stageNumber}</b>
@@ -165,7 +171,13 @@ export function AtlasGrowthStages() {
           <div className={styles.activeSystems}>
             <strong>Atlas systems most active in this view</strong>
             <div>
-              {selected.activeSystems.map((system) => <span key={system}>{systemLabels.get(system) ?? system}</span>)}
+              {selected.activeSystems.map((system) => (
+                <span key={system}>
+                  <Link href={systemRoute(system)} style={{ color: "inherit", textDecoration: "none" }}>
+                    {systemLabels.get(system) ?? system}
+                  </Link>
+                </span>
+              ))}
             </div>
           </div>
 
