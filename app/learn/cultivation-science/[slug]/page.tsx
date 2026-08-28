@@ -3,9 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import coreLibrary from "@/content/cultivation-science-library.json";
 import protectedLibrary from "@/content/protected-cultivation-library.json";
+import protectedLighting from "@/content/protected-cultivation-lighting.json";
 import styles from "../../plant-health/page.module.css";
 
-const library = [...coreLibrary, ...protectedLibrary];
+const library = [...coreLibrary, ...protectedLibrary, ...protectedLighting];
 
 function getEntry(slug: string) {
   return library.find((item) => item.slug === slug);
@@ -68,6 +69,7 @@ export default async function CultivationScienceReferencePage({ params }: { para
       <div className={styles.footerActions}>
         <Link className="button button--primary" href="/learn/cultivation-science">Back to Cultivation Science</Link>
         <Link className="button" href="/learn/tools">Printable Tools</Link>
+        <Link className="button" href="/learn/search">Search all education</Link>
         <Link className="button" href="/learn/atlas">Open Living Plant Atlas</Link>
         <Link className="button" href="/learn/plant-health">Plant Health Library</Link>
       </div>
