@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import coreLibrary from "@/content/cultivation-science-library.json";
 import protectedLibrary from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
+import { RelatedEducation } from "@/components/education/RelatedEducation";
 import styles from "../../plant-health/page.module.css";
 
 const library = [...coreLibrary, ...protectedLibrary, ...protectedLighting];
@@ -42,6 +43,7 @@ export default async function CultivationScienceReferencePage({ params }: { para
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) notFound();
+  const path = `/learn/cultivation-science/${slug}`;
 
   return (
     <section className="shell page-section">
@@ -66,12 +68,12 @@ export default async function CultivationScienceReferencePage({ params }: { para
         <TopicPanel title="Visuals this lesson still needs" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
+      <RelatedEducation path={path} />
+
       <div className={styles.footerActions}>
         <Link className="button button--primary" href="/learn/cultivation-science">Back to Cultivation Science</Link>
-        <Link className="button" href="/learn/tools">Printable Tools</Link>
         <Link className="button" href="/learn/search">Search all education</Link>
         <Link className="button" href="/learn/atlas">Open Living Plant Atlas</Link>
-        <Link className="button" href="/learn/plant-health">Plant Health Library</Link>
       </div>
     </section>
   );
