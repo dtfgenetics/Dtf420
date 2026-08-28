@@ -26,6 +26,7 @@ const cultivation = [
   ...readJson("protected-cultivation-lighting.json"),
   ...readJson("outdoor-cultivation-expanded.json"),
   ...readJson("postharvest-science-expanded.json"),
+  ...readJson("advanced-cultivation-science-expanded.json"),
 ];
 const symptoms = readJson("symptom-differential-library.json");
 const tools = readJson("learning-tools.json");
