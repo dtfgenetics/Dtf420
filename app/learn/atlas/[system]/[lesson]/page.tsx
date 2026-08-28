@@ -7,8 +7,10 @@ import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasAssetSlot } from "@/components/atlas/AtlasAssetSlot";
 import { AtlasLessonProgress } from "@/components/atlas/AtlasLearningProgress";
 import { AtlasLessonKnowledgeCheck } from "@/components/atlas/AtlasMastery";
+import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { getAtlasAsset } from "@/lib/atlas-assets";
 import { getAtlasKnowledgeCheck } from "@/lib/atlas-knowledge-checks";
+import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
 function slugify(value: string) {
@@ -59,10 +61,12 @@ export async function generateMetadata({ params }: { params: Promise<{ system: s
   const atlasModule = findAtlasModule(system);
   const selectedLesson = atlasModule?.lessons.find((item) => slugify(item.title) === lesson);
   if (!atlasModule || !selectedLesson) return { title: "Atlas Lesson" };
-  return {
+
+  return buildEducationMetadata({
     title: `${selectedLesson.title} — ${atlasModule.label}`,
     description: selectedLesson.summary,
-  };
+    path: `/learn/atlas/${system}/${lesson}`,
+  });
 }
 
 export default async function AtlasLessonPage({ params }: { params: Promise<{ system: string; lesson: string }> }) {
@@ -86,9 +90,17 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
   const allRoutes = orderedLessonRoutes();
   const globalLessonIndex = allRoutes.indexOf(currentRoute);
   const nextRoute = globalLessonIndex >= 0 ? allRoutes[globalLessonIndex + 1] : undefined;
+  const structuredData = buildLearningResourceJsonLd({
+    name: selectedLesson.title,
+    description: selectedLesson.summary,
+    path: currentRoute,
+    learningResourceType: "Interactive visual lesson",
+    about: atlasModule.label,
+  });
 
   return (
     <section className="shell page-section">
+      <LearningResourceJsonLd data={structuredData} />
       <div className={styles.pageShell}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link href="/learn">Learn</Link><span>/</span>
