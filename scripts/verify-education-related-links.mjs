@@ -33,7 +33,7 @@ const tools = readJson("learning-tools.json");
 const atlasModules = readJson("atlas-learning-modules.json");
 const relatedMap = readJson("education-related-links.json");
 
-const validPaths = new Set([
+const validLearnPaths = new Set([
   "/learn",
   "/learn/search",
   "/learn/plant-health",
@@ -53,16 +53,16 @@ const validPaths = new Set([
   "/learn/atlas/paths",
 ]);
 
-for (const item of plantHealth) validPaths.add(`/learn/plant-health/${item.slug}`);
-for (const item of cultivation) validPaths.add(`/learn/cultivation-science/${item.slug}`);
-for (const item of symptoms) validPaths.add(`/learn/symptoms/${item.slug}`);
-for (const item of tools) validPaths.add(`/learn/tools/${item.slug}`);
+for (const item of plantHealth) validLearnPaths.add(`/learn/plant-health/${item.slug}`);
+for (const item of cultivation) validLearnPaths.add(`/learn/cultivation-science/${item.slug}`);
+for (const item of symptoms) validLearnPaths.add(`/learn/symptoms/${item.slug}`);
+for (const item of tools) validLearnPaths.add(`/learn/tools/${item.slug}`);
 
 for (const atlasModule of atlasModules) {
   const systemSlug = slugify(atlasModule.id);
-  validPaths.add(`/learn/atlas/${systemSlug}`);
+  validLearnPaths.add(`/learn/atlas/${systemSlug}`);
   for (const lesson of atlasModule.lessons) {
-    validPaths.add(`/learn/atlas/${systemSlug}/${slugify(lesson.title)}`);
+    validLearnPaths.add(`/learn/atlas/${systemSlug}/${slugify(lesson.title)}`);
   }
 }
 
@@ -70,7 +70,7 @@ const errors = [];
 let linkCount = 0;
 
 for (const [source, links] of Object.entries(relatedMap)) {
-  if (!validPaths.has(source)) errors.push(`Unknown related-link source: ${source}`);
+  if (!validLearnPaths.has(source)) errors.push(`Unknown related-link source: ${source}`);
   if (!Array.isArray(links) || links.length === 0) {
     errors.push(`Related-link source has no links: ${source}`);
     continue;
@@ -85,18 +85,22 @@ for (const [source, links] of Object.entries(relatedMap)) {
       errors.push(`Missing related-link href: ${source}`);
       continue;
     }
-    if (!link.href.startsWith("/learn")) errors.push(`Related link must stay inside /learn: ${source} -> ${link.href}`);
-    if (!validPaths.has(link.href)) errors.push(`Unknown related-link target: ${source} -> ${link.href}`);
-    if (link.href === source) errors.push(`Self-referencing related link: ${source}`);
-    if (seenTargets.has(link.href)) errors.push(`Duplicate related-link target: ${source} -> ${link.href}`);
-    seenTargets.add(link.href);
+
+    const href = link.href.trim();
+    const isAbsolute = /^https?:\/\//i.test(href);
+    const isInternal = href.startsWith("/");
+    if (!isAbsolute && !isInternal) errors.push(`Related link must be an internal path or http(s) URL: ${source} -> ${href}`);
+    if (href.startsWith("/learn") && !validLearnPaths.has(href)) errors.push(`Unknown learning target: ${source} -> ${href}`);
+    if (href === source) errors.push(`Self-referencing related link: ${source}`);
+    if (seenTargets.has(href)) errors.push(`Duplicate related-link target: ${source} -> ${href}`);
+    seenTargets.add(href);
   }
 }
 
 if (errors.length) {
-  console.error("Education related-link verification failed:\n");
+  console.error("Education related-link integrity verification failed:\n");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Education related links verified: ${Object.keys(relatedMap).length} source pages, ${linkCount} links, ${validPaths.size} valid learning routes indexed.`);
+console.log(`Education related-link integrity verified: ${Object.keys(relatedMap).length} source pages and ${linkCount} links.`);
