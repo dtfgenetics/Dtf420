@@ -4,10 +4,12 @@ import { notFound } from "next/navigation";
 import coreLibrary from "@/content/cultivation-science-library.json";
 import protectedLibrary from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
+import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
+import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
 import styles from "../../plant-health/page.module.css";
 
-const library = [...coreLibrary, ...protectedLibrary, ...protectedLighting];
+const library = [...coreLibrary, ...protectedLibrary, ...protectedLighting, ...outdoorExpanded, ...postharvestExpanded];
 
 function getEntry(slug: string) {
   return library.find((item) => item.slug === slug);
