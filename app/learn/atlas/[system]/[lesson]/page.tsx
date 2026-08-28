@@ -7,6 +7,7 @@ import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasAssetSlot } from "@/components/atlas/AtlasAssetSlot";
 import { AtlasLessonProgress } from "@/components/atlas/AtlasLearningProgress";
 import { AtlasLessonKnowledgeCheck } from "@/components/atlas/AtlasMastery";
+import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { getAtlasAsset } from "@/lib/atlas-assets";
 import { getAtlasKnowledgeCheck } from "@/lib/atlas-knowledge-checks";
@@ -133,6 +134,7 @@ export default async function AtlasLessonPage({ params }: { params: Promise<{ sy
 
         <AtlasLessonKnowledgeCheck check={knowledgeCheck} />
         <AtlasLessonProgress route={currentRoute} nextRoute={nextRoute} />
+        <EvidenceSources path={currentRoute} />
 
         <section className={styles.context}>
           <div>
