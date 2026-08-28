@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import library from "@/content/plant-health-library.json";
+import coreLibrary from "@/content/plant-health-library.json";
+import expandedLibrary from "@/content/plant-health-expanded.json";
 import styles from "../page.module.css";
+
+const library = [...coreLibrary, ...expandedLibrary];
 
 function getEntry(slug: string) {
   return library.find((item) => item.slug === slug);
@@ -66,6 +69,8 @@ export default async function PlantHealthReferencePage({ params }: { params: Pro
 
       <div className={styles.footerActions}>
         <Link className="button button--primary" href="/learn/plant-health">Back to Plant Health Library</Link>
+        <Link className="button" href="/learn/tools">Printable scouting tools</Link>
+        <Link className="button" href="/learn/symptoms">Symptom differentials</Link>
         <Link className="button" href="/learn/atlas/cases">Practice diagnostic cases</Link>
         <Link className="button" href="/learn/atlas">Open Living Plant Atlas</Link>
       </div>
