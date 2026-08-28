@@ -3,6 +3,7 @@ import { LivingPlantAtlas } from "@/components/atlas/LivingPlantAtlas";
 import { AtlasSystemStatusGrid } from "@/components/atlas/AtlasSystemStatusGrid";
 import { AtlasGrowthStages } from "@/components/atlas/AtlasGrowthStages";
 import { AtlasVisualOverlays } from "@/components/atlas/AtlasVisualOverlays";
+import { AtlasOverlayLearningBridge } from "@/components/atlas/AtlasOverlayLearningBridge";
 import { AtlasLearningModules } from "@/components/atlas/AtlasLearningModules";
 import { buildEducationMetadata } from "@/lib/education-seo";
 
@@ -19,6 +20,7 @@ export default function AtlasPage() {
       <AtlasSystemStatusGrid />
       <AtlasGrowthStages />
       <AtlasVisualOverlays />
+      <AtlasOverlayLearningBridge />
       <AtlasLearningModules />
     </section>
   );
