@@ -1,0 +1,497 @@
+[
+  {
+    "slug": "source-sink-carbon-allocation",
+    "title": "Source–Sink Carbon Allocation",
+    "category": "Plant Physiology & Development",
+    "summary": "Leaves that export photosynthate act as sources, while actively growing, storage, root, and reproductive tissues act as sinks. Source–sink strength changes with plant stage, tissue age, environment, and stress, so carbon allocation is dynamic rather than fixed.",
+    "keyConcepts": [
+      "Mature photosynthetically active leaves are major carbohydrate sources",
+      "Expanding leaves, roots, meristems, flowers, and developing seeds can act as sinks",
+      "Sink strength depends on tissue demand and capacity to import and use assimilates",
+      "Stress can reduce source supply, sink demand, transport capacity, or several at once",
+      "Training and pruning change canopy structure and may alter the balance among competing sinks"
+    ],
+    "measureObserve": [
+      "Track which leaves are fully expanded versus still developing",
+      "Record growth rate of competing shoots and reproductive sites",
+      "Compare canopy light distribution with lower-canopy senescence",
+      "Note whether growth slows after root, water, temperature, or light stress",
+      "Use repeated observations rather than inferring carbon allocation from one plant photograph"
+    ],
+    "commonMistakes": [
+      "Assuming every large leaf is always a net source under all conditions",
+      "Treating pruning as a guaranteed way to redirect a fixed amount of energy",
+      "Ignoring root demand when interpreting shoot growth",
+      "Assuming larger sink number always increases total production",
+      "Using source–sink language as a substitute for measurements of light, water, and plant development"
+    ],
+    "visualNeeds": [
+      "Whole-plant source–sink flow diagram",
+      "Leaf age and source transition sequence",
+      "Vegetative versus reproductive sink map",
+      "Pruning and competing-sink comparison"
+    ]
+  },
+  {
+    "slug": "stomatal-conductance-and-gas-exchange",
+    "title": "Stomatal Conductance & Gas Exchange",
+    "category": "Plant Physiology & Development",
+    "summary": "Stomata regulate the exchange of carbon dioxide and water vapor between the leaf and atmosphere. Their behavior responds to light, internal carbon dioxide, water status, vapor-pressure conditions, hormones, temperature, and other signals.",
+    "keyConcepts": [
+      "Carbon dioxide entry and water-vapor loss are coupled through stomatal pores",
+      "Stomatal conductance is not the same as photosynthetic rate",
+      "High atmospheric demand can increase transpiration pressure while also promoting stomatal restriction if plant water supply cannot keep pace",
+      "Leaf temperature and boundary-layer conditions change gas-exchange behavior",
+      "Root-zone stress can alter stomatal behavior before dramatic visual symptoms appear"
+    ],
+    "measureObserve": [
+      "Record air temperature, RH, leaf temperature, and light context together",
+      "Compare leaf posture and temperature across canopy zones",
+      "Observe recovery after irrigation or environmental transitions",
+      "Use gas-exchange instruments when quantitative stomatal conductance is required",
+      "Track root-zone moisture and EC alongside atmospheric measurements"
+    ],
+    "commonMistakes": [
+      "Treating a VPD number as a direct measurement of stomatal conductance",
+      "Assuming open stomata always mean optimal photosynthesis",
+      "Ignoring leaf temperature when interpreting atmospheric demand",
+      "Changing humidity without considering root water supply",
+      "Diagnosing stomatal behavior from leaf curl alone"
+    ],
+    "visualNeeds": [
+      "Stomatal pore gas-exchange cutaway",
+      "CO2-in water-vapor-out diagram",
+      "Atmosphere-root coupling map",
+      "Leaf-temperature and boundary-layer graphic"
+    ]
+  },
+  {
+    "slug": "soil-plant-atmosphere-hydraulic-continuum",
+    "title": "Soil–Plant–Atmosphere Hydraulic Continuum",
+    "category": "Plant Physiology & Development",
+    "summary": "Water movement through the plant is driven by gradients in water potential from the root zone through xylem to evaporating leaf surfaces and the atmosphere. The continuity of this pathway links substrate moisture, root function, stem transport, leaf temperature, and transpiration.",
+    "keyConcepts": [
+      "Water moves along water-potential gradients rather than because roots simply push it upward",
+      "Root hydraulic resistance, xylem transport, leaf conductance, and atmospheric demand all influence flow",
+      "Loss of hydraulic continuity can occur under severe dehydration or vascular damage",
+      "Recovery after water stress depends on tissue condition and the severity and duration of stress",
+      "Atmospheric demand can expose root-zone limitations that are not obvious under milder conditions"
+    ],
+    "measureObserve": [
+      "Track substrate moisture before and after high-demand periods",
+      "Compare leaf posture at predawn, midday, and recovery periods",
+      "Record leaf and air temperature together",
+      "Inspect stems and roots when wilt persists despite adequate bulk moisture",
+      "Map recurring wilt to irrigation zones, root volumes, or vascular injury"
+    ],
+    "commonMistakes": [
+      "Assuming wilt always means the substrate is dry",
+      "Increasing irrigation without checking root oxygen or disease",
+      "Treating all xylem dysfunction as permanent cavitation",
+      "Ignoring local root restriction or stem injury",
+      "Interpreting one moisture reading as the entire root-zone water status"
+    ],
+    "visualNeeds": [
+      "Soil-to-atmosphere water-potential gradient",
+      "Root-xylem-leaf hydraulic pathway",
+      "Midday wilt differential diagram",
+      "Hydraulic bottleneck map"
+    ]
+  },
+  {
+    "slug": "osmotic-adjustment-turgor-and-cell-expansion",
+    "title": "Osmotic Adjustment, Turgor & Cell Expansion",
+    "category": "Plant Physiology & Development",
+    "summary": "Cell expansion depends on water uptake, osmotic conditions, cell-wall properties, and turgor. Plants can adjust cellular solute concentrations during stress, but persistent salinity or dehydration can still suppress expansion and growth.",
+    "keyConcepts": [
+      "Turgor pressure supports cell expansion and tissue posture",
+      "Osmotic potential is influenced by dissolved solutes inside cells and in the root environment",
+      "High external salinity can make water acquisition more difficult even when media appears wet",
+      "Plants can accumulate compatible solutes as part of stress acclimation",
+      "Reduced expansion can appear before widespread tissue death"
+    ],
+    "measureObserve": [
+      "Track root-zone EC and moisture together",
+      "Compare young-tissue expansion with mature-leaf condition",
+      "Record response after irrigation and after salinity correction",
+      "Observe whether growth remains compact despite adequate light",
+      "Separate temporary loss of turgor from irreversible tissue damage"
+    ],
+    "commonMistakes": [
+      "Calling every wilt event simple underwatering",
+      "Ignoring EC when media is visibly moist",
+      "Assuming osmotic adjustment means plants are unaffected by salinity",
+      "Using leaf firmness alone to infer root-zone chemistry",
+      "Correcting salinity aggressively without considering root oxygen and irrigation uniformity"
+    ],
+    "visualNeeds": [
+      "Turgid versus plasmolyzed-cell concept diagram",
+      "Root-zone salinity and water-uptake graphic",
+      "Cell-expansion sequence",
+      "Turgor-loss versus tissue-death comparison"
+    ]
+  },
+  {
+    "slug": "phytochrome-and-photoperiod-signaling",
+    "title": "Phytochrome & Photoperiod Signaling",
+    "category": "Plant Physiology & Development",
+    "summary": "Phytochrome photoreceptors help plants interpret red and far-red light and participate in measuring light–dark transitions. In photoperiod-sensitive cannabis, flowering behavior depends on integrated signaling over repeated daily cycles rather than on one isolated light reading.",
+    "keyConcepts": [
+      "Phytochrome interconverts between light-responsive states influenced strongly by red and far-red wavelengths",
+      "Night length and interruptions can matter independently of total daily photosynthetic light",
+      "Photoperiod signaling interacts with developmental state and genotype",
+      "Brief unintended night lighting can be biologically meaningful depending on intensity, spectrum, duration, and timing",
+      "Photoperiod and DLI describe different aspects of the light environment"
+    ],
+    "measureObserve": [
+      "Document actual lights-on and lights-off times",
+      "Audit dark periods for leaks, work lights, indicators, and neighboring light sources",
+      "Track flowering transition across cultivars and canopy zones",
+      "Record blackout timing and environmental effects after closure",
+      "Distinguish photoperiod changes from changes in total light quantity"
+    ],
+    "commonMistakes": [
+      "Treating DLI and photoperiod as interchangeable",
+      "Assuming any tiny light exposure has the same biological effect",
+      "Ignoring genotype and developmental stage",
+      "Changing spectrum, intensity, and photoperiod simultaneously without records",
+      "Diagnosing delayed flowering without checking the actual dark period"
+    ],
+    "visualNeeds": [
+      "Phytochrome red/far-red state diagram",
+      "Photoperiod and night-interruption timeline",
+      "DLI versus photoperiod comparison",
+      "Dark-period audit map"
+    ]
+  },
+  {
+    "slug": "photomorphogenesis-and-shade-avoidance",
+    "title": "Photomorphogenesis & Shade-Avoidance Responses",
+    "category": "Plant Physiology & Development",
+    "summary": "Plants use light quantity, direction, and spectral cues to shape architecture. Changes in red-to-far-red balance and local shading can influence internode elongation, leaf angle, branching, and allocation without being equivalent to simple light deficiency.",
+    "keyConcepts": [
+      "Photomorphogenesis refers to developmental responses to light signals, not only photosynthetic energy capture",
+      "Neighboring leaves alter both photon quantity and spectral composition",
+      "Low red-to-far-red signals can contribute to shade-avoidance responses",
+      "Architecture feeds back on future light interception",
+      "Genotype strongly influences the magnitude and form of architectural responses"
+    ],
+    "measureObserve": [
+      "Map internode length across canopy positions",
+      "Compare branch angles and leaf orientation before and after crowding",
+      "Measure PPFD rather than assuming shaded appearance equals low total light",
+      "Document changes in plant spacing or canopy closure",
+      "Track responses over several nodes rather than one internode"
+    ],
+    "commonMistakes": [
+      "Calling all stretch a lack-of-light problem",
+      "Ignoring spectral and neighbor cues",
+      "Assuming one cultivar's architecture predicts another's",
+      "Responding to elongation without checking temperature and developmental stage",
+      "Using a single top-canopy light reading to explain lower-canopy morphology"
+    ],
+    "visualNeeds": [
+      "Sun versus canopy spectral comparison",
+      "Shade-avoidance architecture sequence",
+      "Red-to-far-red concept panel",
+      "Canopy feedback loop diagram"
+    ]
+  },
+  {
+    "slug": "auxin-cytokinin-and-branching-control",
+    "title": "Auxin, Cytokinin & Branching Control",
+    "category": "Plant Physiology & Development",
+    "summary": "Branching emerges from interactions among the shoot apex, axillary buds, vascular connections, resource status, and hormone signaling. Auxin and cytokinin are important parts of this network, but training responses should not be reduced to a single-hormone explanation.",
+    "keyConcepts": [
+      "The shoot apex contributes to apical dominance through a broader signaling network",
+      "Axillary buds differ in developmental readiness and access to resources",
+      "Auxin transport, cytokinin signaling, sugars, and strigolactone-related pathways interact in bud outgrowth",
+      "Removing or repositioning the apex changes multiple signals at once",
+      "Branching response depends on plant stage, genotype, light environment, and root status"
+    ],
+    "measureObserve": [
+      "Record which node was topped or trained",
+      "Track bud activation and elongation over several days",
+      "Compare symmetrical branches for vigor and light exposure",
+      "Document root stress or transplant timing before interpreting weak branching",
+      "Measure canopy distribution after the response rather than only immediately after the cut"
+    ],
+    "commonMistakes": [
+      "Explaining topping entirely as auxin removal",
+      "Expecting every axillary bud to respond equally",
+      "Ignoring sugar supply and light exposure",
+      "Repeatedly pruning before the previous response is visible",
+      "Assuming more branches always create a better canopy"
+    ],
+    "visualNeeds": [
+      "Shoot-apex and axillary-bud signaling map",
+      "Bud activation timeline after topping",
+      "Hormone-and-sugar interaction diagram",
+      "Branch response comparison across nodes"
+    ]
+  },
+  {
+    "slug": "gibberellins-stem-elongation-and-development",
+    "title": "Gibberellins, Stem Elongation & Development",
+    "category": "Plant Physiology & Development",
+    "summary": "Gibberellin signaling contributes to stem elongation, developmental transitions, and other growth processes. Observed stretch is the integrated outcome of hormone signaling, light, temperature, genotype, developmental stage, and resource availability.",
+    "keyConcepts": [
+      "Gibberellins can promote cell elongation and growth in many plant tissues",
+      "Internode length is a phenotype produced by several interacting signals",
+      "Temperature and spectral environment can change elongation independently of total light quantity",
+      "Rapid elongation can alter mechanical support and canopy uniformity",
+      "Developmental transitions can change elongation rate even without a management change"
+    ],
+    "measureObserve": [
+      "Measure internode length at successive nodes",
+      "Record day and night temperature conditions",
+      "Track elongation during transition into flowering",
+      "Compare canopy zones for light and crowding",
+      "Observe stem diameter and support needs as elongation changes"
+    ],
+    "commonMistakes": [
+      "Calling all elongation a nutrient problem",
+      "Assuming gibberellin alone explains architecture",
+      "Using one internode as the entire plant's growth-rate indicator",
+      "Ignoring the flowering transition",
+      "Correcting stretch with severe interventions before measuring the environment"
+    ],
+    "visualNeeds": [
+      "Internode elongation sequence",
+      "Hormone-light-temperature interaction map",
+      "Vegetative-to-flower stretch timeline",
+      "Stem diameter versus elongation comparison"
+    ]
+  },
+  {
+    "slug": "ethylene-wounding-and-stress-signaling",
+    "title": "Ethylene, Wounding & Stress Signaling",
+    "category": "Plant Physiology & Development",
+    "summary": "Ethylene is a gaseous plant hormone involved in responses to wounding, flooding, senescence, organ abscission, mechanical stress, and developmental processes. Its effects depend on concentration, tissue sensitivity, developmental stage, and interactions with other signals.",
+    "keyConcepts": [
+      "Ethylene production can increase after wounding or other stress",
+      "Mechanical training creates both structural change and wound-response signaling",
+      "Low-oxygen root conditions can alter ethylene-related responses",
+      "Senescing tissues often show coordinated hormone and nutrient-remobilization changes",
+      "Hormone responses are networks rather than isolated switches"
+    ],
+    "measureObserve": [
+      "Record training, pruning, transplant, or mechanical injury events",
+      "Track wound closure and nearby tissue condition",
+      "Check root-zone aeration when abnormal swelling, epinasty, or stress is suspected",
+      "Compare damaged and undamaged branches",
+      "Observe whether symptoms continue after the original stress has ended"
+    ],
+    "commonMistakes": [
+      "Treating ethylene as the only explanation for any stress response",
+      "Assuming visible wound swelling is always beneficial strengthening",
+      "Ignoring root hypoxia in stress interpretation",
+      "Applying hormone terminology without documenting the triggering event",
+      "Confusing correlation with direct hormone measurement"
+    ],
+    "visualNeeds": [
+      "Wound-response signaling timeline",
+      "Ethylene stress-response network",
+      "Root hypoxia to shoot-response diagram",
+      "Healing versus progressive injury comparison"
+    ]
+  },
+  {
+    "slug": "leaf-senescence-and-nutrient-remobilization",
+    "title": "Leaf Senescence & Nutrient Remobilization",
+    "category": "Plant Physiology & Development",
+    "summary": "Leaf senescence is a regulated developmental process that dismantles cellular machinery and remobilizes useful compounds before tissue death. Stress can accelerate senescence, while normal aging can resemble nutrient or root-zone problems if location and progression are ignored.",
+    "keyConcepts": [
+      "Senescence involves ordered changes in chlorophyll, proteins, membranes, and nutrient transport",
+      "Older leaves often enter senescence before younger source leaves",
+      "Nitrogen and other mobile resources can be remobilized from aging tissue",
+      "Stress-induced senescence can overlap visually with normal developmental aging",
+      "Whole-plant source–sink relationships change as reproductive demand increases"
+    ],
+    "measureObserve": [
+      "Map which leaves yellow first and whether the pattern is symmetrical",
+      "Record plant stage and flowering progression",
+      "Compare senescence with root-zone EC, pH, moisture, and disease observations",
+      "Track whether yellowing progresses into younger tissue",
+      "Document leaf loss and canopy light exposure over time"
+    ],
+    "commonMistakes": [
+      "Calling all late-cycle yellowing a deficiency",
+      "Calling all yellowing normal senescence",
+      "Ignoring root disease because the plant is in flower",
+      "Removing large amounts of aging foliage before checking what the pattern means",
+      "Using calendar week as the only maturity context"
+    ],
+    "visualNeeds": [
+      "Normal senescence progression plate",
+      "Senescence versus root-stress differential",
+      "Nutrient remobilization flow diagram",
+      "Old-to-young leaf progression map"
+    ]
+  },
+  {
+    "slug": "abscission-and-organ-shedding",
+    "title": "Abscission & Organ Shedding",
+    "category": "Plant Physiology & Development",
+    "summary": "Plants can actively separate leaves, flowers, or other organs through specialized abscission zones. Shedding can be developmental or stress-related, so dropped tissue should be interpreted with timing, attachment-zone condition, and whole-plant context.",
+    "keyConcepts": [
+      "Abscission is an active developmental separation process",
+      "Hormone balance and tissue age influence abscission-zone activation",
+      "Water stress, root injury, shading, and reproductive changes can alter organ retention",
+      "Physical breakage and true abscission leave different evidence",
+      "Dropped organs can become sanitation issues in dense canopies or production floors"
+    ],
+    "measureObserve": [
+      "Inspect the attachment point of shed organs",
+      "Record whether shedding is localized or whole-plant",
+      "Compare shaded interior leaves with well-lit leaves",
+      "Track irrigation or root stress before shedding events",
+      "Remove fallen tissue and note recurrence"
+    ],
+    "commonMistakes": [
+      "Treating every dropped leaf as mechanical damage",
+      "Assuming organ shedding always indicates a nutrient shortage",
+      "Ignoring canopy shade and normal developmental turnover",
+      "Leaving fallen tissue to accumulate during disease-prone conditions",
+      "Inferring a hormone concentration from appearance alone"
+    ],
+    "visualNeeds": [
+      "Leaf abscission-zone close-up",
+      "Abscission versus breakage comparison",
+      "Shade-related interior leaf shedding map",
+      "Organ-shedding observation workflow"
+    ]
+  },
+  {
+    "slug": "carbon-nitrogen-balance-and-growth-allocation",
+    "title": "Carbon–Nitrogen Balance & Growth Allocation",
+    "category": "Plant Physiology & Development",
+    "summary": "Plant growth depends on coordination between carbon captured through photosynthesis and nitrogen used to build proteins, nucleic acids, pigments, enzymes, and new tissues. Excess or shortage of either resource can shift growth patterns, but a simple carbon-to-nitrogen ratio does not diagnose plant health by itself.",
+    "keyConcepts": [
+      "Carbon capture and nitrogen assimilation are metabolically interconnected",
+      "Nitrogen status influences leaf area, chlorophyll, enzyme capacity, and growth",
+      "High carbon supply cannot compensate for severe mineral or root limitations",
+      "Excessive nitrogen can change architecture and tissue composition without guaranteeing faster useful growth",
+      "Developmental stage changes the balance of vegetative and reproductive demand"
+    ],
+    "measureObserve": [
+      "Track leaf color and growth rate with root-zone EC and nutrient records",
+      "Compare new and old tissue rather than relying on one leaf",
+      "Record biomass allocation to leaves, stems, roots, and flowers when conducting trials",
+      "Use tissue analysis when precise nutrient status is required",
+      "Relate responses to light and temperature context"
+    ],
+    "commonMistakes": [
+      "Using dark green color as proof of ideal nitrogen status",
+      "Assuming more nitrogen always increases productive growth",
+      "Ignoring light limitation when growth remains weak",
+      "Treating carbon–nitrogen concepts as a fertilizer recipe",
+      "Comparing plants at different developmental stages without normalization"
+    ],
+    "visualNeeds": [
+      "Carbon and nitrogen assimilation map",
+      "Vegetative versus reproductive allocation diagram",
+      "Nitrogen status and canopy response comparison",
+      "Growth-allocation measurement worksheet graphic"
+    ]
+  },
+  {
+    "slug": "reproductive-source-sink-transition",
+    "title": "Reproductive Source–Sink Transition",
+    "category": "Plant Physiology & Development",
+    "summary": "As flowering progresses, expanding inflorescences and developing reproductive tissues become major sinks. The plant's allocation pattern changes alongside canopy aging, root activity, light interception, and reproductive development.",
+    "keyConcepts": [
+      "Flowering changes the distribution of growth demand across the plant",
+      "Reproductive sinks compete with continued vegetative growth and root maintenance",
+      "Lower-canopy leaves may contribute differently depending on light exposure and tissue age",
+      "Pollination and seed development can alter sink demand within flowers",
+      "Late-cycle decline can reflect development, stress, disease, or combinations and should be separated with evidence"
+    ],
+    "measureObserve": [
+      "Track flower expansion and branch growth simultaneously",
+      "Map canopy light interception as flowers increase in size",
+      "Record lower-leaf senescence and root-zone condition together",
+      "Compare pollinated and unpollinated sites when relevant",
+      "Use repeated maturity observations rather than one late-cycle snapshot"
+    ],
+    "commonMistakes": [
+      "Assuming flowering stops all vegetative metabolism",
+      "Treating every lower-leaf decline as normal fade",
+      "Ignoring root health late in flower",
+      "Assuming pollination affects only seed presence and not resource allocation",
+      "Using calendar week alone to infer reproductive demand"
+    ],
+    "visualNeeds": [
+      "Vegetative-to-reproductive sink transition map",
+      "Flowering allocation timeline",
+      "Pollinated versus unpollinated sink comparison",
+      "Late-cycle senescence differential"
+    ]
+  },
+  {
+    "slug": "trichome-secretion-and-secondary-metabolism",
+    "title": "Trichome Secretion & Secondary Metabolism",
+    "category": "Plant Physiology & Development",
+    "summary": "Glandular trichomes are specialized structures associated with the production and storage of many secondary metabolites in cannabis. Their abundance, development, and chemistry reflect genotype, tissue type, developmental stage, and environment rather than one simple cultivation variable.",
+    "keyConcepts": [
+      "Secretory cells in glandular trichomes contribute to cannabinoid and terpene biosynthesis",
+      "Trichome density and metabolite concentration are related but not interchangeable measurements",
+      "Different tissues and trichome types can have different chemical profiles",
+      "Developmental stage changes trichome structure and chemistry",
+      "Environmental responses can influence secondary metabolism but should not be reduced to universal stress recipes"
+    ],
+    "measureObserve": [
+      "Standardize tissue type and sampling position",
+      "Use consistent magnification for structural comparisons",
+      "Separate trichome density observations from chemical potency testing",
+      "Track developmental stage when comparing samples",
+      "Use laboratory analysis when cannabinoid or terpene concentration matters"
+    ],
+    "commonMistakes": [
+      "Equating visible frost with a precise potency value",
+      "Comparing sugar leaves directly with flower bracts without noting tissue type",
+      "Assuming amber trichomes provide a complete chemical profile",
+      "Using stress as a blanket recommendation to increase secondary metabolites",
+      "Treating microscope appearance as a substitute for analytical chemistry"
+    ],
+    "visualNeeds": [
+      "Glandular trichome biosynthesis cutaway",
+      "Trichome density versus chemistry comparison",
+      "Tissue-specific sampling map",
+      "Developmental trichome sequence"
+    ]
+  },
+  {
+    "slug": "respiration-temperature-and-carbon-cost",
+    "title": "Respiration, Temperature & Carbon Cost",
+    "category": "Plant Physiology & Development",
+    "summary": "Respiration supplies usable energy and metabolic intermediates by consuming stored carbon. Temperature strongly affects respiration rate within biological limits, so warm conditions can increase carbon costs even when photosynthetic light is unchanged.",
+    "keyConcepts": [
+      "Respiration occurs in living tissues day and night",
+      "Higher temperature often increases metabolic reaction rates until stress or damage alters the response",
+      "Night temperature can influence carbon balance independently of daytime PPFD",
+      "Roots, stems, leaves, flowers, and growing tissues all have respiratory costs",
+      "Net biomass gain reflects carbon captured minus carbon used for respiration and other losses"
+    ],
+    "measureObserve": [
+      "Record day and night temperatures separately",
+      "Track growth rate during sustained warm-night periods",
+      "Compare root-zone temperature with canopy temperature",
+      "Relate temperature shifts to light availability and plant stage",
+      "Use controlled comparisons rather than assuming a single optimal night temperature"
+    ],
+    "commonMistakes": [
+      "Treating nighttime temperature as irrelevant because photosynthesis stops",
+      "Assuming warmer always means faster productive growth",
+      "Ignoring root respiration and root-zone temperature",
+      "Comparing biomass without considering temperature history",
+      "Using respiration concepts to justify extreme temperature swings"
+    ],
+    "visualNeeds": [
+      "Photosynthesis-versus-respiration carbon budget",
+      "Day/night temperature timeline",
+      "Whole-plant respiration map",
+      "Temperature and net-carbon-balance diagram"
+    ]
+  }
+]
