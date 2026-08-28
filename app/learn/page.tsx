@@ -18,6 +18,14 @@ const learningModes = [
     action: "Open the Plant Health Library",
   },
   {
+    eyebrow: "Visual diagnostics",
+    title: "Symptom Differential Library",
+    description:
+      "Compare yellowing, spotting, curling, wilting, bleaching, pigmentation, root decline, stem lesions, and flower damage against multiple plausible causes and discriminating checks.",
+    href: "/learn/symptoms",
+    action: "Open symptom differentials",
+  },
+  {
     eyebrow: "Expanded subject library",
     title: "Cultivation Science References",
     description:
