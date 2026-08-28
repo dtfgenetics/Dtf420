@@ -7,6 +7,7 @@ import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
+import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
@@ -18,16 +19,20 @@ const library = [
   ...postharvestExpanded,
   ...advancedExpanded,
   ...plantPhysiologyExpanded,
+  ...propagationNutritionGenetics,
 ];
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Cultivation Science Reference Library",
-  description: "Advanced cultivation references covering plant physiology, outdoor and protected cultivation, post-harvest science, plant architecture, flowering, and measurement science.",
+  description: "Advanced cultivation references covering plant physiology, propagation, nutrition and root-zone chemistry, genetics and breeding, outdoor and protected cultivation, post-harvest science, plant architecture, flowering, and measurement science.",
   path: "/learn/cultivation-science",
 });
 
 const categories = [
   "Plant Physiology & Development",
+  "Propagation & Cloning",
+  "Nutrition & Root-Zone Chemistry",
+  "Genetics & Breeding",
   "Outdoor & Protected Cultivation",
   "Protected Cultivation",
   "Harvest & Post-Harvest",
@@ -43,10 +48,11 @@ export default function CultivationSciencePage() {
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Cultivation Science Reference Library</h1>
         <p className="lede">
-          Deep subject branches for whole-plant physiology, outdoor and protected cultivation, greenhouse environment and lighting, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement and experimental science.
+          Deep subject branches for whole-plant physiology, propagation and cloning, nutrition and root-zone chemistry, genetics and breeding, outdoor and protected cultivation, harvest and post-harvest biology, plant architecture, flowering development, and measurement science.
         </p>
         <div className={styles.heroActions}>
           <Link className="button button--primary" href="/learn/atlas">Open the Living Plant Atlas</Link>
+          <Link className="button" href="/learn/academy">THC Academy</Link>
           <Link className="button" href="/learn/plant-health">Open Plant Health</Link>
           <Link className="button" href="/learn/tools">Printable Tools</Link>
           <Link className="button" href="/learn/sources">Evidence & Sources</Link>
