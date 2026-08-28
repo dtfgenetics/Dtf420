@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/", 1, "weekly"),
     item("/learn", 0.95, "weekly"),
     item("/learn/search", 0.85, "weekly"),
+    item("/learn/sources", 0.82, "weekly"),
     item("/learn/atlas", 0.95, "weekly"),
     item("/learn/plant-health", 0.9, "weekly"),
     item("/learn/symptoms", 0.9, "weekly"),
