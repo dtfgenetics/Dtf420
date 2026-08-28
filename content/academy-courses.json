@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "evidence-observation-diagnosis",
+    "title": "Evidence, Observation & Diagnosis",
+    "summary": "Learn to describe plant problems precisely, collect measurements, track progression, and build a differential before choosing a response.",
+    "units": [
+      {"title":"Symptom location","href":"/learn/atlas/diagnostic-overlay/symptom-location","description":"Locate where a problem begins before naming a cause."},
+      {"title":"Pattern description","href":"/learn/atlas/diagnostic-overlay/pattern-description","description":"Use consistent language for chlorosis, necrosis, spotting, curl, wilt, and distortion."},
+      {"title":"Progression over time","href":"/learn/atlas/diagnostic-overlay/progression-over-time","description":"Separate sudden, gradual, spreading, stable, and recovering patterns."},
+      {"title":"Measurement context","href":"/learn/atlas/diagnostic-overlay/measurement-context","description":"Bring pH, EC, moisture, temperature, RH, VPD, PPFD, and recent actions into the same record."},
+      {"title":"Differential workflow","href":"/learn/atlas/diagnostic-overlay/differential-workflow","description":"Rank plausible causes and use new evidence to narrow them."}
+    ]
+  },
+  {
+    "slug": "seed-germination-establishment",
+    "title": "Seed, Germination & Establishment",
+    "summary": "Follow the seed from anatomy and water uptake through radicle emergence, cotyledon transition, and common establishment failures.",
+    "units": [
+      {"title":"Seed anatomy","href":"/learn/atlas/seed-germination/seed-anatomy","description":"Identify the seed coat, embryo, cotyledons, radicle, and micropyle."},
+      {"title":"Imbibition","href":"/learn/atlas/seed-germination/imbibition","description":"Understand the first phase of water uptake and metabolic reactivation."},
+      {"title":"Radicle emergence","href":"/learn/atlas/seed-germination/radicle-emergence","description":"Follow the first visible root organ and early orientation."},
+      {"title":"Cotyledon transition","href":"/learn/atlas/seed-germination/cotyledon-transition","description":"Track emergence through cotyledon opening and first true leaves."},
+      {"title":"Germination failure patterns","href":"/learn/atlas/seed-germination/germination-failure-patterns","description":"Separate seed viability questions from moisture, temperature, oxygen, and disease risks."}
+    ]
+  },
+  {
+    "slug": "roots-rhizosphere-water-uptake",
+    "title": "Roots, Rhizosphere & Water Uptake",
+    "summary": "Build a root-first understanding of architecture, absorption, rhizosphere exchange, transport, and root-zone stress.",
+    "units": [
+      {"title":"Root architecture","href":"/learn/atlas/root-system/root-architecture","description":"Map primary, lateral, fine roots, and root hairs through the occupied media volume."},
+      {"title":"Root hairs & absorption","href":"/learn/atlas/root-system/root-hairs-and-absorption","description":"See where short-lived absorbing surfaces develop."},
+      {"title":"Rhizosphere","href":"/learn/atlas/root-system/rhizosphere","description":"Connect roots, water, ions, microbes, exudates, and oxygen."},
+      {"title":"Water & nutrient uptake","href":"/learn/atlas/root-system/water-and-nutrient-uptake","description":"Connect substrate conditions to membrane transport and vascular flow."},
+      {"title":"Root stress","href":"/learn/atlas/root-system/root-stress","description":"Compare low oxygen, saturation, dryback, salinity, temperature stress, and visible root decline."}
+    ]
+  },
+  {
+    "slug": "stems-vascular-transport",
+    "title": "Stems & Vascular Transport",
+    "summary": "Study stem structure, xylem, phloem, internode development, and the consequences of mechanical damage.",
+    "units": [
+      {"title":"Stem cross-section","href":"/learn/atlas/stem-vascular/stem-cross-section","description":"Identify epidermal, cortex, vascular, and pith regions."},
+      {"title":"Xylem transport","href":"/learn/atlas/stem-vascular/xylem-transport","description":"Follow water and dissolved mineral movement toward transpiring shoots."},
+      {"title":"Phloem transport","href":"/learn/atlas/stem-vascular/phloem-transport","description":"Follow source-to-sink movement of photosynthate."},
+      {"title":"Internodal spacing","href":"/learn/atlas/stem-vascular/internodal-spacing","description":"Relate internode length to genotype, light, temperature, stage, and growth rate."},
+      {"title":"Damage & recovery","href":"/learn/atlas/stem-vascular/damage-and-recovery","description":"Understand how bending, crushing, pruning, and breakage affect support and transport."}
+    ]
+  },
+  {
+    "slug": "branching-training-canopy",
+    "title": "Branching, Training & Canopy Architecture",
+    "summary": "Connect node anatomy and apical dominance to topping, low-stress training, mainlining, and screen-based canopy organization.",
+    "units": [
+      {"title":"Node anatomy","href":"/learn/atlas/nodes-branching/node-anatomy","description":"Locate the leaf attachment, axillary bud, branch origin, and internodes."},
+      {"title":"Apical dominance","href":"/learn/atlas/nodes-branching/apical-dominance","description":"Understand how the active apex influences lateral growth."},
+      {"title":"Topping & FIM","href":"/learn/atlas/nodes-branching/topping-and-fim","description":"Compare removal points and resulting redistribution of active shoots."},
+      {"title":"LST & directional growth","href":"/learn/atlas/nodes-branching/lst-and-directional-growth","description":"Use branch orientation and light exposure to redistribute canopy height."},
+      {"title":"Mainlining & SCROG","href":"/learn/atlas/nodes-branching/mainlining-and-scrog","description":"Compare structured branch selection with screen-based canopy distribution."}
+    ]
+  },
+  {
+    "slug": "leaves-photosynthesis-gas-exchange",
+    "title": "Leaves, Photosynthesis & Gas Exchange",
+    "summary": "Use healthy leaves as a baseline, then connect photosynthesis, stomata, transpiration, symptom language, and inspection workflow.",
+    "units": [
+      {"title":"Healthy leaf baseline","href":"/learn/atlas/leaves/healthy-leaf-baseline","description":"Establish a visual and structural reference before judging abnormality."},
+      {"title":"Photosynthesis","href":"/learn/atlas/leaves/photosynthesis","description":"Connect light capture, carbon dioxide, water status, chloroplasts, and carbohydrate production."},
+      {"title":"Stomata & transpiration","href":"/learn/atlas/leaves/stomata-and-transpiration","description":"Link stomatal behavior to carbon dioxide exchange and water loss."},
+      {"title":"Symptom pattern language","href":"/learn/atlas/leaves/symptom-pattern-language","description":"Describe symptoms precisely before assigning a cause."},
+      {"title":"Stomatal conductance","href":"/learn/cultivation-science/stomatal-conductance-and-gas-exchange","description":"Go deeper into gas exchange, atmospheric demand, leaf temperature, and root-water supply."}
+    ]
+  },
+  {
+    "slug": "flowering-development-maturity",
+    "title": "Flowering, Development & Maturity",
+    "summary": "Follow female flower structure from initiation through bud development, pollination response, maturity assessment, and reproductive resource allocation.",
+    "units": [
+      {"title":"Female flower anatomy","href":"/learn/atlas/flowers/female-flower-anatomy","description":"Locate bracts, stigmas, sugar leaves, and clustered floral structures."},
+      {"title":"Flower initiation","href":"/learn/atlas/flowers/flower-initiation","description":"Follow the transition from preflower expression into expanding floral sites."},
+      {"title":"Bud development","href":"/learn/atlas/flowers/bud-development","description":"Track changes in bracts, stigmas, resin coverage, density, and senescence."},
+      {"title":"Maturity & risk inspection","href":"/learn/atlas/flowers/maturity-and-risk-inspection","description":"Combine development, trichome observations, senescence, cultivar behavior, and mold inspection."},
+      {"title":"Reproductive source–sink transition","href":"/learn/cultivation-science/reproductive-source-sink-transition","description":"Understand how flowering changes demand across leaves, roots, shoots, and reproductive tissues."}
+    ]
+  },
+  {
+    "slug": "trichomes-resin-secondary-metabolism",
+    "title": "Trichomes, Resin & Secondary Metabolism",
+    "summary": "Study glandular trichome forms, anatomy, sampling, optical maturity observations, and the difference between visible resin and analytical chemistry.",
+    "units": [
+      {"title":"Trichome types","href":"/learn/atlas/trichomes-resin/trichome-types","description":"Compare capitate-stalked, capitate-sessile, and bulbous glandular trichomes."},
+      {"title":"Gland anatomy","href":"/learn/atlas/trichomes-resin/gland-anatomy","description":"Identify stalk, gland head, secretory region, and storage space."},
+      {"title":"Where to inspect","href":"/learn/atlas/trichomes-resin/where-to-inspect","description":"Standardize representative flower-bract sampling."},
+      {"title":"Clear, cloudy & amber","href":"/learn/atlas/trichomes-resin/clear-cloudy-and-amber","description":"Use optical condition cautiously as one maturity observation among several."},
+      {"title":"Trichome secretion & secondary metabolism","href":"/learn/cultivation-science/trichome-secretion-and-secondary-metabolism","description":"Connect gland biology to cannabinoid and terpene production without equating visible frost with potency."}
+    ]
+  },
+  {
+    "slug": "sex-pollen-seed-breeding",
+    "title": "Sex, Pollen, Seed & Breeding Foundations",
+    "summary": "Learn reproductive structures, mixed-sex expression, pollen biology, seed formation, and controlled pollination workflow.",
+    "units": [
+      {"title":"Male vs female preflowers","href":"/learn/atlas/sex-pollen-seed/male-vs-female-preflowers","description":"Compare developing staminate and pistillate structures across stages."},
+      {"title":"Mixed-sex expression","href":"/learn/atlas/sex-pollen-seed/mixed-sex-expression","description":"Identify anthers or staminate structures on otherwise female plants without assuming cause."},
+      {"title":"Pollen biology","href":"/learn/atlas/sex-pollen-seed/pollen-biology","description":"Follow pollen production, release, transport, stigma contact, and fertilization."},
+      {"title":"Seed formation","href":"/learn/atlas/sex-pollen-seed/seed-formation","description":"Track fertilization through embryo and seed-coat development."},
+      {"title":"Controlled pollination","href":"/learn/atlas/sex-pollen-seed/controlled-pollination","description":"Use isolation, labeling, pollen handling, and recordkeeping for intentional crosses."}
+    ]
+  },
+  {
+    "slug": "environment-light-vpd",
+    "title": "Environment, Light & VPD",
+    "summary": "Treat environment as an interacting system of light, temperature, humidity, airflow, atmospheric demand, and root-zone supply.",
+    "units": [
+      {"title":"Light distribution","href":"/learn/atlas/environment-overlay/light-distribution","description":"Map high- and low-light zones across the canopy."},
+      {"title":"Temperature & humidity","href":"/learn/atlas/environment-overlay/temperature-and-humidity","description":"Understand how temperature and RH combine to shape evaporative demand."},
+      {"title":"VPD & transpiration","href":"/learn/atlas/environment-overlay/vpd-and-transpiration","description":"Connect VPD to stomatal behavior, leaf temperature, water movement, and changing plant demand."},
+      {"title":"Airflow & boundary layer","href":"/learn/atlas/environment-overlay/airflow-and-boundary-layer","description":"Visualize the still-air boundary layer around leaves."},
+      {"title":"Supplemental lighting & DLI","href":"/learn/cultivation-science/supplemental-lighting-and-dli-in-greenhouses","description":"Integrate natural and supplemental photons across the day."}
+    ]
+  },
+  {
+    "slug": "plant-health-ipm-biosecurity",
+    "title": "Plant Health, IPM & Biosecurity",
+    "summary": "Build an evidence-first plant-health workflow around scouting, pest and disease identification, sanitation, testing, and clean-stock practices.",
+    "units": [
+      {"title":"Diagnostic foundations","href":"/learn/plant-health/diagnostic-foundations","description":"Start every plant-health problem with location, pattern, progression, measurements, and recent changes."},
+      {"title":"Two-spotted spider mite","href":"/learn/plant-health/two-spotted-spider-mite","description":"Identify eggs, mites, stippling, and late-stage webbing correctly."},
+      {"title":"Powdery mildew","href":"/learn/plant-health/powdery-mildew","description":"Separate fungal colonies from residues and other pale surface material."},
+      {"title":"Hop latent viroid","href":"/learn/plant-health/hop-latent-viroid","description":"Understand why laboratory testing and clean-stock practices matter for HLVd."},
+      {"title":"Pest scouting & hotspot mapping","href":"/learn/tools/pest-scouting-map","description":"Turn repeated scouting observations into spatial and population trends."}
+    ]
+  },
+  {
+    "slug": "outdoor-protected-postharvest",
+    "title": "Outdoor, Protected Cultivation & Post-Harvest",
+    "summary": "Connect establishment, weather, protected-environment risk, lighting, drying, water activity, and microbial quality into one applied systems course.",
+    "units": [
+      {"title":"Hardening & outdoor establishment","href":"/learn/cultivation-science/hardening-transplant-and-outdoor-establishment","description":"Move plants into sun, wind, and changing humidity through measured acclimation."},
+      {"title":"Rainfall, irrigation & water-source integration","href":"/learn/cultivation-science/rainfall-irrigation-and-water-source-integration","description":"Connect effective rainfall, root-zone storage, runoff, irrigation, and source-water quality."},
+      {"title":"Humidity, condensation & dew-point risk","href":"/learn/cultivation-science/humidity-condensation-and-dew-point","description":"Understand condensation risk inside protected structures."},
+      {"title":"Drying temperature, RH & airflow","href":"/learn/cultivation-science/drying-temperature-rh-and-airflow","description":"Treat drying as controlled moisture transfer rather than a fixed calendar schedule."},
+      {"title":"Water activity & equilibration","href":"/learn/cultivation-science/water-activity-and-equilibration","description":"Separate moisture content from water activity and understand post-harvest equilibration."}
+    ]
+  }
+]
