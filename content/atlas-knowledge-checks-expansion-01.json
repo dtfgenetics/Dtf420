@@ -1,0 +1,132 @@
+[
+  {
+    "id": "seed-reserve-mobilization",
+    "route": "/learn/atlas/seed-germination/reserve-mobilization",
+    "prompt": "During early germination, what is the main role of stored seed reserves before the seedling is fully photosynthetically independent?",
+    "options": [
+      "They provide substrates and energy for resumed metabolism and early growth",
+      "They permanently replace mineral uptake by roots",
+      "They determine the final sex of the plant",
+      "They prevent all water loss from the embryo"
+    ],
+    "correctIndex": 0,
+    "explanation": "Stored reserves in seed tissues are mobilized as metabolism resumes, supporting embryo growth and establishment before expanding photosynthetic tissues can supply most current carbon demand."
+  },
+  {
+    "id": "root-oxygen-diffusion",
+    "route": "/learn/atlas/root-system/root-zone-oxygen-diffusion",
+    "prompt": "Why can a persistently saturated root zone reduce oxygen availability around roots even when the irrigation water itself contains dissolved oxygen?",
+    "options": [
+      "Gas diffusion through water-filled pore space is much slower than through air-filled pore space",
+      "Roots stop respiring whenever water is present",
+      "Dissolved oxygen automatically converts to carbon dioxide at the media surface",
+      "Root hairs physically block all oxygen movement after irrigation"
+    ],
+    "correctIndex": 0,
+    "explanation": "When pores remain water-filled, atmospheric oxygen replenishes the root zone much more slowly. Root and microbial respiration can then consume oxygen faster than it is replaced."
+  },
+  {
+    "id": "stem-source-sink-integration",
+    "route": "/learn/atlas/stem-vascular/source-sink-integration",
+    "prompt": "Which statement best describes source–sink integration in the vascular system?",
+    "options": [
+      "Photosynthate moves through phloem from exporting source tissues toward importing sinks according to changing plant demand",
+      "Xylem transports sugars downward while phloem transports only water upward",
+      "Every leaf exports the same amount of carbon to every organ at all times",
+      "Sink tissues are always mature leaves and never developing organs"
+    ],
+    "correctIndex": 0,
+    "explanation": "Source and sink status changes with development. Mature photosynthetic tissues commonly export assimilates, while growing shoots, roots, flowers, seeds, and storage tissues can act as competing sinks."
+  },
+  {
+    "id": "nodes-branch-angle-support",
+    "route": "/learn/atlas/nodes-branching/branch-angle-and-mechanical-support",
+    "prompt": "Why should branch angle be interpreted together with branch diameter, load, attachment geometry, and support rather than as a single strength score?",
+    "options": [
+      "Mechanical failure depends on interacting geometry, tissue properties, leverage, and load",
+      "Branch angle has no relationship to canopy architecture",
+      "Only internode color determines branch strength",
+      "All branch attachments carry identical loads regardless of position"
+    ],
+    "correctIndex": 0,
+    "explanation": "A branch is a loaded structure. Its risk of bending or failure depends on leverage, attachment, tissue condition, branch dimensions, supported mass, movement, and external support—not one angle alone."
+  },
+  {
+    "id": "leaf-energy-balance",
+    "route": "/learn/atlas/leaves/leaf-temperature-and-energy-balance",
+    "prompt": "Why can leaf temperature differ from measured room air temperature?",
+    "options": [
+      "Leaf energy balance includes radiation absorbed, convective exchange, and evaporative cooling through transpiration",
+      "Leaves always remain exactly two degrees warmer than air",
+      "Only root-zone pH determines leaf temperature",
+      "Leaf temperature is independent of light, airflow, and transpiration"
+    ],
+    "correctIndex": 0,
+    "explanation": "Leaves exchange energy with radiation, surrounding air, and water vapor. Light load, airflow, stomatal behavior, humidity, and water status can therefore make leaf temperature diverge from air temperature."
+  },
+  {
+    "id": "flower-photoperiod-transition",
+    "route": "/learn/atlas/flowers/photoperiod-sensing-and-floral-transition",
+    "prompt": "Why is photoperiod response not identical to the first day that visible flowers appear?",
+    "options": [
+      "Photoperiodic signaling and meristem transition precede many externally visible stages of flower development",
+      "Plants perceive photoperiod only after mature flowers have formed",
+      "Visible stigmas are the organ that measures night length",
+      "Photoperiod affects roots but not shoot development"
+    ],
+    "correctIndex": 0,
+    "explanation": "Developmental signaling and meristem reorganization occur before all floral structures are externally obvious. Visible flower development is therefore a later observation in a broader transition process."
+  },
+  {
+    "id": "trichome-secretory-storage",
+    "route": "/learn/atlas/trichomes-resin/secretory-disk-and-storage-cavity",
+    "prompt": "In a glandular cannabis trichome, where does much of the secreted resin accumulate relative to the secretory disk cells?",
+    "options": [
+      "In a subcuticular storage cavity beneath the expanded cuticle",
+      "Inside xylem vessels in the trichome stalk",
+      "Only inside the nucleus of each secretory cell",
+      "Inside root hairs before transport to the flower"
+    ],
+    "correctIndex": 0,
+    "explanation": "Secretory disk cells produce specialized metabolites that accumulate in a subcuticular storage space as the cuticle separates and expands over the gland head."
+  },
+  {
+    "id": "sex-fertilization-seed-fill",
+    "route": "/learn/atlas/sex-pollen-seed/fertilization-and-seed-filling",
+    "prompt": "What distinguishes pollen contact with a stigma from successful seed development?",
+    "options": [
+      "Pollen must progress through compatible reproductive processes leading to fertilization before embryo and seed filling can proceed",
+      "Any pollen grain touching any leaf immediately becomes a mature seed",
+      "Seed filling occurs before fertilization",
+      "Stigmas transform directly into embryos after contact"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pollen arrival is only an early step. Successful fertilization must occur before embryo development, reserve accumulation, seed-coat maturation, and later physical seed maturity."
+  },
+  {
+    "id": "environment-leaf-air-temperature",
+    "route": "/learn/atlas/environment-overlay/leaf-temperature-vs-air-temperature",
+    "prompt": "When estimating plant-level vapor-pressure conditions, why is measured leaf temperature often more informative than assuming it equals air temperature?",
+    "options": [
+      "Saturation vapor pressure at the leaf surface depends on actual leaf temperature, which can differ from room air temperature",
+      "Air temperature is never relevant to plant physiology",
+      "Leaf temperature alone determines root-zone EC",
+      "Relative humidity automatically forces leaf and air temperatures to be identical"
+    ],
+    "correctIndex": 0,
+    "explanation": "Leaf temperature can diverge from air temperature because of radiation, convection, airflow, and transpiration. That difference changes the vapor-pressure gradient at the leaf surface."
+  },
+  {
+    "id": "diagnostic-genotype-environment",
+    "route": "/learn/atlas/diagnostic-overlay/genotype-by-environment-context",
+    "prompt": "Why should a repeated trait across one cultivar not automatically be treated as a universal deficiency or disease symptom?",
+    "options": [
+      "Genotype, developmental stage, environment, and their interaction can produce repeatable phenotypes that are not a single pathological cause",
+      "Every visible difference is caused by the same nutrient",
+      "Genetics only affects seed color and cannot affect plant form",
+      "Environmental context becomes irrelevant once a cultivar name is known"
+    ],
+    "correctIndex": 0,
+    "explanation": "Plant phenotype reflects genotype, environment, development, and their interaction. Diagnostic reasoning therefore needs baselines, comparisons, measurements, and progression rather than a universal visual label."
+  }
+]
