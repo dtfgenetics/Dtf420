@@ -1,0 +1,80 @@
+import type { MetadataRoute } from "next";
+import atlasModules from "@/content/atlas-learning-modules.json";
+import plantHealthCore from "@/content/plant-health-library.json";
+import plantHealthExpanded from "@/content/plant-health-expanded.json";
+import cultivationCore from "@/content/cultivation-science-library.json";
+import protectedCultivation from "@/content/protected-cultivation-library.json";
+import protectedLighting from "@/content/protected-cultivation-lighting.json";
+import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
+import postharvestExpanded from "@/content/postharvest-science-expanded.json";
+import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
+import symptomLibrary from "@/content/symptom-differential-library.json";
+import learningTools from "@/content/learning-tools.json";
+
+const BASE_URL = "https://dtfseeds.com";
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replaceAll("&", "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function item(path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly") {
+  return {
+    url: `${BASE_URL}${path}`,
+    lastModified: new Date(),
+    changeFrequency,
+    priority,
+  } satisfies MetadataRoute.Sitemap[number];
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const staticRoutes = [
+    item("/", 1, "weekly"),
+    item("/learn", 0.95, "weekly"),
+    item("/learn/search", 0.85, "weekly"),
+    item("/learn/atlas", 0.95, "weekly"),
+    item("/learn/plant-health", 0.9, "weekly"),
+    item("/learn/symptoms", 0.9, "weekly"),
+    item("/learn/cultivation-science", 0.9, "weekly"),
+    item("/learn/tools", 0.85, "weekly"),
+    item("/learn/atlas/cases", 0.8, "monthly"),
+    item("/learn/atlas/practice", 0.8, "monthly"),
+    item("/learn/atlas/review", 0.75, "monthly"),
+    item("/learn/atlas/mastery", 0.7, "monthly"),
+    item("/learn/atlas/paths", 0.75, "monthly"),
+    item("/games", 0.8, "weekly"),
+    item("/tools", 0.75, "monthly"),
+    item("/community", 0.7, "monthly"),
+  ];
+
+  const plantHealth = [...plantHealthCore, ...plantHealthExpanded].map((entry) =>
+    item(`/learn/plant-health/${entry.slug}`, 0.78, "monthly"),
+  );
+
+  const cultivation = [
+    ...cultivationCore,
+    ...protectedCultivation,
+    ...protectedLighting,
+    ...outdoorExpanded,
+    ...postharvestExpanded,
+    ...advancedExpanded,
+  ].map((entry) => item(`/learn/cultivation-science/${entry.slug}`, 0.78, "monthly"));
+
+  const symptoms = symptomLibrary.map((entry) => item(`/learn/symptoms/${entry.slug}`, 0.8, "monthly"));
+  const tools = learningTools.map((entry) => item(`/learn/tools/${entry.slug}`, 0.7, "monthly"));
+
+  const atlasRoutes = atlasModules.flatMap((atlasModule) => {
+    const systemSlug = slugify(atlasModule.id);
+    return [
+      item(`/learn/atlas/${systemSlug}`, 0.82, "monthly"),
+      ...atlasModule.lessons.map((lesson) => item(`/learn/atlas/${systemSlug}/${slugify(lesson.title)}`, 0.75, "monthly")),
+    ];
+  });
+
+  const all = [...staticRoutes, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
+  const unique = new Map(all.map((entry) => [entry.url, entry]));
+  return [...unique.values()];
+}
