@@ -5,10 +5,14 @@ import { useMemo, useState } from "react";
 import atlasSections from "@/content/atlas-sections.json";
 import learningModules from "@/content/atlas-learning-modules.json";
 import diagnosticFramework from "@/content/diagnostic-framework.json";
+import { useAtlasProgress } from "@/components/atlas/AtlasLearningProgress";
+import { useAtlasMastery } from "@/components/atlas/AtlasMastery";
 import styles from "./LivingPlantAtlas.module.css";
+import progressStyles from "./LivingPlantAtlasProgress.module.css";
 
 type AtlasMode = "anatomy" | "environment" | "diagnostics";
 type AtlasSection = (typeof atlasSections)[number];
+type SystemState = "notStarted" | "inProgress" | "complete" | "mastered";
 
 type HotspotPosition = {
   top: string;
@@ -41,6 +45,14 @@ const anatomicalIds = new Set([
 
 const lessonCount = learningModules.reduce((total, module) => total + module.lessons.length, 0);
 
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replaceAll("&", "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function sectionForMode(mode: AtlasMode, section: AtlasSection) {
   if (mode === "anatomy") return anatomicalIds.has(section.id);
   if (mode === "environment") return section.id === "environment_overlay" || anatomicalIds.has(section.id);
@@ -51,9 +63,33 @@ function sectionRoute(section: AtlasSection) {
   return `/learn/atlas/${section.id.replaceAll("_", "-")}`;
 }
 
+function lessonRoutesForSystem(systemId: string) {
+  const atlasModule = learningModules.find((item) => item.id === systemId);
+  if (!atlasModule) return [];
+  return atlasModule.lessons.map(
+    (lesson) => `/learn/atlas/${slugify(atlasModule.id)}/${slugify(lesson.title)}`,
+  );
+}
+
+function stateForSystem(total: number, completed: number, mastered: number): SystemState {
+  if (total > 0 && mastered === total) return "mastered";
+  if (total > 0 && completed === total) return "complete";
+  if (completed > 0 || mastered > 0) return "inProgress";
+  return "notStarted";
+}
+
+function stateLabel(state: SystemState) {
+  if (state === "mastered") return "Mastered";
+  if (state === "complete") return "Complete";
+  if (state === "inProgress") return "In progress";
+  return "Not started";
+}
+
 export function LivingPlantAtlas() {
   const [mode, setMode] = useState<AtlasMode>("anatomy");
   const [selectedId, setSelectedId] = useState("leaves");
+  const { progress } = useAtlasProgress();
+  const { mastery } = useAtlasMastery();
 
   const selected = useMemo(
     () => atlasSections.find((section) => section.id === selectedId) ?? atlasSections[4],
@@ -61,6 +97,11 @@ export function LivingPlantAtlas() {
   );
 
   const visibleSections = atlasSections.filter((section) => sectionForMode(mode, section));
+  const selectedRoutes = lessonRoutesForSystem(selected.id);
+  const selectedCompleted = selectedRoutes.filter((route) => progress.completed.includes(route)).length;
+  const selectedMastered = selectedRoutes.filter((route) => mastery.lessons[route]?.mastered).length;
+  const selectedState = stateForSystem(selectedRoutes.length, selectedCompleted, selectedMastered);
+  const selectedNextRoute = selectedRoutes.find((route) => !progress.completed.includes(route)) ?? selectedRoutes[0];
 
   function selectSection(section: AtlasSection) {
     setSelectedId(section.id);
@@ -120,7 +161,7 @@ export function LivingPlantAtlas() {
         <div className={`${styles.plantStage} ${styles[mode]}`}>
           <div className={styles.stageLabel}>
             <span>{mode === "anatomy" ? "Whole-plant anatomy" : mode === "environment" ? "Environmental interactions" : "Symptom location"}</span>
-            <small>Tap a hotspot to inspect the system</small>
+            <small>Hotspots show your saved learning state</small>
           </div>
 
           <svg className={styles.plantArt} viewBox="0 0 600 760" role="img" aria-label="Interactive cannabis plant diagram">
@@ -191,17 +232,23 @@ export function LivingPlantAtlas() {
           {visibleSections.map((section) => {
             const position = hotspotPositions[section.id];
             const isActive = selected.id === section.id;
+            const routes = lessonRoutesForSystem(section.id);
+            const completed = routes.filter((route) => progress.completed.includes(route)).length;
+            const mastered = routes.filter((route) => mastery.lessons[route]?.mastered).length;
+            const state = stateForSystem(routes.length, completed, mastered);
             return (
               <button
                 key={section.id}
                 type="button"
-                className={`${styles.hotspot} ${isActive ? styles.hotspotActive : ""}`}
+                className={`${styles.hotspot} ${progressStyles[state]} ${isActive ? styles.hotspotActive : ""}`}
                 style={position}
                 aria-pressed={isActive}
+                aria-label={`${section.label}. ${stateLabel(state)}. ${completed} of ${routes.length} lessons complete and ${mastered} mastered.`}
                 onClick={() => selectSection(section)}
               >
                 <span className={styles.hotspotDot} />
                 <span>{section.label}</span>
+                <small className={progressStyles.hotspotStatus}>{mastered === routes.length && routes.length > 0 ? "Mastered" : `${completed}/${routes.length}`}</small>
               </button>
             );
           })}
@@ -211,6 +258,22 @@ export function LivingPlantAtlas() {
           <p className={styles.panelEyebrow}>Selected system</p>
           <h2>{selected.label}</h2>
           <p>{selected.summary}</p>
+
+          <div className={progressStyles.progressCard}>
+            <div className={progressStyles.progressTopline}>
+              <span>Your system state</span>
+              <strong>{stateLabel(selectedState)}</strong>
+            </div>
+            <div className={progressStyles.progressMetrics}>
+              <div><b>{selectedCompleted}/{selectedRoutes.length}</b><small>lessons complete</small></div>
+              <div><b>{selectedMastered}/{selectedRoutes.length}</b><small>checks mastered</small></div>
+            </div>
+            {selectedNextRoute ? (
+              <Link className={progressStyles.continueLink} href={selectedNextRoute}>
+                {selectedCompleted === selectedRoutes.length ? "Review this system" : "Continue this system"}
+              </Link>
+            ) : null}
+          </div>
 
           <div className={styles.assetCallout}>
             <span>Visual focus</span>
@@ -239,12 +302,21 @@ export function LivingPlantAtlas() {
       </section>
 
       <section className={styles.systemStrip} aria-label="Plant system index">
-        {atlasSections.map((section) => (
-          <button key={section.id} type="button" onClick={() => selectSection(section)}>
-            <span>{section.label}</span>
-            <small>{section.topics.length} topics</small>
-          </button>
-        ))}
+        {atlasSections.map((section) => {
+          const routes = lessonRoutesForSystem(section.id);
+          const completed = routes.filter((route) => progress.completed.includes(route)).length;
+          const mastered = routes.filter((route) => mastery.lessons[route]?.mastered).length;
+          const state = stateForSystem(routes.length, completed, mastered);
+          return (
+            <button key={section.id} type="button" onClick={() => selectSection(section)} aria-label={`${section.label}. ${stateLabel(state)}.`}>
+              <span>{section.label}</span>
+              <span className={progressStyles.stripMeta}>
+                <small>{section.topics.length} topics</small>
+                <small className={progressStyles.stripState}>{stateLabel(state)}</small>
+              </span>
+            </button>
+          );
+        })}
       </section>
     </div>
   );
