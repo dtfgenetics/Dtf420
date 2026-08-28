@@ -1,0 +1,27 @@
+.shell { display: grid; gap: 24px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
+.hero h1 { margin-bottom: 14px; }
+.hero p { max-width: 760px; color: var(--muted); line-height: 1.65; }
+.hero a { color: var(--accent-strong); font-weight: 800; }
+.searchPanel { padding: 20px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+.searchPanel label { display: block; margin-bottom: 8px; font-weight: 900; }
+.inputRow { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 10px; }
+.inputRow input, .inputRow select { min-height: 48px; width: 100%; padding: 0 14px; border: 1px solid var(--border); border-radius: 12px; background: #09120c; color: var(--text); font: inherit; }
+.examples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.examples button { padding: 7px 10px; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
+.examples button:hover, .examples button:focus-visible { border-color: var(--accent); color: var(--accent-strong); }
+.resultHeader { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); }
+.resultList { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.resultCard { padding: 20px; border: 1px solid var(--border); border-radius: 18px; background: linear-gradient(180deg, rgba(20, 34, 25, 0.96), rgba(12, 23, 16, 0.96)); }
+.resultCard:hover, .resultCard:focus-visible { border-color: var(--accent); }
+.resultMeta { display: flex; flex-wrap: wrap; gap: 8px 12px; color: var(--muted); font-size: 12px; }
+.resultMeta strong { color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
+.resultCard h2 { margin: 10px 0; font-size: 22px; }
+.resultCard p { color: var(--muted); line-height: 1.55; }
+.resultCard b { color: var(--accent-strong); }
+.empty { padding: 30px; border: 1px dashed var(--border); border-radius: 18px; color: var(--muted); text-align: center; }
+.scope { padding: 18px; border-left: 3px solid var(--accent); background: rgba(183, 226, 93, 0.06); color: var(--muted); }
+.scope strong { color: var(--text); }
+@media (max-width: 800px) {
+  .hero, .inputRow, .resultList { grid-template-columns: 1fr; }
+}
