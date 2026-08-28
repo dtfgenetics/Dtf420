@@ -1,0 +1,52 @@
+name: Repair Education Links
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/fix-education-links.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair-links:
+    if: github.event.head_commit.message == 'Add one-time education link repair workflow'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Repair confirmed stale learning route
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const file = 'content/education-related-links.json';
+          const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+          let changed = 0;
+          for (const links of Object.values(data)) {
+            for (const link of links) {
+              if (link.href === '/learn/plant-health/sanitation-and-biosecurity') {
+                link.href = '/learn/plant-health/sanitation-and-quarantine';
+                link.title = 'Sanitation and Quarantine';
+                changed += 1;
+              }
+            }
+          }
+          if (!changed) throw new Error('Expected stale sanitation link was not found.');
+          fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+          console.log(`Repaired ${changed} stale education link(s).`);
+          NODE
+
+      - name: Commit repaired learning map
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/education-related-links.json
+          git commit -m "Repair stale education sanitation link"
+          git push origin HEAD:main
