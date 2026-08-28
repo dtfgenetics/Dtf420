@@ -3,11 +3,15 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import modules from "@/content/atlas-learning-modules.json";
+import sections from "@/content/atlas-sections.json";
+import systemConnections from "@/content/atlas-system-connections.json";
+import growthStages from "@/content/atlas-growth-stages.json";
+import overlays from "@/content/atlas-overlays.json";
 import guidedPaths from "@/content/atlas-guided-paths.json";
 import diagnosticCases from "@/content/atlas-diagnostic-cases.json";
 import styles from "./AtlasSearch.module.css";
 
-type SearchKind = "Lesson" | "Guided path" | "Diagnostic case" | "Tool";
+type SearchKind = "Lesson" | "Plant system" | "Lifecycle stage" | "Environment factor" | "Diagnostic zone" | "Guided path" | "Diagnostic case" | "Tool";
 
 type SearchItem = {
   kind: SearchKind;
@@ -32,23 +36,93 @@ function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
+function environmentRoute(id: string) {
+  if (id === "light") return "/learn/atlas/environment-overlay/light-distribution";
+  if (["leaf_temperature", "temperature", "rh"].includes(id)) return "/learn/atlas/environment-overlay/temperature-and-humidity";
+  if (id === "vpd") return "/learn/atlas/environment-overlay/vpd-and-transpiration";
+  if (id === "airflow") return "/learn/atlas/environment-overlay/airflow-and-boundary-layer";
+  if (["water", "root_oxygen", "ph", "ec"].includes(id)) return "/learn/atlas/environment-overlay/root-zone-interaction";
+  return "/learn/atlas/environment-overlay";
+}
+
+const connectionById = new Map(systemConnections.map((item) => [item.id, item] as const));
+
 const lessonItems: SearchItem[] = modules.flatMap((atlasModule) =>
-  atlasModule.lessons.map((lesson) => ({
-    kind: "Lesson" as const,
-    title: lesson.title,
-    context: atlasModule.label,
-    summary: lesson.summary,
-    href: `/learn/atlas/${slugify(atlasModule.id)}/${slugify(lesson.title)}`,
-    terms: [lesson.visual, ...atlasModule.learningGoals].join(" "),
-  })),
+  atlasModule.lessons.map((lesson) => {
+    const connection = connectionById.get(atlasModule.id);
+    return {
+      kind: "Lesson" as const,
+      title: lesson.title,
+      context: atlasModule.label,
+      summary: lesson.summary,
+      href: `/learn/atlas/${slugify(atlasModule.id)}/${slugify(lesson.title)}`,
+      terms: [
+        lesson.visual,
+        ...atlasModule.learningGoals,
+        ...(connection?.stages ?? []),
+        ...(connection?.measurements ?? []),
+      ].join(" "),
+    };
+  }),
 );
+
+const systemItems: SearchItem[] = sections.map((section) => {
+  const connection = connectionById.get(section.id);
+  return {
+    kind: "Plant system",
+    title: section.label,
+    context: `${section.topics.length} indexed topics`,
+    summary: section.summary,
+    href: `/learn/atlas/${slugify(section.id)}`,
+    terms: [
+      section.firstAsset,
+      ...section.topics,
+      connection?.reason ?? "",
+      ...(connection?.stages ?? []),
+      ...(connection?.measurements ?? []),
+      ...(connection?.related ?? []),
+    ].join(" "),
+  };
+});
+
+const stageItems: SearchItem[] = growthStages.map((stage) => ({
+  kind: "Lifecycle stage" as const,
+  title: stage.label,
+  context: `Stage ${stage.stageNumber} of ${growthStages.length}`,
+  summary: stage.summary,
+  href: "/learn/atlas#atlas-growth-stages",
+  terms: [
+    ...stage.visibleStructures,
+    ...stage.activeSystems,
+    ...stage.observe,
+    ...stage.biology,
+  ].join(" "),
+}));
+
+const environmentItems: SearchItem[] = overlays.environment.factors.map((factor) => ({
+  kind: "Environment factor" as const,
+  title: factor.label,
+  context: `${factor.zone} zone`,
+  summary: factor.summary,
+  href: environmentRoute(factor.id),
+  terms: `${factor.id} ${factor.connectsTo.join(" ")}`,
+}));
+
+const diagnosticZoneItems: SearchItem[] = overlays.diagnostics.zones.map((zone) => ({
+  kind: "Diagnostic zone" as const,
+  title: zone.label,
+  context: `Symptom location · ${zone.position}`,
+  summary: zone.questions[0],
+  href: "/learn/atlas/diagnostic-overlay/symptom-location",
+  terms: `${zone.id} ${zone.questions.join(" ")}`,
+}));
 
 const pathItems: SearchItem[] = guidedPaths.map((path) => ({
   kind: "Guided path" as const,
   title: path.title,
   context: `${path.lessons.length} lesson guided path`,
   summary: path.summary,
-  href: "/learn/atlas/paths",
+  href: `/learn/atlas/paths/${path.id}`,
   terms: `${path.outcome} ${path.lessons.join(" ")}`,
 }));
 
@@ -85,11 +159,19 @@ const toolItems: SearchItem[] = [
   },
   {
     kind: "Tool",
+    title: "Visual Identification Lab",
+    context: "Practice from diagrams",
+    summary: "Identify plant structures, reproductive features, vascular tissues, root structures, and environmental relationships from Atlas visuals.",
+    href: "/learn/atlas/practice#visual-identification-title",
+    terms: "visual identify diagram structure recognition practice roots xylem node petiole stigma trichome reproductive",
+  },
+  {
+    kind: "Tool",
     title: "Practice Hub",
     context: "Practice",
-    summary: "Choose focused recall, diagnostic reasoning, or side-by-side plant-system comparisons.",
+    summary: "Choose visual identification, focused recall, diagnostic reasoning, or side-by-side plant-system comparisons.",
     href: "/learn/atlas/practice",
-    terms: "practice quiz recall reasoning compare review",
+    terms: "practice visual quiz recall reasoning compare review",
   },
   {
     kind: "Tool",
@@ -141,8 +223,17 @@ const toolItems: SearchItem[] = [
   },
 ];
 
-const searchItems = [...lessonItems, ...pathItems, ...caseItems, ...toolItems];
-const examples = ["VPD", "yellow lower leaves", "trichomes", "pH", "roots"];
+const searchItems = [
+  ...lessonItems,
+  ...systemItems,
+  ...stageItems,
+  ...environmentItems,
+  ...diagnosticZoneItems,
+  ...pathItems,
+  ...caseItems,
+  ...toolItems,
+];
+const examples = ["VPD", "root oxygen", "cotyledon", "maturation", "one branch", "trichomes"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -176,7 +267,7 @@ export function AtlasSearch() {
       .map((item) => rankItem(item, query))
       .filter((item): item is RankedItem => item !== null)
       .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
-      .slice(0, 12),
+      .slice(0, 14),
     [query],
   );
   const searching = normalize(query).length >= 2;
@@ -186,8 +277,8 @@ export function AtlasSearch() {
       <section className={styles.hero} aria-labelledby="atlas-search-title">
         <div>
           <small>Atlas Search</small>
-          <h1 id="atlas-search-title">Find the concept, case, or tool you need.</h1>
-          <p>Search the 50 lessons, guided paths, diagnostic cases, and learner tools without needing to know where they live in the Atlas.</p>
+          <h1 id="atlas-search-title">Find the structure, stage, measurement, case, or tool you need.</h1>
+          <p>Search lessons plus plant systems, lifecycle stages, environment factors, symptom locations, guided paths, diagnostic cases, and learner tools.</p>
         </div>
         <Link href="/learn/atlas/dashboard">Back to Dashboard</Link>
       </section>
@@ -201,7 +292,7 @@ export function AtlasSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try VPD, roots, yellow lower leaves, trichomes, pH…"
+            placeholder="Try VPD, root oxygen, cotyledon, maturation, one branch…"
             autoComplete="off"
           />
           {query ? <button type="button" onClick={() => setQuery("")} aria-label="Clear Atlas search">Clear</button> : null}
@@ -215,13 +306,13 @@ export function AtlasSearch() {
       <section className={styles.results} aria-label="Atlas search results" aria-live="polite">
         {!searching ? (
           <div className={styles.empty}>
-            <strong>Search across the whole learning system.</strong>
-            <p>Lesson titles rank first, followed by matching systems, cases, paths, summaries, and learner tools.</p>
+            <strong>Search across the connected plant model.</strong>
+            <p>Results can come from lesson titles, system topics, developmental stages, measurements, environment factors, diagnostic zones, cases, paths, and tools.</p>
           </div>
         ) : results.length === 0 ? (
           <div className={styles.empty}>
             <strong>No Atlas matches yet.</strong>
-            <p>Try a broader biological term, a visible pattern, a measurement, or one of the examples above.</p>
+            <p>Try a broader biological term, a visible pattern, a developmental stage, a measurement, or one of the examples above.</p>
           </div>
         ) : (
           <>
