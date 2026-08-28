@@ -13,6 +13,7 @@ import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
+import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
 import evidenceSources from "@/content/education-sources.json";
@@ -48,7 +49,7 @@ const academyItems: SearchItem[] = academyCourses.map((course) => ({
   title: course.title,
   context: `${course.units.length} guided units`,
   summary: course.summary,
-  href: `/learn/academy#${course.slug}`,
+  href: `/learn/academy/${course.slug}`,
   terms: course.units.map((unit) => `${unit.title} ${unit.description}`).join(" "),
 }));
 
@@ -86,6 +87,7 @@ const cultivationItems: SearchItem[] = [
   ...postharvestExpanded,
   ...advancedExpanded,
   ...plantPhysiologyExpanded,
+  ...propagationNutritionGenetics,
 ].map((item) => ({
   kind: "Cultivation science" as const,
   title: item.title,
@@ -124,7 +126,7 @@ const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
 
 const searchItems = [...academyItems, ...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems];
 const kinds: Array<"All" | SearchKind> = ["All", "Academy course", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source"];
-const examples = ["plant health course", "stomatal conductance", "source sink", "yellow lower leaves", "PPFD", "water activity", "HLVd research", "replication"];
+const examples = ["cloning", "root-zone chemistry", "breeding", "plant health course", "stomatal conductance", "yellow lower leaves", "PPFD", "water activity", "HLVd research", "replication"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -171,7 +173,7 @@ export function EducationSearch() {
         <div>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Search Education</h1>
-          <p>Search Academy courses, Atlas lessons, plant-health references, whole-plant physiology, symptom differentials, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, printable field tools, and evidence sources from one place.</p>
+          <p>Search Academy courses, Atlas lessons, plant-health references, whole-plant physiology, propagation, nutrition and root-zone chemistry, genetics and breeding, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, printable field tools, and evidence sources from one place.</p>
         </div>
         <Link href="/learn">Back to Learn</Link>
       </section>
@@ -184,7 +186,7 @@ export function EducationSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try plant health course, stomatal conductance, water activity…"
+            placeholder="Try cloning, root-zone chemistry, breeding, water activity…"
             autoComplete="off"
           />
           <select aria-label="Filter education search" value={kind} onChange={(event) => setKind(event.target.value as "All" | SearchKind)}>
@@ -200,7 +202,7 @@ export function EducationSearch() {
         {!searching ? (
           <div className={styles.empty}>Enter at least two characters to search across {searchItems.length} indexed learning resources.</div>
         ) : results.length === 0 ? (
-          <div className={styles.empty}>No matches yet. Try a broader course, plant structure, physiology, symptom, pest, measurement, environment, workflow, research, or post-harvest term.</div>
+          <div className={styles.empty}>No matches yet. Try a broader course, plant structure, physiology, propagation, nutrition, breeding, symptom, pest, measurement, environment, workflow, research, or post-harvest term.</div>
         ) : (
           <>
             <header className={styles.resultHeader}>
