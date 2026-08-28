@@ -7,6 +7,7 @@ import { AtlasSystemGraphic } from "@/components/atlas/AtlasSystemGraphic";
 import { AtlasInteractiveLab } from "@/components/atlas/AtlasInteractiveLab";
 import { AtlasCoreInteractiveLab } from "@/components/atlas/AtlasCoreInteractiveLab";
 import { AtlasSystemProgress } from "@/components/atlas/AtlasSystemProgress";
+import { AtlasSystemConnections } from "@/components/atlas/AtlasSystemConnections";
 import styles from "./page.module.css";
 
 function slugify(value: string) {
@@ -70,6 +71,7 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
         </section>
 
         <AtlasSystemProgress systemId={atlasModule.id} />
+        <AtlasSystemConnections systemId={atlasModule.id} />
         <AtlasInteractiveLab systemId={atlasModule.id} />
         <AtlasCoreInteractiveLab systemId={atlasModule.id} />
 
