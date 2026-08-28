@@ -5,9 +5,17 @@ import protectedLibrary from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
 import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
+import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import styles from "../plant-health/page.module.css";
 
-const library = [...coreLibrary, ...protectedLibrary, ...protectedLighting, ...outdoorExpanded, ...postharvestExpanded];
+const library = [
+  ...coreLibrary,
+  ...protectedLibrary,
+  ...protectedLighting,
+  ...outdoorExpanded,
+  ...postharvestExpanded,
+  ...advancedExpanded,
+];
 
 export const metadata: Metadata = {
   title: "Cultivation Science Reference Library",
@@ -31,7 +39,7 @@ export default function CultivationSciencePage() {
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Cultivation Science Reference Library</h1>
         <p className="lede">
-          Deep subject branches for outdoor and protected cultivation, greenhouse environment and lighting, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.
+          Deep subject branches for outdoor and protected cultivation, greenhouse environment and lighting, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement and experimental science.
         </p>
         <div className={styles.heroActions}>
           <Link className="button button--primary" href="/learn/atlas">Open the Living Plant Atlas</Link>
