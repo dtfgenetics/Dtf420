@@ -1,0 +1,98 @@
+[
+  {
+    "id": "cannabis-greenhouse-pathogens-2024",
+    "title": "Integrated Management of Pathogens and Microbes in Cannabis sativa L. (Cannabis) under Greenhouse Conditions",
+    "publisher": "Plants",
+    "year": 2024,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10974757/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Cannabis greenhouse disease diagnosis and integrated management, including powdery mildew, Botrytis, root disease, HLVd, sanitation, irrigation, airflow, and post-harvest microbial risk."
+  },
+  {
+    "id": "hlvd-transmission-management-2025",
+    "title": "Transmission, Spread, Longevity and Management of Hop Latent Viroid, a Widespread and Destructive Pathogen Affecting Cannabis Plants in North America",
+    "publisher": "Plants",
+    "year": 2025,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11902214/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "HLVd detection, transmission pathways, persistence, sanitation experiments, propagation risk, and clean-stock management."
+  },
+  {
+    "id": "hlvd-review-2023",
+    "title": "Hop Latent Viroid: A Hidden Threat to the Cannabis Industry",
+    "publisher": "Viruses",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10053334/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "HLVd biology, cannabis disease context, symptoms, testing, crop-quality effects, and management considerations."
+  },
+  {
+    "id": "postharvest-drying-curing-2025",
+    "title": "Postharvest Drying and Curing Affect Cannabinoid Contents and Microbial Levels in Industrial Hemp",
+    "publisher": "Peer-reviewed open-access research",
+    "year": 2025,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821007/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Experimental drying and curing comparisons, moisture redistribution, cannabinoid measurements, color, and microbial levels."
+  },
+  {
+    "id": "cannabis-microbial-loads-2023",
+    "title": "Total yeast and mold levels in high THC-containing cannabis inflorescences are influenced by genotype, environment, and pre- and post-harvest handling practices",
+    "publisher": "Peer-reviewed open-access research",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10294073/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis inflorescence microbial loads, microclimate, airflow, handling, drying method, moisture, water activity, and post-harvest risk factors."
+  },
+  {
+    "id": "postharvest-operations-review-2022",
+    "title": "Postharvest Operations of Cannabis and Their Effect on Cannabinoid Content: A Review",
+    "publisher": "Peer-reviewed review",
+    "year": 2022,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9404914/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Drying, curing, storage, water activity, equilibrium moisture, packaging, and post-harvest process design."
+  },
+  {
+    "id": "penn-state-greenhouse-biocontrol-2026",
+    "title": "Planning for Biological Control in Greenhouses",
+    "publisher": "Penn State Extension",
+    "year": 2026,
+    "url": "https://extension.psu.edu/planning-for-biological-control-in-greenhouses",
+    "sourceType": "University extension",
+    "scope": "Preventive biological control, natural-enemy selection, compatibility, environmental fit, sticky-card monitoring, scouting, and recordkeeping."
+  },
+  {
+    "id": "okstate-greenhouse-ipm",
+    "title": "Integrated Pest Management in Commercial Greenhouses: An Overview of Principles and Practices",
+    "publisher": "Oklahoma State University Extension",
+    "url": "https://extension.okstate.edu/fact-sheets/ipm-in-the-greenhouse-series-integrated-pest-management-in-commercial-greenhouses-an-overview-of-principles-and-practices",
+    "sourceType": "University extension",
+    "scope": "Greenhouse IPM principles, plant quarantine, scouting, monitoring, sanitation, media, and integrated pest-management practices."
+  },
+  {
+    "id": "ontario-greenhouse-ipm-2025",
+    "title": "Integrated Pest Management for Greenhouse Fruits and Vegetables",
+    "publisher": "Ontario Ministry of Agriculture, Food and Agribusiness",
+    "year": 2025,
+    "url": "https://www.ontario.ca/page/publication-836a-integrated-pest-management-greenhouse-fruits-and-vegetables",
+    "sourceType": "Government production guide",
+    "scope": "Comprehensive greenhouse IPM framework and pest-management concepts for protected production systems."
+  },
+  {
+    "id": "cfia-greenhouse-biosecurity",
+    "title": "Greenhouse Vegetable Sector Biosecurity Guide",
+    "publisher": "Canadian Food Inspection Agency",
+    "url": "https://inspection.canada.ca/en/plant-health/invasive-species/biosecurity/greenhouse-vegetable-sector-biosecurity-guide",
+    "sourceType": "Government biosecurity guide",
+    "scope": "Controlled access, crop scouting, movement controls, sanitation, pest introduction pathways, and greenhouse biosecurity practices."
+  },
+  {
+    "id": "missouri-greenhouse-ipm",
+    "title": "Using Integrated Pest Management in Greenhouses and Herbaceous Nurseries",
+    "publisher": "University of Missouri Extension",
+    "url": "https://extension.missouri.edu/publications/ipm1026",
+    "sourceType": "University extension",
+    "scope": "Regular scouting, biological-control planning, greenhouse insect screening, pest exclusion, and airflow tradeoffs."
+  }
+]
