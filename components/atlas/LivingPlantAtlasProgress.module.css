@@ -1,0 +1,125 @@
+.hotspotStatus {
+  display: inline-flex;
+  align-items: center;
+  min-height: 18px;
+  margin-left: 0.15rem;
+  padding: 0.12rem 0.38rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(245, 250, 246, 0.68);
+  font-size: 0.62rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.notStarted {
+  opacity: 0.88;
+}
+
+.inProgress {
+  border-color: rgba(137, 197, 154, 0.55) !important;
+}
+
+.inProgress .hotspotStatus {
+  background: rgba(111, 190, 134, 0.16);
+  color: #d7efdd;
+}
+
+.complete {
+  border-color: rgba(132, 207, 154, 0.78) !important;
+  box-shadow: 0 0 0 2px rgba(132, 207, 154, 0.08), 0 8px 18px rgba(0, 0, 0, 0.2) !important;
+}
+
+.complete .hotspotStatus {
+  background: rgba(116, 199, 141, 0.22);
+  color: #e3f6e8;
+}
+
+.mastered {
+  border-color: rgba(199, 226, 151, 0.92) !important;
+  box-shadow: 0 0 0 3px rgba(199, 226, 151, 0.1), 0 8px 20px rgba(0, 0, 0, 0.22) !important;
+}
+
+.mastered .hotspotStatus {
+  background: rgba(199, 226, 151, 0.22);
+  color: #f1f9df;
+}
+
+.progressCard {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(122, 170, 136, 0.2);
+  border-radius: 16px;
+  background: rgba(8, 20, 13, 0.36);
+}
+
+.progressTopline,
+.progressMetrics,
+.stripMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.progressTopline span {
+  color: #a8ddb6;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.progressTopline strong {
+  font-size: 0.86rem;
+}
+
+.progressMetrics {
+  align-items: stretch;
+}
+
+.progressMetrics div {
+  display: grid;
+  flex: 1;
+  gap: 0.2rem;
+  padding: 0.65rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.progressMetrics b {
+  font-size: 1.25rem;
+}
+
+.progressMetrics small,
+.stripMeta small {
+  color: rgba(240, 248, 242, 0.56);
+}
+
+.continueLink {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.62rem 0.82rem;
+  background: rgba(145, 211, 167, 0.12);
+  color: #d8efdf;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.stripState {
+  color: #a8d7b6 !important;
+  font-weight: 800;
+}
+
+@media (max-width: 700px) {
+  .hotspotStatus {
+    display: none;
+  }
+
+  .progressMetrics {
+    flex-direction: column;
+  }
+}
