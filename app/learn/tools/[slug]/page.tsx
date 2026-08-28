@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import tools from "@/content/learning-tools.json";
+import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import { PrintButton } from "../PrintButton";
@@ -84,6 +85,8 @@ export default async function LearningToolPage({ params }: { params: Promise<{ s
           </section>
         ))}
       </div>
+
+      <EvidenceSources path={path} />
 
       <section className={styles.related}>
         <h2>Related lessons and tools</h2>
