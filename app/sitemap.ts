@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import academyCourses from "@/content/academy-courses.json";
 import atlasModules from "@/content/atlas-learning-modules.json";
 import plantHealthCore from "@/content/plant-health-library.json";
 import plantHealthExpanded from "@/content/plant-health-expanded.json";
@@ -53,6 +54,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/community", 0.7, "monthly"),
   ];
 
+  const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
+
   const plantHealth = [...plantHealthCore, ...plantHealthExpanded].map((entry) =>
     item(`/learn/plant-health/${entry.slug}`, 0.78, "monthly"),
   );
@@ -78,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  const all = [...staticRoutes, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
+  const all = [...staticRoutes, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
   const unique = new Map(all.map((entry) => [entry.url, entry]));
   return [...unique.values()];
 }
