@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import library from "@/content/symptom-differential-library.json";
+import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildEducationMetadata({
   title: "Visual Symptom Differential Library",
-  description:
-    "Evidence-first cannabis symptom references for yellowing, chlorosis, necrosis, curling, wilting, bleaching, pigmentation, slow growth, root decline, stem lesions, and flower rot.",
-};
+  description: "Evidence-first cannabis symptom references for yellowing, chlorosis, necrosis, curling, wilting, bleaching, pigmentation, slow growth, root decline, stem lesions, and flower rot.",
+  path: "/learn/symptoms",
+});
 
 export default function SymptomDifferentialPage() {
   return (
@@ -20,6 +21,7 @@ export default function SymptomDifferentialPage() {
         </p>
         <div className={styles.heroActions}>
           <Link className="button button--primary" href="/learn/plant-health/diagnostic-foundations">Diagnostic foundations</Link>
+          <Link className="button" href="/learn/sources">Evidence & Sources</Link>
           <Link className="button" href="/learn/atlas/cases">Practice diagnostic cases</Link>
         </div>
       </header>
