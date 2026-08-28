@@ -222,9 +222,9 @@
   ],
   "/learn/cultivation-science/greenhouse-sensor-placement-and-data-quality": [
     {
-      "kind": "Measurement lesson",
-      "title": "Sensor Placement & Representative Sampling",
-      "href": "/learn/cultivation-science/sensor-placement-and-representative-sampling"
+      "kind": "Atlas system",
+      "title": "Environment Overlay",
+      "href": "/learn/atlas/environment-overlay"
     },
     {
       "kind": "Worksheet",
@@ -330,8 +330,8 @@
     },
     {
       "kind": "Cultivation science",
-      "title": "PPFD, DLI & Light Measurement",
-      "href": "/learn/cultivation-science/ppfd-dli-and-light-measurement"
+      "title": "Photoperiod Integrity, Blackout & Light Leaks",
+      "href": "/learn/cultivation-science/photoperiod-integrity-and-light-leaks"
     },
     {
       "kind": "Atlas system",
@@ -422,40 +422,6 @@
       "kind": "Plant health",
       "title": "Post-Harvest Mold & Microbial Risk",
       "href": "/learn/plant-health/post-harvest-mold-and-microbial-risk"
-    }
-  ],
-  "/learn/cultivation-science/ph-and-ec-measurement-quality": [
-    {
-      "kind": "Worksheet",
-      "title": "pH & EC Meter Calibration Log",
-      "href": "/learn/tools/ph-ec-calibration-log"
-    },
-    {
-      "kind": "Cultivation science",
-      "title": "Measurement Uncertainty",
-      "href": "/learn/cultivation-science/measurement-uncertainty"
-    },
-    {
-      "kind": "Atlas system",
-      "title": "Diagnostic Overlay",
-      "href": "/learn/atlas/diagnostic-overlay"
-    }
-  ],
-  "/learn/cultivation-science/ppfd-dli-and-light-measurement": [
-    {
-      "kind": "Worksheet",
-      "title": "PPFD Canopy Mapping Grid",
-      "href": "/learn/tools/ppfd-mapping-grid"
-    },
-    {
-      "kind": "Cultivation science",
-      "title": "Supplemental Lighting & DLI in Greenhouses",
-      "href": "/learn/cultivation-science/supplemental-lighting-and-dli-in-greenhouses"
-    },
-    {
-      "kind": "Atlas system",
-      "title": "Environment Overlay",
-      "href": "/learn/atlas/environment-overlay"
     }
   ],
   "/learn/symptoms/lower-leaf-yellowing": [
@@ -592,6 +558,23 @@
       "kind": "Atlas system",
       "title": "Root System",
       "href": "/learn/atlas/root-system"
+    }
+  ],
+  "/learn/cultivation-science/ph-alkalinity-and-root-zone-buffering": [
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "EC, Salinity & Osmotic Stress",
+      "href": "/learn/cultivation-science/ec-salinity-and-osmotic-stress"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Diagnostic Overlay",
+      "href": "/learn/atlas/diagnostic-overlay"
     }
   ]
 }
