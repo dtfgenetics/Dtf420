@@ -20,11 +20,12 @@
     "verify:atlas-badges": "node scripts/verify-atlas-mastery-badges.mjs",
     "verify:atlas-cases": "node scripts/verify-atlas-diagnostic-cases.mjs",
     "verify:atlas-connections": "node scripts/verify-atlas-system-connections.mjs",
+    "verify:atlas-visual-practice": "node scripts/verify-atlas-visual-identification.mjs",
     "verify:education-content": "node scripts/verify-education-content.mjs",
     "verify:education-links": "node scripts/verify-education-related-links.mjs",
     "verify:education-sources": "node scripts/verify-education-sources.mjs",
     "verify:academy": "node scripts/verify-academy.mjs",
-    "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:academy && npm run lint && npm run typecheck && npm run build"
+    "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:academy && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.3",
