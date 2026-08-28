@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
+import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../page.module.css";
@@ -80,6 +81,7 @@ export default async function PlantHealthReferencePage({ params }: { params: Pro
         <TopicPanel title="Visuals this lesson still needs" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
+      <EvidenceSources path={path} />
       <RelatedEducation path={path} />
 
       <div className={styles.footerActions}>
