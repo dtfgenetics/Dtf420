@@ -16,6 +16,7 @@ const cultivationFiles = [
   "outdoor-cultivation-expanded.json",
   "postharvest-science-expanded.json",
   "advanced-cultivation-science-expanded.json",
+  "plant-physiology-expanded.json",
 ];
 const symptomFiles = ["symptom-differential-library.json"];
 const toolFiles = ["learning-tools.json"];
