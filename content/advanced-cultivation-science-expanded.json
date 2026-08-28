@@ -1,0 +1,252 @@
+[
+  {
+    "slug": "canopy-uniformity-and-light-distribution",
+    "title": "Canopy Uniformity & Light Distribution",
+    "category": "Training & Plant Architecture",
+    "summary": "Canopy training changes the spatial distribution of shoots and leaves. Its value should be evaluated through light distribution, branch position, airflow, plant recovery, and final crop measurements rather than assuming that a flatter canopy automatically increases yield.",
+    "keyConcepts": ["Shoot height changes light interception across the canopy", "A uniform canopy can reduce extreme high- and low-light zones", "Leaf overlap and branch density can still create internal shade", "Training responses depend on genotype, growth stage, space, and recovery time"],
+    "measureObserve": ["Map PPFD across the canopy", "Record canopy height variation", "Photograph branch positions before and after training", "Track recovery and new shoot growth"],
+    "commonMistakes": ["Judging uniformity only from a top-down photo", "Assuming equal shoot height means equal light", "Training repeatedly without allowing recovery", "Claiming a yield benefit without a controlled comparison"],
+    "visualNeeds": ["Uneven-versus-uniform canopy PPFD map", "Branch-height profile", "Leaf-overlap cross section", "Training outcome measurement card"]
+  },
+  {
+    "slug": "defoliation-objectives-and-tradeoffs",
+    "title": "Defoliation Objectives & Tradeoffs",
+    "category": "Training & Plant Architecture",
+    "summary": "Removing leaves changes photosynthetic area, airflow, light penetration, and source-sink relationships at the same time. Defoliation should therefore have a defined objective and measured response rather than being treated as a universal schedule.",
+    "keyConcepts": ["Leaves are photosynthetic source tissues", "Removing selected leaves can change local light and airflow", "Heavy removal can reduce available photosynthetic area", "The response depends on plant vigor, developmental stage, and how much tissue is removed"],
+    "measureObserve": ["Record which leaves and how much tissue are removed", "Map light before and after", "Observe recovery and new leaf expansion", "Compare flower-zone humidity or airflow where that is the objective"],
+    "commonMistakes": ["Removing leaves only because a calendar says to", "Calling every large fan leaf unproductive", "Changing defoliation intensity between experimental groups", "Attributing later crop differences to defoliation without controlling other variables"],
+    "visualNeeds": ["Leaf source-area diagram", "Selective-versus-heavy defoliation comparison", "Before-after PPFD map", "Recovery observation timeline"]
+  },
+  {
+    "slug": "pruning-branch-selection-and-source-sink-balance",
+    "title": "Pruning, Branch Selection & Source-Sink Balance",
+    "category": "Training & Plant Architecture",
+    "summary": "Pruning changes the number and position of growing sinks and the source leaves that support them. Branch selection is therefore a structural and physiological decision, not simply removal of everything below a fixed height.",
+    "keyConcepts": ["Growing shoots and flowers compete for assimilates and mineral resources", "Source leaves support multiple sinks through the phloem network", "Pruning changes architecture and hormonal signaling as well as resource demand", "Different branch positions can experience different light and airflow"],
+    "measureObserve": ["Record branch number and position before pruning", "Track shoot growth after pruning", "Compare retained branch light exposure", "Observe wound closure and plant recovery"],
+    "commonMistakes": ["Using one pruning height on plants of different structure", "Removing source leaves and branches without distinguishing them", "Pruning stressed plants heavily", "Assuming lower position alone makes a branch unproductive"],
+    "visualNeeds": ["Source-sink branch map", "Pruning decision tree", "Branch-position light comparison", "Post-pruning recovery sequence"]
+  },
+  {
+    "slug": "training-timing-stress-stacking-and-recovery",
+    "title": "Training Timing, Stress Stacking & Recovery",
+    "category": "Training & Plant Architecture",
+    "summary": "Topping, bending, transplanting, irrigation changes, pest pressure, heat, and other stresses can overlap. Training decisions should account for the plant's current recovery state instead of treating each event independently.",
+    "keyConcepts": ["Training creates a temporary structural or physiological disturbance", "Simultaneous stresses can make cause-and-effect harder to interpret", "New growth is often a better recovery indicator than damaged old tissue", "Recovery rate varies among plants and environments"],
+    "measureObserve": ["Log training date and method", "Record concurrent environmental or root-zone stress", "Track new growth and leaf posture", "Delay additional interventions when recovery evidence is poor"],
+    "commonMistakes": ["Topping immediately after severe transplant stress", "Changing feed, irrigation, and training at the same time", "Expecting damaged tissue to return to normal", "Calling slow recovery genetic without checking environment"],
+    "visualNeeds": ["Stress-stacking timeline", "Recovery indicator panel", "Single-versus-multiple-change comparison", "Training decision checkpoint"]
+  },
+  {
+    "slug": "trellis-support-and-flower-load-management",
+    "title": "Trellis, Support & Flower-Load Management",
+    "category": "Training & Plant Architecture",
+    "summary": "As stems elongate and flower mass increases, branches experience greater bending moments. Support systems should stabilize architecture without constricting stems, trapping wet tissue, or making inspection impossible.",
+    "keyConcepts": ["Branch load increases with mass and distance from the stem base", "Trellis systems redistribute support across the canopy", "Ties can damage expanding stems if they constrict tissue", "Support layout affects access, airflow, and harvest workflow"],
+    "measureObserve": ["Inspect branch angles and bending under increasing load", "Check ties and net contact points", "Map areas where flowers are compressed together", "Record breakage or support failures"],
+    "commonMistakes": ["Using thin constricting ties", "Waiting for branch failure before adding support", "Packing flowers against one another with the net", "Installing support that prevents scouting"],
+    "visualNeeds": ["Branch bending-moment concept", "Trellis support layout", "Safe tie versus constriction", "Compressed-flower microclimate warning"]
+  },
+  {
+    "slug": "training-wounds-recovery-and-sanitation",
+    "title": "Training Wounds, Recovery & Sanitation",
+    "category": "Training & Plant Architecture",
+    "summary": "Cuts, crushed stems, tears, and breaks alter protective tissues and vascular continuity. Wounds should be evaluated for severity, structural stability, contamination risk, and recovery rather than automatically treated the same way.",
+    "keyConcepts": ["A clean pruning cut differs from a crushed or contaminated wound", "Vascular disruption severity influences recovery", "Shared cutting tools can move plant material between plants", "Wound response includes structural reinforcement and tissue remodeling"],
+    "measureObserve": ["Photograph wound type and location", "Inspect tool cleanliness between plants", "Track wilting above the injury", "Observe callus or structural recovery without disturbing the wound repeatedly"],
+    "commonMistakes": ["Using dull contaminated tools", "Wrapping wet damaged tissue tightly", "Assuming every split stem is fatal", "Continuing high-stress training above a poorly supported injury"],
+    "visualNeeds": ["Clean cut versus crush injury", "Vascular continuity diagram", "Tool sanitation workflow", "Wound recovery timeline"]
+  },
+  {
+    "slug": "canopy-density-airflow-and-flower-microclimate",
+    "title": "Canopy Density, Airflow & Flower Microclimate",
+    "category": "Training & Plant Architecture",
+    "summary": "Dense canopies change radiation, airflow, humidity, and drying within leaves and flowers. Plant architecture should therefore be evaluated as a microclimate variable, especially during flowering.",
+    "keyConcepts": ["Bulk room RH may not describe humidity inside dense flowers", "Dense leaves increase resistance to air movement", "Shade and reduced air exchange can slow surface drying", "Opening a canopy changes both light distribution and microclimate"],
+    "measureObserve": ["Compare RH or temperature at canopy edge and interior when possible", "Inspect morning or post-irrigation drying", "Map stagnant regions", "Track disease occurrence by canopy zone"],
+    "commonMistakes": ["Pointing stronger fans at one spot instead of correcting distribution", "Using room RH as the only disease-risk observation", "Removing large amounts of foliage without measuring the new light environment", "Ignoring flower-to-flower contact"],
+    "visualNeeds": ["Dense-canopy airflow cross section", "Flower microclimate diagram", "Edge-versus-interior sensor comparison", "Canopy-opening tradeoff graphic"]
+  },
+  {
+    "slug": "testing-training-methods-with-controlled-comparisons",
+    "title": "Testing Training Methods with Controlled Comparisons",
+    "category": "Training & Plant Architecture",
+    "summary": "Training claims are best tested with comparable plants, a defined untreated or standard-practice control, replication, consistent environment, and measurements selected before the trial begins.",
+    "keyConcepts": ["One impressive plant does not establish a treatment effect", "Training method and vegetative duration can be confounded", "Plant density and cultivar can change the response", "A useful trial defines the outcome before seeing the result"],
+    "measureObserve": ["Choose one training variable to compare", "Use comparable starting plants", "Replicate each treatment", "Measure canopy area, light distribution, labor, recovery, yield, and quality consistently"],
+    "commonMistakes": ["Giving the trained plant more vegetative time than the control", "Comparing different cultivars", "Selecting the best plant from one group and average plant from another", "Ignoring added labor and recovery time"],
+    "visualNeeds": ["Training trial layout", "Confounded-versus-controlled comparison", "Replication diagram", "Outcome scorecard"]
+  },
+  {
+    "slug": "photoperiod-response-variation-and-flowering-thresholds",
+    "title": "Photoperiod Response Variation & Flowering Thresholds",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Cannabis flowering response varies with genotype and developmental state. Photoperiod should be treated as a biological signal with cultivar-dependent response rather than a universal switch that acts identically in every plant.",
+    "keyConcepts": ["Many cannabis genotypes are photoperiod responsive", "Critical daylength and response speed can vary", "Photoperiod-insensitive or weakly sensitive genotypes exist", "Light quality, timing, plant age, and genetics interact with flowering pathways"],
+    "measureObserve": ["Record actual light and dark timing", "Track first floral structures by plant", "Compare genotypes separately", "Document changes in photoperiod rather than only calendar date"],
+    "commonMistakes": ["Assuming every cultivar responds identically to the same schedule", "Calling photoperiod the only flowering signal", "Ignoring unintended night light", "Using one plant's transition date as the population response"],
+    "visualNeeds": ["Genotype response curves", "Photoperiod timeline", "Population flowering distribution", "Signal-versus-response diagram"]
+  },
+  {
+    "slug": "age-dependent-preflowers-and-developmental-readiness",
+    "title": "Age-Dependent Preflowers & Developmental Readiness",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Solitary preflowers and later large inflorescences are not the same developmental event. Age-dependent floral structures can appear under longer days, while strong short-day induction changes branching and inflorescence development.",
+    "keyConcepts": ["Preflower expression can reflect developmental maturity", "Photoperiod-induced inflorescence development is a larger architectural transition", "Plant age and node development provide context", "Preflowers should not be confused with fully induced flowering"],
+    "measureObserve": ["Record node position of first preflowers", "Photograph preflower progression", "Separate solitary structures from expanding inflorescences", "Track photoperiod and plant age together"],
+    "commonMistakes": ["Calling the first preflower day one of full flowering", "Ignoring plant age", "Comparing plants at different developmental stages", "Using stigma presence alone to define crop stage"],
+    "visualNeeds": ["Preflower-to-inflorescence sequence", "Node-age map", "Solitary flower versus induced cluster", "Developmental-stage checklist"]
+  },
+  {
+    "slug": "inflorescence-architecture-and-floral-branching",
+    "title": "Inflorescence Architecture & Floral Branching",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Female cannabis inflorescences are compound structures formed from repeated phytomer and branch units. Density and shape emerge from internode length, branching, bract development, leaf position, and genotype rather than from a single 'bud size' trait.",
+    "keyConcepts": ["Inflorescences contain repeated branch and floral units", "Shortened internodes contribute to compact flower clusters", "Genotype strongly affects architecture", "Architecture influences light exposure, support needs, and internal microclimate"],
+    "measureObserve": ["Measure floral branch length and internode compression", "Record flower-cluster density and leaf abundance", "Compare upper and lower canopy structures", "Inspect dense interiors for moisture or disease"],
+    "commonMistakes": ["Treating the whole visible cluster as one flower", "Calling compact architecture universally better", "Ignoring sugar-leaf contribution to microclimate", "Comparing flower size without branch-position context"],
+    "visualNeeds": ["Inflorescence phytomer diagram", "Compact-versus-open architecture", "Floral branch cross section", "Microclimate-by-architecture comparison"]
+  },
+  {
+    "slug": "stretch-elongation-and-flowering-architecture",
+    "title": "Stretch, Elongation & Flowering Architecture",
+    "category": "Flowering & Reproductive Development",
+    "summary": "The flowering transition often coincides with changes in stem elongation and branching, but the magnitude and timing of stretch vary with genotype, light environment, temperature, density, and prior architecture.",
+    "keyConcepts": ["Internode elongation is a developmental and environmental response", "Stretch changes canopy spacing and support requirements", "Light quality and intensity can influence morphology", "A single height multiplier is not universal"],
+    "measureObserve": ["Measure plant and branch height at consistent intervals", "Record internode length at comparable positions", "Track canopy PPFD during elongation", "Document support installation and branch angle"],
+    "commonMistakes": ["Planning space from a universal stretch factor", "Changing light and temperature together then attributing response to one", "Measuring only final height", "Ignoring cultivar variation"],
+    "visualNeeds": ["Stretch measurement timeline", "Internode comparison", "Canopy height growth curve", "Architecture-support planning diagram"]
+  },
+  {
+    "slug": "sex-expression-plasticity-and-mixed-flower-observation",
+    "title": "Sex-Expression Plasticity & Mixed-Flower Observation",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Cannabis sex phenotype is genetically anchored but can show developmental and environmental plasticity. Mixed-sex structures should be documented precisely; their presence does not by itself prove one environmental cause.",
+    "keyConcepts": ["Cannabis commonly has differentiated sex chromosomes", "Sex expression also involves hormonal, developmental, and environmental regulation", "Genotype influences stability", "Stress associations are context dependent and should not be turned into one-cause rules"],
+    "measureObserve": ["Identify the exact floral structure", "Record plant, branch, node, and date", "Inspect related clones or siblings", "Document environmental disruptions and plant health without assuming causality"],
+    "commonMistakes": ["Calling swollen bracts male flowers", "Assuming every mixed-sex event has the same trigger", "Failing to inspect the rest of the plant", "Discarding lineage and environmental records"],
+    "visualNeeds": ["Pistillate versus staminate versus mixed structures", "Whole-plant location map", "Lineage observation table", "Cause-versus-association diagram"]
+  },
+  {
+    "slug": "flower-microclimate-and-disease-risk",
+    "title": "Flower Microclimate & Disease Risk",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Temperature, humidity, leaf wetness, airflow, and tissue density inside flowers can differ from room or weather-station measurements. Disease risk must therefore include the microclimate at the susceptible tissue.",
+    "keyConcepts": ["Dense inflorescences can retain humid air", "Condensation can occur on tissue even when room RH seems acceptable", "Dead floral tissue can become a colonization site", "Airflow at the room scale may not penetrate dense clusters"],
+    "measureObserve": ["Inspect flower interiors", "Record overnight temperature/RH", "Check for condensation after cool periods", "Map disease onset by canopy and flower density"],
+    "commonMistakes": ["Inspecting only flower surfaces", "Using daytime room RH as the entire disease-risk assessment", "Blaming density without checking moisture and pathogen evidence", "Compressing flowers with support netting"],
+    "visualNeeds": ["Flower microclimate cutaway", "Room-versus-flower RH concept", "Condensation sequence", "Botrytis risk inspection map"]
+  },
+  {
+    "slug": "pollination-exposure-fertilization-and-seed-set",
+    "title": "Pollination Exposure, Fertilization & Seed Set",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Pollen arrival, pollen germination, pollen-tube growth, fertilization, and visible seed development are separate stages. Seed set should be used as evidence of successful fertilization rather than assuming that every exposure produces a seed.",
+    "keyConcepts": ["Pollination is pollen transfer, not guaranteed fertilization", "Receptive floral tissue and viable pollen must overlap", "Seed formation takes time after fertilization", "Uneven pollen exposure can create uneven seed set"],
+    "measureObserve": ["Record pollen-source timing", "Map targeted or suspected exposure", "Inspect later seed development by flower site", "Keep seed-bearing branches identifiable"],
+    "commonMistakes": ["Treating stigma contact as proof of fertilization", "Using one seed as evidence the whole crop was uniformly pollinated", "Losing branch identity after exposure", "Confusing developing ovules with mature viable seed"],
+    "visualNeeds": ["Pollination-to-seed sequence", "Exposure map", "Uneven seed-set diagram", "Fertilization evidence timeline"]
+  },
+  {
+    "slug": "senescence-maturation-and-stress-differentials",
+    "title": "Senescence, Maturation & Stress Differentials",
+    "category": "Flowering & Reproductive Development",
+    "summary": "Late-flowering changes can include normal developmental senescence, but yellowing, necrosis, wilt, or flower discoloration may also reflect root stress, disease, salinity, or environmental injury. Timing alone does not make every symptom normal fade.",
+    "keyConcepts": ["Senescence is developmentally regulated", "Stress can accelerate or mimic senescence", "Different tissues age at different rates", "Maturity decisions should include disease inspection"],
+    "measureObserve": ["Map which tissues are declining first", "Inspect roots and flower interiors", "Track progression across days", "Compare with cultivar history and healthy plants at the same stage"],
+    "commonMistakes": ["Calling all late yellowing normal", "Ignoring rapid branch-specific decline", "Using stigma color alone as maturity", "Harvesting diseased tissue as if it were normal senescence"],
+    "visualNeeds": ["Senescence-versus-stress comparison", "Late-flower symptom locator", "Maturity and disease inspection checklist", "Progression timeline"]
+  },
+  {
+    "slug": "measurement-calibration-traceability-and-reference-standards",
+    "title": "Calibration, Traceability & Reference Standards",
+    "category": "Measurement & Experimental Science",
+    "summary": "A measurement is defensible when the instrument, calibration or check standard, method, operator, and date are traceable. Displayed precision is not evidence of accuracy by itself.",
+    "keyConcepts": ["Calibration compares an instrument response with a known reference", "Check standards can reveal drift between calibrations", "Instrument resolution and accuracy are different", "Traceable records make questionable data auditable"],
+    "measureObserve": ["Record instrument ID", "Record reference standard and lot where relevant", "Document pre- and post-calibration readings", "Remove instruments from service when checks fail"],
+    "commonMistakes": ["Trusting a meter because it shows many decimal places", "Calibrating without recording the standard", "Using expired or contaminated standards", "Mixing data from known-bad and verified instruments"],
+    "visualNeeds": ["Calibration traceability chain", "Resolution-versus-accuracy graphic", "Drift check chart", "Out-of-tolerance workflow"]
+  },
+  {
+    "slug": "sensor-response-time-and-logging-frequency",
+    "title": "Sensor Response Time & Logging Frequency",
+    "category": "Measurement & Experimental Science",
+    "summary": "Sensors do not respond instantly, and logging intervals can hide short events or create large datasets with little added information. Measurement frequency should match how quickly the variable and decision can meaningfully change.",
+    "keyConcepts": ["Sensor response time limits how quickly real changes are captured", "Averaging can hide extremes", "Long intervals can miss irrigation, lighting, or HVAC events", "Very short intervals can create noisy redundant data"],
+    "measureObserve": ["Check manufacturer response specifications", "Compare raw and averaged data", "Align logging times with known events", "Document clock synchronization across devices"],
+    "commonMistakes": ["Interpreting one delayed sensor as the environment changing slowly", "Comparing devices with unsynchronized clocks", "Using daily averages to investigate minute-scale failures", "Increasing logging frequency without a question"],
+    "visualNeeds": ["Fast-versus-slow sensor response", "Logging interval comparison", "Event alignment timeline", "Averaging hides extreme example"]
+  },
+  {
+    "slug": "sampling-hierarchy-and-pseudoreplication",
+    "title": "Sampling Hierarchy & Pseudoreplication",
+    "category": "Measurement & Experimental Science",
+    "summary": "Many leaves measured on one plant are not the same as many independent plants, and many plants in one room may not be independent room replicates. The experimental unit must match the treatment assignment.",
+    "keyConcepts": ["Subsamples improve measurement of one experimental unit but do not create new independent replicates", "Treatments applied to whole rooms make the room an experimental unit", "Nested sampling should preserve plant, zone, and treatment identity", "Pseudoreplication can make evidence look stronger than it is"],
+    "measureObserve": ["State the experimental unit before collecting data", "Label subsamples by their parent unit", "Replicate treatments at the correct level", "Analyze or summarize data without pretending subsamples are independent"],
+    "commonMistakes": ["Calling ten leaves from one plant n=10 plants", "Treating two zones in one room as two independent rooms", "Pooling samples before recording identity", "Reporting a large sample count without the hierarchy"],
+    "visualNeeds": ["Plant-leaf sampling hierarchy", "Room-level experimental unit diagram", "Pseudoreplication example", "Nested sample labels"]
+  },
+  {
+    "slug": "randomization-blocking-and-position-effects",
+    "title": "Randomization, Blocking & Position Effects",
+    "category": "Measurement & Experimental Science",
+    "summary": "Position in a room, greenhouse, or field can create systematic light, temperature, airflow, soil, and edge effects. Randomization and blocking help keep those gradients from being confused with the treatment being tested.",
+    "keyConcepts": ["Spatial gradients can bias treatment comparisons", "Randomization reduces systematic placement bias", "Blocking groups similar positions before treatment assignment", "Edge plants may behave differently from interior plants"],
+    "measureObserve": ["Map the experimental layout", "Identify known gradients", "Randomize within appropriate blocks", "Record plant moves or replacements"],
+    "commonMistakes": ["Putting all treatment plants under one fixture and controls under another", "Ignoring greenhouse bench position", "Replacing failed plants without preserving treatment records", "Using only edge plants for one group"],
+    "visualNeeds": ["Biased-versus-randomized layout", "Blocked greenhouse bench example", "Field gradient diagram", "Edge-effect map"]
+  },
+  {
+    "slug": "controls-baselines-and-before-after-comparisons",
+    "title": "Controls, Baselines & Before/After Comparisons",
+    "category": "Measurement & Experimental Science",
+    "summary": "A before/after change in one treated plant does not show what would have happened without the treatment. Controls and baseline measurements provide the comparison needed to interpret change.",
+    "keyConcepts": ["A control represents the comparison condition", "Baseline data show starting differences", "Natural development can create change even without treatment", "Concurrent controls are stronger than memory or historical anecdotes"],
+    "measureObserve": ["Define the control before treatment", "Collect the same baseline variables in all groups", "Measure groups on the same schedule", "Record deviations from the planned protocol"],
+    "commonMistakes": ["Calling pre-treatment data the control group", "Comparing this crop with a vague memory of last crop", "Measuring treatment plants more carefully than controls", "Changing control practices midway"],
+    "visualNeeds": ["Before-after versus controlled comparison", "Baseline balance table", "Concurrent control timeline", "Protocol deviation log"]
+  },
+  {
+    "slug": "measurement-uncertainty-repeatability-and-reproducibility",
+    "title": "Uncertainty, Repeatability & Reproducibility",
+    "category": "Measurement & Experimental Science",
+    "summary": "Repeated measurements naturally vary. Understanding repeatability, operator differences, instrument differences, sampling variation, and environmental variability prevents small numerical differences from being overinterpreted.",
+    "keyConcepts": ["Repeatability describes variation under similar measurement conditions", "Reproducibility includes changes such as operator, day, or instrument", "Biological variability and instrument uncertainty both contribute", "A difference smaller than normal variation may not be meaningful"],
+    "measureObserve": ["Take replicate measurements on the same sample when appropriate", "Compare operators or meters periodically", "Track standard deviation or range", "Report method and sample count with the result"],
+    "commonMistakes": ["Reporting one measurement without context", "Treating the last decimal place as biologically meaningful", "Averaging away outliers without investigating them", "Comparing methods with different uncertainty as if identical"],
+    "visualNeeds": ["Repeatability versus reproducibility", "Sources-of-uncertainty diagram", "Overlapping measurement distributions", "Method-reporting checklist"]
+  },
+  {
+    "slug": "data-visualization-and-honest-cultivation-comparisons",
+    "title": "Data Visualization & Honest Cultivation Comparisons",
+    "category": "Measurement & Experimental Science",
+    "summary": "Charts should reveal the underlying variation, sample size, time, and treatment structure instead of using dramatic axes or averages alone to make small differences look decisive.",
+    "keyConcepts": ["Raw points or distributions can reveal variation hidden by means", "Axis choices affect visual interpretation", "Time-series data should preserve event timing", "Missing data and excluded observations should be disclosed"],
+    "measureObserve": ["Plot individual values when sample size allows", "Show units and sample counts", "Use comparable axes for comparable treatments", "Mark interventions on time-series plots"],
+    "commonMistakes": ["Starting an axis at a value that exaggerates a trivial difference", "Showing only the best plant photo", "Hiding failed replicates", "Using a bar chart with no indication of variation"],
+    "visualNeeds": ["Misleading-versus-honest axis", "Mean-only versus raw-points chart", "Annotated time-series", "Missing-data disclosure example"]
+  },
+  {
+    "slug": "reading-cultivation-research-and-limits-of-evidence",
+    "title": "Reading Cultivation Research & Limits of Evidence",
+    "category": "Measurement & Experimental Science",
+    "summary": "A cultivation paper should be interpreted through its question, genotype, environment, sample size, treatments, measurement methods, statistics, and limitations. A statistically significant result in one system is not automatically a universal grow rule.",
+    "keyConcepts": ["Study population determines what the result directly applies to", "Statistical significance and practical importance are different", "Confounding and uncontrolled variables weaken causal claims", "Replication across studies and environments increases confidence"],
+    "measureObserve": ["Identify the experimental unit and sample size", "List treatment differences", "Check whether controls and replication were used", "Read limitations and methods before applying the conclusion"],
+    "commonMistakes": ["Applying hemp fiber research directly to drug-type floral production without context", "Reading only the abstract", "Treating correlation as proof of cause", "Ignoring cultivar and environment"],
+    "visualNeeds": ["Research-paper reading checklist", "Evidence applicability funnel", "Statistical-versus-practical significance", "Correlation-versus-causation graphic"]
+  },
+  {
+    "slug": "small-cultivation-trials-from-question-to-decision",
+    "title": "Small Cultivation Trials: Question to Decision",
+    "category": "Measurement & Experimental Science",
+    "summary": "A useful grower trial begins with a narrow question, a defined treatment and control, enough independent replicates, a randomized or blocked layout, standardized measurements, and a decision rule chosen before results are known.",
+    "keyConcepts": ["A narrow test is easier to interpret than changing many variables", "Replication and randomization protect against plant and position variability", "Measurements should answer the stated question", "The result may justify another trial rather than a universal conclusion"],
+    "measureObserve": ["Write the hypothesis and decision criterion", "Define experimental units and replicates", "Randomize or block positions", "Collect baseline and outcome data with the same methods", "Record deviations and unexpected events"],
+    "commonMistakes": ["Changing several inputs at once", "Using one plant per treatment", "Moving only weak plants between groups", "Choosing the success metric after seeing results"],
+    "visualNeeds": ["Trial planning workflow", "Randomized block example", "Predefined decision rule", "From result to next experiment"]
+  }
+]
