@@ -10,6 +10,7 @@ import protectedCultivation from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
 import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
+import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
 import styles from "./EducationSearch.module.css";
@@ -71,6 +72,7 @@ const cultivationItems: SearchItem[] = [
   ...protectedLighting,
   ...outdoorExpanded,
   ...postharvestExpanded,
+  ...advancedExpanded,
 ].map((item) => ({
   kind: "Cultivation science" as const,
   title: item.title,
@@ -100,7 +102,7 @@ const toolItems: SearchItem[] = learningTools.map((item) => ({
 
 const searchItems = [...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems];
 const kinds: Array<"All" | SearchKind> = ["All", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool"];
-const examples = ["yellow lower leaves", "whiteflies", "dew point", "PPFD", "blackout light leak", "pollen drift", "water activity", "drying airflow"];
+const examples = ["yellow lower leaves", "whiteflies", "dew point", "PPFD", "pollen drift", "water activity", "defoliation", "sex expression", "replication"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -147,7 +149,7 @@ export function EducationSearch() {
         <div>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Search Education</h1>
-          <p>Search Atlas lessons, plant-health references, symptom differentials, outdoor and greenhouse science, post-harvest material, and printable field tools from one place.</p>
+          <p>Search Atlas lessons, plant-health references, symptom differentials, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, and printable field tools from one place.</p>
         </div>
         <Link href="/learn">Back to Learn</Link>
       </section>
@@ -160,7 +162,7 @@ export function EducationSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try yellow lower leaves, whiteflies, dew point, PPFD…"
+            placeholder="Try yellow lower leaves, whiteflies, water activity, replication…"
             autoComplete="off"
           />
           <select aria-label="Filter education search" value={kind} onChange={(event) => setKind(event.target.value as "All" | SearchKind)}>
@@ -176,7 +178,7 @@ export function EducationSearch() {
         {!searching ? (
           <div className={styles.empty}>Enter at least two characters to search across {searchItems.length} indexed learning resources.</div>
         ) : results.length === 0 ? (
-          <div className={styles.empty}>No matches yet. Try a broader plant structure, symptom, pest, measurement, environment, or workflow term.</div>
+          <div className={styles.empty}>No matches yet. Try a broader plant structure, symptom, pest, measurement, environment, workflow, flowering, or post-harvest term.</div>
         ) : (
           <>
             <header className={styles.resultHeader}>
