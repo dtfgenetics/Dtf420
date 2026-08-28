@@ -13,7 +13,7 @@ const learningModes = [
     eyebrow: "Plant health reference",
     title: "Plant Health, IPM & Disease Library",
     description:
-      "Use observation-first references for pests, diseases, systemic pathogens, scouting, sanitation, and differential diagnosis without relying on one-symptom shortcuts.",
+      "Use observation-first references for pests, diseases, systemic pathogens, scouting, sanitation, biological control, and differential diagnosis without relying on one-symptom shortcuts.",
     href: "/learn/plant-health",
     action: "Open the Plant Health Library",
   },
@@ -29,9 +29,17 @@ const learningModes = [
     eyebrow: "Expanded subject library",
     title: "Cultivation Science References",
     description:
-      "Go deeper into outdoor and protected cultivation, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.",
+      "Go deeper into outdoor cultivation, greenhouse and protected cultivation, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.",
     href: "/learn/cultivation-science",
     action: "Open cultivation science",
+  },
+  {
+    eyebrow: "Field practice",
+    title: "Printable Learning Tools",
+    description:
+      "Use printable observation sheets, scouting maps, calibration logs, propagation records, environmental logs, outdoor surveys, and post-harvest worksheets.",
+    href: "/learn/tools",
+    action: "Open printable tools",
   },
   {
     eyebrow: "Applied diagnostics",
@@ -73,7 +81,7 @@ export default function LearnPage() {
       <p className="eyebrow">Teaching Healthy Cultivation</p>
       <h1>Learn</h1>
       <p className="lede">
-        A connected cultivation education system built around plant function, direct observation, measurement, visual learning, and evidence-based diagnostics.
+        A connected cultivation education system built around plant function, direct observation, measurement, visual learning, evidence-based diagnostics, and repeatable field records.
       </p>
 
       <div className="card-grid" style={{ marginTop: 34 }}>
