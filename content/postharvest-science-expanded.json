@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "curing-as-moisture-equilibration-and-storage-transition",
+    "title": "Curing as Moisture Equilibration & Storage Transition",
+    "category": "Harvest & Post-Harvest",
+    "summary": "After initial drying, moisture can redistribute within flowers and between flowers and package headspace. Curing should be treated as a controlled transition into stable storage, not as a fixed folklore schedule.",
+    "keyConcepts": ["Surface dryness can occur before internal moisture has equilibrated", "Sealed storage allows moisture redistribution but can also expose an overly wet lot to microbial risk", "Temperature affects equilibrium relationships and reaction rates", "Curing changes should be evaluated with repeatable measurements and product observations"],
+    "measureObserve": ["Sample representative flowers rather than one exterior piece", "Record package temperature and water activity or another validated moisture metric", "Recheck after equilibration", "Inspect for condensation, abnormal odor, soft tissue, or visible mold"],
+    "commonMistakes": ["Using a fixed number of cure days for every cultivar and flower size", "Packaging material that is still unevenly wet", "Treating container RH as automatically equivalent to a validated water-activity measurement", "Opening containers on a ritual schedule without using evidence"],
+    "visualNeeds": ["Surface-to-interior moisture redistribution", "Package equilibration timeline", "Curing measurement workflow", "Overwet-lot risk diagram"]
+  },
+  {
+    "slug": "representative-water-activity-sampling",
+    "title": "Representative Water-Activity Sampling",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Water-activity measurements are only as useful as the sample plan. Uneven drying, flower size, canopy position, package location, temperature, and equilibration can make one reading unrepresentative of an entire lot.",
+    "keyConcepts": ["Water activity measures available water rather than total moisture mass", "A heterogeneous lot requires a representative sampling plan", "Instrument calibration and sample temperature influence data quality", "Acceptance criteria should follow the relevant jurisdiction, standard, or product specification"],
+    "measureObserve": ["Define how many samples and where they come from", "Use a calibrated meter and documented procedure", "Allow the sample to equilibrate according to the instrument method", "Record lot, package, sample, time, temperature, and meter identity"],
+    "commonMistakes": ["Testing only the driest-looking flower", "Using one reading for a large uneven lot", "Comparing measurements taken with different procedures without noting the difference", "Applying a universal acceptance number without checking the governing standard"],
+    "visualNeeds": ["Representative lot-sampling map", "Water activity versus moisture-content diagram", "Meter workflow", "Sampling-bias comparison"]
+  },
+  {
+    "slug": "drying-load-density-and-air-distribution",
+    "title": "Drying Load Density & Air Distribution",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Drying-room performance depends on how much wet plant material is loaded, how it is spaced, and how conditioned air moves through the load. Room temperature and RH do not guarantee uniform flower conditions.",
+    "keyConcepts": ["Fresh plant material adds a large moisture load to the room", "Dense hanging or rack placement can create protected humid pockets", "Air should circulate through the room without blasting one product surface", "As drying progresses, the room moisture load changes"],
+    "measureObserve": ["Record wet load or lot size", "Map temperature and RH in several product zones", "Inspect spacing and stagnant pockets", "Track representative sample mass or other consistent drying indicators"],
+    "commonMistakes": ["Using the same room settings regardless of load size", "Crowding flowers until air cannot move between them", "Aiming fans directly at one area", "Assuming a wall sensor represents the middle of a dense load"],
+    "visualNeeds": ["Low-versus-high load density comparison", "Drying room airflow map", "Moisture-load-over-time graph", "Direct-fan versus mixed-air diagram"]
+  },
+  {
+    "slug": "trimming-handling-and-contact-contamination",
+    "title": "Trimming, Handling & Contact Contamination",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Every post-harvest contact step can move plant debris and microorganisms between flowers, tools, gloves, bins, tables, and lots. Workflow design should preserve lot identity while minimizing unnecessary handling and cross-contact.",
+    "keyConcepts": ["Harvested tissue can acquire contamination from contact surfaces", "Wet or damaged flowers are more vulnerable than stable dry product", "Tools and gloves can move material between lots", "Cleaning must be matched to the surface and followed by appropriate drying or sanitation practice"],
+    "measureObserve": ["Map product-contact surfaces", "Record cleaning between lots", "Keep suspect material physically separate", "Inspect high-contact locations for debris buildup"],
+    "commonMistakes": ["Using the same uncleaned tools across lots", "Stacking flowers deeply during trimming", "Returning rejected material to clean product", "Assuming gloves remain clean because they look clean"],
+    "visualNeeds": ["Clean-to-dirty trimming workflow", "Contact-surface map", "Cross-lot contamination pathway", "Lot separation station"]
+  },
+  {
+    "slug": "postharvest-lot-traceability-and-quality-control",
+    "title": "Post-Harvest Lot Traceability & Quality Control",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Quality observations are much more useful when each package or sample can be traced back to plant or harvest lot, room position, drying history, measurements, handling events, and test results.",
+    "keyConcepts": ["Traceability makes it possible to identify where variability entered the process", "Lot mixing can erase useful evidence", "Environmental data should be time-aligned with product movement", "A quality-control record should distinguish observation, measurement, decision, and disposition"],
+    "measureObserve": ["Assign a harvest lot before product enters shared processing areas", "Record room and zone", "Link measurements and sample IDs to the lot", "Document merges, splits, rejects, and final packages"],
+    "commonMistakes": ["Relabeling lots without retaining the original relationship", "Keeping room logs that cannot be linked to product", "Combining suspect and normal material before investigation", "Recording a pass/fail result without the underlying measurement"],
+    "visualNeeds": ["Plant-to-package traceability map", "Lot split-and-merge diagram", "QC decision record example", "Environmental-data timeline"]
+  },
+  {
+    "slug": "packaging-moisture-gas-and-light-barriers",
+    "title": "Packaging: Moisture, Gas & Light Barriers",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Packages differ in water-vapor transmission, oxygen transmission, light protection, seal quality, headspace, and mechanical protection. Packaging should be chosen for the product state and storage objective rather than by material name alone.",
+    "keyConcepts": ["A moisture barrier slows exchange but cannot correct an improperly dried product", "Oxygen exposure can contribute to oxidation", "Transparent packages provide less light protection unless secondary packaging is used", "Seal integrity and repeated opening can dominate theoretical material performance"],
+    "measureObserve": ["Record package material and closure type", "Inspect seal integrity", "Track storage temperature and light exposure", "Record how often a package is opened and whether moisture changes afterward"],
+    "commonMistakes": ["Assuming all plastic or all glass performs identically", "Using barrier packaging as a substitute for drying", "Ignoring headspace and repeated opening", "Comparing packages without the same storage conditions"],
+    "visualNeeds": ["Packaging barrier comparison", "Seal-leak diagram", "Headspace and opening cycle", "Light exposure comparison"]
+  },
+  {
+    "slug": "temperature-transitions-and-storage-condensation",
+    "title": "Temperature Transitions & Storage Condensation",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Moving sealed product between temperatures can change headspace relative humidity and create condensation risk on cold surfaces or product. Storage decisions should consider the entire temperature transition, not only the destination setpoint.",
+    "keyConcepts": ["Air's moisture-holding capacity changes with temperature", "Cold packages opened in warmer humid air can collect condensation", "Repeated temperature cycling can stress moisture equilibrium", "Cooling does not remove existing water from the product"],
+    "measureObserve": ["Record storage and transfer temperatures", "Allow sealed packages to approach the next environment when appropriate before opening", "Inspect for condensation", "Recheck product moisture indicators after unusual temperature excursions"],
+    "commonMistakes": ["Opening cold product immediately in humid air", "Assuming refrigeration automatically prevents mold", "Ignoring power-loss temperature excursions", "Moving product repeatedly without recording conditions"],
+    "visualNeeds": ["Cold-package condensation sequence", "Temperature/RH transition diagram", "Storage excursion record", "Package warming workflow"]
+  },
+  {
+    "slug": "postharvest-microbial-sampling-and-test-interpretation",
+    "title": "Post-Harvest Microbial Sampling & Test Interpretation",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Microbial test results describe the sample and method used. A useful sampling plan must account for lot heterogeneity, visible suspect material, laboratory method, jurisdictional requirements, and how results will change disposition decisions.",
+    "keyConcepts": ["Microbial populations can be uneven within a lot", "Different analytical methods may detect or quantify different targets", "Total counts do not necessarily identify each organism present", "Visible mold and laboratory counts are different types of evidence"],
+    "measureObserve": ["Define a representative sampling plan before collecting samples", "Keep sample identity and chain of custody", "Record laboratory method and target organisms", "Interpret results against the applicable specification rather than an unrelated threshold"],
+    "commonMistakes": ["Submitting one convenient flower as the entire lot", "Assuming a total count reveals the species present", "Mixing visibly suspect material into the sample only after a problem is noticed", "Comparing results from different methods as if they were identical"],
+    "visualNeeds": ["Representative microbial sample plan", "Sample-to-lab chain of custody", "Total count versus organism identity", "Result-to-disposition flow"]
+  },
+  {
+    "slug": "retained-samples-and-storage-stability-observation",
+    "title": "Retained Samples & Storage Stability Observation",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Retained samples allow a lot to be re-examined after storage time has passed. A useful retained-sample program preserves identity, representative packaging, environmental history, and predefined observation intervals.",
+    "keyConcepts": ["Quality changes may emerge after initial packaging", "A retained sample should represent the packaged lot and storage condition", "Repeatedly opening one sample changes its storage history", "Stability observations can guide future packaging and storage decisions"],
+    "measureObserve": ["Retain clearly labeled representative samples", "Use defined inspection intervals", "Record package integrity, aroma, appearance, moisture indicators, and relevant test results", "Use separate packages when repeated opening would alter the sample"],
+    "commonMistakes": ["Keeping an unlabeled leftover as the retained sample", "Opening the same package repeatedly without noting it", "Changing storage conditions mid-study without documenting them", "Using retained samples only after a complaint rather than as planned evidence"],
+    "visualNeeds": ["Retained-sample schedule", "Package opening bias diagram", "Stability observation record", "Lot-to-retain traceability"]
+  },
+  {
+    "slug": "postharvest-process-comparison-and-experimental-design",
+    "title": "Comparing Post-Harvest Processes with Small Experiments",
+    "category": "Harvest & Post-Harvest",
+    "summary": "Drying, curing, trimming, and packaging comparisons are more useful when variables are controlled, treatments are replicated, measurements are standardized, and conclusions stay within what the experiment actually tested.",
+    "keyConcepts": ["Changing several variables at once prevents attribution", "Replicates help separate treatment effects from natural flower-to-flower variation", "Sample position and cultivar can influence results", "Quality outcomes should be defined before the comparison begins"],
+    "measureObserve": ["State the question and treatment difference", "Use comparable starting material", "Replicate treatments where possible", "Measure the same outcomes with the same methods", "Keep raw observations and avoid selecting only favorable examples"],
+    "commonMistakes": ["Comparing one branch against another cultivar and calling the difference a drying effect", "Using different meters or sampling locations between treatments", "Changing airflow and temperature together without recognizing both changed", "Generalizing from one small trial to every cultivar"],
+    "visualNeeds": ["Controlled post-harvest trial layout", "Replication example", "Confounded-versus-controlled comparison", "Result interpretation checklist"]
+  }
+]
