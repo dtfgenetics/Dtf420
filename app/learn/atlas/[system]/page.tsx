@@ -8,6 +8,8 @@ import { AtlasInteractiveLab } from "@/components/atlas/AtlasInteractiveLab";
 import { AtlasCoreInteractiveLab } from "@/components/atlas/AtlasCoreInteractiveLab";
 import { AtlasSystemProgress } from "@/components/atlas/AtlasSystemProgress";
 import { AtlasSystemConnections } from "@/components/atlas/AtlasSystemConnections";
+import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
+import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
 function slugify(value: string) {
@@ -31,10 +33,11 @@ export async function generateMetadata({ params }: { params: Promise<{ system: s
   const atlasModule = findAtlasModule(system);
   if (!atlasModule) return { title: "Atlas System" };
   const section = atlasSections.find((item) => item.id === atlasModule.id);
-  return {
+  return buildEducationMetadata({
     title: `${atlasModule.label} — THC Living Plant Atlas`,
     description: section?.summary ?? `Visual cannabis plant science lessons for ${atlasModule.label}.`,
-  };
+    path: `/learn/atlas/${system}`,
+  });
 }
 
 export default async function AtlasSystemPage({ params }: { params: Promise<{ system: string }> }) {
@@ -43,10 +46,18 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
   if (!atlasModule) notFound();
 
   const section = atlasSections.find((item) => item.id === atlasModule.id);
-  const related = modules.filter((item) => item.id !== atlasModule.id).slice(0, 4);
+  const description = section?.summary ?? `Visual cannabis plant science lessons for ${atlasModule.label}.`;
+  const structuredData = buildLearningResourceJsonLd({
+    name: `${atlasModule.label} — THC Living Plant Atlas`,
+    description,
+    path: `/learn/atlas/${system}`,
+    learningResourceType: "Interactive plant-system learning module",
+    about: atlasModule.label,
+  });
 
   return (
     <section className="shell page-section">
+      <LearningResourceJsonLd data={structuredData} />
       <div className={styles.pageShell}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link href="/learn">Learn</Link>
@@ -60,7 +71,7 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
           <div className={styles.heroCopy}>
             <p>THC Living Plant Atlas system</p>
             <h1>{atlasModule.label}</h1>
-            <div className={styles.summary}>{section?.summary}</div>
+            <div className={styles.summary}>{description}</div>
             <div className={styles.stats}>
               <span><b>{atlasModule.lessons.length}</b> structured lessons</span>
               <span><b>{atlasModule.learningGoals.length}</b> learning goals</span>
@@ -132,16 +143,26 @@ export default async function AtlasSystemPage({ params }: { params: Promise<{ sy
 
         <section className={styles.related}>
           <div>
-            <p>Keep exploring the plant</p>
-            <h2>Related Atlas systems</h2>
+            <p>Whole-plant context</p>
+            <h2>Return to the connected Atlas</h2>
           </div>
           <div className={styles.relatedGrid}>
-            {related.map((item) => (
-              <Link key={item.id} href={`/learn/atlas/${slugify(item.id)}`}>
-                <span>{item.label}</span>
-                <small>{item.lessons.length} lessons</small>
-              </Link>
-            ))}
+            <Link href="/learn/atlas">
+              <span>Whole-plant explorer</span>
+              <small>See this system in the plant map and lifecycle.</small>
+            </Link>
+            <Link href="/learn/atlas/dashboard">
+              <span>Study dashboard</span>
+              <small>Resume lessons, mastery, paths, and review.</small>
+            </Link>
+            <Link href="/learn/atlas/practice">
+              <span>Practice hub</span>
+              <small>Apply system knowledge to comparisons and diagnostic reasoning.</small>
+            </Link>
+            <Link href="/learn/atlas/notebook">
+              <span>Observation notebook</span>
+              <small>Record real plant observations and measurements.</small>
+            </Link>
           </div>
           <Link className={styles.backButton} href="/learn/atlas">Return to whole-plant Atlas</Link>
         </section>
