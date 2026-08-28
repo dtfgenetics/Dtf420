@@ -13,7 +13,7 @@
     "area": "Learn navigation",
     "title": "Surface Living Plant Atlas and interactive learning modes",
     "status": "implemented",
-    "acceptanceCriteria": ["Learn hub links directly to Living Plant Atlas", "Diagnostic cases, practice, review, and guided paths are discoverable from Learn"]
+    "acceptanceCriteria": ["Learn hub links directly to Living Plant Atlas", "Diagnostic cases, practice, review, guided paths, subject libraries, and printable tools are discoverable from Learn"]
   },
   {
     "id": "EDU-P0-003",
@@ -21,7 +21,7 @@
     "area": "Plant Health",
     "title": "Build Plant Health, IPM and Disease reference branch",
     "status": "in_progress",
-    "acceptanceCriteria": ["Reference index is public and indexable", "Each entry separates observation, look-alikes, confirmation, management principles, prevention, and visual needs", "Expand arthropod, disease, systemic pathogen, scouting, sanitation, and diagnostic foundations coverage"]
+    "acceptanceCriteria": ["Reference index is public and indexable", "Each entry separates observation, look-alikes, confirmation, management principles, prevention, and visual needs", "Continue expanding arthropod, disease, systemic pathogen, scouting, sanitation, biological-control, and diagnostic coverage"]
   },
   {
     "id": "EDU-P0-004",
@@ -52,8 +52,8 @@
     "priority": "P1",
     "area": "Protected cultivation",
     "title": "Add greenhouse and protected-cultivation branch",
-    "status": "queued",
-    "acceptanceCriteria": ["Ventilation and heat load", "Humidity and condensation", "Supplemental lighting context", "Irrigation", "Screening and exclusion", "Season extension and environmental tradeoffs"]
+    "status": "in_progress",
+    "acceptanceCriteria": ["Ventilation and heat load", "Humidity, dew point and condensation", "Sensor placement and data quality", "Irrigation and drainage", "Screening and exclusion", "Quarantine and scouting", "Biological control", "High-tunnel versus greenhouse tradeoffs", "Add dedicated supplemental-lighting integration lesson"]
   },
   {
     "id": "EDU-P1-004",
@@ -85,7 +85,7 @@
     "area": "Subject hubs",
     "title": "Convert overview pages into topic clusters",
     "status": "in_progress",
-    "acceptanceCriteria": ["Each major overview becomes a hub that links to focused lessons", "Lighting, water, environment, nutrition, roots, propagation, plant health, outdoor, training and post-harvest receive deep subtopic clusters"]
+    "acceptanceCriteria": ["Each major overview becomes a hub that links to focused lessons", "Lighting, water, environment, nutrition, roots, propagation, plant health, outdoor, protected cultivation, training and post-harvest receive deep subtopic clusters"]
   },
   {
     "id": "EDU-P2-002",
@@ -101,15 +101,15 @@
     "area": "Visual library",
     "title": "Build systematic 200+ education visual program",
     "status": "in_progress",
-    "acceptanceCriteria": ["Anatomy plates", "Microscope plates", "Process diagrams", "Diagnostic comparisons", "Pest and disease identification", "Measurement guides", "Growth stages", "Root-zone diagrams", "Environmental diagrams", "Training sequences", "Breeding diagrams", "Outdoor diagrams", "Post-harvest diagrams"]
+    "acceptanceCriteria": ["Anatomy plates", "Microscope plates", "Process diagrams", "Diagnostic comparisons", "Pest and disease identification", "Measurement guides", "Growth stages", "Root-zone diagrams", "Environmental diagrams", "Training sequences", "Breeding diagrams", "Outdoor diagrams", "Protected-cultivation diagrams", "Post-harvest diagrams"]
   },
   {
     "id": "EDU-P2-004",
     "priority": "P2",
     "area": "Downloads",
     "title": "Build printable grower tools",
-    "status": "queued",
-    "acceptanceCriteria": ["Plant-health intake", "Pest scouting map", "VPD log", "PPFD grid", "Irrigation log", "pH/EC calibration log", "Seed and germination records", "Clone batch record", "Phenotype scorecard", "Outdoor site survey", "Harvest maturity sheet", "Drying and storage logs"]
+    "status": "implemented",
+    "acceptanceCriteria": ["Plant-health intake", "Pest scouting map", "VPD log", "PPFD grid", "Irrigation log", "pH/EC calibration log", "Seed and germination records", "Clone batch record", "Phenotype scorecard", "Outdoor site survey", "Harvest maturity sheet", "Drying log", "Storage and water-activity log", "Incoming-plant quarantine record"]
   },
   {
     "id": "EDU-P3-001",
