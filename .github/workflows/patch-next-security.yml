@@ -1,0 +1,44 @@
+name: Patch Next.js Security Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/patch-next-security.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-next:
+    if: github.event.head_commit.message == 'Add one-time Next.js security patch workflow'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Update patched Next.js release and lockfile
+        run: npm install --package-lock-only --save-exact next@16.3.3 eslint-config-next@16.3.3 --no-audit --no-fund
+
+      - name: Commit generated dependency files
+        run: |
+          if git diff --quiet -- package.json package-lock.json; then
+            echo "Dependency files already patched."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Patch Next.js to 16.3.3 security release"
+          git push origin HEAD:main
