@@ -27,15 +27,20 @@ const cultivation = [
   ...readJson("outdoor-cultivation-expanded.json"),
   ...readJson("postharvest-science-expanded.json"),
   ...readJson("advanced-cultivation-science-expanded.json"),
+  ...readJson("plant-physiology-expanded.json"),
+  ...readJson("propagation-nutrition-genetics-expanded.json"),
 ];
 const symptoms = readJson("symptom-differential-library.json");
 const tools = readJson("learning-tools.json");
+const academyCourses = readJson("academy-courses.json");
 const atlasModules = readJson("atlas-learning-modules.json");
 const relatedMap = readJson("education-related-links.json");
 
 const validLearnPaths = new Set([
   "/learn",
+  "/learn/academy",
   "/learn/search",
+  "/learn/sources",
   "/learn/plant-health",
   "/learn/cultivation-science",
   "/learn/symptoms",
@@ -53,6 +58,7 @@ const validLearnPaths = new Set([
   "/learn/atlas/paths",
 ]);
 
+for (const course of academyCourses) validLearnPaths.add(`/learn/academy/${course.slug}`);
 for (const item of plantHealth) validLearnPaths.add(`/learn/plant-health/${item.slug}`);
 for (const item of cultivation) validLearnPaths.add(`/learn/cultivation-science/${item.slug}`);
 for (const item of symptoms) validLearnPaths.add(`/learn/symptoms/${item.slug}`);
@@ -103,4 +109,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Education related-link integrity verified: ${Object.keys(relatedMap).length} source pages and ${linkCount} links.`);
+console.log(`Education related-link integrity verified: ${Object.keys(relatedMap).length} source pages and ${linkCount} links across ${validLearnPaths.size} current learning routes.`);
