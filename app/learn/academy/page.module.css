@@ -1,0 +1,145 @@
+.hero {
+  display: grid;
+  gap: 16px;
+  max-width: 920px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0 36px;
+}
+
+.stat {
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.stat strong {
+  font-size: 28px;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.courseList {
+  display: grid;
+  gap: 22px;
+}
+
+.course {
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.courseHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+  padding: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.courseHeader p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.courseNumber {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.courseHeader h2 {
+  margin: 5px 0 0;
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.startLink {
+  white-space: nowrap;
+  font-weight: 800;
+}
+
+.units {
+  display: grid;
+}
+
+.unit {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding: 17px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.unit:last-child {
+  border-bottom: 0;
+}
+
+.unit:hover,
+.unit:focus-visible {
+  background: color-mix(in srgb, var(--surface) 88%, var(--accent));
+}
+
+.unitIndex {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.unitText {
+  display: grid;
+  gap: 5px;
+}
+
+.unitText strong {
+  color: var(--text);
+}
+
+.unitText span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.open {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .courseHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .unit {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .open {
+    grid-column: 2;
+  }
+}
