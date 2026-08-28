@@ -94,5 +94,113 @@
     "url": "https://extension.missouri.edu/publications/ipm1026",
     "sourceType": "University extension",
     "scope": "Regular scouting, biological-control planning, greenhouse insect screening, pest exclusion, and airflow tradeoffs."
+  },
+  {
+    "id": "cannabis-seed-ultrastructure-2023",
+    "title": "Degeneration of oil bodies by rough endoplasmic reticulum (rER)-associated protein during seed germination in Cannabis sativa L",
+    "publisher": "Annals of Botany",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10718813/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis achene and embryo microstructure, cotyledons, radicle position, storage organelles, reserve mobilization, and structural changes during germination."
+  },
+  {
+    "id": "cannabis-life-cycle-morphology-2023",
+    "title": "Morphological Characterization of Cannabis sativa L. Throughout Its Complete Life Cycle",
+    "publisher": "Plants",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10610221/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis leaf morphogenesis, phyllotaxy, plant architecture, reproductive transition, inflorescence development, trichome development, and senescence across a complete life cycle."
+  },
+  {
+    "id": "cannabis-florogenesis-2019",
+    "title": "Architecture and Florogenesis in Female Cannabis sativa Plants",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2019,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6454139/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Female cannabis phytomer organization, solitary flowers, branching, photoperiod response, inflorescence architecture, and floral development."
+  },
+  {
+    "id": "cannabis-trichomes-2021",
+    "title": "Cannabis Glandular Trichomes: A Cellular Metabolite Factory",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2021,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8488169/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Cannabis glandular trichome morphology, capitate-stalked and sessile forms, secretory disk cells, subcuticular storage, distribution, and specialized-metabolite biology."
+  },
+  {
+    "id": "cannabis-photosynthesis-2008",
+    "title": "Photosynthetic response of Cannabis sativa L. to variations in photosynthetic photon flux densities, temperature and CO2 conditions",
+    "publisher": "Physiology and Molecular Biology of Plants",
+    "year": 2008,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3550641/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis gas exchange, photosynthesis, transpiration, stomatal conductance, PPFD, temperature, and carbon-dioxide response under measured conditions."
+  },
+  {
+    "id": "root-hairs-review-2014",
+    "title": "Root Hairs",
+    "publisher": "Plant Physiology",
+    "year": 2014,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4075452/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Foundational angiosperm root-hair development, absorptive surface, nutrient acquisition, environmental response, and root–microbe interaction."
+  },
+  {
+    "id": "phloem-transport-review-2017",
+    "title": "An update on phloem transport: a simple bulk flow under complex regulation",
+    "publisher": "F1000Research",
+    "year": 2017,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5721935/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Plant source–sink relationships, phloem loading and unloading, sieve-element transport, pressure-driven bulk flow, and regulatory context."
+  },
+  {
+    "id": "vpd-stomatal-response-2015",
+    "title": "The Evolution of Mechanisms Driving the Stomatal Response to Vapor Pressure Deficit",
+    "publisher": "Plant Physiology",
+    "year": 2015,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4348763/",
+    "sourceType": "Peer-reviewed research review",
+    "scope": "Vapor-pressure-deficit sensing and stomatal response mechanisms in vascular plants, including hydraulic and ABA-mediated regulation."
+  },
+  {
+    "id": "cannabis-photoperiod-flowering-2024",
+    "title": "Inflorescence development in female cannabis plants is mediated by photoperiod and gibberellin",
+    "publisher": "Plant Growth Regulation",
+    "year": 2024,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11560369/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Female cannabis photoperiod response, shoot-apex architecture, internode elongation, condensed inflorescence development, gibberellin, and auxin context."
+  },
+  {
+    "id": "cannabis-sex-plasticity-2026",
+    "title": "Hermaphroditism in Cannabis sativa L.: Impacts, Inducers, and Industry Implications",
+    "publisher": "Plants",
+    "year": 2026,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13258890/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Cannabis sex determination and sex-expression plasticity, genetic and hormonal regulation, environmental context, hermaphroditism, early detection, and breeding implications."
+  },
+  {
+    "id": "cannabis-drought-physiology-2025",
+    "title": "Genotypic Variation in Photosynthesis and Biomass Partitioning Underlies Agronomic Performance and Cannabinoid Profile in Cannabis sativa Under Drought",
+    "publisher": "Peer-reviewed open-access research",
+    "year": 2025,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12736467/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis photosynthetic and stomatal responses to water deficit, genotype-dependent drought response, biomass partitioning, and physiological interpretation under measured conditions."
+  },
+  {
+    "id": "cannabis-trichome-sampling-2025",
+    "title": "Bracts, Buds, and Biases: Uncovering Gaps in Trichome Density Quantification and Cannabinoid Concentration in Cannabis sativa L",
+    "publisher": "Peer-reviewed open-access review",
+    "year": 2025,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12300688/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Trichome sampling units, bract versus sugar-leaf context, microscopy and imaging considerations, anatomical variability, and reproducibility of trichome assessment."
   }
 ]
