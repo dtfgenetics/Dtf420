@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import library from "@/content/symptom-differential-library.json";
+import { RelatedEducation } from "@/components/education/RelatedEducation";
 import styles from "../../plant-health/page.module.css";
 
 function getEntry(slug: string) {
@@ -38,6 +39,7 @@ export default async function SymptomDifferentialDetailPage({ params }: { params
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) notFound();
+  const path = `/learn/symptoms/${slug}`;
 
   return (
     <section className="shell page-section">
@@ -63,9 +65,11 @@ export default async function SymptomDifferentialDetailPage({ params }: { params
         <TopicPanel title="Visuals this differential still needs" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
+      <RelatedEducation path={path} />
+
       <div className={styles.footerActions}>
         <Link className="button button--primary" href="/learn/symptoms">Back to symptom library</Link>
-        <Link className="button" href="/learn/plant-health">Plant Health Library</Link>
+        <Link className="button" href="/learn/search">Search all education</Link>
         <Link className="button" href="/learn/atlas/cases">Practice diagnostic cases</Link>
       </div>
     </section>
