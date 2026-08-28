@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
+import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
+import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../page.module.css";
 
 const library = [...coreLibrary, ...expandedLibrary];
@@ -21,10 +23,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const entry = getEntry(slug);
   if (!entry) return { title: "Plant Health Reference" };
 
-  return {
+  return buildEducationMetadata({
     title: `${entry.title} — Plant Health Library`,
     description: entry.summary,
-  };
+    path: `/learn/plant-health/${slug}`,
+  });
 }
 
 function TopicPanel({ title, items, className = "" }: { title: string; items: string[]; className?: string }) {
@@ -43,9 +46,17 @@ export default async function PlantHealthReferencePage({ params }: { params: Pro
   const entry = getEntry(slug);
   if (!entry) notFound();
   const path = `/learn/plant-health/${slug}`;
+  const structuredData = buildLearningResourceJsonLd({
+    name: entry.title,
+    description: entry.summary,
+    path,
+    learningResourceType: "Plant health reference",
+    about: entry.category,
+  });
 
   return (
     <section className="shell page-section">
+      <LearningResourceJsonLd data={structuredData} />
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/learn">Learn</Link>
         <span>/</span>
