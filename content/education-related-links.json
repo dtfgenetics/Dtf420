@@ -1,177 +1,597 @@
 {
   "/learn/plant-health/whiteflies": [
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"},
-    {"kind":"Cultivation science","title":"Greenhouse Scouting & Hotspot Mapping","href":"/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping"},
-    {"kind":"Plant health","title":"Beneficial Arthropods & Biological Control","href":"/learn/plant-health/beneficial-arthropods-and-biological-control"}
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Greenhouse Scouting & Hotspot Mapping",
+      "href": "/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Beneficial Arthropods & Biological Control",
+      "href": "/learn/plant-health/beneficial-arthropods-and-biological-control"
+    }
   ],
   "/learn/plant-health/root-aphids": [
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"},
-    {"kind":"Atlas system","title":"Root System","href":"/learn/atlas/root-system"},
-    {"kind":"Cultivation science","title":"Protected-Cultivation Irrigation & Drainage","href":"/learn/cultivation-science/protected-cultivation-irrigation-and-drainage"}
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Root System",
+      "href": "/learn/atlas/root-system"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Protected-Cultivation Irrigation & Drainage",
+      "href": "/learn/cultivation-science/protected-cultivation-irrigation-and-drainage"
+    }
   ],
   "/learn/plant-health/mealybugs-and-scale-insects": [
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"},
-    {"kind":"Cultivation science","title":"Incoming Plant Quarantine & Clean Stock","href":"/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock"},
-    {"kind":"Worksheet","title":"Incoming Plant Quarantine Record","href":"/learn/tools/incoming-plant-quarantine"}
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Incoming Plant Quarantine & Clean Stock",
+      "href": "/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Incoming Plant Quarantine Record",
+      "href": "/learn/tools/incoming-plant-quarantine"
+    }
   ],
   "/learn/plant-health/leafhoppers-and-other-mobile-sap-feeders": [
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"},
-    {"kind":"Cultivation science","title":"Insect Exclusion Screening & Airflow Tradeoffs","href":"/learn/cultivation-science/insect-exclusion-screening-and-airflow-tradeoffs"},
-    {"kind":"Plant health","title":"Virus Disease & Vector Concepts","href":"/learn/plant-health/virus-disease-and-vector-concepts"}
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Insect Exclusion Screening & Airflow Tradeoffs",
+      "href": "/learn/cultivation-science/insect-exclusion-screening-and-airflow-tradeoffs"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Virus Disease & Vector Concepts",
+      "href": "/learn/plant-health/virus-disease-and-vector-concepts"
+    }
   ],
   "/learn/plant-health/caterpillars-and-chewing-insects": [
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"},
-    {"kind":"Cultivation science","title":"Insect Exclusion Screening & Airflow Tradeoffs","href":"/learn/cultivation-science/insect-exclusion-screening-and-airflow-tradeoffs"},
-    {"kind":"Atlas system","title":"Flowers","href":"/learn/atlas/flowers"}
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Insect Exclusion Screening & Airflow Tradeoffs",
+      "href": "/learn/cultivation-science/insect-exclusion-screening-and-airflow-tradeoffs"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Flowers",
+      "href": "/learn/atlas/flowers"
+    }
   ],
   "/learn/plant-health/beneficial-arthropods-and-biological-control": [
-    {"kind":"Cultivation science","title":"Biological Control Program Design","href":"/learn/cultivation-science/biological-control-program-design"},
-    {"kind":"Cultivation science","title":"Greenhouse Scouting & Hotspot Mapping","href":"/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping"},
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"}
+    {
+      "kind": "Cultivation science",
+      "title": "Biological Control Program Design",
+      "href": "/learn/cultivation-science/biological-control-program-design"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Greenhouse Scouting & Hotspot Mapping",
+      "href": "/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    }
   ],
   "/learn/plant-health/fusarium-associated-wilt-and-crown-disease": [
-    {"kind":"Atlas system","title":"Root System","href":"/learn/atlas/root-system"},
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"}
+    {
+      "kind": "Atlas system",
+      "title": "Root System",
+      "href": "/learn/atlas/root-system"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    }
   ],
   "/learn/plant-health/pythium-associated-root-rot": [
-    {"kind":"Atlas system","title":"Root System","href":"/learn/atlas/root-system"},
-    {"kind":"Cultivation science","title":"Protected-Cultivation Irrigation & Drainage","href":"/learn/cultivation-science/protected-cultivation-irrigation-and-drainage"},
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"}
+    {
+      "kind": "Atlas system",
+      "title": "Root System",
+      "href": "/learn/atlas/root-system"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Protected-Cultivation Irrigation & Drainage",
+      "href": "/learn/cultivation-science/protected-cultivation-irrigation-and-drainage"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    }
   ],
   "/learn/plant-health/leaf-spot-disease-complexes": [
-    {"kind":"Symptom differential","title":"Necrotic Spots & Lesions","href":"/learn/symptoms/necrotic-spots-and-lesions"},
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Cultivation science","title":"Humidity, Condensation & Dew-Point Risk","href":"/learn/cultivation-science/humidity-condensation-and-dew-point"}
+    {
+      "kind": "Symptom differential",
+      "title": "Necrotic Spots & Lesions",
+      "href": "/learn/symptoms/necrotic-spots-and-lesions"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Humidity, Condensation & Dew-Point Risk",
+      "href": "/learn/cultivation-science/humidity-condensation-and-dew-point"
+    }
   ],
   "/learn/plant-health/virus-disease-and-vector-concepts": [
-    {"kind":"Cultivation science","title":"Incoming Plant Quarantine & Clean Stock","href":"/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock"},
-    {"kind":"Worksheet","title":"Incoming Plant Quarantine Record","href":"/learn/tools/incoming-plant-quarantine"},
-    {"kind":"Worksheet","title":"Clone Batch & Mother-Plant Record","href":"/learn/tools/clone-batch-record"}
+    {
+      "kind": "Cultivation science",
+      "title": "Incoming Plant Quarantine & Clean Stock",
+      "href": "/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Incoming Plant Quarantine Record",
+      "href": "/learn/tools/incoming-plant-quarantine"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Clone Batch & Mother-Plant Record",
+      "href": "/learn/tools/clone-batch-record"
+    }
   ],
   "/learn/plant-health/bacterial-disease-concepts": [
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Plant health","title":"Sanitation & Biosecurity","href":"/learn/plant-health/sanitation-and-biosecurity"},
-    {"kind":"Symptom differential","title":"Necrotic Spots & Lesions","href":"/learn/symptoms/necrotic-spots-and-lesions"}
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Sanitation and Quarantine",
+      "href": "/learn/plant-health/sanitation-and-quarantine"
+    },
+    {
+      "kind": "Symptom differential",
+      "title": "Necrotic Spots & Lesions",
+      "href": "/learn/symptoms/necrotic-spots-and-lesions"
+    }
   ],
   "/learn/plant-health/post-harvest-mold-and-microbial-risk": [
-    {"kind":"Cultivation science","title":"Drying: Temperature, RH & Airflow","href":"/learn/cultivation-science/drying-temperature-rh-and-airflow"},
-    {"kind":"Cultivation science","title":"Water Activity & Moisture Equilibration","href":"/learn/cultivation-science/water-activity-and-equilibration"},
-    {"kind":"Worksheet","title":"Storage & Water-Activity Log","href":"/learn/tools/storage-water-activity-log"}
+    {
+      "kind": "Cultivation science",
+      "title": "Drying: Temperature, RH & Airflow",
+      "href": "/learn/cultivation-science/drying-temperature-rh-and-airflow"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Water Activity & Moisture Equilibration",
+      "href": "/learn/cultivation-science/water-activity-and-equilibration"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Storage & Water-Activity Log",
+      "href": "/learn/tools/storage-water-activity-log"
+    }
   ],
   "/learn/cultivation-science/humidity-condensation-and-dew-point": [
-    {"kind":"Worksheet","title":"Temperature, RH & VPD Observation Log","href":"/learn/tools/vpd-environment-log"},
-    {"kind":"Atlas system","title":"Environment Overlay","href":"/learn/atlas/environment-overlay"},
-    {"kind":"Plant health","title":"Plant Health, IPM & Disease Library","href":"/learn/plant-health"}
+    {
+      "kind": "Worksheet",
+      "title": "Temperature, RH & VPD Observation Log",
+      "href": "/learn/tools/vpd-environment-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Environment Overlay",
+      "href": "/learn/atlas/environment-overlay"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Plant Health, IPM & Disease Library",
+      "href": "/learn/plant-health"
+    }
   ],
   "/learn/cultivation-science/greenhouse-sensor-placement-and-data-quality": [
-    {"kind":"Measurement lesson","title":"Sensor Placement & Representative Sampling","href":"/learn/cultivation-science/sensor-placement-and-representative-sampling"},
-    {"kind":"Worksheet","title":"Temperature, RH & VPD Observation Log","href":"/learn/tools/vpd-environment-log"},
-    {"kind":"Worksheet","title":"pH & EC Meter Calibration Log","href":"/learn/tools/ph-ec-calibration-log"}
+    {
+      "kind": "Measurement lesson",
+      "title": "Sensor Placement & Representative Sampling",
+      "href": "/learn/cultivation-science/sensor-placement-and-representative-sampling"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Temperature, RH & VPD Observation Log",
+      "href": "/learn/tools/vpd-environment-log"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    }
   ],
   "/learn/cultivation-science/protected-cultivation-irrigation-and-drainage": [
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"},
-    {"kind":"Atlas system","title":"Root System","href":"/learn/atlas/root-system"},
-    {"kind":"Plant health","title":"Pythium-Associated Root Rot","href":"/learn/plant-health/pythium-associated-root-rot"}
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Root System",
+      "href": "/learn/atlas/root-system"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Pythium-Associated Root Rot",
+      "href": "/learn/plant-health/pythium-associated-root-rot"
+    }
   ],
   "/learn/cultivation-science/insect-exclusion-screening-and-airflow-tradeoffs": [
-    {"kind":"Cultivation science","title":"Ventilation, Air Exchange & Circulation","href":"/learn/cultivation-science/ventilation-air-exchange-and-circulation"},
-    {"kind":"Plant health","title":"Plant Health, IPM & Disease Library","href":"/learn/plant-health"},
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"}
+    {
+      "kind": "Cultivation science",
+      "title": "Ventilation, Air Exchange & Circulation",
+      "href": "/learn/cultivation-science/ventilation-air-exchange-and-circulation"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Plant Health, IPM & Disease Library",
+      "href": "/learn/plant-health"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    }
   ],
   "/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock": [
-    {"kind":"Worksheet","title":"Incoming Plant Quarantine Record","href":"/learn/tools/incoming-plant-quarantine"},
-    {"kind":"Plant health","title":"Virus Disease & Vector Concepts","href":"/learn/plant-health/virus-disease-and-vector-concepts"},
-    {"kind":"Worksheet","title":"Clone Batch & Mother-Plant Record","href":"/learn/tools/clone-batch-record"}
+    {
+      "kind": "Worksheet",
+      "title": "Incoming Plant Quarantine Record",
+      "href": "/learn/tools/incoming-plant-quarantine"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Virus Disease & Vector Concepts",
+      "href": "/learn/plant-health/virus-disease-and-vector-concepts"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Clone Batch & Mother-Plant Record",
+      "href": "/learn/tools/clone-batch-record"
+    }
   ],
   "/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping": [
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"},
-    {"kind":"Plant health","title":"Beneficial Arthropods & Biological Control","href":"/learn/plant-health/beneficial-arthropods-and-biological-control"},
-    {"kind":"Cultivation science","title":"Biological Control Program Design","href":"/learn/cultivation-science/biological-control-program-design"}
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Beneficial Arthropods & Biological Control",
+      "href": "/learn/plant-health/beneficial-arthropods-and-biological-control"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Biological Control Program Design",
+      "href": "/learn/cultivation-science/biological-control-program-design"
+    }
   ],
   "/learn/cultivation-science/biological-control-program-design": [
-    {"kind":"Plant health","title":"Beneficial Arthropods & Biological Control","href":"/learn/plant-health/beneficial-arthropods-and-biological-control"},
-    {"kind":"Worksheet","title":"Pest Scouting & Hotspot Map","href":"/learn/tools/pest-scouting-map"},
-    {"kind":"Cultivation science","title":"Greenhouse Scouting & Hotspot Mapping","href":"/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping"}
+    {
+      "kind": "Plant health",
+      "title": "Beneficial Arthropods & Biological Control",
+      "href": "/learn/plant-health/beneficial-arthropods-and-biological-control"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Pest Scouting & Hotspot Map",
+      "href": "/learn/tools/pest-scouting-map"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Greenhouse Scouting & Hotspot Mapping",
+      "href": "/learn/cultivation-science/greenhouse-scouting-and-hotspot-mapping"
+    }
   ],
   "/learn/cultivation-science/supplemental-lighting-and-dli-in-greenhouses": [
-    {"kind":"Worksheet","title":"PPFD Canopy Mapping Grid","href":"/learn/tools/ppfd-mapping-grid"},
-    {"kind":"Cultivation science","title":"PPFD, DLI & Light Measurement","href":"/learn/cultivation-science/ppfd-dli-and-light-measurement"},
-    {"kind":"Atlas system","title":"Environment Overlay","href":"/learn/atlas/environment-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "PPFD Canopy Mapping Grid",
+      "href": "/learn/tools/ppfd-mapping-grid"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "PPFD, DLI & Light Measurement",
+      "href": "/learn/cultivation-science/ppfd-dli-and-light-measurement"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Environment Overlay",
+      "href": "/learn/atlas/environment-overlay"
+    }
   ],
   "/learn/cultivation-science/photoperiod-integrity-and-light-leaks": [
-    {"kind":"Cultivation science","title":"Latitude, Photoperiod & Seasonal Timing","href":"/learn/cultivation-science/latitude-photoperiod-and-seasonal-timing"},
-    {"kind":"Cultivation science","title":"Floral Transition & Photoperiod Sensing","href":"/learn/cultivation-science/floral-transition-and-photoperiod-sensing"},
-    {"kind":"Atlas system","title":"Flowers","href":"/learn/atlas/flowers"}
+    {
+      "kind": "Cultivation science",
+      "title": "Latitude, Photoperiod & Seasonal Timing",
+      "href": "/learn/cultivation-science/latitude-photoperiod-and-seasonal-timing"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Floral Transition & Photoperiod Sensing",
+      "href": "/learn/cultivation-science/floral-transition-and-photoperiod-sensing"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Flowers",
+      "href": "/learn/atlas/flowers"
+    }
   ],
   "/learn/cultivation-science/outdoor-site-and-sun-mapping": [
-    {"kind":"Worksheet","title":"Outdoor Site Survey","href":"/learn/tools/outdoor-site-survey"},
-    {"kind":"Cultivation science","title":"Latitude, Photoperiod & Seasonal Timing","href":"/learn/cultivation-science/latitude-photoperiod-and-seasonal-timing"},
-    {"kind":"Cultivation science","title":"Wind, Storms & Structural Support","href":"/learn/cultivation-science/wind-storms-and-structural-support"}
+    {
+      "kind": "Worksheet",
+      "title": "Outdoor Site Survey",
+      "href": "/learn/tools/outdoor-site-survey"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Latitude, Photoperiod & Seasonal Timing",
+      "href": "/learn/cultivation-science/latitude-photoperiod-and-seasonal-timing"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Wind, Storms & Structural Support",
+      "href": "/learn/cultivation-science/wind-storms-and-structural-support"
+    }
   ],
   "/learn/cultivation-science/harvest-maturity-sampling": [
-    {"kind":"Worksheet","title":"Harvest Maturity Sampling Record","href":"/learn/tools/harvest-maturity-record"},
-    {"kind":"Atlas system","title":"Trichomes & Resin","href":"/learn/atlas/trichomes-resin"},
-    {"kind":"Cultivation science","title":"Storage: Light, Oxygen, Temperature & Packaging","href":"/learn/cultivation-science/storage-light-oxygen-temperature-and-packaging"}
+    {
+      "kind": "Worksheet",
+      "title": "Harvest Maturity Sampling Record",
+      "href": "/learn/tools/harvest-maturity-record"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Trichomes & Resin",
+      "href": "/learn/atlas/trichomes-resin"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Storage: Light, Oxygen, Temperature & Packaging",
+      "href": "/learn/cultivation-science/storage-light-oxygen-temperature-and-packaging"
+    }
   ],
   "/learn/cultivation-science/drying-temperature-rh-and-airflow": [
-    {"kind":"Worksheet","title":"Drying Room Environment Log","href":"/learn/tools/drying-room-log"},
-    {"kind":"Cultivation science","title":"Water Activity & Moisture Equilibration","href":"/learn/cultivation-science/water-activity-and-equilibration"},
-    {"kind":"Plant health","title":"Post-Harvest Mold & Microbial Risk","href":"/learn/plant-health/post-harvest-mold-and-microbial-risk"}
+    {
+      "kind": "Worksheet",
+      "title": "Drying Room Environment Log",
+      "href": "/learn/tools/drying-room-log"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Water Activity & Moisture Equilibration",
+      "href": "/learn/cultivation-science/water-activity-and-equilibration"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Post-Harvest Mold & Microbial Risk",
+      "href": "/learn/plant-health/post-harvest-mold-and-microbial-risk"
+    }
   ],
   "/learn/cultivation-science/water-activity-and-equilibration": [
-    {"kind":"Worksheet","title":"Storage & Water-Activity Log","href":"/learn/tools/storage-water-activity-log"},
-    {"kind":"Cultivation science","title":"Drying: Temperature, RH & Airflow","href":"/learn/cultivation-science/drying-temperature-rh-and-airflow"},
-    {"kind":"Plant health","title":"Post-Harvest Mold & Microbial Risk","href":"/learn/plant-health/post-harvest-mold-and-microbial-risk"}
+    {
+      "kind": "Worksheet",
+      "title": "Storage & Water-Activity Log",
+      "href": "/learn/tools/storage-water-activity-log"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Drying: Temperature, RH & Airflow",
+      "href": "/learn/cultivation-science/drying-temperature-rh-and-airflow"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Post-Harvest Mold & Microbial Risk",
+      "href": "/learn/plant-health/post-harvest-mold-and-microbial-risk"
+    }
   ],
   "/learn/cultivation-science/ph-and-ec-measurement-quality": [
-    {"kind":"Worksheet","title":"pH & EC Meter Calibration Log","href":"/learn/tools/ph-ec-calibration-log"},
-    {"kind":"Cultivation science","title":"Measurement Uncertainty","href":"/learn/cultivation-science/measurement-uncertainty"},
-    {"kind":"Atlas system","title":"Diagnostic Overlay","href":"/learn/atlas/diagnostic-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Measurement Uncertainty",
+      "href": "/learn/cultivation-science/measurement-uncertainty"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Diagnostic Overlay",
+      "href": "/learn/atlas/diagnostic-overlay"
+    }
   ],
   "/learn/cultivation-science/ppfd-dli-and-light-measurement": [
-    {"kind":"Worksheet","title":"PPFD Canopy Mapping Grid","href":"/learn/tools/ppfd-mapping-grid"},
-    {"kind":"Cultivation science","title":"Supplemental Lighting & DLI in Greenhouses","href":"/learn/cultivation-science/supplemental-lighting-and-dli-in-greenhouses"},
-    {"kind":"Atlas system","title":"Environment Overlay","href":"/learn/atlas/environment-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "PPFD Canopy Mapping Grid",
+      "href": "/learn/tools/ppfd-mapping-grid"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Supplemental Lighting & DLI in Greenhouses",
+      "href": "/learn/cultivation-science/supplemental-lighting-and-dli-in-greenhouses"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Environment Overlay",
+      "href": "/learn/atlas/environment-overlay"
+    }
   ],
   "/learn/symptoms/lower-leaf-yellowing": [
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"},
-    {"kind":"Atlas system","title":"Diagnostic Overlay","href":"/learn/atlas/diagnostic-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Diagnostic Overlay",
+      "href": "/learn/atlas/diagnostic-overlay"
+    }
   ],
   "/learn/symptoms/new-growth-chlorosis": [
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Plant health","title":"Broad & Russet Mites","href":"/learn/plant-health/broad-and-russet-mites"},
-    {"kind":"Worksheet","title":"pH & EC Meter Calibration Log","href":"/learn/tools/ph-ec-calibration-log"}
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Plant health",
+      "title": "Broad & Russet Mites",
+      "href": "/learn/plant-health/broad-and-russet-mites"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    }
   ],
   "/learn/symptoms/interveinal-chlorosis": [
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Worksheet","title":"pH & EC Meter Calibration Log","href":"/learn/tools/ph-ec-calibration-log"},
-    {"kind":"Atlas system","title":"Root System","href":"/learn/atlas/root-system"}
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Root System",
+      "href": "/learn/atlas/root-system"
+    }
   ],
   "/learn/symptoms/marginal-necrosis": [
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"},
-    {"kind":"Worksheet","title":"PPFD Canopy Mapping Grid","href":"/learn/tools/ppfd-mapping-grid"},
-    {"kind":"Atlas system","title":"Environment Overlay","href":"/learn/atlas/environment-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "PPFD Canopy Mapping Grid",
+      "href": "/learn/tools/ppfd-mapping-grid"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Environment Overlay",
+      "href": "/learn/atlas/environment-overlay"
+    }
   ],
   "/learn/symptoms/tip-burn": [
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"},
-    {"kind":"Worksheet","title":"pH & EC Meter Calibration Log","href":"/learn/tools/ph-ec-calibration-log"},
-    {"kind":"Atlas system","title":"Diagnostic Overlay","href":"/learn/atlas/diagnostic-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Diagnostic Overlay",
+      "href": "/learn/atlas/diagnostic-overlay"
+    }
   ],
   "/learn/symptoms/necrotic-spots-and-lesions": [
-    {"kind":"Plant health","title":"Leaf Spot Disease Complexes","href":"/learn/plant-health/leaf-spot-disease-complexes"},
-    {"kind":"Worksheet","title":"Plant Health Intake Sheet","href":"/learn/tools/plant-health-intake"},
-    {"kind":"Cultivation science","title":"Humidity, Condensation & Dew-Point Risk","href":"/learn/cultivation-science/humidity-condensation-and-dew-point"}
+    {
+      "kind": "Plant health",
+      "title": "Leaf Spot Disease Complexes",
+      "href": "/learn/plant-health/leaf-spot-disease-complexes"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Plant Health Intake Sheet",
+      "href": "/learn/tools/plant-health-intake"
+    },
+    {
+      "kind": "Cultivation science",
+      "title": "Humidity, Condensation & Dew-Point Risk",
+      "href": "/learn/cultivation-science/humidity-condensation-and-dew-point"
+    }
   ],
   "/learn/symptoms/upward-curl-and-tacoing": [
-    {"kind":"Worksheet","title":"PPFD Canopy Mapping Grid","href":"/learn/tools/ppfd-mapping-grid"},
-    {"kind":"Worksheet","title":"Temperature, RH & VPD Observation Log","href":"/learn/tools/vpd-environment-log"},
-    {"kind":"Atlas system","title":"Environment Overlay","href":"/learn/atlas/environment-overlay"}
+    {
+      "kind": "Worksheet",
+      "title": "PPFD Canopy Mapping Grid",
+      "href": "/learn/tools/ppfd-mapping-grid"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "Temperature, RH & VPD Observation Log",
+      "href": "/learn/tools/vpd-environment-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Environment Overlay",
+      "href": "/learn/atlas/environment-overlay"
+    }
   ],
   "/learn/symptoms/downward-clawing": [
-    {"kind":"Worksheet","title":"Irrigation & Root-Zone Log","href":"/learn/tools/irrigation-root-zone-log"},
-    {"kind":"Worksheet","title":"pH & EC Meter Calibration Log","href":"/learn/tools/ph-ec-calibration-log"},
-    {"kind":"Atlas system","title":"Root System","href":"/learn/atlas/root-system"}
+    {
+      "kind": "Worksheet",
+      "title": "Irrigation & Root-Zone Log",
+      "href": "/learn/tools/irrigation-root-zone-log"
+    },
+    {
+      "kind": "Worksheet",
+      "title": "pH & EC Meter Calibration Log",
+      "href": "/learn/tools/ph-ec-calibration-log"
+    },
+    {
+      "kind": "Atlas system",
+      "title": "Root System",
+      "href": "/learn/atlas/root-system"
+    }
   ]
 }
