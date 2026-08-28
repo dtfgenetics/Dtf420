@@ -12,7 +12,7 @@ export const metadata: Metadata = buildEducationMetadata({
 
 const unitCount = courses.reduce((sum, course) => sum + course.units.length, 0);
 const referenceKinds = new Set(
-  courses.flatMap((course) => course.units.map((unit) => unit.href.split("/").filter(Boolean)[1] ?? "learn")),
+  courses.flatMap((course) => course.units.map((unit) => unit.href.split("/").filter(Boolean)[2] ?? "learn")),
 ).size;
 
 export default function AcademyPage() {
@@ -41,7 +41,7 @@ export default function AcademyPage() {
                 <h2>{course.title}</h2>
                 <p>{course.summary}</p>
               </div>
-              <Link className={styles.startLink} href={course.units[0].href}>Start course →</Link>
+              <Link className={styles.startLink} href={`/learn/academy/${course.slug}`}>Open course →</Link>
             </header>
 
             <div className={styles.units}>
