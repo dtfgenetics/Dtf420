@@ -1,0 +1,189 @@
+[
+  {
+    "slug": "plant-health-intake",
+    "title": "Plant Health Intake Sheet",
+    "category": "Diagnostics",
+    "purpose": "Capture symptom location, timing, crop context, measurements, and recent changes before forming a diagnosis.",
+    "sections": [
+      {"title": "Plant identity", "fields": ["Plant / lot ID", "Cultivar / line", "Age / growth stage", "Propagation source", "Location / zone"]},
+      {"title": "Symptom map", "fields": ["First tissue affected", "Old vs new growth", "Upper vs lower canopy", "One branch / sector / whole plant", "First observed date", "Progression since first observation"]},
+      {"title": "Measurements", "fields": ["Air temperature", "RH", "Leaf temperature if available", "PPFD / light context", "Root-zone moisture", "pH", "EC", "Water / feed source"]},
+      {"title": "Recent changes", "fields": ["Irrigation change", "Feed change", "Environmental change", "Spray / treatment", "Training / pruning", "Transplant / media change"]},
+      {"title": "Evidence", "fields": ["Pests / eggs / cast skins", "Root appearance", "Visible fungal or bacterial signs", "Photos collected", "Samples collected", "Initial differential"]}
+    ],
+    "related": ["/learn/symptoms", "/learn/plant-health/diagnostic-foundations", "/learn/atlas/cases"]
+  },
+  {
+    "slug": "pest-scouting-map",
+    "title": "Pest Scouting & Hotspot Map",
+    "category": "IPM",
+    "purpose": "Use repeatable zones and counts to track pest pressure, life stages, beneficial organisms, and intervention outcomes over time.",
+    "sections": [
+      {"title": "Scouting session", "fields": ["Date", "Scout", "Crop / room", "Week / stage", "Weather or environment notes"]},
+      {"title": "Zone map", "fields": ["Zone A observations", "Zone B observations", "Zone C observations", "Zone D observations", "Entry / vent / door hotspots"]},
+      {"title": "Pest counts", "fields": ["Pest species", "Eggs", "Immatures", "Adults", "Damage severity", "Trap count / card ID"]},
+      {"title": "Beneficials", "fields": ["Beneficial species", "Observed / released", "Release date", "Release location", "Evidence of establishment"]},
+      {"title": "Follow-up", "fields": ["Action taken", "Target zone", "Recheck date", "Population trend", "Notes"]}
+    ],
+    "related": ["/learn/plant-health/greenhouse-scouting-and-hotspot-mapping", "/learn/plant-health/beneficial-arthropods-and-biological-control"]
+  },
+  {
+    "slug": "incoming-plant-quarantine",
+    "title": "Incoming Plant Quarantine Record",
+    "category": "Biosecurity",
+    "purpose": "Keep source, lot identity, inspection findings, testing, and disposition linked while incoming plants remain separated from established stock.",
+    "sections": [
+      {"title": "Source", "fields": ["Supplier / source", "Arrival date", "Cultivar / line", "Lot / batch", "Plant count", "Propagation type"]},
+      {"title": "Initial inspection", "fields": ["Upper leaf surfaces", "Lower leaf surfaces", "Nodes / stems", "Root zone", "Pests / eggs", "Disease signs / symptoms"]},
+      {"title": "Testing", "fields": ["Test requested", "Sample ID", "Lab / method", "Date collected", "Result", "Follow-up required"]},
+      {"title": "Quarantine observations", "fields": ["Day 1", "Day 3", "Day 7", "Later observation", "Treatment / action"]},
+      {"title": "Disposition", "fields": ["Released", "Held", "Removed", "Release / removal date", "Authorized by"]}
+    ],
+    "related": ["/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock", "/learn/plant-health/sanitation-and-biosecurity"]
+  },
+  {
+    "slug": "vpd-environment-log",
+    "title": "Temperature, RH & VPD Observation Log",
+    "category": "Environment",
+    "purpose": "Track atmospheric conditions with location and leaf-temperature context instead of treating one VPD value as a universal target.",
+    "sections": [
+      {"title": "Session", "fields": ["Date", "Time", "Room / zone", "Growth stage", "Sensor ID"]},
+      {"title": "Atmosphere", "fields": ["Air temperature", "RH", "Calculated air VPD", "Leaf temperature", "Leaf-air temperature difference", "Leaf VPD if calculated"]},
+      {"title": "Context", "fields": ["Lights on / off", "PPFD", "Irrigation timing", "Airflow state", "CO2 context if measured"]},
+      {"title": "Plant response", "fields": ["Leaf posture", "Visible stress", "Transpiration clues", "Root-zone moisture", "Notes"]}
+    ],
+    "related": ["/learn/atlas/environment-overlay", "/learn/cultivation-science/greenhouse-sensor-placement-and-data-quality"]
+  },
+  {
+    "slug": "ppfd-mapping-grid",
+    "title": "PPFD Canopy Mapping Grid",
+    "category": "Lighting",
+    "purpose": "Measure spatial light distribution across a defined grid instead of using one center reading to represent the canopy.",
+    "sections": [
+      {"title": "Setup", "fields": ["Date", "Fixture / room", "Fixture height", "Dimmer / power setting", "Canopy height", "Meter ID"]},
+      {"title": "Grid readings", "fields": ["Row A readings", "Row B readings", "Row C readings", "Row D readings", "Edge readings", "Center reading"]},
+      {"title": "Summary", "fields": ["Minimum PPFD", "Maximum PPFD", "Average PPFD", "Uniformity observation", "High-light hotspot", "Low-light zone"]},
+      {"title": "Adjustment", "fields": ["Fixture change", "Plant / canopy change", "New measurement date", "Result"]}
+    ],
+    "related": ["/learn/cultivation-science/ppfd-dli-and-light-measurement", "/learn/atlas/environment-overlay"]
+  },
+  {
+    "slug": "irrigation-root-zone-log",
+    "title": "Irrigation & Root-Zone Log",
+    "category": "Water & Root Zone",
+    "purpose": "Track delivered water, drainage, moisture, pH, EC, and plant response together so irrigation decisions are based on the root-zone system.",
+    "sections": [
+      {"title": "Irrigation event", "fields": ["Date / time", "Zone", "Input volume", "Duration", "Emitter count", "Water / feed batch"]},
+      {"title": "Input", "fields": ["Input pH", "Input EC", "Water temperature", "Source", "Notes"]},
+      {"title": "Root zone", "fields": ["Pre-irrigation moisture", "Post-irrigation moisture", "Drainage volume", "Drainage pH", "Drainage EC", "Ponding / runoff"]},
+      {"title": "Plant response", "fields": ["Leaf posture before", "Leaf posture after", "Wilt / edema / other clues", "Root observation", "Follow-up"]}
+    ],
+    "related": ["/learn/cultivation-science/protected-cultivation-irrigation-and-drainage", "/learn/atlas/root-system"]
+  },
+  {
+    "slug": "ph-ec-calibration-log",
+    "title": "pH & EC Meter Calibration Log",
+    "category": "Measurement",
+    "purpose": "Document instrument identity, standards, calibration checks, cleaning, and failures so measurements remain traceable.",
+    "sections": [
+      {"title": "Instrument", "fields": ["Meter ID", "Probe ID", "Model", "Location", "Owner / operator"]},
+      {"title": "Calibration", "fields": ["Date", "Standard / buffer lot", "Standard value", "Observed value before calibration", "Observed value after calibration", "Temperature"]},
+      {"title": "Maintenance", "fields": ["Probe cleaned", "Storage solution checked", "Damage observed", "Battery / power", "Notes"]},
+      {"title": "Disposition", "fields": ["Passed", "Recalibrated", "Removed from service", "Replacement date", "Verified by"]}
+    ],
+    "related": ["/learn/cultivation-science/ph-and-ec-measurement-quality", "/learn/cultivation-science/measurement-uncertainty"]
+  },
+  {
+    "slug": "seed-germination-record",
+    "title": "Seed & Germination Record",
+    "category": "Propagation",
+    "purpose": "Preserve lot identity and environmental context while separating seed viability observations from germination conditions.",
+    "sections": [
+      {"title": "Seed lot", "fields": ["Lot ID", "Cross / cultivar", "Source", "Harvest / acquisition date", "Storage history", "Seed count"]},
+      {"title": "Germination setup", "fields": ["Start date", "Method", "Medium", "Temperature", "Moisture approach", "Light context"]},
+      {"title": "Emergence", "fields": ["First radicle date", "Radicles emerged", "Cotyledons opened", "Abnormal seedlings", "Non-germinated seeds"]},
+      {"title": "Outcome", "fields": ["Germination percentage", "Seedling survival", "Failure patterns", "Notes / photos"]}
+    ],
+    "related": ["/learn/atlas/seed-germination"]
+  },
+  {
+    "slug": "clone-batch-record",
+    "title": "Clone Batch & Mother-Plant Record",
+    "category": "Propagation",
+    "purpose": "Connect each clone batch to source plants, sanitation, rooting observations, plant-health status, and final disposition.",
+    "sections": [
+      {"title": "Source", "fields": ["Mother plant ID", "Cultivar / line", "Mother health status", "Batch date", "Operator"]},
+      {"title": "Preparation", "fields": ["Tool sanitation", "Cutting count", "Media / system", "Label / lot ID", "Environment zone"]},
+      {"title": "Rooting observations", "fields": ["Day 3", "Day 7", "First roots", "Rooting percentage", "Losses / abnormality"]},
+      {"title": "Health / release", "fields": ["Pest inspection", "Disease / systemic test", "Release date", "Rejected count", "Destination"]}
+    ],
+    "related": ["/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock", "/learn/plant-health/virus-disease-and-vector-concepts"]
+  },
+  {
+    "slug": "phenotype-scorecard",
+    "title": "Phenotype Observation Scorecard",
+    "category": "Genetics",
+    "purpose": "Record repeatable plant traits and environmental context without collapsing a phenotype into one subjective overall score.",
+    "sections": [
+      {"title": "Identity", "fields": ["Plant ID", "Population / cross", "Generation", "Date", "Evaluator"]},
+      {"title": "Architecture", "fields": ["Height", "Internode pattern", "Branching", "Stem strength", "Canopy shape"]},
+      {"title": "Development", "fields": ["Vigor", "Flowering transition", "Stretch", "Flower architecture", "Maturity timing"]},
+      {"title": "Health / resilience", "fields": ["Root health", "Stress response", "Pest / disease observations", "Recovery after training", "Uniformity"]},
+      {"title": "Quality observations", "fields": ["Trichome density observation", "Aroma notes", "Seed traits if applicable", "Photos / sample IDs", "Keep / cull / retest rationale"]}
+    ],
+    "related": ["/learn/atlas/sex-pollen-seed", "/learn/cultivation-science/replication-controls-and-cultivation-trials"]
+  },
+  {
+    "slug": "outdoor-site-survey",
+    "title": "Outdoor Site Survey",
+    "category": "Outdoor",
+    "purpose": "Document sun, drainage, wind, water, access, microclimate, neighboring light, and seasonal risks before planting.",
+    "sections": [
+      {"title": "Site identity", "fields": ["Location", "Survey date", "Latitude / region", "Elevation if known", "Access / security notes"]},
+      {"title": "Light", "fields": ["Morning sun", "Midday sun", "Afternoon sun", "Seasonal shade sources", "Artificial night lighting"]},
+      {"title": "Root zone / water", "fields": ["Soil / container plan", "Drainage after rain", "Water source", "Irrigation route", "Mulch / cover plan"]},
+      {"title": "Weather / exposure", "fields": ["Prevailing wind", "Storm exposure", "Cold-air pooling", "Frost history", "Heat / reflective surfaces", "Rain / dew risk"]},
+      {"title": "Biological risk", "fields": ["Nearby host plants", "Wildlife", "Pest history", "Pollen sources", "Smoke / dust exposure"]}
+    ],
+    "related": ["/learn/cultivation-science/outdoor-site-and-sun-mapping", "/learn/cultivation-science/latitude-photoperiod-and-seasonal-timing"]
+  },
+  {
+    "slug": "harvest-maturity-record",
+    "title": "Harvest Maturity Sampling Record",
+    "category": "Post-Harvest",
+    "purpose": "Standardize sampling location, optics, flower-development observations, and repeated dates before deciding harvest timing.",
+    "sections": [
+      {"title": "Sample identity", "fields": ["Plant / lot", "Date", "Canopy position", "Flower site", "Tissue sampled"]},
+      {"title": "Optics", "fields": ["Magnification", "Lighting", "Camera / microscope", "Image IDs"]},
+      {"title": "Observations", "fields": ["Trichome appearance", "Bract development", "Stigma context", "Senescence", "Mold / injury check"]},
+      {"title": "Decision", "fields": ["Compared with prior date", "Additional sample needed", "Harvest decision", "Reasoning"]}
+    ],
+    "related": ["/learn/cultivation-science/harvest-maturity-sampling", "/learn/atlas/trichomes-resin"]
+  },
+  {
+    "slug": "drying-room-log",
+    "title": "Drying Room Environment Log",
+    "category": "Post-Harvest",
+    "purpose": "Track room conditions, airflow distribution, sample condition, and moisture change over time instead of relying on a single room reading.",
+    "sections": [
+      {"title": "Room / lot", "fields": ["Lot ID", "Harvest date", "Room", "Rack / hang zone", "Sensor IDs"]},
+      {"title": "Environment", "fields": ["Date / time", "Temperature", "RH", "High / low since last check", "Airflow state", "Dehumidifier / HVAC state"]},
+      {"title": "Product observation", "fields": ["Surface feel", "Stem / branch observation", "Mass sample if used", "Odor", "Visible mold / condensation"]},
+      {"title": "Adjustment", "fields": ["Fan change", "HVAC / dehumidification change", "Load spacing change", "Reason", "Recheck time"]}
+    ],
+    "related": ["/learn/cultivation-science/drying-temperature-rh-and-airflow"]
+  },
+  {
+    "slug": "storage-water-activity-log",
+    "title": "Storage & Water-Activity Log",
+    "category": "Post-Harvest",
+    "purpose": "Keep lot identity, package conditions, storage temperature, water-activity measurements, and visual inspection linked over time.",
+    "sections": [
+      {"title": "Lot / package", "fields": ["Lot ID", "Package type", "Package date", "Storage location", "Seal condition"]},
+      {"title": "Measurement", "fields": ["Date", "Sample ID", "Water activity", "Instrument ID", "Equilibration time / method", "Temperature"]},
+      {"title": "Storage context", "fields": ["Storage temperature", "Light exposure", "Package openings", "Condensation observed", "Odor / visual condition"]},
+      {"title": "Disposition", "fields": ["Accepted", "Recondition / investigate", "Rejected", "Reason", "Follow-up date"]}
+    ],
+    "related": ["/learn/cultivation-science/water-activity-and-equilibration", "/learn/cultivation-science/storage-light-oxygen-temperature-and-packaging"]
+  }
+]
