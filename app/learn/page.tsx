@@ -1,11 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { buildEducationMetadata } from "@/lib/education-seo";
+
+export const metadata: Metadata = buildEducationMetadata({
+  title: "Teaching Healthy Cultivation",
+  description: "DTF's connected cultivation education system for plant science, diagnostics, greenhouse and outdoor cultivation, post-harvest science, visual learning, field tools, and evidence sources.",
+  path: "/learn",
+});
 
 const learningModes = [
   {
     eyebrow: "Find anything",
     title: "Search Teaching Healthy Cultivation",
     description:
-      "Search Atlas lessons, plant-health references, symptom differentials, greenhouse and outdoor science, post-harvest topics, and printable field tools from one place.",
+      "Search Atlas lessons, plant-health references, symptom differentials, greenhouse and outdoor science, post-harvest topics, printable field tools, and evidence sources from one place.",
     href: "/learn/search",
     action: "Search all education",
   },
@@ -40,6 +48,14 @@ const learningModes = [
       "Go deeper into outdoor cultivation, greenhouse and protected cultivation, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.",
     href: "/learn/cultivation-science",
     action: "Open cultivation science",
+  },
+  {
+    eyebrow: "Research foundation",
+    title: "Evidence & Sources",
+    description:
+      "Browse peer-reviewed cannabis research, university extension material, and government technical guidance connected directly to THC lessons.",
+    href: "/learn/sources",
+    action: "Open evidence library",
   },
   {
     eyebrow: "Field practice",
@@ -89,7 +105,7 @@ export default function LearnPage() {
       <p className="eyebrow">Teaching Healthy Cultivation</p>
       <h1>Learn</h1>
       <p className="lede">
-        A connected cultivation education system built around plant function, direct observation, measurement, visual learning, evidence-based diagnostics, and repeatable field records.
+        A connected cultivation education system built around plant function, direct observation, measurement, visual learning, evidence-based diagnostics, transparent sourcing, and repeatable field records.
       </p>
 
       <div className="card-grid" style={{ marginTop: 34 }}>
