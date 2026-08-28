@@ -1,0 +1,72 @@
+[
+  {
+    "id": "seed_germination",
+    "stages": ["Germination", "Seedling"],
+    "measurements": ["Media moisture", "Root-zone temperature", "Time to radicle emergence", "Seedling establishment rate"],
+    "related": ["root_system", "stem_vascular", "leaves", "environment_overlay"],
+    "reason": "Early establishment links seed hydration, root emergence, vascular continuity, cotyledon function, and environmental conditions."
+  },
+  {
+    "id": "root_system",
+    "stages": ["Seedling", "Vegetative", "Transition", "Flowering", "Maturation"],
+    "measurements": ["Substrate moisture", "Root-zone EC", "Root-zone pH", "Root temperature", "Irrigation volume and interval"],
+    "related": ["stem_vascular", "leaves", "environment_overlay", "diagnostic_overlay"],
+    "reason": "Root water, oxygen, ion availability, and root health directly shape vascular supply, leaf behavior, and whole-plant stress patterns."
+  },
+  {
+    "id": "stem_vascular",
+    "stages": ["Seedling", "Vegetative", "Transition", "Flowering"],
+    "measurements": ["Internode length", "Stem diameter", "Water demand", "Physical injury location"],
+    "related": ["root_system", "nodes_branching", "leaves", "flowers"],
+    "reason": "The stem is the transport and support bridge between roots, expanding shoots, leaves, branches, and reproductive sinks."
+  },
+  {
+    "id": "nodes_branching",
+    "stages": ["Vegetative", "Transition", "Flowering"],
+    "measurements": ["Node count", "Internode length", "Branch angle", "Canopy height", "Recovery after training"],
+    "related": ["stem_vascular", "leaves", "flowers", "environment_overlay"],
+    "reason": "Branch architecture changes how leaves and flowers occupy light, airflow, support, and transport pathways."
+  },
+  {
+    "id": "leaves",
+    "stages": ["Seedling", "Vegetative", "Transition", "Flowering", "Maturation"],
+    "measurements": ["Leaf temperature", "PPFD", "Air temperature", "Relative humidity", "VPD", "Symptom location and progression"],
+    "related": ["root_system", "stem_vascular", "environment_overlay", "diagnostic_overlay"],
+    "reason": "Leaves integrate light capture, gas exchange, water status, temperature, nutrition, and many of the earliest visible stress patterns."
+  },
+  {
+    "id": "flowers",
+    "stages": ["Transition", "Flowering", "Maturation"],
+    "measurements": ["Developmental stage", "Representative flower-site observations", "Humidity", "Airflow", "Tissue condition"],
+    "related": ["nodes_branching", "trichomes_resin", "sex_pollen_seed", "environment_overlay"],
+    "reason": "Flower development depends on architecture, reproductive biology, resin-bearing structures, and the microclimate around dense floral tissue."
+  },
+  {
+    "id": "trichomes_resin",
+    "stages": ["Flowering", "Maturation"],
+    "measurements": ["Magnification", "Sample location", "Lighting consistency", "Repeated observations over time"],
+    "related": ["flowers", "leaves", "environment_overlay", "diagnostic_overlay"],
+    "reason": "Trichome observations only make sense when tissue type, flower development, environment, and sampling consistency are considered together."
+  },
+  {
+    "id": "sex_pollen_seed",
+    "stages": ["Transition", "Flowering", "Maturation"],
+    "measurements": ["Node or flower-site location", "Expression timing", "Pollen isolation status", "Seed development stage", "Cross labels and records"],
+    "related": ["flowers", "nodes_branching", "seed_germination", "diagnostic_overlay"],
+    "reason": "Reproductive expression connects developmental timing, flower structure, pollen movement, fertilization, and the next seed generation."
+  },
+  {
+    "id": "environment_overlay",
+    "stages": ["Germination", "Seedling", "Vegetative", "Transition", "Flowering", "Maturation"],
+    "measurements": ["PPFD", "Leaf and air temperature", "Relative humidity", "VPD", "CO2", "Airflow", "Root-zone moisture", "pH", "EC"],
+    "related": ["root_system", "leaves", "flowers", "diagnostic_overlay"],
+    "reason": "Environmental variables act through plant structures and processes, so measurements should always be interpreted with plant stage and biological response."
+  },
+  {
+    "id": "diagnostic_overlay",
+    "stages": ["Germination", "Seedling", "Vegetative", "Transition", "Flowering", "Maturation"],
+    "measurements": ["Symptom location", "Pattern", "Progression", "Plant stage", "Root-zone data", "Environment data", "Recent actions"],
+    "related": ["root_system", "leaves", "environment_overlay", "flowers"],
+    "reason": "Diagnosis is a whole-plant reasoning process that combines where symptoms occur with measurements, stage, history, and competing explanations."
+  }
+]
