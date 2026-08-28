@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     item("/", 1, "weekly"),
     item("/learn", 0.95, "weekly"),
+    item("/learn/academy", 0.92, "weekly"),
     item("/learn/search", 0.85, "weekly"),
     item("/learn/sources", 0.82, "weekly"),
     item("/learn/atlas", 0.95, "weekly"),
