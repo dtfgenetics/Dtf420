@@ -1,0 +1,350 @@
+[
+  {
+    "courseSlug": "evidence-observation-diagnosis",
+    "outcomes": [
+      "Describe symptom location, pattern, distribution, and progression before assigning a cause.",
+      "Collect environmental, root-zone, and plant observations in one traceable record.",
+      "Rank multiple plausible causes and identify evidence that supports or weakens each one.",
+      "Document follow-up observations so a diagnosis can be revised when new evidence appears."
+    ],
+    "exercises": [
+      {
+        "title": "Blind symptom description",
+        "task": "Choose one plant image or real observation and write a description that contains no diagnosis words. Record tissue age, canopy position, pattern, distribution, severity, and progression.",
+        "deliverable": "A completed plant-health intake record plus a short list of observations that are still missing.",
+        "relatedHref": "/learn/tools/plant-health-intake"
+      },
+      {
+        "title": "Measurement-context audit",
+        "task": "Take one suspected plant-health problem and identify which measurements would materially change the differential. Separate measurements you have from measurements you are assuming.",
+        "deliverable": "A measurement checklist with instrument, location, timing, and uncertainty notes.",
+        "relatedHref": "/learn/atlas/diagnostic-overlay/measurement-context"
+      }
+    ],
+    "capstone": {
+      "title": "Evidence packet and ranked differential",
+      "brief": "Build a complete evidence packet for one plant-health scenario without jumping directly from appearance to treatment.",
+      "evidence": ["Symptom map", "Timeline", "Environmental and root-zone measurements", "Direct pest/pathogen evidence if present", "Three or more ranked explanations", "A next-test or follow-up plan"],
+      "relatedHrefs": ["/learn/atlas/cases", "/learn/symptoms", "/learn/plant-health/diagnostic-foundations"]
+    }
+  },
+  {
+    "courseSlug": "seed-germination-establishment",
+    "outcomes": [
+      "Identify major seed structures and connect them to germination.",
+      "Distinguish imbibition, radicle emergence, cotyledon opening, and first true-leaf development.",
+      "Separate seed viability questions from environmental establishment failures.",
+      "Record germination as a repeatable batch process rather than a memory-based result."
+    ],
+    "exercises": [
+      {
+        "title": "Seed anatomy reconstruction",
+        "task": "Create a labeled seed cutaway from memory, then compare it with the Atlas reference and correct every misplaced or missing structure.",
+        "deliverable": "A corrected labeled diagram with one sentence describing the role of each major structure.",
+        "relatedHref": "/learn/atlas/seed-germination/seed-anatomy"
+      },
+      {
+        "title": "Germination batch record",
+        "task": "Track one germination batch by lot identity, setup, temperature, moisture approach, radicle emergence, cotyledon opening, abnormal seedlings, and non-germinated seeds.",
+        "deliverable": "A completed seed and germination record with a calculated germination percentage and notes on uncertainty.",
+        "relatedHref": "/learn/tools/seed-germination-record"
+      }
+    ],
+    "capstone": {
+      "title": "Seed-to-seedling establishment protocol",
+      "brief": "Design an establishment workflow that preserves seed-lot identity and makes failures diagnosable.",
+      "evidence": ["Seed-lot record", "Environmental observations", "Emergence timeline", "Failure-pattern notes", "Seedling survival record", "Changes proposed for the next batch"],
+      "relatedHrefs": ["/learn/atlas/seed-germination", "/learn/tools/seed-germination-record"]
+    }
+  },
+  {
+    "courseSlug": "roots-rhizosphere-water-uptake",
+    "outcomes": [
+      "Distinguish primary, lateral, fine-root, and root-hair functions.",
+      "Connect media water, oxygen, ions, microbes, and root temperature to root performance.",
+      "Interpret root appearance with texture, branching, and root-zone measurements rather than color alone.",
+      "Relate root-zone conditions to whole-plant water and nutrient behavior."
+    ],
+    "exercises": [
+      {
+        "title": "Root-system observation map",
+        "task": "Inspect a root system or reference image and map fine-root density, branching, active tips, discoloration, texture, and the media zones occupied by roots.",
+        "deliverable": "A root-zone sketch plus a list of observations that are direct evidence versus interpretation.",
+        "relatedHref": "/learn/atlas/root-system/root-architecture"
+      },
+      {
+        "title": "Irrigation-response comparison",
+        "task": "Record pre-irrigation moisture, input volume, drainage, pH, EC, and plant posture across repeated irrigation events.",
+        "deliverable": "An irrigation/root-zone log showing at least two events and a short interpretation of what changed.",
+        "relatedHref": "/learn/tools/irrigation-root-zone-log"
+      }
+    ],
+    "capstone": {
+      "title": "Root-zone evidence model",
+      "brief": "Explain a root-zone problem as an interacting water, oxygen, chemistry, temperature, and biological system.",
+      "evidence": ["Root observations", "Moisture history", "pH and EC context", "Irrigation history", "Temperature or oxygen context", "A ranked list of plausible root-stress mechanisms"],
+      "relatedHrefs": ["/learn/atlas/root-system", "/learn/plant-health/root-disease-complex"]
+    }
+  },
+  {
+    "courseSlug": "stems-vascular-transport",
+    "outcomes": [
+      "Identify simplified stem tissues and their structural roles.",
+      "Separate xylem water transport from phloem source-to-sink transport.",
+      "Relate internode development to genotype, stage, light, temperature, and growth rate.",
+      "Describe mechanical injury in terms of support and transport rather than appearance alone."
+    ],
+    "exercises": [
+      {
+        "title": "Transport-path tracing",
+        "task": "Trace one molecule of water from the root zone to a transpiring leaf and one unit of photosynthate from a source leaf toward a growing sink.",
+        "deliverable": "A two-path transport diagram labeling xylem, phloem, source, sink, and the environmental forces that affect movement.",
+        "relatedHref": "/learn/atlas/stem-vascular/xylem-transport"
+      },
+      {
+        "title": "Stem injury assessment",
+        "task": "Compare bending, crushing, pruning, and breakage and record what evidence would indicate intact support, restricted transport, or recovery.",
+        "deliverable": "A damage-and-recovery observation table.",
+        "relatedHref": "/learn/atlas/stem-vascular/damage-and-recovery"
+      }
+    ],
+    "capstone": {
+      "title": "Whole-plant transport explanation",
+      "brief": "Explain how roots, stems, leaves, and active sinks remain connected through transport and how one disrupted segment can affect the rest of the plant.",
+      "evidence": ["Stem anatomy", "Xylem pathway", "Phloem pathway", "Source and sink examples", "Environmental context", "Mechanical injury example"],
+      "relatedHrefs": ["/learn/atlas/stem-vascular", "/learn/atlas/leaves/photosynthesis"]
+    }
+  },
+  {
+    "courseSlug": "branching-training-canopy",
+    "outcomes": [
+      "Locate nodes, internodes, axillary buds, and active shoot tips.",
+      "Explain apical dominance and why branch responses differ after training.",
+      "Compare topping, directional training, mainlining, and screen-based canopy organization.",
+      "Evaluate training by canopy structure, light distribution, recovery, and plant condition instead of unsupported yield claims."
+    ],
+    "exercises": [
+      {
+        "title": "Branch-response map",
+        "task": "Choose a training event and map the active shoot tips before and after it. Record which branches changed position or growth priority.",
+        "deliverable": "A before/after branch map with node numbers and observation dates.",
+        "relatedHref": "/learn/atlas/nodes-branching/apical-dominance"
+      },
+      {
+        "title": "Canopy distribution audit",
+        "task": "Record canopy height variation and visible high/low-light zones before and after a training adjustment.",
+        "deliverable": "A canopy sketch with height bands, likely light zones, and the structural change made.",
+        "relatedHref": "/learn/atlas/nodes-branching/mainlining-and-scrog"
+      }
+    ],
+    "capstone": {
+      "title": "Training-system comparison",
+      "brief": "Compare two training approaches using the same evaluation criteria rather than declaring one universally superior.",
+      "evidence": ["Starting architecture", "Intervention map", "Recovery observations", "Canopy distribution", "Support requirements", "Limits and confounding variables"],
+      "relatedHrefs": ["/learn/atlas/nodes-branching", "/learn/cultivation-science"]
+    }
+  },
+  {
+    "courseSlug": "leaves-photosynthesis-gas-exchange",
+    "outcomes": [
+      "Use a healthy leaf as a structural and visual baseline.",
+      "Connect photosynthesis to light, carbon dioxide, water status, and chloroplast function.",
+      "Relate stomata and transpiration to temperature, humidity, airflow, and root-water supply.",
+      "Describe leaf symptoms precisely before attempting diagnosis."
+    ],
+    "exercises": [
+      {
+        "title": "Healthy-leaf baseline plate",
+        "task": "Document a healthy leaf using leaflet shape, venation, petiole, surface condition, color distribution, and posture.",
+        "deliverable": "A labeled baseline image or drawing that can be reused for later comparisons.",
+        "relatedHref": "/learn/atlas/leaves/healthy-leaf-baseline"
+      },
+      {
+        "title": "Gas-exchange context record",
+        "task": "Record temperature, RH, leaf-temperature context if available, airflow state, light context, and leaf posture at multiple times in one day.",
+        "deliverable": "A time-series observation sheet explaining how atmospheric demand changed through the day.",
+        "relatedHref": "/learn/tools/vpd-environment-log"
+      }
+    ],
+    "capstone": {
+      "title": "Leaf function and symptom analysis",
+      "brief": "Explain one leaf symptom without treating color or shape as a diagnosis by itself.",
+      "evidence": ["Healthy baseline", "Symptom vocabulary", "Tissue age and location", "Environment context", "Root-zone context", "At least three plausible cause categories"],
+      "relatedHrefs": ["/learn/atlas/leaves", "/learn/symptoms"]
+    }
+  },
+  {
+    "courseSlug": "flowering-development-maturity",
+    "outcomes": [
+      "Identify major female flower structures across development.",
+      "Separate floral transition, stretch, bud development, pollination response, and senescence.",
+      "Use multiple maturity signals and representative sampling instead of a single visual cue.",
+      "Recognize disease and physical-risk observations that can complicate maturity decisions."
+    ],
+    "exercises": [
+      {
+        "title": "Flower-stage image series",
+        "task": "Document the same flower site or a standardized set of sites across several dates and describe changes in bracts, stigmas, resin coverage, structure, and senescence.",
+        "deliverable": "A dated development sequence with consistent sampling notes.",
+        "relatedHref": "/learn/atlas/flowers/bud-development"
+      },
+      {
+        "title": "Representative maturity sampling",
+        "task": "Define canopy positions and flower sites before inspecting maturity so sampling is not biased toward one convenient location.",
+        "deliverable": "A completed harvest maturity sampling record from multiple representative sites.",
+        "relatedHref": "/learn/tools/harvest-maturity-record"
+      }
+    ],
+    "capstone": {
+      "title": "Defensible harvest-readiness assessment",
+      "brief": "Build a harvest-readiness decision from repeated representative observations rather than one photograph or one trichome field.",
+      "evidence": ["Sampling map", "Repeated dates", "Flower development observations", "Trichome observations", "Senescence context", "Mold/injury inspection and decision rationale"],
+      "relatedHrefs": ["/learn/atlas/flowers", "/learn/tools/harvest-maturity-record"]
+    }
+  },
+  {
+    "courseSlug": "trichomes-resin-secondary-metabolism",
+    "outcomes": [
+      "Distinguish major glandular trichome forms and basic gland anatomy.",
+      "Standardize magnification, tissue sampled, lighting, and sampling location.",
+      "Treat clear/cloudy/amber appearance as one observation rather than a direct potency measurement.",
+      "Separate visible resin abundance from analytical cannabinoid or terpene chemistry."
+    ],
+    "exercises": [
+      {
+        "title": "Microscope sampling standard",
+        "task": "Write a repeatable microscope workflow specifying tissue type, canopy position, magnification, illumination, and image labeling.",
+        "deliverable": "A one-page sampling SOP and a labeled example image set.",
+        "relatedHref": "/learn/atlas/trichomes-resin/microscope-workflow"
+      },
+      {
+        "title": "Bract versus sugar-leaf comparison",
+        "task": "Compare gland observations from flower bracts and nearby sugar leaves without assuming both tissues represent maturity equally.",
+        "deliverable": "A side-by-side comparison with tissue identity and sampling limitations stated explicitly.",
+        "relatedHref": "/learn/atlas/trichomes-resin/where-to-inspect"
+      }
+    ],
+    "capstone": {
+      "title": "Trichome observation protocol",
+      "brief": "Create a repeatable observation protocol that can support maturity tracking without claiming visual microscopy substitutes for laboratory chemistry.",
+      "evidence": ["Sampling locations", "Optical setup", "Image labels", "Repeated observations", "Tissue comparison", "Interpretation limits"],
+      "relatedHrefs": ["/learn/atlas/trichomes-resin", "/learn/tools/harvest-maturity-record"]
+    }
+  },
+  {
+    "courseSlug": "sex-pollen-seed-breeding",
+    "outcomes": [
+      "Distinguish developing staminate and pistillate reproductive structures.",
+      "Recognize mixed-sex expression as an observation that still requires context.",
+      "Explain pollen release, transport, stigma contact, fertilization, and seed development.",
+      "Use isolation, labels, records, and controlled handling to preserve cross identity."
+    ],
+    "exercises": [
+      {
+        "title": "Reproductive-structure identification",
+        "task": "Classify a set of preflower and flower references by structure and developmental stage, including ambiguous examples that require more observation.",
+        "deliverable": "An identification sheet with confidence notes and the evidence used for each classification.",
+        "relatedHref": "/learn/atlas/sex-pollen-seed/male-vs-female-preflowers"
+      },
+      {
+        "title": "Controlled-pollination record design",
+        "task": "Design a record that preserves pollen source, target plant, target branch, date, isolation method, labels, and later seed observations.",
+        "deliverable": "A controlled-pollination worksheet plus a contamination-prevention checklist.",
+        "relatedHref": "/learn/atlas/sex-pollen-seed/controlled-pollination"
+      }
+    ],
+    "capstone": {
+      "title": "Traceable cross plan",
+      "brief": "Build a complete controlled-cross documentation plan from pollen source through mature seed lot.",
+      "evidence": ["Parent IDs", "Pollen handling", "Isolation plan", "Target labels", "Pollination date", "Seed-lot identity and phenotype observation plan"],
+      "relatedHrefs": ["/learn/atlas/sex-pollen-seed", "/learn/tools/phenotype-scorecard"]
+    }
+  },
+  {
+    "courseSlug": "environment-light-vpd",
+    "outcomes": [
+      "Treat temperature, humidity, VPD, airflow, light, leaf temperature, and root-zone water as interacting variables.",
+      "Distinguish instantaneous PPFD from daily light integral.",
+      "Map environmental variation across space rather than relying on one sensor or one light reading.",
+      "Use plant response and measurement context together when adjusting the environment."
+    ],
+    "exercises": [
+      {
+        "title": "Daily VPD context profile",
+        "task": "Record temperature, RH, leaf-temperature context, light state, irrigation timing, airflow, and plant posture at several points through one light cycle.",
+        "deliverable": "A completed VPD environment log with notes explaining when atmospheric demand changed most.",
+        "relatedHref": "/learn/tools/vpd-environment-log"
+      },
+      {
+        "title": "Canopy PPFD map",
+        "task": "Measure a defined canopy grid rather than one center point and identify high-light, low-light, and uniform zones.",
+        "deliverable": "A completed PPFD map with minimum, maximum, average, and a proposed adjustment if needed.",
+        "relatedHref": "/learn/tools/ppfd-mapping-grid"
+      }
+    ],
+    "capstone": {
+      "title": "Environment interaction map",
+      "brief": "Build a whole-system environmental assessment that connects atmospheric demand, photon delivery, airflow, and root-zone supply.",
+      "evidence": ["Temperature/RH profile", "VPD context", "PPFD distribution", "Airflow observations", "Root-zone moisture context", "Plant-response observations"],
+      "relatedHrefs": ["/learn/atlas/environment-overlay", "/learn/tools/vpd-environment-log", "/learn/tools/ppfd-mapping-grid"]
+    }
+  },
+  {
+    "courseSlug": "plant-health-ipm-biosecurity",
+    "outcomes": [
+      "Scout plants and production zones before damage becomes severe.",
+      "Identify pests by organism and life stage rather than damage alone.",
+      "Separate disease signs, symptoms, environmental stress, and systemic-pathogen questions.",
+      "Use quarantine, sanitation, clean stock, records, and compatible controls as one integrated system."
+    ],
+    "exercises": [
+      {
+        "title": "Scouting and hotspot map",
+        "task": "Divide a crop or practice layout into repeatable zones and record pest life stages, damage, beneficial organisms, and monitoring-card observations separately.",
+        "deliverable": "A completed scouting map with at least one scheduled recheck point.",
+        "relatedHref": "/learn/tools/pest-scouting-map"
+      },
+      {
+        "title": "Look-alike differential",
+        "task": "Choose one symptom such as stippling, pale residue, distorted new growth, or root discoloration and compare at least three plausible explanations.",
+        "deliverable": "A differential table showing evidence for, evidence against, and the next discriminating check for each possibility.",
+        "relatedHref": "/learn/symptoms"
+      }
+    ],
+    "capstone": {
+      "title": "IPM and biosecurity response plan",
+      "brief": "Build an evidence-based response plan for a confirmed or suspected plant-health problem while protecting unaffected stock.",
+      "evidence": ["Pest/pathogen identity or diagnostic status", "Scouting distribution", "Quarantine decision", "Sanitation workflow", "Compatible management options", "Verification and follow-up schedule"],
+      "relatedHrefs": ["/learn/plant-health", "/learn/tools/incoming-plant-quarantine", "/learn/tools/pest-scouting-map"]
+    }
+  },
+  {
+    "courseSlug": "outdoor-protected-postharvest",
+    "outcomes": [
+      "Evaluate outdoor sites by sun, drainage, wind, water, microclimate, biology, and seasonal risk.",
+      "Explain how protected structures change heat, humidity, condensation, ventilation, pest entry, and light management.",
+      "Treat drying as controlled moisture transfer with spatially variable temperature, RH, airflow, and load density.",
+      "Separate water activity from moisture content and preserve lot identity through storage."
+    ],
+    "exercises": [
+      {
+        "title": "Site and microclimate survey",
+        "task": "Map sun exposure, drainage, wind, cold-air pooling, water access, neighboring light, wildlife, pest history, pollen sources, and smoke/dust exposure for one outdoor or protected site.",
+        "deliverable": "A completed outdoor site survey with three priority risks and the evidence for each.",
+        "relatedHref": "/learn/tools/outdoor-site-survey"
+      },
+      {
+        "title": "Drying-room process record",
+        "task": "Track temperature, RH, airflow state, room zone, lot identity, product observations, and process adjustments through a drying interval.",
+        "deliverable": "A drying-room log that connects each adjustment to a recorded observation.",
+        "relatedHref": "/learn/tools/drying-room-log"
+      }
+    ],
+    "capstone": {
+      "title": "Environment-to-storage process map",
+      "brief": "Connect preharvest environment, harvest handling, drying, equilibration, packaging, and storage into one traceable process.",
+      "evidence": ["Site or room risk map", "Lot identity", "Drying environment history", "Water-activity context", "Packaging/storage conditions", "Quality or microbial-risk checkpoints"],
+      "relatedHrefs": ["/learn/cultivation-science", "/learn/tools/drying-room-log", "/learn/tools/storage-water-activity-log"]
+    }
+  }
+]
