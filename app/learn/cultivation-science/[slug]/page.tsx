@@ -8,6 +8,7 @@ import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
+import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../../plant-health/page.module.css";
@@ -89,6 +90,7 @@ export default async function CultivationScienceReferencePage({ params }: { para
         <TopicPanel title="Visuals this lesson still needs" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
+      <EvidenceSources path={path} />
       <RelatedEducation path={path} />
 
       <div className={styles.footerActions}>
