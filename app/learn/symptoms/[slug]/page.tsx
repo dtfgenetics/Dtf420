@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import library from "@/content/symptom-differential-library.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
+import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
+import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../../plant-health/page.module.css";
 
 function getEntry(slug: string) {
@@ -18,10 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const entry = getEntry(slug);
   if (!entry) return { title: "Symptom Differential" };
 
-  return {
+  return buildEducationMetadata({
     title: `${entry.title} — Symptom Differential`,
     description: entry.summary,
-  };
+    path: `/learn/symptoms/${slug}`,
+  });
 }
 
 function TopicPanel({ title, items, className = "" }: { title: string; items: string[]; className?: string }) {
@@ -40,9 +43,17 @@ export default async function SymptomDifferentialDetailPage({ params }: { params
   const entry = getEntry(slug);
   if (!entry) notFound();
   const path = `/learn/symptoms/${slug}`;
+  const structuredData = buildLearningResourceJsonLd({
+    name: entry.title,
+    description: entry.summary,
+    path,
+    learningResourceType: "Symptom differential",
+    about: "Observation-first plant diagnosis",
+  });
 
   return (
     <section className="shell page-section">
+      <LearningResourceJsonLd data={structuredData} />
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/learn">Learn</Link>
         <span>/</span>
