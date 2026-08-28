@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import library from "@/content/cultivation-science-library.json";
+import coreLibrary from "@/content/cultivation-science-library.json";
+import protectedLibrary from "@/content/protected-cultivation-library.json";
 import styles from "../plant-health/page.module.css";
+
+const library = [...coreLibrary, ...protectedLibrary];
 
 export const metadata: Metadata = {
   title: "Cultivation Science Reference Library",
@@ -11,6 +14,7 @@ export const metadata: Metadata = {
 
 const categories = [
   "Outdoor & Protected Cultivation",
+  "Protected Cultivation",
   "Harvest & Post-Harvest",
   "Training & Plant Architecture",
   "Flowering & Reproductive Development",
@@ -24,22 +28,24 @@ export default function CultivationSciencePage() {
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Cultivation Science Reference Library</h1>
         <p className="lede">
-          Deeper subject branches for the areas that were still thin: outdoor cultivation, post-harvest biology, training and plant architecture, flowering development, and measurement science.
+          Deep subject branches for outdoor and protected cultivation, greenhouse environmental control, post-harvest biology, training and plant architecture, flowering development, and measurement science.
         </p>
         <div className={styles.heroActions}>
           <Link className="button button--primary" href="/learn/atlas">Open the Living Plant Atlas</Link>
           <Link className="button" href="/learn/plant-health">Open Plant Health</Link>
+          <Link className="button" href="/learn/tools">Printable Tools</Link>
         </div>
       </header>
 
       <div className={styles.stats} aria-label="Cultivation science library summary">
-        <div className={styles.stat}><strong>{library.length}</strong><span>new reference lessons</span></div>
-        <div className={styles.stat}><strong>{categories.length}</strong><span>missing subject branches covered</span></div>
+        <div className={styles.stat}><strong>{library.length}</strong><span>reference lessons</span></div>
+        <div className={styles.stat}><strong>{categories.length}</strong><span>subject branches covered</span></div>
         <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.visualNeeds.length, 0)}</strong><span>lesson visuals specified</span></div>
       </div>
 
       {categories.map((category) => {
         const entries = library.filter((item) => item.category === category);
+        if (!entries.length) return null;
         return (
           <section className={styles.section} key={category}>
             <div className={styles.sectionHeader}>
@@ -47,7 +53,7 @@ export default function CultivationSciencePage() {
                 <p className="eyebrow">Reference group</p>
                 <h2>{category}</h2>
               </div>
-              <p>{entries.length} focused lessons designed to turn the former overview-level coverage into a real topic cluster.</p>
+              <p>{entries.length} focused lessons designed to replace overview-only coverage with practical plant-science reference material.</p>
             </div>
 
             <div className={styles.grid}>
