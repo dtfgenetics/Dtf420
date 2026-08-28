@@ -4,16 +4,24 @@ import { buildEducationMetadata } from "@/lib/education-seo";
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Teaching Healthy Cultivation",
-  description: "DTF's connected cultivation education system for plant science, diagnostics, greenhouse and outdoor cultivation, post-harvest science, visual learning, field tools, and evidence sources.",
+  description: "DTF's connected cultivation education system for guided courses, plant science, diagnostics, greenhouse and outdoor cultivation, post-harvest science, visual learning, field tools, and evidence sources.",
   path: "/learn",
 });
 
 const learningModes = [
   {
+    eyebrow: "Guided curriculum",
+    title: "THC Academy",
+    description:
+      "Follow 12 structured courses and 60 connected units through plant science, diagnostics, environment, health, breeding, outdoor cultivation, protected cultivation, and post-harvest learning.",
+    href: "/learn/academy",
+    action: "Open THC Academy",
+  },
+  {
     eyebrow: "Find anything",
     title: "Search Teaching Healthy Cultivation",
     description:
-      "Search Atlas lessons, plant-health references, symptom differentials, greenhouse and outdoor science, post-harvest topics, printable field tools, and evidence sources from one place.",
+      "Search Atlas lessons, plant-health references, whole-plant physiology, symptom differentials, greenhouse and outdoor science, post-harvest topics, printable field tools, and evidence sources from one place.",
     href: "/learn/search",
     action: "Search all education",
   },
@@ -45,7 +53,7 @@ const learningModes = [
     eyebrow: "Expanded subject library",
     title: "Cultivation Science References",
     description:
-      "Go deeper into outdoor cultivation, greenhouse and protected cultivation, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.",
+      "Go deeper into whole-plant physiology, outdoor cultivation, greenhouse and protected cultivation, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.",
     href: "/learn/cultivation-science",
     action: "Open cultivation science",
   },
