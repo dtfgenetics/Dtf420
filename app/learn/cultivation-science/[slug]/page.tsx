@@ -8,6 +8,7 @@ import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
+import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
 import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
@@ -22,6 +23,7 @@ const library = [
   ...postharvestExpanded,
   ...advancedExpanded,
   ...plantPhysiologyExpanded,
+  ...propagationNutritionGenetics,
 ];
 
 function getEntry(slug: string) {
