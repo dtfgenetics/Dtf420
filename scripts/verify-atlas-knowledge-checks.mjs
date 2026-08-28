@@ -2,9 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const modules = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-learning-modules.json"), "utf8"));
-const checks = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-knowledge-checks.json"), "utf8"));
-const guidedPaths = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-guided-paths.json"), "utf8"));
+const contentDir = path.join(root, "content");
+const modules = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-learning-modules.json"), "utf8"));
+const checkFiles = fs
+  .readdirSync(contentDir)
+  .filter((name) => name.startsWith("atlas-knowledge-checks") && name.endsWith(".json"))
+  .sort();
+const checks = checkFiles.flatMap((name) => JSON.parse(fs.readFileSync(path.join(contentDir, name), "utf8")));
+const guidedPaths = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-guided-paths.json"), "utf8"));
 
 function slugify(value) {
   return value
@@ -23,7 +28,7 @@ const routes = new Set();
 const errors = [];
 
 if (checks.length !== canonicalRoutes.length) {
-  errors.push(`Expected ${canonicalRoutes.length} knowledge checks but found ${checks.length}.`);
+  errors.push(`Expected ${canonicalRoutes.length} knowledge checks but found ${checks.length} across ${checkFiles.length} files.`);
 }
 
 checks.forEach((check, index) => {
@@ -66,12 +71,11 @@ for (const guidedPath of guidedPaths) {
   }
 }
 
-// The UI deterministically moves the correct option to index % 4 so answer positions
-// are evenly distributed without making the canonical content file harder to review.
 const renderedDistribution = [0, 0, 0, 0];
 checks.forEach((_, index) => { renderedDistribution[index % 4] += 1; });
 const spread = Math.max(...renderedDistribution) - Math.min(...renderedDistribution);
-if (spread > 1 || renderedDistribution.some((count) => count < 12)) {
+const minimumExpected = Math.floor(checks.length / 4);
+if (spread > 1 || renderedDistribution.some((count) => count < minimumExpected)) {
   errors.push(`Rendered correct-answer distribution is unbalanced: ${renderedDistribution.join("/")}.`);
 }
 
@@ -81,4 +85,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Atlas knowledge checks verified: ${checks.length} checks for ${canonicalRoutes.length} lessons; rendered answer distribution A/B/C/D = ${renderedDistribution.join("/")}.`);
+console.log(`Atlas knowledge checks verified: ${checks.length} checks across ${checkFiles.length} files for ${canonicalRoutes.length} lessons; rendered answer distribution A/B/C/D = ${renderedDistribution.join("/")}.`);
