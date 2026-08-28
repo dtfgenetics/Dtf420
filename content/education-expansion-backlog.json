@@ -28,7 +28,7 @@
     "priority": "P0",
     "area": "Diagnostics",
     "title": "Build visual symptom differential library",
-    "status": "queued",
+    "status": "implemented",
     "acceptanceCriteria": ["Cover chlorosis, interveinal chlorosis, marginal injury, tip burn, spotting, curl, claw, wilt, bleaching, pigmentation, stunting, distortion, stem, root, and flower symptoms", "Every symptom page ranks plausible categories instead of assigning one cause from appearance"]
   },
   {
@@ -36,7 +36,7 @@
     "priority": "P1",
     "area": "Post-harvest",
     "title": "Expand harvest and post-harvest science",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Representative maturity sampling", "Harvest handling and sanitation", "Drying kinetics and airflow", "Water activity and equilibration", "Microbial risk", "Storage degradation and packaging context"]
   },
   {
@@ -44,7 +44,7 @@
     "priority": "P1",
     "area": "Outdoor",
     "title": "Build full outdoor cultivation curriculum",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Latitude and photoperiod", "Sun and site mapping", "Drainage and root-zone planning", "Irrigation and mulch", "Wind, rain, dew, storms, frost and heat", "Wildlife, pests, pathogens, pollen drift and smoke/dust"]
   },
   {
@@ -60,7 +60,7 @@
     "priority": "P1",
     "area": "Training",
     "title": "Expand plant architecture and training science",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Apical dominance", "Topping and partial-apex removal", "LST", "Supercropping and injury recovery", "Mainlining", "SCROG", "Pruning and defoliation", "Canopy uniformity and structural support"]
   },
   {
@@ -68,7 +68,7 @@
     "priority": "P1",
     "area": "Flowering",
     "title": "Expand flowering and reproductive development",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Floral transition and photoperiod sensing", "Preflowers and sex expression", "Stretch and floral architecture", "Pollination and seed development", "Senescence and maturity assessment"]
   },
   {
@@ -76,7 +76,7 @@
     "priority": "P1",
     "area": "Measurement science",
     "title": "Add measurement and experimental science curriculum",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Calibration", "Accuracy versus precision", "Sensor placement", "Representative sampling", "Replication and controls", "Measurement uncertainty", "Interpreting cultivation trials and published research"]
   },
   {
@@ -84,7 +84,7 @@
     "priority": "P2",
     "area": "Subject hubs",
     "title": "Convert overview pages into topic clusters",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Each major overview becomes a hub that links to focused lessons", "Lighting, water, environment, nutrition, roots, propagation, plant health, outdoor, training and post-harvest receive deep subtopic clusters"]
   },
   {
@@ -92,7 +92,7 @@
     "priority": "P2",
     "area": "Interactive learning",
     "title": "Connect quizzes, cases, practice and mastery to lessons",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Knowledge checks are linked from relevant lessons", "Diagnostic simulations use evidence and measurements", "Progress and mastery routes are discoverable", "Photo or visual identification exercises are added where appropriate"]
   },
   {
@@ -100,7 +100,7 @@
     "priority": "P2",
     "area": "Visual library",
     "title": "Build systematic 200+ education visual program",
-    "status": "queued",
+    "status": "in_progress",
     "acceptanceCriteria": ["Anatomy plates", "Microscope plates", "Process diagrams", "Diagnostic comparisons", "Pest and disease identification", "Measurement guides", "Growth stages", "Root-zone diagrams", "Environmental diagrams", "Training sequences", "Breeding diagrams", "Outdoor diagrams", "Post-harvest diagrams"]
   },
   {
