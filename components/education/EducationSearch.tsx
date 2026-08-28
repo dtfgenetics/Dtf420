@@ -11,6 +11,7 @@ import protectedLighting from "@/content/protected-cultivation-lighting.json";
 import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
+import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
 import evidenceSources from "@/content/education-sources.json";
@@ -74,6 +75,7 @@ const cultivationItems: SearchItem[] = [
   ...outdoorExpanded,
   ...postharvestExpanded,
   ...advancedExpanded,
+  ...plantPhysiologyExpanded,
 ].map((item) => ({
   kind: "Cultivation science" as const,
   title: item.title,
@@ -112,7 +114,7 @@ const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
 
 const searchItems = [...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems];
 const kinds: Array<"All" | SearchKind> = ["All", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source"];
-const examples = ["yellow lower leaves", "whiteflies", "dew point", "PPFD", "water activity", "HLVd research", "replication"];
+const examples = ["yellow lower leaves", "whiteflies", "stomatal conductance", "source sink", "PPFD", "water activity", "HLVd research", "replication"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -159,7 +161,7 @@ export function EducationSearch() {
         <div>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Search Education</h1>
-          <p>Search Atlas lessons, plant-health references, symptom differentials, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, printable field tools, and evidence sources from one place.</p>
+          <p>Search Atlas lessons, plant-health references, whole-plant physiology, symptom differentials, outdoor and greenhouse science, post-harvest material, plant architecture, flowering science, measurement methods, printable field tools, and evidence sources from one place.</p>
         </div>
         <Link href="/learn">Back to Learn</Link>
       </section>
@@ -172,7 +174,7 @@ export function EducationSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try yellow lower leaves, HLVd research, water activity…"
+            placeholder="Try stomatal conductance, HLVd research, water activity…"
             autoComplete="off"
           />
           <select aria-label="Filter education search" value={kind} onChange={(event) => setKind(event.target.value as "All" | SearchKind)}>
@@ -188,7 +190,7 @@ export function EducationSearch() {
         {!searching ? (
           <div className={styles.empty}>Enter at least two characters to search across {searchItems.length} indexed learning resources.</div>
         ) : results.length === 0 ? (
-          <div className={styles.empty}>No matches yet. Try a broader plant structure, symptom, pest, measurement, environment, workflow, research, or post-harvest term.</div>
+          <div className={styles.empty}>No matches yet. Try a broader plant structure, physiology, symptom, pest, measurement, environment, workflow, research, or post-harvest term.</div>
         ) : (
           <>
             <header className={styles.resultHeader}>
