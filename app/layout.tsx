@@ -15,7 +15,6 @@ export const metadata: Metadata = {
     siteName: "DTF420",
     title: "DTF420",
     description: "Cultivation education, interactive learning, tools, games, and community.",
-    url: "https://dtfseeds.com",
   },
   robots: {
     index: true,
