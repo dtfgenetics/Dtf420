@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
+import { RelatedEducation } from "@/components/education/RelatedEducation";
 import styles from "../page.module.css";
 
 const library = [...coreLibrary, ...expandedLibrary];
@@ -41,6 +42,7 @@ export default async function PlantHealthReferencePage({ params }: { params: Pro
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) notFound();
+  const path = `/learn/plant-health/${slug}`;
 
   return (
     <section className="shell page-section">
@@ -67,12 +69,12 @@ export default async function PlantHealthReferencePage({ params }: { params: Pro
         <TopicPanel title="Visuals this lesson still needs" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
+      <RelatedEducation path={path} />
+
       <div className={styles.footerActions}>
         <Link className="button button--primary" href="/learn/plant-health">Back to Plant Health Library</Link>
-        <Link className="button" href="/learn/tools">Printable scouting tools</Link>
-        <Link className="button" href="/learn/symptoms">Symptom differentials</Link>
+        <Link className="button" href="/learn/search">Search all education</Link>
         <Link className="button" href="/learn/atlas/cases">Practice diagnostic cases</Link>
-        <Link className="button" href="/learn/atlas">Open Living Plant Atlas</Link>
       </div>
     </section>
   );
