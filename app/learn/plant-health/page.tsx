@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
+import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
 const library = [...coreLibrary, ...expandedLibrary];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildEducationMetadata({
   title: "Plant Health, IPM & Disease Library",
-  description:
-    "Observation-first cannabis plant health references covering pests, diseases, systemic pathogens, scouting, sanitation, and diagnostic reasoning.",
-};
+  description: "Observation-first cannabis plant health references covering pests, diseases, systemic pathogens, scouting, sanitation, and diagnostic reasoning.",
+  path: "/learn/plant-health",
+});
 
 const categories = ["Foundations", "Arthropod pests", "Diseases", "Systemic pathogens"] as const;
 
@@ -24,18 +25,11 @@ export default function PlantHealthPage() {
           Diagnose from evidence, not a symptom chart. These references start with what can be observed, show important look-alikes, and identify what should be measured or confirmed before choosing a response.
         </p>
         <div className={styles.heroActions}>
-          <Link className="button button--primary" href="/learn/plant-health/diagnostic-foundations">
-            Start with diagnostic foundations
-          </Link>
-          <Link className="button" href="/learn/symptoms">
-            Open symptom differentials
-          </Link>
-          <Link className="button" href="/learn/tools">
-            Printable scouting tools
-          </Link>
-          <Link className="button" href="/learn/atlas/cases">
-            Open diagnostic cases
-          </Link>
+          <Link className="button button--primary" href="/learn/plant-health/diagnostic-foundations">Start with diagnostic foundations</Link>
+          <Link className="button" href="/learn/symptoms">Open symptom differentials</Link>
+          <Link className="button" href="/learn/tools">Printable scouting tools</Link>
+          <Link className="button" href="/learn/sources">Evidence & sources</Link>
+          <Link className="button" href="/learn/atlas/cases">Open diagnostic cases</Link>
         </div>
       </header>
 
