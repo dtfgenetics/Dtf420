@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import library from "@/content/symptom-differential-library.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
+import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../../plant-health/page.module.css";
@@ -76,6 +77,7 @@ export default async function SymptomDifferentialDetailPage({ params }: { params
         <TopicPanel title="Visuals this differential still needs" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
+      <EvidenceSources path={path} />
       <RelatedEducation path={path} />
 
       <div className={styles.footerActions}>
