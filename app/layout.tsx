@@ -10,9 +10,6 @@ export const metadata: Metadata = {
     template: "%s | DTF420",
   },
   description: "DTF420 games, cultivation education, tools, and community.",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     siteName: "DTF420",
