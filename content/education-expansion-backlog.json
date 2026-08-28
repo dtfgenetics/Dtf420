@@ -1,0 +1,122 @@
+[
+  {
+    "id": "EDU-P0-001",
+    "priority": "P0",
+    "area": "Visual mapping",
+    "title": "Prevent mismatched commercial artwork in education",
+    "status": "implemented",
+    "acceptanceCriteria": ["Atlas verification rejects strain-card, seed-card, product-card, packaging, merch, product, and strain asset paths", "Every educational visual has a lesson-specific alt text and production brief"]
+  },
+  {
+    "id": "EDU-P0-002",
+    "priority": "P0",
+    "area": "Learn navigation",
+    "title": "Surface Living Plant Atlas and interactive learning modes",
+    "status": "implemented",
+    "acceptanceCriteria": ["Learn hub links directly to Living Plant Atlas", "Diagnostic cases, practice, review, and guided paths are discoverable from Learn"]
+  },
+  {
+    "id": "EDU-P0-003",
+    "priority": "P0",
+    "area": "Plant Health",
+    "title": "Build Plant Health, IPM and Disease reference branch",
+    "status": "in_progress",
+    "acceptanceCriteria": ["Reference index is public and indexable", "Each entry separates observation, look-alikes, confirmation, management principles, prevention, and visual needs", "Expand arthropod, disease, systemic pathogen, scouting, sanitation, and diagnostic foundations coverage"]
+  },
+  {
+    "id": "EDU-P0-004",
+    "priority": "P0",
+    "area": "Diagnostics",
+    "title": "Build visual symptom differential library",
+    "status": "queued",
+    "acceptanceCriteria": ["Cover chlorosis, interveinal chlorosis, marginal injury, tip burn, spotting, curl, claw, wilt, bleaching, pigmentation, stunting, distortion, stem, root, and flower symptoms", "Every symptom page ranks plausible categories instead of assigning one cause from appearance"]
+  },
+  {
+    "id": "EDU-P1-001",
+    "priority": "P1",
+    "area": "Post-harvest",
+    "title": "Expand harvest and post-harvest science",
+    "status": "queued",
+    "acceptanceCriteria": ["Representative maturity sampling", "Harvest handling and sanitation", "Drying kinetics and airflow", "Water activity and equilibration", "Microbial risk", "Storage degradation and packaging context"]
+  },
+  {
+    "id": "EDU-P1-002",
+    "priority": "P1",
+    "area": "Outdoor",
+    "title": "Build full outdoor cultivation curriculum",
+    "status": "queued",
+    "acceptanceCriteria": ["Latitude and photoperiod", "Sun and site mapping", "Drainage and root-zone planning", "Irrigation and mulch", "Wind, rain, dew, storms, frost and heat", "Wildlife, pests, pathogens, pollen drift and smoke/dust"]
+  },
+  {
+    "id": "EDU-P1-003",
+    "priority": "P1",
+    "area": "Protected cultivation",
+    "title": "Add greenhouse and protected-cultivation branch",
+    "status": "queued",
+    "acceptanceCriteria": ["Ventilation and heat load", "Humidity and condensation", "Supplemental lighting context", "Irrigation", "Screening and exclusion", "Season extension and environmental tradeoffs"]
+  },
+  {
+    "id": "EDU-P1-004",
+    "priority": "P1",
+    "area": "Training",
+    "title": "Expand plant architecture and training science",
+    "status": "queued",
+    "acceptanceCriteria": ["Apical dominance", "Topping and partial-apex removal", "LST", "Supercropping and injury recovery", "Mainlining", "SCROG", "Pruning and defoliation", "Canopy uniformity and structural support"]
+  },
+  {
+    "id": "EDU-P1-005",
+    "priority": "P1",
+    "area": "Flowering",
+    "title": "Expand flowering and reproductive development",
+    "status": "queued",
+    "acceptanceCriteria": ["Floral transition and photoperiod sensing", "Preflowers and sex expression", "Stretch and floral architecture", "Pollination and seed development", "Senescence and maturity assessment"]
+  },
+  {
+    "id": "EDU-P1-006",
+    "priority": "P1",
+    "area": "Measurement science",
+    "title": "Add measurement and experimental science curriculum",
+    "status": "queued",
+    "acceptanceCriteria": ["Calibration", "Accuracy versus precision", "Sensor placement", "Representative sampling", "Replication and controls", "Measurement uncertainty", "Interpreting cultivation trials and published research"]
+  },
+  {
+    "id": "EDU-P2-001",
+    "priority": "P2",
+    "area": "Subject hubs",
+    "title": "Convert overview pages into topic clusters",
+    "status": "queued",
+    "acceptanceCriteria": ["Each major overview becomes a hub that links to focused lessons", "Lighting, water, environment, nutrition, roots, propagation, plant health, outdoor, training and post-harvest receive deep subtopic clusters"]
+  },
+  {
+    "id": "EDU-P2-002",
+    "priority": "P2",
+    "area": "Interactive learning",
+    "title": "Connect quizzes, cases, practice and mastery to lessons",
+    "status": "queued",
+    "acceptanceCriteria": ["Knowledge checks are linked from relevant lessons", "Diagnostic simulations use evidence and measurements", "Progress and mastery routes are discoverable", "Photo or visual identification exercises are added where appropriate"]
+  },
+  {
+    "id": "EDU-P2-003",
+    "priority": "P2",
+    "area": "Visual library",
+    "title": "Build systematic 200+ education visual program",
+    "status": "queued",
+    "acceptanceCriteria": ["Anatomy plates", "Microscope plates", "Process diagrams", "Diagnostic comparisons", "Pest and disease identification", "Measurement guides", "Growth stages", "Root-zone diagrams", "Environmental diagrams", "Training sequences", "Breeding diagrams", "Outdoor diagrams", "Post-harvest diagrams"]
+  },
+  {
+    "id": "EDU-P2-004",
+    "priority": "P2",
+    "area": "Downloads",
+    "title": "Build printable grower tools",
+    "status": "queued",
+    "acceptanceCriteria": ["Plant-health intake", "Pest scouting map", "VPD log", "PPFD grid", "Irrigation log", "pH/EC calibration log", "Seed and germination records", "Clone batch record", "Phenotype scorecard", "Outdoor site survey", "Harvest maturity sheet", "Drying and storage logs"]
+  },
+  {
+    "id": "EDU-P3-001",
+    "priority": "P3",
+    "area": "Search and SEO",
+    "title": "Strengthen internal linking and search discovery",
+    "status": "queued",
+    "acceptanceCriteria": ["Every reference links to related Atlas systems and practice", "Topic clusters expose descriptive metadata", "Search covers new reference branches", "Structured content avoids duplicate thin pages"]
+  }
+]
