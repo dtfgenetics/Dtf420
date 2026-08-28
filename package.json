@@ -19,8 +19,9 @@
     "verify:atlas-checks": "node scripts/verify-atlas-knowledge-checks.mjs",
     "verify:atlas-badges": "node scripts/verify-atlas-mastery-badges.mjs",
     "verify:atlas-cases": "node scripts/verify-atlas-diagnostic-cases.mjs",
+    "verify:education-content": "node scripts/verify-education-content.mjs",
     "verify:education-links": "node scripts/verify-education-related-links.mjs",
-    "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:education-links && npm run lint && npm run typecheck && npm run build"
+    "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:education-content && npm run verify:education-links && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.2",
