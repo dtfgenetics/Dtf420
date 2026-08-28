@@ -6,6 +6,7 @@ import protectedLighting from "@/content/protected-cultivation-lighting.json";
 import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
 import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
+import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
 const library = [
@@ -17,11 +18,11 @@ const library = [
   ...advancedExpanded,
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildEducationMetadata({
   title: "Cultivation Science Reference Library",
-  description:
-    "Advanced cultivation references covering outdoor and protected cultivation, post-harvest science, plant architecture, flowering, and measurement science.",
-};
+  description: "Advanced cultivation references covering outdoor and protected cultivation, post-harvest science, plant architecture, flowering, and measurement science.",
+  path: "/learn/cultivation-science",
+});
 
 const categories = [
   "Outdoor & Protected Cultivation",
@@ -45,6 +46,7 @@ export default function CultivationSciencePage() {
           <Link className="button button--primary" href="/learn/atlas">Open the Living Plant Atlas</Link>
           <Link className="button" href="/learn/plant-health">Open Plant Health</Link>
           <Link className="button" href="/learn/tools">Printable Tools</Link>
+          <Link className="button" href="/learn/sources">Evidence & Sources</Link>
           <Link className="button" href="/learn/search">Search all education</Link>
         </div>
       </header>
