@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import library from "@/content/plant-health-library.json";
+import coreLibrary from "@/content/plant-health-library.json";
+import expandedLibrary from "@/content/plant-health-expanded.json";
 import styles from "./page.module.css";
+
+const library = [...coreLibrary, ...expandedLibrary];
 
 export const metadata: Metadata = {
   title: "Plant Health, IPM & Disease Library",
@@ -26,6 +29,9 @@ export default function PlantHealthPage() {
           </Link>
           <Link className="button" href="/learn/symptoms">
             Open symptom differentials
+          </Link>
+          <Link className="button" href="/learn/tools">
+            Printable scouting tools
           </Link>
           <Link className="button" href="/learn/atlas/cases">
             Open diagnostic cases
@@ -52,7 +58,7 @@ export default function PlantHealthPage() {
               </div>
               <p>
                 {category === "Foundations"
-                  ? "Build the observation, sampling, and sanitation habits that make every later diagnosis more reliable."
+                  ? "Build observation, sampling, beneficial-organism, scouting, and sanitation habits that make later diagnoses more reliable."
                   : category === "Arthropod pests"
                     ? "Identify the organism and life stage instead of treating leaf damage as a diagnosis by itself."
                     : category === "Diseases"
