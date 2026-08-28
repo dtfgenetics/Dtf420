@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AtlasVisualIdentificationLab } from "@/components/atlas/AtlasVisualIdentificationLab";
+import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildEducationMetadata({
   title: "Atlas Practice",
-  description: "Practice Living Plant Atlas knowledge with focused review, diagnostic cases, and plant-system comparisons.",
-};
+  description: "Practice Living Plant Atlas knowledge with visual identification, focused review, diagnostic cases, and plant-system comparisons.",
+  path: "/learn/atlas/practice",
+});
 
 const tools = [
   {
@@ -38,10 +41,12 @@ export default function AtlasPracticePage() {
         <div>
           <p className={styles.kicker}>Atlas Practice</p>
           <h1 id="practice-title">Turn plant knowledge into usable reasoning.</h1>
-          <p>Choose the kind of practice you need: recall a concept, reason through a plant case, or compare two biological systems.</p>
+          <p>Practice visual identification, recall a concept, reason through a plant case, or compare biological systems.</p>
         </div>
         <Link href="/learn/atlas/dashboard">Back to Study Dashboard</Link>
       </section>
+
+      <AtlasVisualIdentificationLab />
 
       <section className={styles.grid} aria-label="Atlas practice tools">
         {tools.map((tool) => (
@@ -57,7 +62,7 @@ export default function AtlasPracticePage() {
       <section className={styles.method} aria-label="Atlas practice method">
         <small>Practice method</small>
         <h2>Observe → compare → test → update.</h2>
-        <p>The Atlas practice tools are designed to reinforce evidence-based thinking. A visible symptom or one changed measurement is a clue, not a complete causal conclusion.</p>
+        <p>The Atlas practice tools reinforce evidence-based thinking. A visible symptom or one changed measurement is a clue, not a complete causal conclusion.</p>
       </section>
     </main>
   );
