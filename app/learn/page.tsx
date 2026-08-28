@@ -18,6 +18,14 @@ const learningModes = [
     action: "Open the Plant Health Library",
   },
   {
+    eyebrow: "Expanded subject library",
+    title: "Cultivation Science References",
+    description:
+      "Go deeper into outdoor and protected cultivation, harvest and post-harvest biology, training and plant architecture, flowering development, and measurement science.",
+    href: "/learn/cultivation-science",
+    action: "Open cultivation science",
+  },
+  {
     eyebrow: "Applied diagnostics",
     title: "Diagnostic Case Lab",
     description:
