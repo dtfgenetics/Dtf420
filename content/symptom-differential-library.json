@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "lower-leaf-yellowing",
+    "title": "Lower-Leaf Yellowing",
+    "summary": "Yellowing that begins on older or lower leaves is a location pattern, not a diagnosis. It can reflect normal senescence, mobile-nutrient limitations, root stress, irrigation problems, salinity, or reduced light exposure.",
+    "patternQuestions": ["Does yellowing begin uniformly or between veins?", "Is it limited to heavily shaded lower leaves or progressing upward?", "Are roots healthy and actively growing?", "Did irrigation, feed strength, pH, or environmental demand change recently?"],
+    "possibleCategories": ["Developmental senescence", "Root-zone oxygen or irrigation stress", "Mobile nutrient availability", "Salinity or root-zone chemistry", "Low-light leaf retirement", "Systemic disease or other whole-plant stress"],
+    "discriminatingChecks": ["Inspect roots and substrate moisture", "Measure pH and EC using a consistent method", "Compare shaded and well-lit lower leaves", "Track whether new symptoms continue after root-zone conditions are corrected"],
+    "redFlags": ["Rapid whole-plant decline", "Wilting despite wet media", "Root sloughing or loss of fine roots", "Unusual one-sided or branch-specific progression"],
+    "visualNeeds": ["Old-versus-new leaf locator", "Uniform-versus-interveinal yellowing", "Shaded senescence comparison", "Root-context panel"]
+  },
+  {
+    "slug": "new-growth-chlorosis",
+    "title": "New-Growth Chlorosis",
+    "summary": "Pale or yellow new growth can result from root-zone chemistry, micronutrient availability, rapid growth, root injury, pests, pathogens, or genetic/developmental variation.",
+    "patternQuestions": ["Are veins greener than the tissue between them?", "Is the newest tissue distorted as well as pale?", "Is the symptom present on every branch or only selected growing tips?", "Are roots and pH conditions normal for the system?"],
+    "possibleCategories": ["Micronutrient availability problems", "Root-zone pH or root injury", "Broad or russet mite injury", "Systemic pathogen", "Rapid transient growth-related paling", "Genetic or developmental variation"],
+    "discriminatingChecks": ["Inspect growing tips with magnification", "Measure root-zone pH and EC", "Compare multiple branches and plants", "Use laboratory testing when systemic infection remains plausible"],
+    "redFlags": ["Severe distortion", "Progressive shoot-tip death", "Multiple plants linked to the same propagation source", "Microscopic pests present"],
+    "visualNeeds": ["New-growth locator", "Interveinal versus uniform new-growth chlorosis", "Mite-damage comparison", "Root-zone chemistry flow"]
+  },
+  {
+    "slug": "interveinal-chlorosis",
+    "title": "Interveinal Chlorosis",
+    "summary": "Interveinal chlorosis means tissue between veins becomes paler while veins remain comparatively greener. The leaf age where it begins and the root-zone context are critical evidence.",
+    "patternQuestions": ["Does it begin on older, middle, or newest leaves?", "Are the veins truly greener or is the whole leaf fading?", "Is necrosis developing between veins?", "Is the pattern symmetric across the leaf?"],
+    "possibleCategories": ["Nutrient availability or transport", "Root-zone pH effects", "Root injury", "Genetic leaf coloration", "Some disease or toxic effects"],
+    "discriminatingChecks": ["Map symptom onset by leaf age", "Check pH and EC", "Inspect roots", "Review feed composition and recent changes", "Compare with unaffected plants under the same environment"],
+    "redFlags": ["Rapid necrosis", "Severe root decline", "Symptoms confined to one branch", "Concurrent stem or vascular abnormalities"],
+    "visualNeeds": ["Interveinal vocabulary plate", "Old-versus-new onset comparison", "Symmetry comparison", "Root-zone context checklist"]
+  },
+  {
+    "slug": "marginal-necrosis",
+    "title": "Marginal Necrosis / Leaf-Edge Burn",
+    "summary": "Browning or death along leaf margins can arise from salinity, water stress, nutrient imbalance, heat or desiccation, root problems, or disease. Margin injury should be mapped by leaf age and canopy location.",
+    "patternQuestions": ["Does injury begin at tips and move along margins?", "Are upper leaves more affected than lower leaves?", "Is the root zone unusually dry, wet, saline, hot, or cold?", "Did the injury appear suddenly after a feed, spray, or weather event?"],
+    "possibleCategories": ["Salinity or excessive root-zone EC", "Water deficit or root dysfunction", "Nutrient imbalance", "Heat or low-humidity stress", "Chemical or spray injury", "Disease or vascular disruption"],
+    "discriminatingChecks": ["Measure EC and substrate moisture", "Inspect roots", "Map injury against light and airflow zones", "Review recent sprays and irrigation events"],
+    "redFlags": ["Sudden widespread injury after one event", "Wilting with wet media", "Stem lesions or one-sided branch decline"],
+    "visualNeeds": ["Margin-versus-tip injury plate", "Canopy-location map", "Salinity context diagram", "Spray-event differential"]
+  },
+  {
+    "slug": "tip-burn",
+    "title": "Leaf Tip Burn",
+    "summary": "Necrosis at leaf tips is common but nonspecific. It may appear with high root-zone ionic concentration, water-balance stress, nutrient imbalance, or prior injury.",
+    "patternQuestions": ["Is only the terminal tip affected or are margins progressing too?", "Are many leaves affected at the same time?", "Is EC elevated relative to the crop's recent baseline?", "Are leaf posture and transpiration conditions otherwise normal?"],
+    "possibleCategories": ["High root-zone EC", "Nutrient imbalance", "Water-balance stress", "Root injury", "Localized physical or chemical injury"],
+    "discriminatingChecks": ["Measure root-zone EC with a documented method", "Inspect roots and irrigation uniformity", "Compare new growth after adjustments", "Review recent feed-strength changes"],
+    "redFlags": ["Rapid expansion into margins", "Concurrent wilting", "Root-zone odor or sloughing", "Only one branch affected"],
+    "visualNeeds": ["Tip-only versus margin progression", "EC context panel", "New-versus-old damage timeline", "Irrigation-uniformity map"]
+  },
+  {
+    "slug": "necrotic-spots-and-lesions",
+    "title": "Necrotic Spots & Lesions",
+    "summary": "Dead spots can come from pathogens, pests, droplets, sprays, nutrient-related tissue failure, physical injury, or environmental damage. Lesion shape alone is rarely enough to identify cause.",
+    "patternQuestions": ["Are spots bounded by veins or randomly distributed?", "Do lesions expand over time?", "Are there halos, concentric zones, fungal growth, frass, or insects?", "Do spots align with spray droplets or wetting patterns?"],
+    "possibleCategories": ["Fungal or bacterial disease", "Pest feeding", "Spray or droplet injury", "Nutrient or root-zone disorder", "Physical abrasion", "Light or heat injury"],
+    "discriminatingChecks": ["Use magnification", "Track lesion expansion", "Review spray and wetting history", "Compare upper and lower leaf surfaces", "Submit samples for laboratory diagnosis when disease is plausible and consequential"],
+    "redFlags": ["Rapidly expanding lesions", "Stem or petiole involvement", "Sporulation", "Similar lesions spreading between nearby plants"],
+    "visualNeeds": ["Spot morphology vocabulary", "Expanding-versus-static lesion timeline", "Spray-droplet comparison", "Pest-sign overlay"]
+  },
+  {
+    "slug": "upward-curl-and-tacoing",
+    "title": "Upward Curl / Tacoing",
+    "summary": "Leaf margins curling upward can be associated with high radiant load, heat, low humidity, airflow, root-water limitations, genetics, or other stress. It should be interpreted alongside leaf temperature and canopy position.",
+    "patternQuestions": ["Is the symptom concentrated near the light or hottest canopy zone?", "Are leaf temperatures elevated relative to air?", "Does curl improve during lower-demand periods?", "Are roots and substrate moisture adequate?"],
+    "possibleCategories": ["High light or radiant load", "Heat stress", "High evaporative demand", "Root-water limitation", "Airflow exposure", "Genetic leaf posture"],
+    "discriminatingChecks": ["Measure PPFD and leaf temperature", "Map temperature/RH and airflow", "Check substrate moisture and roots", "Compare shaded or lower-canopy leaves"],
+    "redFlags": ["Bleaching or tissue death", "Persistent wilt", "Root failure", "Symptoms continuing after environmental demand is reduced"],
+    "visualNeeds": ["Tacoing posture plate", "Leaf-temperature concept", "High-light canopy map", "Airflow exposure comparison"]
+  },
+  {
+    "slug": "downward-clawing",
+    "title": "Downward Clawing",
+    "summary": "Downward-curled leaflet tips can accompany excess nitrogen availability, root-zone stress, chronic saturation, salinity, genetics, or other physiological stress. Shape alone does not establish nutrient excess.",
+    "patternQuestions": ["Are leaves unusually dark and glossy or simply curled?", "Is media persistently wet?", "Is EC elevated?", "Are roots healthy?", "Does the pattern begin on new or older foliage?"],
+    "possibleCategories": ["Excess nitrogen availability", "Chronic root-zone saturation", "High EC", "Root injury", "Genetic posture", "Other environmental stress"],
+    "discriminatingChecks": ["Measure root-zone moisture and EC", "Inspect roots", "Review feed composition and frequency", "Track posture on new leaves after conditions change"],
+    "redFlags": ["Wilting with saturation", "Root sloughing", "Rapid whole-plant decline", "Severe growth arrest"],
+    "visualNeeds": ["Clawing posture plate", "Dark-leaf versus normal-green comparison", "Saturation context diagram", "Root inspection panel"]
+  },
+  {
+    "slug": "wilting",
+    "title": "Wilting",
+    "summary": "Wilting indicates insufficient tissue turgor but can occur when the root zone is too dry, too wet, oxygen-limited, damaged, saline, hot, cold, or unable to meet atmospheric demand.",
+    "patternQuestions": ["Is the substrate dry, saturated, or apparently normal?", "Does the plant recover during lower-demand periods?", "Are roots intact?", "Is wilting whole-plant or limited to one branch?"],
+    "possibleCategories": ["Water deficit", "Root-zone hypoxia", "Root disease", "High salinity", "Excessive atmospheric demand", "Stem or vascular injury"],
+    "discriminatingChecks": ["Measure substrate moisture", "Inspect roots", "Check EC and root-zone temperature", "Compare leaf temperature and VPD context", "Inspect stem injury when only one branch wilts"],
+    "redFlags": ["Wilting despite saturated media", "One-sided vascular decline", "Rapid collapse", "Severe root decay"],
+    "visualNeeds": ["Dry-versus-wet wilt comparison", "Root oxygen diagram", "Branch-specific wilt locator", "Atmospheric-demand flow"]
+  },
+  {
+    "slug": "bleaching-and-photodamage",
+    "title": "Bleaching & High-Light Injury",
+    "summary": "Very pale or bleached upper-canopy tissue can result from excessive light/radiant exposure, heat, chemical injury, or other stress. Location relative to the light source is important evidence.",
+    "patternQuestions": ["Is bleaching strongest at the highest or most exposed sites?", "What are PPFD and leaf temperature at those points?", "Is there a sharp exposure boundary?", "Did fixture height, power, or environment change recently?"],
+    "possibleCategories": ["Excess light exposure", "Radiant or heat stress", "Chemical injury", "Root stress affecting pigment maintenance", "Genetic variegation or unusual pigmentation"],
+    "discriminatingChecks": ["Map PPFD", "Measure leaf temperature", "Compare shaded leaves", "Review fixture and environmental changes", "Inspect for residue or spray history"],
+    "redFlags": ["Rapid necrosis", "Bleaching unrelated to exposure pattern", "Concurrent systemic decline"],
+    "visualNeeds": ["High-light bleaching gradient", "PPFD heat map", "Exposure-boundary example", "Chemical-injury comparison"]
+  },
+  {
+    "slug": "purple-red-pigmentation",
+    "title": "Purple or Red Pigmentation",
+    "summary": "Anthocyanin-related purple or red coloration can be genetic or developmentally normal, and can also increase with temperature, nutrient, root, or other stress. Pigment color alone is not a deficiency diagnosis.",
+    "patternQuestions": ["Is the cultivar known for pigmentation?", "Are leaves otherwise healthy and growing normally?", "Did cool temperatures precede the change?", "Are petioles, stems, veins, or whole leaves affected?"],
+    "possibleCategories": ["Genetic anthocyanin expression", "Cool-temperature response", "Developmental senescence", "Nutrient or root-zone stress", "High-light protective response"],
+    "discriminatingChecks": ["Compare with cultivar baseline", "Review temperature history", "Inspect roots and growth rate", "Check whether other stress symptoms are present"],
+    "redFlags": ["Pigmentation with severe stunting", "Concurrent necrosis", "Root decline", "Rapid unexplained progression"],
+    "visualNeeds": ["Genetic pigmentation examples", "Petioles-versus-leaf pigmentation", "Cool-temperature context", "Pigment-plus-stress differential"]
+  },
+  {
+    "slug": "stalled-or-slow-growth",
+    "title": "Stalled or Slow Growth",
+    "summary": "Slow growth is an outcome shared by many root, environmental, nutritional, pest, pathogen, genetic, and developmental conditions. Growth rate should be compared with stage and recent baseline.",
+    "patternQuestions": ["Did growth slow suddenly or has the plant always been slower?", "Are roots expanding?", "Are temperature, light, and water conditions suitable?", "Is the issue one plant, one cultivar, or the whole crop?"],
+    "possibleCategories": ["Root-zone stress", "Low temperature", "Inadequate or excessive light", "Nutrient availability", "Pests or pathogens", "Genetic variation", "Transplant or pruning recovery"],
+    "discriminatingChecks": ["Measure growth over time", "Inspect roots", "Check environmental records", "Compare cultivar peers", "Use magnification and testing where biological agents are plausible"],
+    "redFlags": ["Progressive loss of vigor across clones", "Root failure", "Severe distortion", "Systemic pathogen positive test"],
+    "visualNeeds": ["Growth-rate tracking chart", "Root-versus-shoot context", "Crop-distribution map", "Recovery-versus-decline timeline"]
+  },
+  {
+    "slug": "distorted-new-growth",
+    "title": "Distorted New Growth",
+    "summary": "Twisted, hardened, blistered, narrowed, or malformed new leaves can arise from microscopic mites, chemical injury, root-zone problems, micronutrient availability, systemic pathogens, or developmental abnormalities.",
+    "patternQuestions": ["Are the newest tissues most affected?", "Is bronzing or russeting present?", "Were sprays or chemicals recently applied?", "Are multiple clones from one source affected?"],
+    "possibleCategories": ["Broad or russet mites", "Chemical or herbicide injury", "Micronutrient availability", "Root-zone pH or injury", "Systemic pathogen", "Genetic/developmental abnormality"],
+    "discriminatingChecks": ["Use high magnification on growing tips", "Review spray history", "Measure root-zone pH and EC", "Test for systemic pathogens when epidemiology supports it"],
+    "redFlags": ["Microscopic mites present", "Rapid spread among propagation material", "Shoot-tip death", "Severe branch-specific abnormalities"],
+    "visualNeeds": ["Distortion morphology plate", "Mite versus chemical injury", "Growing-tip sampling guide", "Propagation-link map"]
+  },
+  {
+    "slug": "root-discoloration-and-sloughing",
+    "title": "Root Discoloration & Sloughing",
+    "summary": "Root color varies with age, substrate, and staining. Loss of fine roots, soft texture, sloughing, poor branching, and declining function are more informative than color alone.",
+    "patternQuestions": ["Are roots firm or soft?", "Are fine white or light-colored root tips still forming?", "Is the media persistently saturated?", "Are there odors, biofilms, heat, or high EC?"],
+    "possibleCategories": ["Normal staining or aging", "Low oxygen", "Root disease", "High salinity", "Temperature injury", "Physical root damage"],
+    "discriminatingChecks": ["Inspect texture and fine-root structure", "Measure moisture, EC, pH, and root-zone temperature", "Review irrigation frequency", "Use laboratory diagnosis when pathogen identity matters"],
+    "redFlags": ["Widespread sloughing", "Wilting despite wet media", "Rapid loss of fine roots", "Multiple plants linked through shared water"],
+    "visualNeeds": ["Healthy fine-root baseline", "Staining-versus-decay comparison", "Sloughing close-up", "Root-zone measurement panel"]
+  },
+  {
+    "slug": "stem-lesions-and-branch-decline",
+    "title": "Stem Lesions & Branch-Specific Decline",
+    "summary": "Localized stem damage can interrupt support or transport and may result from physical injury, pathogens, constriction, insects, or training wounds. Branch-specific symptoms should trigger direct stem inspection.",
+    "patternQuestions": ["Is decline limited above one stem location?", "Is there splitting, constriction, discoloration, soft tissue, or callus?", "Was the branch recently trained or tied?", "Are insects, frass, or fungal structures present?"],
+    "possibleCategories": ["Mechanical injury", "Girdling or tie constriction", "Stem or crown disease", "Boring insect injury", "Severe training damage", "Vascular disruption"],
+    "discriminatingChecks": ["Inspect the entire stem below affected foliage", "Remove or loosen constricting ties", "Use magnification around lesions", "Submit samples when a stem pathogen is plausible"],
+    "redFlags": ["Expanding cankers", "Soft or collapsing stem tissue", "Rapid one-sided wilt", "Multiple plants with similar stem lesions"],
+    "visualNeeds": ["Branch-specific symptom locator", "Tie-girdling comparison", "Training wound versus lesion", "Stem cross-section transport diagram"]
+  },
+  {
+    "slug": "flower-browning-and-rot",
+    "title": "Flower Browning, Collapse & Rot",
+    "summary": "Browning inside or around flowers can reflect Botrytis and other molds, senescent tissue, mechanical damage, insect injury, heat, or desiccation. Dense flowers must be opened and inspected internally when rot is suspected.",
+    "patternQuestions": ["Does browning begin inside dense flower tissue?", "Is gray or other fungal growth present?", "Did rain, condensation, or high humidity occur?", "Are dead leaves embedded in the flower?"],
+    "possibleCategories": ["Botrytis or other flower mold", "Normal localized senescence", "Mechanical damage", "Caterpillar or insect injury", "Heat or desiccation", "Pollination-related tissue changes"],
+    "discriminatingChecks": ["Inspect inside the flower", "Use magnification", "Review humidity and wetting history", "Check for insects or frass", "Separate suspect harvested material"],
+    "redFlags": ["Gray sporulation", "Soft spreading internal rot", "Musty odor", "Rapid progression after wet weather"],
+    "visualNeeds": ["Flower internal inspection cutaway", "Botrytis versus senescence", "Insect injury comparison", "Wet-weather risk timeline"]
+  }
+]
