@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import tools from "@/content/learning-tools.json";
+import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildEducationMetadata({
   title: "Printable Cultivation Learning Tools",
-  description:
-    "Printable observation sheets, scouting maps, environmental logs, calibration records, propagation records, outdoor surveys, and post-harvest worksheets for Teaching Healthy Cultivation.",
-};
+  description: "Printable observation sheets, scouting maps, environmental logs, calibration records, propagation records, outdoor surveys, and post-harvest worksheets for Teaching Healthy Cultivation.",
+  path: "/learn/tools",
+});
 
 export default function LearningToolsPage() {
   return (
@@ -21,6 +22,7 @@ export default function LearningToolsPage() {
         <div className={styles.heroActions}>
           <Link className="button button--primary" href="/learn/plant-health">Plant Health Library</Link>
           <Link className="button" href="/learn/cultivation-science">Cultivation Science</Link>
+          <Link className="button" href="/learn/sources">Evidence & Sources</Link>
         </div>
       </header>
 
