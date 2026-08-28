@@ -26,7 +26,7 @@
     "verify": "npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:academy && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
-    "next": "16.3.2",
+    "next": "16.3.3",
     "phaser": "4.2.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
@@ -36,7 +36,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "eslint": "9.39.5",
-    "eslint-config-next": "16.3.2",
+    "eslint-config-next": "16.3.3",
     "typescript": "^5.9.0"
   }
 }
