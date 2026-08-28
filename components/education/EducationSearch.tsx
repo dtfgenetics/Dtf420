@@ -8,6 +8,8 @@ import plantHealthExpanded from "@/content/plant-health-expanded.json";
 import cultivationCore from "@/content/cultivation-science-library.json";
 import protectedCultivation from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
+import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
+import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
 import styles from "./EducationSearch.module.css";
@@ -63,7 +65,13 @@ const plantHealthItems: SearchItem[] = [...plantHealthCore, ...plantHealthExpand
   ].join(" "),
 }));
 
-const cultivationItems: SearchItem[] = [...cultivationCore, ...protectedCultivation, ...protectedLighting].map((item) => ({
+const cultivationItems: SearchItem[] = [
+  ...cultivationCore,
+  ...protectedCultivation,
+  ...protectedLighting,
+  ...outdoorExpanded,
+  ...postharvestExpanded,
+].map((item) => ({
   kind: "Cultivation science" as const,
   title: item.title,
   context: item.category,
@@ -92,7 +100,7 @@ const toolItems: SearchItem[] = learningTools.map((item) => ({
 
 const searchItems = [...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems];
 const kinds: Array<"All" | SearchKind> = ["All", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool"];
-const examples = ["yellow lower leaves", "whiteflies", "dew point", "PPFD", "blackout light leak", "root rot", "drying airflow"];
+const examples = ["yellow lower leaves", "whiteflies", "dew point", "PPFD", "blackout light leak", "pollen drift", "water activity", "drying airflow"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
