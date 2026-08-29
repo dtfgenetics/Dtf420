@@ -60,12 +60,19 @@ export default function BudOrBluffGame() {
   const currentPlayer = playerStats[currentPlayerIndex];
 
   useEffect(() => {
+    let timer: number | undefined;
     try {
       const saved = window.localStorage.getItem(STATS_KEY);
-      if (saved) setLifetime(JSON.parse(saved) as LifetimeStats);
+      if (saved) {
+        const parsed = JSON.parse(saved) as LifetimeStats;
+        timer = window.setTimeout(() => setLifetime(parsed), 0);
+      }
     } catch {
       // Local storage is optional.
     }
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
   }, []);
 
   const persistLifetime = useCallback((next: LifetimeStats) => {
