@@ -1,28 +1,55 @@
-# DTF420 Architecture
+# DTF Genetics Web Architecture
 
 ## Purpose
 
-DTF420 is the application-oriented side of the DTF ecosystem. It owns games, cultivation education, interactive tools, and community features. DTFSeeds remains a separate genetics-focused project and repository.
+This repository powers the unified DTF Genetics web experience. Its canonical production origin is `https://dtfseeds.com`, and the application brings genetics references, Teaching Healthy Cultivation education, tools, games, community content, and editorial surfaces into one routed Next.js system.
 
-## Initial stack
+## Application stack
 
 - Next.js App Router
 - TypeScript
 - React
-- Phaser for browser games
+- Phaser for Phaser-based browser games
 - Node.js 22
-- Hostinger Business Web Hosting for the web application
+- Hostinger Business Web Hosting as the current web-hosting target
+- Playwright for desktop/mobile browser QA
+
+## Product areas
+
+The application currently owns these public route families:
+
+- `/seeds` — genetics project records
+- `/learn` — Teaching Healthy Cultivation, Academy, Living Plant Atlas, plant-health references, symptom differentials, evidence, and printable learning tools
+- `/tools` — interactive cultivation tools and methodology pages
+- `/games` — browser games and game-release documentation
+- `/community` — community programs and event surfaces
+- `/journal` — editorial and educational publishing
+- `/about` and `/contact` — organization and support-routing information
+
+Shared navigation, metadata, redirects, canonical URLs, robots rules, and sitemap generation belong to this application rather than to separate microsites.
+
+## Education content boundary
+
+Education content is data-driven where possible. Canonical datasets live under `content/`, while rendering components and route shells live under `app/learn` and `components/`. Integrity scripts under `scripts/` verify routes, evidence mappings, diagnostic cases, Atlas learning data, and related links before merge.
+
+Scientific claims should be connected to the evidence system when supporting sources are available. Internal production backlog language should not appear on public lesson pages.
 
 ## Game boundary
 
-Phaser is loaded only from a client component. The Next.js page remains free to use normal server rendering while the game canvas is isolated behind a client-only dynamic import.
+Phaser is loaded from client-side game components so the surrounding Next.js routes can retain normal server-rendering behavior. Games that do not need Phaser can use ordinary React/client components.
 
-The first game, Burn Buds, is intentionally small during bootstrap. Its first job is to prove rendering, responsive scaling, lifecycle teardown, and production build compatibility.
+A title should be presented as playable only when its public route, runtime, controls, and browser QA are functioning. Concepts and incomplete migrations should remain visually distinct from released games.
 
 ## Multiplayer boundary
 
-Do not place an authoritative WebSocket game server inside Hostinger Business Web Hosting. The future multiplayer service is a separate deployment that can accept incoming WebSocket connections. The browser game client will connect to that service through a dedicated endpoint such as `game.dtf420.com`.
+Do not place an authoritative long-lived WebSocket game server inside hosting that cannot reliably accept and maintain those connections. Real-time multiplayer, when a game requires it, should use a separate service with a dedicated endpoint while the browser client remains part of this application.
 
-## Repository rule
+## Repository rules
 
-This repository must not contain the DTFSeeds application or share deployment secrets with it.
+- Do not commit deployment secrets, API keys, private credentials, or user data.
+- Keep public routes and sitemap entries synchronized.
+- Preserve canonical URLs and redirects when replacing legacy content.
+- Run `npm run verify` and desktop/mobile Browser QA before production cutover.
+- Treat production domain changes as a separate, reversible operation from merging application code.
+
+See `docs/DEPLOYMENT.md` for release and rollback requirements.
