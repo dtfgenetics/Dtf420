@@ -51,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/learn/atlas/mastery", 0.7, "monthly"),
     item("/learn/atlas/paths", 0.75, "monthly"),
     item("/games", 0.8, "weekly"),
+    item("/games/bud-or-bluff", 0.82, "weekly"),
     item("/tools", 0.75, "monthly"),
     item("/community", 0.7, "monthly"),
   ];
