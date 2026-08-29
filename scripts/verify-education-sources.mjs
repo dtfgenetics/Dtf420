@@ -2,14 +2,17 @@ import fs from "node:fs";
 import path from "node:path";
 
 const contentDir = path.join(process.cwd(), "content");
-const sources = JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources.json"), "utf8"));
+const sources = [
+  ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources.json"), "utf8")),
+  ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources-abiotic.json"), "utf8")),
+];
 const sourceMap = JSON.parse(fs.readFileSync(path.join(contentDir, "education-source-map.json"), "utf8"));
 const atlasSourceDefaults = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-source-defaults.json"), "utf8"));
 const atlasModules = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-learning-modules.json"), "utf8"));
 const errors = [];
 
 if (!Array.isArray(sources)) {
-  errors.push("education-sources.json must contain an array");
+  errors.push("education source packs must contain arrays");
 }
 
 const ids = new Set();

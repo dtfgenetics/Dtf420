@@ -1,0 +1,77 @@
+[
+  {
+    "id": "uc-ipm-aeration-deficit",
+    "title": "Aeration Deficit",
+    "publisher": "University of California Statewide Integrated Pest Management Program",
+    "url": "https://ipm.ucanr.edu/home-and-landscape/aeration-deficit/",
+    "sourceType": "University extension",
+    "scope": "Root-zone oxygen supply, waterlogging, root respiration, water and nutrient uptake, chronic saturation, root decline, and the overlap between aeration deficit and root-decay pathogens."
+  },
+  {
+    "id": "uc-ipm-water-deficit-excess",
+    "title": "Water Deficit and Excess",
+    "publisher": "University of California Statewide Integrated Pest Management Program",
+    "url": "https://ipm.ucanr.edu/home-and-landscape/water-deficit-and-excess/",
+    "sourceType": "University extension",
+    "scope": "Plant injury from insufficient or excessive root-zone moisture, irrigation diagnosis, overwatering, poor drainage, aeration deficit, and the need to distinguish wet-root and dry-root stress."
+  },
+  {
+    "id": "illinois-drowning-edema",
+    "title": "Drowning and Edema",
+    "publisher": "University of Illinois Extension",
+    "url": "https://extension.illinois.edu/plant-problems/drowning-and-edema",
+    "sourceType": "University extension",
+    "scope": "Non-infectious edema symptoms, lower-leaf blisters and corking, excess moisture, humid conditions, and water uptake exceeding transpiration."
+  },
+  {
+    "id": "umd-phytotoxicity",
+    "title": "Phytotoxicity: Chemical Damage to Garden Plants",
+    "publisher": "University of Maryland Extension",
+    "url": "https://extension.umd.edu/resource/phytotoxicity-chemical-damage-garden-plants",
+    "sourceType": "University extension",
+    "scope": "Chemical and pesticide injury, spray-pattern damage, spotting, scorch, distortion, look-alikes, exposure history, and clues that distinguish one-time phytotoxic injury from pests and infectious disease."
+  },
+  {
+    "id": "umd-herbicide-vegetables",
+    "title": "Herbicide Damage on Vegetables",
+    "publisher": "University of Maryland Extension",
+    "url": "https://extension.umd.edu/resource/herbicide-damage-vegetables",
+    "sourceType": "University extension",
+    "scope": "Off-target herbicide injury, drift, distorted and strappy new growth, multi-species exposure clues, symptom timing, and differential diagnosis against cultural, insect, mite, disease, and virus problems."
+  },
+  {
+    "id": "penn-state-saline-soils-2025",
+    "title": "Saline Soils and Plant Growth",
+    "publisher": "Penn State Extension",
+    "year": 2025,
+    "url": "https://extension.psu.edu/saline-soils-and-plant-growth",
+    "sourceType": "University extension",
+    "scope": "Soluble-salt accumulation, electrical-conductivity measurement, method-dependent EC interpretation, greenhouse and high-tunnel salt risk, root-zone leaching, and plant response to salinity."
+  },
+  {
+    "id": "penn-state-water-quality-toolkit-2025",
+    "title": "A Water Quality Toolkit for Greenhouse and Nursery Production",
+    "publisher": "Penn State Extension",
+    "year": 2025,
+    "url": "https://extension.psu.edu/a-water-quality-toolkit-for-greenhouse-and-nursery-production",
+    "sourceType": "University extension",
+    "scope": "Greenhouse water-quality monitoring, pH, alkalinity, hardness, electrical conductivity, meter calibration, recordkeeping, and the relationship between irrigation chemistry, growing-media pH, and nutrient availability."
+  },
+  {
+    "id": "penn-state-potting-media",
+    "title": "Potting Media and Plant Propagation",
+    "publisher": "Penn State Extension",
+    "url": "https://extension.psu.edu/potting-media-and-plant-propagation",
+    "sourceType": "University extension",
+    "scope": "Greenhouse soilless-media testing, saturated-media methods, pH, soluble salts, nutrient analysis, media aeration, drainage, and propagation-root-zone quality."
+  },
+  {
+    "id": "penn-state-chilling-injury-2026",
+    "title": "Chilling Injury in Newly Planted Corn and Soybeans",
+    "publisher": "Penn State Extension",
+    "year": 2026,
+    "url": "https://extension.psu.edu/chilling-injury-in-newly-planted-corn-and-soybeans",
+    "sourceType": "University extension",
+    "scope": "General crop chilling-injury principles, cold and wet root-zone exposure, low-temperature stress around germination and establishment, and the importance of temperature history when interpreting injury."
+  }
+]

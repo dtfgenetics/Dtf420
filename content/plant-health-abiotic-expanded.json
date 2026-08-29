@@ -1,0 +1,422 @@
+[
+  {
+    "slug": "root-zone-hypoxia-and-waterlogging",
+    "title": "Root-Zone Hypoxia & Waterlogging",
+    "category": "Abiotic disorders",
+    "summary": "Roots require oxygen for respiration and normal water and nutrient uptake. When pore spaces remain water-filled or poorly aerated, root function can decline even though the root zone contains abundant water.",
+    "whatToLookFor": [
+      "Wilt or loss of leaf posture while the medium is still wet",
+      "Slow dryback, poor drainage, or persistently saturated zones",
+      "Reduced fine-root growth, darkened or declining roots, and weak new growth",
+      "Symptoms that worsen after irrigation rather than improving promptly"
+    ],
+    "lookAlikes": [
+      "Drought or missed irrigation",
+      "Pythium-associated root disease",
+      "High root-zone EC",
+      "Root-zone heat injury"
+    ],
+    "confirmWith": [
+      "Measure substrate moisture and track dryback across the full container or bed",
+      "Inspect drainage, air-filled porosity, roots, and irrigation frequency together",
+      "Compare affected and unaffected zones for standing water or persistent saturation",
+      "Use pathogen testing when infectious root disease remains plausible"
+    ],
+    "managementPrinciples": [
+      "Correct excessive irrigation frequency or poor drainage before adding more water",
+      "Restore an appropriate wet-dry rhythm for the medium and root system",
+      "Separate confirmed infectious root disease from purely physical aeration problems",
+      "Reassess new root growth because damaged roots may not recover immediately"
+    ],
+    "prevention": [
+      "Choose media and containers with adequate drainage and air space",
+      "Use irrigation records rather than watering only by the clock",
+      "Check emitter output and drainage uniformity",
+      "Avoid allowing runoff or contaminated solution to move between plant groups"
+    ],
+    "visualNeeds": [
+      "Water-filled versus air-filled pore diagram",
+      "Healthy versus hypoxic fine-root comparison",
+      "Post-irrigation dryback timeline",
+      "Wet-wilt versus dry-wilt decision panel"
+    ]
+  },
+  {
+    "slug": "drought-and-root-zone-water-deficit",
+    "title": "Drought & Root-Zone Water Deficit",
+    "category": "Abiotic disorders",
+    "summary": "Water deficit occurs when root water supply cannot keep pace with plant demand. The useful diagnostic question is not simply whether leaves are drooping, but whether the root zone is actually too dry or unable to deliver water fast enough.",
+    "whatToLookFor": [
+      "Loss of leaf or petiole turgor associated with a dry root zone",
+      "Rapid container weight loss or uneven dry pockets",
+      "Marginal scorch or slowed expansion after repeated severe dryback",
+      "Symptoms that intensify during peak light, heat, or atmospheric demand"
+    ],
+    "lookAlikes": [
+      "Root-zone hypoxia",
+      "Root disease",
+      "High EC and osmotic stress",
+      "Localized stem or vascular injury"
+    ],
+    "confirmWith": [
+      "Measure substrate moisture at more than one depth or location",
+      "Compare irrigation volume and emitter output among affected and unaffected plants",
+      "Inspect roots for physical damage or disease that could limit water delivery",
+      "Review leaf temperature and atmospheric demand during symptom peaks"
+    ],
+    "managementPrinciples": [
+      "Restore water supply without converting a dry-root problem into chronic saturation",
+      "Correct blocked emitters or uneven irrigation before changing nutrition",
+      "Reduce extreme environmental demand when roots temporarily cannot keep pace",
+      "Judge recovery by posture and new growth rather than damaged leaf margins"
+    ],
+    "prevention": [
+      "Track dryback trends",
+      "Verify irrigation distribution routinely",
+      "Match container volume and media water-holding characteristics to plant size",
+      "Use environmental records to anticipate periods of unusually high water demand"
+    ],
+    "visualNeeds": [
+      "Dry root-zone profile",
+      "Container moisture gradient",
+      "Demand-versus-supply diagram",
+      "Dry-wilt versus wet-wilt comparison"
+    ]
+  },
+  {
+    "slug": "high-ec-and-salt-stress",
+    "title": "High EC & Salt Stress",
+    "category": "Abiotic disorders",
+    "summary": "Excess dissolved salts increase the osmotic difficulty of water uptake and can accompany tip burn, marginal necrosis, slowed growth, or root injury. Symptoms are not specific, so electrical conductivity should be measured rather than inferred from leaf appearance.",
+    "whatToLookFor": [
+      "Leaf-tip or marginal necrosis developing across multiple leaves",
+      "Slowed growth or reduced water uptake despite adequate bulk moisture",
+      "Root-zone EC rising above the recent input and crop baseline",
+      "Symptoms that follow stronger feed, insufficient leaching, or concentration during rapid dryback"
+    ],
+    "lookAlikes": [
+      "Drought stress",
+      "Nutrient imbalance",
+      "Heat or low-humidity injury",
+      "Root disease"
+    ],
+    "confirmWith": [
+      "Measure input and root-zone EC using the same documented method",
+      "Review feed concentration, irrigation volume, runoff, and recent dryback",
+      "Inspect roots for secondary injury",
+      "Compare affected zones with plants receiving the same formula but different irrigation distribution"
+    ],
+    "managementPrinciples": [
+      "Correct the salt accumulation process rather than adding more fertilizer to burned tissue",
+      "Adjust feed strength or irrigation strategy using measured trends rather than a single visual symptom",
+      "Avoid abrupt overcorrection when plants are already root-stressed",
+      "Track new growth after root-zone conditions normalize"
+    ],
+    "prevention": [
+      "Record input and root-zone EC consistently",
+      "Calibrate conductivity meters",
+      "Verify irrigation uniformity",
+      "Account for source-water EC when evaluating total dissolved-salt load"
+    ],
+    "visualNeeds": [
+      "Input-versus-root-zone EC graph",
+      "Tip-burn progression plate",
+      "Salt accumulation concept diagram",
+      "High-EC versus drought differential"
+    ]
+  },
+  {
+    "slug": "root-zone-ph-drift-and-nutrient-availability",
+    "title": "Root-Zone pH Drift & Nutrient Availability",
+    "category": "Abiotic disorders",
+    "summary": "Root-zone pH changes nutrient solubility and availability, but a pH reading does not identify a deficiency by itself. Diagnosis requires a consistent sampling method plus root condition, EC, feed composition, and symptom location.",
+    "whatToLookFor": [
+      "Chlorosis or slowed growth without clear evidence that a nutrient is absent from the feed",
+      "Repeated pH measurements trending outside the crop's established working range",
+      "Differences between input solution and root-zone measurements",
+      "Symptoms appearing alongside root decline or salt accumulation"
+    ],
+    "lookAlikes": [
+      "True nutrient shortage",
+      "High EC",
+      "Root disease",
+      "Microscopic pest injury on new growth"
+    ],
+    "confirmWith": [
+      "Measure root-zone pH and EC with a repeatable method",
+      "Verify meter calibration before making large corrections",
+      "Review nutrient formulation and source-water alkalinity or chemistry",
+      "Inspect roots and symptom distribution before assigning a nutrient diagnosis"
+    ],
+    "managementPrinciples": [
+      "Correct the underlying root-zone chemistry trend instead of chasing individual leaf colors",
+      "Avoid large pH swings caused by repeated aggressive adjustment",
+      "Separate pH-driven availability problems from damaged roots that cannot absorb normally",
+      "Use new growth to judge whether the correction improved plant function"
+    ],
+    "prevention": [
+      "Calibrate pH meters on schedule",
+      "Record input and root-zone measurements",
+      "Track source-water chemistry",
+      "Use consistent sampling locations and timing"
+    ],
+    "visualNeeds": [
+      "Root-zone pH sampling workflow",
+      "pH-versus-availability concept chart",
+      "Input-versus-root-zone trend example",
+      "pH problem versus root injury differential"
+    ]
+  },
+  {
+    "slug": "heat-stress-and-canopy-overheating",
+    "title": "Heat Stress & Canopy Overheating",
+    "category": "Abiotic disorders",
+    "summary": "Heat injury is best evaluated at the tissue and canopy level. Leaf temperature can differ from room air temperature, and the most exposed leaves may experience a different combination of radiant load, humidity, and airflow than sensors elsewhere in the room.",
+    "whatToLookFor": [
+      "Upper-canopy curling, edge lift, loss of posture, or scorch during the hottest period",
+      "Symptoms concentrated near high-radiant-load zones",
+      "Leaf temperature substantially different from a remote air-sensor reading",
+      "Partial recovery when light or temperature demand falls"
+    ],
+    "lookAlikes": [
+      "High-light stress",
+      "Drought or root-water limitation",
+      "High EC",
+      "Direct airflow injury"
+    ],
+    "confirmWith": [
+      "Measure leaf temperature at symptomatic and unaffected canopy positions",
+      "Map PPFD, temperature, RH, and airflow where symptoms occur",
+      "Check root-zone moisture and delivery during peak demand",
+      "Compare symptom timing with fixture output and environmental cycles"
+    ],
+    "managementPrinciples": [
+      "Reduce the environmental load that exceeds current plant water-delivery capacity",
+      "Correct localized hot spots instead of relying only on room-average conditions",
+      "Avoid treating heat-driven curl as proof of a nutrient problem",
+      "Evaluate new growth after the canopy environment is stabilized"
+    ],
+    "prevention": [
+      "Measure canopy conditions at plant height",
+      "Maintain adequate but non-damaging air movement",
+      "Commission lighting and HVAC together rather than independently",
+      "Monitor high-risk upper-canopy zones during peak load"
+    ],
+    "visualNeeds": [
+      "Leaf-temperature versus air-temperature diagram",
+      "Canopy heat map",
+      "Heat curl versus root wilt comparison",
+      "Peak-demand timeline"
+    ]
+  },
+  {
+    "slug": "cold-and-chilling-stress",
+    "title": "Cold & Chilling Stress",
+    "category": "Abiotic disorders",
+    "summary": "Low tissue or root-zone temperatures can slow metabolism, water uptake, and growth. Chilling symptoms overlap with nutrient and root problems, so temperature history and location matter more than leaf color alone.",
+    "whatToLookFor": [
+      "Slowed growth following cold nights, cold irrigation solution, or cold root-zone conditions",
+      "Temporary wilt, discoloration, or pigmentation associated with temperature drops",
+      "Symptoms strongest near cold walls, floors, intakes, or exposed outdoor locations",
+      "Recovery lag even after air temperature improves"
+    ],
+    "lookAlikes": [
+      "Nutrient availability problems",
+      "Root disease",
+      "Drought stress",
+      "Genetic anthocyanin expression"
+    ],
+    "confirmWith": [
+      "Review minimum air, leaf, and root-zone temperatures",
+      "Map cold locations rather than relying only on daytime averages",
+      "Inspect roots and irrigation temperature",
+      "Compare affected plants with protected plants of the same cultivar"
+    ],
+    "managementPrinciples": [
+      "Restore stable temperature conditions without abrupt extremes",
+      "Do not diagnose cold-associated pigmentation as a nutrient shortage from color alone",
+      "Protect root function as well as the canopy",
+      "Assess recovery using subsequent growth"
+    ],
+    "prevention": [
+      "Monitor nighttime and root-zone minimum temperatures",
+      "Avoid cold irrigation shocks where practical",
+      "Identify cold-edge microclimates",
+      "Harden plants gradually when transitioning outdoors"
+    ],
+    "visualNeeds": [
+      "Cold-zone room map",
+      "Chilling versus nutrient differential",
+      "Root-zone temperature timeline",
+      "Recovery growth comparison"
+    ]
+  },
+  {
+    "slug": "excessive-light-and-photoinhibition",
+    "title": "Excessive Light & Photoinhibition",
+    "category": "Abiotic disorders",
+    "summary": "High photon exposure can exceed the capacity of photosynthetic processes, especially when combined with heat, water limitation, or abrupt increases in light. Bleaching and upper-canopy injury should be mapped against measured light rather than diagnosed from appearance alone.",
+    "whatToLookFor": [
+      "Bleaching or paling concentrated at the most exposed canopy surfaces",
+      "Upward leaf curl or reduced leaf expansion near the highest PPFD zones",
+      "A clear timeline after fixture power, height, or photoperiod intensity changed",
+      "Less injury on shaded or lower leaves of the same plant"
+    ],
+    "lookAlikes": [
+      "Heat stress",
+      "Chemical or spray injury",
+      "New-growth chlorosis from root-zone chemistry",
+      "Genetic variegation"
+    ],
+    "confirmWith": [
+      "Map PPFD across affected and unaffected canopy positions",
+      "Measure leaf temperature at the same points",
+      "Review the rate and timing of recent lighting changes",
+      "Compare symptoms with shaded tissue and neighboring plants"
+    ],
+    "managementPrinciples": [
+      "Reduce excessive exposure and correct interacting heat or water-delivery stress",
+      "Change intensity progressively when acclimation is needed",
+      "Do not use canopy bleaching as proof of a mineral deficiency",
+      "Monitor new tissue for recovery because bleached tissue may not regain normal appearance"
+    ],
+    "prevention": [
+      "Commission fixtures with a PPFD map",
+      "Increase light progressively after transplant or major canopy changes",
+      "Coordinate light intensity with temperature, humidity, CO2 strategy where applicable, and root water supply",
+      "Check canopy uniformity after plant height changes"
+    ],
+    "visualNeeds": [
+      "PPFD heat map",
+      "Bleaching exposure gradient",
+      "Light-versus-heat differential",
+      "Acclimation timeline"
+    ]
+  },
+  {
+    "slug": "edema-and-intumescence",
+    "title": "Edema & Intumescence",
+    "category": "Abiotic disorders",
+    "summary": "Edema and related intumescence disorders are non-infectious tissue abnormalities that can produce blisters, bumps, or corky areas. They are associated with an imbalance between water uptake and water loss in susceptible plants and can be confused with pests or disease.",
+    "whatToLookFor": [
+      "Small blisters, bumps, or raised areas, often most noticeable on lower leaf surfaces",
+      "Older lesions becoming tan or corky",
+      "Symptoms developing during humid, low-transpiration periods in susceptible plants",
+      "No moving pest or fungal structure associated with the lesions"
+    ],
+    "lookAlikes": [
+      "Mite or insect injury",
+      "Leaf-spot disease",
+      "Spray residue or phytotoxicity",
+      "Genetic leaf texture"
+    ],
+    "confirmWith": [
+      "Inspect both leaf surfaces with magnification",
+      "Review irrigation timing, humidity, airflow, and nighttime conditions",
+      "Track whether new lesions stop forming after environmental balance improves",
+      "Rule out pests and infectious lesions before assigning a physiological disorder"
+    ],
+    "managementPrinciples": [
+      "Correct excessive or poorly timed moisture supply when it contributes to the pattern",
+      "Improve the environmental conditions that support appropriate transpiration without creating excessive drying stress",
+      "Avoid unnecessary pesticide treatment when no pest or pathogen is present",
+      "Evaluate new leaves because existing corky lesions will remain"
+    ],
+    "prevention": [
+      "Avoid chronic overwatering",
+      "Maintain appropriate air movement",
+      "Track high-humidity low-transpiration periods",
+      "Learn cultivar or species susceptibility before assuming lesions are infectious"
+    ],
+    "visualNeeds": [
+      "Edema blister close-up",
+      "Lower-versus-upper leaf surface comparison",
+      "Edema versus mite injury plate",
+      "Water-uptake versus transpiration diagram"
+    ]
+  },
+  {
+    "slug": "phytotoxicity-and-spray-injury",
+    "title": "Phytotoxicity & Spray Injury",
+    "category": "Abiotic disorders",
+    "summary": "Phytotoxicity is plant tissue injury caused by chemical exposure. Droplet patterns, exposure history, affected tissue age, temperature, light, formulation, concentration, and tank contamination can help separate spray injury from pests, pathogens, and nutritional disorders.",
+    "whatToLookFor": [
+      "Speckling, spotting, bleaching, scorch, or distortion appearing after a spray or chemical event",
+      "Damage matching droplet coverage or a treated canopy zone",
+      "Symptoms appearing on exposed tissue while protected tissue remains less affected",
+      "Several plants showing a similar timeline after the same application"
+    ],
+    "lookAlikes": [
+      "Leaf-spot disease",
+      "Mite or thrips feeding",
+      "High-light injury",
+      "Nutrient-related necrosis"
+    ],
+    "confirmWith": [
+      "Reconstruct the application history including product, rate, adjuvant, water, tank history, and environmental conditions",
+      "Compare treated and untreated plants or protected tissue",
+      "Use magnification to rule out pests and fungal structures",
+      "Track whether injury remains static after the exposure ends or continues spreading independently"
+    ],
+    "managementPrinciples": [
+      "Stop repeating the suspected exposure until the cause is understood",
+      "Do not treat chemical injury with additional unverified sprays",
+      "Protect healthy new growth while the plant recovers",
+      "Follow product labels and compatibility guidance for any future application"
+    ],
+    "prevention": [
+      "Label and clean spray equipment carefully",
+      "Test unfamiliar mixtures or conditions on limited material first when appropriate and label-permitted",
+      "Avoid off-label concentrations and incompatible mixtures",
+      "Record application conditions and tank contents"
+    ],
+    "visualNeeds": [
+      "Droplet-pattern injury plate",
+      "Phytotoxicity versus disease comparison",
+      "Spray-event timeline",
+      "Tank-history diagnostic checklist"
+    ]
+  },
+  {
+    "slug": "herbicide-drift-and-growth-regulator-injury",
+    "title": "Herbicide Drift & Growth-Regulator Injury",
+    "category": "Abiotic disorders",
+    "summary": "Off-target herbicide exposure can produce distorted, narrowed, cupped, twisted, stunted, bleached, or necrotic growth depending on the active ingredient and exposure. New growth may be especially informative, but visual symptoms alone cannot identify a specific herbicide.",
+    "whatToLookFor": [
+      "Abnormal twisting, cupping, narrowing, or strapping of new growth",
+      "A spatial gradient toward an intake, field edge, neighboring treatment area, or contaminated tool path",
+      "Multiple plant species showing injury in the same exposure zone",
+      "Symptoms beginning days after a plausible drift, volatilization, carryover, or equipment-contamination event"
+    ],
+    "lookAlikes": [
+      "Broad or russet mite injury",
+      "Virus or viroid-associated distortion",
+      "Micronutrient or root-zone chemistry problems",
+      "Other spray phytotoxicity"
+    ],
+    "confirmWith": [
+      "Map affected plants and species against the plausible exposure direction",
+      "Review nearby applications, ventilation intake history, compost or media inputs, and sprayer history",
+      "Inspect growing tips under magnification for microscopic pests",
+      "Use laboratory residue analysis only when practical and decision-relevant"
+    ],
+    "managementPrinciples": [
+      "Prevent further exposure and separate contaminated equipment or inputs",
+      "Avoid adding nutrients or pesticides merely because distorted leaves resemble another disorder",
+      "Track whether healthy new growth resumes after the exposure ends",
+      "Replace severely affected material when recovery is not compatible with production goals"
+    ],
+    "prevention": [
+      "Keep herbicide equipment separate from crop spray equipment",
+      "Control intake and application timing around nearby herbicide use where relevant",
+      "Verify compost, manure, mulch, and other inputs when carryover risk is plausible",
+      "Maintain application and incident records"
+    ],
+    "visualNeeds": [
+      "Growth-regulator injury plate",
+      "Drift-gradient map",
+      "Herbicide versus mite distortion comparison",
+      "Exposure-history checklist"
+    ]
+  }
+]

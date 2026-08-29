@@ -3,13 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
+import abioticLibrary from "@/content/plant-health-abiotic-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
 import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../page.module.css";
 
-const library = [...coreLibrary, ...expandedLibrary];
+const library = [...coreLibrary, ...expandedLibrary, ...abioticLibrary];
 
 function getEntry(slug: string) {
   return library.find((item) => item.slug === slug);
@@ -78,7 +79,7 @@ export default async function PlantHealthReferencePage({ params }: { params: Pro
         <TopicPanel title="How to confirm" items={entry.confirmWith} />
         <TopicPanel title="Management principles" items={entry.managementPrinciples} />
         <TopicPanel title="Prevention" items={entry.prevention} />
-        <TopicPanel title="Visuals this lesson still needs" items={entry.visualNeeds} className={styles.visualPanel} />
+        <TopicPanel title="Visual study guide" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
       <EvidenceSources path={path} />

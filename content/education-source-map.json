@@ -23,6 +23,61 @@
     "okstate-greenhouse-ipm",
     "cfia-greenhouse-biosecurity"
   ],
+  "/learn/plant-health/root-zone-hypoxia-and-waterlogging": [
+    "uc-ipm-aeration-deficit",
+    "uc-ipm-water-deficit-excess",
+    "penn-state-potting-media"
+  ],
+  "/learn/plant-health/drought-and-root-zone-water-deficit": [
+    "cannabis-drought-physiology-2025",
+    "uc-ipm-water-deficit-excess"
+  ],
+  "/learn/plant-health/high-ec-and-salt-stress": [
+    "penn-state-saline-soils-2025",
+    "penn-state-water-quality-toolkit-2025"
+  ],
+  "/learn/plant-health/root-zone-ph-drift-and-nutrient-availability": [
+    "penn-state-water-quality-toolkit-2025",
+    "penn-state-potting-media"
+  ],
+  "/learn/plant-health/heat-stress-and-canopy-overheating": [
+    "cannabis-photosynthesis-2008",
+    "vpd-stomatal-response-2015"
+  ],
+  "/learn/plant-health/cold-and-chilling-stress": [
+    "penn-state-chilling-injury-2026",
+    "cannabis-photosynthesis-2008"
+  ],
+  "/learn/plant-health/excessive-light-and-photoinhibition": [
+    "cannabis-photosynthesis-2008"
+  ],
+  "/learn/plant-health/edema-and-intumescence": [
+    "illinois-drowning-edema"
+  ],
+  "/learn/plant-health/phytotoxicity-and-spray-injury": [
+    "umd-phytotoxicity"
+  ],
+  "/learn/plant-health/herbicide-drift-and-growth-regulator-injury": [
+    "umd-herbicide-vegetables",
+    "umd-phytotoxicity"
+  ],
+  "/learn/symptoms/corky-blisters-and-leaf-bumps": [
+    "illinois-drowning-edema"
+  ],
+  "/learn/symptoms/leaf-cupping-strapping-and-epinasty": [
+    "umd-herbicide-vegetables"
+  ],
+  "/learn/symptoms/sudden-post-spray-speckling-and-scorch": [
+    "umd-phytotoxicity"
+  ],
+  "/learn/symptoms/patchy-container-to-container-decline": [
+    "uc-ipm-water-deficit-excess",
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/symptoms/wet-media-wilt-and-post-irrigation-droop": [
+    "uc-ipm-aeration-deficit",
+    "cannabis-greenhouse-pathogens-2024"
+  ],
   "/learn/cultivation-science/incoming-plant-quarantine-and-clean-stock": [
     "okstate-greenhouse-ipm",
     "cfia-greenhouse-biosecurity",

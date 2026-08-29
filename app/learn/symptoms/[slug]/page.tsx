@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import library from "@/content/symptom-differential-library.json";
+import coreLibrary from "@/content/symptom-differential-library.json";
+import expandedLibrary from "@/content/symptom-differential-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
 import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../../plant-health/page.module.css";
+
+const library = [...coreLibrary, ...expandedLibrary];
 
 function getEntry(slug: string) {
   return library.find((item) => item.slug === slug);
@@ -74,7 +77,7 @@ export default async function SymptomDifferentialDetailPage({ params }: { params
         <TopicPanel title="Plausible cause categories" items={entry.possibleCategories} />
         <TopicPanel title="Discriminating checks" items={entry.discriminatingChecks} />
         <TopicPanel title="Red flags" items={entry.redFlags} />
-        <TopicPanel title="Visuals this differential still needs" items={entry.visualNeeds} className={styles.visualPanel} />
+        <TopicPanel title="Visual study guide" items={entry.visualNeeds} className={styles.visualPanel} />
       </div>
 
       <EvidenceSources path={path} />

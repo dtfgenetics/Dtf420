@@ -3,7 +3,10 @@ import path from "node:path";
 
 const root = process.cwd();
 const modules = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-learning-modules.json"), "utf8"));
-const cases = JSON.parse(fs.readFileSync(path.join(root, "content/atlas-diagnostic-cases.json"), "utf8"));
+const cases = [
+  ...JSON.parse(fs.readFileSync(path.join(root, "content/atlas-diagnostic-cases.json"), "utf8")),
+  ...JSON.parse(fs.readFileSync(path.join(root, "content/atlas-diagnostic-cases-expanded.json"), "utf8")),
+];
 
 function slugify(value) {
   return value
@@ -26,8 +29,8 @@ const ids = new Set();
 const titles = new Set();
 let linkCount = 0;
 
-if (!Array.isArray(cases) || cases.length < 6) {
-  errors.push("Diagnostic case bank must contain at least six cases.");
+if (!Array.isArray(cases) || cases.length < 12) {
+  errors.push("Diagnostic case bank must contain at least twelve cases.");
 } else {
   for (const diagnosticCase of cases) {
     if (!diagnosticCase || typeof diagnosticCase !== "object") {

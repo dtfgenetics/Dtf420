@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import sources from "@/content/education-sources.json";
+import coreSources from "@/content/education-sources.json";
+import abioticSources from "@/content/education-sources-abiotic.json";
 import sourceMap from "@/content/education-source-map.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
+
+const sources = [...coreSources, ...abioticSources];
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Evidence & Sources — Teaching Healthy Cultivation",
@@ -38,7 +41,7 @@ export default function EducationSourcesPage() {
             <p className="eyebrow">Reference library</p>
             <h2>Current sources</h2>
           </div>
-          <p>Peer-reviewed research is prioritized for cannabis-specific claims, with university extension and government guidance used for broader greenhouse, IPM, and biosecurity principles.</p>
+          <p>Peer-reviewed research is prioritized for cannabis-specific claims, with university extension and government guidance used for broader greenhouse, IPM, biosecurity, environmental-stress, and diagnostic principles.</p>
         </div>
 
         <div className={styles.grid}>

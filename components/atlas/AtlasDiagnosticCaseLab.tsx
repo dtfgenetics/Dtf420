@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import rawCases from "@/content/atlas-diagnostic-cases.json";
+import coreCases from "@/content/atlas-diagnostic-cases.json";
+import expandedCases from "@/content/atlas-diagnostic-cases-expanded.json";
 import styles from "./AtlasDiagnosticCaseLab.module.css";
 
 type Result = "correct" | "incorrect" | null;
-type DiagnosticCase = (typeof rawCases)[number];
+type DiagnosticCase = (typeof coreCases)[number];
 
 function balanceAnswerPosition(item: DiagnosticCase, index: number): DiagnosticCase {
   const targetIndex = index % item.options.length;
@@ -22,7 +23,7 @@ function balanceAnswerPosition(item: DiagnosticCase, index: number): DiagnosticC
   };
 }
 
-const cases = rawCases.map(balanceAnswerPosition);
+const cases = [...coreCases, ...expandedCases].map(balanceAnswerPosition);
 
 export function AtlasDiagnosticCaseLab() {
   const [selectedId, setSelectedId] = useState(cases[0].id);

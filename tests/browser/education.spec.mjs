@@ -43,7 +43,7 @@ test("THC Academy renders guided courses and working unit links", async ({ page 
   await expectNoHorizontalOverflow(page);
 });
 
-test("Unified education search finds Academy, physiology, lessons, tools, and evidence sources", async ({ page }) => {
+test("Unified education search finds Academy, physiology, diagnostics, tools, and evidence sources", async ({ page }) => {
   await page.goto("/learn/search", { waitUntil: "networkidle" });
   const search = page.getByLabel("Search the education system");
 
@@ -58,21 +58,29 @@ test("Unified education search finds Academy, physiology, lessons, tools, and ev
   await search.fill("HLVd");
   await expect(page.getByText("Hop Latent Viroid (HLVd)", { exact: true }).first()).toBeVisible();
 
+  await search.fill("root-zone hypoxia");
+  await expect(page.getByText("Root-Zone Hypoxia & Waterlogging", { exact: true }).first()).toBeVisible();
+
+  await search.fill("corky blisters");
+  await expect(page.getByText("Corky Blisters, Bumps & Edema-Like Lesions", { exact: true }).first()).toBeVisible();
+
   await search.fill("water activity");
   await expect(page.getByText(/Water Activity/i).first()).toBeVisible();
 
-  await search.fill("HLVd research");
+  await search.fill("edema");
   await page.getByLabel("Filter education search").selectOption("Evidence source");
-  await expect(page.getByText(/Hop Latent Viroid/i).first()).toBeVisible();
+  await expect(page.getByText("Drowning and Edema", { exact: true }).first()).toBeVisible();
 
   await expectNoHorizontalOverflow(page);
 });
 
-test("Evidence library is public and populated", async ({ page }) => {
+test("Evidence library is public and includes abiotic diagnostic sources", async ({ page }) => {
   await page.goto("/learn/sources", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { name: "Evidence & Sources", exact: true })).toBeVisible();
   await expect(page.getByText("Peer-reviewed research", { exact: true }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /Hop Latent Viroid: A Hidden Threat to the Cannabis Industry/i })).toBeVisible();
+  await expect(page.locator('a[href="https://ipm.ucanr.edu/home-and-landscape/aeration-deficit/"]')).toBeVisible();
+  await expect(page.locator('a[href="https://extension.umd.edu/resource/phytotoxicity-chemical-damage-garden-plants"]')).toBeVisible();
   await expectCanonical(page, "/learn/sources");
   await expectNoHorizontalOverflow(page);
 });
@@ -83,6 +91,30 @@ test("Plant health lesson renders evidence, canonical metadata, and LearningReso
   await expect(page.getByRole("heading", { name: "Hop Latent Viroid (HLVd)", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources connected to this lesson", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: /Transmission, Spread, Longevity and Management of Hop Latent Viroid/i })).toBeVisible();
+  await expectCanonical(page, path);
+  await expectLearningResourceJsonLd(page);
+  await expectNoHorizontalOverflow(page);
+});
+
+test("Abiotic plant-health reference renders mapped evidence and structured metadata", async ({ page }) => {
+  const path = "/learn/plant-health/root-zone-hypoxia-and-waterlogging";
+  await page.goto(path, { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { name: "Root-Zone Hypoxia & Waterlogging", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources connected to this lesson", exact: true })).toBeVisible();
+  await expect(page.locator('a[href="https://ipm.ucanr.edu/home-and-landscape/aeration-deficit/"]')).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Visual study guide", exact: true })).toBeVisible();
+  await expectCanonical(page, path);
+  await expectLearningResourceJsonLd(page);
+  await expectNoHorizontalOverflow(page);
+});
+
+test("Expanded symptom differential renders evidence and structured metadata", async ({ page }) => {
+  const path = "/learn/symptoms/corky-blisters-and-leaf-bumps";
+  await page.goto(path, { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { name: "Corky Blisters, Bumps & Edema-Like Lesions", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Discriminating checks", exact: true })).toBeVisible();
+  await expect(page.locator('a[href="https://extension.illinois.edu/plant-problems/drowning-and-edema"]')).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Visual study guide", exact: true })).toBeVisible();
   await expectCanonical(page, path);
   await expectLearningResourceJsonLd(page);
   await expectNoHorizontalOverflow(page);
@@ -134,6 +166,8 @@ test("robots and sitemap expose education discovery routes", async ({ request })
   expect(xml).toContain("https://dtfseeds.com/learn/academy");
   expect(xml).toContain("https://dtfseeds.com/learn/sources");
   expect(xml).toContain("https://dtfseeds.com/learn/plant-health/hop-latent-viroid");
+  expect(xml).toContain("https://dtfseeds.com/learn/plant-health/root-zone-hypoxia-and-waterlogging");
+  expect(xml).toContain("https://dtfseeds.com/learn/symptoms/corky-blisters-and-leaf-bumps");
   expect(xml).toContain("https://dtfseeds.com/learn/cultivation-science/source-sink-carbon-allocation");
   expect(xml).toContain("https://dtfseeds.com/learn/cultivation-science/humidity-condensation-and-dew-point");
 });

@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
+import abioticLibrary from "@/content/plant-health-abiotic-expanded.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
-const library = [...coreLibrary, ...expandedLibrary];
+const library = [...coreLibrary, ...expandedLibrary, ...abioticLibrary];
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Plant Health, IPM & Disease Library",
-  description: "Observation-first cannabis plant health references covering pests, diseases, systemic pathogens, scouting, sanitation, and diagnostic reasoning.",
+  description: "Observation-first cannabis plant health references covering pests, diseases, abiotic disorders, systemic pathogens, scouting, sanitation, and diagnostic reasoning.",
   path: "/learn/plant-health",
 });
 
-const categories = ["Foundations", "Arthropod pests", "Diseases", "Systemic pathogens"] as const;
+const categories = ["Foundations", "Abiotic disorders", "Arthropod pests", "Diseases", "Systemic pathogens"] as const;
 
 export default function PlantHealthPage() {
   return (
@@ -36,7 +37,7 @@ export default function PlantHealthPage() {
       <div className={styles.stats} aria-label="Plant health library summary">
         <div className={styles.stat}><strong>{library.length}</strong><span>reference lessons</span></div>
         <div className={styles.stat}><strong>{categories.length}</strong><span>topic groups</span></div>
-        <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.visualNeeds.length, 0)}</strong><span>purpose-built visuals specified</span></div>
+        <div className={styles.stat}><strong>3</strong><span>diagnostic layers: symptom, cause, evidence</span></div>
       </div>
 
       {categories.map((category) => {
@@ -53,11 +54,13 @@ export default function PlantHealthPage() {
               <p>
                 {category === "Foundations"
                   ? "Build observation, sampling, beneficial-organism, scouting, and sanitation habits that make later diagnoses more reliable."
-                  : category === "Arthropod pests"
-                    ? "Identify the organism and life stage instead of treating leaf damage as a diagnosis by itself."
-                    : category === "Diseases"
-                      ? "Separate pathogen evidence from environmental and root-zone conditions that can create similar symptoms."
-                      : "Use testing and propagation records when visual symptoms cannot establish infection."}
+                  : category === "Abiotic disorders"
+                    ? "Separate irrigation, root oxygen, salinity, pH, light, temperature, and chemical injury from pests, pathogens, and nutrient look-alikes."
+                    : category === "Arthropod pests"
+                      ? "Identify the organism and life stage instead of treating leaf damage as a diagnosis by itself."
+                      : category === "Diseases"
+                        ? "Separate pathogen evidence from environmental and root-zone conditions that can create similar symptoms."
+                        : "Use testing and propagation records when visual symptoms cannot establish infection."}
               </p>
             </div>
 
