@@ -21,9 +21,10 @@ import learningTools from "@/content/learning-tools.json";
 import coreEvidenceSources from "@/content/education-sources.json";
 import abioticEvidenceSources from "@/content/education-sources-abiotic.json";
 import glossary from "@/content/education-glossary.json";
+import sops from "@/content/education-sops.json";
 import styles from "./EducationSearch.module.css";
 
-type SearchKind = "Academy course" | "Atlas lesson" | "Plant health" | "Cultivation science" | "Symptom differential" | "Printable tool" | "Evidence source" | "Glossary term";
+type SearchKind = "Academy course" | "Atlas lesson" | "Plant health" | "Cultivation science" | "Symptom differential" | "Printable tool" | "Evidence source" | "Glossary term" | "SOP";
 
 type SearchItem = {
   kind: SearchKind;
@@ -138,9 +139,18 @@ const glossaryItems: SearchItem[] = glossary.map((entry) => ({
   terms: entry.aliases.join(" "),
 }));
 
-const searchItems = [...academyItems, ...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems, ...glossaryItems];
-const kinds: Array<"All" | SearchKind> = ["All", "Academy course", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source", "Glossary term"];
-const examples = ["VPD", "root-zone hypoxia", "edema", "herbicide drift", "breeding", "yellow lower leaves", "PPFD", "water activity", "HLVd research", "rhizosphere"];
+const sopItems: SearchItem[] = sops.map((sop) => ({
+  kind: "SOP" as const,
+  title: sop.title,
+  context: sop.category,
+  summary: sop.purpose,
+  href: `/learn/sops/${sop.slug}`,
+  terms: [sop.scope, sop.frequency, ...sop.tools, ...sop.preconditions, ...sop.steps.flatMap((step) => [step.title, step.action, step.record]), ...sop.verification, ...sop.records, ...sop.limitations].join(" "),
+}));
+
+const searchItems = [...academyItems, ...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems, ...glossaryItems, ...sopItems];
+const kinds: Array<"All" | SearchKind> = ["All", "Academy course", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source", "Glossary term", "SOP"];
+const examples = ["VPD", "root-zone hypoxia", "edema", "pH meter", "PPFD", "breeding", "yellow lower leaves", "water activity", "HLVd research", "rhizosphere"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -187,7 +197,7 @@ export function EducationSearch() {
         <div>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Search Education</h1>
-          <p>Search Academy courses, Atlas lessons, plant-health references, abiotic disorders, symptom differentials, cultivation science, glossary definitions, printable field tools, and evidence sources from one place.</p>
+          <p>Search Academy courses, Atlas lessons, plant-health references, abiotic disorders, symptom differentials, cultivation science, glossary definitions, SOPs, printable field tools, and evidence sources from one place.</p>
         </div>
         <Link href="/learn">Back to Learn</Link>
       </section>
@@ -200,7 +210,7 @@ export function EducationSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try root-zone hypoxia, VPD, rhizosphere, water activity…"
+            placeholder="Try root-zone hypoxia, VPD, pH meter, rhizosphere…"
             autoComplete="off"
           />
           <select aria-label="Filter education search" value={kind} onChange={(event) => setKind(event.target.value as "All" | SearchKind)}>
@@ -216,7 +226,7 @@ export function EducationSearch() {
         {!searching ? (
           <div className={styles.empty}>Enter at least two characters to search across {searchItems.length} indexed learning resources.</div>
         ) : results.length === 0 ? (
-          <div className={styles.empty}>No matches yet. Try a broader course, plant structure, physiology, propagation, nutrition, breeding, symptom, pest, abiotic stress, measurement, environment, glossary, research, or post-harvest term.</div>
+          <div className={styles.empty}>No matches yet. Try a broader course, plant structure, physiology, propagation, nutrition, breeding, symptom, pest, abiotic stress, measurement, SOP, environment, glossary, research, or post-harvest term.</div>
         ) : (
           <>
             <header className={styles.resultHeader}>
