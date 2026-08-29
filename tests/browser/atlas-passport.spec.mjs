@@ -2,7 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
 
-const rawChecks = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks.json"), "utf8"));
+const rawChecks = [
+  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks.json"), "utf8")),
+  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks-expansion-01.json"), "utf8")),
+];
 const badges = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-mastery-badges.json"), "utf8"));
 const LESSON_COUNT = rawChecks.length;
 const TOTAL_BADGES = badges.length + 1;
