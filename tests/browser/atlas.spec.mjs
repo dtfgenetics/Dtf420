@@ -59,9 +59,10 @@ async function expectNoInternalProductionLabels(page) {
   expect(visibleText).not.toMatch(/atlas-[a-z0-9-]+-v\d+/i);
 }
 
-test("all 50 Atlas lesson routes respond successfully", async ({ request }, testInfo) => {
+test("all Atlas lesson routes respond successfully", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Run the route sweep once.");
-  expect(lessonRoutes).toHaveLength(50);
+  expect(lessonRoutes.length).toBeGreaterThan(0);
+  expect(new Set(lessonRoutes.map((lesson) => lesson.route)).size).toBe(lessonRoutes.length);
 
   for (const lesson of lessonRoutes) {
     const response = await request.get(lesson.route);
@@ -117,7 +118,7 @@ test("Atlas lesson completion persists and Dashboard Continue Learning advances"
 
   await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
   const metrics = page.locator('section[aria-label="Atlas study metrics"]');
-  await expect(metrics).toContainText("1/50");
+  await expect(metrics).toContainText(`1/${lessonRoutes.length}`);
   const continuePanel = page.locator('section[aria-label="Continue Atlas learning"]');
   await expect(continuePanel).toContainText("Imbibition");
   await expect(continuePanel.getByRole("link", { name: "Open next lesson" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");

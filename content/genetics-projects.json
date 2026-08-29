@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "blue-mango",
+    "name": "Blue Mango",
+    "lineage": "Somango XXL × Blueberry Butcher",
+    "status": "Documented flagship breeding line",
+    "summary": "Blue Mango is a flagship DTF breeding project built from Somango XXL and Blueberry Butcher.",
+    "floweringWindow": "8–10 weeks",
+    "aromaticDirection": "Candy blueberry × ripe mango",
+    "traits": [
+      "Vigorous growth",
+      "Strong branching",
+      "Heavy resin production"
+    ],
+    "breedingNotes": [
+      "Documented through multiple filial generations.",
+      "F2 and F3 work includes both regular and feminized directions.",
+      "Later generation work continues the DTF selection and preservation program."
+    ]
+  },
+  {
+    "slug": "mango-bubbles",
+    "name": "Mango Bubbles",
+    "lineage": "Blue Mango × Blue Bubblegum",
+    "status": "Documented DTF breeding project",
+    "summary": "Mango Bubbles combines the Blue Mango line with Blue Bubblegum as a distinct DTF family.",
+    "floweringWindow": null,
+    "aromaticDirection": null,
+    "traits": [],
+    "breedingNotes": [
+      "The project name is locked as Mango Bubbles.",
+      "Parentage is preserved as Blue Mango × Blue Bubblegum."
+    ]
+  },
+  {
+    "slug": "blue-bubblegum",
+    "name": "Blue Bubblegum",
+    "lineage": "Bubblegum Kush × Blueberry Butcher",
+    "status": "Documented DTF breeding line",
+    "summary": "Blue Bubblegum is a DTF cross connecting Bubblegum Kush with Blueberry Butcher.",
+    "floweringWindow": null,
+    "aromaticDirection": null,
+    "traits": [],
+    "breedingNotes": [
+      "Blueberry Butcher is the documented breeding parent on the paternal side of this cross."
+    ]
+  },
+  {
+    "slug": "blueberry-butcher",
+    "name": "Blueberry Butcher",
+    "lineage": "Blueberry Muffin × Jack Herer",
+    "status": "Foundational DTF breeding parent",
+    "summary": "Blueberry Butcher is a foundational DTF parent used across multiple breeding projects.",
+    "floweringWindow": null,
+    "aromaticDirection": null,
+    "traits": [],
+    "breedingNotes": [
+      "Documented parentage is Blueberry Muffin × Jack Herer.",
+      "The line appears as a parent in both Blue Mango and Blue Bubblegum."
+    ]
+  }
+]

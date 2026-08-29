@@ -1,5 +1,12 @@
+import fs from "node:fs";
+import path from "node:path";
 import { expect, test } from "@playwright/test";
 
+const rawChecks = [
+  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks.json"), "utf8")),
+  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks-expansion-01.json"), "utf8")),
+];
+const LESSON_COUNT = rawChecks.length;
 const MASTERY_KEY = "dtf420.atlas.mastery.v1";
 
 async function seedReviewState(page) {
@@ -35,7 +42,7 @@ test("review lab prioritizes recent misses and updates shared mastery", async ({
   const summary = page.locator('section[aria-label="Atlas review summary"]');
   await expect(summary).toContainText("1");
   await expect(summary).toContainText("recent misses");
-  await expect(summary).toContainText("49");
+  await expect(summary).toContainText(String(LESSON_COUNT - 1));
   await expect(summary).toContainText("unmastered");
   await expect(summary).toContainText("mastered");
 
