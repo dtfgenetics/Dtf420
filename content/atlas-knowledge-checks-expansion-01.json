@@ -118,7 +118,7 @@
   },
   {
     "id": "diagnostic-genotype-environment",
-    "route": "/learn/atlas/diagnostic-overlay/genotype-by-environment-context",
+    "route": "/learn/atlas/diagnostic-overlay/genotype-environment-context",
     "prompt": "Why should a repeated trait across one cultivar not automatically be treated as a universal deficiency or disease symptom?",
     "options": [
       "Genotype, developmental stage, environment, and their interaction can produce repeatable phenotypes that are not a single pathological cause",
