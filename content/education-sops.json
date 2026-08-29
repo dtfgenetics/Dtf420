@@ -1,0 +1,210 @@
+[
+  {
+    "slug": "ph-meter-calibration-and-measurement",
+    "title": "pH Meter Calibration & Measurement",
+    "category": "Root-zone measurement",
+    "purpose": "Produce traceable pH readings with a clean, calibrated meter and enough context to interpret the number correctly.",
+    "scope": "Use for irrigation water, prepared nutrient solution, or other compatible liquid samples. Use a method appropriate to the substrate when evaluating media or root-zone pH.",
+    "frequency": "Calibrate at the interval specified by the meter manufacturer and whenever verification checks, storage history, or measurement behavior suggest drift.",
+    "tools": ["pH meter with appropriate probe", "fresh calibration buffers appropriate to the meter", "clean rinse water", "clean sample cup", "record sheet or digital log"],
+    "preconditions": ["Confirm the probe has been stored and maintained according to the meter instructions.", "Use uncontaminated calibration solutions and clean containers.", "Allow sample and buffers to reach a stable working temperature when temperature differences could affect the reading."],
+    "steps": [
+      {"title":"Inspect and rinse","action":"Inspect the probe for visible residue or damage, then rinse it without wiping or abrading the sensing surface.","record":"Record abnormal probe condition or maintenance performed."},
+      {"title":"Calibrate","action":"Run the meter's calibration routine with the required fresh buffer points, following the manufacturer's sequence and acceptance prompts.","record":"Record calibration date, buffer values, and whether calibration passed."},
+      {"title":"Prepare the sample","action":"Mix or collect a representative sample in a clean vessel without cross-contaminating it with buffer solution.","record":"Record sample identity, source, and relevant treatment or batch."},
+      {"title":"Measure","action":"Immerse the probe to the proper depth, provide gentle movement if the meter instructions call for it, and wait for a stable reading.","record":"Record pH, sample temperature when available, and time."},
+      {"title":"Rinse and store","action":"Rinse the probe after measurement and return it to the storage condition specified by the manufacturer.","record":"Record any cleaning or storage exception."}
+    ],
+    "verification": ["Calibration routine passes without an error or out-of-range warning.", "A check buffer or known reference is within the meter's stated tolerance when verification is required.", "Repeated readings of the same well-mixed sample are reasonably stable."],
+    "records": ["meter identification", "calibration date/time", "buffer values", "sample identity", "pH", "sample temperature if available", "operator or observer", "notes/exceptions"],
+    "relatedRoutes": ["/learn/glossary#ph", "/learn/plant-health/root-zone-ph-drift", "/learn/tools/ph-measurement-log"],
+    "limitations": ["pH does not directly report nutrient concentration.", "Substrate pH depends on the sampling/extraction method; do not compare unlike methods as though they are identical."]
+  },
+  {
+    "slug": "ec-meter-verification-and-measurement",
+    "title": "EC Meter Verification & Measurement",
+    "category": "Root-zone measurement",
+    "purpose": "Generate consistent electrical-conductivity readings while preserving the sample method, temperature context, and instrument verification needed for comparison over time.",
+    "scope": "Use for compatible liquid samples and for root-zone extracts only when the extraction method is defined and kept consistent.",
+    "frequency": "Verify or calibrate at the interval recommended by the meter manufacturer and after storage, cleaning, probe replacement, or suspicious readings.",
+    "tools": ["EC/conductivity meter", "appropriate conductivity standard", "clean rinse water", "clean sample cup", "record sheet or digital log"],
+    "preconditions": ["Confirm the standard is within its usable date and has not been contaminated.", "Know whether the meter reports EC directly or converts to another scale.", "Define the sampling method before comparing root-zone readings."],
+    "steps": [
+      {"title":"Inspect and rinse","action":"Inspect and rinse the conductivity cell or probe according to its instructions.","record":"Note visible residue, cleaning, or probe condition."},
+      {"title":"Verify or calibrate","action":"Measure the specified conductivity standard and complete calibration if the instrument or SOP requires it.","record":"Record standard value, observed value, and pass/fail status."},
+      {"title":"Collect a representative sample","action":"Mix or collect the liquid sample consistently and avoid contaminating it with standard solution or residue from another sample.","record":"Record sample identity and collection method."},
+      {"title":"Measure and stabilize","action":"Place the probe correctly in the sample, allow the reading and temperature compensation to stabilize, and record the displayed EC unit.","record":"Record EC, units, temperature if available, and time."},
+      {"title":"Rinse and close out","action":"Rinse the probe and store it according to its manufacturer instructions.","record":"Record exceptions or maintenance."}
+    ],
+    "verification": ["Reference standard is within the instrument's stated acceptance range.", "Units are recorded with every value.", "Sampling/extraction method is unchanged when comparing a time series."],
+    "records": ["meter identification", "standard value", "verification result", "sample identity", "sampling method", "EC and units", "temperature if available", "operator", "notes"],
+    "relatedRoutes": ["/learn/glossary#electrical-conductivity", "/learn/plant-health/high-ec-and-salt-stress", "/learn/tools/ec-measurement-log"],
+    "limitations": ["EC reflects total ionic conductivity, not the concentration of each nutrient ion.", "Different meters, units, extraction methods, and temperature handling can make numbers non-comparable unless documented."]
+  },
+  {
+    "slug": "ppfd-grid-survey",
+    "title": "PPFD Canopy Grid Survey",
+    "category": "Light measurement",
+    "purpose": "Map photosynthetic photon flux density across a canopy or target plane so lighting uniformity and spatial variation are visible instead of inferred from one reading.",
+    "scope": "Use with a suitable quantum sensor at a defined measurement plane and lighting state.",
+    "frequency": "Repeat after material lighting changes, fixture height changes, canopy-height changes that alter the target plane, or when troubleshooting light distribution.",
+    "tools": ["quantum/PAR sensor", "grid or marked measurement positions", "measuring tape", "record sheet or digital map"],
+    "preconditions": ["Warm up and operate fixtures according to their normal measurement condition.", "Define the measurement plane before starting.", "Keep sensor orientation consistent and avoid shading it with the operator."],
+    "steps": [
+      {"title":"Define the grid","action":"Mark repeatable positions across the target area and record the grid spacing and measurement height.","record":"Record grid dimensions, point labels, and target-plane height."},
+      {"title":"Stabilize lighting","action":"Set fixtures to the normal output and configuration being evaluated and allow them to reach a stable operating condition if required.","record":"Record fixture state, dimming level if known, and relevant environmental or curtain state."},
+      {"title":"Measure each point","action":"Place the sensor at each grid point in the same orientation and record the stabilized PPFD value.","record":"Record PPFD for every point with units."},
+      {"title":"Summarize distribution","action":"Calculate or report minimum, maximum, average, and obvious low/high zones without hiding individual grid values.","record":"Record summary values and a grid map."},
+      {"title":"Preserve comparability","action":"Save enough setup detail that the same grid can be measured again after a change.","record":"Record fixture height/position and canopy or reference-plane description."}
+    ],
+    "verification": ["All planned grid positions have a recorded value.", "Measurement plane and sensor orientation are documented.", "Units are PPFD units and are not confused with lux or fixture power."],
+    "records": ["date/time", "sensor identification", "fixture state", "measurement-plane height", "grid coordinates", "PPFD values", "minimum/maximum/average", "notes"],
+    "relatedRoutes": ["/learn/glossary#ppfd", "/learn/cultivation-science", "/learn/tools/light-measurement-grid"],
+    "limitations": ["A PPFD map describes the measured plane at that moment; it does not by itself describe leaf-level interception throughout a three-dimensional canopy."]
+  },
+  {
+    "slug": "dli-calculation-and-logging",
+    "title": "DLI Calculation & Logging",
+    "category": "Light measurement",
+    "purpose": "Convert a defined PPFD exposure over time into daily light integral while preserving the assumptions used in the calculation.",
+    "scope": "Use when PPFD and photoperiod are known or when integrating time-series photon-flux measurements.",
+    "frequency": "Recalculate when photoperiod, fixture output, target-plane PPFD, or light schedule changes materially.",
+    "tools": ["PPFD measurement or validated time-series data", "photoperiod duration", "calculator or worksheet", "record sheet"],
+    "preconditions": ["Confirm PPFD units are micromoles per square meter per second.", "Confirm the light-on duration represented by the calculation.", "Decide whether a single representative PPFD or a time series is appropriate for the question."],
+    "steps": [
+      {"title":"Record PPFD basis","action":"Document the PPFD value, spatial average, or time-series source being used.","record":"Record value/source, units, measurement plane, and method."},
+      {"title":"Record light duration","action":"Document the actual daily light-on duration represented by the calculation.","record":"Record hours per day and schedule notes."},
+      {"title":"Calculate","action":"For constant PPFD, calculate DLI as PPFD × light seconds per day ÷ 1,000,000. For changing PPFD, integrate the time series instead of using an unsupported constant assumption.","record":"Record calculation method and resulting mol m⁻² d⁻¹."},
+      {"title":"Check plausibility","action":"Confirm the result uses the intended photoperiod and photon-flux basis and that no unit conversion was omitted.","record":"Record reviewer/check status when used operationally."}
+    ],
+    "verification": ["PPFD source and photoperiod are both documented.", "The calculation converts seconds and micromoles to moles correctly.", "DLI is labeled with mol m⁻² d⁻¹ rather than PPFD units."],
+    "records": ["PPFD source", "photoperiod", "calculation method", "DLI", "date", "measurement plane", "notes"],
+    "relatedRoutes": ["/learn/glossary#daily-light-integral", "/learn/glossary#ppfd", "/learn/cultivation-science"],
+    "limitations": ["DLI summarizes photon exposure over a day; it does not preserve the timing or short-term intensity pattern that produced the total."]
+  },
+  {
+    "slug": "air-temperature-rh-sensor-check",
+    "title": "Air Temperature & RH Sensor Check",
+    "category": "Environment measurement",
+    "purpose": "Document sensor placement, agreement, and operating context so temperature and relative-humidity records can be interpreted as measurements rather than assumed room truth.",
+    "scope": "Use for fixed or portable air temperature and RH sensors used in plant environments.",
+    "frequency": "Check after installation, relocation, suspected drift, exposure to condensation or contamination, and at a routine interval appropriate to the sensor and monitoring importance.",
+    "tools": ["installed sensor", "trusted comparison sensor or calibration method", "location map", "record sheet"],
+    "preconditions": ["Avoid direct wetting or a placement that is known to be outside the intended measurement environment.", "Allow colocated sensors enough time to equilibrate before comparing readings."],
+    "steps": [
+      {"title":"Document placement","action":"Record sensor height, location relative to canopy or air sources, shielding, and any nearby heat or moisture source.","record":"Record location and placement description."},
+      {"title":"Inspect","action":"Check housing, vents, cables, batteries, and visible contamination or condensation.","record":"Record condition and maintenance."},
+      {"title":"Compare","action":"Colocate or otherwise compare against the defined reference method under a stable condition.","record":"Record sensor and reference temperature/RH values and time."},
+      {"title":"Evaluate difference","action":"Compare observed differences to the tolerance appropriate to the equipment and use case; do not silently offset data without a documented procedure.","record":"Record difference and pass/action decision."},
+      {"title":"Return to service","action":"Restore the sensor to its documented measurement location and confirm data logging resumes.","record":"Record completion and any configuration change."}
+    ],
+    "verification": ["Sensor location is documented and repeatable.", "Reference comparison has date/time and both values.", "Any correction, replacement, or maintenance action is traceable."],
+    "records": ["sensor ID", "location", "reference method", "temperature comparison", "RH comparison", "difference", "action", "operator", "notes"],
+    "relatedRoutes": ["/learn/glossary#relative-humidity", "/learn/glossary#microclimate", "/learn/atlas/environment-overlay/temperature-and-humidity"],
+    "limitations": ["Relative humidity is temperature-dependent; a sensor in a different microclimate can disagree without either sensor being defective."]
+  },
+  {
+    "slug": "leaf-temperature-measurement",
+    "title": "Leaf Temperature Measurement",
+    "category": "Environment measurement",
+    "purpose": "Collect repeatable leaf-temperature observations and the context needed to compare them with air conditions or use them in vapor-pressure analysis.",
+    "scope": "Use with a suitable infrared or contact method on defined leaves and canopy positions.",
+    "frequency": "Use during environmental characterization, lighting changes, VPD investigations, heat-stress investigations, or other studies where leaf-to-air temperature difference matters.",
+    "tools": ["appropriate infrared thermometer, thermal device, or contact sensor", "air temperature/RH measurement", "leaf/location labels", "record sheet"],
+    "preconditions": ["Know the instrument's distance, target-size, emissivity, or contact requirements.", "Avoid measuring a leaf surface that has just been handled, wetted, or shaded by the operator if that changes the intended condition."],
+    "steps": [
+      {"title":"Define sample positions","action":"Choose and label repeatable canopy positions or leaf classes rather than selecting only visually convenient leaves.","record":"Record plant/zone and leaf position."},
+      {"title":"Record air context","action":"Record nearby air temperature and RH at approximately the same time.","record":"Record air temperature, RH, sensor location, and time."},
+      {"title":"Measure leaf surface","action":"Use the device according to its targeting requirements and record a stable leaf-temperature value.","record":"Record leaf temperature and instrument/method."},
+      {"title":"Repeat","action":"Measure the planned number of positions and retain the individual values before summarizing them.","record":"Record each observation and any excluded measurement with reason."},
+      {"title":"Summarize","action":"Report the range and representative values together with the air measurements and canopy locations.","record":"Record summary and leaf-to-air differences when relevant."}
+    ],
+    "verification": ["Measurement method and target location are documented.", "Air temperature is measured close enough in time and space to support comparison.", "Individual leaf values remain available behind any average."],
+    "records": ["plant/zone", "leaf position", "leaf temperature", "air temperature", "RH", "instrument", "time", "notes"],
+    "relatedRoutes": ["/learn/glossary#leaf-temperature", "/learn/atlas/environment-overlay/leaf-temperature-vs-air-temperature", "/learn/atlas/environment-overlay/vpd-and-transpiration"],
+    "limitations": ["Infrared measurements depend on target size, viewing geometry, surface properties, and instrument configuration; a distant spot measurement can include background rather than only leaf tissue."]
+  },
+  {
+    "slug": "vpd-observation-record",
+    "title": "VPD Observation Record",
+    "category": "Environment measurement",
+    "purpose": "Create a transparent vapor-pressure-deficit record that preserves the temperature and humidity inputs rather than storing only a derived VPD number.",
+    "scope": "Use for plant-environment observation and comparison; retain whether the calculation uses air temperature alone or a leaf-temperature estimate/measurement.",
+    "frequency": "Use when characterizing climate periods, investigating water relations, or comparing environmental changes.",
+    "tools": ["air temperature/RH sensor", "leaf-temperature method when leaf-to-air VPD is required", "validated VPD calculation method", "record sheet"],
+    "preconditions": ["Confirm temperature and RH measurements represent the intended microclimate.", "Record whether leaf temperature is measured, estimated, or omitted."],
+    "steps": [
+      {"title":"Capture inputs","action":"Record air temperature, RH, time, and sensor location; record leaf temperature and leaf location when available.","record":"Preserve all raw inputs and units."},
+      {"title":"Choose calculation basis","action":"Document whether the value is air VPD or a leaf-to-air formulation and which temperature is used for saturation vapor pressure.","record":"Record calculation basis or tool/version."},
+      {"title":"Calculate","action":"Calculate VPD using the documented inputs and method.","record":"Record VPD and units alongside the raw inputs."},
+      {"title":"Interpret in context","action":"Compare values through time together with plant water status, light, airflow, and irrigation observations rather than treating VPD as a stand-alone diagnosis.","record":"Record relevant contextual observations."}
+    ],
+    "verification": ["Raw temperature and RH inputs accompany the derived VPD.", "Leaf temperature status is explicit.", "Units and calculation basis are recorded."],
+    "records": ["air temperature", "RH", "leaf temperature/status", "VPD", "calculation basis", "sensor locations", "time", "plant/context notes"],
+    "relatedRoutes": ["/learn/glossary#vapor-pressure-deficit", "/learn/atlas/environment-overlay/vpd-and-transpiration", "/learn/glossary#transpiration"],
+    "limitations": ["VPD is a physical environmental descriptor, not a diagnosis and not a complete model of stomatal behavior or plant water status."]
+  },
+  {
+    "slug": "plant-health-scouting-record",
+    "title": "Plant-Health Scouting Record",
+    "category": "Plant health & IPM",
+    "purpose": "Turn a plant-health inspection into a repeatable evidence record with location, distribution, progression, and negative findings instead of a symptom-only note.",
+    "scope": "Use for routine scouting and investigation of pests, disease signs, abiotic injury, and unexplained plant symptoms.",
+    "frequency": "Use on the program's routine scouting cadence and whenever a new symptom or exposure event is being investigated.",
+    "tools": ["scouting map or plant identifiers", "magnification appropriate to the inspection", "clean tools/PPE appropriate to site biosecurity", "camera when permitted", "record sheet"],
+    "preconditions": ["Follow site sanitation and movement rules before moving between plants or zones.", "Define the inspection route so healthy and affected areas are both represented."],
+    "steps": [
+      {"title":"Identify location","action":"Record room/zone, plant or bench identifiers, growth stage, and inspection time.","record":"Record exact location and crop context."},
+      {"title":"Describe pattern","action":"Describe which organs, canopy levels, ages of tissue, and spatial zones are affected before assigning a suspected cause.","record":"Record symptom location, distribution, and severity estimate."},
+      {"title":"Inspect for signs","action":"Look for insects, mites, eggs, frass, webbing, fungal growth, lesions, root abnormalities, or other discriminating evidence appropriate to the symptom.","record":"Record positive and important negative findings."},
+      {"title":"Capture context","action":"Record recent irrigation, environmental, chemical, handling, and propagation history that could explain an abiotic or exposure pattern.","record":"Record relevant changes/exposures and dates when known."},
+      {"title":"Set next evidence step","action":"Choose the next measurement, inspection, isolation, or diagnostic test that best separates the leading alternatives.","record":"Record ranked possibilities and next action without labeling an unconfirmed diagnosis as fact."}
+    ],
+    "verification": ["Record includes symptom location and distribution, not only a symptom name.", "At least one discriminating observation or next-step check is documented.", "Confirmed and suspected causes are clearly distinguished."],
+    "records": ["location/plant ID", "growth stage", "symptom pattern", "severity/distribution", "positive findings", "negative findings", "environment/root-zone context", "recent exposures", "photos", "ranked differential", "next check"],
+    "relatedRoutes": ["/learn/plant-health", "/learn/symptoms", "/learn/atlas/cases", "/learn/tools/pest-scouting-map"],
+    "limitations": ["Visual scouting alone cannot reliably confirm every pathogen, viroid, nutrient imbalance, or root-zone cause; laboratory or instrumented testing may be required."]
+  },
+  {
+    "slug": "incoming-plant-quarantine-intake",
+    "title": "Incoming Plant Quarantine Intake",
+    "category": "Plant health & biosecurity",
+    "purpose": "Preserve source, inspection, isolation, and testing records for incoming plant material before it is mixed with established plant populations.",
+    "scope": "Use for incoming live plants, cuttings, rooted clones, or other vegetative material subject to a quarantine program.",
+    "frequency": "Every incoming lot or source event before release into the main plant area.",
+    "tools": ["intake identifiers", "designated isolation area", "inspection/magnification tools", "clean handling supplies", "testing records when used", "intake form"],
+    "preconditions": ["Prepare the isolation area before material arrives.", "Keep source lots traceable and physically separated as required by the program.", "Follow local rules and site-specific plant-health requirements."],
+    "steps": [
+      {"title":"Assign identity","action":"Assign lot/plant identifiers and record source, cultivar/project name as supplied, arrival date, and quantity.","record":"Record traceability information without rewriting source claims as verified genetics."},
+      {"title":"Inspect on entry","action":"Inspect foliage, stems, growing points, media/root zone when visible, and packaging for pest or disease evidence.","record":"Record findings, photos, and any rejected material."},
+      {"title":"Isolate","action":"Move material into the designated quarantine area and avoid shared tools, runoff, contact, or traffic patterns that defeat isolation.","record":"Record quarantine location and start time/date."},
+      {"title":"Monitor and test","action":"Perform the observation and testing plan defined by the site's biosecurity program before release.","record":"Record scouting dates, tests, results, and unresolved findings."},
+      {"title":"Release or reject","action":"Document the authorized decision to release, extend quarantine, treat under an approved plan, or reject/dispose according to site rules.","record":"Record decision, basis, date, and responsible person."}
+    ],
+    "verification": ["Every incoming lot has a unique traceable identity.", "Quarantine start and release/rejection decision are documented.", "Required scouting or testing records are complete before release."],
+    "records": ["source", "arrival date", "lot/plant IDs", "supplied genetics label", "initial inspection", "quarantine location", "scouting/tests", "release decision", "decision date", "notes"],
+    "relatedRoutes": ["/learn/plant-health/sanitation-and-biosecurity", "/learn/tools/incoming-plant-quarantine", "/learn/glossary#biosecurity"],
+    "limitations": ["Quarantine reduces risk but does not prove freedom from every latent or undetectable pest/pathogen; testing capability and release criteria must match the risks being managed."]
+  },
+  {
+    "slug": "root-zone-moisture-irrigation-observation",
+    "title": "Root-Zone Moisture & Irrigation Observation",
+    "category": "Water & root zone",
+    "purpose": "Create a repeatable irrigation/root-zone record that connects water delivery, substrate condition, plant response, and measurement method without treating one moisture number as universal.",
+    "scope": "Use for container or bed observations where irrigation timing and root-zone water status are being compared over time.",
+    "frequency": "At defined observation points around irrigation events or during a diagnostic study.",
+    "tools": ["irrigation volume or duration record", "defined substrate moisture method or sensor when used", "container/zone identifiers", "drainage/runoff observation when relevant", "record sheet"],
+    "preconditions": ["Define the moisture measurement method and sensor placement before comparing readings.", "Record substrate/container type because water content and aeration behavior are method- and media-dependent."],
+    "steps": [
+      {"title":"Record pre-irrigation state","action":"Record time since prior irrigation, substrate moisture indicator, container mass or other defined method, and visible plant water-status observations.","record":"Record method, value, units, and plant observations."},
+      {"title":"Record irrigation event","action":"Record start time, delivered amount or duration, solution identity, and any relevant EC/pH measurement performed under its own validated method.","record":"Record event details and linked measurement IDs."},
+      {"title":"Observe drainage and response","action":"Record drainage timing/amount when relevant and any immediate evidence of channeling, pooling, slow infiltration, or uneven wetting.","record":"Record qualitative and measured drainage observations."},
+      {"title":"Record post-irrigation state","action":"At the planned interval, repeat the same moisture method and plant/root-zone observations.","record":"Record value, units, elapsed time, and observations."},
+      {"title":"Compare through time","action":"Use repeated records to evaluate dryback and consistency within the same substrate/container/method context.","record":"Record trends and changes without imposing an unsupported universal target."}
+    ],
+    "verification": ["Pre- and post-irrigation observations use the same stated method when compared.", "Container/substrate and sensor location are documented.", "Irrigation event details can be linked to the measured response."],
+    "records": ["zone/plant ID", "substrate/container", "measurement method", "pre-irrigation value", "irrigation amount/duration", "solution ID", "drainage observation", "post-irrigation value", "elapsed time", "plant response", "notes"],
+    "relatedRoutes": ["/learn/glossary#dryback", "/learn/glossary#substrate", "/learn/plant-health/root-zone-hypoxia-and-waterlogging", "/learn/atlas/root-system/water-and-nutrient-uptake"],
+    "limitations": ["Sensor values and dryback percentages are not automatically comparable across substrate types, sensor technologies, container geometry, or root occupancy."]
+  }
+]
