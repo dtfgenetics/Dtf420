@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import type { Game } from "phaser";
 import { startBurnBuds } from "@/game/burn-buds/main";
+import styles from "./BurnBudsGame.module.css";
 
 const GAME_PARENT_ID = "burn-buds-game";
 
@@ -21,9 +22,8 @@ export function BurnBudsGame() {
   }, []);
 
   return (
-    <div className="game-shell">
-      <div id={GAME_PARENT_ID} className="game-canvas" aria-label="Burn Buds game canvas" />
-      <p className="game-note">Engine check: responsive Phaser canvas · 15 × 15 board · client-only runtime</p>
+    <div className={styles.shell}>
+      <div id={GAME_PARENT_ID} className={styles.canvas} aria-label="Burn Buds 15 by 15 board preview" />
     </div>
   );
 }
