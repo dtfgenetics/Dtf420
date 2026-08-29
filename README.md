@@ -1,20 +1,28 @@
-# DTF420
+# DTF Genetics Web Platform
 
-New application codebase for the DTF420 platform.
+Production application repository for the DTF Genetics / Dream the Future web ecosystem served under `dtfseeds.com`.
 
-## Status
+## Current scope
 
-Bootstrap validation in progress. The current milestone proves that Next.js, TypeScript, and Phaser can build together cleanly before full Burn Buds gameplay, multiplayer, education, tools, or content migration are added.
+This is no longer a framework bootstrap. The repository contains the shared Next.js application for:
 
-The bootstrap branch is verified by GitHub Actions before it can be considered for merge.
+- Genetics project records and seed-reference pages
+- Teaching Healthy Cultivation education, Academy, Living Plant Atlas, diagnostics, evidence sources, and printable learning tools
+- GrowLens, Grow Doc, and related cultivation tools
+- Browser games, including Bud or Bluff and Burn Buds
+- Community, Journal, About, and Contact surfaces
+- SEO metadata, redirects, robots, and sitemap generation
+
+Incomplete or experimental features should remain clearly separated from public playable or production-facing routes.
 
 ## Stack
 
 - Node.js 22
-- Next.js 16
+- Next.js 16.3.3
 - React 19
 - TypeScript
-- Phaser 4
+- Phaser 4 for Phaser-based browser games
+- Playwright for desktop/mobile browser QA
 
 ## Local commands
 
@@ -24,12 +32,15 @@ npm run dev
 npm run verify
 ```
 
-`npm run verify` runs ESLint, TypeScript checking, and a production Next.js build.
+`npm run verify` runs the repository's content and data-integrity checks, game/Atlas/education verification, ESLint, TypeScript checking, and a production Next.js build.
 
-## Project boundaries
+Browser QA is maintained separately through the Playwright workflow and must also pass before production cutover.
 
-- DTF420 owns games, education, tools, and community features.
-- DTFSeeds remains a separate repository and production site.
-- Multiplayer WebSocket hosting will be a separate service; it will not be embedded into Hostinger Business Web Hosting.
+## Architecture boundaries
 
-See `docs/ARCHITECTURE.md` and `docs/DEPLOYMENT.md`.
+- This repository is the web application source of truth for the unified DTF Genetics site experience.
+- The canonical production origin is `https://dtfseeds.com`.
+- Authoritative real-time multiplayer infrastructure, when required, should run as a separate service rather than being embedded in basic web hosting.
+- Secrets and hosting credentials must not be committed to the repository.
+
+See `docs/ARCHITECTURE.md`, `docs/DEPLOYMENT.md`, and `docs/UPDATE-POLICY.md` for operational details.
