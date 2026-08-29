@@ -24,7 +24,7 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px 12px;
-  background: var(--background);
+  background: var(--bg);
   color: inherit;
   font: inherit;
 }
@@ -34,7 +34,7 @@
   min-width: 110px;
   padding: 10px 14px;
   border-radius: 12px;
-  background: var(--background);
+  background: var(--bg);
 }
 
 .resultCount strong {
