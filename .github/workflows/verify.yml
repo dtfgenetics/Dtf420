@@ -38,6 +38,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Verify Bud or Bluff data
+        run: npm run verify:bud-or-bluff
+
       - name: Verify Atlas assets
         run: npm run verify:atlas-assets
 
