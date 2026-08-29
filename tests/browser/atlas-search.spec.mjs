@@ -37,8 +37,11 @@ test("Atlas search finds exact lessons, diagnostic cases, and tools", async ({ p
 test("Atlas search provides examples and a useful no-results state", async ({ page }) => {
   const search = await openSearch(page);
 
-  await page.getByRole("button", { name: "trichomes", exact: true }).click();
-  await expect(search).toHaveValue("trichomes");
+  await page.getByRole("button", { name: "edema", exact: true }).click();
+  await expect(search).toHaveValue("edema");
+  await expect(page.locator('section[aria-label="Atlas search results"]')).toContainText(/edema/i);
+
+  await search.fill("trichomes");
   await expect(page.locator('section[aria-label="Atlas search results"]')).toContainText("Trichome types");
 
   await search.fill("xyzzynothing");
