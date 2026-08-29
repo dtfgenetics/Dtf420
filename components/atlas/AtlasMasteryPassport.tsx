@@ -10,9 +10,10 @@ const PASS_SCORE = 80;
 
 export function AtlasMasteryPassport() {
   const { mastery } = useAtlasMastery();
+  const lessonCount = atlasKnowledgeChecks.length;
   const masteredChecks = Object.values(mastery.lessons).filter((record) => record.mastered).length;
   const unlockedPathBadges = badges.filter((badge) => (mastery.paths[badge.id]?.bestScore ?? 0) >= PASS_SCORE).length;
-  const atlasBadgeUnlocked = masteredChecks === atlasKnowledgeChecks.length;
+  const atlasBadgeUnlocked = masteredChecks === lessonCount;
   const totalUnlocked = unlockedPathBadges + (atlasBadgeUnlocked ? 1 : 0);
   const totalBadges = badges.length + 1;
 
@@ -23,13 +24,13 @@ export function AtlasMasteryPassport() {
           <p>Atlas Mastery Passport</p>
           <h1>Build proof of what you understand.</h1>
           <span>
-            Path badges unlock at a best mastery-quiz score of {PASS_SCORE}% or higher. The whole-Atlas badge unlocks after all {atlasKnowledgeChecks.length} lesson checks are mastered.
+            Path badges unlock at a best mastery-quiz score of {PASS_SCORE}% or higher. The whole-Atlas badge unlocks after all {lessonCount} lesson checks are mastered.
           </span>
         </div>
         <div className={styles.totals}>
           <strong>{totalUnlocked}/{totalBadges}</strong>
           <span>badges unlocked</span>
-          <small>{masteredChecks}/{atlasKnowledgeChecks.length} lesson checks mastered</small>
+          <small>{masteredChecks}/{lessonCount} lesson checks mastered</small>
         </div>
       </section>
 
@@ -69,17 +70,17 @@ export function AtlasMasteryPassport() {
 
       <section className={atlasBadgeUnlocked ? styles.finalBadgeUnlocked : styles.finalBadgeLocked} aria-label="Whole Atlas mastery badge">
         <div className={styles.finalMark} aria-hidden="true">
-          <span>50</span>
+          <span>{lessonCount}</span>
           <small>ATLAS</small>
         </div>
         <div>
           <small>Whole-Atlas achievement</small>
           <h2>Living Plant Atlas Mastery</h2>
-          <p>Master all 50 lesson knowledge checks across seed biology, roots, transport, architecture, leaves, flowers, trichomes, reproduction, environment, and diagnostics.</p>
+          <p>Master all {lessonCount} lesson knowledge checks across seed biology, roots, transport, architecture, leaves, flowers, trichomes, reproduction, environment, and diagnostics.</p>
         </div>
         <div className={styles.finalStatus}>
-          <strong>{atlasBadgeUnlocked ? "Unlocked ✓" : `${masteredChecks}/${atlasKnowledgeChecks.length}`}</strong>
-          <span>{atlasBadgeUnlocked ? "All lesson checks mastered" : `${atlasKnowledgeChecks.length - masteredChecks} checks remaining`}</span>
+          <strong>{atlasBadgeUnlocked ? "Unlocked ✓" : `${masteredChecks}/${lessonCount}`}</strong>
+          <span>{atlasBadgeUnlocked ? "All lesson checks mastered" : `${lessonCount - masteredChecks} checks remaining`}</span>
           <Link href="/learn/atlas">{atlasBadgeUnlocked ? "Review the Atlas" : "Continue mastering lessons"}</Link>
         </div>
       </section>
