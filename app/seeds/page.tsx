@@ -14,7 +14,7 @@ export default function GeneticsPage() {
       <p className="eyebrow">DTF Genetics · Breeding library</p>
       <h1>Genetics</h1>
       <p className="lede">
-        This library is for permanent breeding records, not only products that happen to be available today. Each DTF project should preserve parentage, generation history, selection goals, phenotype observations, photographs, related projects, and release status in one traceable record.
+        Permanent breeding records for DTF genetics projects. Open a project to review its parentage, generation history, documented selection direction, related DTF families, and dated milestones where those records are established.
       </p>
 
       <div className="card-grid" style={{ marginTop: 34 }}>
@@ -32,9 +32,9 @@ export default function GeneticsPage() {
       <section className="section" aria-labelledby="genetics-record-standard">
         <div className="section-heading">
           <p className="eyebrow">Record standard</p>
-          <h2 id="genetics-record-standard">Every project needs a complete history.</h2>
+          <h2 id="genetics-record-standard">Lineage history stays separate from inventory.</h2>
           <p className="lede">
-            These permanent project URLs are designed to expand with parent profiles, generation-by-generation notes, selection criteria, phenotype observations, flowering and structure notes, photo documentation, related offspring, packaging references, release history, and clear current status without losing the underlying lineage record.
+            A genetics page remains a permanent reference even when a seed release is not currently available. Planned generation directions are labeled separately from established project records, and observations are published only when they are documented rather than inferred from a parent name or cross.
           </p>
         </div>
       </section>

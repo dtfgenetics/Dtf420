@@ -12,10 +12,71 @@
       "Strong branching",
       "Heavy resin production"
     ],
+    "selectionFocus": [
+      "Preserve vigorous plant growth and strong lateral branching",
+      "Maintain heavy resin expression",
+      "Select toward the documented candy-blueberry and ripe-mango aromatic direction"
+    ],
+    "parentRoles": [
+      {
+        "name": "Somango XXL",
+        "role": "Maternal parent"
+      },
+      {
+        "name": "Blueberry Butcher",
+        "role": "Paternal parent"
+      }
+    ],
+    "generationHistory": [
+      {
+        "label": "F1",
+        "status": "Foundation cross recorded",
+        "notes": "Somango XXL × Blueberry Butcher established the Blue Mango family."
+      },
+      {
+        "label": "F2",
+        "status": "Regular and feminized directions documented",
+        "notes": "The project record includes both regular and feminized F2 work."
+      },
+      {
+        "label": "F3",
+        "status": "Regular and feminized directions documented",
+        "notes": "The project record continues through regular and feminized F3 directions."
+      },
+      {
+        "label": "F4",
+        "status": "Later-generation project direction",
+        "notes": "Regular and feminized F4 work is identified in the project plan; this record does not assert a release date or completion state that has not been documented."
+      },
+      {
+        "label": "F5",
+        "status": "Regular-line project direction",
+        "notes": "Regular F5 continuation is identified in the project plan; release and selection details remain separate from the permanent lineage record."
+      }
+    ],
+    "relatedProjects": [
+      {
+        "name": "Mango Bubbles",
+        "slug": "mango-bubbles",
+        "relationship": "Blue Mango is one of the two documented parents."
+      },
+      {
+        "name": "Blueberry Butcher",
+        "slug": "blueberry-butcher",
+        "relationship": "Foundational paternal parent of Blue Mango."
+      }
+    ],
+    "milestones": [
+      {
+        "date": null,
+        "label": "Multi-generation preservation",
+        "detail": "The permanent record tracks Blue Mango from the foundation cross through documented F2/F3 work and later-generation project directions."
+      }
+    ],
     "breedingNotes": [
       "Documented through multiple filial generations.",
       "F2 and F3 work includes both regular and feminized directions.",
-      "Later generation work continues the DTF selection and preservation program."
+      "Later-generation work continues the DTF selection and preservation program."
     ]
   },
   {
@@ -27,6 +88,43 @@
     "floweringWindow": null,
     "aromaticDirection": null,
     "traits": [],
+    "selectionFocus": [],
+    "parentRoles": [
+      {
+        "name": "Blue Mango",
+        "role": "Documented parent"
+      },
+      {
+        "name": "Blue Bubblegum",
+        "role": "Documented parent"
+      }
+    ],
+    "generationHistory": [
+      {
+        "label": "Foundation cross",
+        "status": "Parentage recorded",
+        "notes": "The permanent project record preserves the cross as Blue Mango × Blue Bubblegum."
+      }
+    ],
+    "relatedProjects": [
+      {
+        "name": "Blue Mango",
+        "slug": "blue-mango",
+        "relationship": "Documented parent line."
+      },
+      {
+        "name": "Blue Bubblegum",
+        "slug": "blue-bubblegum",
+        "relationship": "Documented parent line."
+      }
+    ],
+    "milestones": [
+      {
+        "date": "2026-06-15",
+        "label": "Project name locked",
+        "detail": "The Blue Mango × Blue Bubblegum project name was standardized as Mango Bubbles."
+      }
+    ],
     "breedingNotes": [
       "The project name is locked as Mango Bubbles.",
       "Parentage is preserved as Blue Mango × Blue Bubblegum."
@@ -41,6 +139,37 @@
     "floweringWindow": null,
     "aromaticDirection": null,
     "traits": [],
+    "selectionFocus": [],
+    "parentRoles": [
+      {
+        "name": "Bubblegum Kush",
+        "role": "Maternal parent"
+      },
+      {
+        "name": "Blueberry Butcher",
+        "role": "Paternal parent"
+      }
+    ],
+    "generationHistory": [
+      {
+        "label": "Foundation cross",
+        "status": "Parentage recorded",
+        "notes": "Bubblegum Kush × Blueberry Butcher establishes the documented Blue Bubblegum lineage."
+      }
+    ],
+    "relatedProjects": [
+      {
+        "name": "Mango Bubbles",
+        "slug": "mango-bubbles",
+        "relationship": "Blue Bubblegum is one of the two documented parents."
+      },
+      {
+        "name": "Blueberry Butcher",
+        "slug": "blueberry-butcher",
+        "relationship": "Foundational paternal parent of Blue Bubblegum."
+      }
+    ],
+    "milestones": [],
     "breedingNotes": [
       "Blueberry Butcher is the documented breeding parent on the paternal side of this cross."
     ]
@@ -54,6 +183,37 @@
     "floweringWindow": null,
     "aromaticDirection": null,
     "traits": [],
+    "selectionFocus": [],
+    "parentRoles": [
+      {
+        "name": "Blueberry Muffin",
+        "role": "Documented parent"
+      },
+      {
+        "name": "Jack Herer",
+        "role": "Documented parent"
+      }
+    ],
+    "generationHistory": [
+      {
+        "label": "Foundation lineage",
+        "status": "Parentage recorded",
+        "notes": "Blueberry Muffin × Jack Herer is preserved as the documented Blueberry Butcher parentage."
+      }
+    ],
+    "relatedProjects": [
+      {
+        "name": "Blue Mango",
+        "slug": "blue-mango",
+        "relationship": "Blueberry Butcher is the documented paternal parent."
+      },
+      {
+        "name": "Blue Bubblegum",
+        "slug": "blue-bubblegum",
+        "relationship": "Blueberry Butcher is the documented paternal parent."
+      }
+    ],
+    "milestones": [],
     "breedingNotes": [
       "Documented parentage is Blueberry Muffin × Jack Herer.",
       "The line appears as a parent in both Blue Mango and Blue Bubblegum."
