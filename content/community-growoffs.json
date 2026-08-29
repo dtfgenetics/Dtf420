@@ -1,0 +1,78 @@
+[
+  {
+    "slug": "solo-cup-grow-off",
+    "title": "THC Solo Cup Grow-Off",
+    "status": "Permanent rules reference",
+    "summary": "A compact-container indoor grow-off built around consistent weekly documentation and a fixed event-format schedule.",
+    "tagline": null,
+    "editionNotice": "These are the permanent format rules and schedule markers. A year-specific announcement determines whether an edition is currently open and supplies that edition's calendar year and final results.",
+    "rules": [
+      "Use a 500 mL cup or a 16–18 oz cup as the grow container.",
+      "Indoor grows only.",
+      "Post at least one qualifying plant photo each week.",
+      "Maintain a grow diary or dedicated Discord grow thread.",
+      "Do not use blurple-only lighting for required documentation photos.",
+      "Any strain may be entered.",
+      "Autoflowers are allowed, but the event format does not recommend them."
+    ],
+    "timeline": [
+      {
+        "label": "Event start",
+        "dateLabel": "April 20",
+        "detail": "The locked event format begins on 4/20."
+      },
+      {
+        "label": "Seedling window",
+        "dateLabel": "First 14 days",
+        "detail": "The format reserves roughly two weeks for early seedling establishment."
+      },
+      {
+        "label": "Vegetative window",
+        "dateLabel": "About 28 days",
+        "detail": "The standard schedule provides roughly four weeks of vegetative growth before the flip target."
+      },
+      {
+        "label": "Flip target",
+        "dateLabel": "June 1",
+        "detail": "June 1 is the locked photoperiod-flip target in the event format."
+      },
+      {
+        "label": "Flower window",
+        "dateLabel": "About 70 days",
+        "detail": "The standard format allows roughly ten weeks for flowering after the flip target."
+      },
+      {
+        "label": "Last-harvest target",
+        "dateLabel": "August 10",
+        "detail": "August 10 is the last-harvest marker in the locked schedule."
+      },
+      {
+        "label": "Winner announcement target",
+        "dateLabel": "September 1",
+        "detail": "The standard event format places the winner announcement on September 1."
+      }
+    ],
+    "judging": [
+      "Top three placements are selected through community voting with staff review."
+    ]
+  },
+  {
+    "slug": "freebie-grow-off",
+    "title": "Freebie Grow-Off",
+    "status": "Permanent rules reference",
+    "summary": "A low-barrier community grow-off built around actually running the free seed that has been sitting in the collection.",
+    "tagline": "That freebie you forgot about might be the one.",
+    "editionNotice": "This page preserves the locked participation rule. A year-specific announcement determines the active edition, calendar year, judging details, and final results.",
+    "rules": [
+      "Start the qualifying grow log in Discord by December 1 for the announced edition."
+    ],
+    "timeline": [
+      {
+        "label": "Grow-log deadline",
+        "dateLabel": "December 1",
+        "detail": "The qualifying Discord grow log must be started by the edition's December 1 deadline."
+      }
+    ],
+    "judging": []
+  }
+]
