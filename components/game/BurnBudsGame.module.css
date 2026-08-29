@@ -1,0 +1,69 @@
+.shell {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(183, 226, 93, 0.12);
+  border-radius: 18px;
+  background: #06100a;
+}
+
+.canvas {
+  width: 100%;
+  min-height: 360px;
+  overflow: hidden;
+}
+
+.canvas canvas {
+  display: block;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.loading {
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(183, 226, 93, 0.09), transparent 18rem),
+    #06100a;
+  color: #aab8ae;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loading::before {
+  content: "";
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  border: 3px solid rgba(183, 226, 93, 0.18);
+  border-top-color: #b7e25d;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.loadingInner {
+  display: flex;
+  align-items: center;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 620px) {
+  .canvas {
+    min-height: 280px;
+  }
+
+  .loading {
+    min-height: 320px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading::before {
+    animation: none;
+  }
+}
