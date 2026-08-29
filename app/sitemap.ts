@@ -36,6 +36,7 @@ function item(path: string, priority: number, changeFrequency: MetadataRoute.Sit
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     item("/", 1, "weekly"),
+    item("/seeds", 0.95, "weekly"),
     item("/learn", 0.95, "weekly"),
     item("/learn/academy", 0.92, "weekly"),
     item("/learn/search", 0.85, "weekly"),
@@ -50,9 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/learn/atlas/review", 0.75, "monthly"),
     item("/learn/atlas/mastery", 0.7, "monthly"),
     item("/learn/atlas/paths", 0.75, "monthly"),
+    item("/tools", 0.85, "weekly"),
+    item("/tools/growlens", 0.78, "monthly"),
+    item("/tools/grow-doc", 0.78, "monthly"),
     item("/games", 0.8, "weekly"),
-    item("/tools", 0.75, "monthly"),
     item("/community", 0.7, "monthly"),
+    item("/journal", 0.72, "weekly"),
   ];
 
   const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
