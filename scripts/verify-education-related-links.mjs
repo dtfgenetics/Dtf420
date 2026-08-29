@@ -19,6 +19,7 @@ function slugify(value) {
 const plantHealth = [
   ...readJson("plant-health-library.json"),
   ...readJson("plant-health-expanded.json"),
+  ...readJson("plant-health-abiotic-expanded.json"),
 ];
 const cultivation = [
   ...readJson("cultivation-science-library.json"),
@@ -30,7 +31,10 @@ const cultivation = [
   ...readJson("plant-physiology-expanded.json"),
   ...readJson("propagation-nutrition-genetics-expanded.json"),
 ];
-const symptoms = readJson("symptom-differential-library.json");
+const symptoms = [
+  ...readJson("symptom-differential-library.json"),
+  ...readJson("symptom-differential-expanded.json"),
+];
 const tools = readJson("learning-tools.json");
 const academyCourses = readJson("academy-courses.json");
 const atlasModules = readJson("atlas-learning-modules.json");
