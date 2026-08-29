@@ -65,6 +65,9 @@ jobs:
       - name: Verify education evidence sources
         run: npm run verify:education-sources
 
+      - name: Verify education glossary
+        run: npm run verify:education-glossary
+
       - name: Verify THC Academy routes
         run: npm run verify:academy
 
