@@ -31,10 +31,23 @@ type PlayerStats = {
 
 const TIMER_SECONDS = 20;
 const STATS_KEY = "dtf-bud-or-bluff-stats-v1";
+const GAME_SHELL_ID = "bud-or-bluff-game";
 
 function playerAccuracy(player?: PlayerStats) {
   if (!player?.answered) return 0;
   return Math.round((player.correct / player.answered) * 100);
+}
+
+function focusGameShell() {
+  window.requestAnimationFrame(() => {
+    const game = document.getElementById(GAME_SHELL_ID);
+    if (!game) return;
+
+    const header = document.querySelector<HTMLElement>("header");
+    const headerHeight = header?.getBoundingClientRect().height ?? 0;
+    const target = game.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+    window.scrollTo({ top: Math.max(0, target), behavior: "auto" });
+  });
 }
 
 export default function BudOrBluffGame() {
@@ -130,6 +143,7 @@ export default function BudOrBluffGame() {
     if (!revealed) return;
     if (roundIndex + 1 >= deck.length) {
       setPhase("finished");
+      focusGameShell();
       return;
     }
 
@@ -141,6 +155,7 @@ export default function BudOrBluffGame() {
     setTimeLeft(TIMER_SECONDS);
     setQuitArmed(false);
     setTurnReady(playerStats.length <= 1);
+    focusGameShell();
   }, [deck.length, playerStats.length, revealed, roundIndex]);
 
   useEffect(() => {
@@ -172,9 +187,20 @@ export default function BudOrBluffGame() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [advanceRound, phase, resolveGuess, revealed, turnReady]);
 
+  const availableForFilter = useMemo(
+    () => budOrBluffCards.filter((card) => difficulty === "All" || card.difficulty === difficulty).length,
+    [difficulty],
+  );
+
+  const cappedRoundCount = Math.min(roundCount, availableForFilter);
+  const fairRoundCount = useMemo(() => {
+    if (players.length <= 1 || availableForFilter < players.length) return cappedRoundCount;
+    return Math.max(players.length, Math.floor(cappedRoundCount / players.length) * players.length);
+  }, [availableForFilter, cappedRoundCount, players.length]);
+
   const startGame = () => {
     const normalizedPlayers = players.map((name, index) => name.trim() || `Player ${index + 1}`);
-    const nextDeck = buildBalancedDeck(budOrBluffCards, roundCount, difficulty);
+    const nextDeck = buildBalancedDeck(budOrBluffCards, fairRoundCount, difficulty);
 
     setPlayers(normalizedPlayers);
     setDeck(nextDeck);
@@ -195,6 +221,7 @@ export default function BudOrBluffGame() {
     setTurnReady(true);
     setQuitArmed(false);
     setPhase("playing");
+    focusGameShell();
   };
 
   const resetToSetup = () => {
@@ -205,6 +232,7 @@ export default function BudOrBluffGame() {
     setPointsAwarded(0);
     setRevealed(false);
     setQuitArmed(false);
+    focusGameShell();
   };
 
   const addPlayer = () => {
@@ -217,11 +245,6 @@ export default function BudOrBluffGame() {
     setPlayers((previous) => previous.filter((_, playerIndex) => playerIndex !== index));
   };
 
-  const availableForFilter = useMemo(
-    () => budOrBluffCards.filter((card) => difficulty === "All" || card.difficulty === difficulty).length,
-    [difficulty],
-  );
-
   const sessionAnswered = playerStats.reduce((total, player) => total + player.answered, 0);
   const sessionCorrect = playerStats.reduce((total, player) => total + player.correct, 0);
   const sessionAccuracy = sessionAnswered ? Math.round((sessionCorrect / sessionAnswered) * 100) : 0;
@@ -232,7 +255,7 @@ export default function BudOrBluffGame() {
 
   if (phase === "setup") {
     return (
-      <div className={styles.gameFrame}>
+      <div id={GAME_SHELL_ID} className={styles.gameFrame}>
         <div className={styles.setupGrid}>
           <section className={styles.panel}>
             <p className={styles.kicker}>Players</p>
@@ -283,7 +306,14 @@ export default function BudOrBluffGame() {
             </label>
             <div className={styles.poolReadout}>
               <strong>{budOrBluffPoolStats.total}</strong> curated cards · <strong>{budOrBluffPoolStats.bud}</strong> real · <strong>{budOrBluffPoolStats.bluff}</strong> bluff
-              <small>{availableForFilter} cards match this difficulty.{roundCount > availableForFilter ? ` The session will use all ${availableForFilter}.` : ""}</small>
+              <small>
+                {availableForFilter} cards match this difficulty.
+                {fairRoundCount < cappedRoundCount
+                  ? ` This setup will use ${fairRoundCount} cards so every player gets the same number of turns.`
+                  : roundCount > availableForFilter
+                    ? ` The session will use all ${availableForFilter}.`
+                    : ""}
+              </small>
             </div>
             <button className={styles.primaryButton} type="button" onClick={startGame}>Start game</button>
           </section>
@@ -301,15 +331,15 @@ export default function BudOrBluffGame() {
 
   if (phase === "finished") {
     return (
-      <div className={styles.gameFrame}>
+      <div id={GAME_SHELL_ID} className={styles.gameFrame}>
         <section className={`${styles.panel} ${styles.finishPanel}`}>
           <p className={styles.kicker}>Session complete</p>
           <h2>{winners.length === 1 ? `${winners[0].name} wins` : `${winners.map((player) => player.name).join(" & ")} tie`}</h2>
           <p className={styles.finishCopy}>{sessionCorrect}/{sessionAnswered} correct overall · {sessionAccuracy}% accuracy</p>
 
           <div className={styles.finalScores}>
-            {[...playerStats].sort((a, b) => b.score - a.score).map((player) => (
-              <div className={styles.finalScore} key={player.name}>
+            {[...playerStats].sort((a, b) => b.score - a.score).map((player, index) => (
+              <div className={styles.finalScore} key={`${player.name}-${index}`}>
                 <div><strong>{player.name}</strong><small>{player.correct}/{player.answered} correct · best streak {player.bestStreak}</small></div>
                 <span>{player.score} pts</span>
               </div>
@@ -332,7 +362,7 @@ export default function BudOrBluffGame() {
 
   if (!turnReady) {
     return (
-      <div className={styles.gameFrame}>
+      <div id={GAME_SHELL_ID} className={styles.gameFrame}>
         <section className={styles.handoffPanel}>
           <p className={styles.kicker}>Pass the device</p>
           <h2>{currentPlayer.name}, you’re up.</h2>
@@ -345,7 +375,7 @@ export default function BudOrBluffGame() {
   }
 
   return (
-    <div className={styles.gameFrame}>
+    <div id={GAME_SHELL_ID} className={styles.gameFrame}>
       <div className={styles.topBar}>
         <div><span>Round</span><strong>{roundIndex + 1}/{deck.length}</strong></div>
         <div><span>Up now</span><strong>{currentPlayer.name}</strong></div>
