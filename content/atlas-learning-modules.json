@@ -2,9 +2,9 @@
   {
     "id": "seed_germination",
     "label": "Seed & Germination",
-    "learningGoals": ["Identify external and internal seed structures", "Follow imbibition through radicle emergence", "Recognize healthy cotyledon transition", "Separate environmental failure points from seed viability problems"],
+    "learningGoals": ["Distinguish the achene fruit wall from the true seed and embryo tissues", "Follow imbibition through radicle emergence", "Recognize healthy cotyledon transition", "Separate seed viability questions from environmental failure patterns"],
     "lessons": [
-      {"title":"Seed anatomy","summary":"Locate the seed coat, embryo, cotyledon tissue, radicle, and micropyle and connect each structure to germination.","visual":"Cutaway seed anatomy plate"},
+      {"title":"Seed anatomy","summary":"Distinguish the whole cannabis achene from the true seed and locate the pericarp, seed coat, residual peripheral endosperm, cotyledons, radicle, hypocotyl region, and plumule.","visual":"Achene and true-seed longitudinal cutaway"},
       {"title":"Imbibition","summary":"See how water uptake rehydrates seed tissues and restarts metabolic activity before visible germination.","visual":"Hydration sequence diagram"},
       {"title":"Radicle emergence","summary":"Follow the radicle as the first root organ emerges and establishes the direction of early seedling growth.","visual":"Time-sequence germination strip"},
       {"title":"Cotyledon transition","summary":"Track emergence from the seed shell through cotyledon opening and the first true leaves.","visual":"Seedling transition timeline"},
