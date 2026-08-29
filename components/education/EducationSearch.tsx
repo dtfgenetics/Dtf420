@@ -18,7 +18,8 @@ import propagationNutritionGenetics from "@/content/propagation-nutrition-geneti
 import symptomCore from "@/content/symptom-differential-library.json";
 import symptomExpanded from "@/content/symptom-differential-expanded.json";
 import learningTools from "@/content/learning-tools.json";
-import evidenceSources from "@/content/education-sources.json";
+import coreEvidenceSources from "@/content/education-sources.json";
+import abioticEvidenceSources from "@/content/education-sources-abiotic.json";
 import styles from "./EducationSearch.module.css";
 
 type SearchKind = "Academy course" | "Atlas lesson" | "Plant health" | "Cultivation science" | "Symptom differential" | "Printable tool" | "Evidence source";
@@ -117,6 +118,7 @@ const toolItems: SearchItem[] = learningTools.map((item) => ({
   terms: item.sections.flatMap((section) => [section.title, ...section.fields]).join(" "),
 }));
 
+const evidenceSources = [...coreEvidenceSources, ...abioticEvidenceSources];
 const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
   kind: "Evidence source" as const,
   title: source.title,
