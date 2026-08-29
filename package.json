@@ -26,7 +26,8 @@
     "verify:education-links": "node scripts/verify-education-related-links.mjs",
     "verify:education-sources": "node scripts/verify-education-sources.mjs",
     "verify:academy": "node scripts/verify-academy.mjs",
-    "verify": "npm run verify:bud-or-bluff && npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:academy && npm run lint && npm run typecheck && npm run build"
+    "verify:routes": "node scripts/verify-internal-routes.mjs",
+    "verify": "npm run verify:bud-or-bluff && npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:academy && npm run verify:routes && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.3",
