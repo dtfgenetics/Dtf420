@@ -57,17 +57,19 @@ test("Bud or Bluff protects an active session from accidental quit", async ({ pa
   await expect(page.getByText("REAL STRAIN OR FAKE NAME?", { exact: true })).toBeVisible();
 });
 
-test("Bud or Bluff remains playable at 390px mobile width", async ({ page }) => {
+test("Bud or Bluff remains playable at 390px mobile width", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/games/bud-or-bluff", { waitUntil: "networkidle" });
   await expect(page.getByRole("button", { name: "Start game" })).toBeVisible();
   await expectNoHorizontalOverflow(page);
+  await page.screenshot({ path: testInfo.outputPath("bud-or-bluff-mobile-setup.png"), fullPage: true });
 
   await page.getByRole("checkbox", { name: "20-second turn timer" }).uncheck();
   await page.getByRole("button", { name: "Start game" }).click();
   await expect(page.getByRole("button", { name: /BUD That strain is real/i })).toBeVisible();
   await expect(page.getByRole("button", { name: /BLUFF That name is fake/i })).toBeVisible();
   await expectNoHorizontalOverflow(page);
+  await page.screenshot({ path: testInfo.outputPath("bud-or-bluff-mobile-playing.png"), fullPage: true });
 });
 
 test("Games hub exposes Bud or Bluff as a playable game", async ({ page }) => {
