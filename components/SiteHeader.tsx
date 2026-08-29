@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const navigation = [
+  { href: "/seeds", label: "Genetics" },
   { href: "/learn", label: "Learn" },
   { href: "/tools", label: "Tools" },
   { href: "/games", label: "Games" },
