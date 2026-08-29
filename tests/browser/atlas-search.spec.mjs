@@ -7,7 +7,7 @@ async function expectNoHorizontalOverflow(page) {
 
 async function openSearch(page) {
   await page.goto("/learn/atlas/search", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { name: "Find the concept, case, or tool you need." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Find the structure, stage, measurement, case, or tool you need." })).toBeVisible();
   return page.getByLabel("Search the Atlas");
 }
 
