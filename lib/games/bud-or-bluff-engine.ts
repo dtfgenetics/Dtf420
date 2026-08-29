@@ -1,15 +1,57 @@
 import type { BudOrBluffCard, BudOrBluffDifficulty } from "./bud-or-bluff";
 
 export type DifficultyFilter = "All" | BudOrBluffDifficulty;
+type Answer = "BUD" | "BLUFF";
 
 function randomIndex(length: number, random: () => number) {
-  return Math.min(length - 1, Math.floor(random() * length));
+  return Math.min(length - 1, Math.max(0, Math.floor(random() * length)));
 }
 
 function takeRandom<T>(items: T[], random: () => number): T | undefined {
   if (!items.length) return undefined;
   const index = randomIndex(items.length, random);
   return items.splice(index, 1)[0];
+}
+
+function sequenceIsFeasible(bud: number, bluff: number) {
+  return bud <= 2 * (bluff + 1) && bluff <= 2 * (bud + 1);
+}
+
+function buildAnswerSequence(budTarget: number, bluffTarget: number, random: () => number) {
+  const sequence: Answer[] = [];
+
+  function search(remainingBud: number, remainingBluff: number): boolean {
+    if (remainingBud === 0 && remainingBluff === 0) return true;
+
+    const lastTwo = sequence.slice(-2);
+    const candidates: Answer[] = [];
+    if (remainingBud > 0 && !(lastTwo.length === 2 && lastTwo.every((answer) => answer === "BUD"))) candidates.push("BUD");
+    if (remainingBluff > 0 && !(lastTwo.length === 2 && lastTwo.every((answer) => answer === "BLUFF"))) candidates.push("BLUFF");
+
+    if (candidates.length === 2) {
+      const total = remainingBud + remainingBluff;
+      const preferBud = random() < remainingBud / total;
+      if (!preferBud) candidates.reverse();
+    }
+
+    for (const answer of candidates) {
+      const nextBud = remainingBud - (answer === "BUD" ? 1 : 0);
+      const nextBluff = remainingBluff - (answer === "BLUFF" ? 1 : 0);
+      if (!sequenceIsFeasible(nextBud, nextBluff)) continue;
+
+      sequence.push(answer);
+      if (search(nextBud, nextBluff)) return true;
+      sequence.pop();
+    }
+
+    return false;
+  }
+
+  if (!search(budTarget, bluffTarget)) {
+    throw new Error("Unable to build a balanced Bud or Bluff deck without a three-answer run.");
+  }
+
+  return sequence;
 }
 
 export function buildBalancedDeck(
@@ -35,43 +77,15 @@ export function buildBalancedDeck(
     bluffTarget = bluffs.length;
   }
 
+  const answerSequence = buildAnswerSequence(budTarget, bluffTarget, random);
   const budPool = [...buds];
   const bluffPool = [...bluffs];
-  const deck: BudOrBluffCard[] = [];
-  let remainingBud = budTarget;
-  let remainingBluff = bluffTarget;
 
-  while (deck.length < targetCount) {
-    const lastTwo = deck.slice(-2).map((card) => card.answer);
-    const blocksBud = lastTwo.length === 2 && lastTwo.every((answer) => answer === "BUD");
-    const blocksBluff = lastTwo.length === 2 && lastTwo.every((answer) => answer === "BLUFF");
-
-    const canBud = remainingBud > 0 && !blocksBud;
-    const canBluff = remainingBluff > 0 && !blocksBluff;
-
-    let answer: "BUD" | "BLUFF";
-    if (canBud && canBluff) {
-      const total = remainingBud + remainingBluff;
-      answer = random() < remainingBud / total ? "BUD" : "BLUFF";
-    } else if (canBud) {
-      answer = "BUD";
-    } else if (canBluff) {
-      answer = "BLUFF";
-    } else if (remainingBud > 0) {
-      answer = "BUD";
-    } else {
-      answer = "BLUFF";
-    }
-
-    const next = answer === "BUD" ? takeRandom(budPool, random) : takeRandom(bluffPool, random);
-    if (!next) break;
-
-    deck.push(next);
-    if (answer === "BUD") remainingBud -= 1;
-    else remainingBluff -= 1;
-  }
-
-  return deck;
+  return answerSequence.map((answer) => {
+    const card = answer === "BUD" ? takeRandom(budPool, random) : takeRandom(bluffPool, random);
+    if (!card) throw new Error(`Bud or Bluff ${answer} pool ran out while building the deck.`);
+    return card;
+  });
 }
 
 export function scoreCorrectGuess(streakBefore: number) {
