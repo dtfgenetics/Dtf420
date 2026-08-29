@@ -7,8 +7,15 @@ const navigation = [
   { href: "/games", label: "Games" },
   { href: "/community", label: "Community" },
   { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact" },
 ];
+
+function NavigationLinks() {
+  return navigation.map((item) => (
+    <li key={item.href}>
+      <Link href={item.href}>{item.label}</Link>
+    </li>
+  ));
+}
 
 export function SiteHeader() {
   return (
@@ -16,18 +23,36 @@ export function SiteHeader() {
       <div className="site-header__inner">
         <Link className="brand" href="/" aria-label="DTF Genetics home">
           <span className="brand__mark" aria-hidden="true">DTF</span>
-          <span>DTF Genetics</span>
+          <span className="brand__identity">
+            <strong>DTF Genetics</strong>
+            <small>Dream the Future</small>
+          </span>
         </Link>
 
-        <nav aria-label="Primary navigation">
+        <nav className="desktop-nav" aria-label="Primary navigation">
           <ul className="nav-list">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
+            <NavigationLinks />
           </ul>
         </nav>
+
+        <Link className="header-action desktop-search" href="/learn/search">
+          Search THC
+        </Link>
+
+        <div className="mobile-nav-actions">
+          <Link className="mobile-search" href="/learn/search" aria-label="Search Teaching Healthy Cultivation">
+            Search
+          </Link>
+          <details className="mobile-menu">
+            <summary>Menu</summary>
+            <nav className="mobile-menu__panel" aria-label="Mobile navigation">
+              <ul className="mobile-menu__links">
+                <NavigationLinks />
+                <li><Link href="/contact">Contact</Link></li>
+              </ul>
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
   );
