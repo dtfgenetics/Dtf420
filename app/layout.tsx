@@ -6,15 +6,25 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://dtfseeds.com"),
   title: {
-    default: "DTF420",
-    template: "%s | DTF420",
+    default: "DTF Genetics — Dream the Future",
+    template: "%s | DTF Genetics",
   },
-  description: "DTF420 games, cultivation education, tools, and community.",
+  description:
+    "DTF Genetics combines original cannabis genetics, Teaching Healthy Cultivation plant-science education, grow tools, browser games, and community resources.",
+  applicationName: "DTF Genetics",
   openGraph: {
     type: "website",
-    siteName: "DTF420",
-    title: "DTF420",
-    description: "Cultivation education, interactive learning, tools, games, and community.",
+    siteName: "DTF Genetics",
+    title: "DTF Genetics — Dream the Future",
+    description:
+      "Original genetics, evidence-based cultivation education, grow tools, games, and community resources.",
+    url: "https://dtfseeds.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DTF Genetics — Dream the Future",
+    description:
+      "Original genetics, evidence-based cultivation education, grow tools, games, and community resources.",
   },
   robots: {
     index: true,

@@ -13,6 +13,7 @@ import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
 import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
+import geneticsProjects from "@/content/genetics-projects.json";
 
 const BASE_URL = "https://dtfseeds.com";
 
@@ -36,6 +37,7 @@ function item(path: string, priority: number, changeFrequency: MetadataRoute.Sit
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     item("/", 1, "weekly"),
+    item("/seeds", 0.95, "weekly"),
     item("/learn", 0.95, "weekly"),
     item("/learn/academy", 0.92, "weekly"),
     item("/learn/search", 0.85, "weekly"),
@@ -50,12 +52,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/learn/atlas/review", 0.75, "monthly"),
     item("/learn/atlas/mastery", 0.7, "monthly"),
     item("/learn/atlas/paths", 0.75, "monthly"),
+    item("/tools", 0.85, "weekly"),
+    item("/tools/growlens", 0.78, "monthly"),
+    item("/tools/grow-doc", 0.78, "monthly"),
     item("/games", 0.8, "weekly"),
     item("/games/bud-or-bluff", 0.82, "weekly"),
-    item("/tools", 0.75, "monthly"),
     item("/community", 0.7, "monthly"),
+    item("/journal", 0.72, "weekly"),
+    item("/about", 0.62, "monthly"),
+    item("/contact", 0.65, "monthly"),
   ];
 
+  const genetics = geneticsProjects.map((project) => item(`/seeds/${project.slug}`, 0.82, "monthly"));
   const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
 
   const plantHealth = [...plantHealthCore, ...plantHealthExpanded].map((entry) =>
@@ -84,7 +92,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  const all = [...staticRoutes, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
+  const all = [...staticRoutes, ...genetics, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
   const unique = new Map(all.map((entry) => [entry.url, entry]));
   return [...unique.values()];
 }

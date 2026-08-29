@@ -1,20 +1,22 @@
 import Link from "next/link";
 
 const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/games", label: "Games" },
+  { href: "/seeds", label: "Genetics" },
   { href: "/learn", label: "Learn" },
   { href: "/tools", label: "Tools" },
+  { href: "/games", label: "Games" },
   { href: "/community", label: "Community" },
+  { href: "/journal", label: "Journal" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <Link className="brand" href="/" aria-label="DTF420 home">
-          <span className="brand__mark" aria-hidden="true">420</span>
-          <span>DTF420</span>
+        <Link className="brand" href="/" aria-label="DTF Genetics home">
+          <span className="brand__mark" aria-hidden="true">DTF</span>
+          <span>DTF Genetics</span>
         </Link>
 
         <nav aria-label="Primary navigation">
