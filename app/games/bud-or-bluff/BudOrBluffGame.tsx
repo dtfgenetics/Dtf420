@@ -5,7 +5,6 @@ import {
   budOrBluffCards,
   budOrBluffPoolStats,
   type BudOrBluffAnswer,
-  type BudOrBluffDifficulty,
 } from "@/lib/games/bud-or-bluff";
 import {
   buildBalancedDeck,
@@ -82,20 +81,20 @@ export default function BudOrBluffGame() {
     if (phase !== "playing" || !turnReady || revealed || !currentCard || !currentPlayer) return;
 
     const correct = answer === currentCard.answer;
-    let awarded = 0;
+    const scoring = correct ? scoreCorrectGuess(currentPlayer.streak) : null;
+    const awarded = scoring?.points ?? 0;
 
     setSelectedAnswer(answer);
     setWasCorrect(correct);
+    setPointsAwarded(awarded);
     setRevealed(true);
 
     setPlayerStats((previous) => previous.map((player, index) => {
       if (index !== currentPlayerIndex) return player;
-      if (!correct) {
+      if (!correct || !scoring) {
         return { ...player, answered: player.answered + 1, streak: 0 };
       }
 
-      const scoring = scoreCorrectGuess(player.streak);
-      awarded = scoring.points;
       return {
         ...player,
         score: player.score + scoring.points,
@@ -106,7 +105,6 @@ export default function BudOrBluffGame() {
       };
     }));
 
-    setPointsAwarded(awarded);
     setLifetime((previous) => {
       const next = {
         correct: previous.correct + (correct ? 1 : 0),
