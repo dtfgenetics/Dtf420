@@ -1,0 +1,188 @@
+[
+  {
+    "id": "corky-leaf-blisters-after-humid-nights",
+    "title": "Corky leaf blisters after humid nights",
+    "focus": "Moisture balance + lesion inspection",
+    "scenario": "Small raised blisters appear mainly on the undersides of several leaves. Older bumps become tan and corky. The root zone has stayed wet overnight and nighttime humidity has been high, but the grower is preparing to spray for mites.",
+    "observations": [
+      { "label": "Location", "value": "Mostly lower leaf surfaces" },
+      { "label": "Pattern", "value": "Raised blisters becoming corky rather than fine feeding stipple" },
+      { "label": "Progression", "value": "New lesions appeared after several humid, low-transpiration nights" },
+      { "label": "Known context", "value": "No pest has been confirmed under magnification" }
+    ],
+    "question": "What is the strongest next step before applying a pesticide?",
+    "options": [
+      { "label": "Inspect both leaf surfaces with magnification and review irrigation, RH, and airflow history", "rationale": "This directly separates a physiological edema-like pattern from pests or infectious lesions while testing the moisture-balance context." },
+      { "label": "Spray immediately because any raised bump proves mite feeding", "rationale": "Raised lesions are not specific to mites, and an unverified spray can add phytotoxicity or obscure the original pattern." },
+      { "label": "Increase irrigation so the leaves remain fully hydrated", "rationale": "If water uptake is already exceeding water loss, more moisture can strengthen the leading physiological explanation rather than test it." },
+      { "label": "Remove every affected leaf before recording the pattern", "rationale": "Removing the evidence first makes it harder to compare lesion age, location, and response to corrected conditions." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Edema or intumescence associated with water uptake exceeding transpiration",
+      "Microscopic pest injury",
+      "Phytotoxic or infectious leaf lesions"
+    ],
+    "takeaway": "Blisters and corky bumps are not automatically pests. Confirm the organism and reconstruct the water-transpiration context before choosing a control.",
+    "links": [
+      { "label": "Pattern description", "route": "/learn/atlas/diagnostic-overlay/pattern-description" },
+      { "label": "Temperature & humidity", "route": "/learn/atlas/environment-overlay/temperature-and-humidity" },
+      { "label": "Differential workflow", "route": "/learn/atlas/diagnostic-overlay/differential-workflow" }
+    ]
+  },
+  {
+    "id": "twisted-new-growth-near-air-intake",
+    "title": "Twisted new growth near an air intake",
+    "focus": "Spatial distribution + exposure history",
+    "scenario": "New leaves become narrow, twisted, and cupped on plants closest to one intake. Several non-crop plants outside that side of the structure show similar distortion. No nutrient change occurred.",
+    "observations": [
+      { "label": "Location", "value": "Strongest near one air intake and weaker farther away" },
+      { "label": "Pattern", "value": "Newest tissue is narrowed, twisted, and cupped" },
+      { "label": "Progression", "value": "Symptoms appeared after nearby vegetation was treated" },
+      { "label": "Known context", "value": "Multiple plant species show a similar spatial gradient" }
+    ],
+    "question": "Which investigation most strongly tests an off-target exposure hypothesis?",
+    "options": [
+      { "label": "Map affected plants against the intake and review nearby application and ventilation history", "rationale": "A multi-species spatial gradient tied to an exposure pathway is stronger evidence for drift or volatilization than leaf shape alone." },
+      { "label": "Increase micronutrients because the newest leaves are distorted", "rationale": "The spatial gradient and cross-species pattern are not explained by a whole-crop nutrient shortage." },
+      { "label": "Assume a virus because distortion involves new growth", "rationale": "Systemic pathogens remain a differential, but the exposure pattern should be tested before assigning a transmissible cause." },
+      { "label": "Ignore nearby non-crop plants because they are different species", "rationale": "Similar injury across species can be a valuable clue when investigating an environmental or chemical exposure event." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Herbicide drift or volatilization entering through the intake",
+      "Other phytotoxic exposure",
+      "Microscopic mites or systemic disease as competing explanations"
+    ],
+    "takeaway": "Distribution is evidence. A gradient linked to an intake plus injury on multiple species can be more informative than trying to diagnose distorted leaves from shape alone.",
+    "links": [
+      { "label": "Symptom location", "route": "/learn/atlas/diagnostic-overlay/symptom-location" },
+      { "label": "Pattern description", "route": "/learn/atlas/diagnostic-overlay/pattern-description" },
+      { "label": "Differential workflow", "route": "/learn/atlas/diagnostic-overlay/differential-workflow" }
+    ]
+  },
+  {
+    "id": "speckling-after-foliar-spray",
+    "title": "Speckling after a foliar spray",
+    "focus": "Timeline + exposure pattern",
+    "scenario": "Small pale and necrotic spots appear the morning after a foliar application. Spots are most concentrated on exposed upper leaf surfaces and resemble the droplet pattern from the spray.",
+    "observations": [
+      { "label": "Location", "value": "Exposed sprayed leaf surfaces" },
+      { "label": "Pattern", "value": "Discrete specks and small spots resembling droplet coverage" },
+      { "label": "Progression", "value": "Appeared soon after one documented application" },
+      { "label": "Known context", "value": "No similar injury was present before the spray" }
+    ],
+    "question": "What should be reconstructed first to separate phytotoxicity from disease?",
+    "options": [
+      { "label": "The spray record, tank history, rate, mixture, and environmental conditions around application", "rationale": "The symptom timeline and droplet-like distribution make exposure history the strongest discriminating evidence before assuming an infectious process." },
+      { "label": "Apply the same mixture again to see whether the spots get worse", "rationale": "Repeating a suspected harmful exposure is not a safe diagnostic test and can compound injury." },
+      { "label": "Add more fertilizer because the spots contain dead tissue", "rationale": "Necrosis is an outcome shared by many injuries and does not establish nutrient shortage." },
+      { "label": "Diagnose a fungal leaf spot without checking lesion progression or magnification", "rationale": "Disease remains possible, but the event-linked distribution should be tested first." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Foliar-spray phytotoxicity",
+      "High-light or heat interaction with wet treated tissue",
+      "Leaf-spot disease or pest injury coinciding with the spray"
+    ],
+    "takeaway": "A precise timeline can be diagnostic evidence. When injury begins immediately after a spray and follows its coverage pattern, reconstruct the exposure before adding another treatment.",
+    "links": [
+      { "label": "Measurement context", "route": "/learn/atlas/diagnostic-overlay/measurement-context" },
+      { "label": "Light distribution", "route": "/learn/atlas/environment-overlay/light-distribution" },
+      { "label": "Pattern description", "route": "/learn/atlas/diagnostic-overlay/pattern-description" }
+    ]
+  },
+  {
+    "id": "bleached-tops-after-light-increase",
+    "title": "Bleached tops after a light increase",
+    "focus": "Exposure gradient + leaf temperature",
+    "scenario": "The highest leaves become pale and slightly curled several days after fixture output was increased. Lower and shaded leaves on the same plants remain greener.",
+    "observations": [
+      { "label": "Location", "value": "Highest and most exposed canopy surfaces" },
+      { "label": "Pattern", "value": "Paling and curl follow the light-exposure gradient" },
+      { "label": "Progression", "value": "Began after a documented fixture-output increase" },
+      { "label": "Known context", "value": "PPFD and leaf temperature have not been remapped since the change" }
+    ],
+    "question": "Which measurements most directly test the leading explanation?",
+    "options": [
+      { "label": "PPFD and leaf temperature at affected and shaded canopy positions", "rationale": "These measurements test whether the visible gradient follows photon and thermal exposure rather than assuming the pale color is nutritional." },
+      { "label": "Only the nutrient label on the reservoir", "rationale": "The reservoir label does not explain why injury is concentrated at the most exposed canopy positions after a lighting change." },
+      { "label": "Only room air temperature at the wall", "rationale": "A remote air sensor can miss the leaf temperature and radiant environment experienced by the damaged tissue." },
+      { "label": "Increase feed strength before taking light measurements", "rationale": "Adding dissolved salts does not test the strongest timeline and spatial evidence." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Excess light exposure or photoinhibition",
+      "Canopy overheating interacting with high radiant load",
+      "Root-water limitation made visible first in the highest-demand tissue"
+    ],
+    "takeaway": "Bleaching that tracks fixture exposure should be measured as an exposure problem before it is interpreted as nutrient deficiency.",
+    "links": [
+      { "label": "Light distribution", "route": "/learn/atlas/environment-overlay/light-distribution" },
+      { "label": "Temperature & humidity", "route": "/learn/atlas/environment-overlay/temperature-and-humidity" },
+      { "label": "VPD & transpiration", "route": "/learn/atlas/environment-overlay/vpd-and-transpiration" }
+    ]
+  },
+  {
+    "id": "fine-stippling-without-webbing",
+    "title": "Fine stippling without webbing",
+    "focus": "Direct pest evidence",
+    "scenario": "Fine pale stippling appears on several leaves. There is no webbing, so the grower assumes spider mites are impossible and starts adjusting nutrients instead.",
+    "observations": [
+      { "label": "Location", "value": "Scattered leaves with strongest injury near lower surfaces" },
+      { "label": "Pattern", "value": "Many fine pale feeding-like points rather than uniform chlorosis" },
+      { "label": "Progression", "value": "The stippled area is expanding over time" },
+      { "label": "Known context", "value": "Leaf undersides have not been inspected with magnification" }
+    ],
+    "question": "What is the strongest next step?",
+    "options": [
+      { "label": "Inspect leaf undersides and symptom edges with magnification for mites, eggs, thrips, and pest signs", "rationale": "Webbing is not required for early mite infestations. Direct organism evidence is more diagnostic than either webbing absence or nutrient photo matching." },
+      { "label": "Rule out spider mites solely because there is no webbing", "rationale": "Webbing is generally associated with heavier populations and its absence does not exclude mites." },
+      { "label": "Increase nitrogen because the leaves contain pale dots", "rationale": "Fine stippling is not the typical evidence needed to establish a whole-leaf nitrogen shortage." },
+      { "label": "Wait until the whole plant is bronzed before scouting", "rationale": "Delaying direct inspection can allow a pest population to increase while early evidence is already available." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Spider mite feeding",
+      "Thrips or another surface-feeding arthropod",
+      "Spray or mechanical surface injury"
+    ],
+    "takeaway": "Absence of webbing is not absence of mites. Use magnification and inspect the organism, eggs, fecal signs, and damage pattern directly.",
+    "links": [
+      { "label": "Symptom pattern language", "route": "/learn/atlas/leaves/symptom-pattern-language" },
+      { "label": "Pattern description", "route": "/learn/atlas/diagnostic-overlay/pattern-description" },
+      { "label": "Differential workflow", "route": "/learn/atlas/diagnostic-overlay/differential-workflow" }
+    ]
+  },
+  {
+    "id": "flower-browning-after-condensation",
+    "title": "Flower browning after condensation",
+    "focus": "Internal inspection + microclimate",
+    "scenario": "A few dense flower clusters develop localized browning after several nights with high humidity and visible condensation. Surface tissue looks mostly normal from a distance.",
+    "observations": [
+      { "label": "Location", "value": "Dense flower interiors rather than the whole plant" },
+      { "label": "Pattern", "value": "Localized internal browning and softening" },
+      { "label": "Progression", "value": "Appeared after repeated high-humidity nights" },
+      { "label": "Known context", "value": "The flower interiors have not been opened and inspected closely" }
+    ],
+    "question": "What is the strongest next step?",
+    "options": [
+      { "label": "Open representative affected flowers carefully, inspect internally with magnification, and review humidity/condensation records", "rationale": "Dense flower disease can progress internally before obvious surface sporulation, so direct tissue inspection plus microclimate history best separates mold from senescence or physical damage." },
+      { "label": "Assume normal senescence because the outer flower still looks acceptable", "rationale": "Surface appearance can miss internal decay, especially in dense tissue after persistent moisture events." },
+      { "label": "Mist the flowers to see whether the brown tissue softens", "rationale": "Additional wetting can increase disease risk and does not provide useful diagnostic separation." },
+      { "label": "Change root-zone fertilizer without inspecting the flower", "rationale": "A localized internal flower pattern after condensation is poorly matched to a whole-root-zone nutrient change." }
+    ],
+    "correctIndex": 0,
+    "differential": [
+      "Botrytis or another flower mold",
+      "Localized senescence or dead embedded tissue",
+      "Mechanical or insect-associated injury"
+    ],
+    "takeaway": "Dense flowers must be inspected internally when rot is plausible. Environmental history and direct tissue evidence are more useful than judging the flower from its outer surface.",
+    "links": [
+      { "label": "Temperature & humidity", "route": "/learn/atlas/environment-overlay/temperature-and-humidity" },
+      { "label": "Symptom location", "route": "/learn/atlas/diagnostic-overlay/symptom-location" },
+      { "label": "Differential workflow", "route": "/learn/atlas/diagnostic-overlay/differential-workflow" }
+    ]
+  }
+]
