@@ -1,5 +1,9 @@
+import fs from "node:fs";
+import path from "node:path";
 import { expect, test } from "@playwright/test";
 
+const modules = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-learning-modules.json"), "utf8"));
+const LESSON_COUNT = modules.reduce((total, atlasModule) => total + atlasModule.lessons.length, 0);
 const PROGRESS_KEY = "dtf420.atlas.progress.v1";
 const MASTERY_KEY = "dtf420.atlas.mastery.v1";
 
@@ -51,8 +55,8 @@ test("study dashboard summarizes shared state and prioritizes recent misses", as
   await expect(summary).toContainText("Continue with what matters most.");
 
   const metrics = page.locator('section[aria-label="Atlas study metrics"]');
-  await expect(metrics).toContainText("2/50");
-  await expect(metrics).toContainText("1/50");
+  await expect(metrics).toContainText(`2/${LESSON_COUNT}`);
+  await expect(metrics).toContainText(`1/${LESSON_COUNT}`);
   await expect(metrics).toContainText("Review");
   await expect(metrics).toContainText("1/6");
 
