@@ -1,33 +1,35 @@
 .gameFrame {
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at top right, rgba(183, 226, 93, 0.08), transparent 26rem),
-    linear-gradient(180deg, rgba(15, 29, 19, 0.98), rgba(8, 17, 11, 0.98));
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
   overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 82% 0%, rgba(183, 226, 93, 0.1), transparent 25rem),
+    linear-gradient(180deg, rgba(14, 29, 19, 0.99), rgba(6, 14, 9, 0.99));
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.32);
 }
 
 .setupGrid,
 .playGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
   gap: 18px;
   padding: 18px;
 }
 
 .panel {
+  min-width: 0;
+  padding: clamp(22px, 4vw, 36px);
   border: 1px solid rgba(183, 226, 93, 0.14);
   border-radius: 22px;
-  background: rgba(9, 20, 13, 0.78);
-  padding: clamp(22px, 4vw, 34px);
+  background: rgba(8, 19, 12, 0.78);
 }
 
-.panel h2 {
+.panel h2,
+.handoffPanel h2 {
   margin: 8px 0 24px;
-  font-size: clamp(28px, 4vw, 42px);
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
 }
 
 .kicker {
@@ -42,12 +44,12 @@
 .playerList {
   display: grid;
   gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .playerRow {
   display: grid;
-  grid-template-columns: 78px minmax(0, 1fr) 42px;
+  grid-template-columns: 32px minmax(0, 1fr) 44px;
   align-items: center;
   gap: 10px;
 }
@@ -63,14 +65,14 @@
 .playerRow input,
 .field select {
   width: 100%;
-  min-height: 46px;
+  min-height: 48px;
+  padding: 0 14px;
   border: 1px solid var(--border);
   border-radius: 13px;
-  background: #09150d;
+  outline: 0;
+  background: #08140c;
   color: var(--text);
   font: inherit;
-  padding: 0 13px;
-  outline: none;
 }
 
 .playerRow input:focus,
@@ -85,17 +87,18 @@
 .answerButton,
 .nextButton,
 .quitButton,
-.textButton {
+.textButton,
+.quitConfirm button {
   border: 0;
   font: inherit;
   cursor: pointer;
 }
 
 .iconButton {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.055);
   color: var(--muted);
   font-size: 22px;
 }
@@ -104,9 +107,9 @@
 .primaryButton,
 .nextButton,
 .quitButton {
-  min-height: 48px;
-  border-radius: 14px;
+  min-height: 50px;
   padding: 0 18px;
+  border-radius: 14px;
   font-weight: 900;
 }
 
@@ -118,7 +121,7 @@
 
 .secondaryButton:disabled {
   cursor: not-allowed;
-  opacity: 0.45;
+  opacity: 0.42;
 }
 
 .primaryButton,
@@ -142,37 +145,72 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 18px;
+  min-height: 44px;
+  margin-top: 8px;
 }
 
 .toggleRow input {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   accent-color: var(--accent);
 }
 
 .poolReadout {
-  margin-top: 20px;
+  margin-top: 18px;
+  padding: 14px;
   border: 1px solid rgba(183, 226, 93, 0.14);
   border-radius: 14px;
-  background: rgba(183, 226, 93, 0.05);
+  background: rgba(183, 226, 93, 0.045);
   color: var(--muted);
-  padding: 14px;
   line-height: 1.5;
 }
 
 .poolReadout strong { color: var(--text); }
-.poolReadout small { display: block; margin-top: 4px; }
+.poolReadout small { display: block; margin-top: 5px; }
 
-.instructions {
+.rulesStrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
   border-top: 1px solid var(--border);
-  color: var(--muted);
-  padding: 16px 20px 20px;
-  font-size: 13px;
-  line-height: 1.65;
+  border-bottom: 1px solid var(--border);
+  background: var(--border);
 }
 
-.instructions strong { color: var(--text); }
+.rulesStrip > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 88px;
+  padding: 16px 20px;
+  background: rgba(8, 17, 11, 0.98);
+}
+
+.rulesStrip strong {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(183, 226, 93, 0.24);
+  border-radius: 11px;
+  color: var(--accent-strong);
+}
+
+.rulesStrip span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.instructions {
+  margin: 0;
+  padding: 14px 20px 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 .instructions kbd {
   display: inline-grid;
   min-width: 24px;
@@ -187,19 +225,18 @@
 }
 
 .topBar {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   padding: 14px 18px 10px;
 }
 
 .topBar > div {
-  min-width: 120px;
-  flex: 1 1 120px;
+  min-width: 0;
+  padding: 10px 12px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.025);
-  padding: 10px 12px;
 }
 
 .topBar span,
@@ -214,8 +251,11 @@
 
 .topBar strong {
   display: block;
+  overflow: hidden;
   margin-top: 3px;
   font-size: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .timerDanger {
@@ -226,7 +266,7 @@
 .timerDanger strong { color: #ff9a9a; }
 
 .progressTrack {
-  height: 4px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -238,35 +278,35 @@
 }
 
 .playGrid {
-  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-columns: minmax(0, 1fr) 292px;
   align-items: start;
 }
 
 .cardStage { min-width: 0; }
 
 .strainCard {
-  min-height: 370px;
+  position: relative;
   display: flex;
+  min-height: 390px;
+  overflow: hidden;
   flex-direction: column;
   justify-content: center;
+  padding: clamp(30px, 6vw, 62px);
   border: 1px solid rgba(183, 226, 93, 0.17);
   border-radius: 26px;
   background:
-    radial-gradient(circle at 50% 18%, rgba(183, 226, 93, 0.09), transparent 18rem),
-    linear-gradient(155deg, #102118, #0a150e 68%);
-  padding: clamp(28px, 6vw, 58px);
+    radial-gradient(circle at 50% 14%, rgba(183, 226, 93, 0.1), transparent 18rem),
+    linear-gradient(155deg, #11231a, #08130c 72%);
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
 .strainCard::after {
   content: "?";
   position: absolute;
-  right: -20px;
-  bottom: -72px;
-  color: rgba(255, 255, 255, 0.025);
-  font-size: 280px;
+  right: -22px;
+  bottom: -76px;
+  color: rgba(255, 255, 255, 0.028);
+  font-size: 300px;
   font-weight: 1000;
   line-height: 1;
   pointer-events: none;
@@ -275,19 +315,21 @@
 .strainCardRevealed::after { content: "✓"; }
 
 .cardMeta {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .cardMeta span {
+  padding: 6px 9px;
   border: 1px solid rgba(183, 226, 93, 0.14);
   border-radius: 999px;
-  background: rgba(183, 226, 93, 0.06);
+  background: rgba(183, 226, 93, 0.055);
   color: var(--muted);
-  padding: 6px 9px;
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -295,6 +337,8 @@
 }
 
 .cardPrompt {
+  position: relative;
+  z-index: 1;
   margin: 0;
   color: var(--accent);
   font-size: 11px;
@@ -303,28 +347,33 @@
 }
 
 .strainCard h2 {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
   margin: 12px auto 10px;
-  font-size: clamp(44px, 8vw, 82px);
-  line-height: 0.96;
+  font-size: clamp(44px, 8vw, 84px);
+  line-height: 0.94;
   letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
   text-wrap: balance;
 }
 
 .cardHint {
+  position: relative;
+  z-index: 1;
   margin: 10px 0 0;
   color: var(--muted);
   font-size: 14px;
 }
 
 .reveal {
-  max-width: 700px;
-  margin: 20px auto 0;
   position: relative;
   z-index: 1;
+  max-width: 700px;
+  margin: 20px auto 0;
 }
 
-.reveal > p:not(.correct):not(.incorrect):not(.lineage) {
+.reveal > p:not(.correct):not(.incorrect):not(.lineage):not(.pointsAwarded) {
   color: var(--muted);
   line-height: 1.6;
 }
@@ -342,9 +391,18 @@
 .correct { color: #cfff8b; }
 .incorrect { color: #ffb0b0; }
 .correct strong,
-.incorrect strong {
-  font-size: 28px;
-  letter-spacing: 0.05em;
+.incorrect strong { font-size: 28px; letter-spacing: 0.05em; }
+
+.pointsAwarded {
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 7px 10px;
+  border: 1px solid rgba(183, 226, 93, 0.24);
+  border-radius: 999px;
+  background: rgba(183, 226, 93, 0.08);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .lineage {
@@ -364,7 +422,7 @@
   text-transform: uppercase;
 }
 
-.reveal small { color: #7f9284; }
+.reveal small { color: #829486; }
 
 .answerGrid {
   display: grid;
@@ -374,26 +432,26 @@
 }
 
 .answerButton {
-  min-height: 126px;
   display: grid;
+  min-height: 128px;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto;
   align-content: center;
   column-gap: 12px;
+  padding: 18px 20px;
   border: 1px solid var(--border);
   border-radius: 20px;
   color: var(--text);
   text-align: left;
-  padding: 18px 20px;
   transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
 }
 
 .answerButton > span {
-  grid-row: 1 / 3;
-  align-self: center;
   display: grid;
   width: 34px;
   height: 34px;
+  grid-row: 1 / 3;
+  align-self: center;
   place-items: center;
   border: 1px solid currentColor;
   border-radius: 10px;
@@ -402,34 +460,17 @@
   font-weight: 1000;
 }
 
-.answerButton strong {
-  font-size: clamp(26px, 4vw, 38px);
-  line-height: 1;
-}
-
-.answerButton small {
-  color: var(--muted);
-  margin-top: 5px;
-}
-
+.answerButton strong { font-size: clamp(27px, 4vw, 40px); line-height: 1; }
+.answerButton small { margin-top: 5px; color: var(--muted); }
 .answerButton:not(:disabled):hover,
-.answerButton:not(:disabled):focus-visible {
-  transform: translateY(-2px);
-}
-
+.answerButton:not(:disabled):focus-visible { transform: translateY(-2px); }
 .answerButton:disabled { cursor: default; opacity: 0.58; }
 
-.budButton {
-  background: linear-gradient(145deg, rgba(100, 181, 74, 0.15), rgba(44, 92, 39, 0.06));
-}
-
+.budButton { background: linear-gradient(145deg, rgba(100, 181, 74, 0.16), rgba(44, 92, 39, 0.05)); }
 .budButton:not(:disabled):hover,
 .budButton:not(:disabled):focus-visible { border-color: #8bd45e; }
 
-.bluffButton {
-  background: linear-gradient(145deg, rgba(189, 108, 90, 0.13), rgba(82, 38, 32, 0.06));
-}
-
+.bluffButton { background: linear-gradient(145deg, rgba(189, 108, 90, 0.14), rgba(82, 38, 32, 0.05)); }
 .bluffButton:not(:disabled):hover,
 .bluffButton:not(:disabled):focus-visible { border-color: #de806f; }
 
@@ -448,10 +489,12 @@
 .nextButton span { margin-left: 8px; opacity: 0.7; }
 
 .scoreboard {
+  position: sticky;
+  top: 88px;
+  padding: 14px;
   border: 1px solid rgba(183, 226, 93, 0.13);
   border-radius: 20px;
-  background: rgba(8, 17, 11, 0.72);
-  padding: 14px;
+  background: rgba(7, 16, 10, 0.86);
 }
 
 .scoreHeading {
@@ -467,34 +510,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding: 11px 12px;
   border: 1px solid transparent;
   border-radius: 14px;
-  padding: 11px 12px;
 }
 
 .scoreRow + .scoreRow { margin-top: 5px; }
 .scoreRow > div { min-width: 0; }
-.scoreRow strong {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.scoreRow small {
-  display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.scoreRow > span {
-  min-width: 38px;
-  text-align: right;
-  color: var(--accent-strong);
-  font-size: 26px;
-  font-weight: 1000;
-}
+.scoreRow strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.scoreRow small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+.scoreRow > span { min-width: 38px; color: var(--accent-strong); font-size: 27px; font-weight: 1000; text-align: right; }
 
 .activePlayer {
   border-color: rgba(183, 226, 93, 0.22);
@@ -509,88 +534,102 @@
   color: var(--muted);
 }
 
+.quitConfirm {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid rgba(255, 126, 126, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 84, 84, 0.05);
+}
+
+.quitConfirm p { margin: 0 0 10px; color: var(--text); font-size: 13px; font-weight: 800; }
+.quitConfirm button { width: 100%; min-height: 42px; border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: var(--text); }
+.quitConfirm button + button { margin-top: 7px; }
+
+.handoffPanel {
+  display: grid;
+  min-height: 470px;
+  place-items: center;
+  align-content: center;
+  padding: clamp(40px, 10vw, 100px) 24px;
+  text-align: center;
+}
+
+.handoffPanel h2 { margin-bottom: 12px; }
+.handoffPanel p:not(.kicker) { max-width: 520px; margin: 0 0 24px; color: var(--muted); }
+.handoffPanel .primaryButton { min-width: min(100%, 300px); }
+.handoffPanel small { margin-top: 10px; color: var(--muted); }
+
 .finishPanel {
-  max-width: 760px;
+  max-width: 790px;
   margin: 18px auto;
   text-align: center;
 }
 
-.finishCopy {
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.finalScores {
-  display: grid;
-  gap: 8px;
-  margin: 26px 0;
-}
+.finishCopy { color: var(--muted); font-size: 18px; line-height: 1.6; }
+.finalScores { display: grid; gap: 8px; margin: 26px 0; }
 
 .finalScore {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 18px;
+  padding: 13px 15px;
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 12px 15px;
   text-align: left;
 }
 
-.finalScore strong {
-  color: var(--accent-strong);
-  font-size: 26px;
-}
+.finalScore > div { min-width: 0; }
+.finalScore strong { display: block; }
+.finalScore small { display: block; margin-top: 3px; color: var(--muted); }
+.finalScore > span { flex: 0 0 auto; color: var(--accent-strong); font-size: 22px; font-weight: 1000; }
 
-.finishActions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.lifetimeNote {
-  margin: 22px 0 5px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.textButton {
-  background: transparent;
-  color: #839486;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+.finishActions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.lifetimeNote { margin: 24px 0 8px; color: var(--muted); font-size: 13px; }
+.textButton { min-height: 42px; background: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 900px) {
   .setupGrid,
   .playGrid { grid-template-columns: 1fr; }
-  .scoreboard { order: -1; }
-  .scoreboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
-  .scoreHeading,
-  .quitButton { grid-column: 1 / -1; }
-  .scoreRow + .scoreRow { margin-top: 0; }
+  .scoreboard { position: static; order: -1; }
+  .scoreboard .scoreRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
 }
 
-@media (max-width: 620px) {
-  .gameFrame { border-radius: 20px; }
+@media (max-width: 640px) {
+  .gameFrame { border-radius: 22px; }
   .setupGrid,
-  .playGrid { padding: 10px; gap: 10px; }
-  .panel { padding: 20px; border-radius: 17px; }
-  .playerRow { grid-template-columns: 1fr 42px; }
-  .playerRow label { grid-column: 1 / -1; }
-  .topBar { padding: 10px; }
-  .topBar > div { min-width: calc(50% - 5px); }
-  .strainCard { min-height: 330px; padding: 26px 18px; border-radius: 19px; }
-  .strainCard h2 { font-size: clamp(40px, 14vw, 64px); }
+  .playGrid { gap: 12px; padding: 12px; }
+  .panel { padding: 20px; border-radius: 18px; }
+  .topBar { grid-template-columns: 1fr 1fr; padding: 12px; }
+  .rulesStrip { grid-template-columns: 1fr; }
+  .rulesStrip > div { min-height: 68px; }
+  .strainCard { min-height: 330px; padding: 28px 18px; border-radius: 20px; }
+  .strainCard h2 { font-size: clamp(38px, 13vw, 58px); }
+  .cardMeta { margin-bottom: 18px; }
   .answerGrid { grid-template-columns: 1fr; }
-  .answerButton { min-height: 100px; }
-  .scoreboard { grid-template-columns: 1fr; }
-  .scoreHeading,
-  .quitButton { grid-column: auto; }
+  .answerButton { min-height: 96px; }
+  .scoreboard { border-radius: 16px; }
+  .scoreRow { padding: 9px 10px; }
+  .scoreRow > span { font-size: 24px; }
+  .handoffPanel { min-height: 390px; }
+  .finishActions > * { width: 100%; }
+  .finalScore { align-items: flex-start; }
+}
+
+@media (max-width: 430px) {
+  .playerRow { grid-template-columns: 26px minmax(0, 1fr) 44px; }
+  .topBar { gap: 7px; }
+  .topBar > div { padding: 9px 10px; }
+  .topBar strong { font-size: 15px; }
+  .cardPrompt { letter-spacing: 0.16em; }
+  .correct,
+  .incorrect { flex-direction: column; align-items: center; gap: 2px; }
+  .lineage { flex-direction: column; gap: 4px; }
+  .scoreHeading { align-items: flex-start; flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .answerButton,
-  .progressTrack span { transition: none; }
+  .progressTrack span,
+  .answerButton { transition: none; }
 }
