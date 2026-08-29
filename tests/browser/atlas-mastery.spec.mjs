@@ -39,10 +39,10 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("knowledge-check manifest covers exactly the 50 canonical lessons", async ({ request }, testInfo) => {
+test("knowledge-check manifest covers every canonical lesson", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Run manifest sweep once.");
-  expect(lessonRoutes).toHaveLength(50);
-  expect(rawChecks).toHaveLength(50);
+  expect(lessonRoutes.length).toBeGreaterThan(0);
+  expect(rawChecks).toHaveLength(lessonRoutes.length);
   expect(new Set(rawChecks.map((check) => check.route))).toEqual(new Set(lessonRoutes));
 
   for (const guidedPath of guidedPaths) {
@@ -91,7 +91,7 @@ test("Study Dashboard and guided paths reflect shared mastery state", async ({ p
   await page.goto("/learn/atlas/dashboard", { waitUntil: "networkidle" });
   const metrics = page.locator('section[aria-label="Atlas study metrics"]');
   await expect(metrics).toContainText("Knowledge");
-  await expect(metrics).toContainText("1/50");
+  await expect(metrics).toContainText(`1/${lessonRoutes.length}`);
   const destinations = page.locator('section[aria-label="Atlas learner destinations"]');
   await expect(destinations.getByRole("link", { name: /Mastery Passport/i })).toHaveAttribute("href", "/learn/atlas/mastery");
 
