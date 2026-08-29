@@ -199,11 +199,11 @@ test("representative Atlas lessons render and interactive visuals change state",
 
   await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
   const visual = page.locator('section[aria-label="Atlas primary visual"]');
-  await visual.locator("button").nth(1).click();
+  await visual.getByRole("button", { name: /Pericarp \/ fruit wall/ }).click();
   await expectNoInternalProductionLabels(page);
 
-  const explanation = page.getByText(
-    "Embryonic leaf tissue that supports the seedling during the earliest stage after emergence.",
+  const explanation = visual.getByText(
+    "The visible protective shell includes the pericarp, which develops from the ovary wall. It is fruit tissue and must not be labeled as if the whole shell were the true seed coat.",
     { exact: true },
   );
   await expect(explanation).toBeVisible();

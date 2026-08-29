@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { AtlasAssetRecord } from "@/lib/atlas-assets";
+import { AtlasAcheneVisual } from "./AtlasAcheneVisual";
 import { AtlasPriorityVisual } from "./AtlasPriorityVisual";
 import { AtlasProcessVisual } from "./AtlasProcessVisual";
 import { AtlasConceptVisual } from "./AtlasConceptVisual";
@@ -11,7 +12,6 @@ import { AtlasFinalVisualB } from "./AtlasFinalVisualB";
 import styles from "./AtlasAssetSlot.module.css";
 
 const priorityInteractiveAssetIds = new Set([
-  "atlas-seed-anatomy-v1",
   "atlas-root-architecture-v1",
   "atlas-healthy-leaf-baseline-v1",
   "atlas-female-flower-anatomy-v1",
@@ -85,6 +85,7 @@ const finalBInteractiveAssetIds = new Set([
 ]);
 
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
+  const acheneInteractive = asset.assetId === "atlas-seed-anatomy-v1";
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
   const processInteractive = processInteractiveAssetIds.has(asset.assetId);
   const conceptInteractive = conceptInteractiveAssetIds.has(asset.assetId);
@@ -96,7 +97,9 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
-      {priorityInteractive ? (
+      {acheneInteractive ? (
+        <AtlasAcheneVisual />
+      ) : priorityInteractive ? (
         <AtlasPriorityVisual assetId={asset.assetId} />
       ) : processInteractive ? (
         <AtlasProcessVisual assetId={asset.assetId} />
