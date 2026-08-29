@@ -3,6 +3,7 @@ import academyCourses from "@/content/academy-courses.json";
 import atlasModules from "@/content/atlas-learning-modules.json";
 import plantHealthCore from "@/content/plant-health-library.json";
 import plantHealthExpanded from "@/content/plant-health-expanded.json";
+import plantHealthAbiotic from "@/content/plant-health-abiotic-expanded.json";
 import cultivationCore from "@/content/cultivation-science-library.json";
 import protectedCultivation from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
@@ -11,7 +12,8 @@ import postharvestExpanded from "@/content/postharvest-science-expanded.json";
 import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
 import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
 import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
-import symptomLibrary from "@/content/symptom-differential-library.json";
+import symptomCore from "@/content/symptom-differential-library.json";
+import symptomExpanded from "@/content/symptom-differential-expanded.json";
 import learningTools from "@/content/learning-tools.json";
 import geneticsProjects from "@/content/genetics-projects.json";
 
@@ -65,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const genetics = geneticsProjects.map((project) => item(`/seeds/${project.slug}`, 0.82, "monthly"));
   const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
 
-  const plantHealth = [...plantHealthCore, ...plantHealthExpanded].map((entry) =>
+  const plantHealth = [...plantHealthCore, ...plantHealthExpanded, ...plantHealthAbiotic].map((entry) =>
     item(`/learn/plant-health/${entry.slug}`, 0.78, "monthly"),
   );
 
@@ -80,7 +82,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...propagationNutritionGenetics,
   ].map((entry) => item(`/learn/cultivation-science/${entry.slug}`, 0.78, "monthly"));
 
-  const symptoms = symptomLibrary.map((entry) => item(`/learn/symptoms/${entry.slug}`, 0.8, "monthly"));
+  const symptoms = [...symptomCore, ...symptomExpanded].map((entry) => item(`/learn/symptoms/${entry.slug}`, 0.8, "monthly"));
   const tools = learningTools.map((entry) => item(`/learn/tools/${entry.slug}`, 0.7, "monthly"));
 
   const atlasRoutes = atlasModules.flatMap((atlasModule) => {
