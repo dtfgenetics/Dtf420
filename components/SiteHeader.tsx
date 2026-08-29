@@ -7,6 +7,7 @@ const navigation = [
   { href: "/games", label: "Games" },
   { href: "/community", label: "Community" },
   { href: "/journal", label: "Journal" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
