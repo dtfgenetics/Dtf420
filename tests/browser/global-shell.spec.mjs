@@ -19,6 +19,13 @@ async function expectInternalLinksResolve(page) {
   }
 }
 
+async function attachFullPageScreenshot(page, testInfo, name) {
+  await testInfo.attach(name, {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: "image/png",
+  });
+}
+
 test("homepage shell exposes the intended visual hierarchy and valid destinations", async ({ page }, testInfo) => {
   await page.goto("/");
 
@@ -36,6 +43,7 @@ test("homepage shell exposes the intended visual hierarchy and valid destination
     await page.locator(".mobile-menu summary").click();
     await expect(page.locator(".mobile-menu__panel")).toBeVisible();
     await expect(page.locator(".mobile-menu__panel").getByRole("link", { name: "Genetics" })).toHaveAttribute("href", "/seeds");
+    await page.locator(".mobile-menu summary").click();
   } else {
     await expect(page.locator(".desktop-nav")).toBeVisible();
     await expect(page.locator(".mobile-menu")).toBeHidden();
@@ -43,6 +51,7 @@ test("homepage shell exposes the intended visual hierarchy and valid destination
 
   await expectNoHorizontalOverflow(page);
   await expectInternalLinksResolve(page);
+  await attachFullPageScreenshot(page, testInfo, mobileProject ? "homepage-mobile-default" : "homepage-desktop");
 });
 
 test("mobile homepage remains contained at 390px and 430px", async ({ page }, testInfo) => {
@@ -56,5 +65,6 @@ test("mobile homepage remains contained at 390px and 430px", async ({ page }, te
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByRole("link", { name: "Explore THC education" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
+    await attachFullPageScreenshot(page, testInfo, `homepage-mobile-${width}`);
   }
 });
