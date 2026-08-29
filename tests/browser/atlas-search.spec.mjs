@@ -39,7 +39,7 @@ test("Atlas search provides examples and a useful no-results state", async ({ pa
 
   await page.getByRole("button", { name: "edema", exact: true }).click();
   await expect(search).toHaveValue("edema");
-  await expect(page.locator('section[aria-label="Atlas search results"]')).toContainText(/edema/i);
+  await expect(page.locator('section[aria-label="Atlas search results"]')).toContainText("Corky leaf blisters after humid nights");
 
   await search.fill("trichomes");
   await expect(page.locator('section[aria-label="Atlas search results"]')).toContainText("Trichome types");
