@@ -57,6 +57,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/games", 0.8, "weekly"),
     item("/community", 0.7, "monthly"),
     item("/journal", 0.72, "weekly"),
+    item("/about", 0.62, "monthly"),
+    item("/contact", 0.65, "monthly"),
   ];
 
   const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
