@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Games",
   description:
-    "DTF Genetics browser games, playable releases, migration status, rules, and community testing information.",
+    "DTF Genetics browser games, playable releases, rules, migration status, and community testing information.",
 };
 
 const migrationStandards = [
@@ -22,15 +22,26 @@ export default function GamesPage() {
       <p className="eyebrow">DTF Genetics · Original browser games</p>
       <h1>Games</h1>
       <p className="lede">
-        The DTF game hub is being migrated into one shared application. Public releases are kept separate from ports that are still being rebuilt so a visitor never has to guess whether a Play button actually works.
+        Cannabis-themed browser games built for quick sessions, party play, and community competition. Playable releases stay separate from concepts and ports that are still being rebuilt so every launch action leads to a working route.
       </p>
 
       <div className="game-card">
         <div>
-          <p className="status-pill">Playable in this app</p>
+          <p className="status-pill">Playable · Party game</p>
+          <h2>Bud or Bluff</h2>
+          <p>
+            Hear an absurd strain name and decide: BUD if it is real, BLUFF if it is fake. The current build includes multiplayer scoring, difficulty filters, turn timers, streaks, and a balanced real-versus-fake deck.
+          </p>
+        </div>
+        <Link className="button button--primary" href="/games/bud-or-bluff">Play Bud or Bluff</Link>
+      </div>
+
+      <div className="game-card">
+        <div>
+          <p className="status-pill">Playable · Phaser</p>
           <h2>Burn Buds</h2>
           <p>
-            Burn Buds is currently the migrated Phaser game in this repository and serves as the first production runtime on the shared DTF game foundation.
+            Burn Buds is the migrated Phaser title currently running on the shared DTF game foundation with responsive canvas scaling and browser-safe startup and teardown.
           </p>
         </div>
         <Link className="button button--primary" href="/games/burn-buds">Play Burn Buds</Link>
@@ -41,7 +52,7 @@ export default function GamesPage() {
           <p className="eyebrow">Migration standard</p>
           <h2 id="game-migration-standard">Each game needs more than a launch button.</h2>
           <p className="lede">
-            As the rest of the DTF game library is moved into this application, every title will use the same public documentation and testing standard.
+            As the rest of the DTF game library moves into this application, every title will use the same public documentation and testing standard.
           </p>
         </div>
 
