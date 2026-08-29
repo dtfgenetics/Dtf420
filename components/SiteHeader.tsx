@@ -7,7 +7,6 @@ const navigation = [
   { href: "/games", label: "Games" },
   { href: "/community", label: "Community" },
   { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -15,11 +14,16 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="brand" href="/" aria-label="DTF Genetics home">
-          <span className="brand__mark" aria-hidden="true">DTF</span>
-          <span>DTF Genetics</span>
+          <span className="brand__mark" aria-hidden="true">
+            <span>DTF</span>
+          </span>
+          <span className="brand__identity">
+            <strong>DTF Genetics</strong>
+            <small>Dream the Future</small>
+          </span>
         </Link>
 
-        <nav aria-label="Primary navigation">
+        <nav className="site-nav" aria-label="Primary navigation">
           <ul className="nav-list">
             {navigation.map((item) => (
               <li key={item.href}>
@@ -28,6 +32,10 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
+
+        <Link className="header-action" href="/learn/search">
+          Search THC
+        </Link>
       </div>
     </header>
   );
