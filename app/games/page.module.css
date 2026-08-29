@@ -272,6 +272,14 @@
   transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
 }
 
+.primaryAction::after,
+.secondaryAction::after {
+  content: "→";
+  margin-left: 8px;
+  opacity: 0.7;
+  transition: transform 150ms ease;
+}
+
 .primaryAction {
   background: var(--accent);
   color: #0d150c;
@@ -288,6 +296,13 @@
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
   transform: translateY(-2px);
+}
+
+.primaryAction:hover::after,
+.primaryAction:focus-visible::after,
+.secondaryAction:hover::after,
+.secondaryAction:focus-visible::after {
+  transform: translateX(3px);
 }
 
 .principles {
@@ -426,7 +441,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .primaryAction,
-  .secondaryAction {
+  .secondaryAction,
+  .primaryAction::after,
+  .secondaryAction::after {
     transition: none;
   }
 }
