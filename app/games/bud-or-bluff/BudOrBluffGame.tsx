@@ -71,12 +71,19 @@ export default function BudOrBluffGame() {
   const currentPlayer = players[currentPlayerIndex] || `Player ${currentPlayerIndex + 1}`;
 
   useEffect(() => {
+    let timer: number | undefined;
     try {
       const saved = window.localStorage.getItem(STATS_KEY);
-      if (saved) setLifetime(JSON.parse(saved) as LifetimeStats);
+      if (saved) {
+        const parsed = JSON.parse(saved) as LifetimeStats;
+        timer = window.setTimeout(() => setLifetime(parsed), 0);
+      }
     } catch {
       // Local storage is optional; game play should never depend on it.
     }
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
   }, []);
 
   const persistLifetime = useCallback((next: LifetimeStats) => {
@@ -134,12 +141,15 @@ export default function BudOrBluffGame() {
 
   useEffect(() => {
     if (phase !== "playing" || revealed || !timerEnabled || !currentCard) return;
-    if (timeLeft <= 0) {
-      resolveGuess(null);
-      return;
-    }
 
-    const timer = window.setTimeout(() => setTimeLeft((value) => value - 1), 1000);
+    const timer = window.setTimeout(() => {
+      if (timeLeft <= 1) {
+        resolveGuess(null);
+      } else {
+        setTimeLeft((value) => value - 1);
+      }
+    }, 1000);
+
     return () => window.clearTimeout(timer);
   }, [currentCard, phase, resolveGuess, revealed, timeLeft, timerEnabled]);
 
@@ -159,7 +169,8 @@ export default function BudOrBluffGame() {
 
   const startGame = () => {
     const normalizedPlayers = players.map((name, index) => name.trim() || `Player ${index + 1}`);
-    const nextDeck = buildBalancedDeck(roundCount, difficulty);
+    const eligibleCount = budOrBluffCards.filter((card) => difficulty === "All" || card.difficulty === difficulty).length;
+    const nextDeck = buildBalancedDeck(Math.min(roundCount, eligibleCount), difficulty);
     setPlayers(normalizedPlayers);
     setDeck(nextDeck);
     setScores(normalizedPlayers.map(() => 0));
@@ -266,7 +277,10 @@ export default function BudOrBluffGame() {
 
             <div className={styles.poolReadout}>
               <strong>{budOrBluffPoolStats.total}</strong> curated cards · <strong>{budOrBluffPoolStats.bud}</strong> BUD · <strong>{budOrBluffPoolStats.bluff}</strong> BLUFF
-              <small>{availableForFilter} cards match the selected difficulty.</small>
+              <small>
+                {availableForFilter} cards match the selected difficulty.
+                {roundCount > availableForFilter ? ` This mode will use all ${availableForFilter} available cards.` : ""}
+              </small>
             </div>
 
             <button className={styles.primaryButton} type="button" onClick={startGame}>
