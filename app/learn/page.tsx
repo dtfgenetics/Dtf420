@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildEducationMetadata } from "@/lib/education-seo";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Teaching Healthy Cultivation",
@@ -28,7 +29,7 @@ const primaryLearning = [
     action: "Explore the plant",
     variant: "atlas",
   },
-];
+] as const;
 
 const diagnosticPaths = [
   {
@@ -90,8 +91,8 @@ const referencePaths = [
 export default function LearnPage() {
   return (
     <>
-      <section className="learn-hero shell page-section">
-        <div className="learn-hero__copy">
+      <section className={`${styles.hero} shell page-section`}>
+        <div className={styles.heroCopy}>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Understand the plant, not just the recipe.</h1>
           <p className="lede">
@@ -113,10 +114,14 @@ export default function LearnPage() {
           </p>
         </div>
 
-        <div className="learn-primary-grid">
+        <div className={styles.primaryGrid}>
           {primaryLearning.map((item) => (
-            <Link className={`learn-primary-card learn-primary-card--${item.variant}`} href={item.href} key={item.href}>
-              <span className="learn-primary-card__number">{item.number}</span>
+            <Link
+              className={`${styles.primaryCard} ${item.variant === "academy" ? styles.primaryCardAcademy : styles.primaryCardAtlas}`}
+              href={item.href}
+              key={item.href}
+            >
+              <span className={styles.primaryNumber}>{item.number}</span>
               <div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
@@ -126,7 +131,7 @@ export default function LearnPage() {
           ))}
         </div>
 
-        <Link className="learn-search-strip" href="/learn/search">
+        <Link className={styles.searchStrip} href="/learn/search">
           <span>
             <small>Know the question, not the library?</small>
             <strong>Search lessons, symptoms, plant health, field tools, and evidence.</strong>
@@ -135,7 +140,7 @@ export default function LearnPage() {
         </Link>
       </section>
 
-      <section className="learn-diagnostic-band" aria-labelledby="learn-diagnose">
+      <section className={styles.diagnosticBand} aria-labelledby="learn-diagnose">
         <div className="shell">
           <div className="section-heading">
             <p className="eyebrow">Diagnose and investigate</p>
@@ -145,10 +150,10 @@ export default function LearnPage() {
             </p>
           </div>
 
-          <div className="learn-diagnostic-grid">
+          <div className={styles.diagnosticGrid}>
             {diagnosticPaths.map((item, index) => (
-              <Link className="learn-diagnostic-card" href={item.href} key={item.href}>
-                <span className="learn-diagnostic-card__index">0{index + 1}</span>
+              <Link className={styles.diagnosticCard} href={item.href} key={item.href}>
+                <span className={styles.diagnosticIndex}>0{index + 1}</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 <strong>{item.action} →</strong>
@@ -167,9 +172,9 @@ export default function LearnPage() {
           </p>
         </div>
 
-        <div className="learn-reference-list">
+        <div className={styles.referenceList}>
           {referencePaths.map((item) => (
-            <Link className="learn-reference-row" href={item.href} key={item.href}>
+            <Link className={styles.referenceRow} href={item.href} key={item.href}>
               <strong>{item.title}</strong>
               <p>{item.description}</p>
               <span aria-hidden="true">Open →</span>
