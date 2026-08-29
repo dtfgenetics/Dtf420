@@ -80,7 +80,7 @@ test("Evidence library is public and includes abiotic diagnostic sources", async
   await expect(page.getByText("Peer-reviewed research", { exact: true }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /Hop Latent Viroid: A Hidden Threat to the Cannabis Industry/i })).toBeVisible();
   await expect(page.locator('a[href="https://ipm.ucanr.edu/home-and-landscape/aeration-deficit/"]')).toBeVisible();
-  await expect(page.locator('a[href="https://extension.umn.edu/plant-diseases/phytotoxicity-chemical-damage-garden-plants"]')).toBeVisible();
+  await expect(page.locator('a[href="https://extension.umd.edu/resource/phytotoxicity-chemical-damage-garden-plants"]')).toBeVisible();
   await expectCanonical(page, "/learn/sources");
   await expectNoHorizontalOverflow(page);
 });
@@ -113,7 +113,7 @@ test("Expanded symptom differential renders evidence and structured metadata", a
   await page.goto(path, { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { name: "Corky Blisters, Bumps & Edema-Like Lesions", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Discriminating checks", exact: true })).toBeVisible();
-  await expect(page.locator('a[href="https://extension.umn.edu/plant-diseases/drowning-and-edema"]')).toBeVisible();
+  await expect(page.locator('a[href="https://extension.illinois.edu/plant-problems/drowning-and-edema"]')).toBeVisible();
   await expect(page.getByRole("heading", { name: "Visual study guide", exact: true })).toBeVisible();
   await expectCanonical(page, path);
   await expectLearningResourceJsonLd(page);
