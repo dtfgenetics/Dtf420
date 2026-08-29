@@ -20,7 +20,7 @@ const startHere = [
   },
   {
     eyebrow: "Interactive plant science",
-    title: "Living Plant Atlas",
+    title: "THC Living Plant Atlas",
     description:
       "Explore anatomy, physiology, environment, reproductive biology, trichomes, diagnostics, and whole-plant relationships through connected visual lessons.",
     href: "/learn/atlas",
@@ -28,7 +28,7 @@ const startHere = [
   },
   {
     eyebrow: "Find a specific answer",
-    title: "Search THC",
+    title: "Search Teaching Healthy Cultivation",
     description:
       "Search lessons, symptom references, plant-health material, cultivation science, field tools, and evidence sources from one education index.",
     href: "/learn/search",
