@@ -1,33 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import projects from "@/content/genetics-projects.json";
 
 export const metadata: Metadata = {
   title: "Genetics",
   description:
     "Explore DTF Genetics breeding projects, lineages, generation history, selection goals, and documented project records.",
 };
-
-const projects = [
-  {
-    name: "Blue Mango",
-    lineage: "Somango XXL × Blueberry Butcher",
-    summary: "Flagship DTF breeding line selected around vigorous growth, branching, resin production, and a blueberry-to-ripe-mango aromatic direction.",
-  },
-  {
-    name: "Mango Bubbles",
-    lineage: "Blue Mango × Blue Bubblegum",
-    summary: "A DTF project combining the Blue Mango line with Blue Bubblegum to preserve documented parentage and build a distinct next-generation family.",
-  },
-  {
-    name: "Blue Bubblegum",
-    lineage: "Bubblegum Kush × Blueberry Butcher",
-    summary: "A documented DTF cross connecting Bubblegum Kush with the Blueberry Butcher breeding parent.",
-  },
-  {
-    name: "Blueberry Butcher",
-    lineage: "Blueberry Muffin × Jack Herer",
-    summary: "A foundational DTF parent used across multiple breeding projects and preserved as a permanent lineage record.",
-  },
-];
 
 export default function GeneticsPage() {
   return (
@@ -40,12 +19,13 @@ export default function GeneticsPage() {
 
       <div className="card-grid" style={{ marginTop: 34 }}>
         {projects.map((project) => (
-          <article className="feature-card" key={project.name}>
-            <p className="eyebrow">Documented breeding line</p>
+          <Link className="feature-card" href={`/seeds/${project.slug}`} key={project.slug}>
+            <p className="eyebrow">{project.status}</p>
             <h3>{project.name}</h3>
             <p><strong>Lineage:</strong> {project.lineage}</p>
             <p>{project.summary}</p>
-          </article>
+            <span>Open breeding record →</span>
+          </Link>
         ))}
       </div>
 
@@ -54,7 +34,7 @@ export default function GeneticsPage() {
           <p className="eyebrow">Record standard</p>
           <h2 id="genetics-record-standard">Every project needs a complete history.</h2>
           <p className="lede">
-            The next expansion will turn each project into its own record with parent profiles, generation-by-generation notes, selection criteria, phenotype observations, flowering and structure notes, photo documentation, related offspring, packaging references, release history, and clear current status.
+            These permanent project URLs are designed to expand with parent profiles, generation-by-generation notes, selection criteria, phenotype observations, flowering and structure notes, photo documentation, related offspring, packaging references, release history, and clear current status without losing the underlying lineage record.
           </p>
         </div>
       </section>
