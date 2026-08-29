@@ -2,18 +2,20 @@ import fs from "node:fs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
 
-const caseBank = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), "content/atlas-diagnostic-cases.json"), "utf8"),
-);
+const caseBank = [
+  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-diagnostic-cases.json"), "utf8")),
+  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-diagnostic-cases-expanded.json"), "utf8")),
+];
 
 async function expectNoHorizontalOverflow(page) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("Diagnostic Case Lab renders all six cases and keeps lesson links live", async ({ page, request }) => {
+test("Diagnostic Case Lab renders the complete case bank and keeps lesson links live", async ({ page, request }) => {
   await page.goto("/learn/atlas/cases", { waitUntil: "networkidle" });
   await expect(page.locator('section[aria-label="Diagnostic case lab introduction"]')).toContainText("Reason from evidence before naming a cause.");
+  await expect(page.getByRole("navigation", { name: "Atlas diagnostic cases" }).getByRole("button")).toHaveCount(caseBank.length);
 
   for (const diagnosticCase of caseBank) {
     const selector = page.getByRole("button", { name: new RegExp(diagnosticCase.title, "i") });
