@@ -2,17 +2,16 @@
 
 ## Current rule
 
-Do not replace the existing `dtf420.com` website during bootstrap.
+Treat domain cutover as a separate release step from merging application code. The application uses `https://dtfseeds.com` as its canonical production origin, but production traffic should move only after the candidate build has passed the repository gates and a staging deployment has been checked on the target host.
 
-The new application must pass:
+A release candidate must pass:
 
-1. `npm run lint`
-2. `npm run typecheck`
-3. `npm run build`
-4. Browser verification on desktop and mobile
-5. Hostinger staging deployment verification
+1. `npm run verify` — content/data integrity checks, lint, typecheck, and production build
+2. Browser QA on desktop and mobile
+3. Hostinger staging deployment verification
+4. Smoke tests for primary routes, canonical metadata, sitemap/robots output, and playable game routes
 
-Only after those checks pass should the production domain be switched.
+Do not bypass a failing gate to perform a domain cutover.
 
 ## Hostinger target
 
@@ -22,11 +21,22 @@ The web application is designed for Hostinger Business Web Hosting as a Node.js 
 - Build command: `npm run build`
 - Start command: `npm run start`
 - Repository: `dtfgenetics/Dtf420`
+- Canonical production origin: `https://dtfseeds.com`
 
-## Security hold
+## Security baseline
 
-On August 20, 2026, Next.js announced a scheduled August 26 security release covering the 16.3 and 15.5 lines, including one critical issue. This bootstrap uses the current 16.3 line for compatibility testing, but it must not be exposed as a production deployment until the security patch is applied and verification passes again.
+The August 2026 Next.js security release was published on August 25, 2026. Next.js 16.3.3 is the patched Active LTS release for the two Critical vulnerabilities disclosed in that release. This repository is pinned to `next` 16.3.3 and `eslint-config-next` 16.3.3, so the earlier pre-release security hold no longer applies.
+
+Security status must still be re-evaluated before a production cutover whenever framework dependencies change or a new vendor security advisory is published. A successful historical build is not sufficient evidence after a security-sensitive dependency change.
+
+Vendor references:
+
+- https://nextjs.org/blog
+- https://github.com/vercel/next.js/security/advisories/GHSA-p293-qw3h-jr36
+- https://github.com/vercel/next.js/security/advisories/GHSA-2xp9-vwfh-vxw4
 
 ## Rollback
 
-The existing public DTF420 site remains untouched until the replacement has been verified. Domain cutover is a separate operation from code deployment.
+Keep the previously working production deployment available until the replacement release has passed staging verification and post-cutover smoke tests. Domain/DNS changes and application deployment should remain independently reversible where the hosting setup allows it.
+
+If post-cutover checks fail, restore traffic to the last verified deployment before diagnosing nonessential follow-up work.
