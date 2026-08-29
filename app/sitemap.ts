@@ -13,6 +13,7 @@ import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
 import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
 import symptomLibrary from "@/content/symptom-differential-library.json";
 import learningTools from "@/content/learning-tools.json";
+import geneticsProjects from "@/content/genetics-projects.json";
 
 const BASE_URL = "https://dtfseeds.com";
 
@@ -61,6 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/contact", 0.65, "monthly"),
   ];
 
+  const genetics = geneticsProjects.map((project) => item(`/seeds/${project.slug}`, 0.82, "monthly"));
   const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
 
   const plantHealth = [...plantHealthCore, ...plantHealthExpanded].map((entry) =>
@@ -89,7 +91,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  const all = [...staticRoutes, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
+  const all = [...staticRoutes, ...genetics, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
   const unique = new Map(all.map((entry) => [entry.url, entry]));
   return [...unique.values()];
 }
