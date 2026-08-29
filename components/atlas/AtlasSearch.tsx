@@ -9,6 +9,7 @@ import growthStages from "@/content/atlas-growth-stages.json";
 import overlays from "@/content/atlas-overlays.json";
 import guidedPaths from "@/content/atlas-guided-paths.json";
 import diagnosticCases from "@/content/atlas-diagnostic-cases.json";
+import diagnosticCasesExpanded from "@/content/atlas-diagnostic-cases-expanded.json";
 import styles from "./AtlasSearch.module.css";
 
 type SearchKind = "Lesson" | "Plant system" | "Lifecycle stage" | "Environment factor" | "Diagnostic zone" | "Guided path" | "Diagnostic case" | "Tool";
@@ -126,7 +127,7 @@ const pathItems: SearchItem[] = guidedPaths.map((path) => ({
   terms: `${path.outcome} ${path.lessons.join(" ")}`,
 }));
 
-const caseItems: SearchItem[] = diagnosticCases.map((diagnosticCase) => ({
+const caseItems: SearchItem[] = [...diagnosticCases, ...diagnosticCasesExpanded].map((diagnosticCase) => ({
   kind: "Diagnostic case" as const,
   title: diagnosticCase.title,
   context: diagnosticCase.focus,
@@ -187,7 +188,7 @@ const toolItems: SearchItem[] = [
     context: "Observation-first reasoning",
     summary: "Practice choosing discriminating measurements and inspections instead of guessing a diagnosis from appearance.",
     href: "/learn/atlas/cases",
-    terms: "symptoms diagnose diagnosis yellow leaves droop wilt tip burn chlorosis case plant problem",
+    terms: "symptoms diagnose diagnosis yellow leaves droop wilt tip burn chlorosis edema herbicide stippling flower rot case plant problem",
   },
   {
     kind: "Tool",
@@ -233,7 +234,7 @@ const searchItems = [
   ...caseItems,
   ...toolItems,
 ];
-const examples = ["VPD", "root oxygen", "cotyledon", "maturation", "one branch", "trichomes"];
+const examples = ["VPD", "root oxygen", "edema", "herbicide drift", "stippling", "flower rot"];
 
 function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
   const query = normalize(rawQuery);
@@ -292,7 +293,7 @@ export function AtlasSearch() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try VPD, root oxygen, cotyledon, maturation, one branch…"
+            placeholder="Try VPD, root oxygen, edema, herbicide drift, stippling…"
             autoComplete="off"
           />
           {query ? <button type="button" onClick={() => setQuery("")} aria-label="Clear Atlas search">Clear</button> : null}
