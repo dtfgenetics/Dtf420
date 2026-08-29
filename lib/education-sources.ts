@@ -1,7 +1,9 @@
-import sources from "@/content/education-sources.json";
+import coreSources from "@/content/education-sources.json";
+import abioticSources from "@/content/education-sources-abiotic.json";
 import sourceMap from "@/content/education-source-map.json";
 import atlasSourceDefaults from "@/content/atlas-source-defaults.json";
 
+const sources = [...coreSources, ...abioticSources];
 type EducationSource = (typeof sources)[number];
 type SourceMap = Record<string, string[]>;
 
