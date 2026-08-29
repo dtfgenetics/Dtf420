@@ -10,10 +10,10 @@ const exploreLinks = [
 ];
 
 const learningLinks = [
-  { href: "/learn/academy", label: "THC Academy" },
-  { href: "/learn/atlas", label: "Living Plant Atlas" },
-  { href: "/learn/plant-health", label: "Plant Health & IPM" },
-  { href: "/learn/sources", label: "Evidence & sources" },
+  { href: "/learn/academy", label: "Academy" },
+  { href: "/learn/atlas", label: "Plant Atlas" },
+  { href: "/learn/plant-health", label: "Plant health & IPM" },
+  { href: "/learn/sources", label: "Evidence sources" },
 ];
 
 export function SiteFooter() {
