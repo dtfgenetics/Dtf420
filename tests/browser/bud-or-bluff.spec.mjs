@@ -39,7 +39,7 @@ test("Bud or Bluff plays a complete guess-and-reveal turn", async ({ page }) => 
 
 test("Games hub exposes Bud or Bluff as a playable game", async ({ page }) => {
   await page.goto("/games", { waitUntil: "networkidle" });
-  const link = page.getByRole("link", { name: "Play now" });
+  const link = page.getByRole("link", { name: "Play Bud or Bluff", exact: true });
   await expect(link).toHaveAttribute("href", "/games/bud-or-bluff");
   await expectNoHorizontalOverflow(page);
 });
