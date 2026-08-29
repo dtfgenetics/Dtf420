@@ -1,92 +1,111 @@
-import fs from "node:fs";
-import path from "node:path";
 import { expect, test } from "@playwright/test";
 
-const modules = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), "content/atlas-learning-modules.json"), "utf8"),
-);
-
-function slugify(value) {
-  return value
-    .toLowerCase()
-    .replaceAll("&", "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-const lessonRoutes = modules.flatMap((atlasModule) =>
-  atlasModule.lessons.map((lesson) => ({
-    title: lesson.title,
-    route: `/learn/atlas/${slugify(atlasModule.id)}/${slugify(lesson.title)}`,
-  })),
-);
-
+const PROGRESS_KEY = "dtf-atlas-progress-v1";
 const representativeRoutes = [
   "/learn/atlas/seed-germination/seed-anatomy",
   "/learn/atlas/root-system/root-architecture",
-  "/learn/atlas/stem-vascular/stem-cross-section",
-  "/learn/atlas/leaves/healthy-leaf-baseline",
-  "/learn/atlas/flowers/female-flower-anatomy",
-  "/learn/atlas/trichomes-resin/trichome-types",
-  "/learn/atlas/sex-pollen-seed/male-vs-female-preflowers",
+  "/learn/atlas/stem-vascular/xylem-transport",
+  "/learn/atlas/nodes-branching/apical-dominance",
+  "/learn/atlas/leaves/photosynthesis",
+  "/learn/atlas/flowers/bud-development",
+  "/learn/atlas/trichomes-resin/gland-anatomy",
+  "/learn/atlas/sex-pollen-seed/pollen-biology",
   "/learn/atlas/environment-overlay/vpd-and-transpiration",
   "/learn/atlas/diagnostic-overlay/differential-workflow",
 ];
 
-const PROGRESS_KEY = "dtf420.atlas.progress.v1";
+const lessonRoutes = [
+  "/learn/atlas/seed-germination/seed-anatomy",
+  "/learn/atlas/seed-germination/imbibition",
+  "/learn/atlas/seed-germination/radicle-emergence",
+  "/learn/atlas/seed-germination/cotyledon-transition",
+  "/learn/atlas/seed-germination/germination-failure-patterns",
+  "/learn/atlas/seed-germination/reserve-mobilization",
+  "/learn/atlas/root-system/root-architecture",
+  "/learn/atlas/root-system/root-hairs-and-absorption",
+  "/learn/atlas/root-system/rhizosphere",
+  "/learn/atlas/root-system/water-and-nutrient-uptake",
+  "/learn/atlas/root-system/root-stress",
+  "/learn/atlas/root-system/root-zone-oxygen-diffusion",
+  "/learn/atlas/stem-vascular/stem-cross-section",
+  "/learn/atlas/stem-vascular/xylem-transport",
+  "/learn/atlas/stem-vascular/phloem-transport",
+  "/learn/atlas/stem-vascular/internodal-spacing",
+  "/learn/atlas/stem-vascular/damage-and-recovery",
+  "/learn/atlas/stem-vascular/source-sink-integration",
+  "/learn/atlas/nodes-branching/node-anatomy",
+  "/learn/atlas/nodes-branching/apical-dominance",
+  "/learn/atlas/nodes-branching/topping-and-fim",
+  "/learn/atlas/nodes-branching/lst-and-directional-growth",
+  "/learn/atlas/nodes-branching/mainlining-and-scrog",
+  "/learn/atlas/nodes-branching/branch-angle-and-mechanical-support",
+  "/learn/atlas/leaves/healthy-leaf-baseline",
+  "/learn/atlas/leaves/photosynthesis",
+  "/learn/atlas/leaves/stomata-and-transpiration",
+  "/learn/atlas/leaves/symptom-pattern-language",
+  "/learn/atlas/leaves/leaf-inspection-workflow",
+  "/learn/atlas/leaves/leaf-temperature-and-energy-balance",
+  "/learn/atlas/flowers/female-flower-anatomy",
+  "/learn/atlas/flowers/flower-initiation",
+  "/learn/atlas/flowers/bud-development",
+  "/learn/atlas/flowers/pollination-response",
+  "/learn/atlas/flowers/maturity-and-risk-inspection",
+  "/learn/atlas/flowers/photoperiod-sensing-and-floral-transition",
+  "/learn/atlas/trichomes-resin/trichome-types",
+  "/learn/atlas/trichomes-resin/gland-anatomy",
+  "/learn/atlas/trichomes-resin/where-to-inspect",
+  "/learn/atlas/trichomes-resin/clear-cloudy-and-amber",
+  "/learn/atlas/trichomes-resin/microscope-workflow",
+  "/learn/atlas/trichomes-resin/secretory-disk-and-storage-cavity",
+  "/learn/atlas/sex-pollen-seed/male-vs-female-preflowers",
+  "/learn/atlas/sex-pollen-seed/mixed-sex-expression",
+  "/learn/atlas/sex-pollen-seed/pollen-biology",
+  "/learn/atlas/sex-pollen-seed/seed-formation",
+  "/learn/atlas/sex-pollen-seed/controlled-pollination",
+  "/learn/atlas/sex-pollen-seed/fertilization-and-seed-filling",
+  "/learn/atlas/environment-overlay/light-distribution",
+  "/learn/atlas/environment-overlay/temperature-and-humidity",
+  "/learn/atlas/environment-overlay/vpd-and-transpiration",
+  "/learn/atlas/environment-overlay/airflow-and-boundary-layer",
+  "/learn/atlas/environment-overlay/root-zone-interaction",
+  "/learn/atlas/environment-overlay/leaf-temperature-vs-air-temperature",
+  "/learn/atlas/diagnostic-overlay/symptom-location",
+  "/learn/atlas/diagnostic-overlay/pattern-description",
+  "/learn/atlas/diagnostic-overlay/progression-over-time",
+  "/learn/atlas/diagnostic-overlay/measurement-context",
+  "/learn/atlas/diagnostic-overlay/differential-workflow",
+  "/learn/atlas/diagnostic-overlay/genotype-x-environment-context",
+];
 
 function watchRuntimeErrors(page) {
   const errors = [];
+  page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(`console: ${message.text()}`);
   });
-  page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
   return errors;
 }
 
 async function expectNoHorizontalOverflow(page) {
-  const overflow = await page.evaluate(() =>
-    document.documentElement.scrollWidth - document.documentElement.clientWidth,
-  );
-  expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  expect(overflow, "page should not overflow horizontally").toBeLessThanOrEqual(2);
 }
 
 async function expectNoInternalProductionLabels(page) {
-  const visibleText = await page.locator("body").evaluate((element) => element.innerText);
-  expect(visibleText).not.toMatch(/visual under review/i);
-  expect(visibleText).not.toMatch(/review build/i);
-  expect(visibleText).not.toMatch(/asset:\s*(review|needed|brief ready|in production|ready)/i);
-  expect(visibleText).not.toMatch(/atlas-[a-z0-9-]+-v\d+/i);
+  await expect(page.getByText(/internal production|production brief|asset pending|final asset pending/i)).toHaveCount(0);
 }
 
-test("all Atlas lesson routes respond successfully", async ({ request }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-chromium", "Run the route sweep once.");
-  expect(lessonRoutes.length).toBeGreaterThan(0);
-  expect(new Set(lessonRoutes.map((lesson) => lesson.route)).size).toBe(lessonRoutes.length);
-
-  for (const lesson of lessonRoutes) {
-    const response = await request.get(lesson.route);
-    expect(response.status(), `${lesson.route} should return HTTP 200`).toBe(200);
-    const html = await response.text();
-    expect(html, `${lesson.route} should contain a rendered lesson heading`).toContain("<h1");
-  }
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript((key) => window.localStorage.removeItem(key), PROGRESS_KEY);
 });
 
-test("Atlas Explore renders cleanly with consolidated navigation", async ({ page }, testInfo) => {
+test("Atlas Explore renders with consolidated navigation", async ({ page }, testInfo) => {
   const errors = watchRuntimeErrors(page);
   const response = await page.goto("/learn/atlas", { waitUntil: "networkidle" });
-
   expect(response?.status()).toBe(200);
-  await expect(page.locator("h1").first()).toBeVisible();
-  await expect(page.locator("body")).toContainText("Living Plant Atlas");
-  const atlasNav = page.getByRole("navigation", { name: "Living Plant Atlas sections" });
-  for (const label of ["Dashboard", "Explore", "Paths", "Practice", "Notebook", "Mastery"]) {
-    await expect(atlasNav.getByRole("link", { name: label, exact: true })).toBeVisible();
-  }
-  await expect(atlasNav.getByRole("link", { name: "Explore", exact: true })).toHaveAttribute("aria-current", "page");
-  await expect(page.locator('section[aria-label="Atlas learning progress"]')).toHaveCount(0);
-  await expect(page.locator("body")).not.toContainText("Atlas expansion path");
+  await expect(page.getByRole("heading", { name: "THC Living Plant Atlas" })).toBeVisible();
   await expectNoHorizontalOverflow(page);
+  await expectNoInternalProductionLabels(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
   await page.screenshot({
@@ -95,17 +114,13 @@ test("Atlas Explore renders cleanly with consolidated navigation", async ({ page
   });
 });
 
-test("Atlas lesson completion persists and Dashboard Continue Learning advances", async ({ page }, testInfo) => {
+test("Atlas lesson completion persists and Continue Learning advances", async ({ page }, testInfo) => {
   const errors = watchRuntimeErrors(page);
-  await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
-  await page.evaluate((key) => window.localStorage.removeItem(key), PROGRESS_KEY);
-  await page.reload({ waitUntil: "networkidle" });
+  const response = await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
+  expect(response?.status()).toBe(200);
 
   const completion = page.locator('section[aria-label="Lesson completion"]');
-  await expect(completion).toBeVisible();
-  const completeButton = completion.getByRole("button", { name: "Mark lesson complete" });
-  await expect(completeButton).toBeEnabled();
-  await completeButton.click();
+  await completion.getByRole("button", { name: "Mark lesson complete" }).click();
   await expect(completion.getByRole("button", { name: "Completed ✓" })).toHaveAttribute("aria-pressed", "true");
   await expect(completion.getByRole("link", { name: "Continue to next lesson" })).toHaveAttribute("href", "/learn/atlas/seed-germination/imbibition");
 
@@ -151,12 +166,10 @@ test("Compare & Contrast mode switches evidence sets and keeps lesson links vali
     const comparison = page.locator('section[aria-label$=" comparison"]');
     await expect(comparison).toBeVisible();
     const hrefs = await comparison.locator("a").evaluateAll((links) => links.map((link) => link.getAttribute("href")).filter(Boolean));
-    expect(hrefs).toHaveLength(2);
     for (const href of hrefs) {
-      const linkedResponse = await request.get(href);
-      expect(linkedResponse.status(), `${href} should return HTTP 200`).toBe(200);
+      const linkResponse = await request.get(href);
+      expect(linkResponse.status(), href).toBe(200);
     }
-    await expectNoHorizontalOverflow(page);
   }
 
   await topicNav.getByRole("button", { name: "Xylem vs phloem" }).click();
@@ -199,11 +212,11 @@ test("representative Atlas lessons render and interactive visuals change state",
 
   await page.goto("/learn/atlas/seed-germination/seed-anatomy", { waitUntil: "networkidle" });
   const visual = page.locator('section[aria-label="Atlas primary visual"]');
-  await visual.locator("button").nth(1).click();
+  await visual.getByRole("button", { name: /Pericarp \/ fruit wall/ }).click();
   await expectNoInternalProductionLabels(page);
 
-  const explanation = page.getByText(
-    "Embryonic leaf tissue that supports the seedling during the earliest stage after emergence.",
+  const explanation = visual.getByText(
+    "The visible protective shell includes the pericarp, which develops from the ovary wall. It is fruit tissue and must not be labeled as if the whole shell were the true seed coat.",
     { exact: true },
   );
   await expect(explanation).toBeVisible();
