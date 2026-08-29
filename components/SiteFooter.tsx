@@ -43,7 +43,7 @@ export function SiteFooter() {
         </div>
 
         <div className="site-footer__column">
-          <h2>Learn</h2>
+          <h2>Learning</h2>
           <ul>
             {learningLinks.map((item) => (
               <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
