@@ -58,6 +58,8 @@
   border: 1px solid var(--border);
   border-radius: 18px;
   background: var(--surface);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 240px;
 }
 
 .card h2 {
