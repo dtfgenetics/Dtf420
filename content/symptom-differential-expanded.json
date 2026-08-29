@@ -1,0 +1,222 @@
+[
+  {
+    "slug": "corky-blisters-and-leaf-bumps",
+    "title": "Corky Blisters, Bumps & Edema-Like Lesions",
+    "summary": "Raised blisters or corky bumps can result from edema or intumescence, but similar surface changes may also come from pests, chemical injury, residue, or disease. Texture and environmental history are important discriminators.",
+    "patternQuestions": [
+      "Are bumps concentrated on lower leaf surfaces, petioles, or stems?",
+      "Do fresh lesions begin as translucent or raised blisters and later become corky?",
+      "Were nights or low-light periods unusually humid with a wet root zone?",
+      "Are mites, insects, fungal structures, or residue visible under magnification?"
+    ],
+    "possibleCategories": [
+      "Edema or intumescence",
+      "Microscopic pest injury",
+      "Phytotoxicity or spray residue",
+      "Leaf-spot or other disease",
+      "Genetic or developmental texture"
+    ],
+    "discriminatingChecks": [
+      "Inspect both leaf surfaces with magnification",
+      "Review irrigation timing, RH, airflow, and nighttime conditions",
+      "Track whether new lesions stop forming after moisture and transpiration balance improves",
+      "Compare multiple plants and cultivars for susceptibility"
+    ],
+    "redFlags": [
+      "Moving pests or eggs present",
+      "Lesions rapidly expanding or crossing into stems",
+      "Sporulation or soft tissue decay",
+      "Whole-crop progression independent of environmental changes"
+    ],
+    "visualNeeds": [
+      "Fresh blister versus corky lesion timeline",
+      "Lower-leaf-surface locator",
+      "Edema versus mite injury comparison",
+      "Humidity-irrigation context panel"
+    ]
+  },
+  {
+    "slug": "bronzing-stippling-and-surface-scarring",
+    "title": "Bronzing, Stippling & Surface Scarring",
+    "summary": "Fine pale dots, bronzing, silvering, or surface scars often trigger a pest suspicion, but spray injury, abrasion, and environmental damage can create similar patterns. Direct evidence of the causal organism matters.",
+    "patternQuestions": [
+      "Are individual pale feeding points visible or is the tissue uniformly bronzed?",
+      "Are symptoms stronger on leaf undersides, along veins, or in exposed canopy zones?",
+      "Are webbing, fecal specks, cast skins, eggs, or mobile arthropods present?",
+      "Did the pattern appear after a spray, handling event, or environmental shift?"
+    ],
+    "possibleCategories": [
+      "Spider mites",
+      "Thrips",
+      "Broad or russet mites",
+      "Chemical or spray injury",
+      "Mechanical abrasion",
+      "High-light or heat-associated surface injury"
+    ],
+    "discriminatingChecks": [
+      "Inspect leaf undersides and symptom edges with adequate magnification",
+      "Compare pest signs with the damage rather than diagnosing from scars alone",
+      "Review spray and handling history",
+      "Map injury against canopy exposure and airflow"
+    ],
+    "redFlags": [
+      "Rapid population increase of confirmed pests",
+      "Webbing or abundant eggs",
+      "Severe distortion of new growth",
+      "Damage spreading among plants without a shared spray or handling event"
+    ],
+    "visualNeeds": [
+      "Mite stippling versus thrips silvering plate",
+      "Bronzing close-up",
+      "Pest-sign checklist",
+      "Spray-abrasion look-alike comparison"
+    ]
+  },
+  {
+    "slug": "leaf-cupping-strapping-and-epinasty",
+    "title": "Leaf Cupping, Strapping & Epinasty",
+    "summary": "Severely twisted, narrowed, cupped, or downward-bent new growth can arise from herbicide exposure, microscopic mites, root-zone or micronutrient stress, systemic pathogens, or other developmental injury. Distribution and exposure history are critical.",
+    "patternQuestions": [
+      "Is the newest growth disproportionately affected?",
+      "Do multiple plant species show a similar pattern in the same location?",
+      "Is there a spatial gradient toward an intake, edge, doorway, or treated area?",
+      "Are microscopic mites or eggs present on growing tips?"
+    ],
+    "possibleCategories": [
+      "Herbicide drift or growth-regulator exposure",
+      "Broad or russet mites",
+      "Root-zone chemistry or micronutrient availability",
+      "Systemic pathogen",
+      "Other phytotoxicity",
+      "Genetic or developmental abnormality"
+    ],
+    "discriminatingChecks": [
+      "Map the symptom across the room, field, and nearby non-crop plants",
+      "Inspect growing tips with high magnification",
+      "Review nearby herbicide use and sprayer or ventilation history",
+      "Measure root-zone pH and EC",
+      "Use pathogen testing when propagation-linked systemic disease remains plausible"
+    ],
+    "redFlags": [
+      "Multiple species injured along the same exposure gradient",
+      "Microscopic pest confirmed",
+      "Shoot-tip death",
+      "Symptoms recurring through a propagation chain"
+    ],
+    "visualNeeds": [
+      "Cupping-versus-strapping vocabulary plate",
+      "Herbicide versus mite comparison",
+      "Exposure-gradient map",
+      "Growing-tip inspection guide"
+    ]
+  },
+  {
+    "slug": "sudden-post-spray-speckling-and-scorch",
+    "title": "Sudden Post-Spray Speckling & Scorch",
+    "summary": "Spotting, bleaching, or scorch that appears after a foliar application should be investigated as a possible exposure event before being labeled disease or deficiency. Droplet pattern and timing are especially useful clues.",
+    "patternQuestions": [
+      "Did symptoms begin within a plausible interval after a spray or chemical application?",
+      "Does injury match droplet coverage, treated zones, or exposed leaf surfaces?",
+      "Were lights, temperature, or humidity unusually intense around application time?",
+      "Did untreated plants or shielded leaves remain normal?"
+    ],
+    "possibleCategories": [
+      "Phytotoxicity",
+      "Leaf-spot disease",
+      "High-light or heat injury",
+      "Mite or thrips feeding",
+      "Nutrient-related necrosis"
+    ],
+    "discriminatingChecks": [
+      "Reconstruct the spray record and tank history",
+      "Compare treated and untreated tissue",
+      "Inspect lesions with magnification for pests or fungal structures",
+      "Track whether spots remain static after the event or continue expanding"
+    ],
+    "redFlags": [
+      "Continuing lesion expansion after the exposure has ended",
+      "Sporulation or soft decay",
+      "Confirmed pest population",
+      "Repeated injury from the same tank or application process"
+    ],
+    "visualNeeds": [
+      "Droplet-pattern injury reference",
+      "Static versus expanding lesion timeline",
+      "Spray record checklist",
+      "Phytotoxicity versus pathogen comparison"
+    ]
+  },
+  {
+    "slug": "patchy-container-to-container-decline",
+    "title": "Patchy Container-to-Container Decline",
+    "summary": "When neighboring plants decline unevenly, distribution can reveal irrigation, drainage, emitter, root disease, pest, media, or placement differences that would be hidden by looking only at one symptomatic plant.",
+    "patternQuestions": [
+      "Do affected plants share an irrigation line, bench position, media batch, or runoff path?",
+      "Are containers drying at different rates?",
+      "Is the pattern clustered, random, edge-biased, or associated with one cultivar or propagation lot?",
+      "Are root symptoms similar across affected plants?"
+    ],
+    "possibleCategories": [
+      "Emitter or irrigation nonuniformity",
+      "Localized saturation or poor drainage",
+      "Root disease spread through shared water",
+      "Media inconsistency",
+      "Localized pest pressure",
+      "Environmental edge effect"
+    ],
+    "discriminatingChecks": [
+      "Measure emitter output and container moisture across the pattern",
+      "Inspect roots from affected and unaffected plants",
+      "Map the problem against irrigation zones, airflow, temperature, and runoff",
+      "Review propagation and media lot records"
+    ],
+    "redFlags": [
+      "Rapid spread along shared water routes",
+      "Severe root sloughing",
+      "Blocked or failed emitters",
+      "Clusters linked to one propagation lot"
+    ],
+    "visualNeeds": [
+      "Bench-level symptom map",
+      "Emitter-output comparison",
+      "Cluster-pattern examples",
+      "Root comparison panel"
+    ]
+  },
+  {
+    "slug": "wet-media-wilt-and-post-irrigation-droop",
+    "title": "Wet-Media Wilt & Post-Irrigation Droop",
+    "summary": "A drooping plant in wet media may have impaired root aeration or root disease rather than a water shortage. The timing of wilt relative to irrigation can completely change the differential.",
+    "patternQuestions": [
+      "Does droop begin or worsen after irrigation?",
+      "How long does the medium remain wet?",
+      "Are roots firm and actively branching or dark, soft, and reduced?",
+      "Does the plant improve as the root zone dries?"
+    ],
+    "possibleCategories": [
+      "Root-zone hypoxia",
+      "Poor drainage or chronic saturation",
+      "Pythium-associated or other root disease",
+      "High EC",
+      "Less likely true drought when the root zone is demonstrably wet"
+    ],
+    "discriminatingChecks": [
+      "Measure moisture and dryback rather than watering again by reflex",
+      "Inspect roots and drainage",
+      "Measure root-zone EC and temperature",
+      "Compare plants in faster- and slower-drying positions"
+    ],
+    "redFlags": [
+      "Root sloughing or strong decay odor",
+      "Rapid collapse across a shared irrigation system",
+      "Persistent saturation",
+      "No recovery as aeration improves"
+    ],
+    "visualNeeds": [
+      "Wet-wilt versus dry-wilt plate",
+      "Post-irrigation timeline",
+      "Root aeration diagram",
+      "Dryback comparison chart"
+    ]
+  }
+]
