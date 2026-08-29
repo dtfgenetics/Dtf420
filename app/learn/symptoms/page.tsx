@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import library from "@/content/symptom-differential-library.json";
+import coreLibrary from "@/content/symptom-differential-library.json";
+import expandedLibrary from "@/content/symptom-differential-expanded.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
+const library = [...coreLibrary, ...expandedLibrary];
+
 export const metadata: Metadata = buildEducationMetadata({
   title: "Visual Symptom Differential Library",
-  description: "Evidence-first cannabis symptom references for yellowing, chlorosis, necrosis, curling, wilting, bleaching, pigmentation, slow growth, root decline, stem lesions, and flower rot.",
+  description: "Evidence-first cannabis symptom references for yellowing, chlorosis, necrosis, curling, wilting, bleaching, pigmentation, surface injury, edema-like lesions, root decline, stem lesions, and flower rot.",
   path: "/learn/symptoms",
 });
 
@@ -29,7 +32,7 @@ export default function SymptomDifferentialPage() {
       <div className={styles.stats} aria-label="Symptom differential summary">
         <div className={styles.stat}><strong>{library.length}</strong><span>symptom differentials</span></div>
         <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.possibleCategories.length, 0)}</strong><span>plausible cause categories mapped</span></div>
-        <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.visualNeeds.length, 0)}</strong><span>diagnostic visuals specified</span></div>
+        <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.discriminatingChecks.length, 0)}</strong><span>evidence checks mapped</span></div>
       </div>
 
       <div className={styles.grid}>
