@@ -1,0 +1,449 @@
+.gamesPage {
+  padding-block: clamp(48px, 7vw, 84px) 96px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  padding: clamp(28px, 5vw, 54px);
+  border: 1px solid rgba(183, 226, 93, 0.16);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(183, 226, 93, 0.18), transparent 24rem),
+    linear-gradient(145deg, rgba(18, 38, 24, 0.98), rgba(6, 15, 9, 0.98));
+  overflow: hidden;
+}
+
+.heroCopy {
+  max-width: 780px;
+}
+
+.hero h1 {
+  margin: 10px 0 18px;
+  max-width: 860px;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.heroText {
+  max-width: 700px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.65;
+}
+
+.heroStats {
+  display: grid;
+  gap: 10px;
+  min-width: 190px;
+}
+
+.statChip {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 14px 16px;
+}
+
+.statChip strong,
+.statChip span {
+  display: block;
+}
+
+.statChip strong {
+  color: var(--accent-strong);
+  font-size: 22px;
+}
+
+.statChip span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.libraryHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 58px 0 20px;
+}
+
+.libraryHeading h2 {
+  margin: 7px 0 0;
+  font-size: clamp(34px, 5vw, 54px);
+  letter-spacing: -0.04em;
+}
+
+.libraryHeading p:last-child {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.libraryGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 18px;
+}
+
+.gameCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 560px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #0b1710;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.24);
+}
+
+.poster {
+  position: relative;
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.poster::after {
+  position: absolute;
+  inset: auto -24px -86px auto;
+  font-size: 230px;
+  font-weight: 1000;
+  line-height: 1;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.budPoster {
+  background:
+    radial-gradient(circle at 75% 25%, rgba(214, 255, 117, 0.2), transparent 18rem),
+    linear-gradient(145deg, #18351f, #09130d 72%);
+}
+
+.budPoster::after {
+  content: "?";
+}
+
+.burnPoster {
+  background:
+    linear-gradient(rgba(183, 226, 93, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(183, 226, 93, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 70% 20%, rgba(113, 171, 255, 0.14), transparent 18rem),
+    linear-gradient(145deg, #101f19, #08100c);
+  background-size: 30px 30px, 30px 30px, auto, auto;
+}
+
+.burnPoster::after {
+  content: "15";
+}
+
+.posterTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(183, 226, 93, 0.26);
+  border-radius: 999px;
+  background: rgba(7, 16, 10, 0.7);
+  color: var(--accent-strong);
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.previewStatus {
+  color: #a9caff;
+  border-color: rgba(169, 202, 255, 0.24);
+}
+
+.posterMeta {
+  color: rgba(243, 248, 244, 0.68);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.posterTitle {
+  position: relative;
+  z-index: 1;
+}
+
+.posterTitle span {
+  display: block;
+  color: rgba(243, 248, 244, 0.58);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.posterTitle strong {
+  display: block;
+  margin-top: 6px;
+  max-width: 620px;
+  font-size: clamp(46px, 7vw, 82px);
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+}
+
+.cardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.cardBody h3 {
+  margin: 0 0 9px;
+  font-size: 28px;
+  letter-spacing: -0.025em;
+}
+
+.cardBody > p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.tag {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #c4d0c7;
+  padding: 6px 9px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cardAction {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.primaryAction,
+.secondaryAction {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  padding: 0 18px;
+  font-weight: 900;
+  transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+
+.primaryAction::after,
+.secondaryAction::after {
+  content: "→";
+  margin-left: 8px;
+  opacity: 0.7;
+  transition: transform 150ms ease;
+}
+
+.primaryAction {
+  background: var(--accent);
+  color: #0d150c;
+}
+
+.secondaryAction {
+  border: 1px solid rgba(169, 202, 255, 0.3);
+  background: rgba(169, 202, 255, 0.07);
+  color: #d9e7ff;
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible,
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+  transform: translateY(-2px);
+}
+
+.primaryAction:hover::after,
+.primaryAction:focus-visible::after,
+.secondaryAction:hover::after,
+.secondaryAction:focus-visible::after {
+  transform: translateX(3px);
+}
+
+.principles {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.principlesHeader {
+  max-width: 680px;
+}
+
+.principlesHeader h2 {
+  margin: 8px 0 10px;
+  font-size: clamp(32px, 4vw, 46px);
+  letter-spacing: -0.035em;
+}
+
+.principlesHeader p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.principleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.principle {
+  min-height: 180px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.025);
+  padding: 22px;
+}
+
+.principle strong {
+  display: block;
+  color: var(--accent-strong);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.principle h3 {
+  margin: 18px 0 8px;
+  font-size: 22px;
+}
+
+.principle p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroStats {
+    grid-template-columns: repeat(3, 1fr);
+    min-width: 0;
+  }
+
+  .libraryHeading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .libraryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .gameCard {
+    min-height: 0;
+  }
+
+  .principleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .principle {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .gamesPage {
+    padding-top: 24px;
+  }
+
+  .hero {
+    padding: 24px 20px;
+    border-radius: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 15vw, 68px);
+  }
+
+  .heroStats {
+    grid-template-columns: 1fr;
+  }
+
+  .libraryHeading {
+    margin-top: 42px;
+  }
+
+  .poster {
+    min-height: 250px;
+    padding: 20px;
+  }
+
+  .posterTitle strong {
+    font-size: clamp(44px, 14vw, 64px);
+  }
+
+  .posterTop {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cardBody {
+    padding: 20px;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction,
+  .primaryAction::after,
+  .secondaryAction::after {
+    transition: none;
+  }
+}
