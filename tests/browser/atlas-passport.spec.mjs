@@ -4,6 +4,8 @@ import { expect, test } from "@playwright/test";
 
 const rawChecks = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks.json"), "utf8"));
 const badges = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-mastery-badges.json"), "utf8"));
+const LESSON_COUNT = rawChecks.length;
+const TOTAL_BADGES = badges.length + 1;
 const MASTERY_KEY = "dtf420.atlas.mastery.v1";
 
 async function setMastery(page, state) {
@@ -38,11 +40,11 @@ test("mastery passport starts locked and explains its educational scope", async 
   await page.goto("/learn/atlas/mastery", { waitUntil: "networkidle" });
 
   const summary = page.locator('section[aria-label="Atlas mastery passport summary"]');
-  await expect(summary).toContainText("0/7");
-  await expect(summary).toContainText("0/50 lesson checks mastered");
+  await expect(summary).toContainText(`0/${TOTAL_BADGES}`);
+  await expect(summary).toContainText(`0/${LESSON_COUNT} lesson checks mastered`);
   await expect(page.locator('section[aria-label="Atlas path mastery badges"] article').getByText("Locked", { exact: true })).toHaveCount(badges.length);
   await expect(page.locator('section[aria-label="Atlas mastery passport scope"]')).toContainText("not a professional license, accreditation, or regulated credential");
-  await expect(page.locator('section[aria-label="Whole Atlas mastery badge"]')).toContainText("50 checks remaining");
+  await expect(page.locator('section[aria-label="Whole Atlas mastery badge"]')).toContainText(`${LESSON_COUNT} checks remaining`);
   await expectNoHorizontalOverflow(page);
 
   await page.screenshot({
@@ -61,7 +63,7 @@ test("path quiz score unlocks the matching passport badge", async ({ page }, tes
   await page.goto("/learn/atlas/mastery", { waitUntil: "networkidle" });
 
   const summary = page.locator('section[aria-label="Atlas mastery passport summary"]');
-  await expect(summary).toContainText("1/7");
+  await expect(summary).toContainText(`1/${TOTAL_BADGES}`);
   const plantBadge = page.locator('section[aria-label="Atlas path mastery badges"] article').filter({ hasText: "Plant Systems" });
   await expect(plantBadge).toContainText("Unlocked ✓");
   await expect(plantBadge).toContainText("Best score 86%");
@@ -74,7 +76,7 @@ test("path quiz score unlocks the matching passport badge", async ({ page }, tes
   });
 });
 
-test("mastering all 50 lesson checks unlocks the whole-Atlas badge", async ({ page }, testInfo) => {
+test("mastering every lesson check unlocks the whole-Atlas badge", async ({ page }, testInfo) => {
   const lessons = Object.fromEntries(
     rawChecks.map((check) => [check.route, { attempts: 1, mastered: true, lastCorrect: true }]),
   );
@@ -82,9 +84,10 @@ test("mastering all 50 lesson checks unlocks the whole-Atlas badge", async ({ pa
   await page.goto("/learn/atlas/mastery", { waitUntil: "networkidle" });
 
   const finalBadge = page.locator('section[aria-label="Whole Atlas mastery badge"]');
+  await expect(finalBadge).toContainText(String(LESSON_COUNT));
   await expect(finalBadge).toContainText("Unlocked ✓");
   await expect(finalBadge).toContainText("All lesson checks mastered");
-  await expect(page.locator('section[aria-label="Atlas mastery passport summary"]')).toContainText("50/50 lesson checks mastered");
+  await expect(page.locator('section[aria-label="Atlas mastery passport summary"]')).toContainText(`${LESSON_COUNT}/${LESSON_COUNT} lesson checks mastered`);
   await expectNoHorizontalOverflow(page);
 
   await page.screenshot({
