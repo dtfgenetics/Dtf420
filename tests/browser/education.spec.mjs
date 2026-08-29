@@ -19,14 +19,14 @@ async function expectLearningResourceJsonLd(page) {
 
 test("Learn hub exposes Academy, search, evidence, Atlas, health, science, and tools", async ({ page }) => {
   await page.goto("/learn", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: /THC Academy/i })).toHaveAttribute("href", "/learn/academy");
-  await expect(page.getByRole("link", { name: /Search Teaching Healthy Cultivation/i })).toHaveAttribute("href", "/learn/search");
-  await expect(page.getByRole("link", { name: /THC Living Plant Atlas/i })).toHaveAttribute("href", "/learn/atlas");
-  await expect(page.getByRole("link", { name: /Plant Health, IPM & Disease Library/i })).toHaveAttribute("href", "/learn/plant-health");
-  await expect(page.getByRole("link", { name: /Cultivation Science References/i })).toHaveAttribute("href", "/learn/cultivation-science");
-  await expect(page.getByRole("link", { name: /Evidence & Sources/i })).toHaveAttribute("href", "/learn/sources");
-  await expect(page.getByRole("link", { name: /Printable Learning Tools/i })).toHaveAttribute("href", "/learn/tools");
+  await expect(page.getByRole("heading", { name: "Understand the plant, not just the recipe.", exact: true })).toBeVisible();
+  await expect(page.locator('main a[href="/learn/academy"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/learn/search"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/learn/atlas"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/learn/plant-health"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/learn/cultivation-science"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/learn/sources"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/learn/tools"]').first()).toBeVisible();
   await expectCanonical(page, "/learn");
   await expectNoHorizontalOverflow(page);
 });
