@@ -86,7 +86,7 @@ export default function GamesPage() {
               <span className={styles.tag}>Mobile friendly</span>
             </div>
             <div className={styles.cardAction}>
-              <Link className={styles.primaryAction} href="/games/bud-or-bluff">Play Bud or Bluff</Link>
+              <Link className={styles.primaryAction} href="/games/bud-or-bluff" aria-label="Play Bud or Bluff">Play Bud or Bluff</Link>
             </div>
           </div>
         </article>
@@ -115,7 +115,7 @@ export default function GamesPage() {
               <span className={styles.tag}>In development</span>
             </div>
             <div className={styles.cardAction}>
-              <Link className={styles.secondaryAction} href="/games/burn-buds">View board preview</Link>
+              <Link className={styles.secondaryAction} href="/games/burn-buds" aria-label="View board preview">View board preview</Link>
             </div>
           </div>
         </article>
