@@ -33,7 +33,7 @@ export default function GamesPage() {
           <p className="eyebrow">DTF Games</p>
           <h1>Pick a game. Get into it.</h1>
           <p className={styles.heroText}>
-            Original cannabis-themed browser games built for quick rounds, party play, and community competition. Play finished releases now and peek at the next board builds as they take shape.
+            Original cannabis-themed browser games built for quick rounds, party play, and community competition. Play finished releases now and peek at the next builds as they take shape.
           </p>
         </div>
 
@@ -43,8 +43,8 @@ export default function GamesPage() {
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
-            <strong>1</strong>
-            <span>Preview build</span>
+            <strong>2</strong>
+            <span>Preview builds</span>
           </div>
           <div className={styles.statChip}>
             <strong>390px+</strong>
@@ -145,6 +145,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.primaryAction} href="/games/seed-ascent" aria-label="Play Seed Ascent">Play Seed Ascent</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
+              <span className={styles.posterMeta}>Educational trivia · 1 player</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Test higher cognition</span>
+              <strong>High IQ</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Plant science gets a scoreboard.</h3>
+            <p>
+              Answer reviewed-format questions across plant biology, genetics, environment, reproduction, chemistry, and cultivation science. Harder questions score more and streaks add bonuses.
+            </p>
+            <div className={styles.tagRow} aria-label="High IQ preview details">
+              <span className={styles.tag}>24-question starter bank</span>
+              <span className={styles.tag}>4 difficulty tiers</span>
+              <span className={styles.tag}>Optional timer</span>
+              <span className={styles.tag}>Mobile + keyboard</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.secondaryAction} href="/games/high-iq" aria-label="Test High IQ beta">Test beta</Link>
             </div>
           </div>
         </article>
