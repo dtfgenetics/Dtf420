@@ -5,13 +5,21 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("Seed Ascent loads the verified 12-stage retro campaign and starts world 1-1", async ({ page }) => {
+async function getGameFrame(page) {
+  return page.frameLocator('iframe[title="Seed Ascent browser game"]');
+}
+
+async function snapshot(frame) {
+  return frame.locator("#game").evaluate(() => window.__seedAscentDebug?.snapshot?.());
+}
+
+test("Seed Ascent loads the verified 12-stage retro campaign and starts world 1-1 on solid ground", async ({ page }) => {
   await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
 
   await expect(page.getByRole("heading", { level: 1, name: "Seed Ascent" })).toBeVisible();
   await expect(page.getByText(/12 side-scrolling stages across six grow worlds/i)).toBeVisible();
 
-  const frame = page.frameLocator('iframe[title="Seed Ascent browser game"]');
+  const frame = await getGameFrame(page);
   await expect(frame.locator("#game")).toBeVisible();
   await expect(frame.locator("#startBtn")).toBeVisible();
   await expect(frame.locator("#jumpBtn")).toBeAttached();
@@ -30,7 +38,33 @@ test("Seed Ascent loads the verified 12-stage retro campaign and starts world 1-
   await frame.locator("#startBtn").click();
   await expect(frame.locator("#levelLabel")).toHaveText("1-1");
   await expect(frame.locator("#healthLabel")).toHaveText("3");
+
+  await expect.poll(async () => (await snapshot(frame))?.player?.grounded, {
+    message: "player should remain on the stage floor instead of tunneling through it",
+    timeout: 4000,
+  }).toBe(true);
+
+  const state = await snapshot(frame);
+  expect(state.player.y).toBeCloseTo(414, 1);
+  expect(state.maxSafePit).toBeLessThanOrEqual(180);
+  expect(Math.max(...state.pits)).toBeLessThanOrEqual(state.maxSafePit);
   await expectNoHorizontalOverflow(page);
+});
+
+test("Seed Ascent jump control lifts the player from the floor", async ({ page }) => {
+  await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
+  const frame = await getGameFrame(page);
+  await frame.locator("#startBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.player?.grounded).toBe(true);
+
+  const jump = frame.locator("#jumpBtn");
+  await jump.dispatchEvent("pointerdown", { pointerId: 1, pointerType: "touch", isPrimary: true });
+  await page.waitForTimeout(120);
+  await jump.dispatchEvent("pointerup", { pointerId: 1, pointerType: "touch", isPrimary: true });
+
+  await expect.poll(async () => (await snapshot(frame))?.player?.y, {
+    message: "jump should visibly lift the player above the 414px floor standing position",
+  }).toBeLessThan(410);
 });
 
 test("Seed Ascent exposes playable touch controls at 390px", async ({ page }, testInfo) => {
@@ -39,7 +73,7 @@ test("Seed Ascent exposes playable touch controls at 390px", async ({ page }, te
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
 
-  const frame = page.frameLocator('iframe[title="Seed Ascent browser game"]');
+  const frame = await getGameFrame(page);
   await expect(frame.locator("#game")).toBeVisible();
   await expect(frame.locator("#leftBtn")).toBeVisible();
   await expect(frame.locator("#rightBtn")).toBeVisible();

@@ -23,38 +23,26 @@ const library = fs.readFileSync(files.library, "utf8");
 const sitemap = fs.readFileSync(files.sitemap, "utf8");
 
 for (const marker of [
-  'id="game"',
-  'id="jumpBtn"',
-  'id="runBtn"',
-  '/seed-ascent/levels.js',
-  '/seed-ascent/engine.js',
+  'id="game"', 'id="jumpBtn"', 'id="runBtn"',
+  '/seed-ascent/levels.js', '/seed-ascent/engine.js',
 ]) {
   if (!launcher.includes(marker)) throw new Error(`Seed Ascent launcher missing: ${marker}`);
 }
 
 for (const marker of [
-  "doubleUsed",
-  "player.coyote",
-  "player.jumpBuffer",
-  "game.cameraX",
-  "player.surface==='ice'",
-  "updateEnemies",
-  "updateHazards",
-  "updateCheckpoints",
-  "updateBoss",
-  "bossShots",
-  "collectPower",
-  "game.power==='RUSH'",
-  "payload==='TRI'",
-  "payload==='BREAK'",
-  "addEventListener('pointerdown'",
-  "window.addEventListener('blur'",
+  "doubleUsed", "player.coyote", "player.jumpBuffer", "game.cameraX",
+  "MAX_SAFE_PIT", "buildGrounds", "resolvePlayerX", "resolvePlayerY",
+  "prevBottom<=s.y+LANDING_SLOP&&nextBottom>=s.y", "snapPlayerToFloor",
+  "objectLand", "supportAhead", "player.surface==='ice'", "updateEnemies",
+  "updateHazards", "updateCheckpoints", "updateBoss", "bossShots",
+  "collectPower", "game.power==='RUSH'", "payload==='TRI'", "payload==='BREAK'",
+  "window.__seedAscentDebug", "addEventListener('pointerdown'", "window.addEventListener('blur'",
 ]) {
   if (!engine.includes(marker)) throw new Error(`Seed Ascent engine missing mechanic: ${marker}`);
 }
 
-for (const forbidden of ["touchstart", "mousedown"]) {
-  if (engine.includes(forbidden)) throw new Error(`Seed Ascent duplicate-input regression: ${forbidden}`);
+for (const forbidden of ["touchstart", "mousedown", "function collideWorld"]) {
+  if (engine.includes(forbidden)) throw new Error(`Seed Ascent regression detected: ${forbidden}`);
 }
 
 new vm.Script(levelsSource, { filename: files.levels });
@@ -69,12 +57,39 @@ if (!Array.isArray(levels) || levels.length < 12) {
   throw new Error("Seed Ascent requires at least 12 playable side-scrolling stages");
 }
 
+const pitMatch = engine.match(/MAX_SAFE_PIT\s*=\s*(\d+)/);
+const maxSafePit = pitMatch ? Number(pitMatch[1]) : NaN;
+if (!Number.isFinite(maxSafePit) || maxSafePit > 180) {
+  throw new Error(`Seed Ascent safe pit width must be <= 180px; got ${maxSafePit}`);
+}
+
+let widestRawPit = 0;
 for (const level of levels) {
   if (level.width <= 4000) throw new Error(`${level.world} is too short for the side-scrolling campaign`);
   if (!level.exit) throw new Error(`${level.world} is missing its grow gate`);
   if (!Array.isArray(level.checkpoints) || level.checkpoints.length === 0) throw new Error(`${level.world} is missing a checkpoint`);
   if (!Array.isArray(level.platforms) || level.platforms.length < 8) throw new Error(`${level.world} needs more platforming structure`);
   if (!Array.isArray(level.enemies) || level.enemies.length < 5) throw new Error(`${level.world} needs more pest encounters`);
+
+  const grounds = [...level.grounds].sort((a, b) => a[0] - b[0]);
+  const first = grounds[0];
+  if (!(first[0] <= 96 && first[0] + first[1] >= 130)) {
+    throw new Error(`${level.world} does not provide a solid spawn floor`);
+  }
+
+  for (let i = 0; i < grounds.length - 1; i++) {
+    const gap = grounds[i + 1][0] - (grounds[i][0] + grounds[i][1]);
+    widestRawPit = Math.max(widestRawPit, gap);
+    if (gap > 300) throw new Error(`${level.world} contains an unreasonably wide raw pit (${gap}px)`);
+  }
+
+  const hasOpeningStep = level.platforms.some(([x, y]) => x < 900 && y >= 320);
+  if (!hasOpeningStep) throw new Error(`${level.world} lacks a forgiving first platform approach`);
+
+  const exitX = level.exit[0] + level.exit[2] / 2;
+  if (!grounds.some(([x, w]) => exitX >= x && exitX <= x + w)) {
+    throw new Error(`${level.world} grow gate is not supported by ground`);
+  }
 }
 
 const advanced = levels.slice(1);
@@ -89,4 +104,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, side-scroller physics, hazards, breakable routes, power-ups, checkpoints, and phased final boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, platform approach checks, power-ups, hazards, checkpoints, and boss.`);
