@@ -37,12 +37,16 @@ for (const marker of [
   "player.coyote",
   "player.jumpBuffer",
   "game.cameraX",
+  "player.surface==='ice'",
   "updateEnemies",
+  "updateHazards",
   "updateCheckpoints",
   "updateBoss",
+  "bossShots",
   "collectPower",
   "game.power==='RUSH'",
   "payload==='TRI'",
+  "payload==='BREAK'",
   "addEventListener('pointerdown'",
   "window.addEventListener('blur'",
 ]) {
@@ -73,9 +77,16 @@ for (const level of levels) {
   if (!Array.isArray(level.enemies) || level.enemies.length < 5) throw new Error(`${level.world} needs more pest encounters`);
 }
 
+const advanced = levels.slice(1);
+if (!advanced.every((level) => level.blocks.some((block) => block[2] === "BREAK"))) {
+  throw new Error("Every advanced Seed Ascent stage must contain breakable-route gameplay");
+}
+if (!advanced.every((level) => Array.isArray(level.hazards) && level.hazards.length > 0)) {
+  throw new Error("Every advanced Seed Ascent stage must contain an environmental hazard");
+}
 if (!levels.at(-1)?.boss) throw new Error("The final Seed Ascent stage must contain a boss encounter");
 if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent route is not wired to the launcher");
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, side-scroller mechanics, power-ups, checkpoints, and final boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, side-scroller physics, hazards, breakable routes, power-ups, checkpoints, and phased final boss.`);
