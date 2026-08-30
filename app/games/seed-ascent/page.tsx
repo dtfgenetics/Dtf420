@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Seed Ascent | DTF Games",
-  description: "Climb an endless canopy, collect gems, stomp pests, and chase a new high score in Seed Ascent.",
+  description: "Run through six cannabis-themed side-scrolling worlds, stomp pests, collect trichomes, find power-ups, and master a double jump in Seed Ascent.",
 };
 
 export default function SeedAscentPage() {
@@ -10,10 +10,10 @@ export default function SeedAscentPage() {
     <section className="shell page-section">
       <div className="game-page-heading">
         <div>
-          <p className="eyebrow">DTF Games · Platformer</p>
+          <p className="eyebrow">DTF Games · Retro platformer</p>
           <h1>Seed Ascent</h1>
           <p className="lede">
-            Climb an endless canopy, collect gems, stomp pests, use the double jump, and push for a new best score.
+            Run through six side-scrolling grow worlds, stomp pests, collect trichomes, hit checkpoints, find power-ups, and use a responsive double jump to reach each grow gate.
           </p>
         </div>
         <Link className="button" href="/games">All games</Link>
@@ -34,7 +34,7 @@ export default function SeedAscentPage() {
           style={{
             display: "block",
             width: "100%",
-            minHeight: "960px",
+            height: "clamp(540px, 70vw, 820px)",
             border: 0,
             background: "#071108",
           }}
