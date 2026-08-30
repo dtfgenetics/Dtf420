@@ -8,6 +8,7 @@ on:
       - "bootstrap/**"
       - "fix/**"
       - "feature/**"
+      - "release/**"
       - "dependabot/**"
   pull_request:
     branches:
@@ -38,52 +39,7 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Verify Bud or Bluff data
-        run: npm run verify:bud-or-bluff
-
-      - name: Verify Atlas assets
-        run: npm run verify:atlas-assets
-
-      - name: Verify Atlas guided paths
-        run: npm run verify:atlas-paths
-
-      - name: Verify Atlas knowledge checks
-        run: npm run verify:atlas-checks
-
-      - name: Verify Atlas mastery badges
-        run: npm run verify:atlas-badges
-
-      - name: Verify Atlas diagnostic cases
-        run: npm run verify:atlas-cases
-
-      - name: Verify education content integrity
-        run: npm run verify:education-content
-
-      - name: Verify education related links
-        run: npm run verify:education-links
-
-      - name: Verify education evidence sources
-        run: npm run verify:education-sources
-
-      - name: Verify education glossary
-        run: npm run verify:education-glossary
-
-      - name: Verify education SOPs
-        run: npm run verify:education-sops
-
-      - name: Verify THC Academy routes
-        run: npm run verify:academy
-
-      - name: Verify literal internal routes
-        run: npm run verify:routes
-
-      - name: Lint application
-        run: npm run lint
-
-      - name: Typecheck application
-        run: npm run typecheck
-
-      - name: Build production application
-        run: npm run build
+      - name: Run repository verification gate
+        run: npm run verify
         env:
           CI: "true"
