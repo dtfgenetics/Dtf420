@@ -124,24 +124,24 @@ export default function GamesPage() {
           <div className={`${styles.poster} ${styles.budPoster}`}>
             <div className={styles.posterTop}>
               <span className={styles.status}>Playable now</span>
-              <span className={styles.posterMeta}>Platformer · 1 player</span>
+              <span className={styles.posterMeta}>Retro platformer · 1 player</span>
             </div>
             <div className={styles.posterTitle}>
-              <span>Climb the canopy</span>
+              <span>Run the grow worlds</span>
               <strong>Seed Ascent</strong>
             </div>
           </div>
 
           <div className={styles.cardBody}>
-            <h3>Keep climbing. Don&apos;t miss the landing.</h3>
+            <h3>Run, jump, stomp pests, grow stronger.</h3>
             <p>
-              Guide a sprouting seed up an endless platform run, collect gems, stomp pests, hit bounce platforms, and use a double jump to recover from risky moves.
+              A cannabis-themed side-scrolling platform adventure with 12 stages across six grow worlds, running momentum, double jump, checkpoints, moving platforms, pest enemies, trichome collectibles, three power-up systems, and a final boss.
             </p>
             <div className={styles.tagRow} aria-label="Seed Ascent features">
-              <span className={styles.tag}>Endless climb</span>
-              <span className={styles.tag}>Double jump</span>
-              <span className={styles.tag}>High-score save</span>
-              <span className={styles.tag}>Touch controls</span>
+              <span className={styles.tag}>12 side-scrolling stages</span>
+              <span className={styles.tag}>Double jump + run</span>
+              <span className={styles.tag}>Power-ups + checkpoints</span>
+              <span className={styles.tag}>Final boss</span>
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.primaryAction} href="/games/seed-ascent" aria-label="Play Seed Ascent">Play Seed Ascent</Link>
