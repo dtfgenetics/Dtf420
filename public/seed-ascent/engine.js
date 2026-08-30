@@ -13,6 +13,9 @@
   const MAX_SAFE_PIT = 176;
   const LANDING_SLOP = 8;
   const EDGE_GRACE = 3;
+  const SIM_STEP_MS = 1000 / 60;
+  const MAX_FRAME_MS = 100;
+  const MAX_STEPS_PER_FRAME = 6;
 
   ctx.imageSmoothingEnabled = false;
 
@@ -46,6 +49,7 @@
 
   let solids=[],blocks=[],coins=[],powerups=[],enemies=[],hazards=[],checkpoints=[],particles=[],movingPlatforms=[],bossShots=[],pitRanges=[];
   let exitGate=null,boss=null,audioCtx=null;
+  let lastFrameTime=0,accumulator=0;
 
   function audio(){
     if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch{}}
@@ -82,6 +86,10 @@
   }
   function particle(x,y,color,n=8){
     for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-3,3),vy:rand(-4,-1),life:rand(22,48),color,s:rand(2,5)});
+  }
+  function clearInput(){
+    input.left=input.right=input.run=input.jumpHeld=input.jumpPressed=input.jumpReleased=false;
+    player.jumpBuffer=0;
   }
   function clearWorld(){
     solids=[];blocks=[];coins=[];powerups=[];enemies=[];hazards=[];checkpoints=[];particles=[];movingPlatforms=[];bossShots=[];pitRanges=[];
@@ -145,6 +153,7 @@
   }
 
   function loadLevel(i){
+    clearInput();
     game.levelIndex=clamp(i,0,LEVELS.length-1);game.selectedLevel=game.levelIndex;game.level=LEVELS[game.levelIndex];buildLevel(game.level);
     game.cameraX=0;game.power='NONE';game.powerTimer=0;game.shield=false;game.health=game.maxHealth;game.checkpoint=null;
     Object.assign(player,{invuln:0,surface:null,riding:null});
@@ -155,13 +164,14 @@
     loadLevel(game.selectedLevel);game.mode='playing';canvas.focus();
   }
   function respawn(){
+    clearInput();
     game.power='NONE';game.powerTimer=0;game.shield=false;
     const cp=game.checkpoint;
     snapPlayerToFloor(cp?cp.x+30:96,cp?cp.y:320);
     player.invuln=100;
     game.cameraX=clamp(player.x-W*.35,0,game.level.width-W);sync();
   }
-  function gameOver(){game.mode='gameOver';game.power='NONE';game.powerTimer=0;game.shield=false;sounds.hit();sync()}
+  function gameOver(){clearInput();game.mode='gameOver';game.power='NONE';game.powerTimer=0;game.shield=false;sounds.hit();sync()}
   function fallDeath(){if(game.mode!=='playing')return;game.health--;sounds.hit();game.shake=18;if(game.health<=0)gameOver();else respawn()}
   function hurt(){
     if(player.invuln>0||game.power==='RUSH'||game.mode!=='playing')return;
@@ -351,8 +361,7 @@
     }
     if(boss.hp<=6&&boss.summons<1){boss.summons=1;addEnemy(boss.min+120,424,'MITE',180)}
     if(boss.hp<=3&&boss.summons<2){boss.summons=2;addEnemy(boss.max-180,424,'CATERPILLAR',150)}
-    boss.vy=Math.min(boss.vy+.55,12);boss.y+=boss.vy;
-    for(const s of solids){if(overlap(boss,s)&&boss.vy>=0){boss.y=s.y-boss.h;boss.vy=0;break}}
+    boss.vy=Math.min(boss.vy+.55,12);objectLand(boss,boss.vy);
     for(const shot of bossShots){shot.x+=shot.vx;shot.y+=shot.vy;shot.life--;if(overlap(player,shot)){shot.dead=true;hurt()}}
     bossShots=bossShots.filter(s=>!s.dead&&s.life>0&&s.y<H+120);
     if(overlap(player,boss)){
@@ -365,6 +374,7 @@
   function updateExit(){
     if(boss&&!boss.dead)return;
     if(exitGate&&overlap(player,exitGate)){
+      clearInput();
       game.mode='levelComplete';score(2000+game.health*250);sounds.goal();
       const next=game.levelIndex+2;if(next>game.unlocked&&next<=LEVELS.length){game.unlocked=next;localStorage.setItem('seedAscentUnlocked',String(next))}
     }
@@ -423,20 +433,42 @@
     else if(game.mode==='levelComplete'){const last=game.levelIndex===LEVELS.length-1;overlay(last?'HARVEST COMPLETE!':'LEVEL CLEAR!',`${game.level.world} · ${game.level.name}`,last?['You cleared all 12 stages across six grow worlds.','More secrets, bosses and worlds can build on this engine.','Press START to replay.']:[`Next: ${LEVELS[game.levelIndex+1].world} · ${LEVELS[game.levelIndex+1].name}`,'Press START to continue.'])}
     else if(game.mode==='gameOver')overlay('GAME OVER','The pests won this run.',[`Score ${String(game.score).padStart(6,'0')}`,`Best ${String(game.best).padStart(6,'0')}`,'Press START to begin a new run.']);
   }
-  function loop(){step();draw();requestAnimationFrame(loop)}
+  function loop(now){
+    if(!lastFrameTime)lastFrameTime=now;
+    const frameMs=Math.min(MAX_FRAME_MS,Math.max(0,now-lastFrameTime));
+    lastFrameTime=now;accumulator+=frameMs;
+    let steps=0;
+    while(accumulator>=SIM_STEP_MS&&steps<MAX_STEPS_PER_FRAME){step();accumulator-=SIM_STEP_MS;steps++}
+    if(steps===MAX_STEPS_PER_FRAME&&accumulator>=SIM_STEP_MS)accumulator=0;
+    draw();requestAnimationFrame(loop);
+  }
 
   function jumpPress(){input.jumpPressed=true}
   function jumpRelease(){input.jumpReleased=true;input.jumpHeld=false}
-  function togglePause(){if(game.mode==='playing')game.mode='paused';else if(game.mode==='paused')game.mode='playing'}
-  function advance(){if(game.levelIndex<LEVELS.length-1){game.selectedLevel=game.levelIndex+1;loadLevel(game.selectedLevel);game.mode='playing'}else{game.mode='title';game.selectedLevel=0;game.level=null}}
+  function togglePause(){
+    if(game.mode==='playing'){clearInput();game.mode='paused'}
+    else if(game.mode==='paused'){clearInput();game.mode='playing'}
+  }
+  function advance(){if(game.levelIndex<LEVELS.length-1){game.selectedLevel=game.levelIndex+1;loadLevel(game.selectedLevel);game.mode='playing'}else{clearInput();game.mode='title';game.selectedLevel=0;game.level=null}}
   function keyDown(e){
     const k=e.key,lower=k.toLowerCase();if(['ArrowLeft','ArrowRight','ArrowUp',' ','Shift','a','d','w','A','D','W','p','P'].includes(k))e.preventDefault();
     if(k==='ArrowLeft'||lower==='a')input.left=true;if(k==='ArrowRight'||lower==='d')input.right=true;if(k==='Shift')input.run=true;
-    if(k===' '||k==='ArrowUp'||lower==='w'){if(!input.jumpHeld){input.jumpHeld=true;jumpPress()}if(game.mode==='title'||game.mode==='gameOver')startSelected();else if(game.mode==='levelComplete')advance()}
-    if(lower==='p')togglePause();
+    if(k===' '||k==='ArrowUp'||lower==='w'){
+      if(e.repeat)return;
+      if(game.mode==='title'||game.mode==='gameOver'){startSelected();input.jumpHeld=true;return}
+      if(game.mode==='levelComplete'){advance();input.jumpHeld=true;return}
+      if(!input.jumpHeld){input.jumpHeld=true;jumpPress()}
+    }
+    if(lower==='p'&&!e.repeat)togglePause();
   }
   function keyUp(e){const k=e.key,lower=k.toLowerCase();if(k==='ArrowLeft'||lower==='a')input.left=false;if(k==='ArrowRight'||lower==='d')input.right=false;if(k==='Shift')input.run=false;if(k===' '||k==='ArrowUp'||lower==='w')jumpRelease()}
-  function hold(id,on,off){const b=document.getElementById(id);if(!b)return;b.addEventListener('pointerdown',e=>{e.preventDefault();audio();try{b.setPointerCapture(e.pointerId)}catch{}on()});['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();off()}))}
+  function hold(id,on,off){
+    const b=document.getElementById(id);if(!b)return;
+    const activePointers=new Set();
+    b.addEventListener('pointerdown',e=>{e.preventDefault();audio();activePointers.add(e.pointerId);try{b.setPointerCapture(e.pointerId)}catch{}on()});
+    const release=e=>{e.preventDefault();activePointers.delete(e.pointerId);if(activePointers.size===0)off()};
+    ['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,release));
+  }
   hold('leftBtn',()=>input.left=true,()=>input.left=false);hold('rightBtn',()=>input.right=true,()=>input.right=false);hold('runBtn',()=>input.run=true,()=>input.run=false);hold('jumpBtn',()=>{if(!input.jumpHeld){input.jumpHeld=true;jumpPress()}},jumpRelease);
   document.getElementById('startBtn')?.addEventListener('click',()=>{audio();game.mode==='levelComplete'?advance():startSelected()});
   document.getElementById('pauseBtn')?.addEventListener('click',togglePause);
@@ -445,12 +477,13 @@
   document.getElementById('nextBtn')?.addEventListener('click',()=>{if(game.mode==='playing')return;game.selectedLevel=(game.selectedLevel+1)%game.unlocked;game.level=null;sync()});
   canvas.addEventListener('pointerdown',()=>{audio();canvas.focus()});
   window.addEventListener('keydown',keyDown,{passive:false});window.addEventListener('keyup',keyUp,{passive:false});
-  window.addEventListener('blur',()=>{input.left=input.right=input.run=input.jumpHeld=input.jumpPressed=input.jumpReleased=false});
+  window.addEventListener('blur',clearInput);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&game.mode==='playing'){clearInput();game.mode='paused'}});
 
   window.__seedAscentDebug={
-    snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length}},
+    snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length,simulationHz:Math.round(1000/SIM_STEP_MS)}},
     start(){startSelected()},
   };
 
-  sync();loop();
+  sync();requestAnimationFrame(loop);
 })();
