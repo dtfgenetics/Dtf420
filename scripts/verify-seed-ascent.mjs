@@ -45,6 +45,8 @@ for (const marker of [
   "clearInput", "if(e.repeat)return", "activePointers", "pointercancel",
   "const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return",
   "for(const b of blocks)if(b.bump>0)b.bump--;",
+  "function canSelectLevel(){return game.mode==='title'||game.mode==='gameOver'}",
+  "if(!canSelectLevel())return;game.selectedLevel=",
   "document.addEventListener('visibilitychange'", "window.__seedAscentDebug",
   "addEventListener('pointerdown'", "window.addEventListener('blur'",
 ]) {
@@ -146,4 +148,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent pointer release, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent pointer release, safe menu-state level selection, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
