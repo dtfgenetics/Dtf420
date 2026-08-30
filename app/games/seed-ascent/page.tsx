@@ -3,6 +3,9 @@ import Link from "next/link";
 export const metadata = {
   title: "Seed Ascent | DTF Games",
   description: "Run through 12 stages across six cannabis-themed grow worlds, stomp pests, collect trichomes, find power-ups, and defeat the final boss in Seed Ascent.",
+  alternates: {
+    canonical: "/games/seed-ascent",
+  },
 };
 
 export default function SeedAscentPage() {
