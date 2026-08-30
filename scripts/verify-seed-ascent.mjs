@@ -64,32 +64,48 @@ if (!Number.isFinite(maxSafePit) || maxSafePit > 180) {
 }
 
 let widestRawPit = 0;
+const geometryErrors = [];
+const supportedByGround = (grounds, point) => grounds.some(([x, w]) => point >= x && point <= x + w);
+
 for (const level of levels) {
-  if (level.width <= 4000) throw new Error(`${level.world} is too short for the side-scrolling campaign`);
-  if (!level.exit) throw new Error(`${level.world} is missing its grow gate`);
-  if (!Array.isArray(level.checkpoints) || level.checkpoints.length === 0) throw new Error(`${level.world} is missing a checkpoint`);
-  if (!Array.isArray(level.platforms) || level.platforms.length < 8) throw new Error(`${level.world} needs more platforming structure`);
-  if (!Array.isArray(level.enemies) || level.enemies.length < 5) throw new Error(`${level.world} needs more pest encounters`);
+  if (level.width <= 4000) geometryErrors.push(`${level.world}: stage is too short for the side-scrolling campaign`);
+  if (!level.exit) geometryErrors.push(`${level.world}: missing grow gate`);
+  if (!Array.isArray(level.checkpoints) || level.checkpoints.length === 0) geometryErrors.push(`${level.world}: missing checkpoint`);
+  if (!Array.isArray(level.platforms) || level.platforms.length < 8) geometryErrors.push(`${level.world}: needs more platforming structure`);
+  if (!Array.isArray(level.enemies) || level.enemies.length < 5) geometryErrors.push(`${level.world}: needs more pest encounters`);
 
   const grounds = [...level.grounds].sort((a, b) => a[0] - b[0]);
   const first = grounds[0];
-  if (!(first[0] <= 96 && first[0] + first[1] >= 130)) {
-    throw new Error(`${level.world} does not provide a solid spawn floor`);
+  if (!first || !(first[0] <= 96 && first[0] + first[1] >= 130)) {
+    geometryErrors.push(`${level.world}: spawn is not supported by solid ground`);
   }
 
   for (let i = 0; i < grounds.length - 1; i++) {
     const gap = grounds[i + 1][0] - (grounds[i][0] + grounds[i][1]);
     widestRawPit = Math.max(widestRawPit, gap);
-    if (gap > 300) throw new Error(`${level.world} contains an unreasonably wide raw pit (${gap}px)`);
+    if (gap > 300) geometryErrors.push(`${level.world}: raw pit ${i + 1} is unreasonably wide (${gap}px)`);
   }
 
   const hasOpeningStep = level.platforms.some(([x, y]) => x < 900 && y >= 320);
-  if (!hasOpeningStep) throw new Error(`${level.world} lacks a forgiving first platform approach`);
+  if (!hasOpeningStep) geometryErrors.push(`${level.world}: lacks a forgiving first platform approach`);
 
-  const exitX = level.exit[0] + level.exit[2] / 2;
-  if (!grounds.some(([x, w]) => exitX >= x && exitX <= x + w)) {
-    throw new Error(`${level.world} grow gate is not supported by ground`);
+  if (level.exit) {
+    const exitX = level.exit[0] + level.exit[2] / 2;
+    if (!supportedByGround(grounds, exitX)) {
+      geometryErrors.push(`${level.world}: grow gate center x=${exitX} is not supported by raw ground`);
+    }
   }
+
+  for (const [index, checkpoint] of (level.checkpoints || []).entries()) {
+    const checkpointCenter = checkpoint[0] + 15;
+    if (!supportedByGround(grounds, checkpointCenter)) {
+      geometryErrors.push(`${level.world}: checkpoint ${index + 1} center x=${checkpointCenter} is positioned over a gap`);
+    }
+  }
+}
+
+if (geometryErrors.length) {
+  throw new Error(`Seed Ascent geometry audit failed:\n- ${geometryErrors.join("\n- ")}`);
 }
 
 const advanced = levels.slice(1);
@@ -104,4 +120,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, platform approach checks, power-ups, hazards, checkpoints, and boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, power-ups, hazards, checkpoints, and boss.`);
