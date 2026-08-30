@@ -386,6 +386,7 @@
     if(game.mode!=='playing')return;
     updateCoins();updatePowerups();updateHazards();updateEnemies();updateCheckpoints();updateBoss();updateExit();
     if(game.powerTimer>0&&--game.powerTimer<=0){game.power='NONE';sync()}
+    for(const b of blocks)if(b.bump>0)b.bump--;
     for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.life--}
     particles=particles.filter(p=>p.life>0);
     const target=clamp(player.x-W*.38,0,game.level.width-W);game.cameraX+=(target-game.cameraX)*.11;
@@ -414,7 +415,7 @@
     for(const pit of pitRanges){px(pit.x,pit.y,pit.w,H-pit.y,'#050709');ctx.fillStyle='#301625';for(let x=pit.x+8;x<pit.x+pit.w;x+=18){ctx.beginPath();ctx.moveTo(x,pit.y+8);ctx.lineTo(x+6,pit.y+30);ctx.lineTo(x+12,pit.y+8);ctx.fill()}}
     for(const s of solids){let c=t.ground;if(s.type==='stone')c='#5a6067';if(s.type==='brick')c='#74513f';if(s.type==='ice')c='#8ec6d7';px(s.x,s.y,s.w,s.h,c);px(s.x,s.y,s.w,5,t.accent)}
     for(const m of movingPlatforms){px(m.x,m.y,m.w,m.h,'#557c5a');px(m.x,m.y,m.w,4,'#a4e9a8')}
-    for(const b of blocks){if(b.broken)continue;const y=b.y-(b.bump>0?Math.sin(b.bump/10*Math.PI)*8:0);if(b.bump>0)b.bump--;px(b.x,y,b.w,b.h,b.used?'#6a604b':'#b48a3b');px(b.x+4,y+4,b.w-8,b.h-8,b.used?'#514a3e':'#d0a94f');ctx.fillStyle=b.used?'#887e69':'#fff2ad';ctx.font='bold 24px monospace';ctx.fillText(b.used?'·':'?',b.x+16,y+32)}
+    for(const b of blocks){if(b.broken)continue;const y=b.y-(b.bump>0?Math.sin(b.bump/10*Math.PI)*8:0);px(b.x,y,b.w,b.h,b.used?'#6a604b':'#b48a3b');px(b.x+4,y+4,b.w-8,b.h-8,b.used?'#514a3e':'#d0a94f');ctx.fillStyle=b.used?'#887e69':'#fff2ad';ctx.font='bold 24px monospace';ctx.fillText(b.used?'·':'?',b.x+16,y+32)}
     for(const c of coins){const y=c.y+Math.sin(c.bob)*5;ctx.fillStyle='#f4f7ff';ctx.beginPath();ctx.arc(c.x+10,y+10,9,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#bde9ff';ctx.lineWidth=3;ctx.stroke()}
     for(const p of powerups){ctx.fillStyle={LIGHT:'#ffe36d',SHIELD:'#8ce2ff',RUSH:'#e79cff'}[p.type];ctx.beginPath();ctx.arc(p.x+14,p.y+14,14,0,Math.PI*2);ctx.fill();ctx.fillStyle='#142016';ctx.font='bold 15px monospace';ctx.fillText(p.type==='LIGHT'?'☀':p.type==='SHIELD'?'M':'R',p.x+7,p.y+20)}
     for(const cp of checkpoints){px(cp.x+12,cp.y,6,cp.h,cp.active?'#ffe36d':'#d5ded6');ctx.fillStyle=cp.active?'#ffe36d':'#79b781';ctx.beginPath();ctx.moveTo(cp.x+18,cp.y+5);ctx.lineTo(cp.x+55,cp.y+18);ctx.lineTo(cp.x+18,cp.y+32);ctx.fill()}
@@ -466,7 +467,7 @@
     const b=document.getElementById(id);if(!b)return;
     const activePointers=new Set();
     b.addEventListener('pointerdown',e=>{e.preventDefault();audio();activePointers.add(e.pointerId);try{b.setPointerCapture(e.pointerId)}catch{}on()});
-    const release=e=>{e.preventDefault();activePointers.delete(e.pointerId);if(activePointers.size===0)off()};
+    const release=e=>{e.preventDefault();const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return;if(activePointers.size===0)off()};
     ['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,release));
   }
   hold('leftBtn',()=>input.left=true,()=>input.left=false);hold('rightBtn',()=>input.right=true,()=>input.right=false);hold('runBtn',()=>input.run=true,()=>input.run=false);hold('jumpBtn',()=>{if(!input.jumpHeld){input.jumpHeld=true;jumpPress()}},jumpRelease);
