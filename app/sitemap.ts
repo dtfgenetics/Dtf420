@@ -19,6 +19,8 @@ import educationSops from "@/content/education-sops.json";
 import geneticsProjects from "@/content/genetics-projects.json";
 import communityGrowOffs from "@/content/community-growoffs.json";
 
+export const dynamic = "force-static";
+
 const BASE_URL = "https://dtfseeds.com";
 
 function slugify(value: string) {
