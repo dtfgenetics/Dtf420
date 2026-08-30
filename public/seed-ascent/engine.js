@@ -262,8 +262,9 @@
     const slick=player.grounded&&player.surface==='ice';
     const max=input.run?(boost?8.5:7.4):(boost?6.5:5.4);
     const accel=slick?(input.run?.48:.36):(input.run?.74:.6);
-    if(input.left){player.vx-=accel;player.facing=-1}
-    else if(input.right){player.vx+=accel;player.facing=1}
+    const move=(input.right?1:0)-(input.left?1:0);
+    if(move<0){player.vx-=accel;player.facing=-1}
+    else if(move>0){player.vx+=accel;player.facing=1}
     else player.vx*=player.grounded?(slick?.95:.78):.93;
     player.vx=clamp(player.vx,-max,max);
 
@@ -481,7 +482,10 @@
     const activePointers=new Set();
     b.addEventListener('pointerdown',e=>{e.preventDefault();audio();activePointers.add(e.pointerId);try{b.setPointerCapture(e.pointerId)}catch{}on()});
     const release=e=>{e.preventDefault();const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return;if(activePointers.size===0)off()};
+    const resetPointers=()=>{if(activePointers.size===0)return;activePointers.clear();off()};
     ['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,release));
+    window.addEventListener('blur',resetPointers);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)resetPointers()});
   }
   hold('leftBtn',()=>input.left=true,()=>input.left=false);hold('rightBtn',()=>input.right=true,()=>input.right=false);hold('runBtn',()=>input.run=true,()=>input.run=false);hold('jumpBtn',()=>{if(!input.jumpHeld&&game.mode==='playing'){input.jumpHeld=true;jumpPress()}},jumpRelease);
   document.getElementById('startBtn')?.addEventListener('click',activateStart);
