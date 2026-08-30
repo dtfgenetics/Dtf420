@@ -41,6 +41,9 @@ jobs:
       - name: Verify Bud or Bluff data
         run: npm run verify:bud-or-bluff
 
+      - name: Verify Seed Ascent campaign
+        run: npm run verify:seed-ascent
+
       - name: Verify Atlas assets
         run: npm run verify:atlas-assets
 
