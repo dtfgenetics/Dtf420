@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static-overlay": "DTF_STATIC_EXPORT=1 next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
