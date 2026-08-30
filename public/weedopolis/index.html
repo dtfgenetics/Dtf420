@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weedopolis: Strain City Edition | DTF Genetics</title>
+  <meta name="description" content="Play Weedopolis: Strain City Edition, an original adult cannabis-themed property-trading game from DTF Genetics." />
+  <meta name="robots" content="noindex,follow" />
+  <meta name="theme-color" content="#102d20" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dtfgenetics/Weedopolis-strain-Edition@f043e16c188d82627efa6a91b7b3db74c4ba7c95/digital/weedopolis-web/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dtfgenetics/Weedopolis-strain-Edition@f043e16c188d82627efa6a91b7b3db74c4ba7c95/digital/weedopolis-web/approved-assets.css" />
+  <style>
+    .board-frame[data-art-status="approved-board"] .board-art-slot { display: none; }
+    .board-frame[data-art-status="approved-board"] .board {
+      grid-template-columns: 1.34fr repeat(9, 1fr) 1.34fr;
+      grid-template-rows: 1.34fr repeat(9, 1fr) 1.34fr;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #102d20;
+    }
+    .board-frame[data-art-status="approved-board"] .board-center {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .board-frame[data-art-status="approved-board"] .board-center > * { visibility: hidden; }
+    .board-frame[data-art-status="approved-board"] .tile {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+      padding: .15rem;
+    }
+    .board-frame[data-art-status="approved-board"] .tile::before { display: none; }
+    .board-frame[data-art-status="approved-board"] .tile > :not(.token-row) { display: none; }
+    .board-frame[data-art-status="approved-board"] .tile.current-space {
+      outline: 3px solid #f2df9b;
+      outline-offset: -5px;
+      border-radius: .35rem;
+      filter: none;
+    }
+    .board-frame[data-art-status="approved-board"] .token-row {
+      width: 100%;
+      min-height: 100%;
+      align-content: center;
+      justify-content: center;
+      gap: .08rem;
+    }
+    .board-frame[data-art-status="approved-board"] .player-token {
+      width: 1.35rem;
+      height: 1.35rem;
+      background: rgba(248,239,213,.94);
+      border: 2px solid #173f2a;
+      font-size: .82rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.55);
+    }
+    .approved-board-note { color: #d9c985; }
+    .asset-load-warning { color: #f2b6a9; }
+  </style>
+</head>
+<body id="top">
+  <header class="game-command-bar" aria-label="Weedopolis game controls">
+    <div class="command-left">
+      <a class="icon-button" href="/games" aria-label="Return to DTF Game Hub">☰</a>
+      <div class="game-identity">
+        <span class="brand-kicker">DTF Genetics</span>
+        <strong>Weedopolis</strong>
+        <span>Strain City Edition</span>
+      </div>
+    </div>
+
+    <div class="command-right">
+      <div class="bud-bucks-display" aria-label="Current Bud Bucks balance">
+        <span class="bud-icon" aria-hidden="true">❧</span>
+        <span><small>Bud Bucks</small><strong id="currentBalance">1,500</strong></span>
+      </div>
+      <button id="loadGameBtn" type="button" class="utility-button">Load</button>
+      <button id="newGameTopBtn" type="button" class="utility-button">New Game</button>
+    </div>
+  </header>
+
+  <main class="game-shell" data-ui-standard="premium-responsive-shell-v1">
+    <section id="setupPanel" class="panel setup-panel parchment-panel">
+      <p class="section-kicker">New Session</p>
+      <h1>Start Weedopolis</h1>
+      <p>Enter 2–8 player names. The game begins with 1,500 Bud Bucks per player.</p>
+      <div class="player-name-grid" id="playerNameGrid"></div>
+      <button id="startGameBtn" type="button" class="primary">Start Session</button>
+    </section>
+
+    <section class="play-stage" aria-labelledby="weedopolis-board-title">
+      <h2 id="weedopolis-board-title" class="visually-hidden">Weedopolis game board</h2>
+
+      <div id="boardFrame" class="board-frame" data-art-status="loading-approved-board">
+        <div class="board-art-slot" aria-hidden="true"></div>
+        <div id="board" class="board" aria-label="Interactive Weedopolis board"></div>
+      </div>
+
+      <p id="boardAssetStatus" class="asset-status-note approved-board-note" aria-live="polite">
+        Loading the approved Weedopolis V1 board artwork…
+      </p>
+    </section>
+
+    <aside class="game-rail" aria-label="Game information and controls">
+      <section id="turnSection" class="panel parchment-panel turn-card">
+        <div class="panel-heading">
+          <span class="section-kicker">Current Turn</span>
+          <span class="panel-ornament" aria-hidden="true">❧</span>
+        </div>
+        <div id="turnPanel"></div>
+      </section>
+
+      <section id="playersSection" class="panel dark-panel players-card">
+        <div class="panel-heading">
+          <h2>Players</h2>
+          <span class="panel-ornament" aria-hidden="true">❧</span>
+        </div>
+        <div id="playersPanel"></div>
+      </section>
+
+      <section id="propertySection" class="panel parchment-panel property-management-card">
+        <div class="panel-heading">
+          <h2>Property / Management</h2>
+          <span class="asset-chip">Gameplay data active</span>
+        </div>
+        <div class="property-art-slot" aria-hidden="true">
+          <span>Selected property</span>
+        </div>
+        <div id="managePanel"></div>
+      </section>
+
+      <section id="logSection" class="panel dark-panel game-log-card">
+        <div class="panel-heading">
+          <h2>Game Log</h2>
+          <span class="panel-ornament" aria-hidden="true">❧</span>
+        </div>
+        <ol id="logPanel" class="log"></ol>
+      </section>
+    </aside>
+  </main>
+
+  <nav class="mobile-game-dock" aria-label="Mobile game navigation">
+    <a href="#weedopolis-board-title">Board</a>
+    <a href="#propertySection">Property</a>
+    <button id="mobileRollBtn" type="button" disabled>Roll Dice</button>
+    <a href="#logSection">Log</a>
+    <a href="#top">Menu</a>
+  </nav>
+
+  <noscript><p>Weedopolis requires JavaScript to run. Enable JavaScript and reload the page.</p></noscript>
+
+  <script src="https://cdn.jsdelivr.net/gh/dtfgenetics/Weedopolis-strain-Edition@f043e16c188d82627efa6a91b7b3db74c4ba7c95/digital/weedopolis-web/js/weedopolis-edition.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/dtfgenetics/Weedopolis-strain-Edition@f043e16c188d82627efa6a91b7b3db74c4ba7c95/digital/weedopolis-web/js/weedopolis-engine.js"></script>
+  <script src="/weedopolis/board-loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/dtfgenetics/Weedopolis-strain-Edition@f043e16c188d82627efa6a91b7b3db74c4ba7c95/digital/weedopolis-web/js/weedopolis-ui.js"></script>
+</body>
+</html>
