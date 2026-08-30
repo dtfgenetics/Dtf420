@@ -148,6 +148,32 @@ test("Seed Ascent level selectors cannot corrupt a paused game state", async ({ 
   await expect.poll(async () => (await snapshot(frame))?.mode).toBe("playing");
 });
 
+test("Seed Ascent restart cannot farm the same stage rewards", async ({ page }) => {
+  await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
+  const frame = await getGameFrame(page);
+  await frame.locator("#startBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.player?.grounded).toBe(true);
+
+  await frame.locator("#game").focus();
+  await page.keyboard.down("ArrowRight");
+  await expect.poll(async () => (await snapshot(frame))?.score, {
+    message: "moving through the opening coin line should earn score before restart",
+    timeout: 5000,
+  }).toBeGreaterThan(0);
+  await page.keyboard.up("ArrowRight");
+
+  const earned = await snapshot(frame);
+  expect(earned.trichomes).toBeGreaterThan(0);
+
+  await frame.locator("#restartBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.player?.grounded).toBe(true);
+  const restarted = await snapshot(frame);
+  expect(restarted.mode).toBe("playing");
+  expect(restarted.score).toBe(0);
+  expect(restarted.trichomes).toBe(0);
+  expect(restarted.player.y).toBeCloseTo(414, 1);
+});
+
 test("Seed Ascent exposes playable touch controls at 390px", async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.includes("mobile"), "mobile-only responsive coverage");
 
