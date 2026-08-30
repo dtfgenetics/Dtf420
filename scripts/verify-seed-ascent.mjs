@@ -23,6 +23,10 @@ const route = fs.readFileSync(files.route, "utf8");
 const library = fs.readFileSync(files.library, "utf8");
 const sitemap = fs.readFileSync(files.sitemap, "utf8");
 
+for (const path of Object.values(files)) {
+  if (!fs.existsSync(path)) throw new Error(`Missing Seed Ascent package file: ${path}`);
+}
+
 for (const marker of [
   'id="game"', 'id="jumpBtn"', 'id="runBtn"',
   '/seed-ascent/levels.js', '/seed-ascent/engine.js',
@@ -44,6 +48,9 @@ for (const marker of [
   "SIM_STEP_MS", "MAX_STEPS_PER_FRAME", "while(accumulator>=SIM_STEP_MS",
   "clearInput", "if(e.repeat)return", "activePointers", "pointercancel",
   "const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return",
+  "const resetPointers=()=>{if(activePointers.size===0)return;activePointers.clear();off()}",
+  "window.addEventListener('blur',resetPointers)",
+  "const move=(input.right?1:0)-(input.left?1:0)",
   "for(const b of blocks)if(b.bump>0)b.bump--;",
   "function canSelectLevel(){return game.mode==='title'||game.mode==='gameOver'}",
   "if(!canSelectLevel())return;game.selectedLevel=",
@@ -153,4 +160,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent pointer release, safe menu-state level selection, restart reward snapshots, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent and interruption-safe pointer input, neutral opposing input, safe menu-state level selection, restart reward snapshots, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
