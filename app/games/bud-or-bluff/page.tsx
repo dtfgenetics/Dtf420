@@ -20,7 +20,9 @@ export default function BudOrBluffPage() {
         <Link className="button" href="/games">All games</Link>
       </div>
 
-      <BudOrBluffGame />
+      <div style={{ overflowAnchor: "none" }}>
+        <BudOrBluffGame />
+      </div>
     </section>
   );
 }

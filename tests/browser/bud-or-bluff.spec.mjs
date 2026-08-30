@@ -8,18 +8,15 @@ async function expectNoHorizontalOverflow(page) {
 }
 
 async function expectGameBelowStickyHeader(page) {
-  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  const positions = await page.evaluate(() => {
+  await expect.poll(async () => page.evaluate(() => {
     const game = document.getElementById("bud-or-bluff-game");
     const header = document.querySelector("header");
-    if (!game || !header) return null;
-    return {
-      gameTop: game.getBoundingClientRect().top,
-      headerBottom: header.getBoundingClientRect().bottom,
-    };
-  });
-  expect(positions).not.toBeNull();
-  expect(positions.gameTop).toBeGreaterThanOrEqual(positions.headerBottom - 2);
+    if (!game || !header) return Number.NEGATIVE_INFINITY;
+    return game.getBoundingClientRect().top - header.getBoundingClientRect().bottom;
+  }), {
+    message: "Bud or Bluff game shell should settle below the sticky header",
+    timeout: 5000,
+  }).toBeGreaterThanOrEqual(-2);
 }
 
 test("Bud or Bluff master web pool includes Dick Pix pedigree", async () => {

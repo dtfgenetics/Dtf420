@@ -74,6 +74,9 @@ jobs:
       - name: Verify THC Academy routes
         run: npm run verify:academy
 
+      - name: Verify literal internal routes
+        run: npm run verify:routes
+
       - name: Lint application
         run: npm run lint
 
