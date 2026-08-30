@@ -16,6 +16,7 @@ import symptomCore from "@/content/symptom-differential-library.json";
 import symptomExpanded from "@/content/symptom-differential-expanded.json";
 import learningTools from "@/content/learning-tools.json";
 import geneticsProjects from "@/content/genetics-projects.json";
+import communityGrowOffs from "@/content/community-growoffs.json";
 
 const BASE_URL = "https://dtfseeds.com";
 
@@ -60,6 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/games", 0.8, "weekly"),
     item("/games/bud-or-bluff", 0.82, "weekly"),
     item("/community", 0.7, "monthly"),
+    item("/community/grow-offs", 0.74, "monthly"),
     item("/journal", 0.72, "weekly"),
     item("/about", 0.62, "monthly"),
     item("/contact", 0.65, "monthly"),
@@ -85,6 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const symptoms = [...symptomCore, ...symptomExpanded].map((entry) => item(`/learn/symptoms/${entry.slug}`, 0.8, "monthly"));
   const tools = learningTools.map((entry) => item(`/learn/tools/${entry.slug}`, 0.7, "monthly"));
+  const growOffs = communityGrowOffs.map((entry) => item(`/community/grow-offs/${entry.slug}`, 0.7, "monthly"));
 
   const atlasRoutes = atlasModules.flatMap((atlasModule) => {
     const systemSlug = slugify(atlasModule.id);
@@ -94,7 +97,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  const all = [...staticRoutes, ...genetics, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...atlasRoutes];
+  const all = [...staticRoutes, ...genetics, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...growOffs, ...atlasRoutes];
   const unique = new Map(all.map((entry) => [entry.url, entry]));
   return [...unique.values()];
 }
