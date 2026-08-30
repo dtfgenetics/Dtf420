@@ -7,7 +7,8 @@ export function GET() {
   return NextResponse.json(
     {
       status: "ok",
-      service: "dtf420-web",
+      service: "dtfseeds-web",
+      canonicalOrigin: "https://dtfseeds.com",
       runtime: "nodejs",
       node: process.version,
       environment: process.env.NODE_ENV ?? "unknown",
