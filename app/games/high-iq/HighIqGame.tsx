@@ -52,23 +52,19 @@ export default function HighIqGame() {
   const currentQuestion = deck[roundIndex];
 
   useEffect(() => {
+    let timer: number | undefined;
     try {
       const saved = Number(window.localStorage.getItem(BEST_SCORE_KEY) ?? 0);
-      if (Number.isFinite(saved) && saved > 0) setBestScore(saved);
+      if (Number.isFinite(saved) && saved > 0) {
+        timer = window.setTimeout(() => setBestScore(saved), 0);
+      }
     } catch {
       // Local storage is optional and must never block play.
     }
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
   }, []);
-
-  useEffect(() => {
-    if (score <= bestScore) return;
-    setBestScore(score);
-    try {
-      window.localStorage.setItem(BEST_SCORE_KEY, String(score));
-    } catch {
-      // Local storage is optional and must never block play.
-    }
-  }, [bestScore, score]);
 
   const availableForDifficulty = useMemo(
     () => highIqQuestions.filter(
@@ -84,16 +80,26 @@ export default function HighIqGame() {
 
     const correct = answerIndex === currentQuestion.correctIndex;
     const result = scoreHighIqAnswer(currentQuestion, correct, streak);
+    const nextScore = score + result.points;
 
     setSelectedIndex(answerIndex);
     setWasCorrect(correct);
     setPointsAwarded(result.points);
     setRevealed(true);
-    setScore((value) => value + result.points);
+    setScore(nextScore);
     setStreak(result.nextStreak);
     setBestStreak((value) => Math.max(value, result.nextStreak));
     if (correct) setCorrectCount((value) => value + 1);
-  }, [currentQuestion, phase, revealed, streak]);
+
+    if (nextScore > bestScore) {
+      setBestScore(nextScore);
+      try {
+        window.localStorage.setItem(BEST_SCORE_KEY, String(nextScore));
+      } catch {
+        // Local storage is optional and must never block play.
+      }
+    }
+  }, [bestScore, currentQuestion, phase, revealed, score, streak]);
 
   const advanceRound = useCallback(() => {
     if (!revealed) return;
