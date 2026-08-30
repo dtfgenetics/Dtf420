@@ -1,0 +1,4 @@
+interface:
+  display_name: "DTF Game Router"
+  short_description: "Route DTF browser-game work to project skills"
+  default_prompt: "Use $dtf-game-router to route and complete this DTF420 game task."
