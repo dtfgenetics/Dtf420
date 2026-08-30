@@ -5,7 +5,7 @@ import { buildEducationMetadata } from "@/lib/education-seo";
 export const metadata: Metadata = buildEducationMetadata({
   title: "Teaching Healthy Cultivation",
   description:
-    "DTF's connected cultivation education system for guided courses, plant science, diagnostics, greenhouse and outdoor cultivation, post-harvest science, visual learning, field tools, and evidence sources.",
+    "DTF's connected cultivation education system for guided courses, plant science, diagnostics, greenhouse and outdoor cultivation, post-harvest science, SOPs, visual learning, field tools, glossary terms, and evidence sources.",
   path: "/learn",
 });
 
@@ -30,7 +30,7 @@ const startHere = [
     eyebrow: "Find a specific answer",
     title: "Search Teaching Healthy Cultivation",
     description:
-      "Search lessons, symptom references, plant-health material, cultivation science, field tools, and evidence sources from one education index.",
+      "Search lessons, glossary terms, SOPs, symptom references, plant-health material, cultivation science, field tools, and evidence sources from one education index.",
     href: "/learn/search",
     action: "Search education",
   },
@@ -64,6 +64,18 @@ const diagnose = [
 ];
 
 const references = [
+  {
+    title: "Plant Science Glossary",
+    description:
+      "Search shared definitions, abbreviations, aliases, and related lessons for anatomy, physiology, diagnostics, root-zone science, genetics, light, water relations, and postharvest terminology.",
+    href: "/learn/glossary",
+  },
+  {
+    title: "Measurement & Observation SOPs",
+    description:
+      "Print-ready procedures for pH, EC, PPFD, DLI, temperature/RH, leaf temperature, VPD records, scouting, quarantine, and root-zone observations.",
+    href: "/learn/sops",
+  },
   {
     title: "Cultivation Science References",
     description:
@@ -124,7 +136,7 @@ export default function LearnPage() {
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Learn</h1>
         <p className="lede">
-          A connected cultivation education system built around plant function, direct observation, measurement, visual learning, evidence-based diagnostics, transparent sourcing, and repeatable field records.
+          A connected cultivation education system built around plant function, direct observation, measurement, visual learning, evidence-based diagnostics, transparent sourcing, repeatable procedures and field records, and consistent plant-science vocabulary.
         </p>
       </section>
 
