@@ -1,0 +1,218 @@
+[
+  {
+    "id": "hiq-001",
+    "category": "Plant Biology",
+    "difficulty": "Easy",
+    "prompt": "Which leaf pigment is most directly associated with absorbing light for photosynthesis?",
+    "choices": ["Chlorophyll", "Cellulose", "Lignin", "Suberin"],
+    "correctIndex": 0,
+    "explanation": "Chlorophyll pigments absorb light energy used by the photosynthetic apparatus, especially in the red and blue regions of visible light."
+  },
+  {
+    "id": "hiq-002",
+    "category": "Plant Biology",
+    "difficulty": "Easy",
+    "prompt": "What are stomata primarily used for?",
+    "choices": ["Anchoring roots", "Gas exchange and regulation of water loss", "Producing pollen", "Storing genetic information"],
+    "correctIndex": 1,
+    "explanation": "Stomata are adjustable pores that allow carbon dioxide to enter while oxygen and water vapor leave the leaf."
+  },
+  {
+    "id": "hiq-003",
+    "category": "Plant Biology",
+    "difficulty": "Easy",
+    "prompt": "Which plant organ is chiefly responsible for taking up water and mineral nutrients from the root zone?",
+    "choices": ["Flower", "Stem", "Root", "Stigma"],
+    "correctIndex": 2,
+    "explanation": "Roots, especially young roots and root hairs, provide much of the surface area used for water and mineral nutrient uptake."
+  },
+  {
+    "id": "hiq-004",
+    "category": "Genetics",
+    "difficulty": "Easy",
+    "prompt": "In breeding notation, what does F1 mean?",
+    "choices": ["First clone generation", "First selfed generation", "First backcross", "First filial generation"],
+    "correctIndex": 3,
+    "explanation": "F1 means first filial generation: the first generation of offspring produced from the specified parental cross."
+  },
+  {
+    "id": "hiq-005",
+    "category": "Genetics",
+    "difficulty": "Easy",
+    "prompt": "What is a phenotype?",
+    "choices": ["The observable traits produced by genotype interacting with environment", "Only the DNA sequence inherited from the pollen parent", "A seed that cannot germinate", "A measurement of nutrient concentration"],
+    "correctIndex": 0,
+    "explanation": "Phenotype is the set of observable characteristics that results from genetic makeup interacting with environmental conditions."
+  },
+  {
+    "id": "hiq-006",
+    "category": "Cultivation Science",
+    "difficulty": "Easy",
+    "prompt": "What does EC measure in a nutrient solution?",
+    "choices": ["Leaf temperature", "Electrical conductivity", "Light intensity", "Air velocity"],
+    "correctIndex": 1,
+    "explanation": "EC measures electrical conductivity. In irrigation water it is commonly used as an indirect indicator of the total concentration of dissolved ions, not the identity of individual nutrients."
+  },
+  {
+    "id": "hiq-007",
+    "category": "Environment",
+    "difficulty": "Medium",
+    "prompt": "What does PPFD describe?",
+    "choices": ["Daily water use", "Air pressure inside a grow room", "Photosynthetically active photon flux reaching a square meter each second", "The ratio of red light to far-red light"],
+    "correctIndex": 2,
+    "explanation": "PPFD is photosynthetic photon flux density, expressed as micromoles of photosynthetically active photons per square meter per second."
+  },
+  {
+    "id": "hiq-008",
+    "category": "Environment",
+    "difficulty": "Medium",
+    "prompt": "What does DLI summarize?",
+    "choices": ["Root-zone oxygen over one hour", "Night length only", "Average leaf temperature", "The total photosynthetically active light received per square meter over a day"],
+    "correctIndex": 3,
+    "explanation": "Daily light integral is the accumulated photosynthetically active photon exposure over a 24-hour day, usually expressed in mol·m⁻²·day⁻¹."
+  },
+  {
+    "id": "hiq-009",
+    "category": "Plant Biology",
+    "difficulty": "Medium",
+    "prompt": "What is the main effect of removing the shoot tip during topping?",
+    "choices": ["It reduces apical dominance and can promote lateral shoot growth", "It permanently stops photosynthesis", "It changes a plant's chromosome number", "It converts roots into stems"],
+    "correctIndex": 0,
+    "explanation": "Removing the apical meristem reduces the hormonal dominance of the main shoot, allowing lateral buds to compete more strongly for growth."
+  },
+  {
+    "id": "hiq-010",
+    "category": "Genetics",
+    "difficulty": "Medium",
+    "prompt": "What does homozygous mean at a particular locus?",
+    "choices": ["The plant has no allele at that locus", "The two alleles are the same", "The two alleles must produce identical phenotypes in every environment", "The locus exists only in pollen"],
+    "correctIndex": 1,
+    "explanation": "An individual is homozygous at a locus when the two copies of that locus carry the same allele."
+  },
+  {
+    "id": "hiq-011",
+    "category": "Genetics",
+    "difficulty": "Medium",
+    "prompt": "Which process produces gametes with half the parental chromosome number?",
+    "choices": ["Mitosis", "Photosynthesis", "Meiosis", "Transpiration"],
+    "correctIndex": 2,
+    "explanation": "Meiosis reduces chromosome number and produces genetically variable haploid gametes used in sexual reproduction."
+  },
+  {
+    "id": "hiq-012",
+    "category": "Plant Reproduction",
+    "difficulty": "Medium",
+    "prompt": "What is the main role of a receptive stigma in a flower?",
+    "choices": ["To generate roots", "To store starch", "To absorb light", "To receive pollen"],
+    "correctIndex": 3,
+    "explanation": "A receptive stigma is part of the female reproductive structure and provides the surface where compatible pollen can land and germinate."
+  },
+  {
+    "id": "hiq-013",
+    "category": "Environment",
+    "difficulty": "Hard",
+    "prompt": "Vapor pressure deficit (VPD) is best described as what?",
+    "choices": ["The difference between the amount of water vapor the air could hold at saturation and the amount it actually holds, expressed as vapor pressure", "The difference between root-zone EC and runoff EC", "The total amount of water applied each day", "The ratio of oxygen to carbon dioxide"],
+    "correctIndex": 0,
+    "explanation": "VPD is a vapor-pressure difference that represents atmospheric drying demand. It depends strongly on temperature and humidity."
+  },
+  {
+    "id": "hiq-014",
+    "category": "Environment",
+    "difficulty": "Hard",
+    "prompt": "If other factors stay similar, a higher VPD generally creates what change for a leaf?",
+    "choices": ["Lower evaporative demand", "Greater evaporative demand", "No possible effect on transpiration", "Automatic nutrient toxicity"],
+    "correctIndex": 1,
+    "explanation": "A larger vapor-pressure gradient generally increases the atmospheric demand for water, although stomatal responses can limit actual transpiration."
+  },
+  {
+    "id": "hiq-015",
+    "category": "Cultivation Science",
+    "difficulty": "Hard",
+    "prompt": "Why can EC not tell you which specific nutrient ions are present?",
+    "choices": ["EC only works in soil", "EC measures temperature instead of ions", "Different dissolved ions all contribute to bulk electrical conductivity", "EC becomes zero whenever fertilizer is added"],
+    "correctIndex": 2,
+    "explanation": "Conductivity reflects the combined ability of dissolved charged ions to carry electrical current. It does not identify the concentration of each individual ion."
+  },
+  {
+    "id": "hiq-016",
+    "category": "Plant Biology",
+    "difficulty": "Hard",
+    "prompt": "Why do deficiencies of mobile nutrients often appear first on older leaves?",
+    "choices": ["Older leaves cannot contain chlorophyll", "Roots stop functioning near older leaves", "Young leaves do not require nutrients", "The plant can remobilize some nutrients from older tissue toward newer growth"],
+    "correctIndex": 3,
+    "explanation": "For mobile nutrients, plants can relocate stored nutrient from older tissue to actively growing sinks, so deficiency symptoms often develop on older leaves first."
+  },
+  {
+    "id": "hiq-017",
+    "category": "Genetics",
+    "difficulty": "Hard",
+    "prompt": "A heterozygous individual has which allele condition at a locus?",
+    "choices": ["Two different alleles", "No alleles", "Four identical alleles", "Only maternally inherited alleles"],
+    "correctIndex": 0,
+    "explanation": "Heterozygous means the two homologous copies carry different alleles at the locus being discussed."
+  },
+  {
+    "id": "hiq-018",
+    "category": "Plant Reproduction",
+    "difficulty": "Hard",
+    "prompt": "Vegetative cloning most directly preserves which feature of the donor plant?",
+    "choices": ["Its exact future phenotype in every environment", "Its nuclear genotype, aside from mutation or genetic change that may occur", "Its age in calendar years", "Its root-zone microbiome"],
+    "correctIndex": 1,
+    "explanation": "A vegetative clone originates from somatic tissue of the donor and therefore starts with essentially the same nuclear genotype, while environment, mutation, epigenetic state, pests, and microbes can still differ."
+  },
+  {
+    "id": "hiq-019",
+    "category": "Plant Reproduction",
+    "difficulty": "Expert",
+    "prompt": "In photoperiod-sensitive cannabis, flowering is most directly associated with sensing what environmental signal?",
+    "choices": ["Root-zone EC alone", "Wind speed", "The duration of the light/dark cycle, especially uninterrupted night length", "Container volume"],
+    "correctIndex": 2,
+    "explanation": "Photoperiod-sensitive plants use light/dark timing signals mediated by photoreceptor systems; uninterrupted night length is a critical flowering cue in short-day responses."
+  },
+  {
+    "id": "hiq-020",
+    "category": "Plant Reproduction",
+    "difficulty": "Expert",
+    "prompt": "Autoflowering cannabis differs from strongly photoperiod-sensitive cannabis chiefly because flowering is less dependent on what?",
+    "choices": ["Plant genetics", "Plant age", "Meristem activity", "Day length"],
+    "correctIndex": 3,
+    "explanation": "Autoflowering types transition toward flowering largely according to developmental age and genotype rather than requiring a particular photoperiod trigger."
+  },
+  {
+    "id": "hiq-021",
+    "category": "Plant Chemistry",
+    "difficulty": "Expert",
+    "prompt": "Which cannabis surface structure is especially associated with concentrated cannabinoid and terpene production?",
+    "choices": ["Capitate-stalked glandular trichomes", "Root hairs", "Xylem vessels", "Guard cells"],
+    "correctIndex": 0,
+    "explanation": "Capitate-stalked glandular trichomes on reproductive tissues are major sites of specialized metabolite synthesis and accumulation, including cannabinoids and many terpenes."
+  },
+  {
+    "id": "hiq-022",
+    "category": "Plant Biology",
+    "difficulty": "Expert",
+    "prompt": "Why is pH described as a logarithmic scale?",
+    "choices": ["It increases by one unit every hour", "A one-unit pH change represents a tenfold change in hydrogen-ion activity on the conventional scale", "It measures ten different nutrients at once", "It can only be measured in powers of two"],
+    "correctIndex": 1,
+    "explanation": "pH is defined from the negative base-10 logarithm of hydrogen-ion activity, so a one-unit shift corresponds to a tenfold activity change."
+  },
+  {
+    "id": "hiq-023",
+    "category": "Root Biology",
+    "difficulty": "Expert",
+    "prompt": "What best describes a mycorrhizal association?",
+    "choices": ["A virus that blocks photosynthesis", "A mineral precipitate on leaves", "A symbiosis between certain fungi and plant roots", "A form of plant pollen"],
+    "correctIndex": 2,
+    "explanation": "Mycorrhizae are symbiotic associations between compatible fungi and plant roots that can alter nutrient and water acquisition in exchange for plant-derived carbon."
+  },
+  {
+    "id": "hiq-024",
+    "category": "Genetics",
+    "difficulty": "Expert",
+    "prompt": "Why can two genetically identical clones develop visibly different phenotypes?",
+    "choices": ["Clones always rewrite their DNA after rooting", "Phenotype is determined only by container color", "Genotype has no influence on traits", "Environment, developmental state and other non-genetic factors can change trait expression"],
+    "correctIndex": 3,
+    "explanation": "Genotype strongly influences potential traits, but environment, developmental state, stress, epigenetic regulation and other factors can change how those traits are expressed."
+  }
+]
