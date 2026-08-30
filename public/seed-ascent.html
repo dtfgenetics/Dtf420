@@ -1,50 +1,1381 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Seed Ascent | DTF Games</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;background:#071108;color:#e8f6e8;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}body{min-height:100dvh;padding:12px;display:grid;place-items:start center;overflow-x:hidden}.game{width:min(100%,780px);background:linear-gradient(145deg,#102313,#08160b);border:1px solid #2c5632;border-radius:24px;padding:14px;box-shadow:0 20px 60px #000a}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 4px 10px}.title{font-weight:900;color:#8cf29a;letter-spacing:.02em}.stats{display:flex;gap:12px;font-size:.85rem;color:#9fb5a2}.stats b{color:#ecffef}.frame{border:2px solid #2f6339;border-radius:18px;overflow:hidden;background:#071108}canvas{display:block;width:100%;height:auto;touch-action:none;user-select:none}.controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:10px}.controls button{border:1px solid #3b6e44;background:#17381d;color:#effff0;padding:10px 16px;border-radius:12px;font-weight:800;font-size:.95rem;cursor:pointer;touch-action:none}.controls .primary{background:#3c8148}.controls .danger{background:#572d2d;border-color:#7b4343}.hint{text-align:center;color:#739079;font-size:.78rem;margin-top:8px}@media(max-width:560px){body{padding:6px}.game{padding:8px;border-radius:16px}.top{align-items:flex-start}.title{font-size:.95rem}.stats{font-size:.7rem;gap:8px}.controls button{flex:1 1 22%;min-width:68px;padding:11px 8px}.hint{font-size:.7rem}}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌱 Seed Ascent - Cannabis Platformer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #0a0a1a, #1a2a1a, #0d260d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .game-wrapper {
+            background: linear-gradient(145deg, #1a2a1a, #0d1a0d);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            border: 1px solid #2a4a2a;
+            max-width: 750px;
+            width: 100%;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 5px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .game-title {
+            color: #7ddf7d;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .game-title .strain-indicator {
+            font-size: 0.65rem;
+            background: rgba(125, 223, 125, 0.15);
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(125, 223, 125, 0.2);
+            color: #b8f0b8;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 10px;
+            color: #8aaa8a;
+            font-size: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .game-stats span {
+            color: #b8f0b8;
+            font-weight: bold;
+        }
+
+        .game-stats .gold {
+            color: #fbbf24;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #2a5a2a;
+            background: #0d1a0d;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: #0d1a0d;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .controls button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #2d4a2d;
+            color: #b8e0b8;
+            border: 1px solid #3a6a3a;
+            touch-action: none;
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .controls button.primary {
+            background: #4a7a4a;
+            border-color: #5a9a5a;
+            color: #fff;
+        }
+
+        .controls button.danger {
+            background: #5a2a2a;
+            border-color: #7a3a3a;
+        }
+
+        .controls button.gold {
+            background: #5a4a1a;
+            border-color: #8a7a2a;
+            color: #fbbf24;
+        }
+
+        .mobile-controls {
+            display: none;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .mobile-controls button {
+            padding: 12px 20px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            min-width: 55px;
+            min-height: 55px;
+            touch-action: none;
+        }
+
+        .mobile-controls button:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.9);
+        }
+
+        .mobile-controls button.jump-btn {
+            background: rgba(125, 223, 125, 0.15);
+            border-color: rgba(125, 223, 125, 0.3);
+            min-width: 70px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 6px;
+                align-items: flex-start;
+            }
+            .game-wrapper {
+                padding: 10px;
+                border-radius: 18px;
+            }
+            .game-title {
+                font-size: 1rem;
+            }
+            .game-stats {
+                font-size: 0.65rem;
+                gap: 5px;
+            }
+            .controls button {
+                padding: 8px 10px;
+                font-size: 0.7rem;
+                min-height: 44px;
+            }
+            .mobile-controls {
+                display: flex;
+            }
+        }
+
+        .key-hint {
+            color: #4a6a4a;
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0px);
+        }
+
+        .notification.success {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #86efac;
+        }
+
+        .notification.error {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+
+        .notification.info {
+            background: rgba(96, 165, 250, 0.2);
+            border-color: rgba(96, 165, 250, 0.3);
+            color: #93c5fd;
+        }
+
+        .notification.reward {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: rgba(251, 191, 36, 0.3);
+            color: #fcd34d;
+        }
+    </style>
 </head>
 <body>
-<main class="game">
-  <div class="top"><div class="title">🌱 SEED ASCENT</div><div class="stats"><span>Score <b id="score">0</b></span><span>Best <b id="best">0</b></span><span>Gems <b id="gems">0</b></span></div></div>
-  <div class="frame"><canvas id="c" width="600" height="720" aria-label="Seed Ascent platform game"></canvas></div>
-  <div class="controls"><button class="primary" id="start">▶ Start</button><button id="left">← Left</button><button id="jump">↑ Jump</button><button id="right">Right →</button><button class="danger" id="reset">↻ Reset</button></div>
-  <div class="hint">Arrow keys / A D · Space / W / ↑ to jump · Double jump enabled</div>
-</main>
-<script>
-(()=>{
-const c=document.getElementById('c'),x=c.getContext('2d'),W=c.width,H=c.height,SY=H-150;
-const ui={score:document.getElementById('score'),best:document.getElementById('best'),gems:document.getElementById('gems')};
-const state={started:false,over:false,bonus:0,height:0,score:0,best:+localStorage.seedAscentBest||0,gems:0};
-const p={x:W/2-16,y:SY,w:32,h:32,vx:0,vy:0,jumps:0,on:false};
-const keys={left:false,right:false};let plats=[],gems=[],enemies=[],parts=[],clouds=[],cam=0,raf=0;
-const rnd=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function platform(y,starter=false){const w=starter?150:rnd(72,132),px=starter?W/2-w/2:rnd(22,W-w-22),type=!starter&&Math.random()<.13?'bounce':'normal',tufts=Array.from({length:Math.random()<.5?0:1+Math.floor(Math.random()*3)},()=>({o:rnd(10,w-10),h:rnd(5,10)}));plats.push({x:px,y,w,h:13,type,tufts});if(!starter&&Math.random()<.28)gems.push({x:px+w/2+rnd(-22,22),y:y-25,r:9,gold:Math.random()<.18,dead:false});if(!starter&&Math.random()<.1&&w>88)enemies.push({x:px+w/2,y:y-19,base:y-19,min:px+14,max:px+w-14,dir:Math.random()<.5?-1:1,s:rnd(.55,1.05),fast:Math.random()<.2,dead:false})}
-function cloudsInit(){clouds=Array.from({length:8},()=>({x:rnd(-80,W),y:rnd(20,H*.5),w:rnd(70,150),h:rnd(22,44),s:rnd(.08,.28),a:rnd(.05,.14)}))}
-function burst(px,py,color,n=12){for(let i=0;i<n;i++){const a=rnd(0,Math.PI*2),s=rnd(.8,3);parts.push({x:px,y:py,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,r:rnd(2,4),life:rnd(35,70),max:70,color})}}
-function reset(started=false){state.started=started;state.over=false;state.bonus=0;state.height=0;state.score=0;state.gems=0;p.x=W/2-16;p.y=SY;p.vx=p.vy=0;p.jumps=0;p.on=false;cam=0;plats=[];gems=[];enemies=[];parts=[];platform(H-58,true);for(let i=1;i<13;i++)platform(H-58-i*rnd(86,118));cloudsInit();sync()}
-function sync(){state.score=state.height+state.bonus;ui.score.textContent=state.score;ui.best.textContent=state.best;ui.gems.textContent=state.gems}
-function jump(){if(!state.started){reset(true);return}if(state.over){reset(true);return}if(p.jumps<2){p.vy=-12*(p.jumps?0.88:1);p.jumps++;p.on=false;burst(p.x+p.w/2,p.y+p.h,'#90f39c',p.jumps===2?10:5)}}
-function gameOver(){if(state.over)return;state.over=true;if(state.score>state.best){state.best=state.score;localStorage.seedAscentBest=state.best;burst(W/2,p.y,'#ffd84a',35)}sync()}
-function update(){if(!state.started||state.over)return;const prevBottom=p.y+p.h;p.vx=keys.left?-5:keys.right?5:p.vx*.78;p.vy=Math.min(10,p.vy+.5);p.x=clamp(p.x+p.vx,0,W-p.w);p.y+=p.vy;p.on=false;for(const q of plats){if(p.vy>0&&p.x+p.w>q.x+7&&p.x<q.x+q.w-7&&prevBottom<=q.y+2&&p.y+p.h>=q.y&&p.y+p.h<=q.y+q.h+18){p.y=q.y-p.h;p.vy=q.type==='bounce'?-15.5:0;p.on=true;p.jumps=0;if(q.type==='bounce')burst(p.x+p.w/2,p.y+p.h,'#85ff99',10)}}
-for(const g of gems){if(g.dead)continue;const dx=p.x+p.w/2-g.x,dy=p.y+p.h/2-g.y;if(Math.hypot(dx,dy)<g.r+20){g.dead=true;state.gems+=g.gold?5:1;state.bonus+=g.gold?12:3;burst(g.x,g.y,g.gold?'#ffd84a':'#8cf29a',18);sync()}}
-for(const e of enemies){if(e.dead)continue;e.x+=e.s*(e.fast?1.6:1)*e.dir;if(e.x<=e.min||e.x>=e.max){e.x=clamp(e.x,e.min,e.max);e.dir*=-1}const dx=p.x+p.w/2-e.x,dy=p.y+p.h/2-e.y;if(Math.abs(dx)<25&&Math.abs(dy)<24){if(p.vy>0&&p.y+p.h-e.y<17){e.dead=true;p.vy=-9.5;state.bonus+=6;burst(e.x,e.y,'#ff795f',20);sync()}else{gameOver();return}}}
-cam+=(H*.6-p.y-cam)*.08;if(p.y+cam>H+110){gameOver();return}let high=Math.min(...plats.map(q=>q.y));while(p.y<high+240){platform(high-rnd(86,120));high=Math.min(...plats.map(q=>q.y))}const cut=p.y+H*1.7;plats=plats.filter(q=>q.y<cut);gems=gems.filter(g=>g.y<cut&&!g.dead);enemies=enemies.filter(e=>e.y<cut&&!e.dead);for(const a of parts){a.x+=a.vx;a.y+=a.vy;a.vy+=.05;a.life--}parts=parts.filter(a=>a.life>0);for(const q of clouds){q.x+=q.s;if(q.x-q.w/2>W)q.x=-q.w/2}const h=Math.max(0,Math.floor((SY-p.y)/10));if(h>state.height){state.height=h;sync()}}
-function rr(px,py,w,h,r){x.beginPath();x.roundRect(px,py,w,h,r);x.fill()}
-function draw(){x.clearRect(0,0,W,H);let bg=x.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#112b2b');bg.addColorStop(.55,'#12381f');bg.addColorStop(1,'#071108');x.fillStyle=bg;x.fillRect(0,0,W,H);for(const q of clouds){const y=q.y+cam*.08;x.globalAlpha=q.a;x.fillStyle='#fff';x.beginPath();x.ellipse(q.x,y,q.w/2,q.h/2,0,0,Math.PI*2);x.fill()}x.globalAlpha=1;
-for(const q of plats){const y=q.y+cam;if(y<-25||y>H+25)continue;x.shadowBlur=q.type==='bounce'?18:8;x.shadowColor=q.type==='bounce'?'#8cf29a':'#0008';x.fillStyle=q.type==='bounce'?'#3f9b52':'#286536';rr(q.x,y,q.w,q.h,6);x.shadowBlur=0;x.fillStyle='#72b778';x.fillRect(q.x+8,y+2,q.w-16,2);x.fillStyle='#4b9a58';for(const t of q.tufts){x.beginPath();x.moveTo(q.x+t.o,y);x.lineTo(q.x+t.o-3,y-t.h);x.lineTo(q.x+t.o+3,y-t.h*.7);x.fill()}}
-for(const g of gems){const y=g.y+cam;if(y<-20||y>H+20)continue;x.shadowBlur=16;x.shadowColor=g.gold?'#ffd84a':'#8cf29a';x.fillStyle=g.gold?'#ffd84a':'#8cf29a';x.beginPath();x.arc(g.x,y,g.r,0,Math.PI*2);x.fill();x.shadowBlur=0;x.fillStyle='#fff9';x.beginPath();x.arc(g.x-3,y-3,2.6,0,Math.PI*2);x.fill()}
-for(const e of enemies){const y=e.y+cam;x.fillStyle=e.fast?'#ff5e5e':'#c96f3e';x.beginPath();x.arc(e.x,y+9,12,0,Math.PI*2);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(e.x-4,y+6,3,0,Math.PI*2);x.arc(e.x+4,y+6,3,0,Math.PI*2);x.fill();x.fillStyle='#222';x.beginPath();x.arc(e.x-4,y+7,1.4,0,Math.PI*2);x.arc(e.x+4,y+7,1.4,0,Math.PI*2);x.fill()}
-const py=p.y+cam;x.shadowBlur=20;x.shadowColor='#8cf29a55';let pg=x.createRadialGradient(p.x+8,py+7,2,p.x+16,py+16,22);pg.addColorStop(0,'#95ba79');pg.addColorStop(.6,'#557d3d');pg.addColorStop(1,'#29481c');x.fillStyle=pg;x.beginPath();x.ellipse(p.x+16,py+16,16,17,-.15,0,Math.PI*2);x.fill();x.shadowBlur=0;x.strokeStyle='#dfffd04d';x.lineWidth=2;x.beginPath();x.ellipse(p.x+16,py+16,7,13,-.15,0,Math.PI*2);x.stroke();if(!p.on){x.strokeStyle='#7ee68e';x.beginPath();x.moveTo(p.x+16,py+2);x.quadraticCurveTo(p.x+11,py-9,p.x+7,py-20);x.stroke();x.fillStyle='#7ee68e';x.beginPath();x.ellipse(p.x+3,py-21,7,4,-.4,0,Math.PI*2);x.fill();x.beginPath();x.ellipse(p.x+11,py-19,7,4,.4,0,Math.PI*2);x.fill()}
-for(const a of parts){x.globalAlpha=Math.max(0,a.life/a.max);x.fillStyle=a.color;x.beginPath();x.arc(a.x,a.y+cam,a.r,0,Math.PI*2);x.fill()}x.globalAlpha=1;x.fillStyle='#ffffff22';x.font='12px ui-monospace,monospace';x.fillText(`↑ ${Math.max(0,Math.floor((SY-p.y)/10))}m`,12,20);
-if(!state.started||state.over){x.fillStyle='#000b';x.fillRect(0,0,W,H);x.textAlign='center';x.fillStyle=state.over?'#ff8585':'#8cf29a';x.font='900 48px system-ui';x.fillText(state.over?'Game Over':'Seed Ascent',W/2,H/2-42);x.fillStyle='#e5f7e7';x.font='20px system-ui';x.fillText(state.over?`Score ${state.score}`:'Climb higher. Collect gems. Stomp pests.',W/2,H/2+8);x.fillStyle='#9fc7a4';x.font='16px system-ui';x.fillText(state.over?'Press Start or tap the game to retry':'Press Start or tap the game',W/2,H/2+52);x.textAlign='left'}}
-function loop(){update();draw();raf=requestAnimationFrame(loop)}
-function hold(id,key){const b=document.getElementById(id);const on=e=>{e.preventDefault();keys[key]=true;try{b.setPointerCapture(e.pointerId)}catch{}};const off=e=>{e?.preventDefault();keys[key]=false};b.addEventListener('pointerdown',on);['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,off))}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.left=true;if(e.key==='ArrowRight'||e.key==='d')keys.right=true;if(e.key===' '||e.key==='ArrowUp'||e.key==='w'){e.preventDefault();jump()}});document.addEventListener('keyup',e=>{if(e.key==='ArrowLeft'||e.key==='a')keys.left=false;if(e.key==='ArrowRight'||e.key==='d')keys.right=false});hold('left','left');hold('right','right');document.getElementById('jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});document.getElementById('start').onclick=()=>reset(true);document.getElementById('reset').onclick=()=>reset(false);c.addEventListener('pointerdown',e=>{e.preventDefault();jump()});window.addEventListener('blur',()=>keys.left=keys.right=false);reset(false);loop();
-})();
-</script>
+    <div class="notification" id="notification"></div>
+
+    <div class="game-wrapper">
+        <div class="game-header">
+            <div class="game-title">
+                🌱 Seed Ascent
+                <span class="strain-indicator" id="strainDisplay">🌿 Indica</span>
+            </div>
+            <div class="game-stats">
+                <div>🌿 Score: <span id="scoreDisplay">0</span></div>
+                <div>🏆 Best: <span id="bestDisplay">0</span></div>
+                <div>💎 <span class="gold" id="gemDisplay">0</span></div>
+                <div>🔥 <span id="comboDisplay">0x</span></div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="700" height="750" aria-label="Seed Ascent platform game"></canvas>
+        </div>
+
+        <div class="controls">
+            <button class="primary" id="startBtn">▶️ Start</button>
+            <button id="leftBtn">⬅️</button>
+            <button id="rightBtn">➡️</button>
+            <button class="gold" id="strainBtn">🧬 Switch</button>
+            <button class="danger" id="resetBtn">🔄</button>
+        </div>
+
+        <div class="mobile-controls">
+            <button id="mobileLeft">⬅️</button>
+            <button class="jump-btn" id="mobileJump">⬆️</button>
+            <button id="mobileRight">➡️</button>
+        </div>
+
+        <div class="key-hint">⬅️ ➡️ / A D Move | Space / W / Click = Jump | Double Jump!</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('gameCanvas');
+            if (!canvas) {
+                console.error('Canvas element not found!');
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error('Could not get canvas context!');
+                return;
+            }
+
+            const W = canvas.width;
+            const H = canvas.height;
+            const START_Y = H - 160;
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const bestDisplay = document.getElementById('bestDisplay');
+            const gemDisplay = document.getElementById('gemDisplay');
+            const comboDisplay = document.getElementById('comboDisplay');
+            const strainDisplay = document.getElementById('strainDisplay');
+
+            let notifTimeout;
+
+            function notify(msg, type = 'info') {
+                const el = document.getElementById('notification');
+                if (!el) return;
+                el.textContent = msg;
+                el.className = 'notification show ' + type;
+                clearTimeout(notifTimeout);
+                notifTimeout = setTimeout(() => { el.className = 'notification'; }, 2500);
+            }
+
+            let audioCtx = null;
+
+            function initAudio() {
+                try {
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                } catch (e) { /* silent */ }
+            }
+
+            function playTone(freq, dur, type = 'sine', vol = 0.1) {
+                if (!audioCtx) return;
+                try {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.frequency.value = freq;
+                    osc.type = type;
+                    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + dur);
+                } catch (e) { /* silent */ }
+            }
+
+            function sJump() { playTone(300, 0.1); setTimeout(() => playTone(500, 0.08), 80); }
+            function sDouble() { playTone(400, 0.08); setTimeout(() => playTone(600, 0.08), 100); }
+            function sGem() { playTone(880, 0.08); setTimeout(() => playTone(1100, 0.08), 80); }
+            function sGold() { playTone(660, 0.1); setTimeout(() => playTone(880, 0.1), 100); setTimeout(() => playTone(1100, 0.12), 200); }
+            function sStomp() { playTone(200, 0.15, 'sawtooth', 0.08); setTimeout(() => playTone(150, 0.1, 'sawtooth', 0.06), 150); }
+            function sOver() { playTone(300, 0.2, 'sawtooth', 0.08); setTimeout(() => playTone(200, 0.2, 'sawtooth', 0.06), 200); setTimeout(() => playTone(150, 0.3, 'sawtooth', 0.05), 400); }
+            function sBest() { playTone(523, 0.1); setTimeout(() => playTone(659, 0.1), 120); setTimeout(() => playTone(784, 0.15), 240); }
+            function sCombo() { playTone(400, 0.06); setTimeout(() => playTone(600, 0.06), 80); setTimeout(() => playTone(800, 0.08), 160); }
+
+            const STRAINS = [
+                { name: '🌿 Indica', color: '#7ddf7d', jump: -12, speed: 5, gravity: 0.5, doubleJump: true },
+                { name: '☀️ Sativa', color: '#fbbf24', jump: -13, speed: 6, gravity: 0.45, doubleJump: true },
+                { name: '🌈 Hybrid', color: '#a78bfa', jump: -12.5, speed: 5.5, gravity: 0.47, doubleJump: true },
+                { name: '🌲 Ruderalis', color: '#f87171', jump: -11, speed: 7, gravity: 0.55, doubleJump: false },
+                { name: '⛽ Diesel', color: '#fbbf24', jump: -14, speed: 4.5, gravity: 0.4, doubleJump: true },
+                { name: '💜 Purple', color: '#c084fc', jump: -12, speed: 5, gravity: 0.42, doubleJump: true },
+            ];
+
+            const game = {
+                score: 0,
+                bonusScore: 0,
+                heightScore: 0,
+                best: parseInt(localStorage.getItem('seedBest') || localStorage.getItem('seedAscentBest')) || 0,
+                gems: 0,
+                combo: 0,
+                maxCombo: 0,
+                enemiesStomped: 0,
+                gameOver: false,
+                started: false,
+                strainIdx: 0,
+                unlocked: [0],
+                level: 1,
+            };
+
+            const player = {
+                x: W / 2 - 18,
+                y: START_Y,
+                w: 36,
+                h: 36,
+                vy: 0,
+                vx: 0,
+                onGround: false,
+                jumpCount: 0,
+                maxJumps: 2,
+            };
+
+            let platforms = [];
+            let gems = [];
+            let enemies = [];
+            let particles = [];
+            let leaves = [];
+            let clouds = [];
+            let floatingTexts = [];
+            const keys = { left: false, right: false };
+            let cameraY = 0;
+
+            function getStrain() { return STRAINS[game.strainIdx]; }
+            function rand(min, max) { return Math.random() * (max - min) + min; }
+            function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
+            function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
+
+            function spawnParticles(x, y, color, count = 12, speed = 3) {
+                for (let i = 0; i < count; i++) {
+                    const angle = rand(0, Math.PI * 2);
+                    const spd = rand(0.5, speed);
+                    particles.push({
+                        x, y,
+                        vx: Math.cos(angle) * spd,
+                        vy: Math.sin(angle) * spd - 0.5,
+                        life: rand(30, 60),
+                        maxLife: 60,
+                        r: rand(2, 5),
+                        color,
+                        gravity: rand(0.03, 0.08),
+                    });
+                }
+            }
+
+            function spawnLeaf(x, y) {
+                leaves.push({
+                    x, y,
+                    vx: rand(-1.5, 1.5),
+                    vy: rand(-2, -0.5),
+                    rot: rand(0, Math.PI * 2),
+                    rotSpeed: rand(-0.04, 0.04),
+                    life: rand(80, 150),
+                    size: rand(6, 14),
+                    color: `hsl(${rand(90, 140)}, 60%, ${rand(35, 55)}%)`,
+                });
+            }
+
+            function spawnText(x, y, text, color = '#fff', size = 20) {
+                floatingTexts.push({ x, y, text, color, size, life: 50, maxLife: 50, vy: -1.5 });
+            }
+
+            function createEnemy(x, y, type) {
+                const configs = {
+                    basic: { color: '#cc6633', speed: 0.5, hp: 1, score: 5, w: 20, h: 20 },
+                    fast: { color: '#ff4444', speed: 1.2, hp: 1, score: 8, w: 16, h: 16 },
+                    tank: { color: '#8b5cf6', speed: 0.3, hp: 3, score: 15, w: 26, h: 26 },
+                    flying: { color: '#60a5fa', speed: 0.8, hp: 1, score: 10, w: 18, h: 18 },
+                };
+                const c = configs[type] || configs.basic;
+                return {
+                    x, y,
+                    w: c.w,
+                    h: c.h,
+                    type,
+                    speed: c.speed,
+                    hp: c.hp,
+                    maxHp: c.hp,
+                    score: c.score,
+                    color: c.color,
+                    direction: Math.random() < 0.5 ? 1 : -1,
+                    range: rand(30, 60),
+                    startX: x,
+                    dead: false,
+                    hitTimer: 0,
+                    baseY: y,
+                    flyAmp: rand(15, 30),
+                    flySpeed: rand(0.3, 0.8),
+                };
+            }
+
+            function createPlatform(y) {
+                const x = 20 + rand(0, W - 150);
+                const w = 55 + rand(0, 65);
+
+                let type = 'normal';
+                const r = Math.random();
+                if (r < 0.08) type = 'bouncy';
+                else if (r < 0.14) type = 'moving';
+                else if (r < 0.18) type = 'golden';
+
+                const plat = {
+                    x, y, w,
+                    h: 12,
+                    type,
+                    color: `hsl(${120 + (y / H) * 30}, 55%, ${25 + (y / H) * 25}%)`,
+                    startX: x,
+                    moveRange: rand(30, 60),
+                    moveSpeed: rand(0.4, 0.8),
+                    moveDir: Math.random() < 0.5 ? 1 : -1,
+                    goldCollected: false,
+                    broken: false,
+                };
+
+                platforms.push(plat);
+
+                if (Math.random() < 0.25) {
+                    gems.push({
+                        x: x + w / 2 + rand(-20, 20),
+                        y: y - 25,
+                        r: 8,
+                        collected: false,
+                        type: Math.random() < 0.15 ? 'golden' : 'normal',
+                        bob: rand(0, Math.PI * 2),
+                    });
+                }
+
+                if (Math.random() < 0.10 && y < H - 100) {
+                    const types = ['basic', 'basic', 'fast', 'tank'];
+                    const t = types[randInt(0, types.length - 1)];
+                    enemies.push(createEnemy(x + w / 2, y - 20, t));
+                }
+
+                return plat;
+            }
+
+            function initClouds() {
+                clouds = [];
+                for (let i = 0; i < 8; i++) {
+                    clouds.push({
+                        x: rand(0, W),
+                        y: rand(0, H * 0.5),
+                        w: rand(60, 180),
+                        h: rand(15, 35),
+                        speed: rand(0.1, 0.4),
+                        opacity: rand(0.05, 0.15),
+                    });
+                }
+            }
+
+            function initGame() {
+                const strain = getStrain();
+                player.x = W / 2 - 18;
+                player.y = START_Y;
+                player.vy = 0;
+                player.vx = 0;
+                player.onGround = false;
+                player.jumpCount = 0;
+                player.maxJumps = strain.doubleJump ? 2 : 1;
+
+                game.score = 0;
+                game.bonusScore = 0;
+                game.heightScore = 0;
+                game.gems = 0;
+                game.combo = 0;
+                game.maxCombo = 0;
+                game.enemiesStomped = 0;
+                game.gameOver = false;
+                game.started = true;
+                game.level = 1;
+
+                cameraY = 0;
+                platforms = [];
+                gems = [];
+                enemies = [];
+                particles = [];
+                leaves = [];
+                floatingTexts = [];
+
+                for (let i = 0; i < 14; i++) {
+                    const y = H - 60 - i * (75 + rand(0, 40));
+                    createPlatform(y);
+                }
+
+                initClouds();
+                updateUI();
+                notify('🌱 Ready to grow!', 'success');
+            }
+
+            function unlockStrain(idx) {
+                if (!game.unlocked.includes(idx)) {
+                    game.unlocked.push(idx);
+                    notify(`🌟 Unlocked: ${STRAINS[idx].name}!`, 'reward');
+                    updateUI();
+                }
+            }
+
+            function recomputeScore() {
+                game.score = game.heightScore + game.bonusScore;
+            }
+
+            function gameOver() {
+                if (game.gameOver) return;
+                game.gameOver = true;
+                sOver();
+
+                if (game.score > game.best) {
+                    game.best = game.score;
+                    localStorage.setItem('seedBest', game.best);
+                    localStorage.setItem('seedAscentBest', game.best);
+                    sBest();
+                    spawnParticles(W / 2, H / 2, '#fbbf24', 40);
+                }
+
+                if (game.score >= 100) unlockStrain(1);
+                if (game.score >= 300) unlockStrain(2);
+                if (game.gems >= 25) unlockStrain(3);
+                if (game.enemiesStomped >= 10) unlockStrain(4);
+                if (game.enemiesStomped >= 5) unlockStrain(5);
+
+                updateUI();
+            }
+
+            function jump() {
+                if (!game.started || game.gameOver) return;
+                const strain = getStrain();
+                if (player.jumpCount < player.maxJumps) {
+                    const force = strain.jump * (player.jumpCount === 1 ? 0.85 : 1);
+                    player.vy = force;
+                    player.jumpCount++;
+                    player.onGround = false;
+
+                    if (player.jumpCount === 1) {
+                        sJump();
+                        spawnParticles(player.x + player.w / 2, player.y + player.h, strain.color, 6);
+                    } else {
+                        sDouble();
+                        spawnParticles(player.x + player.w / 2, player.y + player.h, '#fbbf24', 12);
+                        spawnText(player.x + player.w / 2, player.y - 20, '🌟 DOUBLE!', '#fbbf24', 16);
+                    }
+                }
+            }
+
+            function switchStrain() {
+                for (let offset = 1; offset < STRAINS.length; offset++) {
+                    const next = (game.strainIdx + offset) % STRAINS.length;
+                    if (!game.unlocked.includes(next)) continue;
+
+                    game.strainIdx = next;
+                    const strain = getStrain();
+                    player.maxJumps = strain.doubleJump ? 2 : 1;
+                    updateUI();
+                    notify(`Switched to ${strain.name}`, 'info');
+                    return;
+                }
+
+                notify('🔒 Unlock another strain to switch', 'error');
+            }
+
+            function updateUI() {
+                scoreDisplay.textContent = game.score;
+                bestDisplay.textContent = game.best;
+                gemDisplay.textContent = game.gems;
+                comboDisplay.textContent = Math.floor(game.combo) + 'x';
+                strainDisplay.textContent = STRAINS[game.strainIdx].name;
+                strainDisplay.style.color = STRAINS[game.strainIdx].color;
+            }
+
+            function update() {
+                if (!game.started || game.gameOver) return;
+
+                const strain = getStrain();
+
+                if (keys.left) player.vx = -strain.speed;
+                else if (keys.right) player.vx = strain.speed;
+                else player.vx *= 0.85;
+
+                player.vy += strain.gravity;
+                if (player.vy > 12) player.vy = 12;
+
+                player.x += player.vx;
+                player.x = clamp(player.x, 0, W - player.w);
+
+                const prevBottom = player.y + player.h;
+                player.y += player.vy;
+
+                player.onGround = false;
+                for (const plat of platforms) {
+                    if (plat.broken) continue;
+                    const inX = player.x + player.w > plat.x + 8 && player.x < plat.x + plat.w - 8;
+                    const newBottom = player.y + player.h;
+                    if (inX && player.vy > 0 && prevBottom <= plat.y + 2 && newBottom >= plat.y &&
+                        newBottom <= plat.y + plat.h + 18) {
+                        player.y = plat.y - player.h;
+                        player.vy = 0;
+                        player.onGround = true;
+                        player.jumpCount = 0;
+
+                        if (plat.type === 'bouncy') {
+                            player.vy = -16;
+                            spawnParticles(player.x + player.w / 2, player.y + player.h, '#7ddf7d', 15);
+                            sJump();
+                        }
+                        if (plat.type === 'golden' && !plat.goldCollected) {
+                            plat.goldCollected = true;
+                            game.gems += 5;
+                            game.bonusScore += 20;
+                            recomputeScore();
+                            spawnParticles(plat.x + plat.w / 2, plat.y, '#fbbf24', 25);
+                            sGold();
+                            spawnText(plat.x + plat.w / 2, plat.y - 20, '+5 💎', '#fbbf24', 22);
+                            updateUI();
+                        }
+                    }
+                }
+
+                for (const plat of platforms) {
+                    if (plat.type === 'moving' && !plat.broken) {
+                        plat.x += plat.moveSpeed * plat.moveDir;
+                        if (Math.abs(plat.x - plat.startX) > plat.moveRange) plat.moveDir *= -1;
+                    }
+                }
+
+                for (const gem of gems) {
+                    if (gem.collected) continue;
+                    const dx = (player.x + player.w / 2) - gem.x;
+                    const dy = (player.y + player.h / 2) - gem.y;
+                    if (Math.sqrt(dx * dx + dy * dy) < gem.r + 20) {
+                        gem.collected = true;
+                        const val = gem.type === 'golden' ? 5 : 1;
+                        const scoreVal = gem.type === 'golden' ? 10 : 2;
+                        game.gems += val;
+                        game.bonusScore += scoreVal;
+                        recomputeScore();
+                        game.combo++;
+                        if (game.combo > game.maxCombo) game.maxCombo = game.combo;
+
+                        if (game.combo >= 3) {
+                            spawnText(gem.x, gem.y - 30, `🔥 ${Math.floor(game.combo)}x COMBO!`, '#ffdd44', 24);
+                            sCombo();
+                            if (game.combo >= 5) {
+                                game.gems += 2;
+                                spawnText(gem.x, gem.y - 55, '✨ BONUS +2', '#fbbf24', 18);
+                            }
+                        }
+
+                        const color = gem.type === 'golden' ? '#fbbf24' : '#7ddf7d';
+                        spawnParticles(gem.x, gem.y, color, gem.type === 'golden' ? 25 : 12);
+                        spawnLeaf(gem.x, gem.y);
+                        gem.type === 'golden' ? sGold() : sGem();
+                        updateUI();
+                    }
+                }
+
+                for (const enemy of enemies) {
+                    if (enemy.dead) continue;
+                    const dx = (player.x + player.w / 2) - enemy.x;
+                    const dy = (player.y + player.h / 2) - enemy.y;
+
+                    if (Math.abs(dx) < 22 && Math.abs(dy) < 22) {
+                        if (player.vy > 0 && player.y + player.h - enemy.y < 15) {
+                            enemy.hp--;
+                            enemy.hitTimer = 10;
+                            spawnParticles(enemy.x, enemy.y, enemy.color, 12);
+
+                            if (enemy.hp <= 0) {
+                                enemy.dead = true;
+                                const bonus = game.combo > 3 ? 2 : 1;
+                                game.bonusScore += enemy.score * bonus;
+                                recomputeScore();
+                                game.enemiesStomped++;
+                                spawnParticles(enemy.x, enemy.y, enemy.color, 25, 4);
+                                sStomp();
+                                spawnText(enemy.x, enemy.y - 20, `+${enemy.score * bonus}`, enemy.color, 18);
+
+                                if (game.enemiesStomped >= 5) unlockStrain(1);
+                                if (game.enemiesStomped >= 10) unlockStrain(2);
+                                if (game.enemiesStomped >= 20) unlockStrain(3);
+                                if (game.enemiesStomped >= 30) unlockStrain(4);
+
+                                updateUI();
+                            } else {
+                                sStomp();
+                            }
+                            player.vy = -8;
+                        } else {
+                            gameOver();
+                            return;
+                        }
+                    }
+
+                    if (!enemy.dead) {
+                        enemy.x += enemy.speed * enemy.direction;
+                        if (Math.abs(enemy.x - enemy.startX) > enemy.range) enemy.direction *= -1;
+                        if (enemy.type === 'flying') {
+                            enemy.y = enemy.baseY + Math.sin(Date.now() / 1000 * enemy.flySpeed) * enemy.flyAmp;
+                        }
+                        if (enemy.hitTimer > 0) enemy.hitTimer--;
+                    }
+                }
+                enemies = enemies.filter(e => !e.dead || e.hitTimer > 0);
+
+                const targetCam = H * 0.55 - player.y;
+                if (targetCam > cameraY) {
+                    cameraY += (targetCam - cameraY) * 0.06;
+                }
+
+                if (player.y + cameraY > H + 100) { gameOver(); return; }
+
+                const highest = platforms.length > 0 ? Math.min(...platforms.map(p => p.y)) : H;
+                if (player.y < highest + 200) {
+                    const newY = highest - (75 + rand(0, 50));
+                    createPlatform(newY);
+
+                    const cleanupY = player.y + H * 1.5;
+                    platforms = platforms.filter(p => p.y < cleanupY);
+                    gems = gems.filter(g => g.y < cleanupY && !g.collected);
+                    enemies = enemies.filter(e => e.y < cleanupY && !e.dead);
+                }
+
+                const heightScore = Math.max(0, Math.floor((START_Y - player.y) / 15));
+                if (heightScore > game.heightScore) {
+                    game.heightScore = heightScore;
+                    recomputeScore();
+                    updateUI();
+                }
+
+                game.level = Math.max(1, Math.floor(Math.max(0, START_Y - player.y) / 500) + 1);
+
+                if (game.combo > 0 && player.onGround) {
+                    game.combo = Math.max(0, game.combo - 0.02);
+                }
+
+                for (const p of particles) {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += p.gravity || 0.05;
+                    p.life--;
+                }
+                particles = particles.filter(p => p.life > 0);
+
+                for (const l of leaves) {
+                    l.x += l.vx;
+                    l.y += l.vy;
+                    l.vy += 0.02;
+                    l.rot += l.rotSpeed;
+                    l.life--;
+                }
+                leaves = leaves.filter(l => l.life > 0);
+
+                for (const ft of floatingTexts) {
+                    ft.y += ft.vy;
+                    ft.life--;
+                    ft.vy *= 0.98;
+                }
+                floatingTexts = floatingTexts.filter(ft => ft.life > 0);
+
+                for (const c of clouds) {
+                    c.x += c.speed;
+                    if (c.x > W + c.w) c.x = -c.w;
+                }
+
+                if (Math.random() < 0.015) {
+                    spawnLeaf(rand(0, W), rand(0, H * 0.3));
+                }
+
+                updateUI();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+
+                const off = clamp((player.y - 200) / 1200, 0, 1);
+                const grad = ctx.createLinearGradient(0, 0, 0, H);
+                grad.addColorStop(0, `hsl(${220 - off * 50}, 50%, ${8 + off * 15}%)`);
+                grad.addColorStop(0.5, `hsl(${160 - off * 30}, 55%, ${12 + off * 15}%)`);
+                grad.addColorStop(1, `hsl(120, 50%, ${8 + off * 10}%)`);
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, W, H);
+
+                for (const c of clouds) {
+                    const cy = c.y + cameraY * 0.1;
+                    if (cy > -50 && cy < H + 50) {
+                        ctx.globalAlpha = c.opacity;
+                        ctx.fillStyle = '#aaccdd';
+                        ctx.beginPath();
+                        ctx.ellipse(c.x, cy, c.w / 2, c.h / 2, 0, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.ellipse(c.x - c.w * 0.3, cy + 4, c.w * 0.25, c.h * 0.35, 0, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.ellipse(c.x + c.w * 0.3, cy + 4, c.w * 0.25, c.h * 0.35, 0, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.globalAlpha = 1;
+                    }
+                }
+
+                for (const ft of floatingTexts) {
+                    const fy = ft.y + cameraY;
+                    const alpha = ft.life / ft.maxLife;
+                    ctx.globalAlpha = alpha;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = ft.color;
+                    ctx.fillStyle = ft.color;
+                    ctx.font = `bold ${ft.size}px Segoe UI, sans-serif`;
+                    ctx.fillText(ft.text, ft.x, fy);
+                    ctx.shadowBlur = 0;
+                }
+                ctx.globalAlpha = 1;
+
+                for (const gem of gems) {
+                    if (gem.collected) continue;
+                    const gy = gem.y + cameraY;
+                    if (gy > -20 && gy < H + 20) {
+                        const bob = Math.sin(gem.bob + Date.now() / 600) * 4;
+                        const glow = gem.type === 'golden' ? '255,220,68' : '125,223,125';
+                        const grad2 = ctx.createRadialGradient(gem.x, gy + bob, 2, gem.x, gy + bob, gem.r * 2.5);
+                        grad2.addColorStop(0, `rgba(${glow},0.3)`);
+                        grad2.addColorStop(1, `rgba(${glow},0)`);
+                        ctx.fillStyle = grad2;
+                        ctx.beginPath();
+                        ctx.arc(gem.x, gy + bob, gem.r * 2.5, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.shadowBlur = 20;
+                        ctx.shadowColor = gem.type === 'golden' ? '#fbbf24' : '#7ddf7d';
+                        ctx.fillStyle = gem.type === 'golden' ? '#fbbf24' : '#7ddf7d';
+                        ctx.beginPath();
+                        ctx.arc(gem.x, gy + bob, gem.r, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                        ctx.beginPath();
+                        ctx.arc(gem.x - gem.r * 0.3, gy + bob - gem.r * 0.3, gem.r * 0.25, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for (const enemy of enemies) {
+                    if (enemy.dead) continue;
+                    const ey = enemy.y + cameraY;
+                    if (ey > -30 && ey < H + 30) {
+                        const flash = enemy.hitTimer > 0 && enemy.hitTimer % 4 < 2;
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = 'rgba(255,0,0,0.15)';
+                        ctx.fillStyle = flash ? '#fff' : enemy.color;
+
+                        if (enemy.type === 'flying') {
+                            ctx.beginPath();
+                            ctx.ellipse(enemy.x - 10, ey, 10, 6, -0.3, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.ellipse(enemy.x + 10, ey, 10, 6, 0.3, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.fillStyle = flash ? '#fff' : '#4a7a4a';
+                            ctx.beginPath();
+                            ctx.arc(enemy.x, ey, 6, 0, Math.PI * 2);
+                            ctx.fill();
+                        } else if (enemy.type === 'tank') {
+                            ctx.beginPath();
+                            ctx.arc(enemy.x, ey + 2, enemy.w / 2, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.fillStyle = '#4a4a4a';
+                            ctx.fillRect(enemy.x - 12, ey - 2, 24, 8);
+                        } else {
+                            ctx.beginPath();
+                            ctx.arc(enemy.x, ey + 5, enemy.w / 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+
+                        if (enemy.maxHp > 1) {
+                            ctx.shadowBlur = 0;
+                            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                            ctx.fillRect(enemy.x - 18, ey - 22, 36, 4);
+                            ctx.fillStyle = enemy.hp / enemy.maxHp > 0.3 ? '#4ade80' : '#f87171';
+                            ctx.fillRect(enemy.x - 18, ey - 22, 36 * (enemy.hp / enemy.maxHp), 4);
+                        }
+
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = '#fff';
+                        ctx.beginPath();
+                        ctx.arc(enemy.x - 4, ey + 3, 3.5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(enemy.x + 4, ey + 3, 3.5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = '#222';
+                        const eOff = enemy.direction > 0 ? 2 : 0;
+                        ctx.beginPath();
+                        ctx.arc(enemy.x - 5 + eOff, ey + 4, 1.8, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(enemy.x + 3 + eOff, ey + 4, 1.8, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for (const plat of platforms) {
+                    if (plat.broken) continue;
+                    const py = plat.y + cameraY;
+                    if (py > -20 && py < H + 20) {
+                        ctx.shadowBlur = 12;
+                        ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                        ctx.shadowOffsetY = 3;
+
+                        ctx.fillStyle = plat.color;
+                        const r = 5;
+                        ctx.beginPath();
+                        ctx.moveTo(plat.x + r, py);
+                        ctx.lineTo(plat.x + plat.w - r, py);
+                        ctx.quadraticCurveTo(plat.x + plat.w, py, plat.x + plat.w, py + r);
+                        ctx.lineTo(plat.x + plat.w, py + plat.h - r);
+                        ctx.quadraticCurveTo(plat.x + plat.w, py + plat.h, plat.x + plat.w - r, py + plat.h);
+                        ctx.lineTo(plat.x + r, py + plat.h);
+                        ctx.quadraticCurveTo(plat.x, py + plat.h, plat.x, py + plat.h - r);
+                        ctx.lineTo(plat.x, py + r);
+                        ctx.quadraticCurveTo(plat.x, py, plat.x + r, py);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        if (plat.type === 'bouncy') {
+                            ctx.shadowBlur = 20;
+                            ctx.shadowColor = '#7ddf7d';
+                            ctx.strokeStyle = 'rgba(125,223,125,0.2)';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(plat.x + 5, py + 2, plat.w - 10, plat.h - 4);
+                            ctx.shadowBlur = 0;
+                            ctx.fillStyle = 'rgba(125,223,125,0.2)';
+                            ctx.font = '12px sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('⬆', plat.x + plat.w / 2, py + plat.h / 2);
+                        }
+                        if (plat.type === 'golden' && !plat.goldCollected) {
+                            ctx.shadowBlur = 20;
+                            ctx.shadowColor = '#fbbf24';
+                            ctx.strokeStyle = 'rgba(251,191,36,0.3)';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(plat.x + 3, py + 2, plat.w - 6, plat.h - 4);
+                            ctx.shadowBlur = 0;
+                            ctx.fillStyle = 'rgba(251,191,36,0.2)';
+                            ctx.font = '14px sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('✦', plat.x + plat.w / 2, py + plat.h / 2);
+                        }
+                        if (plat.type === 'moving') {
+                            ctx.shadowBlur = 0;
+                            ctx.fillStyle = 'rgba(255,255,255,0.08)';
+                            ctx.fillRect(plat.x + 10, py + 3, plat.w - 20, 2);
+                            ctx.fillStyle = 'rgba(255,255,255,0.1)';
+                            ctx.font = '10px sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(plat.moveDir > 0 ? '→' : '←', plat.x + plat.w / 2, py + plat.h / 2);
+                        }
+
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = 'rgba(255,255,255,0.05)';
+                        ctx.fillRect(plat.x + 10, py + 2, plat.w - 20, 2);
+                    }
+                }
+
+                const py2 = player.y + cameraY;
+                const strain = getStrain();
+
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = 'rgba(125,223,125,0.15)';
+
+                const grad3 = ctx.createRadialGradient(
+                    player.x + 8, py2 + 8, 2,
+                    player.x + 18, py2 + 18, 20
+                );
+                grad3.addColorStop(0, strain.color);
+                grad3.addColorStop(0.5, strain.color);
+                grad3.addColorStop(1, '#2a4a1a');
+                ctx.fillStyle = grad3;
+                ctx.beginPath();
+                ctx.ellipse(player.x + player.w / 2, py2 + player.h / 2, player.w / 2, player.h / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.ellipse(player.x + player.w / 2, py2 + player.h / 2, player.w / 4, player.h / 2.5, 0, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                ctx.beginPath();
+                ctx.arc(player.x + 9, py2 + 13, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(player.x + 27, py2 + 13, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(0,0,0,0.25)';
+                ctx.beginPath();
+                ctx.arc(player.x + 9 + (player.vx > 0 ? 1 : 0), py2 + 14, 1.8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(player.x + 27 + (player.vx > 0 ? 1 : 0), py2 + 14, 1.8, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+                ctx.lineWidth = 1.5;
+                if (player.onGround) {
+                    ctx.beginPath();
+                    ctx.arc(player.x + 18, py2 + 20, 5, 0.1, Math.PI - 0.1);
+                    ctx.stroke();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(player.x + 18, py2 + 22, 3.5, Math.PI + 0.2, -0.2);
+                    ctx.stroke();
+                }
+
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(125,223,125,0.15)';
+                ctx.strokeStyle = '#4a8a4a';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(player.x + player.w / 2, py2 + 2);
+                const sway2 = Math.sin(Date.now() / 800) * 2;
+                ctx.quadraticCurveTo(
+                    player.x + player.w / 2 + sway2 + (player.vx > 0 ? 4 : player.vx < 0 ? -4 : 0),
+                    py2 - 16,
+                    player.x + player.w / 2 + sway2 * 1.5 + (player.vx > 0 ? 8 : player.vx < 0 ? -8 : 0),
+                    py2 - 28
+                );
+                ctx.stroke();
+
+                const lx = player.x + player.w / 2 + sway2 * 1.5 + (player.vx > 0 ? 8 : player.vx < 0 ? -8 : 0);
+                const ly = py2 - 28;
+                ctx.fillStyle = '#7ddf7d';
+                ctx.beginPath();
+                ctx.ellipse(lx - 5, ly + 2, 7, 4, -0.4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#5a9a5a';
+                ctx.beginPath();
+                ctx.ellipse(lx + 5, ly + 3, 7, 4, 0.4, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (player.jumpCount < player.maxJumps && !player.onGround) {
+                    ctx.shadowBlur = 0;
+                    for (let i = 0; i < player.maxJumps - player.jumpCount; i++) {
+                        ctx.fillStyle = `rgba(125,223,125,${0.15 + i * 0.1})`;
+                        ctx.strokeStyle = `rgba(125,223,125,${0.1 + i * 0.05})`;
+                        ctx.lineWidth = 1;
+                        const jx = player.x + player.w / 2 - (player.maxJumps - 1) * 10 + i * 20;
+                        ctx.beginPath();
+                        ctx.arc(jx, py2 + player.h + 14, 5 + i * 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.stroke();
+                    }
+                }
+
+                for (const p of particles) {
+                    const py3 = p.y + cameraY;
+                    const alpha = p.life / p.maxLife;
+                    ctx.globalAlpha = alpha;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = p.color;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, py3, p.r * (0.3 + 0.7 * alpha), 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 0;
+
+                for (const l of leaves) {
+                    const ly2 = l.y + cameraY;
+                    const alpha = l.life / 150;
+                    ctx.globalAlpha = alpha * 0.5;
+                    ctx.save();
+                    ctx.translate(l.x, ly2);
+                    ctx.rotate(l.rot);
+                    ctx.fillStyle = l.color;
+                    ctx.shadowBlur = 3;
+                    ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, l.size / 2, l.size / 3, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 0;
+
+                if (game.started && !game.gameOver) {
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'top';
+                    ctx.fillStyle = 'rgba(255,255,255,0.06)';
+                    ctx.font = '11px monospace';
+                    const h = Math.max(0, Math.floor((START_Y - player.y) / 10));
+                    ctx.fillText(`⬆ ${h}m`, 10, 10);
+                    ctx.fillText(`🏰 Lv.${game.level}`, 10, 25);
+
+                    if (game.combo > 0) {
+                        ctx.fillStyle = `rgba(255,220,68,${0.15 + (game.combo / 10) * 0.3})`;
+                        ctx.fillRect(10, 42, Math.min(90, game.combo * 12), 3);
+                        ctx.fillStyle = 'rgba(255,220,68,0.2)';
+                        ctx.font = '8px monospace';
+                        ctx.fillText(`COMBO ${Math.floor(game.combo)}x`, 10, 50);
+                    }
+                }
+
+                if (game.gameOver) {
+                    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                    ctx.fillRect(0, 0, W, H);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    ctx.shadowBlur = 30;
+                    ctx.shadowColor = 'rgba(255,0,0,0.2)';
+                    ctx.fillStyle = '#ff6b6b';
+                    ctx.font = 'bold 48px Segoe UI, sans-serif';
+                    ctx.fillText('💀 Game Over', W / 2, H / 2 - 70);
+
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = '#b8f0b8';
+                    ctx.font = '26px Segoe UI, sans-serif';
+                    ctx.fillText(`Score: ${game.score}`, W / 2, H / 2);
+
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = '18px Segoe UI, sans-serif';
+                    ctx.fillText(`💎 ${game.gems} gems  |  🔥 ${game.maxCombo}x combo`, W / 2, H / 2 + 45);
+
+                    ctx.fillStyle = '#8aaa8a';
+                    ctx.font = '15px Segoe UI, sans-serif';
+                    ctx.fillText(`👾 ${game.enemiesStomped} enemies stomped`, W / 2, H / 2 + 80);
+
+                    ctx.fillStyle = '#7ddf7d';
+                    ctx.font = 'bold 18px Segoe UI, sans-serif';
+                    ctx.fillText('Press "Start" to play again', W / 2, H / 2 + 130);
+                }
+
+                if (!game.started) {
+                    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                    ctx.fillRect(0, 0, W, H);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    ctx.shadowBlur = 40;
+                    ctx.shadowColor = 'rgba(125,223,125,0.15)';
+                    ctx.fillStyle = '#7ddf7d';
+                    ctx.font = 'bold 48px Segoe UI, sans-serif';
+                    ctx.fillText('🌱 Seed Ascent', W / 2, H / 2 - 90);
+
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = '#b8f0b8';
+                    ctx.font = '16px Segoe UI, sans-serif';
+                    ctx.fillText('⬅️ ➡️ Move | Space / Click = Jump | Double Jump!', W / 2, H / 2 - 25);
+
+                    ctx.fillStyle = '#8aaa8a';
+                    ctx.font = '13px Segoe UI, sans-serif';
+                    const strains = STRAINS.map((s, i) =>
+                        `${game.unlocked.includes(i) ? '✅' : '🔒'} ${s.name}`
+                    ).join('  ');
+                    ctx.fillText(strains, W / 2, H / 2 + 20);
+
+                    ctx.fillStyle = '#7ddf7d';
+                    ctx.font = 'bold 22px Segoe UI, sans-serif';
+                    ctx.fillText('▶️ Press "Start" to begin', W / 2, H / 2 + 80);
+
+                    if (game.best > 0) {
+                        ctx.fillStyle = '#fbbf24';
+                        ctx.font = '15px Segoe UI, sans-serif';
+                        ctx.fillText(`🏆 Best Score: ${game.best}`, W / 2, H / 2 + 125);
+                    }
+                }
+            }
+
+            function startGame() {
+                if (game.started && !game.gameOver) return;
+                if (!audioCtx) initAudio();
+                if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+                initGame();
+                notify('🌱 Game started!', 'success');
+            }
+
+            function resetGame() {
+                game.gameOver = false;
+                game.started = false;
+                game.score = 0;
+                game.bonusScore = 0;
+                game.heightScore = 0;
+                game.gems = 0;
+                game.combo = 0;
+                game.maxCombo = 0;
+                game.enemiesStomped = 0;
+                game.level = 1;
+                player.x = W / 2 - 18;
+                player.y = START_Y;
+                player.vy = 0;
+                player.vx = 0;
+                player.onGround = false;
+                player.jumpCount = 0;
+                platforms = [];
+                gems = [];
+                enemies = [];
+                particles = [];
+                leaves = [];
+                floatingTexts = [];
+                cameraY = 0;
+                initClouds();
+                for (let i = 0; i < 14; i++) {
+                    const y = H - 60 - i * (75 + rand(0, 40));
+                    createPlatform(y);
+                }
+                updateUI();
+                notify('🔄 Reset!', 'info');
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
+                if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
+                if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
+                    e.preventDefault();
+                    jump();
+                }
+            });
+
+            document.addEventListener('keyup', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = false;
+                if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = false;
+            });
+
+            document.getElementById('startBtn').addEventListener('click', startGame);
+            document.getElementById('resetBtn').addEventListener('click', resetGame);
+            document.getElementById('strainBtn').addEventListener('click', switchStrain);
+
+            function bindHold(el, action) {
+                const press = (e) => {
+                    e.preventDefault();
+                    keys[action] = true;
+                    try { el.setPointerCapture(e.pointerId); } catch (err) { /* optional */ }
+                };
+                const release = (e) => {
+                    if (e) e.preventDefault();
+                    keys[action] = false;
+                };
+
+                el.addEventListener('pointerdown', press);
+                el.addEventListener('pointerup', release);
+                el.addEventListener('pointercancel', release);
+                el.addEventListener('lostpointercapture', release);
+            }
+
+            bindHold(document.getElementById('leftBtn'), 'left');
+            bindHold(document.getElementById('rightBtn'), 'right');
+            bindHold(document.getElementById('mobileLeft'), 'left');
+            bindHold(document.getElementById('mobileRight'), 'right');
+
+            document.getElementById('mobileJump').addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                jump();
+            });
+
+            canvas.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                if (!game.started) { startGame(); return; }
+                if (game.gameOver) { startGame(); return; }
+                jump();
+            });
+
+            window.addEventListener('blur', () => {
+                keys.left = false;
+                keys.right = false;
+            });
+
+            function gameLoop() {
+                update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            }
+
+            initClouds();
+            for (let i = 0; i < 14; i++) {
+                const y = H - 60 - i * (75 + rand(0, 40));
+                createPlatform(y);
+            }
+
+            player.x = W / 2 - 18;
+            player.y = START_Y;
+
+            updateUI();
+            gameLoop();
+
+            console.log('🌱 Seed Ascent loaded!');
+            console.log('🎮 Press "Start" to play!');
+            console.log('📱 Controls: Arrow keys/A/D, Space/W to jump, click/tap to jump');
+        });
+    </script>
 </body>
 </html>
