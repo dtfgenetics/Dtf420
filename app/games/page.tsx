@@ -39,7 +39,7 @@ export default function GamesPage() {
 
         <div className={styles.heroStats} aria-label="Game library status">
           <div className={styles.statChip}>
-            <strong>1</strong>
+            <strong>2</strong>
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
@@ -62,6 +62,35 @@ export default function GamesPage() {
       </div>
 
       <div className={styles.libraryGrid}>
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={styles.status}>Playable now</span>
+              <span className={styles.posterMeta}>Board game · 2–8 players</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Build the strain city</span>
+              <strong>Weedopolis</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Own the strains. Build the city.</h3>
+            <p>
+              Roll two dice, buy strain properties, collect Bud Bucks, draw High Chance and Community Stash cards, build Grow Tents, upgrade to Dispensaries, and avoid Trim Jail.
+            </p>
+            <div className={styles.tagRow} aria-label="Weedopolis features">
+              <span className={styles.tag}>2–8 local players</span>
+              <span className={styles.tag}>40-space board</span>
+              <span className={styles.tag}>Save + load</span>
+              <span className={styles.tag}>Approved V1 board art</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.primaryAction} href="/games/weedopolis" aria-label="Play Weedopolis">Play Weedopolis</Link>
+            </div>
+          </div>
+        </article>
+
         <article className={styles.gameCard}>
           <div className={`${styles.poster} ${styles.budPoster}`}>
             <div className={styles.posterTop}>
