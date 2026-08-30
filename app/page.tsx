@@ -7,88 +7,172 @@ export const metadata: Metadata = {
     "Explore DTF Genetics breeding projects, Teaching Healthy Cultivation education, grow tools, browser games, and community resources.",
 };
 
-const sections = [
+const discovery = [
   {
-    eyebrow: "Original breeding work",
+    index: "01",
     title: "Genetics",
-    description:
-      "Explore DTF breeding projects, documented lineages, generation history, phenotype observations, and current or archived releases.",
+    description: "Permanent breeding records, lineage, generations, and project history.",
     href: "/seeds",
-    action: "Explore genetics",
   },
   {
-    eyebrow: "Teaching Healthy Cultivation",
+    index: "02",
     title: "Learn",
-    description:
-      "Use structured courses, the Living Plant Atlas, plant-health references, symptom differentials, field tools, and evidence sources as one connected learning system.",
+    description: "Academy courses, Living Plant Atlas, diagnostics, and evidence sources.",
     href: "/learn",
-    action: "Start learning",
   },
   {
-    eyebrow: "Grow records and diagnostics",
+    index: "03",
     title: "Tools",
+    description: "Grow records, observation-first diagnostics, and practical field workflows.",
+    href: "/tools",
+  },
+  {
+    index: "04",
+    title: "Search THC",
+    description: "Find the right lesson, symptom reference, source, or plant-science topic.",
+    href: "/learn/search",
+  },
+];
+
+const practical = [
+  {
+    eyebrow: "Plant health",
+    title: "Diagnose with evidence",
     description:
-      "Work with GrowLens, Grow Doc, calculators, measurement references, and printable field records built to support repeatable observations instead of guesswork.",
+      "Move from visible symptoms toward ranked possibilities using plant location, progression, environment, root-zone context, and supporting observations.",
+    href: "/learn/plant-health",
+    action: "Open plant health",
+  },
+  {
+    eyebrow: "Field systems",
+    title: "Use better grow tools",
+    description:
+      "Connect GrowLens, Grow Doc, measurements, field records, and repeatable observations instead of relying on memory or one-photo certainty.",
     href: "/tools",
     action: "Open tools",
   },
   {
-    eyebrow: "Playable projects",
+    eyebrow: "Interactive practice",
+    title: "Work the problem",
+    description:
+      "Use diagnostic cases and Atlas practice to test plant-science reasoning instead of only reading about it.",
+    href: "/learn/atlas/practice",
+    action: "Open practice",
+  },
+];
+
+const secondary = [
+  {
     title: "Games",
-    description:
-      "Play DTF browser games, test new releases, learn the rules, and follow development updates from one consistent game hub.",
+    description: "Original browser games and playable DTF projects.",
     href: "/games",
-    action: "Browse games",
+    action: "Play",
   },
   {
-    eyebrow: "Grow-offs and participation",
     title: "Community",
-    description:
-      "Find grow-off information, community resources, testing programs, event records, and ways to participate beyond a disappearing chat thread.",
+    description: "Grow-offs, participation records, community resources, and event information.",
     href: "/community",
-    action: "Open community",
+    action: "Explore",
   },
   {
-    eyebrow: "Permanent updates",
-    title: "DTF Journal",
-    description:
-      "Follow breeding notes, education releases, tool updates, game development, research summaries, and community results without generic filler content.",
+    title: "Journal",
+    description: "Permanent updates covering breeding, education, tools, games, research, and community work.",
     href: "/journal",
-    action: "Read the journal",
+    action: "Read",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      <section className="hero shell">
-        <p className="eyebrow">DTF Genetics · Dream the Future</p>
-        <h1>Genetics, plant science, tools, games, and community in one place.</h1>
-        <p className="hero__copy">
-          DTF Genetics is more than a seed catalog. The site documents our breeding work, builds evidence-based cultivation education through Teaching Healthy Cultivation, develops practical grow tools, and creates original browser games for the community.
-        </p>
-        <div className="hero__actions">
-          <Link className="button button--primary" href="/learn">Explore THC education</Link>
-          <Link className="button" href="/seeds">Explore genetics</Link>
+      <section className="home-hero shell">
+        <div className="home-hero__copy">
+          <p className="eyebrow">DTF Genetics · Dream the Future</p>
+          <h1>Better science. Better genetics. Better gardens.</h1>
+          <p>
+            DTF brings original breeding work, Teaching Healthy Cultivation plant science, practical grow tools, browser games, and community resources into one connected system built to help growers understand the plant more clearly.
+          </p>
+          <div className="hero__actions">
+            <Link className="button button--primary" href="/learn">Explore THC education</Link>
+            <Link className="button" href="/seeds">Discover genetics</Link>
+          </div>
+        </div>
+
+        <nav className="home-discovery" aria-label="Explore DTF">
+          {discovery.map((item) => (
+            <Link className="home-discovery__item" href={item.href} key={item.href}>
+              <span className="home-discovery__index">{item.index}</span>
+              <span>
+                <strong>{item.title}</strong>
+                <small>{item.description}</small>
+              </span>
+            </Link>
+          ))}
+        </nav>
+      </section>
+
+      <section className="home-band home-band--paper" aria-labelledby="dtf-core">
+        <div className="shell">
+          <div className="section-heading">
+            <p className="eyebrow">The core of DTF</p>
+            <h2 id="dtf-core">Document the genetics. Understand the plant.</h2>
+            <p className="lede">
+              Genetics and plant science are treated as permanent reference systems, not disposable product copy or disconnected blog posts.
+            </p>
+          </div>
+
+          <div className="home-feature-pair">
+            <Link className="home-feature" href="/seeds">
+              <p className="home-feature__label">DTF Genetics</p>
+              <h3>Follow a breeding project beyond the seed pack.</h3>
+              <p>
+                Review documented parentage, generation history, selection direction, project milestones, and connected DTF families in permanent breeding records.
+              </p>
+              <span>Explore genetics →</span>
+            </Link>
+
+            <Link className="home-feature home-feature--science" href="/learn/atlas">
+              <p className="home-feature__label">Living Plant Atlas</p>
+              <h3>Learn the plant as a connected living system.</h3>
+              <p>
+                Move through anatomy, physiology, environment, reproduction, diagnostics, and whole-plant relationships with connected visual lessons and practice.
+              </p>
+              <span>Open the Atlas →</span>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="shell section" aria-labelledby="explore-dtf">
+      <section className="shell section" aria-labelledby="practical-dtf">
         <div className="section-heading">
-          <p className="eyebrow">Explore DTF</p>
-          <h2 id="explore-dtf">Every section should lead somewhere useful.</h2>
-          <p className="lede">
-            The rebuilt site separates permanent reference material from temporary updates while connecting related genetics, lessons, tools, games, and community work.
-          </p>
+          <p className="eyebrow">From knowledge to action</p>
+          <h2 id="practical-dtf">Observe first. Measure what matters. Make better decisions.</h2>
         </div>
 
-        <div className="card-grid">
-          {sections.map((section) => (
-            <Link className="feature-card" href={section.href} key={section.href}>
-              <p className="eyebrow">{section.eyebrow}</p>
-              <h3>{section.title}</h3>
-              <p>{section.description}</p>
-              <span aria-hidden="true">{section.action} →</span>
+        <div className="home-action-grid">
+          {practical.map((item) => (
+            <Link className="home-action" href={item.href} key={item.href}>
+              <p className="eyebrow">{item.eyebrow}</p>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <span>{item.action} →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell section" aria-labelledby="more-dtf">
+        <div className="section-heading">
+          <p className="eyebrow">More from DTF</p>
+          <h2 id="more-dtf">Play, participate, and follow the work.</h2>
+        </div>
+
+        <div className="home-secondary-list">
+          {secondary.map((item) => (
+            <Link className="home-secondary-link" href={item.href} key={item.href}>
+              <strong>{item.title}</strong>
+              <p>{item.description}</p>
+              <span>{item.action} →</span>
             </Link>
           ))}
         </div>

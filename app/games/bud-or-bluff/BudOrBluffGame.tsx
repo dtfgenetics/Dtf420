@@ -40,13 +40,15 @@ function playerAccuracy(player?: PlayerStats) {
 
 function focusGameShell() {
   window.requestAnimationFrame(() => {
-    const game = document.getElementById(GAME_SHELL_ID);
-    if (!game) return;
+    window.requestAnimationFrame(() => {
+      const game = document.getElementById(GAME_SHELL_ID);
+      if (!game) return;
 
-    const header = document.querySelector<HTMLElement>("header");
-    const headerHeight = header?.getBoundingClientRect().height ?? 0;
-    const target = game.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
-    window.scrollTo({ top: Math.max(0, target), behavior: "auto" });
+      const header = document.querySelector<HTMLElement>("header");
+      const headerHeight = header?.getBoundingClientRect().height ?? 0;
+      const target = game.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+      window.scrollTo({ top: Math.max(0, target), behavior: "auto" });
+    });
   });
 }
 
@@ -367,7 +369,7 @@ export default function BudOrBluffGame() {
           <p className={styles.kicker}>Pass the device</p>
           <h2>{currentPlayer.name}, you’re up.</h2>
           <p>The next strain name is hidden until you are ready.</p>
-          <button className={styles.primaryButton} type="button" onClick={() => setTurnReady(true)} autoFocus>Ready · show card</button>
+          <button className={styles.primaryButton} type="button" onClick={() => setTurnReady(true)}>Ready · show card</button>
           <small>Press Enter to continue</small>
         </section>
       </div>
@@ -416,7 +418,7 @@ export default function BudOrBluffGame() {
             </button>
           </div>
 
-          {revealed && <button className={styles.nextButton} type="button" onClick={advanceRound} autoFocus>{roundIndex + 1 >= deck.length ? "See final scores" : "Next turn"} <span>↵</span></button>}
+          {revealed && <button className={styles.nextButton} type="button" onClick={advanceRound}>{roundIndex + 1 >= deck.length ? "See final scores" : "Next turn"} <span>↵</span></button>}
         </main>
 
         <aside className={styles.scoreboard} aria-label="Scoreboard">
