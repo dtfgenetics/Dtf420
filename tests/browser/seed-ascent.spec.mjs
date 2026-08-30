@@ -67,6 +67,29 @@ test("Seed Ascent jump control lifts the player from the floor", async ({ page }
   }).toBeLessThan(410);
 });
 
+test("Seed Ascent clears held movement when the game window loses focus", async ({ page }) => {
+  await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
+  const frame = await getGameFrame(page);
+  await frame.locator("#startBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.player?.grounded).toBe(true);
+
+  await frame.locator("#game").focus();
+  await page.keyboard.down("ArrowRight");
+  await expect.poll(async () => (await snapshot(frame))?.player?.vx, {
+    message: "held right input should accelerate the player before blur",
+  }).toBeGreaterThan(2);
+
+  const moving = await snapshot(frame);
+  await frame.locator("body").evaluate(() => window.dispatchEvent(new Event("blur")));
+
+  await expect.poll(async () => Math.abs((await snapshot(frame))?.player?.vx ?? 99), {
+    message: "blur should clear held movement so horizontal velocity decays instead of ghost-driving the player",
+    timeout: 2500,
+  }).toBeLessThan(Math.abs(moving.player.vx));
+
+  await page.keyboard.up("ArrowRight");
+});
+
 test("Seed Ascent exposes playable touch controls at 390px", async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.includes("mobile"), "mobile-only responsive coverage");
 
