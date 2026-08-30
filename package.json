@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static-overlay": "DTF_STATIC_EXPORT=1 next build",
+    "verify:static-overlay": "node scripts/verify-static-overlay.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
