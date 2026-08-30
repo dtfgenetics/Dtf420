@@ -43,6 +43,8 @@ for (const marker of [
   "collectPower", "game.power==='RUSH'", "payload==='TRI'", "payload==='BREAK'",
   "SIM_STEP_MS", "MAX_STEPS_PER_FRAME", "while(accumulator>=SIM_STEP_MS",
   "clearInput", "if(e.repeat)return", "activePointers", "pointercancel",
+  "const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return",
+  "for(const b of blocks)if(b.bump>0)b.bump--;",
   "document.addEventListener('visibilitychange'", "window.__seedAscentDebug",
   "addEventListener('pointerdown'", "window.addEventListener('blur'",
 ]) {
@@ -56,6 +58,11 @@ for (const forbidden of [
   "function loop(){step();draw();requestAnimationFrame(loop)}",
 ]) {
   if (engine.includes(forbidden)) throw new Error(`Seed Ascent regression detected: ${forbidden}`);
+}
+
+const bumpUpdates = engine.match(/for\(const b of blocks\)if\(b\.bump>0\)b\.bump--;/g) || [];
+if (bumpUpdates.length !== 1) {
+  throw new Error(`Seed Ascent block bump state must advance exactly once in the fixed simulation; found ${bumpUpdates.length} update sites`);
 }
 
 new vm.Script(levelsSource, { filename: files.levels });
@@ -139,4 +146,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, pointer-safe input, power-ups, hazards, checkpoints, and boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent pointer release, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
