@@ -366,7 +366,7 @@
     bossShots=bossShots.filter(s=>!s.dead&&s.life>0&&s.y<H+120);
     if(overlap(player,boss)){
       const stomp=player.vy>1&&player.prevY+player.h<=boss.y+16;
-      if(stomp&&boss.invuln<=0){boss.hp--;boss.invuln=35;player.vy=-11;sounds.stomp();game.shake=16;particle(boss.x+boss.w/2,boss.y,'#e96b78',24);score(750);if(boss.hp<=0){boss.dead=true;bossShots=[];score(5000);sounds.goal();particle(boss.x+boss.w/2,boss.y+20,'#ffd45b',50)}}
+      if(stomp&&boss.invuln<=0){boss.hp--;player.vy=-11;boss.invuln=35;sounds.stomp();game.shake=16;particle(boss.x+boss.w/2,boss.y,'#e96b78',24);score(750);if(boss.hp<=0){boss.dead=true;bossShots=[];score(5000);sounds.goal();particle(boss.x+boss.w/2,boss.y+20,'#ffd45b',50)}}
       else if(game.power==='RUSH'&&boss.invuln<=0){boss.hp--;boss.invuln=45;game.shake=12;particle(boss.x,boss.y,'#ffd45b',18);if(boss.hp<=0){boss.dead=true;bossShots=[];score(5000);sounds.goal()}}
       else if(boss.invuln<=0)hurt();
     }
@@ -446,6 +446,7 @@
 
   function jumpPress(){input.jumpPressed=true}
   function jumpRelease(){input.jumpReleased=true;input.jumpHeld=false}
+  function canSelectLevel(){return game.mode==='title'||game.mode==='gameOver'}
   function togglePause(){
     if(game.mode==='playing'){clearInput();game.mode='paused'}
     else if(game.mode==='paused'){clearInput();game.mode='playing'}
@@ -474,8 +475,8 @@
   document.getElementById('startBtn')?.addEventListener('click',()=>{audio();game.mode==='levelComplete'?advance():startSelected()});
   document.getElementById('pauseBtn')?.addEventListener('click',togglePause);
   document.getElementById('restartBtn')?.addEventListener('click',()=>{if(game.level){loadLevel(game.levelIndex);game.mode='playing'}else startSelected()});
-  document.getElementById('prevBtn')?.addEventListener('click',()=>{if(game.mode==='playing')return;game.selectedLevel=(game.selectedLevel-1+game.unlocked)%game.unlocked;game.level=null;sync()});
-  document.getElementById('nextBtn')?.addEventListener('click',()=>{if(game.mode==='playing')return;game.selectedLevel=(game.selectedLevel+1)%game.unlocked;game.level=null;sync()});
+  document.getElementById('prevBtn')?.addEventListener('click',()=>{if(!canSelectLevel())return;game.selectedLevel=(game.selectedLevel-1+game.unlocked)%game.unlocked;game.level=null;sync()});
+  document.getElementById('nextBtn')?.addEventListener('click',()=>{if(!canSelectLevel())return;game.selectedLevel=(game.selectedLevel+1)%game.unlocked;game.level=null;sync()});
   canvas.addEventListener('pointerdown',()=>{audio();canvas.focus()});
   window.addEventListener('keydown',keyDown,{passive:false});window.addEventListener('keyup',keyUp,{passive:false});
   window.addEventListener('blur',clearInput);
