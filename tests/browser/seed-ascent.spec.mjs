@@ -124,6 +124,30 @@ test("Seed Ascent pointer cancel releases held touch movement", async ({ page })
   }).toBeLessThan(Math.abs(beforeCancel.player.vx));
 });
 
+test("Seed Ascent level selectors cannot corrupt a paused game state", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(() => localStorage.setItem("seedAscentUnlocked", "2"));
+  await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
+  const frame = await getGameFrame(page);
+
+  await frame.locator("#nextBtn").click();
+  await expect(frame.locator("#levelLabel")).toHaveText("1-2");
+  await frame.locator("#startBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.mode).toBe("playing");
+  await frame.locator("#pauseBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.mode).toBe("paused");
+
+  await frame.locator("#prevBtn").click();
+  await page.waitForTimeout(150);
+  expect((await snapshot(frame)).mode).toBe("paused");
+  await expect(frame.locator("#levelLabel")).toHaveText("1-2");
+  expect(errors).toEqual([]);
+
+  await frame.locator("#pauseBtn").click();
+  await expect.poll(async () => (await snapshot(frame))?.mode).toBe("playing");
+});
+
 test("Seed Ascent exposes playable touch controls at 390px", async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.includes("mobile"), "mobile-only responsive coverage");
 
