@@ -348,7 +348,7 @@ export async function startWorldLab(THREE) {
 
   const keys = new Set();
   const touchMove = new THREE.Vector2();
-  let cameraYaw = Math.PI;
+  let cameraYaw = 0;
   let cameraPitch = 0.36;
   let cameraDistance = 6.8;
   let lookPointer = null;
@@ -428,7 +428,7 @@ export async function startWorldLab(THREE) {
     prompt.hidden = true;
     materials.screen.emissiveIntensity = 2.4;
     beacon.intensity = 7;
-    cameraYaw = Math.PI;
+    cameraYaw = 0;
     cameraPitch = 0.36;
     clearInput();
     updateObjective();
