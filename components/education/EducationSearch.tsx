@@ -7,6 +7,7 @@ import atlasModules from "@/content/atlas-learning-modules.json";
 import plantHealthCore from "@/content/plant-health-library.json";
 import plantHealthExpanded from "@/content/plant-health-expanded.json";
 import plantHealthAbiotic from "@/content/plant-health-abiotic-expanded.json";
+import plantHealthIpmExpanded from "@/content/plant-health-ipm-expanded.json";
 import cultivationCore from "@/content/cultivation-science-library.json";
 import protectedCultivation from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
@@ -69,7 +70,12 @@ const atlasItems: SearchItem[] = atlasModules.flatMap((atlasModule) =>
   })),
 );
 
-const plantHealthItems: SearchItem[] = [...plantHealthCore, ...plantHealthExpanded, ...plantHealthAbiotic].map((item) => ({
+const plantHealthItems: SearchItem[] = [
+  ...plantHealthCore,
+  ...plantHealthExpanded,
+  ...plantHealthAbiotic,
+  ...plantHealthIpmExpanded,
+].map((item) => ({
   kind: "Plant health" as const,
   title: item.title,
   context: item.category,
