@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "worldVersion": "0.1.0",
+  "site": "dtfseeds.com",
+  "route": "/games/dtf-world-lab",
+  "status": "development-preview",
+  "units": "meters",
+  "upAxis": "+Y",
+  "coordinateSystem": "right-handed",
+  "spawn": {
+    "id": "research-walk-start",
+    "position": [0, 0, 21],
+    "cameraYawRadians": 0
+  },
+  "zones": [
+    {
+      "id": "arrival-path",
+      "purpose": "Movement and camera onboarding",
+      "bounds": { "min": [-6, 0, -9], "max": [6, 8, 25] }
+    },
+    {
+      "id": "research-greenhouse",
+      "purpose": "Interaction objective and future interior art pass",
+      "bounds": { "min": [8.5, 0, -23], "max": [23.5, 9, -7] }
+    }
+  ],
+  "interactables": [
+    {
+      "id": "research-terminal",
+      "position": [16, 0, -10.6],
+      "interactionRadius": 2.45,
+      "action": "activate-research-beacon"
+    }
+  ],
+  "assetPolicy": {
+    "shippingFormat": "glb",
+    "runtimeOwnership": "site-owned",
+    "hotlinkExternalAssets": false,
+    "requireLicenseRecord": true,
+    "requireOptimizedDerivative": true,
+    "sourceAssetDirectories": [
+      "public/games/dtf-world-lab/models",
+      "public/games/dtf-world-lab/textures",
+      "public/games/dtf-world-lab/environments"
+    ]
+  },
+  "assets": [],
+  "performanceTargets": {
+    "desktopFps": 60,
+    "mobileFpsFloor": 30,
+    "maxDevicePixelRatio": 1.75,
+    "notes": "Budgets become hard gates after real GLB assets are introduced. Current procedural slice records draw calls and triangle count for baseline comparison."
+  }
+}
