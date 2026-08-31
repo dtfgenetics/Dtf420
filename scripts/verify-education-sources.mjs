@@ -5,6 +5,7 @@ const contentDir = path.join(process.cwd(), "content");
 const sources = [
   ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources.json"), "utf8")),
   ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources-abiotic.json"), "utf8")),
+  ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources-plant-health-ipm.json"), "utf8")),
 ];
 const sourceMap = JSON.parse(fs.readFileSync(path.join(contentDir, "education-source-map.json"), "utf8"));
 const atlasSourceDefaults = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-source-defaults.json"), "utf8"));
