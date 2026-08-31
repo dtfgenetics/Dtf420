@@ -8,7 +8,12 @@ function readJson(name) {
   return JSON.parse(fs.readFileSync(path.join(contentDir, name), "utf8"));
 }
 
-const plantHealthFiles = ["plant-health-library.json", "plant-health-expanded.json", "plant-health-abiotic-expanded.json"];
+const plantHealthFiles = [
+  "plant-health-library.json",
+  "plant-health-expanded.json",
+  "plant-health-abiotic-expanded.json",
+  "plant-health-ipm-expanded.json",
+];
 const cultivationFiles = [
   "cultivation-science-library.json",
   "protected-cultivation-library.json",
