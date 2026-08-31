@@ -4,6 +4,7 @@ import atlasModules from "@/content/atlas-learning-modules.json";
 import plantHealthCore from "@/content/plant-health-library.json";
 import plantHealthExpanded from "@/content/plant-health-expanded.json";
 import plantHealthAbiotic from "@/content/plant-health-abiotic-expanded.json";
+import plantHealthIpmExpanded from "@/content/plant-health-ipm-expanded.json";
 import cultivationCore from "@/content/cultivation-science-library.json";
 import protectedCultivation from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
@@ -78,7 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const genetics = geneticsProjects.map((project) => item(`/seeds/${project.slug}`, 0.82, "monthly"));
   const academy = academyCourses.map((course) => item(`/learn/academy/${course.slug}`, 0.82, "monthly"));
 
-  const plantHealth = [...plantHealthCore, ...plantHealthExpanded, ...plantHealthAbiotic].map((entry) =>
+  const plantHealth = [...plantHealthCore, ...plantHealthExpanded, ...plantHealthAbiotic, ...plantHealthIpmExpanded].map((entry) =>
     item(`/learn/plant-health/${entry.slug}`, 0.78, "monthly"),
   );
 

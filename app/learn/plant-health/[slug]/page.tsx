@@ -4,13 +4,14 @@ import { notFound } from "next/navigation";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
 import abioticLibrary from "@/content/plant-health-abiotic-expanded.json";
+import ipmExpandedLibrary from "@/content/plant-health-ipm-expanded.json";
 import { RelatedEducation } from "@/components/education/RelatedEducation";
 import { EvidenceSources } from "@/components/education/EvidenceSources";
 import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
 import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
 import styles from "../page.module.css";
 
-const library = [...coreLibrary, ...expandedLibrary, ...abioticLibrary];
+const library = [...coreLibrary, ...expandedLibrary, ...abioticLibrary, ...ipmExpandedLibrary];
 
 function getEntry(slug: string) {
   return library.find((item) => item.slug === slug);

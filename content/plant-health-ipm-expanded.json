@@ -1,0 +1,253 @@
+[
+  {
+    "slug": "shore-flies",
+    "title": "Shore Flies",
+    "category": "Arthropod pests",
+    "summary": "Shore flies are small dark flies associated with algae and persistently wet greenhouse surfaces. Adults are primarily a monitoring and sanitation signal rather than a direct plant-feeding pest, so they should be distinguished from fungus gnats before management decisions are made.",
+    "whatToLookFor": [
+      "Small dark flies resting or running on wet benches, floors, media surfaces, and areas with algae",
+      "Adults with a robust, small-housefly-like profile, very short antennae, and dark wings with several pale spots",
+      "Larvae associated with algae-rich wet surfaces rather than feeding inside healthy roots",
+      "Persistent populations concentrated where drainage, leaks, or chronic surface moisture support algal growth"
+    ],
+    "lookAlikes": [
+      "Fungus gnat adults and larvae",
+      "Other small flies attracted to moist organic material",
+      "Root-zone decline caused by overwatering or pathogens that happens to occur where flies are present"
+    ],
+    "confirmWith": [
+      "Inspect adults with magnification instead of identifying from flight behavior alone",
+      "Compare larval morphology with fungus gnat larvae when immature stages are present",
+      "Map captures and sightings against algae, drainage, and wet-surface hotspots",
+      "Inspect plant roots separately before attributing crop decline to the flies"
+    ],
+    "managementPrinciples": [
+      "Correct persistent moisture and algae sources that support reproduction",
+      "Use sanitation and drainage correction as the foundation of control",
+      "Treat shore-fly presence as evidence to inspect the production environment rather than proof of root feeding",
+      "Re-scout wet areas after corrective work to verify that populations are declining"
+    ],
+    "prevention": [
+      "Prevent chronic standing water and algae buildup",
+      "Clean benches, floors, drains, and media spills",
+      "Maintain drainage and irrigation systems so surfaces can dry appropriately",
+      "Include low, wet greenhouse zones in routine scouting"
+    ],
+    "visualNeeds": [
+      "Shore fly versus fungus gnat adult comparison",
+      "Shore fly versus fungus gnat larva comparison",
+      "Algae and wet-surface hotspot map",
+      "Drainage and sanitation inspection diagram"
+    ]
+  },
+  {
+    "slug": "root-knot-nematodes",
+    "title": "Root-Knot Nematodes",
+    "category": "Diseases",
+    "summary": "Root-knot nematodes (Meloidogyne spp.) are plant-parasitic roundworms that can reproduce on Cannabis sativa. Hemp studies show that susceptibility and visible galling can vary, so root symptoms should be paired with soil or root testing before the cause is assigned.",
+    "whatToLookFor": [
+      "Root galls, swellings, or distorted fine-root development",
+      "Patchy stunting or reduced vigor that may be more severe in heavily infested soil",
+      "Reduced root function without a distinctive foliar symptom pattern",
+      "Field or media history that includes known root-knot hosts or prior nematode problems"
+    ],
+    "lookAlikes": [
+      "Crown gall or other abnormal root swellings",
+      "Root aphids and other root-zone pests",
+      "Pythium- or Fusarium-associated root decline",
+      "Compaction, low oxygen, salinity, or irrigation stress"
+    ],
+    "confirmWith": [
+      "Inspect washed roots for galling and abnormal fine-root structure",
+      "Submit representative roots and substrate or soil for nematode extraction and identification",
+      "Compare symptomatic and apparently healthy zones instead of sampling one plant",
+      "Interpret hemp research cautiously because cultivar and nematode species can change symptom severity"
+    ],
+    "managementPrinciples": [
+      "Base management on confirmed plant-parasitic nematode presence and species context",
+      "Avoid moving infested soil, media, roots, or contaminated equipment into clean zones",
+      "Use crop-system-appropriate sanitation, exclusion, and root-zone management rather than relying on foliar symptoms",
+      "Track affected zones over time to determine whether pressure is expanding"
+    ],
+    "prevention": [
+      "Know the nematode history of outdoor sites and reused media systems",
+      "Start with clean propagation material and uncontaminated media",
+      "Clean soil- or media-contact equipment before moving between zones",
+      "Use representative diagnostic sampling when unexplained patchy decline persists"
+    ],
+    "visualNeeds": [
+      "Healthy root versus root-knot galling plate",
+      "Root-knot nematode lifecycle diagram",
+      "Root gall differential comparison",
+      "Representative soil and root sampling guide"
+    ]
+  },
+  {
+    "slug": "septoria-leaf-spot",
+    "title": "Septoria Leaf Spot",
+    "category": "Diseases",
+    "summary": "Septoria species are documented causes of leaf spot disease on Cannabis sativa. Because foliar lesions overlap with spray injury, nutrient-related necrosis, and other pathogens, lesion appearance should be treated as a starting point for diagnosis rather than a species identification.",
+    "whatToLookFor": [
+      "Discrete tan, brown, or necrotic leaf spots that enlarge or increase in number over time",
+      "Lesions that may develop darker margins or small fungal fruiting structures visible with magnification",
+      "Disease progression that is more consistent with repeated infection than a one-time injury event",
+      "Outdoor or protected-crop conditions that support extended leaf wetness or splash dispersal"
+    ],
+    "lookAlikes": [
+      "Other fungal or bacterial leaf spots",
+      "Foliar spray or phytotoxicity injury",
+      "Localized salt or nutrient-related necrosis",
+      "Mechanical injury and pest feeding scars"
+    ],
+    "confirmWith": [
+      "Inspect both leaf surfaces and lesion structures with magnification",
+      "Record lesion progression and recent wetting or splash events",
+      "Compare new lesions with the timing of sprays and environmental events",
+      "Use laboratory identification when species-level confirmation affects management or reporting"
+    ],
+    "managementPrinciples": [
+      "Reduce avoidable leaf wetness and contaminated splash where practical",
+      "Remove heavily affected tissue in a way that limits movement of contaminated debris",
+      "Improve sanitation and airflow while preserving appropriate crop conditions",
+      "Use confirmed diagnosis rather than treating every circular lesion as Septoria"
+    ],
+    "prevention": [
+      "Inspect incoming and nearby plant material for active leaf spots",
+      "Keep irrigation and handling practices from repeatedly wetting foliage where avoidable",
+      "Remove diseased debris from production areas",
+      "Keep records linking symptom onset to weather, irrigation, and crop movement"
+    ],
+    "visualNeeds": [
+      "Septoria-type lesion progression plate",
+      "Leaf spot versus spray injury comparison",
+      "Magnified fruiting-structure guide",
+      "Splash-dispersal and sanitation diagram"
+    ]
+  },
+  {
+    "slug": "neofusicoccum-dieback-and-stem-canker",
+    "title": "Neofusicoccum Dieback & Stem Canker",
+    "category": "Diseases",
+    "summary": "Neofusicoccum parvum has been confirmed as a pathogen of Cannabis sativa and can be associated with stem lesions and terminal dieback. Dieback is not specific to this fungus, so diagnosis should combine stem inspection, crop history, and laboratory confirmation.",
+    "whatToLookFor": [
+      "Progressive terminal or branch dieback that does not match simple water stress",
+      "Localized stem lesions, cankers, or discolored tissue associated with declining shoots",
+      "Symptoms following wounds, pruning, environmental stress, or movement of infected material",
+      "Uneven branch decline while other portions of the plant initially remain functional"
+    ],
+    "lookAlikes": [
+      "Fusarium-associated vascular or crown disease",
+      "Mechanical stem injury or girdling",
+      "Severe root-zone stress causing secondary shoot dieback",
+      "Other fungal canker and dieback pathogens"
+    ],
+    "confirmWith": [
+      "Inspect the transition between healthy and declining stem tissue",
+      "Photograph and sample the advancing lesion margin rather than only dead tissue",
+      "Review pruning, sanitation, and plant-movement history",
+      "Use a plant diagnostic laboratory for organism identification when confirmation matters"
+    ],
+    "managementPrinciples": [
+      "Separate suspect material from clean propagation stock",
+      "Remove affected tissue or plants where appropriate without spreading contaminated debris",
+      "Sanitize cutting tools and work surfaces between plant groups",
+      "Correct environmental or mechanical stressors that can compound stem disease"
+    ],
+    "prevention": [
+      "Use clean propagation stock",
+      "Minimize unnecessary stem injury",
+      "Maintain tool sanitation during pruning and training",
+      "Scout stem lesions and dieback early instead of waiting for whole-plant collapse"
+    ],
+    "visualNeeds": [
+      "Stem canker and dieback progression plate",
+      "Healthy-to-lesion sampling guide",
+      "Neofusicoccum versus Fusarium differential diagram",
+      "Pruning-tool sanitation workflow"
+    ]
+  },
+  {
+    "slug": "sclerotinia-white-mold",
+    "title": "Sclerotinia White Mold",
+    "category": "Diseases",
+    "summary": "Sclerotinia-associated white mold has been reported in hemp and cannabis production contexts. White fungal growth and hardened survival structures can be important clues, but laboratory confirmation is appropriate when the diagnosis affects crop-removal or site-management decisions.",
+    "whatToLookFor": [
+      "Water-soaked or collapsing stem and lower-canopy tissue followed by white cottony fungal growth under favorable conditions",
+      "Hardened dark survival structures (sclerotia) associated with diseased tissue when present",
+      "Localized wilt or stem collapse linked to an infected crown or stem section",
+      "Field history involving susceptible crops or persistent soilborne inoculum"
+    ],
+    "lookAlikes": [
+      "Botrytis gray mold",
+      "Southern blight",
+      "Fusarium-associated crown disease",
+      "Mechanical stem collapse followed by secondary saprophytic mold"
+    ],
+    "confirmWith": [
+      "Inspect affected stems and crowns for characteristic fungal growth and survival structures",
+      "Document the field or substrate history and distribution pattern",
+      "Sample the active disease margin for laboratory identification",
+      "Do not identify white mold from white mycelium alone"
+    ],
+    "managementPrinciples": [
+      "Remove affected material carefully to reduce movement of infected debris",
+      "Reduce prolonged moisture conditions that favor disease where compatible with crop needs",
+      "Account for persistent soil or debris-borne inoculum when planning future crops",
+      "Base site-level decisions on confirmed diagnosis and local agronomic guidance"
+    ],
+    "prevention": [
+      "Review previous crop disease history before outdoor planting",
+      "Remove infected residues rather than incorporating obvious diseased material into clean production areas",
+      "Maintain airflow and avoid persistent canopy wetness",
+      "Scout lower stems and crowns as well as leaves and flowers"
+    ],
+    "visualNeeds": [
+      "White mold stem progression plate",
+      "Sclerotia identification close-up",
+      "Sclerotinia versus Botrytis versus southern blight comparison",
+      "Field inoculum carryover diagram"
+    ]
+  },
+  {
+    "slug": "southern-blight",
+    "title": "Southern Blight",
+    "category": "Diseases",
+    "summary": "Southern blight, historically reported under the pathogen name Sclerotium rolfsii, has been reported on hemp and is favored by warm conditions. Crown collapse and surface fungal growth can resemble other root and stem diseases, so the pathogen should be confirmed when possible.",
+    "whatToLookFor": [
+      "Rapid wilt or collapse associated with a lesion near the soil or media line",
+      "White surface mycelium around the crown or nearby substrate under favorable conditions",
+      "Small round survival structures that develop from pale to tan or brown as they mature",
+      "Disease concentrated in warm areas or sites with a history of susceptible crops"
+    ],
+    "lookAlikes": [
+      "Sclerotinia white mold",
+      "Fusarium crown disease",
+      "Pythium-associated root decline",
+      "Heat or drought stress that causes wilt without a crown lesion"
+    ],
+    "confirmWith": [
+      "Inspect the crown and media surface, not only wilted foliage",
+      "Look for fungal growth and survival structures while recognizing they may be absent early",
+      "Review temperature, moisture, and field-history context",
+      "Use laboratory identification for important outbreaks or uncertain cases"
+    ],
+    "managementPrinciples": [
+      "Remove severely affected plants and contaminated debris where appropriate",
+      "Avoid moving contaminated soil or media into clean areas",
+      "Reduce conditions that leave the crown persistently warm and wet when crop requirements allow",
+      "Plan future site management around confirmed soilborne disease history"
+    ],
+    "prevention": [
+      "Know the disease history of outdoor sites and reused growing areas",
+      "Use clean media and containers for protected cultivation",
+      "Maintain sanitation around plant bases and remove infected residues",
+      "Inspect crowns promptly when plants wilt despite adequate root-zone moisture"
+    ],
+    "visualNeeds": [
+      "Southern blight crown lesion plate",
+      "Sclerotia maturation close-up",
+      "Southern blight versus Sclerotinia differential",
+      "Soilborne inoculum movement diagram"
+    ]
+  }
+]

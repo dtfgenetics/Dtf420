@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import coreSources from "@/content/education-sources.json";
 import abioticSources from "@/content/education-sources-abiotic.json";
+import plantHealthIpmSources from "@/content/education-sources-plant-health-ipm.json";
 import sourceMap from "@/content/education-source-map.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
-const sources = [...coreSources, ...abioticSources];
+const sources = [...coreSources, ...abioticSources, ...plantHealthIpmSources];
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Evidence & Sources — Teaching Healthy Cultivation",

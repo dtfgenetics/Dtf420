@@ -7,6 +7,7 @@ import atlasModules from "@/content/atlas-learning-modules.json";
 import plantHealthCore from "@/content/plant-health-library.json";
 import plantHealthExpanded from "@/content/plant-health-expanded.json";
 import plantHealthAbiotic from "@/content/plant-health-abiotic-expanded.json";
+import plantHealthIpmExpanded from "@/content/plant-health-ipm-expanded.json";
 import cultivationCore from "@/content/cultivation-science-library.json";
 import protectedCultivation from "@/content/protected-cultivation-library.json";
 import protectedLighting from "@/content/protected-cultivation-lighting.json";
@@ -20,6 +21,7 @@ import symptomExpanded from "@/content/symptom-differential-expanded.json";
 import learningTools from "@/content/learning-tools.json";
 import coreEvidenceSources from "@/content/education-sources.json";
 import abioticEvidenceSources from "@/content/education-sources-abiotic.json";
+import plantHealthIpmEvidenceSources from "@/content/education-sources-plant-health-ipm.json";
 import glossary from "@/content/education-glossary.json";
 import sops from "@/content/education-sops.json";
 import styles from "./EducationSearch.module.css";
@@ -69,7 +71,12 @@ const atlasItems: SearchItem[] = atlasModules.flatMap((atlasModule) =>
   })),
 );
 
-const plantHealthItems: SearchItem[] = [...plantHealthCore, ...plantHealthExpanded, ...plantHealthAbiotic].map((item) => ({
+const plantHealthItems: SearchItem[] = [
+  ...plantHealthCore,
+  ...plantHealthExpanded,
+  ...plantHealthAbiotic,
+  ...plantHealthIpmExpanded,
+].map((item) => ({
   kind: "Plant health" as const,
   title: item.title,
   context: item.category,
@@ -120,7 +127,7 @@ const toolItems: SearchItem[] = learningTools.map((item) => ({
   terms: item.sections.flatMap((section) => [section.title, ...section.fields]).join(" "),
 }));
 
-const evidenceSources = [...coreEvidenceSources, ...abioticEvidenceSources];
+const evidenceSources = [...coreEvidenceSources, ...abioticEvidenceSources, ...plantHealthIpmEvidenceSources];
 const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
   kind: "Evidence source" as const,
   title: source.title,

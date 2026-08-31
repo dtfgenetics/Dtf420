@@ -1,11 +1,12 @@
 import coreSources from "@/content/education-sources.json";
 import abioticSources from "@/content/education-sources-abiotic.json";
 import seedAnatomySources from "@/content/education-sources-seed-anatomy.json";
+import plantHealthIpmSources from "@/content/education-sources-plant-health-ipm.json";
 import sourceMap from "@/content/education-source-map.json";
 import seedAnatomySourceMap from "@/content/education-source-map-seed-anatomy.json";
 import atlasSourceDefaults from "@/content/atlas-source-defaults.json";
 
-const sources = [...coreSources, ...abioticSources, ...seedAnatomySources];
+const sources = [...coreSources, ...abioticSources, ...seedAnatomySources, ...plantHealthIpmSources];
 type EducationSource = (typeof sources)[number];
 type SourceMap = Record<string, string[]>;
 

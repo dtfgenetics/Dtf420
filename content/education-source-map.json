@@ -23,6 +23,27 @@
     "okstate-greenhouse-ipm",
     "cfia-greenhouse-biosecurity"
   ],
+  "/learn/plant-health/shore-flies": [
+    "umass-greenhouse-ipm-scouting",
+    "okstate-greenhouse-ipm"
+  ],
+  "/learn/plant-health/root-knot-nematodes": [
+    "cannabis-root-knot-host-status-2024"
+  ],
+  "/learn/plant-health/septoria-leaf-spot": [
+    "cannabis-septoria-2024",
+    "cannabis-emerging-diseases-2021"
+  ],
+  "/learn/plant-health/neofusicoccum-dieback-and-stem-canker": [
+    "cannabis-neofusicoccum-2024",
+    "cannabis-emerging-diseases-2021"
+  ],
+  "/learn/plant-health/sclerotinia-white-mold": [
+    "cannabis-emerging-diseases-2021"
+  ],
+  "/learn/plant-health/southern-blight": [
+    "cannabis-emerging-diseases-2021"
+  ],
   "/learn/plant-health/root-zone-hypoxia-and-waterlogging": [
     "uc-ipm-aeration-deficit",
     "uc-ipm-water-deficit-excess",
