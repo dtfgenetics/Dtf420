@@ -39,7 +39,7 @@ export default function GamesPage() {
 
         <div className={styles.heroStats} aria-label="Game library status">
           <div className={styles.statChip}>
-            <strong>3</strong>
+            <strong>4</strong>
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
@@ -145,6 +145,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.primaryAction} href="/games/seed-ascent" aria-label="Play Seed Ascent">Play Seed Ascent</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={styles.status}>Playable now</span>
+              <span className={styles.posterMeta}>Cultivation RPG · 1 player</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Grow. Upgrade. Select.</span>
+              <strong>THC RPG</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Turn one seed into a genetics progression.</h3>
+            <p>
+              Begin with Blue Mango, manage phenotype variation and room conditions, earn equipment upgrades, move into Blue Bubblegum, and hunt for an 80+ quality Mango Bubbles phenotype across three quest chapters.
+            </p>
+            <div className={styles.tagRow} aria-label="THC RPG features">
+              <span className={styles.tag}>3 quest chapters</span>
+              <span className={styles.tag}>Phenotype variation</span>
+              <span className={styles.tag}>Equipment progression</span>
+              <span className={styles.tag}>Autosave + recovery</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.primaryAction} href="/games/thc-rpg" aria-label="Play THC RPG">Play THC RPG</Link>
             </div>
           </div>
         </article>
