@@ -3,10 +3,11 @@ import Link from "next/link";
 import coreLibrary from "@/content/plant-health-library.json";
 import expandedLibrary from "@/content/plant-health-expanded.json";
 import abioticLibrary from "@/content/plant-health-abiotic-expanded.json";
+import ipmExpandedLibrary from "@/content/plant-health-ipm-expanded.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
-const library = [...coreLibrary, ...expandedLibrary, ...abioticLibrary];
+const library = [...coreLibrary, ...expandedLibrary, ...abioticLibrary, ...ipmExpandedLibrary];
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Plant Health, IPM & Disease Library",
