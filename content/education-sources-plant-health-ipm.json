@@ -1,0 +1,46 @@
+[
+  {
+    "id": "cannabis-emerging-diseases-2021",
+    "title": "Emerging diseases of Cannabis sativa and sustainable management",
+    "publisher": "Pest Management Science",
+    "year": 2021,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8451794/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Emerging Cannabis sativa and hemp diseases, inoculum sources, field carryover, Neofusicoccum-associated disease, Sclerotinia white mold, southern blight, pathogen spread, and integrated disease-management context."
+  },
+  {
+    "id": "cannabis-root-knot-host-status-2024",
+    "title": "Host status and susceptibility of Cannabis sativa cultivars to root-knot nematodes",
+    "publisher": "Journal of Nematology",
+    "year": 2024,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10940272/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Greenhouse trials evaluating Cannabis sativa hemp cultivars as hosts for multiple Meloidogyne root-knot nematode species, including galling, reproduction, cultivar response, and growth effects under infested conditions."
+  },
+  {
+    "id": "cannabis-septoria-2024",
+    "title": "Septoria cannabicola, a new species on Cannabis sativa from Japan",
+    "publisher": "MycoKeys",
+    "year": 2024,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369300/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Morphological and molecular evidence for Septoria leaf spot disease on Cannabis sativa and the importance of organism-level identification rather than diagnosis from lesion appearance alone."
+  },
+  {
+    "id": "cannabis-neofusicoccum-2024",
+    "title": "Draft genome sequences for four isolates of the hemp (Cannabis sativa) fungal pathogen Neofusicoccum parvum",
+    "publisher": "Microbiology Resource Announcements",
+    "year": 2024,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11237463/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis sativa isolates of Neofusicoccum parvum collected from diseased hemp and previously shown to be pathogenic, with disease context including terminal dieback."
+  },
+  {
+    "id": "umass-greenhouse-ipm-scouting",
+    "title": "IPM Scouting and Decision Making",
+    "publisher": "UMass Amherst Extension",
+    "url": "https://www.umass.edu/agriculture-food-environment/greenhouse-floriculture/fact-sheets/ipm-scouting-decision-making",
+    "sourceType": "University extension",
+    "scope": "Greenhouse IPM scouting, incoming-plant inspection, sticky-card monitoring, fungus gnat and shore-fly differentiation context, hotspot mapping, recordkeeping, and treatment-effectiveness review."
+  }
+]
