@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>DTF World Lab</title>
+  <link rel="stylesheet" href="/dtf-world-lab/world.css" />
+</head>
+<body>
+  <main id="world-shell" aria-label="DTF World Lab 3D development preview">
+    <div id="viewport" aria-label="3D playfield"></div>
+
+    <section id="loading" class="loading" role="status" aria-live="polite">
+      <div class="loading-card">
+        <span class="loading-mark" aria-hidden="true"></span>
+        <p class="eyebrow">DTF World Lab</p>
+        <h1>Building the world...</h1>
+        <p id="loading-message">Starting the 3D renderer.</p>
+      </div>
+    </section>
+
+    <section id="error-panel" class="error-panel" hidden role="alert">
+      <p class="eyebrow">3D preview unavailable</p>
+      <h1>The renderer could not start.</h1>
+      <p id="error-message">Check WebGL support and network access, then reload this preview.</p>
+      <button id="reload-button" type="button">Reload preview</button>
+    </section>
+
+    <div id="hud" class="hud" hidden>
+      <section class="objective-card" aria-live="polite">
+        <p class="eyebrow">Current objective</p>
+        <strong id="objective-title">Reach the research greenhouse</strong>
+        <span id="objective-copy">Follow the illuminated path into the greenhouse district.</span>
+      </section>
+
+      <section class="perf-card" aria-label="Performance diagnostics">
+        <span><b id="fps">--</b> FPS</span>
+        <span><b id="calls">--</b> calls</span>
+        <span><b id="triangles">--</b> tris</span>
+        <span><b id="resolution">--</b> DPR</span>
+      </section>
+
+      <section id="prompt" class="prompt" hidden aria-live="polite">
+        <span class="prompt-key">E</span>
+        <span id="prompt-text">Inspect research terminal</span>
+      </section>
+
+      <section id="complete-card" class="complete-card" hidden aria-live="assertive">
+        <p class="eyebrow">Vertical slice complete</p>
+        <h2>World systems online.</h2>
+        <p>You reached the greenhouse and activated the research beacon. Movement, camera, collisions, interaction, responsive controls, and diagnostics are all connected.</p>
+        <button id="restart-button" type="button">Run it again</button>
+      </section>
+
+      <div class="desktop-help" aria-label="Keyboard controls">
+        <span><kbd>WASD</kbd> move</span>
+        <span><kbd>Shift</kbd> run</span>
+        <span><kbd>Space</kbd> jump</span>
+        <span><kbd>Drag</kbd> camera</span>
+        <span><kbd>E</kbd> interact</span>
+      </div>
+
+      <div id="touch-controls" class="touch-controls" aria-label="Touch controls">
+        <div id="move-pad" class="move-pad" aria-label="Movement joystick">
+          <div id="move-knob" class="move-knob"></div>
+        </div>
+        <div id="look-pad" class="look-pad" aria-label="Drag to look">
+          <span>LOOK</span>
+        </div>
+        <div class="touch-actions">
+          <button id="jump-button" type="button">Jump</button>
+          <button id="interact-button" type="button">Interact</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    const loadingMessage = document.getElementById("loading-message");
+    const errorPanel = document.getElementById("error-panel");
+    const errorMessage = document.getElementById("error-message");
+    const reloadButton = document.getElementById("reload-button");
+
+    reloadButton?.addEventListener("click", () => window.location.reload());
+
+    try {
+      loadingMessage.textContent = "Loading pinned Three.js 0.185.1 runtime.";
+      const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js");
+      loadingMessage.textContent = "Creating the DTF World Lab vertical slice.";
+      const { startWorldLab } = await import("/dtf-world-lab/world.js");
+      await startWorldLab(THREE);
+    } catch (error) {
+      console.error("DTF World Lab failed to start", error);
+      document.getElementById("loading")?.setAttribute("hidden", "");
+      errorMessage.textContent = error instanceof Error
+        ? `Startup failed: ${error.message}`
+        : "The 3D runtime could not be loaded.";
+      errorPanel.hidden = false;
+    }
+  </script>
+</body>
+</html>
