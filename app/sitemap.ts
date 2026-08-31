@@ -67,6 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/games/weedopolis", 0.82, "weekly"),
     item("/games/bud-or-bluff", 0.82, "weekly"),
     item("/games/seed-ascent", 0.82, "weekly"),
+    item("/games/thc-rpg", 0.82, "weekly"),
     item("/games/burn-buds", 0.7, "weekly"),
     item("/community", 0.7, "monthly"),
     item("/community/grow-offs", 0.74, "monthly"),
