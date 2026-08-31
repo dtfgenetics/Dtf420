@@ -1,0 +1,410 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050d08;
+  color: #eef5e8;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+#world-shell,
+#viewport,
+#viewport canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#world-shell {
+  position: relative;
+  min-height: 520px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(102, 164, 79, 0.16), transparent 35%),
+    #050d08;
+}
+
+#viewport {
+  position: absolute;
+  inset: 0;
+}
+
+#viewport canvas {
+  display: block;
+  outline: 0;
+  touch-action: none;
+}
+
+.loading,
+.error-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(142, 210, 102, 0.12), transparent 28rem),
+    rgba(3, 10, 6, 0.96);
+}
+
+.loading[hidden],
+.error-panel[hidden],
+#hud[hidden],
+.prompt[hidden],
+.complete-card[hidden] {
+  display: none !important;
+}
+
+.loading-card,
+.error-panel {
+  text-align: center;
+}
+
+.loading-card {
+  max-width: 470px;
+}
+
+.loading-mark {
+  display: block;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 18px;
+  border: 3px solid rgba(191, 238, 124, 0.2);
+  border-top-color: #bfee7c;
+  border-radius: 999px;
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.eyebrow {
+  margin: 0;
+  color: #bfee7c;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.loading-card h1,
+.error-panel h1,
+.complete-card h2 {
+  margin: 8px 0 10px;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.loading-card h1,
+.error-panel h1 {
+  font-size: clamp(30px, 6vw, 52px);
+}
+
+.loading-card p:last-child,
+.error-panel > p:last-of-type,
+.complete-card p:last-of-type {
+  color: rgba(238, 245, 232, 0.68);
+  line-height: 1.55;
+}
+
+.error-panel button,
+.complete-card button,
+.touch-actions button {
+  border: 0;
+  border-radius: 14px;
+  background: #bfee7c;
+  color: #0a1408;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.error-panel button,
+.complete-card button {
+  min-height: 48px;
+  padding: 0 20px;
+}
+
+.hud {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.objective-card,
+.perf-card,
+.prompt,
+.complete-card,
+.desktop-help {
+  border: 1px solid rgba(191, 238, 124, 0.18);
+  background: rgba(4, 13, 8, 0.78);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(12px);
+}
+
+.objective-card {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: max(16px, env(safe-area-inset-left));
+  width: min(420px, calc(100% - 32px));
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.objective-card strong,
+.objective-card span {
+  display: block;
+}
+
+.objective-card strong {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.objective-card span {
+  margin-top: 4px;
+  color: rgba(238, 245, 232, 0.64);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.perf-card {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  display: flex;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  color: rgba(238, 245, 232, 0.62);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.perf-card b {
+  color: #f3f8ef;
+}
+
+.prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 92px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  transform: translateX(-50%);
+}
+
+.prompt-key {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(191, 238, 124, 0.34);
+  border-radius: 9px;
+  background: rgba(191, 238, 124, 0.1);
+  color: #dafaab;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.prompt span:last-child {
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.complete-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(520px, calc(100% - 32px));
+  padding: 24px;
+  border-radius: 20px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.complete-card h2 {
+  font-size: clamp(28px, 5vw, 42px);
+}
+
+.complete-card button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.desktop-help {
+  position: absolute;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 11px;
+  color: rgba(238, 245, 232, 0.58);
+  font-size: 10px;
+}
+
+kbd {
+  padding: 3px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #eef5e8;
+  font: 850 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.touch-controls {
+  display: none;
+}
+
+@media (pointer: coarse), (max-width: 760px) {
+  .desktop-help {
+    display: none;
+  }
+
+  .perf-card {
+    top: auto;
+    right: max(10px, env(safe-area-inset-right));
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 132px);
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .objective-card {
+    top: max(10px, env(safe-area-inset-top));
+    left: max(10px, env(safe-area-inset-left));
+    width: calc(100% - 20px);
+    padding: 12px 14px;
+  }
+
+  .objective-card strong {
+    font-size: 14px;
+  }
+
+  .prompt {
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 132px);
+  }
+
+  .touch-controls {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+  }
+
+  .move-pad,
+  .look-pad,
+  .touch-actions {
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .move-pad {
+    position: absolute;
+    left: max(18px, env(safe-area-inset-left));
+    bottom: max(18px, env(safe-area-inset-bottom));
+    width: 112px;
+    height: 112px;
+    border: 1px solid rgba(191, 238, 124, 0.2);
+    border-radius: 999px;
+    background: rgba(4, 13, 8, 0.38);
+    backdrop-filter: blur(6px);
+  }
+
+  .move-knob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(191, 238, 124, 0.35);
+    border-radius: 999px;
+    background: rgba(191, 238, 124, 0.18);
+    transform: translate(-50%, -50%);
+  }
+
+  .look-pad {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 46%;
+    height: 54%;
+    border-radius: 28px 0 0 0;
+  }
+
+  .look-pad span {
+    position: absolute;
+    right: max(20px, env(safe-area-inset-right));
+    bottom: calc(max(18px, env(safe-area-inset-bottom)) + 98px);
+    color: rgba(238, 245, 232, 0.26);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+  }
+
+  .touch-actions {
+    position: absolute;
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: 70px 88px;
+    gap: 8px;
+  }
+
+  .touch-actions button {
+    min-height: 54px;
+    padding: 0 10px;
+    border: 1px solid rgba(191, 238, 124, 0.24);
+    background: rgba(8, 23, 13, 0.78);
+    color: #e8f7d8;
+    backdrop-filter: blur(8px);
+  }
+
+  .touch-actions button:last-child {
+    background: rgba(191, 238, 124, 0.86);
+    color: #0b1608;
+  }
+}
+
+@media (max-width: 520px) {
+  #world-shell {
+    min-height: 500px;
+  }
+
+  .perf-card span:nth-child(2),
+  .perf-card span:nth-child(3) {
+    display: none;
+  }
+
+  .complete-card {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-mark {
+    animation-duration: 1800ms;
+  }
+}
