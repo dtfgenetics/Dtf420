@@ -8,9 +8,10 @@ const files = {
   css: path.join(root, "public/dtf-world-lab/world.css"),
   world: path.join(root, "public/dtf-world-lab/world.js"),
   hub: path.join(root, "app/games/page.tsx"),
+  manifest: path.join(root, "data/games/dtf-world-lab/world-manifest.json"),
 };
 
-const [route, html, css, world, hub] = await Promise.all(
+const [route, html, css, world, hub, manifestText] = await Promise.all(
   Object.values(files).map((file) => fs.readFile(file, "utf8")),
 );
 
@@ -57,6 +58,24 @@ try {
   errors.push(`world.js syntax check failed: ${error instanceof Error ? error.message : String(error)}`);
 }
 
+try {
+  const manifest = JSON.parse(manifestText);
+  if (manifest.site !== "dtfseeds.com") errors.push("manifest: site must be dtfseeds.com");
+  if (manifest.route !== "/games/dtf-world-lab") errors.push("manifest: route mismatch");
+  if (manifest.status !== "development-preview") errors.push("manifest: status must remain development-preview");
+  if (manifest.worldVersion !== "0.1.0") errors.push("manifest: worldVersion must match runtime 0.1.0");
+  if (manifest.units !== "meters" || manifest.upAxis !== "+Y") errors.push("manifest: world coordinate conventions are incomplete");
+  if (manifest.assetPolicy?.shippingFormat !== "glb") errors.push("manifest: shipping format must be GLB");
+  if (manifest.assetPolicy?.hotlinkExternalAssets !== false) errors.push("manifest: production assets must not be hot-linked");
+  if (manifest.assetPolicy?.requireLicenseRecord !== true) errors.push("manifest: asset license records must be required");
+  if (!Array.isArray(manifest.zones) || manifest.zones.length < 2) errors.push("manifest: expected at least two defined world zones");
+  if (!Array.isArray(manifest.interactables) || !manifest.interactables.some((entry) => entry.id === "research-terminal")) {
+    errors.push("manifest: research-terminal interaction is not registered");
+  }
+} catch (error) {
+  errors.push(`world manifest failed to parse: ${error instanceof Error ? error.message : String(error)}`);
+}
+
 const forbidden = [
   "TODO: build 3d",
   "placeholder cube",
@@ -74,4 +93,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("DTF World Lab verified: route, 3D renderer, movement, collision, interaction, touch controls, diagnostics, cleanup, and preview status are present.");
+console.log("DTF World Lab verified: route, 3D renderer, movement, collision, interaction, touch controls, diagnostics, cleanup, world manifest, and preview status are present.");
