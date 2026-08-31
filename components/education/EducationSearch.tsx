@@ -21,6 +21,7 @@ import symptomExpanded from "@/content/symptom-differential-expanded.json";
 import learningTools from "@/content/learning-tools.json";
 import coreEvidenceSources from "@/content/education-sources.json";
 import abioticEvidenceSources from "@/content/education-sources-abiotic.json";
+import plantHealthIpmEvidenceSources from "@/content/education-sources-plant-health-ipm.json";
 import glossary from "@/content/education-glossary.json";
 import sops from "@/content/education-sops.json";
 import styles from "./EducationSearch.module.css";
@@ -126,7 +127,7 @@ const toolItems: SearchItem[] = learningTools.map((item) => ({
   terms: item.sections.flatMap((section) => [section.title, ...section.fields]).join(" "),
 }));
 
-const evidenceSources = [...coreEvidenceSources, ...abioticEvidenceSources];
+const evidenceSources = [...coreEvidenceSources, ...abioticEvidenceSources, ...plantHealthIpmEvidenceSources];
 const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
   kind: "Evidence source" as const,
   title: source.title,
