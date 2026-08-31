@@ -43,7 +43,7 @@ export default function GamesPage() {
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
-            <strong>2</strong>
+            <strong>3</strong>
             <span>Preview builds</span>
           </div>
           <div className={styles.statChip}>
@@ -174,6 +174,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.secondaryAction} href="/games/high-iq" aria-label="Test High IQ beta">Test beta</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
+              <span className={styles.posterMeta}>3D world · 1 player</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Walk into the next DTF game layer</span>
+              <strong>DTF World Lab</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Our first explorable 3D systems test.</h3>
+            <p>
+              Enter a small greenhouse district built to prove third-person movement, orbit camera behavior, world collisions, a playable objective, keyboard controls, mobile touch input, and browser performance diagnostics.
+            </p>
+            <div className={styles.tagRow} aria-label="DTF World Lab preview details">
+              <span className={styles.tag}>Three.js 3D</span>
+              <span className={styles.tag}>Third-person movement</span>
+              <span className={styles.tag}>Keyboard + touch</span>
+              <span className={styles.tag}>Performance HUD</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.secondaryAction} href="/games/dtf-world-lab" aria-label="Test DTF World Lab">Enter 3D preview</Link>
             </div>
           </div>
         </article>
