@@ -5,8 +5,12 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("Strain Showdown resolves representative Tier 1 battles", async ({ page }) => {
-  await page.goto("/games/strain-showdown", { waitUntil: "networkidle" });
+test("Strain Showdown launches from the Games hub and resolves representative Tier 1 battles", async ({ page }) => {
+  await page.goto("/games", { waitUntil: "networkidle" });
+  const launch = page.getByRole("link", { name: "Test Strain Showdown Battle Lab", exact: true });
+  await expect(launch).toHaveAttribute("href", "/games/strain-showdown");
+  await launch.click();
+  await expect(page).toHaveURL(/\/games\/strain-showdown$/);
 
   await expect(page.getByRole("heading", { name: "Strain Showdown", exact: true })).toBeVisible();
   await expect(page.getByText("48", { exact: true })).toBeVisible();
