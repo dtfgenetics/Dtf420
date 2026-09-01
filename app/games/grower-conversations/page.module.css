@@ -1,0 +1,663 @@
+.page {
+  padding-block: 1.5rem 4rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: end;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(2.1rem, 6vw, 4.7rem);
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+}
+
+.hero p {
+  max-width: 760px;
+  margin: 0;
+}
+
+.backLink {
+  align-self: start;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.status {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.38rem 0.68rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gameFrame {
+  position: relative;
+  overflow: hidden;
+  min-height: 620px;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(148, 202, 91, 0.11), transparent 35%),
+    linear-gradient(155deg, rgba(19, 32, 24, 0.98), rgba(8, 15, 11, 0.99));
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.24);
+}
+
+.kicker {
+  margin: 0 0 0.45rem;
+  color: #b9e881;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.setupHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.setupHero h2,
+.finishPanel h2,
+.passPanel h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.9rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.setupHero p,
+.finishPanel > p,
+.passPanel p {
+  max-width: 720px;
+  margin: 0.8rem 0 0;
+  color: rgba(241, 246, 239, 0.72);
+  line-height: 1.65;
+}
+
+.deckStat {
+  min-width: 150px;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(185, 232, 129, 0.22);
+  border-radius: 22px;
+  background: rgba(185, 232, 129, 0.07);
+  text-align: center;
+}
+
+.deckStat strong {
+  display: block;
+  color: #e9ffd0;
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.deckStat span {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(241, 246, 239, 0.62);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.setupGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.panel {
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.panelHeading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.panelHeading > div {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.panelHeading span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #b9e881;
+  color: #10200f;
+  font-size: 0.76rem;
+  font-weight: 950;
+}
+
+.panelHeading h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.panelHeading small,
+.fairnessNote span,
+.toggleField small {
+  color: rgba(241, 246, 239, 0.58);
+}
+
+.playerList {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 0.8rem;
+}
+
+.playerRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.55rem;
+}
+
+.playerRow input,
+.fieldGrid select {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+  background: rgba(2, 8, 4, 0.48);
+  color: #f3f7f0;
+  font: inherit;
+}
+
+.playerRow input {
+  padding: 0.75rem 0.85rem;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.fieldGrid label {
+  display: grid;
+  gap: 0.42rem;
+  color: rgba(241, 246, 239, 0.72);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.fieldGrid select {
+  min-height: 46px;
+  padding: 0.7rem 0.8rem;
+}
+
+.toggleField {
+  grid-column: 1 / -1;
+  display: flex !important;
+  gap: 0.7rem !important;
+  align-items: flex-start;
+  padding: 0.8rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.toggleField input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.2rem;
+}
+
+.toggleField span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.fairnessNote {
+  display: grid;
+  gap: 0.22rem;
+  margin-top: 0.9rem;
+  padding: 0.8rem;
+  border-left: 3px solid #b9e881;
+  background: rgba(185, 232, 129, 0.05);
+}
+
+.primaryButton,
+.secondaryButton,
+.removeButton,
+.skipButton,
+.followButton,
+.quitButton {
+  min-height: 44px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.primaryButton {
+  border: 0;
+  padding: 0.78rem 1.2rem;
+  background: #b9e881;
+  color: #10200f;
+}
+
+.secondaryButton,
+.removeButton,
+.skipButton,
+.followButton,
+.quitButton {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+  color: #f0f5ed;
+}
+
+.secondaryButton,
+.skipButton,
+.followButton,
+.quitButton {
+  padding: 0.72rem 1rem;
+}
+
+.removeButton {
+  min-height: 40px;
+  padding: 0 0.8rem;
+  color: rgba(241, 246, 239, 0.65);
+  font-size: 0.76rem;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled,
+.removeButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.startBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin: 0 1rem 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.startBar > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.startBar span {
+  color: rgba(241, 246, 239, 0.58);
+  font-size: 0.84rem;
+}
+
+.progressTrack {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progressTrack span {
+  display: block;
+  height: 100%;
+  background: #b9e881;
+  transition: width 180ms ease;
+}
+
+.playHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem clamp(1rem, 3vw, 1.8rem);
+}
+
+.playHeader h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.playHeader h2 span {
+  color: rgba(241, 246, 239, 0.45);
+  font-weight: 600;
+}
+
+.playHeaderActions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.timer {
+  display: grid;
+  min-width: 76px;
+  text-align: right;
+}
+
+.timer strong {
+  font-size: 1.2rem;
+}
+
+.timer span {
+  color: rgba(241, 246, 239, 0.5);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.timerExpired strong {
+  color: #f5bf7c;
+}
+
+.cardStage {
+  display: grid;
+  place-items: center;
+  min-height: 410px;
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+}
+
+.promptCard {
+  width: min(820px, 100%);
+  padding: clamp(1.4rem, 5vw, 2.7rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.08), transparent 28%),
+    rgba(255, 255, 255, 0.055);
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.28);
+}
+
+.depthChill { border-top: 5px solid #8fd58c; }
+.depthReflect { border-top: 5px solid #7dbbd8; }
+.depthDebate { border-top: 5px solid #e2a36a; }
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  color: rgba(241, 246, 239, 0.7);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.promptText {
+  margin: clamp(1.3rem, 4vw, 2.4rem) 0;
+  font-size: clamp(1.65rem, 4vw, 3rem);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+.followUp {
+  display: none;
+  margin: 1.2rem 0 0;
+  padding: 1rem 1.05rem;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.followUpVisible {
+  display: block;
+}
+
+.followUp span {
+  color: #b9e881;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.followUp p {
+  margin: 0.4rem 0 0;
+  color: rgba(241, 246, 239, 0.78);
+  line-height: 1.55;
+}
+
+.followButton {
+  margin-top: 1rem;
+}
+
+.turnActions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0 1rem 1rem;
+}
+
+.turnActions .primaryButton {
+  min-width: 190px;
+}
+
+.skipButton {
+  min-width: 100px;
+}
+
+.keyboardHint {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 1rem 1.2rem;
+  color: rgba(241, 246, 239, 0.45);
+  font-size: 0.72rem;
+}
+
+.keyboardHint kbd {
+  padding: 0.12rem 0.34rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.24);
+  color: rgba(241, 246, 239, 0.8);
+  font-family: inherit;
+}
+
+.passPanel,
+.finishPanel {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 620px;
+  padding: clamp(1.4rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.passPanel .primaryButton {
+  margin-top: 1.5rem;
+}
+
+.passPanel small {
+  margin-top: 0.7rem;
+  color: rgba(241, 246, 239, 0.46);
+}
+
+.turnCounter {
+  margin-bottom: 0.8rem;
+  color: rgba(241, 246, 239, 0.5);
+  font-size: 0.82rem;
+}
+
+.finishStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(760px, 100%);
+  gap: 0.7rem;
+  margin: 1.6rem 0;
+}
+
+.finishStats > div,
+.summaryGrid article {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.finishStats strong {
+  display: block;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+}
+
+.finishStats span {
+  color: rgba(241, 246, 239, 0.52);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(760px, 100%);
+  gap: 0.7rem;
+}
+
+.summaryGrid h3,
+.summaryGrid p {
+  margin: 0;
+}
+
+.summaryGrid p {
+  margin-top: 0.35rem;
+  color: rgba(241, 246, 239, 0.58);
+  font-size: 0.82rem;
+}
+
+.finishActions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding-top: 0.75rem;
+  }
+
+  .hero,
+  .setupHero,
+  .setupGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    align-items: start;
+  }
+
+  .deckStat {
+    width: 100%;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .startBar,
+  .playHeader {
+    align-items: stretch;
+  }
+
+  .startBar {
+    flex-direction: column;
+  }
+
+  .playHeader {
+    gap: 0.5rem;
+  }
+
+  .cardStage {
+    min-height: 380px;
+    padding-inline: 0.8rem;
+  }
+
+  .promptCard {
+    border-radius: 23px;
+  }
+
+  .turnActions {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+  }
+
+  .turnActions button {
+    min-width: 0 !important;
+    width: 100%;
+  }
+
+  .finishStats,
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .finishActions {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 430px) {
+  .gameFrame {
+    min-height: 570px;
+    border-radius: 20px;
+  }
+
+  .panelHeading {
+    align-items: flex-start;
+  }
+
+  .panelHeading small {
+    text-align: right;
+  }
+
+  .playerRow {
+    grid-template-columns: 1fr;
+  }
+
+  .removeButton {
+    justify-self: end;
+  }
+
+  .playHeader {
+    padding-inline: 0.8rem;
+  }
+
+  .playHeaderActions {
+    align-items: flex-end;
+  }
+
+  .quitButton {
+    padding-inline: 0.75rem;
+  }
+
+  .promptText {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressTrack span {
+    transition: none;
+  }
+}

@@ -18,6 +18,7 @@
     "assets:thc:verify": "node scripts/import-thc-project-images.mjs --verify-only",
     "verify:bud-or-bluff": "node scripts/verify-bud-or-bluff.mjs",
     "verify:high-iq": "node scripts/verify-high-iq.mjs",
+    "verify:grower-conversations": "node scripts/verify-grower-conversations.mjs",
     "verify:seed-ascent": "node scripts/verify-seed-ascent.mjs",
     "verify:atlas-assets": "node scripts/verify-atlas-assets.mjs",
     "verify:atlas-paths": "node scripts/verify-atlas-guided-paths.mjs",
@@ -33,7 +34,7 @@
     "verify:education-sops": "node scripts/verify-education-sops.mjs",
     "verify:academy": "node scripts/verify-academy.mjs",
     "verify:routes": "node scripts/verify-internal-routes.mjs",
-    "verify": "npm run verify:bud-or-bluff && npm run verify:high-iq && npm run verify:seed-ascent && npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:education-glossary && npm run verify:education-sops && npm run verify:academy && npm run verify:routes && npm run lint && npm run typecheck && npm run build"
+    "verify": "npm run verify:bud-or-bluff && npm run verify:high-iq && npm run verify:grower-conversations && npm run verify:seed-ascent && npm run verify:atlas-assets && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:education-glossary && npm run verify:education-sops && npm run verify:academy && npm run verify:routes && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.3",
