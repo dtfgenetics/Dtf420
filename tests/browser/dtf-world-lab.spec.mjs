@@ -23,11 +23,6 @@ async function openWorldLab(page) {
   return { frame, runtimeErrors };
 }
 
-async function holdKey(canvas, page, key, milliseconds) {
-  await canvas.focus();
-  await canvas.press(key, { delay: Math.max(1, milliseconds) });
-}
-
 test("DTF World Lab initializes a real WebGL world without runtime errors", async ({ page }, testInfo) => {
   const { frame, runtimeErrors } = await openWorldLab(page);
   await expect(frame.locator("#objective-title")).toHaveText("Reach the research greenhouse");
@@ -88,7 +83,7 @@ test("DTF World Lab objective can be completed through player movement and inter
   ).toBeGreaterThanOrEqual(1);
 
   await expect(frame.locator("#prompt")).toBeVisible();
-  await canvas.press("KeyE");
+  await canvas.press("e");
 
   await expect(frame.locator("#complete-card")).toBeVisible();
   const completed = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
