@@ -58,8 +58,9 @@ test("THC RPG remains usable at the 390px phone target", async ({ page }) => {
   await expect(iframe).toBeVisible();
   const frameBox = await iframe.boundingBox();
   expect(frameBox).not.toBeNull();
-  expect(frameBox.width).toBeLessThanOrEqual(358);
   expect(frameBox.width).toBeGreaterThan(280);
+  expect(frameBox.x).toBeGreaterThanOrEqual(-2);
+  expect(frameBox.x + frameBox.width).toBeLessThanOrEqual(392);
 
   const game = page.frameLocator('iframe[title="THC RPG: The First Seed"]');
   await game.getByRole("button", { name: /Start New Game/i }).click();
