@@ -1,0 +1,40 @@
+.guard {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.guard :global(header),
+.guard :global(section),
+.guard :global(article),
+.guard :global(div),
+.guard :global(fieldset),
+.guard :global(label),
+.guard :global(ol),
+.guard :global(ul),
+.guard :global(li) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.guard :global(select) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.guard :global(p),
+.guard :global(strong),
+.guard :global(span),
+.guard :global(li),
+.guard :global(label) {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 430px) {
+  .guard :global(fieldset),
+  .guard :global(select),
+  .guard :global(label),
+  .guard :global(ol),
+  .guard :global(ul) {
+    width: 100%;
+  }
+}
