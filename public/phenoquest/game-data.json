@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "saveKey": "dtf-phenoquest-save-v1",
+  "title": "PhenoQuest: The Living Seed Vault",
+  "starters": ["citravale", "berrybloom", "pinewarden"],
+  "phenos": [
+    {
+      "id": "citravale",
+      "name": "Citravale",
+      "affinity": "Solar",
+      "aroma": "bright citrus peel",
+      "description": "A fast, sun-seeking Pheno that stores energy in luminous leaf fins.",
+      "color": "#f4c95d",
+      "stats": { "resolve": 100, "power": 17, "guard": 11, "speed": 16, "focus": 14 },
+      "signature": { "name": "Zest Surge", "power": 31, "effect": "burst" }
+    },
+    {
+      "id": "berrybloom",
+      "name": "Berrybloom",
+      "affinity": "Bloom",
+      "aroma": "dark berry and floral sugar",
+      "description": "A balanced Pheno whose flowering crown converts focus into recovery.",
+      "color": "#b983ff",
+      "stats": { "resolve": 110, "power": 14, "guard": 14, "speed": 11, "focus": 17 },
+      "signature": { "name": "Bloom Return", "power": 24, "effect": "heal" }
+    },
+    {
+      "id": "pinewarden",
+      "name": "Pinewarden",
+      "affinity": "Root",
+      "aroma": "pine needle and forest soil",
+      "description": "A patient defensive Pheno with a dense root mantle and exceptional resilience.",
+      "color": "#66c77a",
+      "stats": { "resolve": 120, "power": 13, "guard": 18, "speed": 9, "focus": 12 },
+      "signature": { "name": "Needle Bastion", "power": 22, "effect": "guard" }
+    },
+    {
+      "id": "emberresin",
+      "name": "Emberresin",
+      "affinity": "Resin",
+      "aroma": "fuel, pepper and warm resin",
+      "description": "An aggressive Pheno whose resin vents glow when it commits to an attack.",
+      "color": "#ff805d",
+      "stats": { "resolve": 96, "power": 20, "guard": 9, "speed": 14, "focus": 13 },
+      "signature": { "name": "Resin Flare", "power": 35, "effect": "burst" }
+    },
+    {
+      "id": "hazecrest",
+      "name": "Hazecrest",
+      "affinity": "Canopy",
+      "aroma": "incense, lime and fresh air",
+      "description": "A high-canopy Pheno built around speed, spacing and repeated light attacks.",
+      "color": "#7ed7e8",
+      "stats": { "resolve": 92, "power": 16, "guard": 10, "speed": 20, "focus": 15 },
+      "signature": { "name": "Skyline Rush", "power": 29, "effect": "speed" }
+    },
+    {
+      "id": "nightleaf",
+      "name": "Nightleaf",
+      "affinity": "Shade",
+      "aroma": "grape skin, earth and spice",
+      "description": "A calm twilight Pheno that wins long trials through focus and defensive timing.",
+      "color": "#8266d4",
+      "stats": { "resolve": 105, "power": 15, "guard": 15, "speed": 12, "focus": 18 },
+      "signature": { "name": "Violet Veil", "power": 26, "effect": "guard" }
+    }
+  ],
+  "encounters": [
+    { "id": "field-citravale", "phenoId": "citravale", "position": [-9, 0, -7], "label": "Sunlit sample" },
+    { "id": "field-berrybloom", "phenoId": "berrybloom", "position": [8, 0, -11], "label": "Bloom sample" },
+    { "id": "field-pinewarden", "phenoId": "pinewarden", "position": [-14, 0, -23], "label": "Root sample" },
+    { "id": "field-emberresin", "phenoId": "emberresin", "position": [16, 0, -26], "label": "Resin sample" },
+    { "id": "field-hazecrest", "phenoId": "hazecrest", "position": [-2, 0, -34], "label": "Canopy sample" },
+    { "id": "field-nightleaf", "phenoId": "nightleaf", "position": [13, 0, -39], "label": "Shade sample" }
+  ],
+  "progression": {
+    "samplesBeforeLockout": 3,
+    "gardenTrialPosition": [0, 0, -51],
+    "lockoutGateZ": -43,
+    "gardenTrialBoss": "hazecrest"
+  }
+}
