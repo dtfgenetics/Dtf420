@@ -1,0 +1,54 @@
+[
+  {
+    "id": "stem-vascular-cambium-secondary-growth",
+    "route": "/learn/atlas/stem-vascular/vascular-cambium-and-secondary-growth",
+    "prompt": "What best describes the role of vascular cambium during secondary growth in a cannabis stem?",
+    "options": [
+      "It produces additional vascular tissues that contribute to radial thickening",
+      "It converts mature leaves directly into stem tissue",
+      "It is the main site of pollen production",
+      "It replaces the root system after flowering begins"
+    ],
+    "correctIndex": 0,
+    "explanation": "Vascular cambium is a lateral meristem. As secondary growth proceeds it contributes new secondary xylem toward the inside and secondary phloem toward the outside, increasing stem thickness."
+  },
+  {
+    "id": "stem-bast-fibers-structural-support",
+    "route": "/learn/atlas/stem-vascular/bast-fibers-and-structural-support",
+    "prompt": "Which statement correctly compares major supporting tissues in a mature Cannabis sativa stem?",
+    "options": [
+      "Bast fiber bundles occur toward the stem periphery while the inner xylem-rich core becomes more lignified",
+      "Bast fibers occur only inside the pith and xylem occurs only in the epidermis",
+      "All stem support comes from water pressure and no cell walls contribute",
+      "Bast fibers are reproductive tissues that develop only after pollination"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis stems contain cellulose-rich bast fibers associated with outer phloem regions and a more lignified xylem-rich inner core. Their position, cell-wall composition, and maturation all contribute to mechanical behavior."
+  },
+  {
+    "id": "stem-cohesion-tension-water-potential",
+    "route": "/learn/atlas/stem-vascular/cohesion-tension-and-water-potential",
+    "prompt": "What is the main physical idea behind cohesion-tension transport in xylem?",
+    "options": [
+      "Transpiration and water-potential gradients place a cohesive water column under tension from leaves toward roots",
+      "The stem pumps water upward using rhythmic muscle-like contractions",
+      "Phloem pressure forces all xylem water downward",
+      "Water moves upward only when roots generate positive pressure"
+    ],
+    "correctIndex": 0,
+    "explanation": "Transpiration lowers water potential toward the leaf end of the pathway. Cohesion between water molecules and adhesion to conduit walls allow tension to be transmitted through the xylem water column."
+  },
+  {
+    "id": "stem-hydraulic-disruption-embolism",
+    "route": "/learn/atlas/stem-vascular/hydraulic-disruption-and-embolism",
+    "prompt": "Why can an embolized xylem conduit reduce stem hydraulic conductivity?",
+    "options": [
+      "Gas occupying part of the conduit interrupts the continuous liquid pathway used for water transport",
+      "Gas permanently turns the conduit into phloem",
+      "Embolism increases the number of functioning water columns in every case",
+      "An embolized conduit immediately stops photosynthesis in every leaf on the plant"
+    ],
+    "correctIndex": 0,
+    "explanation": "When gas fills a xylem conduit, that conduit loses part or all of its ability to conduct the continuous water column. Whole-stem impact depends on how much of the hydraulic network is affected and on plant context."
+  }
+]
