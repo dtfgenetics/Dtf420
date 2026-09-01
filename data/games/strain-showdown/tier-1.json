@@ -1,0 +1,67 @@
+{
+  "version": "tier1-approval-draft-2026-09-01",
+  "status": "approval-draft",
+  "families": ["Kush", "Haze", "Skunk", "Gas", "Cookies", "Fruit", "Purple", "Frost"],
+  "rules": {
+    "tier": 1,
+    "cardsPerFamily": 6,
+    "cardsPerProductionPage": 8,
+    "stats": ["Vigor", "Power"],
+    "offSystemCategoriesForbidden": ["Diesel", "Sweet", "Resin", "Legendary", "Dessert"]
+  },
+  "cards": [
+    {"id":"hindu-kush","order":1,"name":"Hindu Kush","family":"Kush","categories":["Kush"],"vigor":4,"power":2,"effectKey":"survive-restore-self","effectText":"When this survives an attack, restore 1 Vigor to it.","sourceReview":"normal"},
+    {"id":"original-haze","order":2,"name":"Original Haze","family":"Haze","categories":["Haze"],"vigor":2,"power":4,"effectKey":"after-attack-cycle-optional","effectText":"After this attacks, you may draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"skunk-1","order":3,"name":"Skunk #1","family":"Skunk","categories":["Skunk","Kush"],"vigor":3,"power":3,"effectKey":"attack-defender-power-down","effectText":"When this attacks, the defending Strain gets -1 Power this battle.","sourceReview":"normal"},
+    {"id":"chemdawg","order":4,"name":"Chemdawg","family":"Gas","categories":["Gas"],"vigor":3,"power":4,"effectKey":"attack-power-up","effectText":"When this attacks, it gets +1 Power this battle.","sourceReview":"normal"},
+    {"id":"girl-scout-cookies","order":5,"name":"Girl Scout Cookies","family":"Cookies","categories":["Cookies","Kush"],"vigor":3,"power":3,"effectKey":"first-boost-power","effectText":"The first Boost played on this each turn gives +1 Power.","sourceReview":"normal"},
+    {"id":"blueberry","order":6,"name":"Blueberry","family":"Fruit","categories":["Fruit","Kush"],"vigor":4,"power":2,"effectKey":"on-play-restore-friendly","effectText":"When played, restore 1 Vigor to one of your Strains.","sourceReview":"normal"},
+    {"id":"purple-urkle","order":7,"name":"Purple Urkle","family":"Purple","categories":["Purple"],"vigor":4,"power":2,"effectKey":"survive-restore-self","effectText":"When this survives an attack, restore 1 Vigor to it.","sourceReview":"normal"},
+    {"id":"white-widow","order":8,"name":"White Widow","family":"Frost","categories":["Frost","Kush"],"vigor":4,"power":2,"effectKey":"first-attack-prevent-damage","effectText":"The first time this is attacked each turn, prevent 1 damage.","sourceReview":"normal"},
+
+    {"id":"afghan-kush","order":9,"name":"Afghan Kush","family":"Kush","categories":["Kush"],"vigor":4,"power":2,"effectKey":"defending-vigor-up","effectText":"This gets +1 Vigor while defending.","sourceReview":"normal"},
+    {"id":"silver-haze","order":10,"name":"Silver Haze","family":"Haze","categories":["Haze","Kush"],"vigor":3,"power":3,"effectKey":"after-attack-cycle","effectText":"After this attacks, draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"super-skunk","order":11,"name":"Super Skunk","family":"Skunk","categories":["Skunk","Kush"],"vigor":3,"power":3,"effectKey":"win-remove-boost","effectText":"When this wins a battle, remove 1 Boost from the defeated Strain.","sourceReview":"normal"},
+    {"id":"chem-91","order":12,"name":"Chem 91","family":"Gas","categories":["Gas"],"vigor":3,"power":4,"effectKey":"once-turn-attack-power-up","effectText":"Once per turn, when this attacks, it gets +1 Power this battle.","sourceReview":"normal"},
+    {"id":"thin-mint-gsc","order":13,"name":"Thin Mint GSC","family":"Cookies","categories":["Cookies","Kush"],"vigor":3,"power":3,"effectKey":"boosted-attacking-power-up","effectText":"If this is Boosted, it gets +1 Power while attacking.","sourceReview":"normal"},
+    {"id":"strawberry-cough","order":14,"name":"Strawberry Cough","family":"Fruit","categories":["Fruit","Haze"],"vigor":2,"power":4,"effectKey":"on-play-cycle","effectText":"When played, draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"mendo-purps","order":15,"name":"Mendo Purps","family":"Purple","categories":["Purple"],"vigor":4,"power":2,"effectKey":"purple-location-vigor-up","effectText":"This gets +1 Vigor while you control a Purple Location.","sourceReview":"normal"},
+    {"id":"white-rhino","order":16,"name":"White Rhino","family":"Frost","categories":["Frost","Kush"],"vigor":5,"power":2,"effectKey":"first-vigor-loss-reduce","effectText":"The first time this would lose Vigor each turn, reduce that loss by 1.","sourceReview":"normal"},
+
+    {"id":"bubba-kush","order":17,"name":"Bubba Kush","family":"Kush","categories":["Kush"],"vigor":5,"power":2,"effectKey":"on-play-temp-vigor-up","effectText":"When played, this gains +1 Vigor this turn.","sourceReview":"normal"},
+    {"id":"purple-haze","order":18,"name":"Purple Haze","family":"Haze","categories":["Haze","Purple"],"vigor":2,"power":4,"effectKey":"after-attack-cycle-optional","effectText":"After this attacks, you may draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"lemon-skunk","order":19,"name":"Lemon Skunk","family":"Skunk","categories":["Skunk","Fruit"],"vigor":3,"power":3,"effectKey":"attack-defender-power-down","effectText":"When this attacks, the defending Strain gets -1 Power this battle.","sourceReview":"normal"},
+    {"id":"chemdawg-4","order":20,"name":"Chemdawg #4","family":"Gas","categories":["Gas"],"vigor":3,"power":4,"effectKey":"attack-higher-vigor-power-up","effectText":"This gets +1 Power while attacking a Strain with higher Vigor.","sourceReview":"normal"},
+    {"id":"forum-cookies","order":21,"name":"Forum Cookies","family":"Cookies","categories":["Cookies"],"vigor":3,"power":3,"effectKey":"first-boost-vigor","effectText":"The first Boost played on this each turn gives +1 Vigor.","sourceReview":"normal"},
+    {"id":"tangie","order":22,"name":"Tangie","family":"Fruit","categories":["Fruit","Skunk"],"vigor":2,"power":4,"effectKey":"after-attack-cycle","effectText":"When this attacks, draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"granddaddy-purple","order":23,"name":"Granddaddy Purple","family":"Purple","categories":["Purple","Kush"],"vigor":5,"power":2,"effectKey":"survive-restore-self","effectText":"When this survives an attack, restore 1 Vigor to it.","sourceReview":"normal"},
+    {"id":"white-russian","order":24,"name":"White Russian","family":"Frost","categories":["Frost","Haze"],"vigor":4,"power":3,"effectKey":"survive-cycle","effectText":"If this survives an attack, draw 1 then discard 1.","sourceReview":"normal"},
+
+    {"id":"master-kush","order":25,"name":"Master Kush","family":"Kush","categories":["Kush","Skunk"],"vigor":4,"power":3,"effectKey":"defending-vigor-up","effectText":"This gets +1 Vigor while defending.","sourceReview":"normal"},
+    {"id":"lemon-haze","order":26,"name":"Lemon Haze","family":"Haze","categories":["Haze","Fruit"],"vigor":2,"power":4,"effectKey":"after-attack-cycle","effectText":"After this attacks, draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"cheese","order":27,"name":"Cheese","family":"Skunk","categories":["Skunk"],"vigor":3,"power":3,"effectKey":"attack-defender-power-down","effectText":"When this attacks, the defending Strain gets -1 Power this battle.","sourceReview":"normal"},
+    {"id":"sour-diesel","order":28,"name":"Sour Diesel","family":"Gas","categories":["Gas","Skunk"],"vigor":2,"power":5,"effectKey":"attack-power-up","effectText":"When this attacks, it gets +1 Power this battle.","sourceReview":"normal"},
+    {"id":"platinum-cookies","order":29,"name":"Platinum Cookies","family":"Cookies","categories":["Cookies"],"vigor":4,"power":3,"effectKey":"first-boost-restore-vigor","effectText":"The first Boost played on this each turn also restores 1 Vigor.","sourceReview":"normal"},
+    {"id":"clementine","order":30,"name":"Clementine","family":"Fruit","categories":["Fruit","Skunk"],"vigor":2,"power":4,"effectKey":"on-play-cycle","effectText":"When played, draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"grape-ape","order":31,"name":"Grape Ape","family":"Purple","categories":["Purple","Skunk"],"vigor":4,"power":3,"effectKey":"survive-restore-self","effectText":"When this survives an attack, restore 1 Vigor to it.","sourceReview":"normal"},
+    {"id":"great-white-shark","order":32,"name":"Great White Shark","family":"Frost","categories":["Frost","Skunk"],"vigor":4,"power":3,"effectKey":"first-attack-prevent-damage","effectText":"The first time this is attacked each turn, prevent 1 damage.","sourceReview":"normal"},
+
+    {"id":"purple-hindu-kush","order":33,"name":"Purple Hindu Kush","family":"Kush","categories":["Kush","Purple"],"vigor":5,"power":2,"effectKey":"defending-vigor-up","effectText":"This gets +1 Vigor while defending.","sourceReview":"normal"},
+    {"id":"nevilles-haze","order":34,"name":"Neville's Haze","family":"Haze","categories":["Haze","Kush"],"vigor":2,"power":5,"effectKey":"after-attack-cycle-optional","effectText":"After this attacks, you may draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"afghan-skunk","order":35,"name":"Afghan Skunk","family":"Skunk","categories":["Skunk","Kush"],"vigor":4,"power":3,"effectKey":"win-remove-boost","effectText":"When this wins a battle, remove 1 Boost from the defeated Strain.","sourceReview":"normal"},
+    {"id":"nyc-diesel","order":36,"name":"NYC Diesel","family":"Gas","categories":["Gas","Kush"],"vigor":3,"power":4,"effectKey":"attack-power-up","effectText":"When this attacks, it gets +1 Power this battle.","sourceReview":"normal"},
+    {"id":"animal-cookies","order":37,"name":"Animal Cookies","family":"Cookies","categories":["Cookies","Kush"],"vigor":3,"power":4,"effectKey":"boosted-attacking-power-up","effectText":"If this is Boosted, it gets +1 Power while attacking.","sourceReview":"normal"},
+    {"id":"pineapple-express","order":38,"name":"Pineapple Express","family":"Fruit","categories":["Fruit","Haze"],"vigor":2,"power":4,"effectKey":"on-play-cycle","effectText":"When played, draw 1 then discard 1.","sourceReview":"normal"},
+    {"id":"blackberry-kush","order":39,"name":"Blackberry Kush","family":"Purple","categories":["Purple","Fruit"],"vigor":4,"power":2,"effectKey":"on-play-restore-friendly","effectText":"When played, restore 1 Vigor to one of your Strains.","sourceReview":"normal"},
+    {"id":"the-white","order":40,"name":"The White","family":"Frost","categories":["Frost"],"vigor":4,"power":3,"effectKey":"first-pressure-vigor-protection","effectText":"This cannot lose Vigor from the first Pressure effect against it each turn.","sourceReview":"normal"},
+
+    {"id":"og-kush","order":41,"name":"OG Kush","family":"Kush","categories":["Kush","Gas"],"vigor":4,"power":3,"effectKey":"battle-vigor-choice","effectText":"When this attacks or defends, it may gain +1 Vigor this battle.","sourceReview":"normal"},
+    {"id":"mango-haze","order":42,"name":"Mango Haze","family":"Haze","categories":["Haze","Skunk"],"vigor":2,"power":4,"effectKey":"after-attack-cycle","effectText":"After this attacks, draw 1 then discard 1.","sourceReview":"normal","lineageNote":"Mr. Nice Seedbank documents Mango Haze as 25% NL5, 25% Skunk, and 50% Haze, with a parallel lineage to Super Silver Haze.","lineageSource":"https://mrnice.com/product/mango-haze/"},
+    {"id":"island-sweet-skunk","order":43,"name":"Island Sweet Skunk","family":"Skunk","categories":["Skunk","Fruit"],"vigor":3,"power":3,"effectKey":"attack-defender-power-down","effectText":"When this attacks, the defending Strain gets -1 Power this battle.","sourceReview":"normal"},
+    {"id":"headband","order":44,"name":"Headband","family":"Gas","categories":["Gas","Kush"],"vigor":3,"power":4,"effectKey":"attack-power-up","effectText":"When this attacks, it gets +1 Power this battle.","sourceReview":"normal"},
+    {"id":"cookies-and-cream","order":45,"name":"Cookies and Cream","family":"Cookies","categories":["Cookies","Gas"],"vigor":3,"power":3,"effectKey":"first-boost-power","effectText":"The first Boost played on this each turn gives +1 Power.","sourceReview":"normal"},
+    {"id":"mango-kush","order":46,"name":"Mango Kush","family":"Fruit","categories":["Fruit","Kush"],"vigor":3,"power":3,"effectKey":"on-play-restore-friendly","effectText":"When played, restore 1 Vigor to one of your Strains.","sourceReview":"needs-lineage-source-review","lineageNote":"Mango × Hindu Kush is the widely reported parentage, but the original breeder/origin remains poorly documented.","lineageSource":"https://seedfinder.eu/en/strain-info/mango-kush/unknown-or-legendary/genealogy"},
+    {"id":"purple-kush","order":47,"name":"Purple Kush","family":"Purple","categories":["Purple","Kush"],"vigor":5,"power":2,"effectKey":"survive-restore-self","effectText":"When this survives an attack, restore 1 Vigor to it.","sourceReview":"normal"},
+    {"id":"white-fire-og","order":48,"name":"White Fire OG","family":"Frost","categories":["Frost","Kush"],"vigor":3,"power":4,"effectKey":"first-attack-prevent-damage","effectText":"The first time this is attacked each turn, prevent 1 damage.","sourceReview":"normal"}
+  ]
+}
