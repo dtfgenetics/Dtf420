@@ -39,6 +39,15 @@ async function dispatchJump(frame) {
   });
 }
 
+test("Games hub launches PhenoQuest as a development preview", async ({ page }) => {
+  await page.goto("/games", { waitUntil: "networkidle" });
+  const link = page.getByRole("link", { name: "Test PhenoQuest 3D preview", exact: true });
+  await expect(link).toHaveAttribute("href", "/games/phenoquest");
+  await link.click();
+  await expect(page.getByRole("heading", { name: "PhenoQuest: The Living Seed Vault", exact: true })).toBeVisible();
+  await expect(page.getByText(/Development preview/i).first()).toBeVisible();
+});
+
 test("PhenoQuest initializes a real WebGL world with six canonical Phenos", async ({ page }, testInfo) => {
   const { frame, runtimeErrors } = await openPhenoQuest(page);
   await expect(frame.locator("#objective-title")).toHaveText("Choose a starter Pheno");
@@ -63,7 +72,7 @@ test("PhenoQuest starter choice and PhenoLog persist in the local save", async (
   await starter.click();
 
   await expect(frame.locator("#active-name")).toHaveText("Citravale");
-  let state = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
+  const state = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
   expect(state.activeId).toBe("citravale");
   expect(state.archived).toContain("citravale");
 
