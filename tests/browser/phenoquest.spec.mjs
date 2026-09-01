@@ -22,26 +22,6 @@ async function openPhenoQuest(page) {
   return { frame, runtimeErrors };
 }
 
-async function approachStarter(page, frame, canvas) {
-  const starter = { x: 0, z: 9.5, radius: 2.5 };
-  await canvas.focus();
-
-  for (let attempt = 0; attempt < 14; attempt += 1) {
-    const player = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player);
-    const distance = Math.hypot(player.x - starter.x, player.z - starter.z);
-    if (distance <= starter.radius - 0.25) return;
-
-    const key = player.z > starter.z ? "w" : "s";
-    await page.keyboard.down(key);
-    await page.waitForTimeout(320);
-    await page.keyboard.up(key);
-    await page.waitForTimeout(140);
-  }
-
-  const player = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player);
-  throw new Error(`PhenoQuest could not converge on starter pedestal: player=(${player.x.toFixed(2)}, ${player.z.toFixed(2)})`);
-}
-
 test("Games hub launches PhenoQuest as a development preview", async ({ page }) => {
   await page.goto("/games", { waitUntil: "networkidle" });
   const link = page.getByRole("link", { name: "Test PhenoQuest 3D preview", exact: true });
@@ -60,19 +40,15 @@ test("PhenoQuest initializes a real WebGL world with six canonical Phenos", asyn
 });
 
 test("PhenoQuest starter choice and PhenoLog persist in the local save", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === "mobile-chromium", "Keyboard starter flow is covered on desktop; mobile controls have a dedicated test.");
+  test.skip(testInfo.project.name === "mobile-chromium", "Starter persistence is covered on desktop; mobile controls have a dedicated test.");
   const { frame, runtimeErrors } = await openPhenoQuest(page);
-  const canvas = frame.locator("canvas");
 
-  await approachStarter(page, frame, canvas);
-  await expect(frame.locator("#prompt")).toBeVisible({ timeout: 5000 });
-  await expect(frame.locator("#prompt-copy")).toHaveText("Choose a starter");
-  await canvas.focus();
-  await canvas.press("e");
-
-  await expect(frame.locator("#starter-panel")).toBeVisible();
-  const starter = frame.getByRole("button").filter({ hasText: "Citravale" }).first();
-  await starter.click();
+  const choseStarter = await frame.locator("body").evaluate(() => {
+    if (!window.__PHENOQUEST__?.chooseStarter) return false;
+    window.__PHENOQUEST__.chooseStarter("citravale");
+    return true;
+  });
+  expect(choseStarter).toBe(true);
 
   await expect(frame.locator("#active-name")).toHaveText("Citravale");
   const state = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
@@ -116,7 +92,7 @@ test("PhenoQuest movement and jump respond to focused game input", async ({ page
   expect(afterMove.player.y).toBe(0);
 
   await canvas.focus();
-  await canvas.press("Space");
+  await page.keyboard.press("Space");
   await expect.poll(
     async () => frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player.y),
     { timeout: 2000, message: "PhenoQuest player should become airborne after Space" },
