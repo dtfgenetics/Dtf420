@@ -66,20 +66,24 @@ test("DTF World Lab objective can be completed through player movement and inter
   const canvas = frame.locator("canvas");
   await canvas.focus();
 
-  // Run far enough south to clear the greenhouse front wall before turning east.
+  // Approach on the west path, line up with the open center doorway, then enter.
   await page.keyboard.down("Shift");
   await page.keyboard.down("w");
-  await page.waitForTimeout(4650);
+  await page.waitForTimeout(2450);
   await page.keyboard.up("w");
 
   await page.keyboard.down("d");
   await page.waitForTimeout(2350);
   await page.keyboard.up("d");
+
+  await page.keyboard.down("w");
+  await page.waitForTimeout(2100);
+  await page.keyboard.up("w");
   await page.keyboard.up("Shift");
 
   await expect.poll(
     async () => frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState().objectiveStage),
-    { timeout: 3000, message: "player should enter the greenhouse through the open center aisle" },
+    { timeout: 3000, message: "player should enter the greenhouse through the open center doorway" },
   ).toBeGreaterThanOrEqual(1);
 
   await expect(frame.locator("#prompt")).toBeVisible();
