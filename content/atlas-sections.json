@@ -19,9 +19,9 @@
     "id": "stem_vascular",
     "label": "Stem & Vascular System",
     "clickTarget": "stem",
-    "summary": "Stem structure, support, xylem, phloem, transport, internodal spacing, stem elongation, damage response, and training response.",
+    "summary": "Stem anatomy, support, xylem, phloem, vascular cambium, secondary growth, transport, source-sink allocation, internodal spacing, hydraulics, damage response, and recovery.",
     "firstAsset": "Stem cross-section infographic",
-    "topics": ["Xylem", "Phloem", "Stem elongation", "Internodal spacing", "Transport", "Training response", "Stem damage"]
+    "topics": ["Xylem", "Phloem", "Vascular cambium", "Secondary growth", "Bast fibers", "Stem elongation", "Internodal spacing", "Source-sink transport", "Cohesion-tension", "Hydraulic disruption", "Training response", "Stem damage"]
   },
   {
     "id": "nodes_branching",
