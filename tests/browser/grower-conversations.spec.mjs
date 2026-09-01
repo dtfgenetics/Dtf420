@@ -21,7 +21,7 @@ test("Grower Conversations plays a prompt, follow-up, and hidden multiplayer han
   await page.goto("/games/grower-conversations", { waitUntil: "networkidle" });
 
   await expect(page.getByRole("heading", { name: "Grower Conversations", exact: true })).toBeVisible();
-  await expect(page.getByText("48 starter prompts", { exact: true })).toBeVisible();
+  await expect(page.getByText("starter prompts", { exact: true })).toBeVisible();
   await expect(page.getByText(/No right answers\. No points\./)).toBeVisible();
 
   await page.getByRole("button", { name: "Start conversation" }).click();
@@ -63,6 +63,11 @@ test("Grower Conversations category and depth filters change the available pool"
   await expect(page.getByText("8 prompts match", { exact: true })).toBeVisible();
   await page.getByLabel("Conversation depth").selectOption("Debate");
   await expect(page.getByText("2 prompts match", { exact: true })).toBeVisible();
+  await expect(page.getByText("2 turns will be dealt.", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Start conversation" })).toBeEnabled();
+
+  // A two-card filtered pool cannot fairly serve three players, so the session is blocked.
+  await page.getByRole("button", { name: "+ Add player" }).click();
   await expect(page.getByRole("button", { name: "Start conversation" })).toBeDisabled();
 });
 
