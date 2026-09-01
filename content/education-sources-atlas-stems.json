@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cannabis-stem-anatomy-2022",
+    "title": "The morphological and anatomical variability of the stems of an industrial hemp collection and the properties of its fibres",
+    "publisher": "Heliyon",
+    "year": 2022,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9043397/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis sativa stem morphology and cross-sectional anatomy, including peripheral bast fiber bundles, xylem-rich inner tissues, lignification gradients, internode traits, and genotype-dependent structural variation."
+  },
+  {
+    "id": "cannabis-secondary-growth-2016",
+    "title": "Studying Secondary Growth and Bast Fiber Development: The Hemp Hypocotyl Peeks behind the Wall",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2016,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5114303/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis sativa primary-to-secondary growth transition, vascular cambium activity, secondary xylem development, phloem bast fibers, cell-wall maturation, and radial thickening in hemp hypocotyl tissue."
+  },
+  {
+    "id": "plant-sap-flow-review-2022",
+    "title": "Challenges and advances in measuring sap flow in agriculture and agroforestry: A review with focus on nuclear magnetic resonance",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2022,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9679431/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Plant hydraulics, soil-plant-atmosphere water movement, cohesion-tension description of xylem sap ascent, transpiration-linked water-potential gradients, and methods used to observe sap flow."
+  },
+  {
+    "id": "xylem-embolism-review-2013",
+    "title": "Maintenance of xylem Network Transport Capacity: A Review of Embolism Repair in Vascular Plants",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2013,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3633935/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Vascular-plant xylem transport capacity, drought-induced and wound-associated embolism, hydraulic conductivity loss, cavitation resistance, and the evidence limits surrounding embolism repair mechanisms."
+  }
+]
