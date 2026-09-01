@@ -16,17 +16,26 @@ for (const path of Object.values(files)) {
 }
 
 const launcher = fs.readFileSync(files.launcher, "utf8");
+const styles = fs.readFileSync(files.styles, "utf8");
 const levelsSource = fs.readFileSync(files.levels, "utf8");
 const engine = fs.readFileSync(files.engine, "utf8");
 const route = fs.readFileSync(files.route, "utf8");
 const library = fs.readFileSync(files.library, "utf8");
 const sitemap = fs.readFileSync(files.sitemap, "utf8");
 
+for (const path of Object.values(files)) {
+  if (!fs.existsSync(path)) throw new Error(`Missing Seed Ascent package file: ${path}`);
+}
+
 for (const marker of [
   'id="game"', 'id="jumpBtn"', 'id="runBtn"',
   '/seed-ascent/levels.js', '/seed-ascent/engine.js',
 ]) {
   if (!launcher.includes(marker)) throw new Error(`Seed Ascent launcher missing: ${marker}`);
+}
+
+if (!styles.includes("touch-action:none")) {
+  throw new Error("Seed Ascent controls must disable browser touch gestures with touch-action:none");
 }
 
 for (const marker of [
@@ -36,13 +45,38 @@ for (const marker of [
   "objectLand", "supportAhead", "player.surface==='ice'", "updateEnemies",
   "updateHazards", "updateCheckpoints", "updateBoss", "bossShots",
   "collectPower", "game.power==='RUSH'", "payload==='TRI'", "payload==='BREAK'",
-  "window.__seedAscentDebug", "addEventListener('pointerdown'", "window.addEventListener('blur'",
+  "SIM_STEP_MS", "MAX_STEPS_PER_FRAME", "while(accumulator>=SIM_STEP_MS",
+  "clearInput", "if(e.repeat)return", "activePointers", "pointercancel",
+  "const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return",
+  "const resetPointers=()=>{if(activePointers.size===0)return;activePointers.clear();off()}",
+  "window.addEventListener('blur',resetPointers)",
+  "const move=(input.right?1:0)-(input.left?1:0)",
+  "for(const b of blocks)if(b.bump>0)b.bump--;",
+  "function canSelectLevel(){return game.mode==='title'||game.mode==='gameOver'}",
+  "if(!canSelectLevel())return;game.selectedLevel=",
+  "levelStartScore", "levelStartTrichomes", "function beginLevel(i)", "function restartLevel()",
+  "game.score=game.levelStartScore;game.trichomes=game.levelStartTrichomes",
+  "function commitBest()", "commitBest();sounds.hit()", "commitBest();sounds.goal()",
+  "function activateStart()", "addEventListener('click',activateStart)",
+  "if(!input.jumpHeld&&game.mode==='playing')",
+  "document.addEventListener('visibilitychange'", "window.__seedAscentDebug",
+  "addEventListener('pointerdown'", "window.addEventListener('blur'",
 ]) {
   if (!engine.includes(marker)) throw new Error(`Seed Ascent engine missing mechanic: ${marker}`);
 }
 
-for (const forbidden of ["touchstart", "mousedown", "function collideWorld"]) {
+for (const forbidden of [
+  "touchstart",
+  "mousedown",
+  "function collideWorld",
+  "function loop(){step();draw();requestAnimationFrame(loop)}",
+]) {
   if (engine.includes(forbidden)) throw new Error(`Seed Ascent regression detected: ${forbidden}`);
+}
+
+const bumpUpdates = engine.match(/for\(const b of blocks\)if\(b\.bump>0\)b\.bump--;/g) || [];
+if (bumpUpdates.length !== 1) {
+  throw new Error(`Seed Ascent block bump state must advance exactly once in the fixed simulation; found ${bumpUpdates.length} update sites`);
 }
 
 new vm.Script(levelsSource, { filename: files.levels });
@@ -61,6 +95,12 @@ const pitMatch = engine.match(/MAX_SAFE_PIT\s*=\s*(\d+)/);
 const maxSafePit = pitMatch ? Number(pitMatch[1]) : NaN;
 if (!Number.isFinite(maxSafePit) || maxSafePit > 180) {
   throw new Error(`Seed Ascent safe pit width must be <= 180px; got ${maxSafePit}`);
+}
+
+const simMatch = engine.match(/SIM_STEP_MS\s*=\s*1000\s*\/\s*(\d+)/);
+const simulationHz = simMatch ? Number(simMatch[1]) : NaN;
+if (simulationHz !== 60) {
+  throw new Error(`Seed Ascent physics must use a fixed 60Hz timestep; got ${simulationHz}`);
 }
 
 let widestRawPit = 0;
@@ -120,4 +160,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, power-ups, hazards, checkpoints, and boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent and interruption-safe pointer input, neutral opposing input, safe menu-state level selection, restart reward snapshots, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
