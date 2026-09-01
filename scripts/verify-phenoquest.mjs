@@ -24,6 +24,9 @@ function requireText(source, text, label) {
 
 requireText(route, 'src="/phenoquest/index.html"', "route iframe");
 requireText(route, "Development preview", "route status");
+requireText(hub, 'href="/games/phenoquest"', "games hub route");
+requireText(hub, "PhenoQuest", "games hub title");
+requireText(hub, "Development preview", "games hub preview status");
 requireText(html, "three@0.185.1", "pinned Three.js runtime");
 requireText(html, 'id="starter-panel"', "starter selection UI");
 requireText(html, 'id="battle-panel"', "Resolve Trial UI");
