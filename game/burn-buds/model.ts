@@ -34,6 +34,7 @@ export interface FleetStatus {
   id: string;
   name: string;
   size: number;
+  shortName: string;
   placed: boolean;
   hits: number;
   sunk: boolean;
