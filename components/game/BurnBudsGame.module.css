@@ -1,25 +1,35 @@
 .shell {
   width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
   overflow: hidden;
-  border: 1px solid rgba(183, 226, 93, 0.12);
-  border-radius: 18px;
-  background: #06100a;
+  border: 1px solid rgba(183, 226, 93, 0.16);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(183, 226, 93, 0.08), transparent 18rem),
+    #06100a;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
 }
 
 .canvas {
   width: 100%;
-  min-height: 360px;
+  aspect-ratio: 5 / 7;
+  min-height: 0;
   overflow: hidden;
+  background: #06100a;
 }
 
 .canvas canvas {
   display: block;
+  width: 100% !important;
+  height: 100% !important;
   max-width: 100%;
   margin-inline: auto;
+  touch-action: manipulation;
 }
 
 .loading {
-  min-height: 520px;
+  aspect-ratio: 5 / 7;
   display: grid;
   place-items: center;
   background:
@@ -32,20 +42,20 @@
   text-transform: uppercase;
 }
 
-.loading::before {
+.loadingInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loadingInner::before {
   content: "";
-  width: 28px;
-  height: 28px;
-  margin-right: 10px;
+  width: 26px;
+  height: 26px;
   border: 3px solid rgba(183, 226, 93, 0.18);
   border-top-color: #b7e25d;
   border-radius: 50%;
   animation: spin 800ms linear infinite;
-}
-
-.loadingInner {
-  display: flex;
-  align-items: center;
 }
 
 @keyframes spin {
@@ -53,17 +63,13 @@
 }
 
 @media (max-width: 620px) {
-  .canvas {
-    min-height: 280px;
-  }
-
-  .loading {
-    min-height: 320px;
+  .shell {
+    border-radius: 16px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .loading::before {
+  .loadingInner::before {
     animation: none;
   }
 }

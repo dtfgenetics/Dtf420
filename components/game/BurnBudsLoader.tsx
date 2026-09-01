@@ -9,7 +9,7 @@ const BurnBudsGame = dynamic(
     ssr: false,
     loading: () => (
       <div className={`${styles.shell} ${styles.loading}`} role="status">
-        <span className={styles.loadingInner}>Preparing board preview…</span>
+        <span className={styles.loadingInner}>Preparing Burn Buds…</span>
       </div>
     ),
   },
