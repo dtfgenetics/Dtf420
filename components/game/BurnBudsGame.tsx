@@ -23,7 +23,11 @@ export function BurnBudsGame() {
 
   return (
     <div className={styles.shell}>
-      <div id={GAME_PARENT_ID} className={styles.canvas} aria-label="Burn Buds 15 by 15 board preview" />
+      <div
+        id={GAME_PARENT_ID}
+        className={styles.canvas}
+        aria-label="Burn Buds 15 by 15 tactical fleet battle"
+      />
     </div>
   );
 }

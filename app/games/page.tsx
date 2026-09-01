@@ -240,27 +240,27 @@ export default function GamesPage() {
           <div className={`${styles.poster} ${styles.burnPoster}`}>
             <div className={styles.posterTop}>
               <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
-              <span className={styles.posterMeta}>15 × 15 board</span>
+              <span className={styles.posterMeta}>Tactical fleet battle · 1 player</span>
             </div>
             <div className={styles.posterTitle}>
-              <span>Board systems in development</span>
+              <span>Hide the fleet. Call the square.</span>
               <strong>Burn Buds</strong>
             </div>
           </div>
 
           <div className={styles.cardBody}>
-            <h3>The board is live. The game is still growing.</h3>
+            <h3>Burn their board before they burn yours.</h3>
             <p>
-              Explore the current responsive 15 × 15 Phaser board shell while the interactive game systems are built out. This route is a preview, not yet a finished playable release.
+              Place a five-piece cannabis-themed fleet on a 15 × 15 grid, fire coordinate by coordinate, track hits and sunk pieces, and survive a hunt-and-target opponent that follows up on damage.
             </p>
             <div className={styles.tagRow} aria-label="Burn Buds preview details">
-              <span className={styles.tag}>Phaser</span>
-              <span className={styles.tag}>15 × 15 board</span>
-              <span className={styles.tag}>Responsive canvas</span>
-              <span className={styles.tag}>In development</span>
+              <span className={styles.tag}>15 × 15 battle grid</span>
+              <span className={styles.tag}>Manual + auto placement</span>
+              <span className={styles.tag}>Hunt + target AI</span>
+              <span className={styles.tag}>Touch controls</span>
             </div>
             <div className={styles.cardAction}>
-              <Link className={styles.secondaryAction} href="/games/burn-buds" aria-label="View board preview">View board preview</Link>
+              <Link className={styles.secondaryAction} href="/games/burn-buds" aria-label="Play Burn Buds beta">Play beta</Link>
             </div>
           </div>
         </article>
