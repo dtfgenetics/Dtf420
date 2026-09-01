@@ -42,6 +42,9 @@ requireText(runtime, "localStorage.setItem", "local save");
 requireText(runtime, "function chooseStarter", "starter flow");
 requireText(runtime, "function startBattle", "Resolve Trial flow");
 requireText(runtime, "function useBattleAction", "battle actions");
+requireText(runtime, "battle.busy", "battle turn lock");
+requireText(runtime, "minX: -WORLD_X_LIMIT", "full-width Team Lockout collider");
+requireText(runtime, "width: WORLD_X_LIMIT * 2", "full-width Team Lockout visual barrier");
 requireText(runtime, "function updateGate", "Team Lockout progression gate");
 requireText(runtime, "gardenTrialComplete", "Garden Trial progression");
 requireText(runtime, "function renderLog", "PhenoLog");
@@ -99,4 +102,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`PhenoQuest verified: ${data.phenos.length} Phenos, ${data.starters.length} starters, ${data.encounters.length} field encounters, Team Lockout threshold ${data.progression.samplesBeforeLockout}, Garden Trial boss ${data.progression.gardenTrialBoss}.`);
+console.log(`PhenoQuest verified: ${data.phenos.length} Phenos, ${data.starters.length} starters, ${data.encounters.length} field encounters, Team Lockout threshold ${data.progression.samplesBeforeLockout}, full-width gate, battle turn lock, Garden Trial boss ${data.progression.gardenTrialBoss}.`);
