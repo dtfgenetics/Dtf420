@@ -49,7 +49,9 @@ test("THC RPG is launched from the game hub and completes the first planting flo
   await expectFrameNoHorizontalOverflow(innerFrame);
 });
 
-test("THC RPG remains usable at the 390px phone target", async ({ page }) => {
+test("THC RPG remains usable at the 390px phone target", async ({ page }, testInfo) => {
+  test.skip(!testInfo.project.name.includes("mobile"), "mobile-only responsive coverage");
+
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/games/thc-rpg", { waitUntil: "networkidle" });
 
@@ -62,8 +64,12 @@ test("THC RPG remains usable at the 390px phone target", async ({ page }) => {
   expect(frameBox.x).toBeGreaterThanOrEqual(-2);
   expect(frameBox.x + frameBox.width).toBeLessThanOrEqual(392);
 
+  await iframe.evaluate((element) => element.scrollIntoView({ block: "start", inline: "nearest" }));
+
   const game = page.frameLocator('iframe[title="THC RPG: The First Seed"]');
-  await game.getByRole("button", { name: /Start New Game/i }).click();
+  const start = game.getByRole("button", { name: /Start New Game/i });
+  await expect(start).toBeVisible();
+  await start.click();
   await expect(game.locator("#actionBar")).toBeVisible();
   await expect(game.locator("#btnInteract")).toBeVisible();
   await expect(game.locator("#btnInventory")).toBeVisible();
