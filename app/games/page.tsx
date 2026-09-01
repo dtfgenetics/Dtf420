@@ -43,7 +43,7 @@ export default function GamesPage() {
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
-            <strong>4</strong>
+            <strong>5</strong>
             <span>Preview builds</span>
           </div>
           <div className={styles.statChip}>
@@ -174,6 +174,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.secondaryAction} href="/games/high-iq" aria-label="Test High IQ beta">Test beta</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
+              <span className={styles.posterMeta}>Conversation deck · 2–8 players</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Pass the device. Trade grow stories.</span>
+              <strong>Grower Conversations</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>No scoreboard. Better grow-room conversations.</h3>
+            <p>
+              Deal prompts about first grows, decisions, lessons, genetics, troubleshooting, and community. Filter the deck by topic or conversation depth, reveal optional follow-ups, and keep every player on equal turns.
+            </p>
+            <div className={styles.tagRow} aria-label="Grower Conversations preview details">
+              <span className={styles.tag}>48 starter prompts</span>
+              <span className={styles.tag}>2–8 local players</span>
+              <span className={styles.tag}>6 categories</span>
+              <span className={styles.tag}>Mobile + keyboard</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.secondaryAction} href="/games/grower-conversations" aria-label="Test Grower Conversations beta">Test conversation beta</Link>
             </div>
           </div>
         </article>
