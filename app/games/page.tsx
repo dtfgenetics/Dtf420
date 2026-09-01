@@ -43,7 +43,7 @@ export default function GamesPage() {
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
-            <strong>3</strong>
+            <strong>4</strong>
             <span>Preview builds</span>
           </div>
           <div className={styles.statChip}>
@@ -203,6 +203,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.secondaryAction} href="/games/dtf-world-lab" aria-label="Test DTF World Lab">Enter 3D preview</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
+              <span className={styles.posterMeta}>3D exploration RPG · 1 player</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Archive the living seed vault</span>
+              <strong>PhenoQuest</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Explore. Stabilize. Preserve.</h3>
+            <p>
+              Choose an original Pheno partner, explore Seedling Town and the Terp Fields, stabilize living genetic samples through Resolve Trials, build the PhenoLog, break Team Lockout’s barrier, and challenge the first Garden Trial.
+            </p>
+            <div className={styles.tagRow} aria-label="PhenoQuest preview details">
+              <span className={styles.tag}>6 original Phenos</span>
+              <span className={styles.tag}>3D exploration</span>
+              <span className={styles.tag}>Resolve Trials</span>
+              <span className={styles.tag}>Local save + PhenoLog</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.secondaryAction} href="/games/phenoquest" aria-label="Test PhenoQuest preview">Enter PhenoQuest</Link>
             </div>
           </div>
         </article>
