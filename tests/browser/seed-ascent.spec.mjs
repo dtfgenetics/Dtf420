@@ -124,7 +124,9 @@ test("Seed Ascent pointer cancel releases held touch movement", async ({ page })
   }).toBeLessThan(Math.abs(beforeCancel.player.vx));
 });
 
-test("Seed Ascent level selectors cannot corrupt a paused game state", async ({ page }) => {
+test("Seed Ascent level selectors cannot corrupt a paused game state", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name.includes("mobile"), "World/level selector buttons are intentionally desktop-only; mobile control coverage is separate.");
+
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.addInitScript(() => localStorage.setItem("seedAscentUnlocked", "2"));
