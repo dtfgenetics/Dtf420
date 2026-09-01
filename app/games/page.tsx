@@ -43,7 +43,7 @@ export default function GamesPage() {
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
-            <strong>3</strong>
+            <strong>4</strong>
             <span>Preview builds</span>
           </div>
           <div className={styles.statChip}>
@@ -232,6 +232,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.secondaryAction} href="/games/grower-conversations" aria-label="Test Grower Conversations beta">Test conversation beta</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
+              <span className={styles.posterMeta}>Battle card game · rules lab</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Compare Power. Protect Vigor.</span>
+              <strong>Strain Showdown</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Build a matchup. Test the battle system.</h3>
+            <p>
+              Match any two cards from the recovered 48-card Tier 1 set, compare Vigor and Power, trigger family effects, and inspect every step of the experimental battle resolver while the full TCG economy is finalized.
+            </p>
+            <div className={styles.tagRow} aria-label="Strain Showdown preview details">
+              <span className={styles.tag}>48 Tier 1 cards</span>
+              <span className={styles.tag}>8 locked families</span>
+              <span className={styles.tag}>Vigor + Power</span>
+              <span className={styles.tag}>Experimental resolver</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.secondaryAction} href="/games/strain-showdown" aria-label="Test Strain Showdown Battle Lab">Test Battle Lab</Link>
             </div>
           </div>
         </article>
