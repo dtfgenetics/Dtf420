@@ -23,14 +23,29 @@ async function openWorldLab(page) {
   return { frame, runtimeErrors };
 }
 
+async function dispatchJump(frame) {
+  await frame.locator("canvas").evaluate((canvas) => {
+    canvas.dispatchEvent(new KeyboardEvent("keydown", {
+      code: "Space",
+      key: " ",
+      bubbles: true,
+      cancelable: true,
+    }));
+    canvas.dispatchEvent(new KeyboardEvent("keyup", {
+      code: "Space",
+      key: " ",
+      bubbles: true,
+      cancelable: true,
+    }));
+  });
+}
+
 test("DTF World Lab initializes a real WebGL world without runtime errors", async ({ page }, testInfo) => {
   const { frame, runtimeErrors } = await openWorldLab(page);
   await expect(frame.locator("#objective-title")).toHaveText("Reach the research greenhouse");
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 
-  await page.locator('iframe[title="DTF World Lab 3D technology preview"]').screenshot({
-    path: testInfo.outputPath("dtf-world-lab-initial.png"),
-  });
+  await page.screenshot({ path: testInfo.outputPath("dtf-world-lab-initial.png"), fullPage: false });
 });
 
 test("DTF World Lab forward input moves toward the greenhouse and jump returns to ground", async ({ page }, testInfo) => {
@@ -46,8 +61,9 @@ test("DTF World Lab forward input moves toward the greenhouse and jump returns t
 
   const afterMove = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
   expect(afterMove.player.z).toBeLessThan(before.player.z - 1.5);
+  expect(afterMove.grounded).toBe(true);
 
-  await canvas.press("Space");
+  await dispatchJump(frame);
   await page.waitForTimeout(180);
   const airborne = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
   expect(airborne.player.y).toBeGreaterThan(0.1);
@@ -64,25 +80,35 @@ test("DTF World Lab objective can be completed through player movement and inter
   test.skip(testInfo.project.name === "mobile-chromium", "Long-form objective traversal runs once on desktop to keep browser QA bounded.");
   const { frame, runtimeErrors } = await openWorldLab(page);
   const canvas = frame.locator("canvas");
+  const getState = () => frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
   await canvas.focus();
 
-  // Approach on the west path, line up with the open center doorway, then enter.
+  // Use real held-key input, but stop each leg based on world coordinates instead of runner timing.
   await page.keyboard.down("Shift");
   await page.keyboard.down("w");
-  await page.waitForTimeout(2450);
+  await expect.poll(async () => (await getState()).player.z, {
+    timeout: 7000,
+    message: "player should reach the greenhouse approach lane",
+  }).toBeLessThan(-5);
   await page.keyboard.up("w");
 
   await page.keyboard.down("d");
-  await page.waitForTimeout(2350);
+  await expect.poll(async () => (await getState()).player.x, {
+    timeout: 5000,
+    message: "player should line up with the greenhouse center doorway",
+  }).toBeGreaterThan(15);
   await page.keyboard.up("d");
 
   await page.keyboard.down("w");
-  await page.waitForTimeout(2100);
+  await expect.poll(async () => (await getState()).player.z, {
+    timeout: 3000,
+    message: "player should move through the greenhouse doorway",
+  }).toBeLessThan(-9);
   await page.keyboard.up("w");
   await page.keyboard.up("Shift");
 
   await expect.poll(
-    async () => frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState().objectiveStage),
+    async () => (await getState()).objectiveStage,
     { timeout: 3000, message: "player should enter the greenhouse through the open center doorway" },
   ).toBeGreaterThanOrEqual(1);
 
@@ -90,14 +116,12 @@ test("DTF World Lab objective can be completed through player movement and inter
   await canvas.press("e");
 
   await expect(frame.locator("#complete-card")).toBeVisible();
-  const completed = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
+  const completed = await getState();
   expect(completed.completed).toBe(true);
   expect(completed.objectiveStage).toBe(2);
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 
-  await page.locator('iframe[title="DTF World Lab 3D technology preview"]').screenshot({
-    path: testInfo.outputPath("dtf-world-lab-complete.png"),
-  });
+  await page.screenshot({ path: testInfo.outputPath("dtf-world-lab-complete.png"), fullPage: false });
 });
 
 test("DTF World Lab exposes usable touch controls on mobile", async ({ page }, testInfo) => {
@@ -113,7 +137,5 @@ test("DTF World Lab exposes usable touch controls on mobile", async ({ page }, t
   expect(overflow, `3D iframe horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 
-  await page.locator('iframe[title="DTF World Lab 3D technology preview"]').screenshot({
-    path: testInfo.outputPath("dtf-world-lab-mobile.png"),
-  });
+  await page.screenshot({ path: testInfo.outputPath("dtf-world-lab-mobile.png"), fullPage: false });
 });
