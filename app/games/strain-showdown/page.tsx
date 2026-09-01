@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { StrainShowdownGame } from "./StrainShowdownGame";
+import containment from "./containment.module.css";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ const stillInReview = [
 
 export default function StrainShowdownPage() {
   return (
-    <main className={`shell ${styles.page}`}>
+    <main className={`shell ${styles.page} ${containment.guard}`}>
       <div className={styles.topline}>
         <Link href="/games" className={styles.backLink}>← Back to games</Link>
         <span className={styles.status}>Development preview · rules lab</span>
