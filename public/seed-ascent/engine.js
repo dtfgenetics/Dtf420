@@ -13,6 +13,9 @@
   const MAX_SAFE_PIT = 176;
   const LANDING_SLOP = 8;
   const EDGE_GRACE = 3;
+  const SIM_STEP_MS = 1000 / 60;
+  const MAX_FRAME_MS = 100;
+  const MAX_STEPS_PER_FRAME = 6;
 
   ctx.imageSmoothingEnabled = false;
 
@@ -32,7 +35,8 @@
   const unlocked = clamp(parseInt(localStorage.getItem('seedAscentUnlocked')||'1',10)||1,1,LEVELS.length||1);
   const game = {
     mode:'title', levelIndex:0, selectedLevel:0, unlocked,
-    score:0, trichomes:0, health:3, maxHealth:3,
+    score:0, trichomes:0, levelStartScore:0, levelStartTrichomes:0,
+    health:3, maxHealth:3,
     cameraX:0, shake:0, level:null, checkpoint:null,
     power:'NONE', powerTimer:0, shield:false,
     best:parseInt(localStorage.getItem('seedAscentRetroBest')||'0',10)||0,
@@ -46,6 +50,7 @@
 
   let solids=[],blocks=[],coins=[],powerups=[],enemies=[],hazards=[],checkpoints=[],particles=[],movingPlatforms=[],bossShots=[],pitRanges=[];
   let exitGate=null,boss=null,audioCtx=null;
+  let lastFrameTime=0,accumulator=0;
 
   function audio(){
     if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch{}}
@@ -75,13 +80,16 @@
     if(ui.health) ui.health.textContent=game.health;
     if(ui.power) ui.power.textContent=game.shield?'SHIELD':game.power;
   }
-  function score(n){
-    game.score+=n;
+  function score(n){game.score+=n;sync()}
+  function commitBest(){
     if(game.score>game.best){game.best=game.score;localStorage.setItem('seedAscentRetroBest',String(game.best))}
-    sync();
   }
   function particle(x,y,color,n=8){
     for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-3,3),vy:rand(-4,-1),life:rand(22,48),color,s:rand(2,5)});
+  }
+  function clearInput(){
+    input.left=input.right=input.run=input.jumpHeld=input.jumpPressed=input.jumpReleased=false;
+    player.jumpBuffer=0;
   }
   function clearWorld(){
     solids=[];blocks=[];coins=[];powerups=[];enemies=[];hazards=[];checkpoints=[];particles=[];movingPlatforms=[];bossShots=[];pitRanges=[];
@@ -145,23 +153,31 @@
   }
 
   function loadLevel(i){
+    clearInput();
     game.levelIndex=clamp(i,0,LEVELS.length-1);game.selectedLevel=game.levelIndex;game.level=LEVELS[game.levelIndex];buildLevel(game.level);
     game.cameraX=0;game.power='NONE';game.powerTimer=0;game.shield=false;game.health=game.maxHealth;game.checkpoint=null;
     Object.assign(player,{invuln:0,surface:null,riding:null});
     snapPlayerToFloor(96,340);sync();
   }
+  function beginLevel(i){
+    game.levelStartScore=game.score;game.levelStartTrichomes=game.trichomes;loadLevel(i);
+  }
+  function restartLevel(){
+    game.score=game.levelStartScore;game.trichomes=game.levelStartTrichomes;loadLevel(game.levelIndex);game.mode='playing';sync();
+  }
   function startSelected(){
     audio();if(game.mode==='title'||game.mode==='gameOver'){game.score=0;game.trichomes=0}
-    loadLevel(game.selectedLevel);game.mode='playing';canvas.focus();
+    beginLevel(game.selectedLevel);game.mode='playing';canvas.focus();
   }
   function respawn(){
+    clearInput();
     game.power='NONE';game.powerTimer=0;game.shield=false;
     const cp=game.checkpoint;
     snapPlayerToFloor(cp?cp.x+30:96,cp?cp.y:320);
     player.invuln=100;
     game.cameraX=clamp(player.x-W*.35,0,game.level.width-W);sync();
   }
-  function gameOver(){game.mode='gameOver';game.power='NONE';game.powerTimer=0;game.shield=false;sounds.hit();sync()}
+  function gameOver(){clearInput();game.mode='gameOver';game.power='NONE';game.powerTimer=0;game.shield=false;commitBest();sounds.hit();sync()}
   function fallDeath(){if(game.mode!=='playing')return;game.health--;sounds.hit();game.shake=18;if(game.health<=0)gameOver();else respawn()}
   function hurt(){
     if(player.invuln>0||game.power==='RUSH'||game.mode!=='playing')return;
@@ -246,8 +262,9 @@
     const slick=player.grounded&&player.surface==='ice';
     const max=input.run?(boost?8.5:7.4):(boost?6.5:5.4);
     const accel=slick?(input.run?.48:.36):(input.run?.74:.6);
-    if(input.left){player.vx-=accel;player.facing=-1}
-    else if(input.right){player.vx+=accel;player.facing=1}
+    const move=(input.right?1:0)-(input.left?1:0);
+    if(move<0){player.vx-=accel;player.facing=-1}
+    else if(move>0){player.vx+=accel;player.facing=1}
     else player.vx*=player.grounded?(slick?.95:.78):.93;
     player.vx=clamp(player.vx,-max,max);
 
@@ -351,13 +368,12 @@
     }
     if(boss.hp<=6&&boss.summons<1){boss.summons=1;addEnemy(boss.min+120,424,'MITE',180)}
     if(boss.hp<=3&&boss.summons<2){boss.summons=2;addEnemy(boss.max-180,424,'CATERPILLAR',150)}
-    boss.vy=Math.min(boss.vy+.55,12);boss.y+=boss.vy;
-    for(const s of solids){if(overlap(boss,s)&&boss.vy>=0){boss.y=s.y-boss.h;boss.vy=0;break}}
+    boss.vy=Math.min(boss.vy+.55,12);objectLand(boss,boss.vy);
     for(const shot of bossShots){shot.x+=shot.vx;shot.y+=shot.vy;shot.life--;if(overlap(player,shot)){shot.dead=true;hurt()}}
     bossShots=bossShots.filter(s=>!s.dead&&s.life>0&&s.y<H+120);
     if(overlap(player,boss)){
       const stomp=player.vy>1&&player.prevY+player.h<=boss.y+16;
-      if(stomp&&boss.invuln<=0){boss.hp--;boss.invuln=35;player.vy=-11;sounds.stomp();game.shake=16;particle(boss.x+boss.w/2,boss.y,'#e96b78',24);score(750);if(boss.hp<=0){boss.dead=true;bossShots=[];score(5000);sounds.goal();particle(boss.x+boss.w/2,boss.y+20,'#ffd45b',50)}}
+      if(stomp&&boss.invuln<=0){boss.hp--;player.vy=-11;boss.invuln=35;sounds.stomp();game.shake=16;particle(boss.x+boss.w/2,boss.y,'#e96b78',24);score(750);if(boss.hp<=0){boss.dead=true;bossShots=[];score(5000);sounds.goal();particle(boss.x+boss.w/2,boss.y+20,'#ffd45b',50)}}
       else if(game.power==='RUSH'&&boss.invuln<=0){boss.hp--;boss.invuln=45;game.shake=12;particle(boss.x,boss.y,'#ffd45b',18);if(boss.hp<=0){boss.dead=true;bossShots=[];score(5000);sounds.goal()}}
       else if(boss.invuln<=0)hurt();
     }
@@ -365,7 +381,8 @@
   function updateExit(){
     if(boss&&!boss.dead)return;
     if(exitGate&&overlap(player,exitGate)){
-      game.mode='levelComplete';score(2000+game.health*250);sounds.goal();
+      clearInput();
+      game.mode='levelComplete';score(2000+game.health*250);commitBest();sounds.goal();
       const next=game.levelIndex+2;if(next>game.unlocked&&next<=LEVELS.length){game.unlocked=next;localStorage.setItem('seedAscentUnlocked',String(next))}
     }
   }
@@ -376,6 +393,7 @@
     if(game.mode!=='playing')return;
     updateCoins();updatePowerups();updateHazards();updateEnemies();updateCheckpoints();updateBoss();updateExit();
     if(game.powerTimer>0&&--game.powerTimer<=0){game.power='NONE';sync()}
+    for(const b of blocks)if(b.bump>0)b.bump--;
     for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.life--}
     particles=particles.filter(p=>p.life>0);
     const target=clamp(player.x-W*.38,0,game.level.width-W);game.cameraX+=(target-game.cameraX)*.11;
@@ -404,7 +422,7 @@
     for(const pit of pitRanges){px(pit.x,pit.y,pit.w,H-pit.y,'#050709');ctx.fillStyle='#301625';for(let x=pit.x+8;x<pit.x+pit.w;x+=18){ctx.beginPath();ctx.moveTo(x,pit.y+8);ctx.lineTo(x+6,pit.y+30);ctx.lineTo(x+12,pit.y+8);ctx.fill()}}
     for(const s of solids){let c=t.ground;if(s.type==='stone')c='#5a6067';if(s.type==='brick')c='#74513f';if(s.type==='ice')c='#8ec6d7';px(s.x,s.y,s.w,s.h,c);px(s.x,s.y,s.w,5,t.accent)}
     for(const m of movingPlatforms){px(m.x,m.y,m.w,m.h,'#557c5a');px(m.x,m.y,m.w,4,'#a4e9a8')}
-    for(const b of blocks){if(b.broken)continue;const y=b.y-(b.bump>0?Math.sin(b.bump/10*Math.PI)*8:0);if(b.bump>0)b.bump--;px(b.x,y,b.w,b.h,b.used?'#6a604b':'#b48a3b');px(b.x+4,y+4,b.w-8,b.h-8,b.used?'#514a3e':'#d0a94f');ctx.fillStyle=b.used?'#887e69':'#fff2ad';ctx.font='bold 24px monospace';ctx.fillText(b.used?'·':'?',b.x+16,y+32)}
+    for(const b of blocks){if(b.broken)continue;const y=b.y-(b.bump>0?Math.sin(b.bump/10*Math.PI)*8:0);px(b.x,y,b.w,b.h,b.used?'#6a604b':'#b48a3b');px(b.x+4,y+4,b.w-8,b.h-8,b.used?'#514a3e':'#d0a94f');ctx.fillStyle=b.used?'#887e69':'#fff2ad';ctx.font='bold 24px monospace';ctx.fillText(b.used?'·':'?',b.x+16,y+32)}
     for(const c of coins){const y=c.y+Math.sin(c.bob)*5;ctx.fillStyle='#f4f7ff';ctx.beginPath();ctx.arc(c.x+10,y+10,9,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#bde9ff';ctx.lineWidth=3;ctx.stroke()}
     for(const p of powerups){ctx.fillStyle={LIGHT:'#ffe36d',SHIELD:'#8ce2ff',RUSH:'#e79cff'}[p.type];ctx.beginPath();ctx.arc(p.x+14,p.y+14,14,0,Math.PI*2);ctx.fill();ctx.fillStyle='#142016';ctx.font='bold 15px monospace';ctx.fillText(p.type==='LIGHT'?'☀':p.type==='SHIELD'?'M':'R',p.x+7,p.y+20)}
     for(const cp of checkpoints){px(cp.x+12,cp.y,6,cp.h,cp.active?'#ffe36d':'#d5ded6');ctx.fillStyle=cp.active?'#ffe36d':'#79b781';ctx.beginPath();ctx.moveTo(cp.x+18,cp.y+5);ctx.lineTo(cp.x+55,cp.y+18);ctx.lineTo(cp.x+18,cp.y+32);ctx.fill()}
@@ -423,34 +441,67 @@
     else if(game.mode==='levelComplete'){const last=game.levelIndex===LEVELS.length-1;overlay(last?'HARVEST COMPLETE!':'LEVEL CLEAR!',`${game.level.world} · ${game.level.name}`,last?['You cleared all 12 stages across six grow worlds.','More secrets, bosses and worlds can build on this engine.','Press START to replay.']:[`Next: ${LEVELS[game.levelIndex+1].world} · ${LEVELS[game.levelIndex+1].name}`,'Press START to continue.'])}
     else if(game.mode==='gameOver')overlay('GAME OVER','The pests won this run.',[`Score ${String(game.score).padStart(6,'0')}`,`Best ${String(game.best).padStart(6,'0')}`,'Press START to begin a new run.']);
   }
-  function loop(){step();draw();requestAnimationFrame(loop)}
+  function loop(now){
+    if(!lastFrameTime)lastFrameTime=now;
+    const frameMs=Math.min(MAX_FRAME_MS,Math.max(0,now-lastFrameTime));
+    lastFrameTime=now;accumulator+=frameMs;
+    let steps=0;
+    while(accumulator>=SIM_STEP_MS&&steps<MAX_STEPS_PER_FRAME){step();accumulator-=SIM_STEP_MS;steps++}
+    if(steps===MAX_STEPS_PER_FRAME&&accumulator>=SIM_STEP_MS)accumulator=0;
+    draw();requestAnimationFrame(loop);
+  }
 
   function jumpPress(){input.jumpPressed=true}
   function jumpRelease(){input.jumpReleased=true;input.jumpHeld=false}
-  function togglePause(){if(game.mode==='playing')game.mode='paused';else if(game.mode==='paused')game.mode='playing'}
-  function advance(){if(game.levelIndex<LEVELS.length-1){game.selectedLevel=game.levelIndex+1;loadLevel(game.selectedLevel);game.mode='playing'}else{game.mode='title';game.selectedLevel=0;game.level=null}}
+  function canSelectLevel(){return game.mode==='title'||game.mode==='gameOver'}
+  function togglePause(){
+    if(game.mode==='playing'){clearInput();game.mode='paused'}
+    else if(game.mode==='paused'){clearInput();game.mode='playing'}
+  }
+  function advance(){if(game.levelIndex<LEVELS.length-1){game.selectedLevel=game.levelIndex+1;beginLevel(game.selectedLevel);game.mode='playing'}else{clearInput();game.mode='title';game.selectedLevel=0;game.level=null}}
+  function activateStart(){
+    audio();
+    if(game.mode==='levelComplete')advance();
+    else if(game.mode==='paused')togglePause();
+    else if(game.mode==='title'||game.mode==='gameOver')startSelected();
+  }
   function keyDown(e){
     const k=e.key,lower=k.toLowerCase();if(['ArrowLeft','ArrowRight','ArrowUp',' ','Shift','a','d','w','A','D','W','p','P'].includes(k))e.preventDefault();
     if(k==='ArrowLeft'||lower==='a')input.left=true;if(k==='ArrowRight'||lower==='d')input.right=true;if(k==='Shift')input.run=true;
-    if(k===' '||k==='ArrowUp'||lower==='w'){if(!input.jumpHeld){input.jumpHeld=true;jumpPress()}if(game.mode==='title'||game.mode==='gameOver')startSelected();else if(game.mode==='levelComplete')advance()}
-    if(lower==='p')togglePause();
+    if(k===' '||k==='ArrowUp'||lower==='w'){
+      if(e.repeat)return;
+      if(game.mode==='title'||game.mode==='gameOver'){startSelected();input.jumpHeld=true;return}
+      if(game.mode==='levelComplete'){advance();input.jumpHeld=true;return}
+      if(!input.jumpHeld&&game.mode==='playing'){input.jumpHeld=true;jumpPress()}
+    }
+    if(lower==='p'&&!e.repeat)togglePause();
   }
   function keyUp(e){const k=e.key,lower=k.toLowerCase();if(k==='ArrowLeft'||lower==='a')input.left=false;if(k==='ArrowRight'||lower==='d')input.right=false;if(k==='Shift')input.run=false;if(k===' '||k==='ArrowUp'||lower==='w')jumpRelease()}
-  function hold(id,on,off){const b=document.getElementById(id);if(!b)return;b.addEventListener('pointerdown',e=>{e.preventDefault();audio();try{b.setPointerCapture(e.pointerId)}catch{}on()});['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();off()}))}
-  hold('leftBtn',()=>input.left=true,()=>input.left=false);hold('rightBtn',()=>input.right=true,()=>input.right=false);hold('runBtn',()=>input.run=true,()=>input.run=false);hold('jumpBtn',()=>{if(!input.jumpHeld){input.jumpHeld=true;jumpPress()}},jumpRelease);
-  document.getElementById('startBtn')?.addEventListener('click',()=>{audio();game.mode==='levelComplete'?advance():startSelected()});
+  function hold(id,on,off){
+    const b=document.getElementById(id);if(!b)return;
+    const activePointers=new Set();
+    b.addEventListener('pointerdown',e=>{e.preventDefault();audio();activePointers.add(e.pointerId);try{b.setPointerCapture(e.pointerId)}catch{}on()});
+    const release=e=>{e.preventDefault();const wasActive=activePointers.delete(e.pointerId);if(!wasActive)return;if(activePointers.size===0)off()};
+    const resetPointers=()=>{if(activePointers.size===0)return;activePointers.clear();off()};
+    ['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,release));
+    window.addEventListener('blur',resetPointers);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)resetPointers()});
+  }
+  hold('leftBtn',()=>input.left=true,()=>input.left=false);hold('rightBtn',()=>input.right=true,()=>input.right=false);hold('runBtn',()=>input.run=true,()=>input.run=false);hold('jumpBtn',()=>{if(!input.jumpHeld&&game.mode==='playing'){input.jumpHeld=true;jumpPress()}},jumpRelease);
+  document.getElementById('startBtn')?.addEventListener('click',activateStart);
   document.getElementById('pauseBtn')?.addEventListener('click',togglePause);
-  document.getElementById('restartBtn')?.addEventListener('click',()=>{if(game.level){loadLevel(game.levelIndex);game.mode='playing'}else startSelected()});
-  document.getElementById('prevBtn')?.addEventListener('click',()=>{if(game.mode==='playing')return;game.selectedLevel=(game.selectedLevel-1+game.unlocked)%game.unlocked;game.level=null;sync()});
-  document.getElementById('nextBtn')?.addEventListener('click',()=>{if(game.mode==='playing')return;game.selectedLevel=(game.selectedLevel+1)%game.unlocked;game.level=null;sync()});
+  document.getElementById('restartBtn')?.addEventListener('click',()=>{if(game.level)restartLevel();else startSelected()});
+  document.getElementById('prevBtn')?.addEventListener('click',()=>{if(!canSelectLevel())return;game.selectedLevel=(game.selectedLevel-1+game.unlocked)%game.unlocked;game.level=null;sync()});
+  document.getElementById('nextBtn')?.addEventListener('click',()=>{if(!canSelectLevel())return;game.selectedLevel=(game.selectedLevel+1)%game.unlocked;game.level=null;sync()});
   canvas.addEventListener('pointerdown',()=>{audio();canvas.focus()});
   window.addEventListener('keydown',keyDown,{passive:false});window.addEventListener('keyup',keyUp,{passive:false});
-  window.addEventListener('blur',()=>{input.left=input.right=input.run=input.jumpHeld=input.jumpPressed=input.jumpReleased=false});
+  window.addEventListener('blur',clearInput);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&game.mode==='playing'){clearInput();game.mode='paused'}});
 
   window.__seedAscentDebug={
-    snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length}},
+    snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,score:game.score,trichomes:game.trichomes,player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length,simulationHz:Math.round(1000/SIM_STEP_MS)}},
     start(){startSelected()},
   };
 
-  sync();loop();
+  sync();requestAnimationFrame(loop);
 })();
