@@ -23,6 +23,11 @@ async function openWorldLab(page) {
   return { frame, runtimeErrors };
 }
 
+async function holdKey(canvas, page, key, milliseconds) {
+  await canvas.focus();
+  await canvas.press(key, { delay: Math.max(1, milliseconds) });
+}
+
 test("DTF World Lab initializes a real WebGL world without runtime errors", async ({ page }, testInfo) => {
   const { frame, runtimeErrors } = await openWorldLab(page);
   await expect(frame.locator("#objective-title")).toHaveText("Reach the research greenhouse");
@@ -36,9 +41,10 @@ test("DTF World Lab initializes a real WebGL world without runtime errors", asyn
 test("DTF World Lab forward input moves toward the greenhouse and jump returns to ground", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === "mobile-chromium", "Keyboard movement is covered on desktop; mobile controls have a dedicated visibility test.");
   const { frame, runtimeErrors } = await openWorldLab(page);
+  const canvas = frame.locator("canvas");
 
   const before = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
-  await frame.locator("canvas").focus();
+  await canvas.focus();
   await page.keyboard.down("w");
   await page.waitForTimeout(900);
   await page.keyboard.up("w");
@@ -46,7 +52,7 @@ test("DTF World Lab forward input moves toward the greenhouse and jump returns t
   const afterMove = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
   expect(afterMove.player.z).toBeLessThan(before.player.z - 1.5);
 
-  await page.keyboard.press("Space");
+  await canvas.press("Space");
   await page.waitForTimeout(180);
   const airborne = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
   expect(airborne.player.y).toBeGreaterThan(0.1);
@@ -62,29 +68,27 @@ test("DTF World Lab forward input moves toward the greenhouse and jump returns t
 test("DTF World Lab objective can be completed through player movement and interaction", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === "mobile-chromium", "Long-form objective traversal runs once on desktop to keep browser QA bounded.");
   const { frame, runtimeErrors } = await openWorldLab(page);
-  await frame.locator("canvas").focus();
+  const canvas = frame.locator("canvas");
+  await canvas.focus();
 
+  // Run far enough south to clear the greenhouse front wall before turning east.
   await page.keyboard.down("Shift");
   await page.keyboard.down("w");
-  await page.waitForTimeout(4050);
+  await page.waitForTimeout(4650);
   await page.keyboard.up("w");
 
   await page.keyboard.down("d");
   await page.waitForTimeout(2350);
   await page.keyboard.up("d");
-
-  await page.keyboard.down("w");
-  await page.waitForTimeout(850);
-  await page.keyboard.up("w");
   await page.keyboard.up("Shift");
 
   await expect.poll(
     async () => frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState().objectiveStage),
-    { timeout: 3000, message: "player should reach the greenhouse objective zone" },
+    { timeout: 3000, message: "player should enter the greenhouse through the open center aisle" },
   ).toBeGreaterThanOrEqual(1);
 
   await expect(frame.locator("#prompt")).toBeVisible();
-  await page.keyboard.press("e");
+  await canvas.press("KeyE");
 
   await expect(frame.locator("#complete-card")).toBeVisible();
   const completed = await frame.locator("body").evaluate(() => window.__DTF_WORLD_LAB__.getState());
