@@ -238,7 +238,7 @@ export async function startPhenoQuest(THREE) {
     }
   }
 
-  const starterPedestal = mesh(new THREE.CylinderGeometry(1.55, 1.8, 0.65, 16), materials.stone, { position: [0, 0.32, 9.5] });
+  mesh(new THREE.CylinderGeometry(1.55, 1.8, 0.65, 16), materials.stone, { position: [0, 0.32, 9.5] });
   const starterGlow = mesh(new THREE.TorusGeometry(1.3, 0.08, 10, 30), materials.glow, { position: [0, 0.72, 9.5], rotation: [Math.PI / 2, 0, 0] });
   interactables.push({ id: "starter", position: new THREE.Vector3(0, 0, 9.5), radius: 2.5, label: "Choose a starter", type: "starter" });
 
@@ -258,15 +258,15 @@ export async function startPhenoQuest(THREE) {
     interactables.push({ id: encounter.id, encounter, pheno, position, radius: 2.2, label: `Stabilize ${pheno.name}`, type: "encounter" });
   }
 
-  const gateCollider = { minX: -7, maxX: 7, minZ: data.progression.lockoutGateZ - 0.6, maxZ: data.progression.lockoutGateZ + 0.6, enabled: true };
+  const gateCollider = { minX: -WORLD_X_LIMIT, maxX: WORLD_X_LIMIT, minZ: data.progression.lockoutGateZ - 0.6, maxZ: data.progression.lockoutGateZ + 0.6, enabled: true };
   colliders.push(gateCollider);
-  const gate = addBox({ x: 0, z: data.progression.lockoutGateZ, width: 14, height: 4.4, depth: 0.7, material: materials.gate, collision: false });
+  const gate = addBox({ x: 0, z: data.progression.lockoutGateZ, width: WORLD_X_LIMIT * 2, height: 4.4, depth: 0.7, material: materials.gate, collision: false });
   const gateLight = new THREE.PointLight(0xa96ee8, 5, 18);
   gateLight.position.set(0, 3.2, data.progression.lockoutGateZ + 1.5);
   scene.add(gateLight);
 
   const trialPosition = new THREE.Vector3(...data.progression.gardenTrialPosition);
-  const trialPlatform = mesh(new THREE.CylinderGeometry(5.2, 5.8, 0.45, 32), materials.stone, { position: [trialPosition.x, 0.2, trialPosition.z] });
+  mesh(new THREE.CylinderGeometry(5.2, 5.8, 0.45, 32), materials.stone, { position: [trialPosition.x, 0.2, trialPosition.z] });
   const trialRing = mesh(new THREE.TorusGeometry(4.1, 0.12, 10, 40), materials.glow, { position: [trialPosition.x, 0.48, trialPosition.z], rotation: [Math.PI / 2, 0, 0] });
   interactables.push({ id: "garden-trial", position: trialPosition, radius: 3.2, label: "Begin Garden Trial", type: "trial" });
 
@@ -500,6 +500,7 @@ export async function startPhenoQuest(THREE) {
       enemyResolve: source.kind === "trial" ? Math.round(enemy.stats.resolve * 1.3) : enemy.stats.resolve,
       focus: 0,
       brace: false,
+      busy: false,
       finished: false,
       won: false,
     };
@@ -532,9 +533,9 @@ export async function startPhenoQuest(THREE) {
     playerChargeReadout.textContent = String(battle.focus);
     playerResolveBar.style.width = `${clamp01(battle.playerResolve / battle.playerMax) * 100}%`;
     enemyResolveBar.style.width = `${clamp01(battle.enemyResolve / battle.enemyMax) * 100}%`;
-    signatureButton.disabled = battle.focus < 2 || battle.finished;
+    signatureButton.disabled = battle.focus < 2 || battle.finished || battle.busy;
     for (const button of battleActions.querySelectorAll("button")) {
-      if (button !== signatureButton) button.disabled = battle.finished;
+      if (button !== signatureButton) button.disabled = battle.finished || battle.busy;
     }
   }
 
@@ -557,11 +558,13 @@ export async function startPhenoQuest(THREE) {
     }
     battleMessage.textContent += ` ${battle.enemy.name} answers for ${hit} Resolve.`;
     battle.turn += 1;
+    battle.busy = false;
     renderBattle();
   }
 
   function finishBattle(won, message) {
     if (!battle) return;
+    battle.busy = false;
     battle.finished = true;
     battle.won = won;
     battleMessage.textContent = message;
@@ -585,7 +588,9 @@ export async function startPhenoQuest(THREE) {
   }
 
   function useBattleAction(action) {
-    if (!battle || battle.finished) return;
+    if (!battle || battle.finished || battle.busy) return;
+    if (action === "signature" && battle.focus < 2) return;
+    battle.busy = true;
     const { active, enemy } = battle;
     if (action === "pulse") {
       const hit = damage(18, active.stats.power, enemy.stats.guard, battle.turn);
@@ -602,13 +607,15 @@ export async function startPhenoQuest(THREE) {
       battle.focus = Math.min(4, battle.focus + 1);
       battleMessage.textContent = `${active.name} cultivates composure and restores ${heal} Resolve.`;
     } else if (action === "signature") {
-      if (battle.focus < 2) return;
       battle.focus -= 2;
       const hit = damage(active.signature.power, active.stats.power + active.stats.focus * 0.35, enemy.stats.guard, battle.turn + 9);
       battle.enemyResolve -= hit;
       if (active.signature.effect === "heal") battle.playerResolve = Math.min(battle.playerMax, battle.playerResolve + 12);
       if (active.signature.effect === "guard") battle.brace = true;
       battleMessage.textContent = `${active.name} used ${active.signature.name} for ${hit} Resolve.`;
+    } else {
+      battle.busy = false;
+      return;
     }
 
     if (battle.enemyResolve <= 0) {
@@ -946,7 +953,7 @@ export async function startPhenoQuest(THREE) {
         xp: save.xp,
         gardenTrialComplete: save.gardenTrialComplete,
         modalOpen,
-        battle: battle ? { enemyId: battle.enemy.id, source: battle.source.kind, turn: battle.turn, finished: battle.finished, won: battle.won } : null,
+        battle: battle ? { enemyId: battle.enemy.id, source: battle.source.kind, turn: battle.turn, busy: battle.busy, finished: battle.finished, won: battle.won } : null,
         player: { x: Number(playerPosition.x.toFixed(3)), y: Number(playerPosition.y.toFixed(3)), z: Number(playerPosition.z.toFixed(3)) },
         renderer: { calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, pixelRatio: renderer.getPixelRatio() },
       };
