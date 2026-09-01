@@ -22,14 +22,29 @@ async function openPhenoQuest(page) {
   return { frame, runtimeErrors };
 }
 
+async function dispatchJump(frame) {
+  await frame.locator("canvas").evaluate((canvas) => {
+    canvas.dispatchEvent(new KeyboardEvent("keydown", {
+      code: "Space",
+      key: " ",
+      bubbles: true,
+      cancelable: true,
+    }));
+    canvas.dispatchEvent(new KeyboardEvent("keyup", {
+      code: "Space",
+      key: " ",
+      bubbles: true,
+      cancelable: true,
+    }));
+  });
+}
+
 test("PhenoQuest initializes a real WebGL world with six canonical Phenos", async ({ page }, testInfo) => {
   const { frame, runtimeErrors } = await openPhenoQuest(page);
   await expect(frame.locator("#objective-title")).toHaveText("Choose a starter Pheno");
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 
-  await page.locator('iframe[title="PhenoQuest 3D game preview"]').screenshot({
-    path: testInfo.outputPath("phenoquest-initial.png"),
-  });
+  await page.screenshot({ path: testInfo.outputPath("phenoquest-initial.png"), fullPage: false });
 });
 
 test("PhenoQuest starter choice and PhenoLog persist in the local save", async ({ page }, testInfo) => {
@@ -58,17 +73,19 @@ test("PhenoQuest starter choice and PhenoLog persist in the local save", async (
   await expect(frame.locator("#log-grid")).toContainText("Citravale");
   await frame.getByRole("button", { name: "Close PhenoLog" }).click();
 
+  // Reload and verify persistence through rendered UI. This avoids coupling the save test
+  // to a continuously animating WebGL iframe's element-stability or internal test hook timing.
   await page.reload({ waitUntil: "domcontentloaded" });
   const reloaded = page.frameLocator('iframe[title="PhenoQuest 3D game preview"]');
   await expect(reloaded.locator("#loading")).toBeHidden({ timeout: 20_000 });
   await expect(reloaded.locator("#active-name")).toHaveText("Citravale");
-  state = await reloaded.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
-  expect(state.archived).toContain("citravale");
+  await reloaded.getByRole("button", { name: "PhenoLog" }).click();
+  await expect(reloaded.locator("#log-panel")).toBeVisible();
+  await expect(reloaded.locator("#log-summary")).toContainText("1 of 6 Phenos archived");
+  await expect(reloaded.locator("#log-grid")).toContainText("Citravale");
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 
-  await page.locator('iframe[title="PhenoQuest 3D game preview"]').screenshot({
-    path: testInfo.outputPath("phenoquest-starter-save.png"),
-  });
+  await page.screenshot({ path: testInfo.outputPath("phenoquest-starter-save.png"), fullPage: false });
 });
 
 test("PhenoQuest movement and jump respond to focused game input", async ({ page }, testInfo) => {
@@ -83,8 +100,9 @@ test("PhenoQuest movement and jump respond to focused game input", async ({ page
   await page.keyboard.up("w");
   const afterMove = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
   expect(afterMove.player.z).toBeLessThan(before.player.z - 1.2);
+  expect(afterMove.player.y).toBe(0);
 
-  await canvas.press("Space");
+  await dispatchJump(frame);
   await page.waitForTimeout(180);
   const airborne = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
   expect(airborne.player.y).toBeGreaterThan(0.1);
@@ -108,7 +126,5 @@ test("PhenoQuest exposes contained touch controls on mobile", async ({ page }, t
   expect(overflow, `PhenoQuest iframe horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 
-  await page.locator('iframe[title="PhenoQuest 3D game preview"]').screenshot({
-    path: testInfo.outputPath("phenoquest-mobile.png"),
-  });
+  await page.screenshot({ path: testInfo.outputPath("phenoquest-mobile.png"), fullPage: false });
 });
