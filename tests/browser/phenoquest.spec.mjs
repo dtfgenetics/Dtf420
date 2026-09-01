@@ -22,21 +22,21 @@ async function openPhenoQuest(page) {
   return { frame, runtimeErrors };
 }
 
-async function dispatchJump(frame) {
-  await frame.locator("canvas").evaluate((canvas) => {
-    canvas.dispatchEvent(new KeyboardEvent("keydown", {
-      code: "Space",
-      key: " ",
+async function dispatchGameKey(frame, code, key) {
+  await frame.locator("body").evaluate(({ code: eventCode, key: eventKey }) => {
+    window.dispatchEvent(new KeyboardEvent("keydown", {
+      code: eventCode,
+      key: eventKey,
       bubbles: true,
       cancelable: true,
     }));
-    canvas.dispatchEvent(new KeyboardEvent("keyup", {
-      code: "Space",
-      key: " ",
+    window.dispatchEvent(new KeyboardEvent("keyup", {
+      code: eventCode,
+      key: eventKey,
       bubbles: true,
       cancelable: true,
     }));
-  });
+  }, { code, key });
 }
 
 test("Games hub launches PhenoQuest as a development preview", async ({ page }) => {
@@ -63,9 +63,15 @@ test("PhenoQuest starter choice and PhenoLog persist in the local save", async (
 
   await canvas.focus();
   await page.keyboard.down("w");
-  await page.waitForTimeout(850);
+  await expect.poll(
+    async () => frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player.z),
+    { timeout: 5000, message: "PhenoQuest player should reach the starter interaction radius" },
+  ).toBeLessThanOrEqual(11.6);
   await page.keyboard.up("w");
-  await canvas.press("e");
+
+  await expect(frame.locator("#prompt")).toBeVisible({ timeout: 5000 });
+  await expect(frame.locator("#prompt-copy")).toHaveText("Choose a starter");
+  await dispatchGameKey(frame, "KeyE", "e");
 
   await expect(frame.locator("#starter-panel")).toBeVisible();
   const starter = frame.getByRole("button").filter({ hasText: "Citravale" }).first();
@@ -85,8 +91,6 @@ test("PhenoQuest starter choice and PhenoLog persist in the local save", async (
   await closeLog.evaluate((button) => button.click());
   await expect(frame.locator("#log-panel")).toBeHidden();
 
-  // Reload and verify persistence through rendered UI. This avoids coupling the save test
-  // to a continuously animating WebGL iframe's element-stability or internal test hook timing.
   await page.reload({ waitUntil: "domcontentloaded" });
   const reloaded = page.frameLocator('iframe[title="PhenoQuest 3D game preview"]');
   await expect(reloaded.locator("#loading")).toBeHidden({ timeout: 20_000 });
@@ -114,14 +118,15 @@ test("PhenoQuest movement and jump respond to focused game input", async ({ page
   expect(afterMove.player.z).toBeLessThan(before.player.z - 1.2);
   expect(afterMove.player.y).toBe(0);
 
-  await dispatchJump(frame);
-  await page.waitForTimeout(180);
-  const airborne = await frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState());
-  expect(airborne.player.y).toBeGreaterThan(0.1);
+  await dispatchGameKey(frame, "Space", " ");
+  await expect.poll(
+    async () => frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player.y),
+    { timeout: 1200, message: "PhenoQuest player should become airborne after Space" },
+  ).toBeGreaterThan(0.1);
 
   await expect.poll(
     async () => frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player.y),
-    { timeout: 2500, message: "PhenoQuest player should land after jumping" },
+    { timeout: 3000, message: "PhenoQuest player should land after jumping" },
   ).toBe(0);
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
 });
