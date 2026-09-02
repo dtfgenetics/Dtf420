@@ -53,10 +53,43 @@ function makeTriangleGlb() {
   return glb;
 }
 
+function releasedManifest() {
+  return {
+    schemaVersion: 1,
+    available: true,
+    model: "./models/cannabis-plant.glb",
+    variants: {
+      desktop: { model: "./models/cannabis-plant.glb", maxDpr: 1.5 },
+      mobile: { model: "./models/cannabis-plant-mobile.glb", maxDpr: 1.15 },
+    },
+    modelVersion: "browser-fixture",
+    targetHeight: 5.2,
+    exposure: 1.05,
+    semanticMeshes: { fan_leaves: "leaves" },
+  };
+}
+
+async function routeReleasedFixture(page, requests) {
+  const glb = makeTriangleGlb();
+  await page.route("**/learn/atlas/atlas-3d/models/model-manifest.json*", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(releasedManifest()),
+    });
+  });
+  for (const file of ["cannabis-plant.glb", "cannabis-plant-mobile.glb"]) {
+    await page.route(`**/learn/atlas/atlas-3d/models/${file}*`, async (route) => {
+      requests.push(file);
+      await route.fulfill({ status: 200, contentType: "model/gltf-binary", body: glb });
+    });
+  }
+}
+
 test("Atlas runtime deliberately stays procedural while no production model is released", async ({ page }) => {
   const modelRequests = [];
   page.on("request", (request) => {
-    if (request.url().includes("/models/cannabis-plant.glb")) modelRequests.push(request.url());
+    if (request.url().includes("/models/cannabis-plant")) modelRequests.push(request.url());
   });
 
   const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
@@ -66,31 +99,30 @@ test("Atlas runtime deliberately stays procedural while no production model is r
   expect(modelRequests).toEqual([]);
 });
 
-test("Atlas runtime loads and normalizes a released GLB through the production path", async ({ page }) => {
-  const glb = makeTriangleGlb();
-  await page.route("**/learn/atlas/atlas-3d/models/model-manifest.json*", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({
-        schemaVersion: 1,
-        available: true,
-        model: "./models/cannabis-plant.glb",
-        modelVersion: "browser-fixture",
-        targetHeight: 5.2,
-        exposure: 1.05,
-        semanticMeshes: { fan_leaves: "leaves" },
-      }),
-    });
-  });
-  await page.route("**/learn/atlas/atlas-3d/models/cannabis-plant.glb*", async (route) => {
-    await route.fulfill({ status: 200, contentType: "model/gltf-binary", body: glb });
-  });
+test("Atlas runtime loads the desktop production GLB on a desktop viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 960 });
+  const requests = [];
+  await routeReleasedFixture(page, requests);
 
   const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
   await expect(page.locator("canvas")).toBeVisible({ timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-version="browser-fixture"]')).toHaveCount(1);
+  await expect(page.locator('html[data-atlas-model-tier="desktop"]')).toHaveCount(1);
   await expect(page.locator("#runtime-legend")).toContainText("photorealistic model");
+  expect(requests).toEqual(["cannabis-plant.glb"]);
+});
+
+test("Atlas runtime chooses the mobile GLB on a compact viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const requests = [];
+  await routeReleasedFixture(page, requests);
+
+  const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("canvas")).toBeVisible({ timeout: 20_000 });
+  await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
+  await expect(page.locator('html[data-atlas-model-tier="mobile"]')).toHaveCount(1);
+  expect(requests).toEqual(["cannabis-plant-mobile.glb"]);
 });
