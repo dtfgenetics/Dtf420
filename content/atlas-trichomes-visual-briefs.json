@@ -1,0 +1,22 @@
+[
+  {
+    "route": "/learn/atlas/trichomes-resin/stalked-trichome-development",
+    "title": "Stalked trichome development",
+    "brief": "Create a photorealistic microscope-to-3D developmental sequence on a female flower bract: epidermal initiation, sessile-like premature stalked gland, expanding secretory disk and storage cavity, emerging multicellular stalk, and mature stalked gland. Distinguish developmental intermediates from mature leaf sessile glands. Use accurate scale cues and no fixed harvest-week labels."
+  },
+  {
+    "route": "/learn/atlas/trichomes-resin/head-stipe-and-stalk-specialization",
+    "title": "Head, stipe & stalk specialization",
+    "brief": "Create an exploded photorealistic trichome showing secretory disk/head, stipe interface, and multicellular stalk. Pair anatomy with restrained functional overlays: head = specialized metabolite production/storage; stalk = distinct growth, transport, sugar, hormone-signaling and precursor-supply programs supported by 2026 multi-omics. Do not depict the stalk as a proven miniature vascular bundle or invent transport rates."
+  },
+  {
+    "route": "/learn/atlas/trichomes-resin/secretory-cell-metabolism-and-storage-interface",
+    "title": "Secretory-cell metabolism & storage interface",
+    "brief": "Create a high-detail secretory-disk cell scene showing cytosol, specialized plastids, cell wall/cuticle, apoplastic interface, and subcuticular storage cavity. Visualize cannabinoid/terpene precursor flow only at the level supported by current reviews and label unresolved export/transport steps as active research questions. Keep the resin cavity extracellular and visually distinct from the secretory cells."
+  },
+  {
+    "route": "/learn/atlas/trichomes-resin/gland-aging-dehiscence-and-sampling-integrity",
+    "title": "Gland aging, dehiscence & sampling integrity",
+    "brief": "Create a standardized microscope comparison of intact developing glands, mature intact heads, aging/darkened heads, collapsed or dehisced cavities, mechanically detached heads, and damaged samples. Include bract-versus-sugar-leaf and canopy-position sampling cues. Make it explicit that optical appearance and physical integrity are observations influenced by genotype, tissue age, sampling, focus, lighting, and handling—not a universal potency or harvest assay."
+  }
+]
