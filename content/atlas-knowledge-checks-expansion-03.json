@@ -1,0 +1,54 @@
+[
+  {
+    "id": "flowers-inflorescence-architecture",
+    "route": "/learn/atlas/flowers/inflorescence-architecture-and-condensed-phytomers",
+    "prompt": "What best describes the visible mature female Cannabis 'bud' in current architectural models?",
+    "options": [
+      "A condensed, highly branched reproductive system built from repeated shortened phytomers and solitary flowers",
+      "One enlarged flower with no internal branch organization",
+      "A leaf rosette that becomes reproductive only after harvest",
+      "A single ovary surrounded by unrelated fan leaves"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis inflorescences are compound, highly branched structures. Shortened branchlets and repeated phytomers become densely packed, so the visible bud contains many flowers and supporting reproductive structures rather than being one flower."
+  },
+  {
+    "id": "flowers-meristem-photoperiod",
+    "route": "/learn/atlas/flowers/floral-meristem-branching-and-photoperiod",
+    "prompt": "Which statement best separates individual flower initiation from photoperiod-driven inflorescence architecture?",
+    "options": [
+      "Short-day exposure in adult plants can reorganize shoot-apex branching and internode length as the inflorescence condenses, while solitary flower initiation is a related but distinct developmental event",
+      "Short days instantly transform every leaf into a mature flower",
+      "Individual flowers cannot initiate until all internodes have stopped growing permanently",
+      "Photoperiod affects only roots and has no relationship to shoot architecture"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis studies distinguish solitary flower development from the broader short-day-associated reorganization of the adult shoot apex. Inflorescence condensation involves changes in branching and internode architecture, not a simple on/off switch."
+  },
+  {
+    "id": "flowers-bract-ovary-stigma-anatomy",
+    "route": "/learn/atlas/flowers/bract-ovary-and-stigma-anatomy",
+    "prompt": "Which set of structures belongs in a Cannabis female-flower anatomical cutaway?",
+    "options": [
+      "Bract tissues, an ovary containing a developing ovule, reduced perianth tissues, and paired stigmatic branches",
+      "Anther sacs, pollen chambers, and a woody cone scale only",
+      "Root hairs, xylem vessels, and cotyledons only",
+      "A single stigma with no ovary or ovule"
+    ],
+    "correctIndex": 0,
+    "explanation": "Female Cannabis flowers include the ovary and ovule, surrounding reproductive bract tissues, reduced perianth structures, and two stigmatic branches. Nearby bract surfaces can also carry stomata and glandular trichomes."
+  },
+  {
+    "id": "flowers-maturation-senescence",
+    "route": "/learn/atlas/flowers/maturation-senescence-and-bract-change",
+    "prompt": "Why should flower maturity not be assigned from one calendar week or stigma color alone?",
+    "options": [
+      "Bract expansion, stigma condition, trichome development, resin-head aging, and tissue senescence can be asynchronous and vary with genotype, flower age, and sampling position",
+      "Every Cannabis genotype matures all floral tissues on the same day",
+      "Stigma color directly measures cannabinoid concentration",
+      "Calendar week is more reliable than observing the plant itself"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis reproductive tissues and glandular trichomes do not mature as one perfectly synchronized clock. Multiple representative observations and plant context are needed for a defensible maturity assessment."
+  }
+]
