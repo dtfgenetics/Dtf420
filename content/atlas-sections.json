@@ -1,12 +1,82 @@
 [
-  {"id":"seed_germination","label":"Seed & Germination","clickTarget":"seed","summary":"Seed anatomy, viability, germination conditions, radicle emergence, cotyledons, seedling transition, storage, and early failure points.","firstAsset":"Annotated seed anatomy plate","topics":["Seed anatomy","Seed viability","Imbibition","Radicle emergence","Cotyledons","Germination failures","Seed storage"]},
-  {"id":"root_system","label":"Root System","clickTarget":"roots","summary":"Root structure, root hairs, rhizosphere, oxygen availability, water uptake, nutrient uptake, dryback, media interaction, and root disorders.","firstAsset":"Root-zone cutaway diagram","topics":["Primary root","Lateral roots","Root hairs","Rhizosphere","Root oxygen","Water uptake","Nutrient uptake","Dryback","Root disease"]},
-  {"id":"stem_vascular","label":"Stem & Vascular System","clickTarget":"stem","summary":"Stem anatomy, support, xylem, phloem, vascular cambium, secondary growth, transport, source-sink allocation, internodal spacing, hydraulics, damage response, and recovery.","firstAsset":"Stem cross-section infographic","topics":["Xylem","Phloem","Vascular cambium","Secondary growth","Bast fibers","Stem elongation","Internodal spacing","Source-sink transport","Cohesion-tension","Hydraulic disruption","Training response","Stem damage"]},
-  {"id":"nodes_branching","label":"Nodes & Branching","clickTarget":"nodes","summary":"Node and phytomer anatomy, axillary-bud establishment and release, apical dominance, phyllotaxy, developmental transitions, pruning plasticity, topping, FIM, LST, mainlining, SCROG, and branch biomechanics.","firstAsset":"Node anatomy diagram","topics":["Node anatomy","Internodes","Axillary buds","Bud activation","Apical dominance","Hormone and sugar signaling","Phyllotaxy","Developmental nodes","Pruning response","Topping","FIM","LST","Mainlining","SCROG","Branch biomechanics"]},
-  {"id":"leaves","label":"Leaves","clickTarget":"leaves","summary":"Leaf tissue anatomy, morphogenesis, leaflet complexity, photosynthesis, stomata, transpiration, leaf age, energy balance, inspection, and observation-first symptom interpretation.","firstAsset":"Healthy leaf reference plate","topics":["Leaf tissue anatomy","Leaf morphogenesis","Leaflet complexity","Venation","Photosynthesis","Leaf age","Stomata","Transpiration","Energy balance","Stomatal sampling","Symptom patterns","Leaf inspection"]},
-  {"id":"flowers","label":"Flowers","clickTarget":"flowers","summary":"Flower initiation, pistils/stigmas, bracts, bud development, resin, pollination, maturation, senescence, harvest timing, and mold risk.","firstAsset":"Flower anatomy plate","topics":["Flower initiation","Bracts","Pistils","Stigmas","Bud development","Pollination","Resin","Harvest timing","Mold risk"]},
-  {"id":"trichomes_resin","label":"Trichomes & Resin","clickTarget":"trichomes","summary":"Trichome types, resin glands, glandular structures, maturity cues, microscope inspection, and harvest interpretation.","firstAsset":"Trichome maturity chart","topics":["Capitate-stalked trichomes","Capitate-sessile trichomes","Bulbous trichomes","Resin glands","Microscope inspection","Harvest interpretation"]},
-  {"id":"sex_pollen_seed","label":"Sex, Pollen & Seeds","clickTarget":"sex","summary":"Female flowers, male flowers, hermaphroditism, pollen sacs, pollination, fertilization, seed formation, seed maturity, and breeding basics.","firstAsset":"Male vs female flower comparison","topics":["Female flowers","Male flowers","Hermaphroditism","Pollen sacs","Pollination","Seed formation","Controlled pollination"]},
-  {"id":"environment_overlay","label":"Environment Overlay","clickTarget":"environment","summary":"Whole-plant overlay for light, temperature, humidity, VPD, airflow, water, nutrients, pH, EC, CO2, and their interactions.","firstAsset":"Environmental interaction map","topics":["Light","Temperature","Humidity","VPD","Airflow","CO2","Water","Nutrients","pH","EC"]},
-  {"id":"diagnostic_overlay","label":"Diagnostic Overlay","clickTarget":"diagnostics","summary":"Symptom-location system for yellowing, browning, spots, curling, wilting, burnt tips, stunting, pest signs, mold signs, and root-zone clues.","firstAsset":"Symptom location map","topics":["Yellowing","Browning","Spots","Curling","Wilting","Burnt tips","Stunting","Pest signs","Mold signs","Root symptoms"]}
+  {
+    "id": "seed_germination",
+    "label": "Seed & Germination",
+    "clickTarget": "seed",
+    "summary": "Seed anatomy, viability, germination conditions, radicle emergence, cotyledons, seedling transition, storage, and early failure points.",
+    "firstAsset": "Annotated seed anatomy plate",
+    "topics": ["Seed anatomy", "Seed viability", "Imbibition", "Radicle emergence", "Cotyledons", "Germination failures", "Seed storage"]
+  },
+  {
+    "id": "root_system",
+    "label": "Root System",
+    "clickTarget": "roots",
+    "summary": "Root structure, root hairs, rhizosphere, oxygen availability, water uptake, nutrient uptake, dryback, media interaction, and root disorders.",
+    "firstAsset": "Root-zone cutaway diagram",
+    "topics": ["Primary root", "Lateral roots", "Root hairs", "Rhizosphere", "Root oxygen", "Water uptake", "Nutrient uptake", "Dryback", "Root disease"]
+  },
+  {
+    "id": "stem_vascular",
+    "label": "Stem & Vascular System",
+    "clickTarget": "stem",
+    "summary": "Stem anatomy, support, xylem, phloem, vascular cambium, secondary growth, transport, source-sink allocation, internodal spacing, hydraulics, damage response, and recovery.",
+    "firstAsset": "Stem cross-section infographic",
+    "topics": ["Xylem", "Phloem", "Vascular cambium", "Secondary growth", "Bast fibers", "Stem elongation", "Internodal spacing", "Source-sink transport", "Cohesion-tension", "Hydraulic disruption", "Training response", "Stem damage"]
+  },
+  {
+    "id": "nodes_branching",
+    "label": "Nodes & Branching",
+    "clickTarget": "nodes",
+    "summary": "Node and phytomer anatomy, axillary-bud establishment and release, apical dominance, phyllotaxy, developmental transitions, pruning plasticity, topping, FIM, LST, mainlining, SCROG, and branch biomechanics.",
+    "firstAsset": "Node anatomy diagram",
+    "topics": ["Node anatomy", "Internodes", "Axillary buds", "Bud activation", "Apical dominance", "Hormone and sugar signaling", "Phyllotaxy", "Developmental nodes", "Pruning response", "Topping", "FIM", "LST", "Mainlining", "SCROG", "Branch biomechanics"]
+  },
+  {
+    "id": "leaves",
+    "label": "Leaves",
+    "clickTarget": "leaves",
+    "summary": "Leaf tissue anatomy, morphogenesis, leaflet complexity, photosynthesis, stomata, transpiration, leaf age, energy balance, inspection, and observation-first symptom interpretation.",
+    "firstAsset": "Healthy leaf reference plate",
+    "topics": ["Leaf tissue anatomy", "Leaf morphogenesis", "Leaflet complexity", "Venation", "Photosynthesis", "Leaf age", "Stomata", "Transpiration", "Energy balance", "Stomatal sampling", "Symptom patterns", "Leaf inspection"]
+  },
+  {
+    "id": "flowers",
+    "label": "Flowers",
+    "clickTarget": "flowers",
+    "summary": "Flower initiation, pistils/stigmas, bracts, bud development, resin, pollination, maturation, senescence, harvest timing, and mold risk.",
+    "firstAsset": "Flower anatomy plate",
+    "topics": ["Flower initiation", "Bracts", "Pistils", "Stigmas", "Bud development", "Pollination", "Resin", "Harvest timing", "Mold risk"]
+  },
+  {
+    "id": "trichomes_resin",
+    "label": "Trichomes & Resin",
+    "clickTarget": "trichomes",
+    "summary": "Trichome types, resin glands, glandular structures, maturity cues, microscope inspection, and harvest interpretation.",
+    "firstAsset": "Trichome maturity chart",
+    "topics": ["Capitate-stalked trichomes", "Capitate-sessile trichomes", "Bulbous trichomes", "Resin glands", "Microscope inspection", "Harvest interpretation"]
+  },
+  {
+    "id": "sex_pollen_seed",
+    "label": "Sex, Pollen & Seeds",
+    "clickTarget": "sex",
+    "summary": "Female flowers, male flowers, hermaphroditism, pollen sacs, pollination, fertilization, seed formation, seed maturity, and breeding basics.",
+    "firstAsset": "Male vs female flower comparison",
+    "topics": ["Female flowers", "Male flowers", "Hermaphroditism", "Pollen sacs", "Pollination", "Seed formation", "Controlled pollination"]
+  },
+  {
+    "id": "environment_overlay",
+    "label": "Environment Overlay",
+    "clickTarget": "environment",
+    "summary": "Whole-plant overlay for light, temperature, humidity, VPD, airflow, water, nutrients, pH, EC, CO2, and their interactions.",
+    "firstAsset": "Environmental interaction map",
+    "topics": ["Light", "Temperature", "Humidity", "VPD", "Airflow", "CO2", "Water", "Nutrients", "pH", "EC"]
+  },
+  {
+    "id": "diagnostic_overlay",
+    "label": "Diagnostic Overlay",
+    "clickTarget": "diagnostics",
+    "summary": "Symptom-location system for yellowing, browning, spots, curling, wilting, burnt tips, stunting, pest signs, mold signs, and root-zone clues.",
+    "firstAsset": "Symptom location map",
+    "topics": ["Yellowing", "Browning", "Spots", "Curling", "Wilting", "Burnt tips", "Stunting", "Pest signs", "Mold signs", "Root symptoms"]
+  }
 ]
