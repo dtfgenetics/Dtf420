@@ -102,7 +102,7 @@ const runtimeContracts = [
   [runtimeJs.includes("prefers-reduced-motion"), "Atlas runtime must provide reduced-motion behavior."],
   [runtimeJs.includes("conceptual xylem water movement"), "Physiology legend must prevent flow particles from being misread as measured flux."],
   [runtimeJs.includes("do not assert a diagnosis"), "Diagnostic overlay must not present markers as diagnoses."],
-  [viewportSource.includes('src="/atlas-3d/index.html"'), "React viewport must mount the same-origin Three.js runtime."],
+  [viewportSource.includes('src="/learn/atlas/atlas-3d/index.html"'), "React viewport must mount the Three.js runtime inside the owned Atlas child route."],
   [viewportSource.includes('aria-label={`${entity.label}.'), "Hotspots must keep explicit accessible names when compact mobile labels are hidden."],
 ];
 for (const [condition, message] of runtimeContracts) if (!condition) errors.push(message);
