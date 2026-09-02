@@ -7,9 +7,9 @@
     "hotspot": { "x": 78, "y": 66 },
     "camera": { "yaw": 18, "pitch": -8, "zoom": 1.3 },
     "layers": ["overview", "anatomy", "physiology"],
-    "microTitle": "Seed tissues",
-    "dataTitle": "Development sequence",
-    "keyFunctions": ["Protect the embryo", "Store reserves for establishment", "Initiate the next plant generation"]
+    "microTitle": "Achene, embryo & germination interfaces",
+    "dataTitle": "Temperature, water potential, vigor & emergence",
+    "keyFunctions": ["Protect and package the embryo", "Store reserves for early establishment", "Respond to hydration and temperature during germination", "Carry seed-lot history through vigor, aging, and storage performance"]
   },
   {
     "id": "root_system",
@@ -19,9 +19,9 @@
     "hotspot": { "x": 37, "y": 81 },
     "camera": { "yaw": -8, "pitch": 18, "zoom": 1.45 },
     "layers": ["overview", "anatomy", "physiology", "micro", "environment", "diagnostics"],
-    "microTitle": "Root hairs & rhizosphere",
-    "dataTitle": "Water, oxygen & ion exchange",
-    "keyFunctions": ["Anchor the plant", "Absorb water and mineral ions", "Interact with the rhizosphere", "Supply the shoot through xylem"]
+    "microTitle": "Root tip, hairs, cortex & rhizosphere",
+    "dataTitle": "Architecture, water pathways, oxygen & microbiome",
+    "keyFunctions": ["Extend through apical and lateral root growth", "Absorb water and mineral ions across root tissues", "Exchange resources and signals with the rhizosphere", "Link oxygen, water status, microbiome context, and xylem supply to the shoot"]
   },
   {
     "id": "stem_vascular",
@@ -91,9 +91,9 @@
     "hotspot": { "x": 76, "y": 49 },
     "camera": { "yaw": 34, "pitch": -4, "zoom": 1.65 },
     "layers": ["overview", "anatomy", "physiology", "micro", "diagnostics"],
-    "microTitle": "Pollen & reproductive structures",
-    "dataTitle": "Sex expression & fertilization",
-    "keyFunctions": ["Produce or receive pollen", "Enable fertilization", "Develop embryos and mature seeds", "Express reproductive morphology across development"]
+    "microTitle": "Anthers, pollen, stigma & developing seed",
+    "dataTitle": "XX/XY context, ethylene plasticity & pollen fitness",
+    "keyFunctions": ["Express reproductive morphology from chromosome, developmental, and hormone context", "Produce, release, receive, and germinate pollen", "Enable fertilization and embryo development", "Preserve breeding evidence through viability tests, isolation, labeling, and controlled pollination records"]
   },
   {
     "id": "environment_overlay",
@@ -103,9 +103,9 @@
     "hotspot": { "x": 18, "y": 14 },
     "camera": { "yaw": 0, "pitch": 0, "zoom": 1 },
     "layers": ["environment"],
-    "microTitle": "Leaf-atmosphere interface",
-    "dataTitle": "Light, temperature, RH, VPD & root supply",
-    "keyFunctions": ["Connect atmospheric demand to plant response", "Compare canopy and root-zone measurements", "Show interacting environmental variables"]
+    "microTitle": "Leaf-atmosphere & root-zone interfaces",
+    "dataTitle": "PPFD, DLI, CO2, temperature, VPD & coupled limits",
+    "keyFunctions": ["Separate instantaneous PPFD, daily light integral, and photoperiod", "Connect CO2 diffusion and stomatal behavior to photosynthetic response", "Compare local canopy acclimation and leaf temperature", "Show environmental resources as interacting limits rather than isolated target numbers"]
   },
   {
     "id": "diagnostic_overlay",
@@ -115,8 +115,8 @@
     "hotspot": { "x": 82, "y": 57 },
     "camera": { "yaw": 0, "pitch": 0, "zoom": 1 },
     "layers": ["diagnostics"],
-    "microTitle": "Inspection detail",
-    "dataTitle": "Observation-first differential",
-    "keyFunctions": ["Locate symptoms before naming causes", "Compare new and old growth", "Combine plant appearance with measurements", "Choose the next discriminating observation"]
+    "microTitle": "Symptom, tissue & pathogen inspection",
+    "dataTitle": "Evidence-weighted differential diagnosis",
+    "keyFunctions": ["Locate and describe symptoms before naming causes", "Pair visual progression with environment, root-zone, and tissue measurements", "Separate overlapping biotic and abiotic clues", "Choose discriminating microscopy, tissue, or pathogen tests before escalating diagnostic certainty"]
   }
 ]
