@@ -64,6 +64,38 @@
     "explanation": "A branch is a loaded structure. Its risk of bending or failure depends on leverage, attachment, tissue condition, branch dimensions, supported mass, movement, and external support—not one angle alone."
   },
   {
+    "id": "nodes-axillary-bud-activation",
+    "route": "/learn/atlas/nodes-branching/axillary-bud-activation",
+    "prompt": "What is the most important distinction between an axillary bud being present at a node and that bud producing an elongating branch?",
+    "options": ["A bud can already exist while its outgrowth remains suppressed until developmental and environmental signals permit activation", "Every visible axillary bud must immediately become a branch", "Axillary buds form only after the main shoot is removed", "A dormant bud is actually a root primordium waiting to move into the soil"],
+    "correctIndex": 0,
+    "explanation": "Axillary meristems and buds can be established without immediately elongating. Bud release and sustained branch growth depend on interacting developmental signals, light, resource status, and competition with other growing sinks."
+  },
+  {
+    "id": "nodes-hormones-sugars-bud-outgrowth",
+    "route": "/learn/atlas/nodes-branching/hormones-sugars-and-bud-outgrowth",
+    "prompt": "Which statement best reflects current general plant evidence for control of axillary bud outgrowth?",
+    "options": ["Auxin, cytokinin, strigolactone, sugars, light, and sink competition interact; apical dominance is not a one-hormone on/off switch", "Auxin simply flows from the main stem directly into every bud and permanently closes it", "Only sugar concentration controls branching and hormones have no role", "Bud outgrowth is determined entirely by branch angle"],
+    "correctIndex": 0,
+    "explanation": "Modern branching models integrate several mechanisms. Auxin in the main stem acts indirectly, cytokinin generally promotes bud activity, strigolactone generally represses it, and sugar/light/resource relationships can influence whether released buds sustain growth."
+  },
+  {
+    "id": "nodes-phyllotaxy-developmental-nodes",
+    "route": "/learn/atlas/nodes-branching/phyllotaxy-and-developmental-nodes",
+    "prompt": "How should node number and phyllotaxy be used when reading Cannabis development?",
+    "options": ["As developmental observations that can shift with genotype and conditions, not as a universal fixed-node clock for every Cannabis plant", "As an exact species-wide calendar in which every cultivar changes phyllotaxy at the same numbered node", "Only to diagnose root diseases", "As proof of cannabinoid potency"],
+    "correctIndex": 0,
+    "explanation": "A complete-life-cycle Cannabis study documented node-associated changes such as axillary buds, stipules, reproductive structures, and a transition from opposite to alternate phyllotaxy in its studied genotype. Those observations are useful references, but they should not be generalized into a fixed universal node number for all genotypes and environments."
+  },
+  {
+    "id": "nodes-pruning-architectural-plasticity",
+    "route": "/learn/atlas/nodes-branching/pruning-response-and-architectural-plasticity",
+    "prompt": "Why should results from a pruning treatment in one Cannabis study not be converted into a guaranteed yield rule for every grow?",
+    "options": ["Architecture response depends on genotype, treatment type, timing, plant scale, environment, and the production goal", "Pruning always doubles yield in every genotype", "Removing the apex permanently stops all lateral growth", "Branch removal cannot change canopy light distribution"],
+    "correctIndex": 0,
+    "explanation": "Cannabis pruning experiments show real architectural plasticity, but treatments and genotypes do not respond identically. The Atlas therefore uses study results to explain mechanisms and observed responses rather than promising a universal yield outcome."
+  },
+  {
     "id": "leaf-energy-balance",
     "route": "/learn/atlas/leaves/leaf-temperature-and-energy-balance",
     "prompt": "Why can leaf temperature differ from measured room air temperature?",
