@@ -1,14 +1,8 @@
 [
   {
-    "id": "seed_germination",
-    "label": "Seed & Germination",
-    "learningGoals": [
-      "Distinguish the achene fruit wall from the true seed and embryo tissues",
-      "Follow imbibition through radicle emergence",
-      "Recognize healthy cotyledon transition",
-      "Separate seed viability questions from environmental failure patterns"
-    ],
-    "lessons": [
+    "id":"seed_germination","label":"Seed & Germination",
+    "learningGoals":["Distinguish the achene fruit wall from the true seed and embryo tissues","Follow imbibition through radicle emergence","Recognize healthy cotyledon transition","Separate seed viability questions from environmental failure patterns"],
+    "lessons":[
       {"title":"Seed anatomy","summary":"Distinguish the whole cannabis achene from the true seed and locate the pericarp, seed coat, residual peripheral endosperm, cotyledons, radicle, hypocotyl region, and plumule.","visual":"Achene and true-seed longitudinal cutaway"},
       {"title":"Imbibition","summary":"See how water uptake rehydrates seed tissues and restarts metabolic activity before visible germination.","visual":"Hydration sequence diagram"},
       {"title":"Radicle emergence","summary":"Follow the radicle as the first root organ emerges and establishes the direction of early seedling growth.","visual":"Time-sequence germination strip"},
@@ -18,15 +12,9 @@
     ]
   },
   {
-    "id": "root_system",
-    "label": "Root System",
-    "learningGoals": [
-      "Distinguish primary, lateral, and fine absorbing roots",
-      "Understand root hairs and rhizosphere exchange",
-      "Connect root oxygen and water status to whole-plant behavior",
-      "Recognize root-zone warning signs"
-    ],
-    "lessons": [
+    "id":"root_system","label":"Root System",
+    "learningGoals":["Distinguish primary, lateral, and fine absorbing roots","Understand root hairs and rhizosphere exchange","Connect root oxygen and water status to whole-plant behavior","Recognize root-zone warning signs"],
+    "lessons":[
       {"title":"Root architecture","summary":"Follow primary roots, lateral branching, fine roots, and root hairs through the occupied media volume.","visual":"Root-zone cutaway"},
       {"title":"Root hairs & absorption","summary":"See where most short-lived absorbing surface develops and how root hairs increase contact with the surrounding solution and media.","visual":"Root-hair microscope diagram"},
       {"title":"Rhizosphere","summary":"Explore the narrow root-influenced zone where water, ions, microbes, exudates, and oxygen conditions interact.","visual":"Rhizosphere interaction map"},
@@ -36,18 +24,9 @@
     ]
   },
   {
-    "id": "stem_vascular",
-    "label": "Stem & Vascular System",
-    "learningGoals": [
-      "Identify major stem tissues",
-      "Separate xylem and phloem functions",
-      "Understand internodal elongation",
-      "Connect training damage to vascular recovery",
-      "Explain how vascular cambium contributes to radial thickening",
-      "Recognize bast fibers and lignified inner tissues as structural components",
-      "Connect xylem hydraulics to water-potential gradients and hydraulic disruption"
-    ],
-    "lessons": [
+    "id":"stem_vascular","label":"Stem & Vascular System",
+    "learningGoals":["Identify major stem tissues","Separate xylem and phloem functions","Understand internodal elongation","Connect training damage to vascular recovery","Explain how vascular cambium contributes to radial thickening","Recognize bast fibers and lignified inner tissues as structural components","Connect xylem hydraulics to water-potential gradients and hydraulic disruption"],
+    "lessons":[
       {"title":"Stem cross-section","summary":"Identify epidermal, cortex, vascular, and pith regions in a simplified cannabis stem cross-section.","visual":"Labeled stem cross-section"},
       {"title":"Xylem transport","summary":"Follow water and dissolved mineral movement from roots toward transpiring shoots and leaves.","visual":"Xylem upward-flow animation"},
       {"title":"Phloem transport","summary":"Follow movement of photosynthate from source tissues toward growing and storage sinks throughout the plant.","visual":"Source-to-sink phloem map"},
@@ -61,18 +40,9 @@
     ]
   },
   {
-    "id": "nodes_branching",
-    "label": "Nodes & Branching",
-    "learningGoals": [
-      "Locate nodes, internodes, axillary buds, stipules, and branch origins",
-      "Understand apical dominance as an interacting shoot-branching system rather than a one-hormone switch",
-      "Separate axillary bud establishment from later bud activation and sustained branch outgrowth",
-      "Track phyllotaxy and node-associated developmental changes without treating one node number as universal",
-      "Predict pruning responses cautiously using genotype, timing, plant scale, and environment",
-      "Compare major canopy-training approaches",
-      "Interpret branch attachment as a loaded mechanical structure rather than using angle alone"
-    ],
-    "lessons": [
+    "id":"nodes_branching","label":"Nodes & Branching",
+    "learningGoals":["Locate nodes, internodes, axillary buds, stipules, and branch origins","Understand apical dominance as an interacting shoot-branching system rather than a one-hormone switch","Separate axillary bud establishment from later bud activation and sustained branch outgrowth","Track phyllotaxy and node-associated developmental changes without treating one node number as universal","Predict pruning responses cautiously using genotype, timing, plant scale, and environment","Compare major canopy-training approaches","Interpret branch attachment as a loaded mechanical structure rather than using angle alone"],
+    "lessons":[
       {"title":"Node anatomy","summary":"Locate the leaf attachment, axillary bud, branch origin, stipules when present, and adjoining internodes at a cannabis node, recognizing the node as a repeated phytomer junction rather than a simple mark on the stem.","visual":"Node anatomy and phytomer close-up"},
       {"title":"Apical dominance","summary":"Understand how the active shoot apex can suppress lateral bud outgrowth through systemic signaling and resource relationships, and why removing or repositioning the apex can change branching without guaranteeing one fixed response.","visual":"Apical dominance multi-signal flow diagram"},
       {"title":"Topping & FIM","summary":"Compare removal points and the resulting redistribution of active shoot growth while separating established pruning evidence from grower-specific FIM terminology and avoiding claims that every genotype will branch identically.","visual":"Cut-location and expected-response comparison"},
@@ -86,33 +56,25 @@
     ]
   },
   {
-    "id": "leaves",
-    "label": "Leaves",
-    "learningGoals": [
-      "Use a healthy leaf as the diagnostic baseline",
-      "Understand photosynthesis, stomata, and transpiration",
-      "Describe symptom pattern precisely",
-      "Separate visual observation from diagnosis"
-    ],
-    "lessons": [
-      {"title":"Healthy leaf baseline","summary":"Use leaflet shape, venation, petiole, surface condition, color distribution, and posture as the reference before judging abnormality.","visual":"Healthy fan leaf reference plate"},
-      {"title":"Photosynthesis","summary":"Connect light capture, carbon dioxide entry, water status, chloroplast function, and carbohydrate production.","visual":"Leaf photosynthesis flow"},
-      {"title":"Stomata & transpiration","summary":"Link stomatal opening, vapor pressure conditions, carbon dioxide exchange, and water loss.","visual":"Stomata and transpiration composite"},
+    "id":"leaves","label":"Leaves",
+    "learningGoals":["Use a healthy leaf as the diagnostic baseline","Identify major Cannabis leaf tissues from epidermis through mesophyll and veins","Understand photosynthesis, stomata, transpiration, and leaf energy balance","Track leaf morphogenesis and changing leaflet complexity across development without assuming a universal node clock","Connect leaf age and light history to changing photosynthetic capacity","Treat stomatal size and density as context-dependent traits that require standardized sampling","Describe symptom pattern precisely","Separate visual observation from diagnosis"],
+    "lessons":[
+      {"title":"Healthy leaf baseline","summary":"Use leaflet shape, venation, petiole, surface condition, color distribution, posture, developmental stage, and cultivar context as the reference before judging abnormality.","visual":"Healthy fan leaf reference plate"},
+      {"title":"Photosynthesis","summary":"Connect light capture, carbon dioxide entry, water status, chloroplast function, carbohydrate production, leaf age, and light history while avoiding the assumption that one leaf gas-exchange measurement predicts whole-plant yield.","visual":"Leaf photosynthesis flow"},
+      {"title":"Stomata & transpiration","summary":"Link stomatal opening, vapor-pressure conditions, carbon dioxide exchange, and water loss while distinguishing dynamic stomatal behavior from structural traits such as stomatal size and density.","visual":"Stomata and transpiration composite"},
       {"title":"Symptom pattern language","summary":"Describe chlorosis, necrosis, spotting, curl, wilt, and texture by location and distribution before assigning a cause.","visual":"Leaf symptom pattern atlas"},
       {"title":"Leaf inspection workflow","summary":"Inspect upper and lower surfaces, new and old growth, margins, veins, petioles, pests, residue, and progression over time.","visual":"Leaf inspection field card"},
-      {"title":"Leaf temperature & energy balance","summary":"See how absorbed radiation, convective exchange, airflow, stomatal behavior, and evaporative cooling can make leaf temperature differ from surrounding air temperature.","visual":"Leaf energy-balance and temperature diagram"}
+      {"title":"Leaf temperature & energy balance","summary":"See how absorbed radiation, convective exchange, airflow, stomatal behavior, and evaporative cooling can make leaf temperature differ from surrounding air temperature.","visual":"Leaf energy-balance and temperature diagram"},
+      {"title":"Leaf tissue anatomy","summary":"Move through a Cannabis leaf cross-section from the epidermal surfaces into palisade and spongy mesophyll, then locate vascular and supporting tissues in the lamina and midrib while keeping trichomes and cystolith-bearing structures in anatomical context.","visual":"Cannabis fan-leaf lamina and midrib cross-section"},
+      {"title":"Leaf morphogenesis & leaflet complexity","summary":"Follow Cannabis leaf development from simple early true leaves toward more complex palmately compound leaves and later reductions in leaflet complexity, using published node-by-node patterns as genotype- and condition-specific examples rather than a universal developmental clock.","visual":"Cannabis leaf morphogenesis developmental strip"},
+      {"title":"Leaf age & photosynthetic capacity","summary":"Compare newly expanded and progressively older Cannabis/hemp leaves to understand why photosynthetic capacity, light saturation, and related gas-exchange traits can decline with leaf age even while a leaf remains visibly green.","visual":"Leaf-age photosynthetic-capacity timeline and canopy map"},
+      {"title":"Stomatal traits & sampling context","summary":"Compare stomatal size, density, surface location, and gas-exchange measurements as traits that depend on genotype, ploidy, development, environment, and sampling method, avoiding a single species-wide numeric reference where the evidence does not support one.","visual":"Cannabis stomatal sampling and trait-comparison microscope plate"}
     ]
   },
   {
-    "id": "flowers",
-    "label": "Flowers",
-    "learningGoals": [
-      "Identify major female flower structures",
-      "Follow flower development",
-      "Recognize pollination-related changes",
-      "Use multiple maturity signals instead of one visual cue"
-    ],
-    "lessons": [
+    "id":"flowers","label":"Flowers",
+    "learningGoals":["Identify major female flower structures","Follow flower development","Recognize pollination-related changes","Use multiple maturity signals instead of one visual cue"],
+    "lessons":[
       {"title":"Female flower anatomy","summary":"Locate bracts, stigmas, pistillate structures, sugar leaves, and dense floral clusters using a labeled reference.","visual":"Female flower anatomy plate"},
       {"title":"Flower initiation","summary":"Follow the transition from preflower expression into expanding floral sites and stacked inflorescences.","visual":"Early-flower timeline"},
       {"title":"Bud development","summary":"Track changes in bract expansion, stigma appearance, resin coverage, density, and senescence across maturation.","visual":"Flower development sequence"},
@@ -122,15 +84,9 @@
     ]
   },
   {
-    "id": "trichomes_resin",
-    "label": "Trichomes & Resin",
-    "learningGoals": [
-      "Distinguish major glandular trichome forms",
-      "Identify the resin head and stalk",
-      "Use magnification correctly",
-      "Interpret maturity observations cautiously"
-    ],
-    "lessons": [
+    "id":"trichomes_resin","label":"Trichomes & Resin",
+    "learningGoals":["Distinguish major glandular trichome forms","Identify the resin head and stalk","Use magnification correctly","Interpret maturity observations cautiously"],
+    "lessons":[
       {"title":"Trichome types","summary":"Compare capitate-stalked, capitate-sessile, and bulbous glandular trichome forms by scale and structure.","visual":"Trichome type microscope plate"},
       {"title":"Gland anatomy","summary":"Identify the stalk, gland head, secretory region, and cuticular storage space in a simplified glandular trichome model.","visual":"Trichome gland cutaway"},
       {"title":"Where to inspect","summary":"Compare trichomes on bracts and nearby sugar leaves and avoid treating every visible gland as equally representative of floral maturity.","visual":"Microscope sampling map"},
@@ -140,15 +96,9 @@
     ]
   },
   {
-    "id": "sex_pollen_seed",
-    "label": "Sex, Pollen & Seeds",
-    "learningGoals": [
-      "Distinguish common male and female reproductive structures",
-      "Recognize mixed-sex expression",
-      "Understand pollen transfer and fertilization",
-      "Follow seed development to maturity"
-    ],
-    "lessons": [
+    "id":"sex_pollen_seed","label":"Sex, Pollen & Seeds",
+    "learningGoals":["Distinguish common male and female reproductive structures","Recognize mixed-sex expression","Understand pollen transfer and fertilization","Follow seed development to maturity"],
+    "lessons":[
       {"title":"Male vs female preflowers","summary":"Compare developing staminate and pistillate structures at nodes using multiple views and developmental stages.","visual":"Male/female comparison plate"},
       {"title":"Mixed-sex expression","summary":"Identify anthers or staminate structures appearing on otherwise female plants and distinguish observations from assumptions about cause.","visual":"Mixed-sex structure reference"},
       {"title":"Pollen biology","summary":"Follow pollen production, release, transport, stigma contact, and the first steps toward fertilization.","visual":"Pollen pathway diagram"},
@@ -158,15 +108,9 @@
     ]
   },
   {
-    "id": "environment_overlay",
-    "label": "Environment Overlay",
-    "learningGoals": [
-      "See environment as interacting variables",
-      "Connect leaf and root responses to atmospheric demand",
-      "Relate light and temperature to transpiration",
-      "Use measurements as context instead of isolated targets"
-    ],
-    "lessons": [
+    "id":"environment_overlay","label":"Environment Overlay",
+    "learningGoals":["See environment as interacting variables","Connect leaf and root responses to atmospheric demand","Relate light and temperature to transpiration","Use measurements as context instead of isolated targets"],
+    "lessons":[
       {"title":"Light distribution","summary":"Map high- and low-light zones across the canopy and connect PPFD distribution to leaf position and canopy architecture.","visual":"Canopy PPFD overlay"},
       {"title":"Temperature & humidity","summary":"See how air temperature and relative humidity combine to shape evaporative demand rather than acting as independent numbers.","visual":"Temperature/RH interaction overlay"},
       {"title":"VPD & transpiration","summary":"Connect vapor pressure deficit to stomatal behavior, leaf temperature, water movement, and changing plant demand.","visual":"Whole-plant VPD flow"},
@@ -176,15 +120,9 @@
     ]
   },
   {
-    "id": "diagnostic_overlay",
-    "label": "Diagnostic Overlay",
-    "learningGoals": [
-      "Locate symptoms before naming causes",
-      "Use old-vs-new and upper-vs-lower growth patterns",
-      "Collect environmental and root-zone context",
-      "Build a differential rather than a single visual guess"
-    ],
-    "lessons": [
+    "id":"diagnostic_overlay","label":"Diagnostic Overlay",
+    "learningGoals":["Locate symptoms before naming causes","Use old-vs-new and upper-vs-lower growth patterns","Collect environmental and root-zone context","Build a differential rather than a single visual guess"],
+    "lessons":[
       {"title":"Symptom location","summary":"Mark whether the first visible problem begins on old leaves, new growth, upper canopy, lower canopy, one branch, roots, or the whole plant.","visual":"Whole-plant symptom locator"},
       {"title":"Pattern description","summary":"Describe uniform, interveinal, marginal, spotted, tip-focused, twisted, wilted, or asymmetric symptoms before assigning cause.","visual":"Pattern vocabulary panel"},
       {"title":"Progression over time","summary":"Compare sudden, gradual, stable, spreading, and recovering patterns and record what changed before symptoms appeared.","visual":"Symptom progression timeline"},
