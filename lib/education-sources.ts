@@ -5,14 +5,25 @@ import plantHealthIpmSources from "@/content/education-sources-plant-health-ipm.
 import atlasStemSources from "@/content/education-sources-atlas-stems.json";
 import atlasNodeSources from "@/content/education-sources-atlas-nodes.json";
 import atlasLeafSources from "@/content/education-sources-atlas-leaves.json";
+import atlasFlowerSources from "@/content/education-sources-atlas-flowers.json";
 import sourceMap from "@/content/education-source-map.json";
 import seedAnatomySourceMap from "@/content/education-source-map-seed-anatomy.json";
 import atlasStemSourceMap from "@/content/education-source-map-atlas-stems.json";
 import atlasNodeSourceMap from "@/content/education-source-map-atlas-nodes.json";
 import atlasLeafSourceMap from "@/content/education-source-map-atlas-leaves.json";
+import atlasFlowerSourceMap from "@/content/education-source-map-atlas-flowers.json";
 import atlasSourceDefaults from "@/content/atlas-source-defaults.json";
 
-const sources = [...coreSources, ...abioticSources, ...seedAnatomySources, ...plantHealthIpmSources, ...atlasStemSources, ...atlasNodeSources, ...atlasLeafSources];
+const sources = [
+  ...coreSources,
+  ...abioticSources,
+  ...seedAnatomySources,
+  ...plantHealthIpmSources,
+  ...atlasStemSources,
+  ...atlasNodeSources,
+  ...atlasLeafSources,
+  ...atlasFlowerSources,
+];
 type EducationSource = (typeof sources)[number];
 type SourceMap = Record<string, string[]>;
 
@@ -23,6 +34,7 @@ const mappedSources = {
   ...(atlasStemSourceMap as SourceMap),
   ...(atlasNodeSourceMap as SourceMap),
   ...(atlasLeafSourceMap as SourceMap),
+  ...(atlasFlowerSourceMap as SourceMap),
 } as SourceMap;
 const atlasDefaults = atlasSourceDefaults as SourceMap;
 
