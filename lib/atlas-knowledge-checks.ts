@@ -1,6 +1,5 @@
 import coreChecks from "@/content/atlas-knowledge-checks.json";
 import expansionOneChecks from "@/content/atlas-knowledge-checks-expansion-01.json";
-import expansionTwoChecks from "@/content/atlas-knowledge-checks-expansion-02.json";
 
 export type AtlasKnowledgeCheck = {
   id: string;
@@ -11,7 +10,7 @@ export type AtlasKnowledgeCheck = {
   explanation: string;
 };
 
-const rawChecks = [...coreChecks, ...expansionOneChecks, ...expansionTwoChecks] as AtlasKnowledgeCheck[];
+const rawChecks = [...coreChecks, ...expansionOneChecks] as AtlasKnowledgeCheck[];
 
 function balanceAnswerPosition(check: AtlasKnowledgeCheck, index: number): AtlasKnowledgeCheck {
   const targetIndex = index % check.options.length;
