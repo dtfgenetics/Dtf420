@@ -2,22 +2,41 @@ import fs from "node:fs";
 import path from "node:path";
 
 const contentDir = path.join(process.cwd(), "content");
-const sources = [
-  ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources.json"), "utf8")),
-  ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources-abiotic.json"), "utf8")),
-  ...JSON.parse(fs.readFileSync(path.join(contentDir, "education-sources-plant-health-ipm.json"), "utf8")),
-];
-const sourceMap = JSON.parse(fs.readFileSync(path.join(contentDir, "education-source-map.json"), "utf8"));
+const sourceFiles = fs
+  .readdirSync(contentDir)
+  .filter((name) => name.startsWith("education-sources") && name.endsWith(".json"))
+  .sort();
+const sourceMapFiles = fs
+  .readdirSync(contentDir)
+  .filter((name) => name.startsWith("education-source-map") && name.endsWith(".json"))
+  .sort();
+
+const sources = sourceFiles.flatMap((name) => {
+  const pack = JSON.parse(fs.readFileSync(path.join(contentDir, name), "utf8"));
+  if (!Array.isArray(pack)) throw new Error(`${name} must contain an array`);
+  return pack;
+});
+
+const sourceMap = {};
+const routeOwners = new Map();
+for (const name of sourceMapFiles) {
+  const map = JSON.parse(fs.readFileSync(path.join(contentDir, name), "utf8"));
+  if (!map || typeof map !== "object" || Array.isArray(map)) throw new Error(`${name} must contain an object`);
+  for (const [route, ids] of Object.entries(map)) {
+    if (routeOwners.has(route)) {
+      throw new Error(`Duplicate evidence route mapping: ${route} appears in ${routeOwners.get(route)} and ${name}`);
+    }
+    routeOwners.set(route, name);
+    sourceMap[route] = ids;
+  }
+}
+
 const atlasSourceDefaults = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-source-defaults.json"), "utf8"));
 const atlasModules = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-learning-modules.json"), "utf8"));
 const errors = [];
-
-if (!Array.isArray(sources)) {
-  errors.push("education source packs must contain arrays");
-}
-
 const ids = new Set();
-for (const source of Array.isArray(sources) ? sources : []) {
+
+for (const source of sources) {
   if (typeof source.id !== "string" || !source.id.trim()) errors.push("Evidence source is missing an id");
   else if (ids.has(source.id)) errors.push(`Duplicate evidence source id: ${source.id}`);
   else ids.add(source.id);
@@ -50,7 +69,7 @@ function verifyMappings(mapping, label, routeKeys = false) {
   }
 }
 
-verifyMappings(sourceMap, "education-source-map.json", true);
+verifyMappings(sourceMap, sourceMapFiles.join(", "), true);
 verifyMappings(atlasSourceDefaults, "atlas-source-defaults.json");
 
 const atlasIds = new Set(atlasModules.map((atlasModule) => atlasModule.id));
@@ -70,5 +89,5 @@ if (errors.length) {
 }
 
 console.log(
-  `Education evidence sources verified: ${ids.size} sources, ${Object.keys(sourceMap).length} page mappings, and ${Object.keys(atlasSourceDefaults).length} Atlas system defaults.`,
+  `Education evidence sources verified: ${ids.size} sources across ${sourceFiles.length} packs, ${Object.keys(sourceMap).length} page mappings across ${sourceMapFiles.length} maps, and ${Object.keys(atlasSourceDefaults).length} Atlas system defaults.`,
 );
