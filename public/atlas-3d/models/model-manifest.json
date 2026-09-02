@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "available": false,
+  "model": "./models/cannabis-plant.glb",
+  "modelVersion": "pending-production-asset",
+  "targetHeight": 5.2,
+  "exposure": 1.05,
+  "semanticMeshes": {
+    "root_system": "root_system",
+    "stem_main": "stem_vascular",
+    "nodes": "nodes_branching",
+    "fan_leaves": "leaves",
+    "flowers": "flowers",
+    "trichomes": "trichomes_resin",
+    "reproductive": "sex_pollen_seed"
+  },
+  "provenance": "./MODEL_PROVENANCE.md"
+}

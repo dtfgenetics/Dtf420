@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-atlas-model-state="loading">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -42,25 +42,46 @@
   <script type="module">
     import * as THREE from "three";
     import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    import { startProductionAtlasRuntime } from "./atlas-production-model.js";
     import { startAtlasRuntime } from "./atlas-runtime.js";
 
     const parentOrigin = window.location.origin;
-    const readyMessage = { type: "atlas:ready", renderer: "three", version: "0.185.1" };
 
-    function announceReady() {
-      window.parent.postMessage(readyMessage, parentOrigin);
+    function announceReady(modelState) {
+      window.parent.postMessage({ type: "atlas:ready", renderer: "three", version: "0.185.1", modelState }, parentOrigin);
     }
 
-    try {
-      startAtlasRuntime(THREE, OrbitControls);
-      announceReady();
-      [150, 450, 900, 1600, 2600, 4000].forEach((delay) => window.setTimeout(announceReady, delay));
-    } catch (error) {
+    async function boot() {
+      let productionStarted = false;
+      try {
+        productionStarted = await startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoader);
+      } catch (error) {
+        document.documentElement.dataset.atlasModelState = "procedural";
+        window.parent.postMessage({
+          type: "atlas:model-state",
+          state: "procedural",
+          reason: "production-runtime-exception",
+          message: error instanceof Error ? error.message : String(error),
+        }, parentOrigin);
+      }
+
+      if (!productionStarted) {
+        document.documentElement.dataset.atlasModelState = "procedural";
+        startAtlasRuntime(THREE, OrbitControls);
+      }
+
+      const modelState = document.documentElement.dataset.atlasModelState || (productionStarted ? "production" : "procedural");
+      announceReady(modelState);
+      [150, 450, 900, 1600, 2600, 4000].forEach((delay) => window.setTimeout(() => announceReady(modelState), delay));
+    }
+
+    boot().catch((error) => {
       const status = document.getElementById("runtime-status");
       status.hidden = false;
       status.textContent = "3D runtime unavailable. The accessible Atlas fallback remains active.";
       window.parent.postMessage({ type: "atlas:runtime-error", message: error instanceof Error ? error.message : String(error) }, parentOrigin);
-    }
+    });
   </script>
 </body>
 </html>
