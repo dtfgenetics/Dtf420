@@ -1,0 +1,16 @@
+{
+  "system": "nodes_branching",
+  "expectedLessonCount": 10,
+  "newRoutes": [
+    "/learn/atlas/nodes-branching/axillary-bud-activation",
+    "/learn/atlas/nodes-branching/hormones-sugars-and-bud-outgrowth",
+    "/learn/atlas/nodes-branching/phyllotaxy-and-developmental-nodes",
+    "/learn/atlas/nodes-branching/pruning-response-and-architectural-plasticity"
+  ],
+  "requiredEvidenceBoundaries": [
+    "Cannabis-specific claims use Cannabis-specific research where available",
+    "General branching-hormone models are labeled as general flowering-plant evidence",
+    "Branch-junction mechanics are not presented as measured Cannabis strength data",
+    "Study-specific pruning outcomes are not presented as universal yield rules"
+  ]
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "plant-apical-dominance-review-2023",
+    "title": "Lessons from a century of apical dominance research",
+    "publisher": "Journal of Experimental Botany",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10400159/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "General flowering-plant evidence on apical dominance, axillary bud release, auxin transport, cytokinin, strigolactone, sugars, and the limits of single-signal explanations for shoot branching."
+  },
+  {
+    "id": "plant-bud-light-hormone-review-2019",
+    "title": "Light Regulation of Axillary Bud Outgrowth Along Plant Axes: An Overview of the Roles of Sugars and Hormones",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2019,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6813921/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "General plant evidence linking light quantity and quality with axillary bud outgrowth through interacting sugar, auxin, cytokinin, strigolactone, and abscisic-acid pathways."
+  },
+  {
+    "id": "cannabis-architecture-pruning-2021",
+    "title": "Shape Matters: Plant Architecture Affects Chemical Uniformity in Large-Size Medical Cannabis Plants",
+    "publisher": "Plants",
+    "year": 2021,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8468686/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Drug-type Cannabis sativa responses to pruning, primary- and secondary-branch removal, defoliation, canopy light gradients, plant height, architectural plasticity, inflorescence yield, and within-plant chemical uniformity."
+  },
+  {
+    "id": "cannabis-pruning-cbd-2022",
+    "title": "Impact of Harvest Time and Pruning Technique on Total CBD Concentration and Yield of Medicinal Cannabis",
+    "publisher": "Plants",
+    "year": 2022,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8747189/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Indoor Cannabis sativa architecture and biomass response in one chemotype-III genotype under apical cutting, side-shoot removal, and unpruned control treatments; supports treatment-specific observations rather than universal pruning rules."
+  },
+  {
+    "id": "plant-branch-junction-biomechanics-2023",
+    "title": "Physiological and Physical Strategies to Minimize Damage at the Branch–Stem Junction of Trees: Using the Finite Element Method to Analyze Stress in Four Branch–Stem Features",
+    "publisher": "Plants",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10707858/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "General woody-plant branch–stem junction biomechanics and finite-element evidence showing that attachment geometry, thickening, load transfer, and stress concentration affect mechanical behavior; used conceptually, not as Cannabis-specific strength data."
+  }
+]

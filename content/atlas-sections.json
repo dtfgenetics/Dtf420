@@ -27,9 +27,9 @@
     "id": "nodes_branching",
     "label": "Nodes & Branching",
     "clickTarget": "nodes",
-    "summary": "Nodes, internodes, axillary buds, branch formation, apical dominance, pruning, topping, FIM, LST, mainlining, and SCROG.",
+    "summary": "Node and phytomer anatomy, axillary-bud establishment and release, apical dominance, phyllotaxy, developmental transitions, pruning plasticity, topping, FIM, LST, mainlining, SCROG, and branch biomechanics.",
     "firstAsset": "Node anatomy diagram",
-    "topics": ["Node anatomy", "Internodes", "Axillary buds", "Apical dominance", "Topping", "FIM", "LST", "Mainlining", "SCROG"]
+    "topics": ["Node anatomy", "Internodes", "Axillary buds", "Bud activation", "Apical dominance", "Hormone and sugar signaling", "Phyllotaxy", "Developmental nodes", "Pruning response", "Topping", "FIM", "LST", "Mainlining", "SCROG", "Branch biomechanics"]
   },
   {
     "id": "leaves",

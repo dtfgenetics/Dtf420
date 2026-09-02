@@ -42,10 +42,10 @@
     "modelTarget": "plant.nodes",
     "hotspot": { "x": 34, "y": 43 },
     "camera": { "yaw": -22, "pitch": -2, "zoom": 1.75 },
-    "layers": ["overview", "anatomy", "physiology", "diagnostics"],
-    "microTitle": "Axillary bud region",
-    "dataTitle": "Branch architecture",
-    "keyFunctions": ["Attach leaves to the stem", "House axillary buds", "Organize branch development", "Respond to pruning and directional training"]
+    "layers": ["overview", "anatomy", "physiology", "micro", "diagnostics"],
+    "microTitle": "Axillary meristem & bud region",
+    "dataTitle": "Bud activation, phyllotaxy & branch architecture",
+    "keyFunctions": ["Join leaves, buds, and branches to repeated phytomers", "House axillary meristems and buds", "Coordinate branch activation and vascular integration", "Reorganize shoot architecture after pruning and directional training"]
   },
   {
     "id": "leaves",
