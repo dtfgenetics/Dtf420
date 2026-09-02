@@ -95,7 +95,7 @@ const representativeHtml = [
   "learn/atlas/leaves/leaf-tissue-anatomy/index.html",
   "learn/atlas/flowers/bract-ovary-and-stigma-anatomy/index.html",
   "learn/atlas/trichomes-resin/head-stipe-and-stalk-specialization/index.html",
-  "learn/atlas/sex-pollen-seeds/sex-chromosomes-and-early-gene-regulation/index.html",
+  "learn/atlas/sex-pollen-seed/sex-chromosomes-and-early-gene-regulation/index.html",
   "learn/atlas/environment-overlay/co2-diffusion-and-photosynthetic-response/index.html",
   "learn/atlas/diagnostic-overlay/evidence-weighting-and-confirmatory-testing/index.html",
   "learn/cultivation-science/outdoor-site-and-sun-mapping/index.html",
