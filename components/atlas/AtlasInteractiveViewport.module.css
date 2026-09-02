@@ -1,0 +1,446 @@
+.viewport {
+  --atlas-accent: #a7d95f;
+  position: relative;
+  min-height: 760px;
+  overflow: hidden;
+  border: 1px solid rgba(181, 205, 119, 0.24);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 52% 30%, rgba(70, 100, 66, 0.3), transparent 35%),
+    radial-gradient(circle at 50% 78%, rgba(121, 100, 55, 0.12), transparent 28%),
+    linear-gradient(145deg, #07100c 0%, #0a1510 45%, #0b110d 100%);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.34), 0 28px 80px rgba(0, 0, 0, 0.28);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.viewport::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.34), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.28));
+  z-index: 2;
+}
+
+.viewport:fullscreen {
+  border-radius: 0;
+  min-height: 100vh;
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.environmentGlow {
+  position: absolute;
+  inset: 7% 13% 18%;
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: blur(24px);
+  background: radial-gradient(circle, rgba(145, 211, 104, 0.16), rgba(49, 109, 77, 0.05) 45%, transparent 72%);
+  pointer-events: none;
+}
+
+.layer_environment .environmentGlow {
+  opacity: 0.95;
+  background: radial-gradient(circle, rgba(97, 179, 183, 0.22), rgba(49, 112, 116, 0.08) 48%, transparent 73%);
+}
+
+.layer_diagnostics .environmentGlow {
+  opacity: 0.9;
+  background: radial-gradient(circle, rgba(214, 174, 79, 0.18), rgba(137, 93, 36, 0.06) 48%, transparent 73%);
+}
+
+.layer_micro .environmentGlow {
+  opacity: 0.9;
+  background: radial-gradient(circle, rgba(199, 218, 116, 0.2), rgba(67, 95, 50, 0.05) 50%, transparent 72%);
+}
+
+.gridFloor {
+  position: absolute;
+  z-index: 0;
+  left: 9%;
+  right: 9%;
+  bottom: -11%;
+  height: 34%;
+  opacity: 0.22;
+  transform: perspective(700px) rotateX(67deg);
+  transform-origin: center bottom;
+  background-image:
+    linear-gradient(rgba(157, 181, 116, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 181, 116, 0.16) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse at center, #000, transparent 68%);
+}
+
+.plantModel {
+  position: absolute;
+  z-index: 1;
+  inset: 3% 16% 2%;
+  transform-style: preserve-3d;
+  transform-origin: 50% 57%;
+  transition: transform 180ms ease-out, filter 180ms ease-out;
+  filter: drop-shadow(0 28px 28px rgba(0, 0, 0, 0.42));
+  will-change: transform;
+}
+
+.dragging .plantModel {
+  transition: filter 180ms ease-out;
+}
+
+.plantArt {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rootMass path,
+.branches path,
+.pistils path {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.rootMass path {
+  stroke: url(#atlasRoot);
+  stroke-width: 7;
+  opacity: 0.94;
+}
+
+.rootMass path:nth-child(n + 4) {
+  stroke-width: 4;
+  opacity: 0.78;
+}
+
+.branches path {
+  stroke: #6c7e52;
+  stroke-width: 9;
+}
+
+.leaves path {
+  stroke: rgba(190, 212, 138, 0.2);
+  stroke-width: 1.8;
+}
+
+.flowers ellipse {
+  stroke: rgba(222, 226, 181, 0.2);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(181, 199, 128, 0.12));
+}
+
+.pistils path {
+  stroke: #c79d77;
+  stroke-width: 3.2;
+}
+
+.nodes circle {
+  fill: #bfce78;
+  stroke: rgba(13, 33, 20, 0.9);
+  stroke-width: 3;
+}
+
+.soil {
+  fill: rgba(58, 43, 29, 0.7);
+}
+
+.layer_anatomy .plantArt {
+  filter: saturate(0.9) contrast(1.06);
+}
+
+.layer_physiology .stem,
+.layer_physiology .branches path {
+  filter: drop-shadow(0 0 7px rgba(147, 207, 111, 0.62));
+}
+
+.layer_micro .flowers ellipse {
+  filter: drop-shadow(0 0 14px rgba(206, 223, 127, 0.48));
+}
+
+.layer_diagnostics .leaves path {
+  filter: sepia(0.14) saturate(1.05);
+}
+
+.viewerTools {
+  position: absolute;
+  z-index: 6;
+  top: 48%;
+  left: 14px;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgba(201, 214, 142, 0.18);
+  border-radius: 16px;
+  background: rgba(7, 15, 10, 0.82);
+  backdrop-filter: blur(18px);
+  transform: translateY(-50%);
+}
+
+.viewerTools button {
+  display: grid;
+  place-items: center;
+  gap: 0.18rem;
+  min-width: 64px;
+  min-height: 64px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: transparent;
+  color: #d8deb8;
+  cursor: pointer;
+  font-size: 1.28rem;
+}
+
+.viewerTools button:last-child {
+  border-bottom: 0;
+}
+
+.viewerTools button:hover,
+.viewerTools button:focus-visible {
+  background: rgba(111, 143, 75, 0.18);
+  color: #ecf1c3;
+  outline: none;
+}
+
+.viewerTools span {
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: 174px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(198, 215, 135, 0.21);
+  border-radius: 13px;
+  padding: 0.48rem 0.62rem 0.48rem 0.48rem;
+  background: rgba(8, 17, 11, 0.74);
+  color: rgba(236, 240, 211, 0.88);
+  text-align: left;
+  backdrop-filter: blur(13px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.hotspot:hover,
+.hotspot:focus-visible,
+.hotspotActive {
+  border-color: rgba(187, 222, 96, 0.74);
+  background: rgba(31, 49, 21, 0.92);
+  box-shadow: 0 0 0 1px rgba(181, 221, 92, 0.12), 0 0 28px rgba(157, 207, 80, 0.16);
+  transform: translate(-50%, -50%) scale(1.04);
+  outline: none;
+}
+
+.hotspot > i {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  border: 2px solid #e7efb5;
+  border-radius: 50%;
+  background: #89b653;
+  box-shadow: 0 0 0 4px rgba(159, 206, 92, 0.16), 0 0 16px rgba(159, 206, 92, 0.58);
+}
+
+.hotspot > span {
+  display: grid;
+  min-width: 0;
+}
+
+.hotspot strong {
+  color: #e0e6be;
+  font-size: 0.71rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hotspot small {
+  overflow: hidden;
+  color: rgba(229, 236, 203, 0.56);
+  font-size: 0.58rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layerPanel {
+  position: absolute;
+  z-index: 7;
+  right: 15px;
+  bottom: 15px;
+  display: grid;
+  width: 154px;
+  padding: 0.65rem;
+  border: 1px solid rgba(198, 215, 135, 0.18);
+  border-radius: 16px;
+  background: rgba(8, 16, 11, 0.82);
+  backdrop-filter: blur(16px);
+}
+
+.layerPanel > span {
+  margin-bottom: 0.4rem;
+  color: rgba(224, 231, 194, 0.6);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.layerPanel button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 34px;
+  border: 0;
+  border-radius: 9px;
+  padding: 0 0.52rem;
+  background: transparent;
+  color: rgba(230, 236, 207, 0.58);
+  cursor: pointer;
+  font-size: 0.66rem;
+  text-align: left;
+}
+
+.layerPanel button:hover,
+.layerPanel button:focus-visible,
+.layerPanel .layerActive {
+  background: rgba(117, 157, 63, 0.2);
+  color: #edf2c7;
+  outline: none;
+}
+
+.layerPanel i {
+  color: #a7d95f;
+  font-style: normal;
+}
+
+.rotationHint {
+  position: absolute;
+  z-index: 6;
+  bottom: 18px;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  min-width: 188px;
+  padding: 0.62rem 0.85rem;
+  border: 1px solid rgba(218, 225, 168, 0.32);
+  border-radius: 999px;
+  background: rgba(6, 13, 9, 0.78);
+  color: #e0dfbc;
+  transform: translateX(-50%);
+  backdrop-filter: blur(14px);
+}
+
+.rotationHint strong {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.rotationHint span {
+  color: rgba(228, 233, 207, 0.54);
+  font-size: 0.58rem;
+}
+
+@media (max-width: 900px) {
+  .viewport {
+    min-height: 660px;
+    border-radius: 22px;
+  }
+
+  .plantModel {
+    inset: 2% 7% 5%;
+  }
+
+  .viewerTools {
+    top: auto;
+    bottom: 14px;
+    left: 12px;
+    grid-auto-flow: column;
+    transform: none;
+  }
+
+  .viewerTools button {
+    min-width: 54px;
+    min-height: 50px;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    border-bottom: 0;
+  }
+
+  .viewerTools span {
+    display: none;
+  }
+
+  .layerPanel {
+    right: 12px;
+    bottom: 72px;
+    width: 140px;
+  }
+
+  .rotationHint {
+    display: none;
+  }
+
+  .hotspot {
+    max-width: 126px;
+    padding: 0.42rem;
+  }
+
+  .hotspot small {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .viewport {
+    min-height: 590px;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .plantModel {
+    inset: 4% 2% 8%;
+  }
+
+  .hotspot {
+    max-width: 44px;
+    border-radius: 999px;
+    padding: 0.4rem;
+  }
+
+  .hotspot > span {
+    display: none;
+  }
+
+  .hotspot > i {
+    width: 16px;
+    height: 16px;
+  }
+
+  .layerPanel {
+    top: 12px;
+    right: 12px;
+    bottom: auto;
+    width: auto;
+    max-width: calc(100% - 24px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .layerPanel > span {
+    grid-column: 1 / -1;
+  }
+
+  .layerPanel button {
+    justify-content: center;
+    padding-inline: 0.35rem;
+    font-size: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plantModel,
+  .hotspot {
+    transition: none;
+  }
+}
