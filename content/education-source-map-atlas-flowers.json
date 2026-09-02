@@ -1,0 +1,21 @@
+{
+  "/learn/atlas/flowers/inflorescence-architecture-and-condensed-phytomers": [
+    "cannabis-florogenesis-2019",
+    "cannabis-photoperiod-flowering-2024",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "/learn/atlas/flowers/floral-meristem-branching-and-photoperiod": [
+    "cannabis-photoperiod-flowering-2024",
+    "cannabis-florogenesis-2019",
+    "cannabis-floral-ontogeny-transcriptome-2026"
+  ],
+  "/learn/atlas/flowers/bract-ovary-and-stigma-anatomy": [
+    "cannabis-florogenesis-2019",
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-floral-ontogeny-transcriptome-2026"
+  ],
+  "/learn/atlas/flowers/maturation-senescence-and-bract-change": [
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-trichome-development-2023"
+  ]
+}
