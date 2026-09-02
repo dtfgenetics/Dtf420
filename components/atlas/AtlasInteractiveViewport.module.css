@@ -74,19 +74,65 @@
   mask-image: radial-gradient(ellipse at center, #000, transparent 68%);
 }
 
+.threeStage {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.threeStage[data-runtime-state="ready"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.threeFrame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #08100b;
+}
+
+.rendererStatus {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(193, 211, 137, 0.18);
+  border-radius: 999px;
+  background: rgba(7, 14, 9, 0.64);
+  color: rgba(230, 237, 206, 0.58);
+  font-size: 0.54rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
 .plantModel {
   position: absolute;
   z-index: 1;
   inset: 3% 16% 2%;
   transform-style: preserve-3d;
   transform-origin: 50% 57%;
-  transition: transform 180ms ease-out, filter 180ms ease-out;
+  transition: transform 180ms ease-out, filter 180ms ease-out, opacity 180ms ease;
   filter: drop-shadow(0 28px 28px rgba(0, 0, 0, 0.42));
   will-change: transform;
 }
 
+.plantModelHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .dragging .plantModel {
-  transition: filter 180ms ease-out;
+  transition: filter 180ms ease-out, opacity 180ms ease;
 }
 
 .plantArt {
@@ -403,6 +449,11 @@
     inset: 4% 2% 8%;
   }
 
+  .rendererStatus {
+    top: auto;
+    bottom: 72px;
+  }
+
   .hotspot {
     max-width: 44px;
     border-radius: 999px;
@@ -440,7 +491,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .plantModel,
-  .hotspot {
+  .hotspot,
+  .threeStage {
     transition: none;
   }
 }
