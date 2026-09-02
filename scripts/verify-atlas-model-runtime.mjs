@@ -58,7 +58,7 @@ for (const entity of requiredEntities) {
   if (!mappedEntities.includes(entity)) throw new Error(`Atlas model manifest is missing semantic mapping for ${entity}.`);
 }
 
-const modelPath = path.join(runtimeDir, "models", manifest.model.replace(/^\.\//, ""));
+const modelPath = path.join(runtimeDir, manifest.model.replace(/^\.\//, ""));
 let modelExists = true;
 try { await access(modelPath); } catch { modelExists = false; }
 
