@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-02",
+  "purpose": "Track unreleased THC Living Plant Atlas 3D specimen candidates outside the public runtime until rights, geometry, botanical review, anatomy mapping, and browser-performance gates are complete.",
+  "performanceBudget": {
+    "desktop": {
+      "maxTriangles": 250000,
+      "maxGlbBytes": 20000000,
+      "maxTextureEdge": 4096
+    },
+    "mobile": {
+      "maxTriangles": 90000,
+      "maxGlbBytes": 10000000,
+      "maxTextureEdge": 2048
+    }
+  },
+  "requiredSemanticEntities": [
+    "root_system",
+    "stem_vascular",
+    "nodes_branching",
+    "leaves",
+    "flowers",
+    "trichomes_resin",
+    "sex_pollen_seed"
+  ],
+  "candidates": [
+    {
+      "id": "zbrojmistrz-cannabis-sativa-2023",
+      "role": "primary-candidate",
+      "status": "blocked-acquisition",
+      "title": "Cannabis Sativa plant",
+      "creator": "Zbrojmistrz",
+      "source": {
+        "provider": "Sketchfab",
+        "url": "https://sketchfab.com/3d-models/cannabis-sativa-plant-ea31a5768c06457ea2fd67c3eb3458b8",
+        "publishedDate": "2023-05-04",
+        "listingReviewedAt": "2026-09-02",
+        "listingNotes": "Listing describes a detailed, fully textured realistic plant. Bucket and plant are separate objects."
+      },
+      "rights": {
+        "state": "listing-indicates-attribution-license",
+        "licenseLabel": "Creative Commons Attribution",
+        "licenseVersion": null,
+        "rightsBasis": "The public Sketchfab listing states CC Attribution. The exact license version and downloaded-package license must still be preserved and verified during ingest before public redistribution.",
+        "attributionRequired": true,
+        "attributionText": "Cannabis Sativa plant by Zbrojmistrz via Sketchfab — Creative Commons Attribution; exact version to be confirmed from the acquired package.",
+        "publicWebsiteUseApproved": false,
+        "modificationApproved": false,
+        "redistributionApproved": false
+      },
+      "sourceReportedGeometry": {
+        "triangles": 40800,
+        "vertices": 27500,
+        "meshes": null,
+        "textures": "fully textured",
+        "potSeparate": true
+      },
+      "acquisition": {
+        "state": "not-ingested",
+        "localCandidatePath": null,
+        "sha256": null,
+        "fileBytes": null,
+        "reason": "The public listing is downloadable through the marketplace, but the binary has not been acquired into the reviewed DTF asset intake lane."
+      },
+      "atlasFit": {
+        "fullCanopyPresent": "pending-review",
+        "exposedRootsPresent": "no",
+        "potOrSceneryBakedIntoPlant": "pending-review",
+        "floweringMorphology": "pending-review",
+        "botanicalReview": "pending",
+        "semanticMeshMapping": "pending",
+        "mobileLod": "pending",
+        "notes": [
+          "Strong source-reported web triangle budget.",
+          "Remove or exclude the separate bucket during conversion.",
+          "A botanically plausible exposed root system still needs to be supplied and integrated.",
+          "Do not promote solely from listing screenshots; inspect the acquired geometry and textures directly."
+        ]
+      },
+      "measuredQa": null,
+      "releaseEligible": false
+    },
+    {
+      "id": "a23d-cannabis-002707a",
+      "role": "quality-benchmark",
+      "status": "benchmark-only",
+      "title": "Cannabis Plant",
+      "creator": "A23D",
+      "source": {
+        "provider": "A23D",
+        "url": "https://www.a23d.co/3dmodel/cannabisplant-002707A",
+        "assetId": "002707A",
+        "listingReviewedAt": "2026-09-02",
+        "listingNotes": "Human-made commercial reference with GLTF availability, PBR metallic/roughness materials, two meshes, and 4K/2K/1K texture options."
+      },
+      "rights": {
+        "state": "commercial-license-required",
+        "licenseLabel": "A23D subscription/EULA",
+        "licenseVersion": null,
+        "rightsBasis": "Use as a visual and technical benchmark only unless an appropriate A23D license is acquired and its redistribution terms are reviewed for the public website asset.",
+        "attributionRequired": null,
+        "attributionText": null,
+        "publicWebsiteUseApproved": false,
+        "modificationApproved": false,
+        "redistributionApproved": false
+      },
+      "sourceReportedGeometry": {
+        "triangles": null,
+        "vertices": 859344,
+        "faces": 418384,
+        "meshes": 2,
+        "materials": 2,
+        "textureSizes": [4096, 2048, 1024],
+        "pbrWorkflow": "metallic-roughness"
+      },
+      "acquisition": {
+        "state": "not-ingested",
+        "localCandidatePath": null,
+        "sha256": null,
+        "fileBytes": null,
+        "reason": "Commercial account/license required. This record is not authorization to download or redistribute the asset."
+      },
+      "atlasFit": {
+        "fullCanopyPresent": "pending-review",
+        "exposedRootsPresent": "pending-review",
+        "potOrSceneryBakedIntoPlant": "no-per-listing-category",
+        "floweringMorphology": "pending-review",
+        "botanicalReview": "pending",
+        "semanticMeshMapping": "pending",
+        "mobileLod": "required",
+        "notes": [
+          "Useful fidelity benchmark for PBR materials and mature plant silhouette.",
+          "Source-reported face/vertex density is above the preferred live desktop budget and would require optimization plus a dedicated mobile LOD.",
+          "Benchmark-only until license and binary acquisition are explicitly approved."
+        ]
+      },
+      "measuredQa": null,
+      "releaseEligible": false
+    }
+  ]
+}
