@@ -35,9 +35,9 @@
     "id": "leaves",
     "label": "Leaves",
     "clickTarget": "leaves",
-    "summary": "Leaf anatomy, photosynthesis, stomata, transpiration, chlorosis, necrosis, leaf curl, nutrient clues, pest damage, and environmental stress.",
+    "summary": "Leaf tissue anatomy, morphogenesis, leaflet complexity, photosynthesis, stomata, transpiration, leaf age, energy balance, inspection, and observation-first symptom interpretation.",
     "firstAsset": "Healthy leaf reference plate",
-    "topics": ["Leaf Anatomy", "Photosynthesis", "Stomata", "Transpiration", "Chlorosis", "Necrosis", "Leaf Curl", "Nutrient Symptoms", "Pest Damage", "Environmental Stress"]
+    "topics": ["Leaf tissue anatomy", "Leaf morphogenesis", "Leaflet complexity", "Venation", "Photosynthesis", "Leaf age", "Stomata", "Transpiration", "Energy balance", "Stomatal sampling", "Symptom patterns", "Leaf inspection"]
   },
   {
     "id": "flowers",

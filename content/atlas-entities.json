@@ -55,9 +55,9 @@
     "hotspot": { "x": 31, "y": 29 },
     "camera": { "yaw": -28, "pitch": -10, "zoom": 1.5 },
     "layers": ["overview", "anatomy", "physiology", "micro", "environment", "diagnostics"],
-    "microTitle": "Stomata & epidermis",
-    "dataTitle": "Photosynthesis & gas exchange",
-    "keyFunctions": ["Capture light", "Exchange carbon dioxide and water vapor", "Drive transpiration", "Export photosynthate to sinks"]
+    "microTitle": "Epidermis, mesophyll & stomata",
+    "dataTitle": "Morphogenesis, leaf age & gas exchange",
+    "keyFunctions": ["Capture light and fix carbon", "Exchange carbon dioxide and water vapor through stomata", "Move water and assimilates through leaf veins", "Change morphology and photosynthetic capacity across development and leaf age"]
   },
   {
     "id": "flowers",

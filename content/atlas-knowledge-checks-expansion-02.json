@@ -1,0 +1,34 @@
+[
+  {
+    "id": "leaves-tissue-anatomy",
+    "route": "/learn/atlas/leaves/leaf-tissue-anatomy",
+    "prompt": "Which sequence best describes major tissue regions visible in a simplified Cannabis leaf cross-section from the upper surface toward the lower surface?",
+    "options": ["Upper epidermis, palisade mesophyll, spongy mesophyll with vascular tissues, then lower epidermis", "Pith, vascular cambium, secondary xylem, then cork", "Seed coat, endosperm, cotyledon, then radicle", "Stigma, anther, ovule, then pollen sac"],
+    "correctIndex": 0,
+    "explanation": "Cannabis leaf sections show epidermal surfaces enclosing differentiated mesophyll, including a palisade region and spongy parenchyma, with vascular bundles and supporting tissues associated with the veins and midrib."
+  },
+  {
+    "id": "leaves-morphogenesis-complexity",
+    "route": "/learn/atlas/leaves/leaf-morphogenesis-and-leaflet-complexity",
+    "prompt": "Why should leaflet number on one Cannabis leaf not be treated as a universal developmental clock?",
+    "options": ["Leaflet complexity changes with development, genotype, and growing context, so published node-by-node patterns describe the studied plants rather than every Cannabis plant", "Every Cannabis plant produces exactly nine leaflets at the same node", "Leaflet number is determined only by root-zone pH", "Leaflet number directly measures cannabinoid concentration"],
+    "correctIndex": 0,
+    "explanation": "Cannabis studies document systematic changes in leaflet complexity across development, but the exact sequence and node numbers belong to specific genotypes and conditions. The Atlas uses those patterns as developmental examples, not a universal clock."
+  },
+  {
+    "id": "leaves-age-photosynthetic-capacity",
+    "route": "/learn/atlas/leaves/leaf-age-and-photosynthetic-capacity",
+    "prompt": "What did repeated measurements in a hemp crown show about fully expanded leaves as they aged?",
+    "options": ["Photosynthetic capacity declined with leaf age even while leaves could remain visibly green", "Photosynthetic capacity always increased until leaf abscission", "Leaf age had no measurable relationship with gas exchange", "Any green leaf had identical photosynthetic capacity regardless of age"],
+    "correctIndex": 0,
+    "explanation": "In the studied hemp cultivar, several photosynthetic-capacity measures declined after full expansion while visual greenness changed much less. This is why leaf color alone cannot quantify current photosynthetic performance."
+  },
+  {
+    "id": "leaves-stomatal-sampling-context",
+    "route": "/learn/atlas/leaves/stomatal-traits-and-sampling-context",
+    "prompt": "Why should a stomatal density value measured on one Cannabis sample not automatically be used as a species-wide reference?",
+    "options": ["Stomatal traits can differ with genotype, ploidy, leaf surface, development, and growing conditions", "Stomata occur only on roots", "All Cannabis leaves have exactly the same stomatal density", "Stomatal density is determined by flower color alone"],
+    "correctIndex": 0,
+    "explanation": "Cannabis experiments have measured differences in stomatal size and density under different biological contexts, including ploidy. Reliable comparisons therefore require consistent leaf surface, developmental stage, genotype, and sampling method."
+  }
+]

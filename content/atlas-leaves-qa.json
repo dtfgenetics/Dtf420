@@ -1,0 +1,18 @@
+{
+  "system": "leaves",
+  "expectedSystemLessonCount": 10,
+  "expectedCanonicalAtlasLessonCount": 72,
+  "newRoutes": [
+    "/learn/atlas/leaves/leaf-tissue-anatomy",
+    "/learn/atlas/leaves/leaf-morphogenesis-and-leaflet-complexity",
+    "/learn/atlas/leaves/leaf-age-and-photosynthetic-capacity",
+    "/learn/atlas/leaves/stomatal-traits-and-sampling-context"
+  ],
+  "requiredEvidenceBoundaries": [
+    "Cannabis leaf anatomy claims remain structural unless supported by physiology studies",
+    "Published leaflet-count and node sequences remain genotype- and condition-specific examples",
+    "Leaf-age response curves are not universal defoliation schedules",
+    "Stomatal size and density values remain tied to genotype, ploidy, development, surface, and sampling method",
+    "Single-leaf photosynthesis is not a stand-alone yield predictor"
+  ]
+}
