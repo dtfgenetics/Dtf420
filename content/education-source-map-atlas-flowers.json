@@ -1,4 +1,33 @@
 {
+  "/learn/atlas/flowers/female-flower-anatomy": [
+    "cannabis-female-reproductive-anatomy-2026",
+    "cannabis-florogenesis-2019",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "/learn/atlas/flowers/flower-initiation": [
+    "cannabis-florogenesis-2019",
+    "cannabis-floral-ontogeny-transcriptome-2026",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "/learn/atlas/flowers/bud-development": [
+    "cannabis-florogenesis-2019",
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-trichome-development-2023"
+  ],
+  "/learn/atlas/flowers/pollination-response": [
+    "cannabis-female-reproductive-anatomy-2026",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "/learn/atlas/flowers/maturity-and-risk-inspection": [
+    "cannabis-trichome-development-2023",
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-greenhouse-pathogens-2024"
+  ],
+  "/learn/atlas/flowers/photoperiod-sensing-and-floral-transition": [
+    "cannabis-photoperiod-flowering-2024",
+    "cannabis-florogenesis-2019",
+    "cannabis-floral-ontogeny-transcriptome-2026"
+  ],
   "/learn/atlas/flowers/inflorescence-architecture-and-condensed-phytomers": [
     "cannabis-florogenesis-2019",
     "cannabis-photoperiod-flowering-2024",
