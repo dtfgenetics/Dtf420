@@ -96,6 +96,11 @@ export function LivingPlantAtlas() {
     else if (selectedId === "environment_overlay" || selectedId === "diagnostic_overlay") setSelectedId("leaves");
   }
 
+  function changePanelTab(tab: PanelTab) {
+    setPanelTab(tab);
+    if (tab === "micro" && selectedEntity.layers.includes("micro")) setLayer("micro");
+  }
+
   return (
     <div className={`${styles.atlasShell} ${lightOn ? styles.lightOn : styles.lightOff}`}>
       <section className={styles.appFrame} aria-label="THC Living Plant Atlas interactive explorer">
@@ -140,15 +145,24 @@ export function LivingPlantAtlas() {
             onLayerChange={changeLayer}
             onSelect={selectEntity}
             statusForEntity={statusForEntity}
+            lightOn={lightOn}
           />
         </main>
 
         <aside className={styles.inspector} aria-live="polite">
           <div className={styles.inspectorTabs} role="tablist" aria-label="Selected structure information modes">
             {(["info", "micro", "data", "notes"] as PanelTab[]).map((tab) => (
-              <button key={tab} type="button" role="tab" aria-selected={panelTab === tab} className={panelTab === tab ? styles.tabActive : ""} onClick={() => setPanelTab(tab)}>
+              <button
+                key={tab}
+                type="button"
+                role="tab"
+                aria-label={tab}
+                aria-selected={panelTab === tab}
+                className={panelTab === tab ? styles.tabActive : ""}
+                onClick={() => changePanelTab(tab)}
+              >
                 <i aria-hidden="true">{tab === "info" ? "ⓘ" : tab === "micro" ? "⌕" : tab === "data" ? "▥" : "▤"}</i>
-                <span>{tab}</span>
+                <span aria-hidden="true">{tab}</span>
               </button>
             ))}
           </div>
@@ -186,8 +200,8 @@ export function LivingPlantAtlas() {
               <section className={styles.detailMode}>
                 <p className={styles.modeKicker}>Microscopy layer</p>
                 <h3>{selectedEntity.microTitle}</h3>
-                <div className={styles.microPreview} aria-hidden="true"><span>⌕</span><b>Microscopy asset slot</b></div>
-                <p>This tab is now a first-class atlas mode. It will bind the selected 3D structure to microscopy, cutaway, and tissue-level assets without changing the hotspot or lesson IDs.</p>
+                <div className={styles.microPreview} aria-hidden="true"><span>⌕</span><b>3D tissue teaching view</b></div>
+                <p>The selected structure now switches the live plant into a schematic tissue-level 3D teaching layer. It is designed to connect to microscopy and cutaway assets while preserving the same hotspot, lesson, and evidence IDs.</p>
                 <Link href={sectionRoute(selectedSection)}>Open source-backed lessons</Link>
               </section>
             ) : null}
