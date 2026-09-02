@@ -24,5 +24,33 @@
     "trichomes": "trichomes_resin",
     "reproductive": "sex_pollen_seed"
   },
+  "semanticHotspots": {
+    "root_system": [
+      { "position": [0, 0.08, 0], "radius": 0.11 }
+    ],
+    "stem_vascular": [
+      { "position": [0, 0.39, 0], "radius": 0.065 }
+    ],
+    "nodes_branching": [
+      { "position": [-0.08, 0.52, 0], "radius": 0.075 },
+      { "position": [0.09, 0.64, 0], "radius": 0.075 }
+    ],
+    "leaves": [
+      { "position": [-0.48, 0.58, 0], "radius": 0.12 },
+      { "position": [0.48, 0.68, 0.02], "radius": 0.12 },
+      { "position": [-0.28, 0.75, -0.18], "radius": 0.1 }
+    ],
+    "flowers": [
+      { "position": [0, 0.91, 0], "radius": 0.12 },
+      { "position": [-0.26, 0.82, 0.02], "radius": 0.1 },
+      { "position": [0.26, 0.84, -0.02], "radius": 0.1 }
+    ],
+    "trichomes_resin": [
+      { "position": [0.18, 0.93, 0.04], "radius": 0.072 }
+    ],
+    "sex_pollen_seed": [
+      { "position": [0.1, 0.74, 0], "radius": 0.085 }
+    ]
+  },
   "provenance": "./MODEL_PROVENANCE.md"
 }
