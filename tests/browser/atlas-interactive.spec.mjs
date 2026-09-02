@@ -56,11 +56,12 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
   await expect.poll(() => fallback.getAttribute("style")).not.toBe(beforeTransform);
   await expect(runtime.locator("canvas")).toBeVisible();
 
-  await app.getByRole("button", { name: "Physiology", exact: true }).click();
+  const layerPanel = app.locator('[aria-label="Plant visualization layers"]');
+  await layerPanel.getByRole("button", { name: "Physiology", exact: true }).click();
   await expect(runtime.locator("#runtime-legend")).toContainText("conceptual xylem water movement");
   await expect(runtime.locator("#runtime-legend")).toContainText("amber particles");
 
-  await app.getByRole("button", { name: "Micro", exact: true }).click();
+  await layerPanel.getByRole("button", { name: "Micro", exact: true }).click();
   await expect(app.getByRole("button", { name: /Trichomes/i }).first()).toBeVisible();
   await expect(runtime.locator("#runtime-legend")).toContainText("schematic");
   await expectNoHorizontalOverflow(page);
