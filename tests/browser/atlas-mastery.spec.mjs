@@ -1,12 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
+import { loadAtlasKnowledgeChecks } from "./atlas-test-data.mjs";
 
 const modules = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-learning-modules.json"), "utf8"));
-const rawChecks = [
-  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks.json"), "utf8")),
-  ...JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-knowledge-checks-expansion-01.json"), "utf8")),
-];
+const rawChecks = loadAtlasKnowledgeChecks();
 const guidedPaths = JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/atlas-guided-paths.json"), "utf8"));
 const MASTERY_KEY = "dtf420.atlas.mastery.v1";
 
