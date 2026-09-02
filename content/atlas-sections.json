@@ -3,17 +3,17 @@
     "id": "seed_germination",
     "label": "Seed & Germination",
     "clickTarget": "seed",
-    "summary": "Seed anatomy, viability, germination conditions, radicle emergence, cotyledons, seedling transition, storage, and early failure points.",
+    "summary": "Achene and true-seed anatomy, imbibition, reserve mobilization, radicle emergence, cotyledon establishment, thermal response, water potential, salinity, vigor, aging, storage, pericarp effects, priming, and failure patterns.",
     "firstAsset": "Annotated seed anatomy plate",
-    "topics": ["Seed anatomy", "Seed viability", "Imbibition", "Radicle emergence", "Cotyledons", "Germination failures", "Seed storage"]
+    "topics": ["Seed anatomy", "Achene pericarp", "Imbibition", "Reserve mobilization", "Radicle emergence", "Cotyledons", "Germination rate", "Thermal response", "Water potential", "Salinity", "Seed vigor", "Seed aging", "Seed storage", "Pericarp resistance", "Priming", "Germination failures"]
   },
   {
     "id": "root_system",
     "label": "Root System",
     "clickTarget": "roots",
-    "summary": "Root structure, root hairs, rhizosphere, oxygen availability, water uptake, nutrient uptake, dryback, media interaction, and root disorders.",
+    "summary": "Root architecture, root-tip growth zones, lateral-root initiation, root hairs, rhizosphere exchange, radial water transport, aquaporins, oxygen availability, water and nutrient uptake, microbiomes, exudates, mycorrhizal interfaces, and root stress.",
     "firstAsset": "Root-zone cutaway diagram",
-    "topics": ["Primary root", "Lateral roots", "Root hairs", "Rhizosphere", "Root oxygen", "Water uptake", "Nutrient uptake", "Dryback", "Root disease"]
+    "topics": ["Primary root", "Adventitious roots", "Lateral roots", "Root cap", "Apical meristem", "Elongation zone", "Root hairs", "Rhizosphere", "Radial water transport", "Aquaporins", "Root oxygen", "Water uptake", "Nutrient uptake", "Root architecture", "Root microbiome", "Exudates", "Mycorrhizae", "Dryback", "Root stress"]
   },
   {
     "id": "stem_vascular",
@@ -59,24 +59,24 @@
     "id": "sex_pollen_seed",
     "label": "Sex, Pollen & Seeds",
     "clickTarget": "sex",
-    "summary": "Female flowers, male flowers, hermaphroditism, pollen sacs, pollination, fertilization, seed formation, seed maturity, and breeding basics.",
-    "firstAsset": "Male vs female flower comparison",
-    "topics": ["Female flowers", "Male flowers", "Hermaphroditism", "Pollen sacs", "Pollination", "Seed formation", "Controlled pollination"]
+    "summary": "Staminate and pistillate development, XX/XY chromosome context, early sex-biased regulation, ethylene-mediated sexual plasticity, mixed-sex expression, anther maturation and dehiscence, pollen biology and fitness, pollination, fertilization, seed formation, and controlled crossing.",
+    "firstAsset": "Male vs female reproductive-development comparison",
+    "topics": ["Female flowers", "Male flowers", "XX/XY chromosomes", "Sex-linked regulation", "Ethylene signaling", "Sexual plasticity", "Mixed-sex expression", "Anthers", "Anther dehiscence", "Pollen release", "Pollen viability", "Pollen germination", "Pollen storage", "Pollination", "Fertilization", "Seed formation", "Controlled pollination"]
   },
   {
     "id": "environment_overlay",
     "label": "Environment Overlay",
     "clickTarget": "environment",
-    "summary": "Whole-plant overlay for light, temperature, humidity, VPD, airflow, water, nutrients, pH, EC, CO2, and their interactions.",
-    "firstAsset": "Environmental interaction map",
-    "topics": ["Light", "Temperature", "Humidity", "VPD", "Airflow", "CO2", "Water", "Nutrients", "pH", "EC"]
+    "summary": "Coupled whole-plant environment overlay for PPFD, DLI, photoperiod, CO2, temperature, humidity, VPD, airflow, leaf energy balance, canopy light acclimation, water, root-zone supply, nutrients, pH, EC, and interacting limitations.",
+    "firstAsset": "Coupled environmental interaction map",
+    "topics": ["PPFD", "DLI", "Photoperiod", "CO2 diffusion", "Photosynthetic response", "Light acclimation", "Canopy position", "Temperature", "Humidity", "VPD", "Airflow", "Boundary layer", "Leaf temperature", "Water", "Root-zone oxygen", "Nutrients", "pH", "EC", "Coupled limitations"]
   },
   {
     "id": "diagnostic_overlay",
     "label": "Diagnostic Overlay",
     "clickTarget": "diagnostics",
-    "summary": "Symptom-location system for yellowing, browning, spots, curling, wilting, burnt tips, stunting, pest signs, mold signs, and root-zone clues.",
-    "firstAsset": "Symptom location map",
-    "topics": ["Yellowing", "Browning", "Spots", "Curling", "Wilting", "Burnt tips", "Stunting", "Pest signs", "Mold signs", "Root symptoms"]
+    "summary": "Observation-first diagnostic overlay for symptom location and progression, environmental and root-zone context, nutrient tissue analysis, root/crown biotic-versus-abiotic clues, senescence, pest and pathogen evidence, differential diagnosis, evidence weighting, and confirmatory testing.",
+    "firstAsset": "Evidence-weighted symptom and differential map",
+    "topics": ["Symptom location", "Pattern description", "Progression", "Measurement context", "Differential diagnosis", "Genotype × environment", "Tissue analysis", "Nutrient disorders", "Root symptoms", "Crown symptoms", "Biotic vs abiotic clues", "Senescence", "Pest signs", "Mold signs", "Evidence weighting", "Microscopy", "Pathogen assays", "Confirmatory testing"]
   }
 ]

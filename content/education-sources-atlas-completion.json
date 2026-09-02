@@ -1,0 +1,182 @@
+[
+  {
+    "id": "hemp-seed-thermal-limits-2022",
+    "title": "Temperature Limits for Seed Germination in Industrial Hemp (Cannabis sativa L.)",
+    "publisher": "Crops",
+    "year": 2022,
+    "url": "https://doi.org/10.3390/crops2040029",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis/hemp seed germination percentage and rate across constant temperatures, including cultivar-specific cardinal temperature estimates and priming effects. Use study-specific values as examples, not universal species thresholds."
+  },
+  {
+    "id": "hemp-seed-salinity-2025",
+    "title": "Geographical variation in seed germination of Hemp (Cannabis sativa L.) ecotypes under salinity conditions",
+    "publisher": "Journal of Applied Research on Medicinal and Aromatic Plants",
+    "year": 2025,
+    "url": "https://doi.org/10.1016/j.jarmap.2025.100650",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis/hemp ecotype variation in germination rate and seedling response as salinity and external water potential decline; supports genotype- and treatment-dependent interpretation."
+  },
+  {
+    "id": "cannabis-seed-storage-2012",
+    "title": "Temperature and Moisture Content for Storage Maintenance of Germination Capacity of Seeds of Industrial Hemp, Marijuana, and Ditchweed Forms of Cannabis sativa",
+    "publisher": "Journal of Natural Fibers",
+    "year": 2012,
+    "url": "https://doi.org/10.1080/15440478.2012.737179",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Long-term Cannabis seed germination capacity under combinations of storage temperature and seed moisture; supports storage-condition effects without assigning a universal shelf life."
+  },
+  {
+    "id": "hemp-seed-pericarp-priming-2022",
+    "title": "Seed Priming and Pericarp Removal Improve Germination in Low-Germinating Seed Lots of Industrial Hemp",
+    "publisher": "Crops",
+    "year": 2022,
+    "url": "https://doi.org/10.3390/crops2040028",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Low-germinating hemp seed lots, pericarp removal, osmotic or solid-matrix priming, vigor, and seedling recovery; supports context-dependent treatment effects rather than guaranteed rescue."
+  },
+  {
+    "id": "hemp-root-architecture-2026",
+    "title": "Diversity of root system architecture and root-shoot biomass allocation in industrial hemp (Cannabis sativa L.)",
+    "publisher": "PLOS ONE",
+    "year": 2026,
+    "url": "https://doi.org/10.1371/journal.pone.0339929",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis/hemp variation in total root length, root-system shape, lateral-root fraction, biomass allocation, heritability, and candidate root-architecture genes across diverse genotypes."
+  },
+  {
+    "id": "cannabis-root-trapr-2022",
+    "title": "Root-TRAPR: a modular plant growth device to visualize root development and monitor growth parameters, as applied to an elicitor response of Cannabis sativa",
+    "publisher": "Plant Methods",
+    "year": 2022,
+    "url": "https://doi.org/10.1186/s13007-022-00875-1",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Time-resolved Cannabis root growth and morphology, including increasing length, surface area, and formation of new lateral roots in a controlled imaging system."
+  },
+  {
+    "id": "cannabis-root-anatomy-2025",
+    "title": "Morphoanatomical, histochemical, and molecular characterization of female Cannabis plants from three Argentine strains",
+    "publisher": "Protoplasma",
+    "year": 2025,
+    "url": "https://doi.org/10.1007/s00709-025-02054-0",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis root anatomy including primary versus adventitious-root tissue organization and early secondary development; useful for Cannabis-specific tissue context."
+  },
+  {
+    "id": "plant-aquaporins-review-2015",
+    "title": "Aquaporins in Plants",
+    "publisher": "Physiological Reviews",
+    "year": 2015,
+    "url": "https://doi.org/10.1152/physrev.00008.2015",
+    "sourceType": "Peer-reviewed review",
+    "scope": "General vascular-plant aquaporin biology and regulated membrane water permeability. Used only for mechanisms that lack Cannabis-specific measurements; not evidence for Cannabis-specific flux rates."
+  },
+  {
+    "id": "cannabis-root-microbiome-review-2026",
+    "title": "Back to the roots: Cannabis sativa L. root metabolism, microbiomes, and biotechnological potential",
+    "publisher": "Applied Microbiology and Biotechnology",
+    "year": 2026,
+    "url": "https://doi.org/10.1007/s00253-026-13955-2",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Cannabis root metabolism, exudation, rhizosphere/endosphere microbiomes, and plant-microbe interactions; supports context-dependent association rather than guaranteed benefit."
+  },
+  {
+    "id": "cannabis-sex-xlinked-2026",
+    "title": "An X-linked sex determination mechanism in cannabis and hop",
+    "publisher": "Nature Communications",
+    "year": 2026,
+    "url": "https://doi.org/10.1038/s41467-026-73233-7",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Phased Cannabis sex chromosomes, X/Y evolution, and an X-linked ACS/ethylene-pathway mechanism associated with female inflorescence fate; supports chromosome-level context while avoiding one-gene explanations for all sex expression."
+  },
+  {
+    "id": "cannabis-ethylene-sex-plasticity-2026",
+    "title": "Sex-specific ethylene responses drive floral sexual plasticity in Cannabis sativa",
+    "publisher": "The Plant Journal",
+    "year": 2026,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41640034/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Multi-omic Cannabis evidence for sex-specific ethylene responses during induced floral sex change in XX and XY plants; distinguishes chromosome complement from phenotypic floral plasticity."
+  },
+  {
+    "id": "cannabis-anther-hermaphrodite-2020",
+    "title": "Hermaphroditism in Marijuana (Cannabis sativa L.) Inflorescences – Impact on Floral Morphology, Seed Formation, Progeny Sex Ratios, and Genetic Variation",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2020,
+    "url": "https://doi.org/10.3389/fpls.2020.00718",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis anther morphology, longitudinal dehiscence, pollen release and germination observations, and mixed-sex reproductive structures."
+  },
+  {
+    "id": "cannabis-pollen-storage-2020",
+    "title": "Development and Optimization of a Germination Assay and Long-Term Storage for Cannabis sativa Pollen",
+    "publisher": "Plants",
+    "year": 2020,
+    "url": "https://doi.org/10.3390/plants9050665",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis pollen germination assays, collection-stage effects, loss of viability during cool storage, desiccation/cryopreservation methods, and periodic viability testing."
+  },
+  {
+    "id": "cannabis-pollen-fitness-2022",
+    "title": "Methods for characterizing pollen fitness in Cannabis sativa L.",
+    "publisher": "PLOS ONE",
+    "year": 2022,
+    "url": "https://doi.org/10.1371/journal.pone.0270799",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis pollen non-abortion versus in-vitro germination, demonstrating that staining-based integrity and actual germination are distinct measures and that viability declines with time after dehiscence."
+  },
+  {
+    "id": "cannabis-photosynthesis-ppfd-co2-2008",
+    "title": "Photosynthetic response of Cannabis sativa L. to variations in photosynthetic photon flux densities, temperature and CO2 conditions",
+    "publisher": "Physiology and Molecular Biology of Plants",
+    "year": 2008,
+    "url": "https://doi.org/10.1007/s12298-008-0027-x",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis leaf gas exchange under varying PPFD, temperature, and CO2; supports coupled response teaching while keeping experimental genotype and chamber conditions explicit."
+  },
+  {
+    "id": "cannabis-dli-acclimation-2024",
+    "title": "Supplemental greenhouse lighting increased the water use efficiency, crop growth, and cutting production in Cannabis sativa",
+    "publisher": "Frontiers in Plant Science",
+    "year": 2024,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11190854/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis responses to contrasting daily light integrals and short-term PPFD, including photosynthetic acclimation and water-use responses; supports separating DLI from instantaneous PPFD."
+  },
+  {
+    "id": "cannabis-nutrient-disorders-2019",
+    "title": "Characterization of Nutrient Disorders of Cannabis sativa",
+    "publisher": "Applied Sciences",
+    "year": 2019,
+    "url": "https://doi.org/10.3390/app9204432",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Controlled single-nutrient deficiency and toxicity symptom progression paired with Cannabis tissue analysis; supports visual-plus-analytical diagnosis rather than image-only conclusions."
+  },
+  {
+    "id": "cannabis-foliar-deficiency-2023",
+    "title": "Foliar Symptomology, Nutrient Content, Yield, and Secondary Metabolite Variability of Cannabis Grown Hydroponically with Different Single-Element Nutrient Deficiencies",
+    "publisher": "Plants",
+    "year": 2023,
+    "url": "https://doi.org/10.3390/plants12030422",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis nutrient-deficiency symptom onset and progression with upper/lower canopy tissue analysis; shows that visual onset and foliar elemental analysis do not always align simply."
+  },
+  {
+    "id": "cannabis-pathogen-management-2024",
+    "title": "Integrated Management of Pathogens and Microbes in Cannabis sativa L. (Cannabis) under Greenhouse Conditions",
+    "publisher": "Plants",
+    "year": 2024,
+    "url": "https://doi.org/10.3390/plants13060786",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Cannabis root/crown, foliar, floral, and systemic disease patterns plus integrated diagnostics; explicitly notes that root browning can arise from pathogens or waterlogging and that confirmation matters."
+  },
+  {
+    "id": "cannabis-molecular-diagnostics-2023",
+    "title": "Challenges to Cannabis sativa Production from Pathogens and Microbes—The Role of Molecular Diagnostics and Bioinformatics",
+    "publisher": "Plants",
+    "year": 2023,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10779078/",
+    "sourceType": "Peer-reviewed research/review",
+    "scope": "Cannabis pathogen identification with PCR-based and genomic diagnostics, supporting confirmatory testing when visual disease symptoms are non-specific."
+  }
+]

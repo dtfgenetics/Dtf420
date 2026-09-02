@@ -3,17 +3,27 @@ import path from "node:path";
 
 const root = path.resolve("out");
 const manifestPath = path.resolve("deployment/static-overlay.json");
+const atlasModulesPath = path.resolve("content/atlas-learning-modules.json");
 
 if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) {
   throw new Error("Static export directory out/ is missing. Run npm run build:static-overlay first.");
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const atlasModules = JSON.parse(fs.readFileSync(atlasModulesPath, "utf8"));
 if (manifest.schemaVersion !== 1 || manifest.purpose !== "dtfseeds-wordpress-child-route-overlay") {
   throw new Error("Unexpected static overlay manifest schema/purpose.");
 }
 if (manifest.canonicalOrigin !== "https://dtfseeds.com") {
   throw new Error(`Wrong canonical origin: ${manifest.canonicalOrigin}`);
+}
+
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .replaceAll("&", "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 const forbiddenOwnership = new Set(["", "learn", "blog", "journal", "community", "games", "seeds", "tools"]);
@@ -54,6 +64,21 @@ for (const rel of [
   }
 }
 
+const canonicalAtlasLessonFiles = atlasModules.flatMap((atlasModule) =>
+  atlasModule.lessons.map((lesson) =>
+    `learn/atlas/${slugify(atlasModule.id)}/${slugify(lesson.title)}/index.html`,
+  ),
+);
+if (atlasModules.length !== 10 || canonicalAtlasLessonFiles.length !== 100) {
+  throw new Error(`Static overlay expects 10 Atlas systems and 100 lessons; found ${atlasModules.length} systems and ${canonicalAtlasLessonFiles.length} lessons.`);
+}
+for (const rel of canonicalAtlasLessonFiles) {
+  const target = path.join(root, rel);
+  if (!fs.existsSync(target) || !fs.statSync(target).isFile() || fs.statSync(target).size === 0) {
+    throw new Error(`Canonical Atlas lesson is missing from the static export: ${rel}`);
+  }
+}
+
 const nextStatic = path.join(root, "_next", "static");
 let nextAssetCount = 0;
 for (const entry of fs.readdirSync(nextStatic, { recursive: true, withFileTypes: true })) {
@@ -63,6 +88,16 @@ if (nextAssetCount < 5) throw new Error(`Static export has too few _next/static 
 
 const representativeHtml = [
   "learn/atlas/index.html",
+  "learn/atlas/seed-germination/thermal-limits-and-germination-rate/index.html",
+  "learn/atlas/root-system/root-tip-zones-and-apical-growth/index.html",
+  "learn/atlas/stem-vascular/hydraulic-disruption-and-embolism/index.html",
+  "learn/atlas/nodes-branching/axillary-bud-activation/index.html",
+  "learn/atlas/leaves/leaf-tissue-anatomy/index.html",
+  "learn/atlas/flowers/bract-ovary-and-stigma-anatomy/index.html",
+  "learn/atlas/trichomes-resin/head-stipe-and-stalk-specialization/index.html",
+  "learn/atlas/sex-pollen-seed/sex-chromosomes-and-early-gene-regulation/index.html",
+  "learn/atlas/environment-overlay/co2-diffusion-and-photosynthetic-response/index.html",
+  "learn/atlas/diagnostic-overlay/evidence-weighting-and-confirmatory-testing/index.html",
   "learn/cultivation-science/outdoor-site-and-sun-mapping/index.html",
   "learn/plant-health/two-spotted-spider-mite/index.html",
   "community/grow-offs/solo-cup-grow-off/index.html",
@@ -108,5 +143,7 @@ console.log(JSON.stringify({
   publishableIndexRoutes: routeCount,
   nextStaticFiles: nextAssetCount,
   requiredRoutes: manifest.requiredRoutes.length,
+  atlasSystems: atlasModules.length,
+  atlasLessons: canonicalAtlasLessonFiles.length,
   atlasRuntime: "learn/atlas/atlas-3d",
 }));

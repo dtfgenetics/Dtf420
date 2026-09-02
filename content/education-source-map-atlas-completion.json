@@ -1,0 +1,74 @@
+{
+  "/learn/atlas/seed-germination/thermal-limits-and-germination-rate": [
+    "hemp-seed-thermal-limits-2022"
+  ],
+  "/learn/atlas/seed-germination/water-potential-salinity-and-osmotic-stress": [
+    "hemp-seed-salinity-2025"
+  ],
+  "/learn/atlas/seed-germination/seed-vigor-aging-and-storage": [
+    "cannabis-seed-storage-2012"
+  ],
+  "/learn/atlas/seed-germination/pericarp-resistance-priming-and-low-vigor-germination": [
+    "hemp-seed-pericarp-priming-2022",
+    "hemp-seed-thermal-limits-2022"
+  ],
+  "/learn/atlas/root-system/root-tip-zones-and-apical-growth": [
+    "cannabis-root-anatomy-2025",
+    "cannabis-root-trapr-2022"
+  ],
+  "/learn/atlas/root-system/lateral-root-initiation-and-architecture-plasticity": [
+    "hemp-root-architecture-2026",
+    "cannabis-root-trapr-2022"
+  ],
+  "/learn/atlas/root-system/radial-water-transport-and-aquaporins": [
+    "plant-aquaporins-review-2015",
+    "cannabis-root-anatomy-2025"
+  ],
+  "/learn/atlas/root-system/root-microbiome-exudates-and-mycorrhizal-interfaces": [
+    "cannabis-root-microbiome-review-2026"
+  ],
+  "/learn/atlas/sex-pollen-seed/sex-chromosomes-and-early-gene-regulation": [
+    "cannabis-sex-xlinked-2026"
+  ],
+  "/learn/atlas/sex-pollen-seed/ethylene-mediated-sexual-plasticity": [
+    "cannabis-ethylene-sex-plasticity-2026",
+    "cannabis-sex-xlinked-2026"
+  ],
+  "/learn/atlas/sex-pollen-seed/anther-maturity-dehiscence-and-pollen-release": [
+    "cannabis-anther-hermaphrodite-2020"
+  ],
+  "/learn/atlas/sex-pollen-seed/pollen-viability-germination-and-storage": [
+    "cannabis-pollen-storage-2020",
+    "cannabis-pollen-fitness-2022"
+  ],
+  "/learn/atlas/environment-overlay/co2-diffusion-and-photosynthetic-response": [
+    "cannabis-photosynthesis-ppfd-co2-2008"
+  ],
+  "/learn/atlas/environment-overlay/ppfd-dli-and-photoperiod": [
+    "cannabis-dli-acclimation-2024",
+    "cannabis-photosynthesis-ppfd-co2-2008"
+  ],
+  "/learn/atlas/environment-overlay/light-acclimation-and-canopy-position": [
+    "cannabis-dli-acclimation-2024"
+  ],
+  "/learn/atlas/environment-overlay/coupled-environmental-limits": [
+    "cannabis-photosynthesis-ppfd-co2-2008",
+    "cannabis-dli-acclimation-2024"
+  ],
+  "/learn/atlas/diagnostic-overlay/nutrient-symptom-progression-and-tissue-analysis": [
+    "cannabis-nutrient-disorders-2019",
+    "cannabis-foliar-deficiency-2023"
+  ],
+  "/learn/atlas/diagnostic-overlay/root-and-crown-biotic-vs-abiotic-clues": [
+    "cannabis-pathogen-management-2024"
+  ],
+  "/learn/atlas/diagnostic-overlay/senescence-vs-disorder": [
+    "cannabis-foliar-deficiency-2023",
+    "cannabis-pathogen-management-2024"
+  ],
+  "/learn/atlas/diagnostic-overlay/evidence-weighting-and-confirmatory-testing": [
+    "cannabis-nutrient-disorders-2019",
+    "cannabis-molecular-diagnostics-2023",
+    "cannabis-pathogen-management-2024"
+  ]
+}
