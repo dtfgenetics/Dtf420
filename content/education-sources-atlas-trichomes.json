@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cannabis-trichome-morphology-metabolites-2020",
+    "title": "Cannabis glandular trichomes alter morphology and metabolite content during flower maturation",
+    "publisher": "The Plant Journal",
+    "year": 2020,
+    "url": "https://doi.org/10.1111/tpj.14516",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Cannabis glandular-trichome morphology, secretory-disc cell numbers, autofluorescence, metabolite specialization, and evidence that mature stalked floral trichomes develop from sessile-like precursor states."
+  },
+  {
+    "id": "cannabis-trichome-biofactory-review-2024",
+    "title": "Building a biofactory: Constructing glandular trichomes in Cannabis sativa",
+    "publisher": "Current Opinion in Plant Biology",
+    "year": 2024,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38761520/",
+    "sourceType": "Peer-reviewed review",
+    "scope": "Cannabis glandular-trichome cell biology, epidermal origin, secretory-disc architecture, non-photosynthetic plastids, cell walls and cuticle, extracellular storage cavity, cannabinoid synthases, and multicellular stalk development."
+  },
+  {
+    "id": "cannabis-trichome-stalk-transcriptomics-2026",
+    "title": "Heads Up: Transcriptomics Reveal Functional Roles of Cannabis Glandular Trichome Stalks",
+    "publisher": "Plants",
+    "year": 2026,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13259226/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Integrated Cannabis glandular-trichome head-versus-stalk transcriptomics and proteomics, supporting distinct head specialization for secondary-metabolite production and stalk roles associated with growth, transport, sugar and hormone signaling, and precursor supply."
+  },
+  {
+    "id": "cannabis-trichome-regulatory-networks-2026",
+    "title": "Insights into glandular trichome biology from analysis of organ-specific gene expression programmes in cannabis, hop and tomato",
+    "publisher": "The Plant Journal",
+    "year": 2026,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12999219/",
+    "sourceType": "Peer-reviewed research",
+    "scope": "Organ-specific transcriptome atlases and gene-regulatory networks for glandular trichomes, flowers, leaves, stems, and roots, including Cannabis-specific regulatory programs enriched for specialized metabolism and shared transport/storage processes."
+  }
+]
