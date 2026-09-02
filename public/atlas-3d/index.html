@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#08100b" />
+  <title>THC Living Plant Atlas 3D Runtime</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body, #atlas-root { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #08100b; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #runtime-status {
+      position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+      padding: .65rem .9rem; border: 1px solid rgba(184, 207, 128, .22); border-radius: 999px;
+      background: rgba(7, 15, 10, .76); color: rgba(232, 239, 212, .76); font-size: 12px;
+      letter-spacing: .04em; backdrop-filter: blur(10px); pointer-events: none;
+    }
+    #runtime-status[hidden] { display: none; }
+    #runtime-legend {
+      position: absolute; left: 12px; bottom: 12px; max-width: min(330px, calc(100% - 24px));
+      padding: .55rem .7rem; border: 1px solid rgba(184, 207, 128, .16); border-radius: 12px;
+      background: rgba(7, 15, 10, .68); color: rgba(231, 237, 212, .68); font-size: 11px; line-height: 1.35;
+      backdrop-filter: blur(10px); pointer-events: none;
+    }
+    @media (max-width: 620px) { #runtime-legend { font-size: 10px; } }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main id="atlas-root" aria-label="Interactive 3D cannabis plant anatomy model"></main>
+  <div id="runtime-status" role="status">Initializing 3D anatomy…</div>
+  <div id="runtime-legend" aria-live="polite">Overview · drag to orbit · pinch or wheel to zoom · tap a plant structure to inspect it.</div>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { startAtlasRuntime } from "./atlas-runtime.js";
+
+    const parentOrigin = window.location.origin;
+    const readyMessage = { type: "atlas:ready", renderer: "three", version: "0.185.1" };
+
+    function announceReady() {
+      window.parent.postMessage(readyMessage, parentOrigin);
+    }
+
+    try {
+      startAtlasRuntime(THREE, OrbitControls);
+      announceReady();
+      [150, 450, 900, 1600, 2600, 4000].forEach((delay) => window.setTimeout(announceReady, delay));
+    } catch (error) {
+      const status = document.getElementById("runtime-status");
+      status.hidden = false;
+      status.textContent = "3D runtime unavailable. The accessible Atlas fallback remains active.";
+      window.parent.postMessage({ type: "atlas:runtime-error", message: error instanceof Error ? error.message : String(error) }, parentOrigin);
+    }
+  </script>
+</body>
+</html>
