@@ -14,7 +14,15 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("interactive Plant Atlas selects structures, switches inspector modes, and rotates the specimen", async ({ page }, testInfo) => {
+async function expectThreeRuntime(app, page) {
+  const status = app.getByText("Three.js live", { exact: true });
+  await expect(status).toBeVisible({ timeout: 20_000 });
+  const runtime = page.frameLocator('iframe[title="Interactive 3D cannabis plant anatomy"]');
+  await expect(runtime.locator("canvas")).toBeVisible({ timeout: 20_000 });
+  return runtime;
+}
+
+test("interactive Plant Atlas selects structures, switches 3D layers, and controls the live renderer", async ({ page }, testInfo) => {
   const errors = watchRuntimeErrors(page);
   const response = await page.goto("/learn/atlas", { waitUntil: "networkidle" });
 
@@ -25,6 +33,9 @@ test("interactive Plant Atlas selects structures, switches inspector modes, and 
   await expect(app.getByRole("heading", { name: "Trichomes", exact: true })).toBeVisible();
   await expectNoHorizontalOverflow(page);
 
+  const runtime = await expectThreeRuntime(app, page);
+  await expect(runtime.locator("#runtime-legend")).toContainText("Overview");
+
   const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
   await expect(fanLeaves).toBeVisible();
   await fanLeaves.click();
@@ -34,28 +45,34 @@ test("interactive Plant Atlas selects structures, switches inspector modes, and 
   await app.getByRole("tab", { name: "micro", exact: true }).click();
   await expect(app.getByText("Microscopy layer", { exact: true })).toBeVisible();
   await expect(app.getByRole("heading", { name: "Stomata & epidermis", exact: true })).toBeVisible();
+  await expect(runtime.locator("#runtime-legend")).toContainText("Micro");
 
   await app.getByRole("tab", { name: "data", exact: true }).click();
   await expect(app.getByRole("heading", { name: "Photosynthesis & gas exchange", exact: true })).toBeVisible();
 
-  const model = app.locator('[aria-label="3D-ready interactive plant model viewport"]');
-  await expect(model).toBeVisible();
-  const beforeTransform = await model.getAttribute("style");
+  const fallback = app.locator('[aria-label="Accessible fallback plant model viewport"]');
+  const beforeTransform = await fallback.getAttribute("style");
   await app.getByRole("button", { name: "Rotate plant left" }).click();
-  await expect.poll(() => model.getAttribute("style")).not.toBe(beforeTransform);
+  await expect.poll(() => fallback.getAttribute("style")).not.toBe(beforeTransform);
+  await expect(runtime.locator("canvas")).toBeVisible();
+
+  await app.getByRole("button", { name: "Physiology", exact: true }).click();
+  await expect(runtime.locator("#runtime-legend")).toContainText("conceptual xylem water movement");
+  await expect(runtime.locator("#runtime-legend")).toContainText("amber particles");
 
   await app.getByRole("button", { name: "Micro", exact: true }).click();
   await expect(app.getByRole("button", { name: /Trichomes/i }).first()).toBeVisible();
+  await expect(runtime.locator("#runtime-legend")).toContainText("schematic");
   await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
   await page.screenshot({
-    path: testInfo.outputPath(`${testInfo.project.name}-interactive-atlas.png`),
+    path: testInfo.outputPath(`${testInfo.project.name}-interactive-atlas-webgl.png`),
     fullPage: true,
   });
 });
 
-test("interactive Plant Atlas remains contained at phone width", async ({ page }, testInfo) => {
+test("interactive Plant Atlas keeps hotspots and inspector controls accessible at phone width", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile-chromium", "Run the dedicated phone containment check in the mobile project.");
   const errors = watchRuntimeErrors(page);
   await page.setViewportSize({ width: 390, height: 844 });
@@ -64,6 +81,13 @@ test("interactive Plant Atlas remains contained at phone width", async ({ page }
   const app = page.locator('section[aria-label="THC Living Plant Atlas interactive explorer"]');
   await expect(app).toBeVisible();
   await expect(app.getByRole("heading", { name: "Plant Atlas", exact: true })).toBeVisible();
+  await expectThreeRuntime(app, page);
+
+  const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
+  await expect(fanLeaves).toBeVisible();
+  await fanLeaves.click();
+  await expect(app.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeVisible();
+
   await expect(app.getByRole("tab", { name: "info", exact: true })).toBeVisible();
   await app.getByRole("tab", { name: "notes", exact: true }).click();
   await expect(app.getByRole("heading", { name: "Record what you observe", exact: true })).toBeVisible();
@@ -71,7 +95,7 @@ test("interactive Plant Atlas remains contained at phone width", async ({ page }
   expect(errors, errors.join("\n")).toEqual([]);
 
   await page.screenshot({
-    path: testInfo.outputPath("390px-interactive-atlas.png"),
+    path: testInfo.outputPath("390px-interactive-atlas-webgl.png"),
     fullPage: true,
   });
 });
