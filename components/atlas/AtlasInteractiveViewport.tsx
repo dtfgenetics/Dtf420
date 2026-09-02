@@ -222,7 +222,7 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
         <iframe
           ref={frameRef}
           className={styles.threeFrame}
-          src="/atlas-3d/index.html"
+          src="/learn/atlas/atlas-3d/index.html"
           title="Interactive 3D cannabis plant anatomy"
           onLoad={postState}
           allow="fullscreen"
