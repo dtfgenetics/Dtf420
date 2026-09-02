@@ -75,7 +75,7 @@ test("Atlas runtime loads and normalizes a released GLB through the production p
       body: JSON.stringify({
         schemaVersion: 1,
         available: true,
-        model: "./cannabis-plant.glb",
+        model: "./models/cannabis-plant.glb",
         modelVersion: "browser-fixture",
         targetHeight: 5.2,
         exposure: 1.05,
