@@ -150,7 +150,7 @@ test("Atlas runtime creates selectable semantic proxies for generically named GL
     manifest: {
       semanticMeshes: { fan_leaves: "leaves" },
       semanticHotspots: {
-        leaves: [{ position: [0, 0.5, 0], radius: 0.18 }],
+        leaves: [{ position: [0.33, 0.956, 0], radius: 0.18 }],
       },
     },
   });
