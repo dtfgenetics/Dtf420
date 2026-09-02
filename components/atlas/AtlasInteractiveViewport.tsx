@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
 import styles from "./AtlasInteractiveViewport.module.css";
 
 export type AtlasLayer = "overview" | "anatomy" | "physiology" | "micro" | "environment" | "diagnostics";
-
+type RuntimeState = "loading" | "ready" | "fallback";
+type RuntimeCommand = "rotate-left" | "rotate-right" | "zoom-in" | "zoom-out" | "reset";
 type Entity = (typeof atlasEntities)[number];
 
 type AtlasInteractiveViewportProps = {
@@ -14,6 +15,7 @@ type AtlasInteractiveViewportProps = {
   onLayerChange: (layer: AtlasLayer) => void;
   onSelect: (id: string) => void;
   statusForEntity?: (id: string) => string;
+  lightOn?: boolean;
 };
 
 const layerLabels: Array<{ id: AtlasLayer; label: string }> = [
@@ -119,26 +121,67 @@ function ReferencePlant() {
   );
 }
 
-export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onSelect, statusForEntity }: AtlasInteractiveViewportProps) {
+export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onSelect, statusForEntity, lightOn = true }: AtlasInteractiveViewportProps) {
   const [rotation, setRotation] = useState(-4);
   const [zoom, setZoom] = useState(1);
   const [dragging, setDragging] = useState(false);
+  const [runtimeState, setRuntimeState] = useState<RuntimeState>("loading");
   const pointer = useRef<{ id: number; x: number; rotation: number } | null>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLIFrameElement>(null);
 
   const visibleEntities = atlasEntities.filter((entity) => entityVisible(entity, layer));
+  const selectedEntity = atlasEntities.find((entity) => entity.id === selectedId) ?? atlasEntities[0];
+
+  const postState = useCallback(() => {
+    frameRef.current?.contentWindow?.postMessage(
+      { type: "atlas:set-state", selectedId, layer, camera: selectedEntity.camera, lightOn },
+      window.location.origin,
+    );
+  }, [layer, lightOn, selectedEntity.camera, selectedId]);
+
+  const sendCommand = useCallback((command: RuntimeCommand) => {
+    frameRef.current?.contentWindow?.postMessage({ type: "atlas:command", command }, window.location.origin);
+  }, []);
+
+  useEffect(() => {
+    function receiveRuntimeMessage(event: MessageEvent) {
+      if (event.origin !== window.location.origin || event.source !== frameRef.current?.contentWindow) return;
+      const data = event.data as { type?: string; id?: string } | null;
+      if (!data || typeof data !== "object") return;
+      if (data.type === "atlas:ready") {
+        setRuntimeState("ready");
+        postState();
+      }
+      if (data.type === "atlas:runtime-error") setRuntimeState("fallback");
+      if (data.type === "atlas:select" && data.id && atlasEntities.some((entity) => entity.id === data.id)) onSelect(data.id);
+    }
+    window.addEventListener("message", receiveRuntimeMessage);
+    return () => window.removeEventListener("message", receiveRuntimeMessage);
+  }, [onSelect, postState]);
+
+  useEffect(() => {
+    if (runtimeState === "ready") postState();
+  }, [postState, runtimeState]);
 
   const reset = useCallback(() => {
     setRotation(-4);
     setZoom(1);
-  }, []);
+    sendCommand("reset");
+  }, [sendCommand]);
 
   const rotateBy = useCallback((degrees: number) => {
     setRotation((value) => value + degrees);
-  }, []);
+    sendCommand(degrees < 0 ? "rotate-left" : "rotate-right");
+  }, [sendCommand]);
+
+  function zoomIn() {
+    setZoom((value) => Math.min(1.45, value + 0.1));
+    sendCommand("zoom-in");
+  }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
-    if ((event.target as HTMLElement).closest("button, a")) return;
+    if (runtimeState === "ready" || (event.target as HTMLElement).closest("button, a, iframe")) return;
     pointer.current = { id: event.pointerId, x: event.clientX, rotation };
     setDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -175,17 +218,32 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
       <div className={styles.environmentGlow} aria-hidden="true" />
       <div className={styles.gridFloor} aria-hidden="true" />
 
+      <div className={styles.threeStage} data-runtime-state={runtimeState}>
+        <iframe
+          ref={frameRef}
+          className={styles.threeFrame}
+          src="/atlas-3d/index.html"
+          title="Interactive 3D cannabis plant anatomy"
+          onLoad={postState}
+          allow="fullscreen"
+        />
+        <span className={styles.rendererStatus} aria-live="polite">
+          {runtimeState === "ready" ? "Three.js live" : runtimeState === "fallback" ? "2D fallback" : "Loading 3D"}
+        </span>
+      </div>
+
       <div className={styles.viewerTools} aria-label="Plant viewer controls">
         <button type="button" onClick={() => rotateBy(-18)} aria-label="Rotate plant left">↺<span>Rotate</span></button>
-        <button type="button" onClick={() => setZoom((value) => Math.min(1.45, value + 0.1))} aria-label="Zoom in">＋<span>Zoom</span></button>
+        <button type="button" onClick={zoomIn} aria-label="Zoom in">＋<span>Zoom</span></button>
         <button type="button" onClick={reset} aria-label="Reset plant view">⟳<span>Reset</span></button>
         <button type="button" onClick={toggleFullscreen} aria-label="Toggle full screen">⛶<span>Full</span></button>
       </div>
 
       <div
-        className={styles.plantModel}
+        className={`${styles.plantModel} ${runtimeState === "ready" ? styles.plantModelHidden : ""}`}
         style={{ transform: `translateZ(0) rotateY(${rotation}deg) scale(${zoom})` }}
-        aria-label="3D-ready interactive plant model viewport"
+        aria-label="Accessible fallback plant model viewport"
+        aria-hidden={runtimeState === "ready"}
       >
         <ReferencePlant />
       </div>
@@ -200,17 +258,18 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
             style={{ left: `${entity.hotspot.x}%`, top: `${entity.hotspot.y}%` }}
             onClick={() => onSelect(entity.id)}
             aria-pressed={active}
+            aria-label={`${entity.label}. ${statusForEntity?.(entity.id) ?? entity.systemLabel}`}
           >
             <i aria-hidden="true" />
-            <span><strong>{entity.label}</strong><small>{statusForEntity?.(entity.id) ?? entity.systemLabel}</small></span>
+            <span aria-hidden="true"><strong>{entity.label}</strong><small>{statusForEntity?.(entity.id) ?? entity.systemLabel}</small></span>
           </button>
         );
       })}
 
-      <div className={styles.layerPanel}>
+      <div className={styles.layerPanel} aria-label="Plant visualization layers">
         <span>Layers</span>
         {layerLabels.map((item) => (
-          <button key={item.id} type="button" className={layer === item.id ? styles.layerActive : ""} onClick={() => onLayerChange(item.id)}>
+          <button key={item.id} type="button" className={layer === item.id ? styles.layerActive : ""} onClick={() => onLayerChange(item.id)} aria-pressed={layer === item.id}>
             <i aria-hidden="true">◉</i>{item.label}
           </button>
         ))}
@@ -218,7 +277,7 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
 
       <div className={styles.rotationHint} aria-hidden="true">
         <strong>↶ 360° ↷</strong>
-        <span>Drag to rotate · controls are 3D-model ready</span>
+        <span>{runtimeState === "ready" ? "Drag the 3D plant to orbit · tap structures to inspect" : "Drag to rotate · accessible fallback active"}</span>
       </div>
     </div>
   );
