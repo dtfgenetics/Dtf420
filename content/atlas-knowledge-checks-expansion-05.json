@@ -1,0 +1,262 @@
+[
+  {
+    "id": "seed-thermal-limits-rate",
+    "route": "/learn/atlas/seed-germination/thermal-limits-and-germination-rate",
+    "prompt": "Why should a Cannabis seed temperature study separate final germination percentage from germination rate?",
+    "options": [
+      "A seed lot can reach a similar final percentage at two temperatures while taking very different amounts of time to get there",
+      "Temperature affects only shell color and never germination timing",
+      "Germination rate and germination percentage are mathematically identical",
+      "One cultivar's cardinal temperatures automatically apply to every Cannabis seed lot"
+    ],
+    "correctIndex": 0,
+    "explanation": "Temperature can change both how many seeds ultimately germinate and how quickly radicle emergence occurs. Published cardinal temperatures are tied to the tested cultivars, lots, and methods rather than universal Cannabis constants."
+  },
+  {
+    "id": "seed-water-potential-salinity",
+    "route": "/learn/atlas/seed-germination/water-potential-salinity-and-osmotic-stress",
+    "prompt": "What is the best interpretation when increasing salinity slows or suppresses Cannabis seed germination?",
+    "options": [
+      "Lower external water potential can restrict water uptake and germination, but the magnitude depends on genotype, seed lot, salt composition, and conditions",
+      "Salt always sterilizes the embryo immediately at any concentration",
+      "Every Cannabis genotype has the same salinity threshold",
+      "Salinity changes only leaf color after germination and cannot affect the seed stage"
+    ],
+    "correctIndex": 0,
+    "explanation": "Salinity can reduce external water potential and add ion stress, slowing or inhibiting germination. The response varies among ecotypes and experimental conditions, so one threshold should not be generalized across Cannabis."
+  },
+  {
+    "id": "seed-vigor-aging-storage",
+    "route": "/learn/atlas/seed-germination/seed-vigor-aging-and-storage",
+    "prompt": "Which statement best distinguishes seed viability from seed vigor during storage?",
+    "options": [
+      "A seed can remain viable yet lose speed, uniformity, or seedling performance as vigor declines",
+      "Viability and vigor are always the same measurement",
+      "Vigor can be measured only from seed color",
+      "Storage temperature matters only after a seed has germinated"
+    ],
+    "correctIndex": 0,
+    "explanation": "Viability asks whether a seed can germinate, while vigor captures performance such as speed, uniformity, and seedling establishment. Storage time, moisture, temperature, and initial lot quality can affect these traits differently."
+  },
+  {
+    "id": "seed-pericarp-priming",
+    "route": "/learn/atlas/seed-germination/pericarp-resistance-priming-and-low-vigor-germination",
+    "prompt": "What is the safest conclusion from hemp studies using priming or pericarp removal on low-germinating seed lots?",
+    "options": [
+      "These treatments can improve germination performance in some poor lots, but they are not guaranteed fixes for every lot or cause of failure",
+      "Pericarp removal proves every ungerminated seed is physically dormant",
+      "Priming permanently repairs dead embryos",
+      "Every seed lot should receive the same treatment regardless of history"
+    ],
+    "correctIndex": 0,
+    "explanation": "Research shows useful improvements in some low-germinating hemp lots, particularly with pericarp removal, but treatment response depends on the condition and cause of poor performance. It should not be generalized into a universal rescue protocol."
+  },
+  {
+    "id": "root-tip-zones-growth",
+    "route": "/learn/atlas/root-system/root-tip-zones-and-apical-growth",
+    "prompt": "Which sequence best describes the functional organization near a growing root tip?",
+    "options": [
+      "Root cap protection, apical meristem cell division, elongation, then tissue differentiation and root-hair development",
+      "Xylem pumping, flower initiation, seed filling, then leaf senescence",
+      "Root hairs first, then the root cap forms behind them",
+      "All root tissues are fully differentiated at the extreme tip"
+    ],
+    "correctIndex": 0,
+    "explanation": "The root cap protects the tip, the apical meristem supplies new cells, cells elongate behind it, and tissues differentiate farther back. Cannabis-specific anatomy should be used where available while general vascular-plant development supplies broader mechanism."
+  },
+  {
+    "id": "root-lateral-architecture",
+    "route": "/learn/atlas/root-system/lateral-root-initiation-and-architecture-plasticity",
+    "prompt": "Why should the Atlas avoid presenting one Cannabis root shape as the species-wide blueprint?",
+    "options": [
+      "Measured hemp root length, shape, lateral-root allocation, and biomass distribution vary substantially among genotypes and growth systems",
+      "Roots are identical in all genotypes once plants reach the same height",
+      "Root architecture is determined only by pot color",
+      "Lateral roots do not contribute to Cannabis root-system architecture"
+    ],
+    "correctIndex": 0,
+    "explanation": "Recent hemp phenotyping shows substantial genetic variation in root-system architecture and root-shoot allocation. Architecture is also affected by the growth environment, so one specimen should not be treated as a universal blueprint."
+  },
+  {
+    "id": "root-radial-water-aquaporins",
+    "route": "/learn/atlas/root-system/radial-water-transport-and-aquaporins",
+    "prompt": "What role do aquaporins play in the Atlas model of radial root water transport?",
+    "options": [
+      "They are regulated membrane channels that can alter cell-to-cell water permeability; they are not mechanical pumps",
+      "They push xylem sap upward using motor proteins like a piston",
+      "They exist only in flowers and not roots",
+      "They eliminate the need for water-potential gradients"
+    ],
+    "correctIndex": 0,
+    "explanation": "Plant aquaporins facilitate regulated membrane transport of water and some small molecules. Water movement still depends on gradients and tissue pathways; describing aquaporins as pumps would misrepresent the mechanism."
+  },
+  {
+    "id": "root-microbiome-interfaces",
+    "route": "/learn/atlas/root-system/root-microbiome-exudates-and-mycorrhizal-interfaces",
+    "prompt": "How should Cannabis root microbiome or mycorrhizal associations be presented in a scientific Atlas?",
+    "options": [
+      "As dynamic interactions shaped by genotype, substrate, environment, inoculum, and management rather than guaranteed benefits",
+      "As universally beneficial regardless of organism or conditions",
+      "As proof that roots no longer require mineral nutrients",
+      "As a fixed microbial community identical in every Cannabis plant"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis root-associated communities and exudate interactions are context dependent. The Atlas should distinguish documented associations from claims that any inoculant or microbe will always improve plant performance."
+  },
+  {
+    "id": "sex-chromosomes-regulation",
+    "route": "/learn/atlas/sex-pollen-seeds/sex-chromosomes-and-early-gene-regulation",
+    "prompt": "What does current chromosome-level Cannabis evidence support about sex determination?",
+    "options": [
+      "Cannabis commonly uses an XX/XY system, with recent evidence implicating X-linked ethylene-pathway regulation rather than a simple active-Y master switch",
+      "The Y chromosome contains a single proven gene that explains every sex-expression outcome",
+      "Chromosomal sex can be determined reliably from leaf shape",
+      "XX and XY chromosomes are absent from dioecious Cannabis"
+    ],
+    "correctIndex": 0,
+    "explanation": "Phased sex-chromosome work supports an XX/XY system and an X-linked ACS/ethylene-related mechanism in female inflorescence fate. Phenotypic sex expression remains developmentally and hormonally plastic, so a one-gene explanation is too simple."
+  },
+  {
+    "id": "sex-ethylene-plasticity",
+    "route": "/learn/atlas/sex-pollen-seeds/ethylene-mediated-sexual-plasticity",
+    "prompt": "Why must the Atlas separate chromosomal sex from ethylene-mediated floral sex expression?",
+    "options": [
+      "Ethylene-pathway manipulation can change floral phenotype without changing the plant's XX or XY chromosome complement",
+      "Ethylene treatment converts an X chromosome into a Y chromosome",
+      "Floral phenotype is unrelated to hormones or development",
+      "Chromosomal sex is rewritten every time photoperiod changes"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis can show substantial floral sexual plasticity in response to ethylene modulation. That changes phenotypic flower expression, not the underlying chromosome complement."
+  },
+  {
+    "id": "sex-anther-dehiscence",
+    "route": "/learn/atlas/sex-pollen-seeds/anther-maturity-dehiscence-and-pollen-release",
+    "prompt": "What structural event directly releases mature Cannabis pollen from an anther?",
+    "options": [
+      "Longitudinal dehiscence opens the anther along a stomium and exposes pollen for release",
+      "The ovary splits into cotyledons",
+      "Root pressure ruptures the pollen wall",
+      "Stigmas detach and become pollen grains"
+    ],
+    "correctIndex": 0,
+    "explanation": "Microscopic descriptions of Cannabis male and mixed-sex flowers show anthers opening longitudinally along a dehiscence line or stomium. Developmental stage matters; the Atlas should not assign one universal day or node."
+  },
+  {
+    "id": "sex-pollen-viability-storage",
+    "route": "/learn/atlas/sex-pollen-seeds/pollen-viability-germination-and-storage",
+    "prompt": "Why is an in-vitro pollen germination assay more informative than appearance or staining alone for stored Cannabis pollen?",
+    "options": [
+      "Intact-looking or non-aborted pollen can persist after the ability to germinate has declined, so actual germination tests measure a different property",
+      "Any pollen grain that stains is guaranteed to fertilize an ovule",
+      "Pollen viability increases automatically with storage time",
+      "Freezing always preserves untreated pollen indefinitely"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis studies show that non-abortion or staining measures can remain high even as in-vitro germination falls. Storage methods therefore need explicit viability testing rather than visual assumptions."
+  },
+  {
+    "id": "environment-co2-response",
+    "route": "/learn/atlas/environment-overlay/co2-diffusion-and-photosynthetic-response",
+    "prompt": "Why should a Cannabis CO2 response be shown together with PPFD, temperature, and stomatal behavior?",
+    "options": [
+      "CO2 response is coupled to light, temperature, diffusion, and stomatal conductance, so changing CO2 alone does not describe the whole photosynthetic state",
+      "CO2 concentration determines photosynthesis independently of every other variable",
+      "Leaves absorb CO2 only through roots",
+      "Stomata have no role in CO2 entry"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis gas-exchange studies show interacting responses to CO2, light, temperature, transpiration, and stomatal conductance. The Atlas should show a coupled system rather than a single-variable target."
+  },
+  {
+    "id": "environment-ppfd-dli-photoperiod",
+    "route": "/learn/atlas/environment-overlay/ppfd-dli-and-photoperiod",
+    "prompt": "Which statement correctly separates PPFD, DLI, and photoperiod?",
+    "options": [
+      "PPFD is an instantaneous photon flux, DLI integrates photons over a day, and photoperiod describes the timing or duration of light and dark",
+      "They are three names for the same measurement",
+      "DLI is measured only at night",
+      "Photoperiod specifies carbon dioxide concentration"
+    ],
+    "correctIndex": 0,
+    "explanation": "These variables describe different aspects of light exposure. Similar daily photon totals can be delivered under different instantaneous intensities and daylength patterns that are not biologically identical."
+  },
+  {
+    "id": "environment-light-acclimation",
+    "route": "/learn/atlas/environment-overlay/light-acclimation-and-canopy-position",
+    "prompt": "What does leaf light acclimation mean in a Cannabis canopy?",
+    "options": [
+      "Leaves developing under different local light histories can differ in photosynthetic response, so sampling position and history matter",
+      "Every leaf has identical photosynthetic capacity regardless of position",
+      "Only root tissues acclimate to light",
+      "One top-leaf measurement automatically predicts whole-canopy productivity"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis lighting research shows photosynthetic responses can differ with long-term light environment. A top-leaf measurement is useful but should not be treated as a complete proxy for the entire canopy."
+  },
+  {
+    "id": "environment-coupled-limits",
+    "route": "/learn/atlas/environment-overlay/coupled-environmental-limits",
+    "prompt": "Why can increasing one environmental input fail to produce a proportional Cannabis growth response?",
+    "options": [
+      "Another process such as light capture, CO2 supply, temperature, water status, root-zone capacity, or nutrient supply can become limiting",
+      "Plants always respond linearly to every added resource",
+      "Environmental variables do not interact",
+      "Only genetics can limit growth"
+    ],
+    "correctIndex": 0,
+    "explanation": "Plant performance emerges from interacting resources and physiological processes. Increasing one input can have diminishing effects when a different factor constrains photosynthesis, transport, growth, or root function."
+  },
+  {
+    "id": "diagnostic-nutrient-tissue",
+    "route": "/learn/atlas/diagnostic-overlay/nutrient-symptom-progression-and-tissue-analysis",
+    "prompt": "Why should nutrient symptoms be paired with tissue analysis and progression records?",
+    "options": [
+      "Visual symptoms can overlap and the timing of visible onset does not always correspond simply with measured tissue concentrations",
+      "Every yellow leaf identifies one nutrient with certainty",
+      "Tissue analysis is useful only after harvest",
+      "Upper and lower canopy position never matters"
+    ],
+    "correctIndex": 0,
+    "explanation": "Controlled Cannabis deficiency studies show characteristic patterns but also demonstrate that visual onset and foliar analysis do not always align as a single threshold. Location, progression, history, and analytical data strengthen the differential."
+  },
+  {
+    "id": "diagnostic-root-crown",
+    "route": "/learn/atlas/diagnostic-overlay/root-and-crown-biotic-vs-abiotic-clues",
+    "prompt": "Why is brown or declining Cannabis root tissue not enough by itself to diagnose a root pathogen?",
+    "options": [
+      "Pathogens such as Fusarium or Pythium and abiotic conditions such as waterlogging can produce overlapping root and wilt symptoms, so confirmation is needed",
+      "All brown roots are caused by Fusarium",
+      "Waterlogging cannot change root appearance",
+      "Root pathogens never cause aboveground symptoms"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cannabis disease literature explicitly notes overlapping symptoms between root pathogens and excessive water or oxygen stress. Diagnostic confidence improves with lesion pattern, irrigation history, microscopy, culture, or molecular testing."
+  },
+  {
+    "id": "diagnostic-senescence-disorder",
+    "route": "/learn/atlas/diagnostic-overlay/senescence-vs-disorder",
+    "prompt": "What is the best way to separate expected senescence from a developing disorder?",
+    "options": [
+      "Use developmental stage, symptom distribution, rate of change, environmental history, and comparison with healthy plants rather than leaf age alone",
+      "Any yellowing during flowering is always normal",
+      "Any old leaf is automatically diseased",
+      "Senescence occurs at the same exact day in every genotype and environment"
+    ],
+    "correctIndex": 0,
+    "explanation": "Normal tissue aging and stress can overlap visually. Developmental context, progression, distribution, measurements, and healthy comparison plants are needed before assigning the pattern to expected senescence or a disorder."
+  },
+  {
+    "id": "diagnostic-evidence-weighting",
+    "route": "/learn/atlas/diagnostic-overlay/evidence-weighting-and-confirmatory-testing",
+    "prompt": "What should happen after a visual symptom suggests several plausible Cannabis problems?",
+    "options": [
+      "Rank the differential and choose the next observation or test most likely to distinguish among competing explanations",
+      "Pick the first image match and treat it as confirmed",
+      "Apply every possible correction simultaneously",
+      "Ignore root-zone and environmental measurements"
+    ],
+    "correctIndex": 0,
+    "explanation": "A visual pattern is a hypothesis generator. Evidence weighting means selecting discriminating follow-up information—measurements, microscopy, tissue analysis, or pathogen tests—before escalating diagnostic certainty."
+  }
+]
