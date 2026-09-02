@@ -1,0 +1,36 @@
+{
+  "/learn/atlas/leaves/healthy-leaf-baseline": [
+    "cannabis-leaf-anatomy-2022",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "/learn/atlas/leaves/photosynthesis": [
+    "cannabis-photosynthesis-2008",
+    "cannabis-light-photosynthesis-2021",
+    "hemp-leaf-age-photosynthesis-2020"
+  ],
+  "/learn/atlas/leaves/stomata-and-transpiration": [
+    "cannabis-photosynthesis-2008",
+    "cannabis-polyploid-stomata-2019"
+  ],
+  "/learn/atlas/leaves/leaf-temperature-and-energy-balance": [
+    "cannabis-photosynthesis-2008",
+    "vpd-stomatal-response-2015"
+  ],
+  "/learn/atlas/leaves/leaf-tissue-anatomy": [
+    "cannabis-leaf-anatomy-2022",
+    "cannabis-life-cycle-morphology-2023"
+  ],
+  "/learn/atlas/leaves/leaf-morphogenesis-and-leaflet-complexity": [
+    "cannabis-life-cycle-morphology-2023",
+    "cannabis-leaf-populations-photosynthesis-2022"
+  ],
+  "/learn/atlas/leaves/leaf-age-and-photosynthetic-capacity": [
+    "hemp-leaf-age-photosynthesis-2020",
+    "cannabis-light-photosynthesis-2021"
+  ],
+  "/learn/atlas/leaves/stomatal-traits-and-sampling-context": [
+    "cannabis-polyploid-stomata-2019",
+    "cannabis-leaf-populations-photosynthesis-2022",
+    "cannabis-photosynthesis-2008"
+  ]
+}
