@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "available": false,
-  "model": "./cannabis-plant.glb",
+  "model": "./models/cannabis-plant.glb",
   "modelVersion": "pending-production-asset",
   "targetHeight": 5.2,
   "exposure": 1.05,
