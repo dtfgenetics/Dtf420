@@ -64,18 +64,25 @@
     "id": "nodes_branching",
     "label": "Nodes & Branching",
     "learningGoals": [
-      "Locate nodes, internodes, and axillary buds",
-      "Understand apical dominance",
-      "Predict branch response after pruning",
-      "Compare major canopy-training approaches"
+      "Locate nodes, internodes, axillary buds, stipules, and branch origins",
+      "Understand apical dominance as an interacting shoot-branching system rather than a one-hormone switch",
+      "Separate axillary bud establishment from later bud activation and sustained branch outgrowth",
+      "Track phyllotaxy and node-associated developmental changes without treating one node number as universal",
+      "Predict pruning responses cautiously using genotype, timing, plant scale, and environment",
+      "Compare major canopy-training approaches",
+      "Interpret branch attachment as a loaded mechanical structure rather than using angle alone"
     ],
     "lessons": [
-      {"title":"Node anatomy","summary":"Locate the leaf attachment, axillary bud, branch origin, and adjoining internodes at a cannabis node.","visual":"Node anatomy close-up"},
-      {"title":"Apical dominance","summary":"Understand how the shoot apex influences lateral growth and why removing or repositioning the apex changes branching behavior.","visual":"Apical dominance flow diagram"},
-      {"title":"Topping & FIM","summary":"Compare removal points and the resulting redistribution of active shoot growth without treating every plant response as identical.","visual":"Cut-location comparison"},
-      {"title":"LST & directional growth","summary":"See how branch orientation and light exposure can redistribute canopy height while preserving tissue continuity.","visual":"LST before-and-after canopy map"},
-      {"title":"Mainlining & SCROG","summary":"Compare structured branch selection with screen-based canopy distribution as different ways to organize growing points.","visual":"Training-system comparison"},
-      {"title":"Branch angle & mechanical support","summary":"Treat branches as loaded structures by connecting attachment angle, diameter, leverage, tissue condition, supported mass, movement, and external support instead of using angle alone as a strength score.","visual":"Branch load and support force diagram"}
+      {"title":"Node anatomy","summary":"Locate the leaf attachment, axillary bud, branch origin, stipules when present, and adjoining internodes at a cannabis node, recognizing the node as a repeated phytomer junction rather than a simple mark on the stem.","visual":"Node anatomy and phytomer close-up"},
+      {"title":"Apical dominance","summary":"Understand how the active shoot apex can suppress lateral bud outgrowth through systemic signaling and resource relationships, and why removing or repositioning the apex can change branching without guaranteeing one fixed response.","visual":"Apical dominance multi-signal flow diagram"},
+      {"title":"Topping & FIM","summary":"Compare removal points and the resulting redistribution of active shoot growth while separating established pruning evidence from grower-specific FIM terminology and avoiding claims that every genotype will branch identically.","visual":"Cut-location and expected-response comparison"},
+      {"title":"LST & directional growth","summary":"See how branch orientation, gravitropic and phototropic response, light exposure, and mechanical support can redistribute canopy height while preserving tissue continuity.","visual":"LST before-and-after canopy and branch-orientation map"},
+      {"title":"Mainlining & SCROG","summary":"Compare structured branch selection with screen-based canopy distribution as different ways to organize growing points, light exposure, and support rather than as universally superior yield formulas.","visual":"Training-system architecture comparison"},
+      {"title":"Branch angle & mechanical support","summary":"Treat branches as loaded structures by connecting attachment geometry, diameter, leverage, tissue condition, supported mass, movement, and external support instead of using angle alone as a strength score; general branch-junction biomechanics are used conceptually where Cannabis-specific strength measurements are unavailable.","visual":"Branch-junction load, leverage, and support force diagram"},
+      {"title":"Axillary bud activation","summary":"Separate the presence of an axillary meristem or bud from later bud release and elongation, then connect sustained branch outgrowth to developmental signaling, light, assimilate availability, sink competition, and the state of neighboring shoots.","visual":"Dormant-to-active axillary bud developmental sequence"},
+      {"title":"Hormones, sugars & bud outgrowth","summary":"Use general flowering-plant evidence to connect auxin transport in the main stem with cytokinin, strigolactone, sugars, light, and bud-local signaling, emphasizing that modern apical-dominance models integrate multiple interacting mechanisms rather than one direct hormone switch.","visual":"Node-centered auxin, cytokinin, strigolactone, sugar, and light interaction map"},
+      {"title":"Phyllotaxy & developmental nodes","summary":"Follow documented Cannabis changes in axillary structures, stipules, bracts, solitary flowers, and opposite-to-alternate phyllotaxy across development while treating the published node numbers as genotype- and condition-specific observations rather than a universal Cannabis clock.","visual":"Cannabis node and phyllotaxy developmental reference strip"},
+      {"title":"Pruning response & architectural plasticity","summary":"Compare Cannabis responses observed after apical cutting, branch removal, and repeated pruning to show how shoot architecture can reorganize, while keeping genotype, timing, plant size, environment, and study-specific yield outcomes visible instead of turning one experiment into a universal recipe.","visual":"Cannabis pruning-treatment architecture and response matrix"}
     ]
   },
   {
