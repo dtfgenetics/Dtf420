@@ -117,6 +117,48 @@ function configureModelMaterials(model, entityMaterials, pickables, semanticMesh
   });
 }
 
+function createSemanticProxyHotspots(THREE, scene, modelBounds, entityMaterials, pickables, semanticHotspots) {
+  const proxies = [];
+  if (!semanticHotspots || typeof semanticHotspots !== "object" || Array.isArray(semanticHotspots)) return proxies;
+
+  const size = modelBounds.getSize(new THREE.Vector3());
+  const center = modelBounds.getCenter(new THREE.Vector3());
+  for (const [entityId, rawEntries] of Object.entries(semanticHotspots)) {
+    if (entityMaterials.has(entityId)) continue;
+    const entries = Array.isArray(rawEntries) ? rawEntries : [rawEntries];
+    for (const entry of entries) {
+      const position = entry?.position;
+      const radiusFraction = Number(entry?.radius);
+      if (!Array.isArray(position) || position.length !== 3 || !position.every((value) => Number.isFinite(Number(value)))) continue;
+      if (!Number.isFinite(radiusFraction) || radiusFraction <= 0) continue;
+
+      const [normalizedX, normalizedY, normalizedZ] = position.map(Number);
+      const radius = Math.max(0.06, Math.min(size.y * 0.2, size.y * radiusFraction));
+      const geometry = new THREE.SphereGeometry(radius, 12, 8);
+      const material = new THREE.MeshBasicMaterial({
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        depthTest: false,
+      });
+      material.colorWrite = false;
+      const proxy = new THREE.Mesh(geometry, material);
+      proxy.position.set(
+        center.x + normalizedX * (size.x / 2),
+        modelBounds.min.y + normalizedY * size.y,
+        center.z + normalizedZ * (size.z / 2),
+      );
+      proxy.userData.entityId = entityId;
+      proxy.userData.atlasSemanticProxy = true;
+      proxy.renderOrder = -100;
+      scene.add(proxy);
+      pickables.push(proxy);
+      proxies.push(proxy);
+    }
+  }
+  return proxies;
+}
+
 function restoreMaterial(material) {
   if (!material) return;
   const baseEmissive = material.userData?.atlasBaseEmissive;
@@ -201,6 +243,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   model.position.z -= scaledCenter.z;
   model.position.y += bottomY - scaledBounds.min.y;
   model.updateMatrixWorld(true);
+  const finalBounds = new THREE.Box3().setFromObject(model);
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x08100b);
@@ -254,6 +297,15 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   const entityMaterials = new Map();
   const pickables = [];
   configureModelMaterials(model, entityMaterials, pickables, semanticMeshes);
+  const semanticProxies = createSemanticProxyHotspots(
+    THREE,
+    scene,
+    finalBounds,
+    entityMaterials,
+    pickables,
+    manifest.semanticHotspots,
+  );
+  document.documentElement.dataset.atlasSemanticProxyCount = String(semanticProxies.length);
 
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
@@ -426,6 +478,11 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     window.removeEventListener("message", receiveMessage);
     renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
     controls.dispose();
+    semanticProxies.forEach((proxy) => {
+      scene.remove(proxy);
+      proxy.geometry?.dispose?.();
+      proxy.material?.dispose?.();
+    });
     model.traverse((object) => {
       if (!object?.isMesh) return;
       object.geometry?.dispose?.();
@@ -451,6 +508,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     modelVersion: String(manifest.modelVersion || "unversioned"),
     modelTier: modelVariant.tier,
     semanticPickables: pickables.length,
+    semanticProxyPickables: semanticProxies.length,
   });
   animate();
   return true;
