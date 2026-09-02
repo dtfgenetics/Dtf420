@@ -77,11 +77,11 @@
     "systemLabel": "Trichomes & Resin",
     "modelTarget": "plant.trichomes",
     "hotspot": { "x": 69, "y": 27 },
-    "camera": { "yaw": 26, "pitch": -14, "zoom": 2.15 },
+    "camera": { "yaw": 26, "pitch": -14, "zoom": 2.35 },
     "layers": ["overview", "anatomy", "physiology", "micro", "environment"],
-    "microTitle": "Gland head & secretory disk",
-    "dataTitle": "Gland development & sampling",
-    "keyFunctions": ["Produce and store specialized metabolites", "Create a subcuticular resin storage cavity", "Contribute to the protective plant surface", "Provide microscopic developmental observations"]
+    "microTitle": "Secretory disk, cavity, stipe & stalk",
+    "dataTitle": "Development, specialization & sampling",
+    "keyFunctions": ["Differentiate from epidermal precursor states into specialized glandular structures", "Synthesize specialized metabolites in secretory head tissues and store them in a subcuticular cavity", "Use distinct stipe and stalk tissues associated with structural support, transport, precursor supply, and signaling", "Provide microscopic developmental observations only when tissue, gland integrity, lighting, and sample location are controlled"]
   },
   {
     "id": "sex_pollen_seed",

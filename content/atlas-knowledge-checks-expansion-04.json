@@ -1,0 +1,54 @@
+[
+  {
+    "id": "trichomes-stalked-development",
+    "route": "/learn/atlas/trichomes-resin/stalked-trichome-development",
+    "prompt": "What does current Cannabis microscopy support about many mature stalked floral glandular trichomes?",
+    "options": [
+      "They can develop through sessile-like precursor stages before the multicellular stalk becomes prominent",
+      "They form only after harvest and drying",
+      "They are mature root hairs transported to the flower",
+      "Every sessile gland on every tissue must become a stalked gland"
+    ],
+    "correctIndex": 0,
+    "explanation": "Developmental work on Cannabis floral trichomes supports a sessile-like premature stalked state that can mature into a stalked gland. That does not mean every mature sessile trichome on every organ follows the same trajectory."
+  },
+  {
+    "id": "trichomes-head-stipe-stalk-specialization",
+    "route": "/learn/atlas/trichomes-resin/head-stipe-and-stalk-specialization",
+    "prompt": "Which statement best matches recent Cannabis head-versus-stalk multi-omics evidence?",
+    "options": [
+      "The head is strongly specialized for secondary-metabolite production and storage, while stalk tissues show distinct growth, transport, sugar, and signaling programs",
+      "The stalk is metabolically identical to the head and serves only as empty space",
+      "Cannabinoids are synthesized only in the stalk and never in secretory head cells",
+      "The stipe and stalk are unrelated tissues with no structural connection to the gland head"
+    ],
+    "correctIndex": 0,
+    "explanation": "Recent transcriptomic and proteomic work supports functional differentiation within the gland. Secretory head tissues emphasize specialized metabolism, while the stalk has distinct transcriptional programs consistent with structural, transport, precursor-supply, and signaling roles."
+  },
+  {
+    "id": "trichomes-secretory-metabolism-storage",
+    "route": "/learn/atlas/trichomes-resin/secretory-cell-metabolism-and-storage-interface",
+    "prompt": "Why should the trichome Atlas distinguish secretory-cell metabolism from the storage cavity?",
+    "options": [
+      "Secretory cells perform specialized metabolic processes, while much of the secreted resin accumulates extracellularly beneath the cuticle in the subcuticular cavity",
+      "The storage cavity is a chloroplast that performs all photosynthesis for the flower",
+      "Cannabinoids are stored only inside the nuclei of secretory cells",
+      "The cavity is part of the xylem and transports water directly to the roots"
+    ],
+    "correctIndex": 0,
+    "explanation": "The secretory disk cells and extracellular storage cavity are anatomically and functionally distinct. Biosynthetic processes occur in the cells and associated compartments, while secreted products accumulate in the subcuticular headspace; several transport steps remain active research questions."
+  },
+  {
+    "id": "trichomes-aging-sampling-integrity",
+    "route": "/learn/atlas/trichomes-resin/gland-aging-dehiscence-and-sampling-integrity",
+    "prompt": "Why can a collapsed, detached, or darkened gland head not be interpreted as one universal maturity stage by itself?",
+    "options": [
+      "Gland integrity and appearance can vary with tissue age, genotype, handling, sampling position, dehiscence, senescence, lighting, and focus",
+      "Every damaged gland contains exactly the same cannabinoid concentration",
+      "Physical gland damage occurs only when a plant is nutrient deficient",
+      "One gland always represents the developmental state of the entire plant"
+    ],
+    "correctIndex": 0,
+    "explanation": "Microscopic appearance depends on biological development and sampling/handling context. Representative tissue, standardized imaging, and repeated observations are needed before using gland appearance as developmental evidence."
+  }
+]

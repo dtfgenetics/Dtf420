@@ -1,0 +1,47 @@
+{
+  "/learn/atlas/trichomes-resin/trichome-types": [
+    "cannabis-trichomes-2021",
+    "cannabis-trichome-morphology-metabolites-2020"
+  ],
+  "/learn/atlas/trichomes-resin/gland-anatomy": [
+    "cannabis-trichomes-2021",
+    "cannabis-trichome-biofactory-review-2024"
+  ],
+  "/learn/atlas/trichomes-resin/where-to-inspect": [
+    "cannabis-trichome-sampling-2025",
+    "cannabis-trichome-development-2023"
+  ],
+  "/learn/atlas/trichomes-resin/clear-cloudy-and-amber": [
+    "cannabis-trichomes-2021",
+    "cannabis-trichome-development-2023"
+  ],
+  "/learn/atlas/trichomes-resin/microscope-workflow": [
+    "cannabis-trichome-sampling-2025",
+    "cannabis-trichome-development-2023"
+  ],
+  "/learn/atlas/trichomes-resin/secretory-disk-and-storage-cavity": [
+    "cannabis-trichomes-2021",
+    "cannabis-trichome-biofactory-review-2024",
+    "cannabis-trichome-morphology-metabolites-2020"
+  ],
+  "/learn/atlas/trichomes-resin/stalked-trichome-development": [
+    "cannabis-trichome-morphology-metabolites-2020",
+    "cannabis-trichome-biofactory-review-2024",
+    "cannabis-trichome-development-2023"
+  ],
+  "/learn/atlas/trichomes-resin/head-stipe-and-stalk-specialization": [
+    "cannabis-trichome-stalk-transcriptomics-2026",
+    "cannabis-trichome-biofactory-review-2024",
+    "cannabis-trichomes-2021"
+  ],
+  "/learn/atlas/trichomes-resin/secretory-cell-metabolism-and-storage-interface": [
+    "cannabis-trichome-biofactory-review-2024",
+    "cannabis-trichome-regulatory-networks-2026",
+    "cannabis-trichomes-2021"
+  ],
+  "/learn/atlas/trichomes-resin/gland-aging-dehiscence-and-sampling-integrity": [
+    "cannabis-trichome-development-2023",
+    "cannabis-trichome-sampling-2025",
+    "cannabis-trichome-morphology-metabolites-2020"
+  ]
+}

@@ -51,9 +51,9 @@
     "id": "trichomes_resin",
     "label": "Trichomes & Resin",
     "clickTarget": "trichomes",
-    "summary": "Trichome types, resin glands, glandular structures, maturity cues, microscope inspection, and harvest interpretation.",
-    "firstAsset": "Trichome maturity chart",
-    "topics": ["Capitate-stalked trichomes", "Capitate-sessile trichomes", "Bulbous trichomes", "Resin glands", "Microscope inspection", "Harvest interpretation"]
+    "summary": "Glandular trichome types and developmental states, secretory-disk anatomy, storage cavity, stipe and stalk specialization, sessile-like precursors, secretory-cell metabolism, optical maturity, gland aging and dehiscence, sampling bias, and microscope workflow.",
+    "firstAsset": "Glandular-trichome developmental and anatomy plate",
+    "topics": ["Bulbous trichomes", "Sessile trichomes", "Premature stalked trichomes", "Mature stalked trichomes", "Secretory disk cells", "Storage cavity", "Stipe", "Stalk function", "Trichome development", "Specialized metabolism", "Gland aging", "Dehiscence", "Sampling bias", "Microscope workflow"]
   },
   {
     "id": "sex_pollen_seed",
