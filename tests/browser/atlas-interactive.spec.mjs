@@ -1,4 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { loadAtlasEntities } from "./atlas-test-data.mjs";
+
+const atlasEntities = loadAtlasEntities();
+const leafEntity = atlasEntities.find((entity) => entity.id === "leaves");
+if (!leafEntity) throw new Error("Leaves Atlas entity is required for interactive QA.");
 
 function watchRuntimeErrors(page) {
   const errors = [];
@@ -44,11 +49,11 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
 
   await app.getByRole("tab", { name: "micro", exact: true }).click();
   await expect(app.getByText("Microscopy layer", { exact: true })).toBeVisible();
-  await expect(app.getByRole("heading", { name: "Stomata & epidermis", exact: true })).toBeVisible();
+  await expect(app.getByRole("heading", { name: leafEntity.microTitle, exact: true })).toBeVisible();
   await expect(runtime.locator("#runtime-legend")).toContainText("Micro");
 
   await app.getByRole("tab", { name: "data", exact: true }).click();
-  await expect(app.getByRole("heading", { name: "Photosynthesis & gas exchange", exact: true })).toBeVisible();
+  await expect(app.getByRole("heading", { name: leafEntity.dataTitle, exact: true })).toBeVisible();
 
   const fallback = app.locator('[aria-label="Accessible fallback plant model viewport"]');
   const beforeTransform = await fallback.getAttribute("style");
