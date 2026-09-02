@@ -65,11 +65,11 @@
     "systemLabel": "Flowers",
     "modelTarget": "plant.flowers",
     "hotspot": { "x": 58, "y": 15 },
-    "camera": { "yaw": 8, "pitch": -18, "zoom": 1.75 },
+    "camera": { "yaw": 8, "pitch": -18, "zoom": 1.9 },
     "layers": ["overview", "anatomy", "physiology", "micro", "environment", "diagnostics"],
-    "microTitle": "Bracts, stigmas & floral tissues",
-    "dataTitle": "Flower development",
-    "keyFunctions": ["Support sexual reproduction", "Receive pollen through stigmas", "Develop seed after fertilization", "Carry dense glandular trichome populations"]
+    "microTitle": "Bract, ovary, ovule & stigma anatomy",
+    "dataTitle": "Inflorescence architecture & maturation",
+    "keyFunctions": ["Build condensed reproductive architecture from repeated phytomers and branch orders", "Enclose the ovary and ovule while exposing stigmatic pollen-reception surfaces", "Support pollination, fertilization, and later seed development", "Carry dense glandular trichomes whose development changes with genotype, tissue age, and sampling position"]
   },
   {
     "id": "trichomes_resin",
