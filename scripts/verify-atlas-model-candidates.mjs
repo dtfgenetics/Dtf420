@@ -50,6 +50,7 @@ if (registry.performanceBudget.mobile.maxTextureEdge >= registry.performanceBudg
 
 const ids = new Set();
 const releaseEligible = [];
+const primaryCandidates = [];
 const allowedRoles = new Set(["primary-candidate", "alternate-candidate", "quality-benchmark"]);
 const allowedStatuses = new Set([
   "researching",
@@ -71,6 +72,23 @@ const allowedRights = new Set([
 const allowedAcquisition = new Set(["not-ingested", "ingested"]);
 const triState = new Set(["yes", "no", "pending-review", "no-per-listing-category"]);
 
+function requireMeasuredNumber(value, label) {
+  const number = Number(value);
+  if (!Number.isFinite(number) || number <= 0) throw new Error(`${label} must be a positive measured number.`);
+  return number;
+}
+
+function verifyMobileMetrics(metrics, candidateId) {
+  if (!metrics || metrics.result !== "pass") throw new Error(`${candidateId} requires a passing mobileVariant.`);
+  const mobileBudget = registry.performanceBudget.mobile;
+  const triangles = requireMeasuredNumber(metrics.triangles, `${candidateId} mobileVariant.triangles`);
+  const fileBytes = requireMeasuredNumber(metrics.fileBytes, `${candidateId} mobileVariant.fileBytes`);
+  const maxTextureEdge = requireMeasuredNumber(metrics.maxTextureEdge, `${candidateId} mobileVariant.maxTextureEdge`);
+  if (triangles > mobileBudget.maxTriangles) throw new Error(`${candidateId} mobile LOD exceeds triangle budget.`);
+  if (fileBytes > mobileBudget.maxGlbBytes) throw new Error(`${candidateId} mobile LOD exceeds GLB byte budget.`);
+  if (maxTextureEdge > mobileBudget.maxTextureEdge) throw new Error(`${candidateId} mobile LOD exceeds texture-edge budget.`);
+}
+
 for (const candidate of registry.candidates) {
   if (!candidate?.id || !/^[a-z0-9][a-z0-9-]+$/.test(candidate.id)) {
     throw new Error("Every Atlas model candidate needs a stable kebab-case id.");
@@ -79,6 +97,7 @@ for (const candidate of registry.candidates) {
   ids.add(candidate.id);
 
   if (!allowedRoles.has(candidate.role)) throw new Error(`${candidate.id} has invalid role ${candidate.role}.`);
+  if (candidate.role === "primary-candidate") primaryCandidates.push(candidate.id);
   if (!allowedStatuses.has(candidate.status)) throw new Error(`${candidate.id} has invalid status ${candidate.status}.`);
   if (!candidate.title || !candidate.creator) throw new Error(`${candidate.id} needs title and creator.`);
   if (!candidate.source?.provider || typeof candidate.source.url !== "string" || !candidate.source.url.startsWith("https://")) {
@@ -86,6 +105,11 @@ for (const candidate of registry.candidates) {
   }
   if (!allowedRights.has(candidate.rights?.state)) throw new Error(`${candidate.id} has invalid rights state ${candidate.rights?.state}.`);
   if (!candidate.rights?.rightsBasis) throw new Error(`${candidate.id} needs a rightsBasis note.`);
+  if (candidate.rights.state === "verified-for-public-web") {
+    for (const field of ["publicWebsiteUseApproved", "modificationApproved", "redistributionApproved"]) {
+      if (candidate.rights[field] !== true) throw new Error(`${candidate.id} verified rights require rights.${field}=true.`);
+    }
+  }
   if (!allowedAcquisition.has(candidate.acquisition?.state)) throw new Error(`${candidate.id} has invalid acquisition state ${candidate.acquisition?.state}.`);
 
   for (const field of ["fullCanopyPresent", "exposedRootsPresent", "potOrSceneryBakedIntoPlant"]) {
@@ -129,9 +153,7 @@ for (const candidate of registry.candidates) {
   }
   if (candidate.acquisition.state !== "ingested" || !localPath) throw new Error(`${candidate.id} must be ingested before release.`);
   if (!/^[a-f0-9]{64}$/i.test(candidate.acquisition.sha256 || "")) throw new Error(`${candidate.id} needs a final SHA-256 before release.`);
-  if (!Number.isFinite(Number(candidate.acquisition.fileBytes)) || Number(candidate.acquisition.fileBytes) <= 0) {
-    throw new Error(`${candidate.id} needs measured fileBytes before release.`);
-  }
+  const fileBytes = requireMeasuredNumber(candidate.acquisition.fileBytes, `${candidate.id} acquisition.fileBytes`);
   if (candidate.atlasFit.fullCanopyPresent !== "yes") throw new Error(`${candidate.id} must include the full canopy before release.`);
   if (candidate.atlasFit.exposedRootsPresent !== "yes") throw new Error(`${candidate.id} must include exposed roots before release.`);
   if (candidate.atlasFit.potOrSceneryBakedIntoPlant !== "no") throw new Error(`${candidate.id} must contain no baked pot/scenery before release.`);
@@ -140,17 +162,26 @@ for (const candidate of registry.candidates) {
   if (!candidate.measuredQa || candidate.measuredQa.result !== "pass") throw new Error(`${candidate.id} needs measuredQa.result=pass before release.`);
 
   const desktop = registry.performanceBudget.desktop;
-  if (Number(candidate.measuredQa.triangles) > desktop.maxTriangles) throw new Error(`${candidate.id} exceeds desktop triangle budget.`);
-  if (Number(candidate.acquisition.fileBytes) > desktop.maxGlbBytes) throw new Error(`${candidate.id} exceeds desktop GLB byte budget.`);
-  if (Number(candidate.measuredQa.maxTextureEdge) > desktop.maxTextureEdge) throw new Error(`${candidate.id} exceeds desktop texture-edge budget.`);
+  const desktopTriangles = requireMeasuredNumber(candidate.measuredQa.triangles, `${candidate.id} measuredQa.triangles`);
+  const desktopTextureEdge = requireMeasuredNumber(candidate.measuredQa.maxTextureEdge, `${candidate.id} measuredQa.maxTextureEdge`);
+  if (desktopTriangles > desktop.maxTriangles) throw new Error(`${candidate.id} exceeds desktop triangle budget.`);
+  if (fileBytes > desktop.maxGlbBytes) throw new Error(`${candidate.id} exceeds desktop GLB byte budget.`);
+  if (desktopTextureEdge > desktop.maxTextureEdge) throw new Error(`${candidate.id} exceeds desktop texture-edge budget.`);
 
-  if (candidate.atlasFit.mobileLod === "required") {
-    const mobile = candidate.mobileVariant;
-    if (!mobile || mobile.result !== "pass") throw new Error(`${candidate.id} requires a passing mobileVariant.`);
-    if (Number(mobile.triangles) > registry.performanceBudget.mobile.maxTriangles) throw new Error(`${candidate.id} mobile LOD exceeds triangle budget.`);
-    if (Number(mobile.fileBytes) > registry.performanceBudget.mobile.maxGlbBytes) throw new Error(`${candidate.id} mobile LOD exceeds GLB byte budget.`);
-    if (Number(mobile.maxTextureEdge) > registry.performanceBudget.mobile.maxTextureEdge) throw new Error(`${candidate.id} mobile LOD exceeds texture-edge budget.`);
+  if (candidate.atlasFit.mobileLod === "complete") {
+    verifyMobileMetrics(candidate.mobileVariant, candidate.id);
+  } else if (candidate.atlasFit.mobileLod === "not-required") {
+    const mobile = registry.performanceBudget.mobile;
+    if (desktopTriangles > mobile.maxTriangles) throw new Error(`${candidate.id} cannot mark mobileLod=not-required because the desktop model exceeds the mobile triangle budget.`);
+    if (fileBytes > mobile.maxGlbBytes) throw new Error(`${candidate.id} cannot mark mobileLod=not-required because the desktop model exceeds the mobile GLB byte budget.`);
+    if (desktopTextureEdge > mobile.maxTextureEdge) throw new Error(`${candidate.id} cannot mark mobileLod=not-required because the desktop textures exceed the mobile texture budget.`);
+  } else {
+    throw new Error(`${candidate.id} must resolve mobileLod to complete or not-required before release.`);
   }
+}
+
+if (primaryCandidates.length !== 1) {
+  throw new Error(`Atlas candidate registry must have exactly one primary-candidate; found ${primaryCandidates.length}.`);
 }
 
 if (manifest.available === true) {
@@ -161,8 +192,16 @@ if (manifest.available === true) {
   if (manifest.modelVersion !== released.id) {
     throw new Error(`Public Atlas modelVersion (${manifest.modelVersion}) must equal the approved candidate id (${released.id}).`);
   }
+  if (manifest.variants?.mobile) {
+    if (released.atlasFit.mobileLod === "complete" && !released.mobileVariant) {
+      throw new Error(`${released.id} manifest exposes a mobile model but registry lacks mobileVariant evidence.`);
+    }
+    if (released.atlasFit.mobileLod === "not-required" && manifest.variants.desktop?.model !== manifest.variants.mobile?.model) {
+      throw new Error(`${released.id} marks mobileLod=not-required but manifest points mobile to a different GLB.`);
+    }
+  }
 } else if (releaseEligible.length > 0) {
   throw new Error("A candidate is marked releaseEligible while the public Atlas manifest remains unavailable. Promote both in one reviewed release change.");
 }
 
-console.log(`Atlas model candidate policy verified (${registry.candidates.length} candidates, ${releaseEligible.length} release-eligible).`);
+console.log(`Atlas model candidate policy verified (${registry.candidates.length} candidates, ${releaseEligible.length} release-eligible, primary=${primaryCandidates[0]}).`);
