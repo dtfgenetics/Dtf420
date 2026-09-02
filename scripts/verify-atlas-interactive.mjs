@@ -6,6 +6,12 @@ const contentDir = path.join(root, "content");
 const entities = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-entities.json"), "utf8"));
 const sections = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-sections.json"), "utf8"));
 const modules = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-learning-modules.json"), "utf8"));
+const viewportPath = path.join(root, "components", "atlas", "AtlasInteractiveViewport.tsx");
+const runtimeHtmlPath = path.join(root, "public", "atlas-3d", "index.html");
+const runtimeJsPath = path.join(root, "public", "atlas-3d", "atlas-runtime.js");
+const viewportSource = fs.readFileSync(viewportPath, "utf8");
+const runtimeHtml = fs.readFileSync(runtimeHtmlPath, "utf8");
+const runtimeJs = fs.readFileSync(runtimeJsPath, "utf8");
 
 const validLayers = new Set(["overview", "anatomy", "physiology", "micro", "environment", "diagnostics"]);
 const sectionIds = new Set(sections.map((section) => section.id));
@@ -79,10 +85,32 @@ const requiredPlantTargets = [
 ];
 for (const target of requiredPlantTargets) if (!modelTargets.has(target)) errors.push(`Missing canonical 3D model target: ${target}`);
 
+const runtimeContracts = [
+  [runtimeHtml.includes("three@0.185.1"), "3D runtime must pin Three.js 0.185.1."],
+  [runtimeHtml.includes("OrbitControls"), "3D runtime must load OrbitControls."],
+  [runtimeHtml.includes("./atlas-runtime.js"), "3D runtime HTML must load the project-owned Atlas scene."],
+  [runtimeJs.includes("new THREE.WebGLRenderer"), "Atlas runtime must create a real WebGL renderer."],
+  [runtimeJs.includes("new THREE.Raycaster"), "Atlas runtime must use mesh picking rather than DOM-only selection."],
+  [runtimeJs.includes("atlas:select"), "Atlas runtime must send mesh selections to the React inspector."],
+  [runtimeJs.includes("atlas:set-state"), "Atlas runtime must accept selected-entity and layer state from React."],
+  [runtimeJs.includes("atlas:command"), "Atlas runtime must accept camera/viewer commands."],
+  [runtimeJs.includes("anatomyGroup"), "Atlas runtime must expose an anatomy layer."],
+  [runtimeJs.includes("physiologyGroup"), "Atlas runtime must expose a physiology layer."],
+  [runtimeJs.includes("microGroup"), "Atlas runtime must expose a micro/tissue teaching layer."],
+  [runtimeJs.includes("environmentGroup"), "Atlas runtime must expose an environment layer."],
+  [runtimeJs.includes("diagnosticGroup"), "Atlas runtime must expose a diagnostic observation layer."],
+  [runtimeJs.includes("prefers-reduced-motion"), "Atlas runtime must provide reduced-motion behavior."],
+  [runtimeJs.includes("conceptual xylem water movement"), "Physiology legend must prevent flow particles from being misread as measured flux."],
+  [runtimeJs.includes("do not assert a diagnosis"), "Diagnostic overlay must not present markers as diagnoses."],
+  [viewportSource.includes('src="/atlas-3d/index.html"'), "React viewport must mount the same-origin Three.js runtime."],
+  [viewportSource.includes('aria-label={`${entity.label}.'), "Hotspots must keep explicit accessible names when compact mobile labels are hidden."],
+];
+for (const [condition, message] of runtimeContracts) if (!condition) errors.push(message);
+
 if (errors.length) {
   console.error("Interactive Atlas verification failed:");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Interactive Atlas verified: ${entities.length} entities, ${modelTargets.size} unique model targets, ${validLayers.size} supported layers.`);
+console.log(`Interactive Atlas verified: ${entities.length} entities, ${modelTargets.size} unique model targets, ${validLayers.size} supported layers, real Three.js renderer + fallback contract.`);
