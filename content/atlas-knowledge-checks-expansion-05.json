@@ -105,7 +105,7 @@
   },
   {
     "id": "sex-chromosomes-regulation",
-    "route": "/learn/atlas/sex-pollen-seeds/sex-chromosomes-and-early-gene-regulation",
+    "route": "/learn/atlas/sex-pollen-seed/sex-chromosomes-and-early-gene-regulation",
     "prompt": "What does current chromosome-level Cannabis evidence support about sex determination?",
     "options": [
       "Cannabis commonly uses an XX/XY system, with recent evidence implicating X-linked ethylene-pathway regulation rather than a simple active-Y master switch",
@@ -118,7 +118,7 @@
   },
   {
     "id": "sex-ethylene-plasticity",
-    "route": "/learn/atlas/sex-pollen-seeds/ethylene-mediated-sexual-plasticity",
+    "route": "/learn/atlas/sex-pollen-seed/ethylene-mediated-sexual-plasticity",
     "prompt": "Why must the Atlas separate chromosomal sex from ethylene-mediated floral sex expression?",
     "options": [
       "Ethylene-pathway manipulation can change floral phenotype without changing the plant's XX or XY chromosome complement",
@@ -131,7 +131,7 @@
   },
   {
     "id": "sex-anther-dehiscence",
-    "route": "/learn/atlas/sex-pollen-seeds/anther-maturity-dehiscence-and-pollen-release",
+    "route": "/learn/atlas/sex-pollen-seed/anther-maturity-dehiscence-and-pollen-release",
     "prompt": "What structural event directly releases mature Cannabis pollen from an anther?",
     "options": [
       "Longitudinal dehiscence opens the anther along a stomium and exposes pollen for release",
@@ -144,7 +144,7 @@
   },
   {
     "id": "sex-pollen-viability-storage",
-    "route": "/learn/atlas/sex-pollen-seeds/pollen-viability-germination-and-storage",
+    "route": "/learn/atlas/sex-pollen-seed/pollen-viability-germination-and-storage",
     "prompt": "Why is an in-vitro pollen germination assay more informative than appearance or staining alone for stored Cannabis pollen?",
     "options": [
       "Intact-looking or non-aborted pollen can persist after the ability to germinate has declined, so actual germination tests measure a different property",
