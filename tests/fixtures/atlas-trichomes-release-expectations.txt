@@ -1,0 +1,19 @@
+THC Living Plant Atlas — Trichomes & Resin expansion release expectations
+
+- Trichomes & Resin contains 10 canonical lessons after this expansion.
+- Whole Atlas contains 80 canonical lessons after Flowers and Trichomes expansions.
+- Every canonical lesson has exactly one knowledge-check route.
+- New routes:
+  /learn/atlas/trichomes-resin/stalked-trichome-development
+  /learn/atlas/trichomes-resin/head-stipe-and-stalk-specialization
+  /learn/atlas/trichomes-resin/secretory-cell-metabolism-and-storage-interface
+  /learn/atlas/trichomes-resin/gland-aging-dehiscence-and-sampling-integrity
+- Each new route has direct scholarly source mappings and a visual-production brief.
+- Trichome entity remains modelTarget plant.trichomes.
+- Micro title: Secretory disk, cavity, stipe & stalk.
+- Data title: Development, specialization & sampling.
+- Sessile-like precursor stages must not be described as meaning every sessile gland becomes stalked.
+- Stalk functional claims must stay within evidence from current multi-omics; do not invent transport fluxes or a proven vascular conduit.
+- Storage cavity is extracellular/subcuticular, not the secretory cell itself.
+- Clear/cloudy/amber appearance is not a direct potency assay.
+- Gland aging, dehiscence, damage, tissue position, genotype, focus and lighting must remain part of sampling interpretation.
