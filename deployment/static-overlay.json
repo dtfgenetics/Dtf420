@@ -18,7 +18,6 @@
   ],
   "sharedPaths": [
     "_next/static",
-    "atlas-3d",
     "seed-ascent",
     "seed-ascent.html"
   ],
@@ -44,8 +43,6 @@
     "learn/tools/plant-health-intake/index.html",
     "community/grow-offs/solo-cup-grow-off/index.html",
     "games/seed-ascent/index.html",
-    "atlas-3d/index.html",
-    "atlas-3d/atlas-runtime.js",
     "seed-ascent.html",
     "seed-ascent/engine.js",
     "seed-ascent/levels.js",
