@@ -1,0 +1,22 @@
+[
+  {
+    "route": "/learn/atlas/flowers/inflorescence-architecture-and-condensed-phytomers",
+    "title": "Inflorescence architecture & condensed phytomers",
+    "brief": "Create a photorealistic 3D educational hierarchy that starts with the whole female plant and progressively isolates the main reproductive axis, branch orders, shortened branchlets, repeated phytomers, reduced leaves/bracts, solitary flowers, and axillary shoots. Make it visually obvious that the familiar cannabis bud is a dense compound inflorescence rather than one flower. Use dark premium Atlas UI framing, clean cream labels, green/gold accents, and no yellow cast."
+  },
+  {
+    "route": "/learn/atlas/flowers/floral-meristem-branching-and-photoperiod",
+    "title": "Floral meristem branching & photoperiod",
+    "brief": "Create a scientifically cautious split-screen 3D shoot-apex comparison showing an adult long-day architecture versus a short-day-responsive architecture. Visualize increased reproductive branching and compressed internodes under short-day conditions without implying an instantaneous flower switch or universal timing. Include a developmental sequence from shoot apex to condensed inflorescence and label it as a conceptual architecture model grounded in Cannabis studies."
+  },
+  {
+    "route": "/learn/atlas/flowers/bract-ovary-and-stigma-anatomy",
+    "title": "Bract, ovary & stigma anatomy",
+    "brief": "Create a high-detail photorealistic female Cannabis flower cutaway. Clearly distinguish the subtending bract, perigonal bract, ovary, developing ovule, reduced perianth, paired stigmatic branches with papillae, glandular trichomes, stomata, and adjacent reduced leaf tissue. Use a staged exploded view so spatial relationships remain readable while preserving believable botanical proportions."
+  },
+  {
+    "route": "/learn/atlas/flowers/maturation-senescence-and-bract-change",
+    "title": "Maturation, senescence & bract change",
+    "brief": "Create a photorealistic multi-stage reproductive-tissue sequence showing bract expansion, changing stigma condition, glandular-trichome development and aging, resin-head dehiscence where appropriate, and surrounding tissue senescence. Explicitly visualize asynchronous development across neighboring floral tissues and include a note that genotype, flower age, and sampling position alter the pattern; do not present fixed week numbers as a universal harvest clock."
+  }
+]

@@ -1,0 +1,18 @@
+THC Living Plant Atlas — Flowers expansion release expectations
+
+- Flowers contains 10 canonical lessons after this expansion.
+- Whole Atlas contains 76 canonical lessons after Nodes, Leaves, and Flowers expansions.
+- Every canonical lesson has exactly one knowledge-check route.
+- New Flower routes:
+  /learn/atlas/flowers/inflorescence-architecture-and-condensed-phytomers
+  /learn/atlas/flowers/floral-meristem-branching-and-photoperiod
+  /learn/atlas/flowers/bract-ovary-and-stigma-anatomy
+  /learn/atlas/flowers/maturation-senescence-and-bract-change
+- Each new route has direct scholarly source mappings and a visual-production brief.
+- Flower entity remains modelTarget plant.flowers and exposes Anatomy, Physiology, Micro, Environment, and Diagnostics layers.
+- Micro title: Bract, ovary, ovule & stigma anatomy.
+- Data title: Inflorescence architecture & maturation.
+- A visible cannabis bud must be described as a condensed compound inflorescence rather than one flower.
+- Photoperiod-driven shoot-apex architecture must be distinguished from individual solitary-flower initiation.
+- STS-treated timing must not be used as normal female developmental timing.
+- Maturation must not be reduced to one calendar week or stigma color.

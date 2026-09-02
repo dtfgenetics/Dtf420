@@ -43,9 +43,9 @@
     "id": "flowers",
     "label": "Flowers",
     "clickTarget": "flowers",
-    "summary": "Flower initiation, pistils/stigmas, bracts, bud development, resin, pollination, maturation, senescence, harvest timing, and mold risk.",
-    "firstAsset": "Flower anatomy plate",
-    "topics": ["Flower initiation", "Bracts", "Pistils", "Stigmas", "Bud development", "Pollination", "Resin", "Harvest timing", "Mold risk"]
+    "summary": "Female flower anatomy, condensed inflorescence architecture, reproductive phytomers, floral meristems, bracts, ovary and ovule, stigmas, photoperiod-driven shoot-apex reorganization, pollination, maturation, senescence, trichome development, and disease-risk inspection.",
+    "firstAsset": "Female flower and condensed-inflorescence anatomy plate",
+    "topics": ["Female flower anatomy", "Inflorescence architecture", "Condensed phytomers", "Floral meristems", "Photoperiod", "Bracts", "Ovary", "Ovule", "Stigmas", "Pollination response", "Bract expansion", "Trichome maturation", "Senescence", "Mold risk"]
   },
   {
     "id": "trichomes_resin",
