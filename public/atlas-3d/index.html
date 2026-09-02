@@ -44,13 +44,22 @@
     import { OrbitControls } from "three/addons/controls/OrbitControls.js";
     import { startAtlasRuntime } from "./atlas-runtime.js";
 
+    const parentOrigin = window.location.origin;
+    const readyMessage = { type: "atlas:ready", renderer: "three", version: "0.185.1" };
+
+    function announceReady() {
+      window.parent.postMessage(readyMessage, parentOrigin);
+    }
+
     try {
       startAtlasRuntime(THREE, OrbitControls);
+      announceReady();
+      [150, 450, 900, 1600, 2600, 4000].forEach((delay) => window.setTimeout(announceReady, delay));
     } catch (error) {
       const status = document.getElementById("runtime-status");
       status.hidden = false;
       status.textContent = "3D runtime unavailable. The accessible Atlas fallback remains active.";
-      window.parent.postMessage({ type: "atlas:runtime-error", message: error instanceof Error ? error.message : String(error) }, window.location.origin);
+      window.parent.postMessage({ type: "atlas:runtime-error", message: error instanceof Error ? error.message : String(error) }, parentOrigin);
     }
   </script>
 </body>
