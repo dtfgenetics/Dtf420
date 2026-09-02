@@ -44,6 +44,16 @@ for (const rel of manifest.sharedPaths) {
   if (!fs.existsSync(target)) throw new Error(`Required shared export path missing: ${rel}`);
 }
 
+for (const rel of [
+  "learn/atlas/atlas-3d/index.html",
+  "learn/atlas/atlas-3d/atlas-runtime.js",
+]) {
+  const target = path.join(root, rel);
+  if (!fs.existsSync(target) || !fs.statSync(target).isFile() || fs.statSync(target).size === 0) {
+    throw new Error(`Atlas 3D runtime is missing from the owned child-route export: ${rel}`);
+  }
+}
+
 const nextStatic = path.join(root, "_next", "static");
 let nextAssetCount = 0;
 for (const entry of fs.readdirSync(nextStatic, { recursive: true, withFileTypes: true })) {
@@ -66,6 +76,11 @@ for (const rel of representativeHtml) {
   if (/https?:\/\/(?:www\.)?dtf420\.com/i.test(html)) {
     throw new Error(`Retired dtf420.com URL leaked into static export: ${rel}`);
   }
+}
+
+const atlasIndex = fs.readFileSync(path.join(root, "learn/atlas/index.html"), "utf8");
+if (!atlasIndex.includes("/learn/atlas/atlas-3d/index.html")) {
+  throw new Error("Atlas index does not reference the owned nested Three.js runtime path.");
 }
 
 const routeCount = manifest.routePrefixes.reduce((sum, prefix) => {
@@ -93,4 +108,5 @@ console.log(JSON.stringify({
   publishableIndexRoutes: routeCount,
   nextStaticFiles: nextAssetCount,
   requiredRoutes: manifest.requiredRoutes.length,
+  atlasRuntime: "learn/atlas/atlas-3d",
 }));
