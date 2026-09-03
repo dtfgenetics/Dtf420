@@ -2,9 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
+import atlasGrowthStages from "@/content/atlas-growth-stages.json";
 import styles from "./AtlasInteractiveViewport.module.css";
 
 export type AtlasLayer = "overview" | "anatomy" | "physiology" | "micro" | "environment" | "diagnostics";
+export type AtlasViewMode = "context" | "isolate" | "xray";
+export type AtlasFlowMode = "all" | "xylem" | "phloem" | "transpiration";
 type RuntimeState = "loading" | "ready" | "fallback";
 type RuntimeCommand = "rotate-left" | "rotate-right" | "zoom-in" | "zoom-out" | "reset";
 type Entity = (typeof atlasEntities)[number];
@@ -12,7 +15,13 @@ type Entity = (typeof atlasEntities)[number];
 type AtlasInteractiveViewportProps = {
   selectedId: string;
   layer: AtlasLayer;
+  stageId: string;
+  viewMode: AtlasViewMode;
+  flowMode: AtlasFlowMode;
   onLayerChange: (layer: AtlasLayer) => void;
+  onStageChange: (stageId: string) => void;
+  onViewModeChange: (mode: AtlasViewMode) => void;
+  onFlowModeChange: (mode: AtlasFlowMode) => void;
   onSelect: (id: string) => void;
   statusForEntity?: (id: string) => string;
   lightOn?: boolean;
@@ -121,7 +130,20 @@ function ReferencePlant() {
   );
 }
 
-export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onSelect, statusForEntity, lightOn = true }: AtlasInteractiveViewportProps) {
+export function AtlasInteractiveViewport({
+  selectedId,
+  layer,
+  stageId,
+  viewMode,
+  flowMode,
+  onLayerChange,
+  onStageChange,
+  onViewModeChange,
+  onFlowModeChange,
+  onSelect,
+  statusForEntity,
+  lightOn = true,
+}: AtlasInteractiveViewportProps) {
   const [rotation, setRotation] = useState(-4);
   const [zoom, setZoom] = useState(1);
   const [dragging, setDragging] = useState(false);
@@ -130,15 +152,31 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
   const viewportRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
 
-  const visibleEntities = atlasEntities.filter((entity) => entityVisible(entity, layer));
   const selectedEntity = atlasEntities.find((entity) => entity.id === selectedId) ?? atlasEntities[0];
+  const currentStage = atlasGrowthStages.find((stage) => stage.id === stageId) ?? atlasGrowthStages[0];
+  const activeSystems = new Set(currentStage.activeSystems);
+  const visibleEntities = atlasEntities.filter((entity) => {
+    if (!entityVisible(entity, layer)) return false;
+    if (entity.id === selectedId || entity.id === "environment_overlay" || entity.id === "diagnostic_overlay") return true;
+    return activeSystems.has(entity.id);
+  });
 
   const postState = useCallback(() => {
     frameRef.current?.contentWindow?.postMessage(
-      { type: "atlas:set-state", selectedId, layer, camera: selectedEntity.camera, lightOn },
+      {
+        type: "atlas:set-state",
+        selectedId,
+        layer,
+        camera: selectedEntity.camera,
+        lightOn,
+        stageId,
+        activeSystems: currentStage.activeSystems,
+        viewMode,
+        flowMode,
+      },
       window.location.origin,
     );
-  }, [layer, lightOn, selectedEntity.camera, selectedId]);
+  }, [currentStage.activeSystems, flowMode, layer, lightOn, selectedEntity.camera, selectedId, stageId, viewMode]);
 
   const sendCommand = useCallback((command: RuntimeCommand) => {
     frameRef.current?.contentWindow?.postMessage({ type: "atlas:command", command }, window.location.origin);
@@ -181,7 +219,7 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
-    if (runtimeState === "ready" || (event.target as HTMLElement).closest("button, a, iframe")) return;
+    if (runtimeState === "ready" || (event.target as HTMLElement).closest("button, a, iframe, select")) return;
     pointer.current = { id: event.pointerId, x: event.clientX, rotation };
     setDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -210,6 +248,9 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
     <div
       ref={viewportRef}
       className={`${styles.viewport} ${dragging ? styles.dragging : ""} ${styles[`layer_${layer}`]}`}
+      data-stage={stageId}
+      data-view-mode={viewMode}
+      data-flow-mode={flowMode}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={releasePointer}
@@ -230,6 +271,35 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
         <span className={styles.rendererStatus} aria-live="polite">
           {runtimeState === "ready" ? "Three.js live" : runtimeState === "fallback" ? "2D fallback" : "Loading 3D"}
         </span>
+      </div>
+
+      <div className={styles.sceneStateBar} aria-label="3D scene state controls">
+        <label>
+          <span>Stage</span>
+          <select aria-label="Growth stage" value={stageId} onChange={(event) => onStageChange(event.target.value)}>
+            {atlasGrowthStages.map((stage) => <option key={stage.id} value={stage.id}>{stage.stageNumber}. {stage.label}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>View</span>
+          <select aria-label="Structure view" value={viewMode} onChange={(event) => onViewModeChange(event.target.value as AtlasViewMode)}>
+            <option value="context">Context</option>
+            <option value="isolate">Isolate</option>
+            <option value="xray">X-ray</option>
+          </select>
+        </label>
+        {layer === "physiology" ? (
+          <label>
+            <span>Flow</span>
+            <select aria-label="Physiology flow" value={flowMode} onChange={(event) => onFlowModeChange(event.target.value as AtlasFlowMode)}>
+              <option value="all">All flows</option>
+              <option value="xylem">Water / xylem</option>
+              <option value="phloem">Assimilate / phloem</option>
+              <option value="transpiration">Transpiration</option>
+            </select>
+          </label>
+        ) : null}
+        <div className={styles.stageReadout} aria-live="polite"><b>{currentStage.label}</b><small>{currentStage.activeSystems.length} active systems</small></div>
       </div>
 
       <div className={styles.viewerTools} aria-label="Plant viewer controls">

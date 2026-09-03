@@ -20,6 +20,48 @@ const LAYER_COPY = {
   diagnostics: "Diagnostics · amber markers identify observation locations only; they do not assert a diagnosis.",
 };
 
+const STAGE_LABELS = {
+  germination: "Germination",
+  seedling: "Seedling",
+  vegetative: "Vegetative Growth",
+  transition: "Transition / Preflower",
+  flowering: "Flower Development",
+  maturation: "Maturation",
+};
+
+const STAGE_PROFILES = {
+  germination: {
+    scale: 0.42,
+    visible: ["seed_germination", "root_system"],
+    entityScale: { root_system: 0.42 },
+  },
+  seedling: {
+    scale: 0.58,
+    visible: ["root_system", "stem_vascular", "nodes_branching", "leaves"],
+    entityScale: { leaves: 0.64, nodes_branching: 0.6 },
+  },
+  vegetative: {
+    scale: 0.84,
+    visible: ["root_system", "stem_vascular", "nodes_branching", "leaves"],
+    entityScale: { leaves: 0.9 },
+  },
+  transition: {
+    scale: 0.94,
+    visible: ["root_system", "stem_vascular", "nodes_branching", "leaves", "flowers", "trichomes_resin", "sex_pollen_seed"],
+    entityScale: { flowers: 0.38, trichomes_resin: 0.42, sex_pollen_seed: 0.72 },
+  },
+  flowering: {
+    scale: 1,
+    visible: ["root_system", "stem_vascular", "nodes_branching", "leaves", "flowers", "trichomes_resin", "sex_pollen_seed"],
+    entityScale: {},
+  },
+  maturation: {
+    scale: 1,
+    visible: ["root_system", "stem_vascular", "nodes_branching", "leaves", "flowers", "trichomes_resin", "sex_pollen_seed"],
+    entityScale: {},
+  },
+};
+
 export function startAtlasRuntime(THREE, OrbitControls) {
   const root = document.getElementById("atlas-root");
   const status = document.getElementById("runtime-status");
@@ -79,6 +121,7 @@ export function startAtlasRuntime(THREE, OrbitControls) {
   const environmentGroup = new THREE.Group();
   const diagnosticGroup = new THREE.Group();
   scene.add(anatomyGroup, physiologyGroup, microGroup, environmentGroup, diagnosticGroup);
+  const stageTransformGroups = [plant, anatomyGroup, physiologyGroup, microGroup, environmentGroup, diagnosticGroup];
 
   const entityObjects = new Map();
   const pickables = [];
@@ -88,18 +131,20 @@ export function startAtlasRuntime(THREE, OrbitControls) {
     const material = new THREE.MeshStandardMaterial(options);
     material.userData.baseEmissive = material.emissive.clone();
     material.userData.baseEmissiveIntensity = material.emissiveIntensity;
+    material.userData.baseOpacity = typeof material.opacity === "number" ? material.opacity : 1;
+    material.userData.baseTransparent = Boolean(material.transparent);
     materials[keyName] = material;
     return material;
   }
 
-  const rootMat = makeMaterial("root_system", { color: 0x9a7c5d, roughness: 0.9, metalness: 0, emissive: 0x000000 });
+  const rootMat = makeMaterial("root_system", { color: 0x9a7c5d, roughness: 0.9, metalness: 0, emissive: 0x000000, transparent: true, opacity: 1 });
   const stemMat = makeMaterial("stem_vascular", { color: 0x7f9b62, roughness: 0.82, metalness: 0, emissive: 0x000000, transparent: true, opacity: 1 });
-  const nodeMat = makeMaterial("nodes_branching", { color: 0xb0c67b, roughness: 0.65, emissive: 0x000000 });
-  const leafMat = makeMaterial("leaves", { color: 0x315d38, roughness: 0.86, emissive: 0x000000, side: THREE.DoubleSide });
-  const flowerMat = makeMaterial("flowers", { color: 0x6f7d51, roughness: 0.72, emissive: 0x000000 });
-  const trichomeMat = makeMaterial("trichomes_resin", { color: 0xdce2c6, roughness: 0.28, metalness: 0.04, emissive: 0x11170c, emissiveIntensity: 0.2 });
-  const seedMat = makeMaterial("seed_germination", { color: 0x7f6747, roughness: 0.78, emissive: 0x000000 });
-  const reproductiveMat = makeMaterial("sex_pollen_seed", { color: 0xc9b36c, roughness: 0.64, emissive: 0x000000 });
+  const nodeMat = makeMaterial("nodes_branching", { color: 0xb0c67b, roughness: 0.65, emissive: 0x000000, transparent: true, opacity: 1 });
+  const leafMat = makeMaterial("leaves", { color: 0x315d38, roughness: 0.86, emissive: 0x000000, side: THREE.DoubleSide, transparent: true, opacity: 1 });
+  const flowerMat = makeMaterial("flowers", { color: 0x6f7d51, roughness: 0.72, emissive: 0x000000, transparent: true, opacity: 1 });
+  const trichomeMat = makeMaterial("trichomes_resin", { color: 0xdce2c6, roughness: 0.28, metalness: 0.04, emissive: 0x11170c, emissiveIntensity: 0.2, transparent: true, opacity: 1 });
+  const seedMat = makeMaterial("seed_germination", { color: 0x7f6747, roughness: 0.78, emissive: 0x000000, transparent: true, opacity: 1 });
+  const reproductiveMat = makeMaterial("sex_pollen_seed", { color: 0xc9b36c, roughness: 0.64, emissive: 0x000000, transparent: true, opacity: 1 });
 
   function register(object, entityId, pick = true) {
     object.userData.entityId = entityId;
@@ -260,8 +305,7 @@ export function startAtlasRuntime(THREE, OrbitControls) {
   }
 
   function createTrichome(position, scale = 1, parent = microGroup) {
-    const stalkMat = trichomeMat;
-    const stalk = cylinderBetween(position, [position[0], position[1] + 0.12 * scale, position[2]], 0.012 * scale, stalkMat, "trichomes_resin", parent);
+    const stalk = cylinderBetween(position, [position[0], position[1] + 0.12 * scale, position[2]], 0.012 * scale, trichomeMat, "trichomes_resin", parent);
     stalk.userData.microOnly = true;
     const head = sphere([position[0], position[1] + 0.15 * scale, position[2]], 0.045 * scale, trichomeMat, "trichomes_resin", parent, 12);
     head.userData.microOnly = true;
@@ -338,54 +382,122 @@ export function startAtlasRuntime(THREE, OrbitControls) {
     }
   });
 
+  entityObjects.forEach((objects) => objects.forEach((object) => {
+    object.userData.atlasBaseScale = object.scale.clone();
+  }));
+
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   let pointerDown = null;
   let activeEntityId = "trichomes_resin";
   let activeLayer = "overview";
+  let activeStageId = "flowering";
+  let activeViewMode = "context";
+  let activeFlowMode = "all";
   let lightOn = true;
   let flyFrames = 0;
   const cameraGoal = new THREE.Vector3();
   const targetGoal = new THREE.Vector3();
 
-  function restoreHighlights() {
+  function restoreMaterials() {
     Object.values(materials).forEach((material) => {
       material.emissive.copy(material.userData.baseEmissive);
       material.emissiveIntensity = material.userData.baseEmissiveIntensity;
+      material.opacity = material.userData.baseOpacity;
+      material.transparent = material.userData.baseTransparent;
+      material.needsUpdate = true;
     });
   }
 
   function highlightEntity(id) {
-    restoreHighlights();
     const material = materials[id];
     if (material) {
       material.emissive.setHex(0x314a13);
       material.emissiveIntensity = id === "trichomes_resin" ? 0.85 : 0.7;
+      material.needsUpdate = true;
     }
   }
 
+  function stageProfile() {
+    return STAGE_PROFILES[activeStageId] || STAGE_PROFILES.flowering;
+  }
+
+  function transformTarget(target) {
+    const profile = stageProfile();
+    const offsetY = -2.72 + 2.72 * profile.scale;
+    return new THREE.Vector3(target[0] * profile.scale, target[1] * profile.scale + offsetY, target[2] * profile.scale);
+  }
+
+  function applyStageGeometry() {
+    const profile = stageProfile();
+    const visible = new Set(profile.visible);
+    const offsetY = -2.72 + 2.72 * profile.scale;
+    stageTransformGroups.forEach((group) => {
+      group.scale.setScalar(profile.scale);
+      group.position.y = offsetY;
+    });
+    entityObjects.forEach((objects, id) => {
+      const stageVisible = visible.has(id);
+      const isolateVisible = activeViewMode !== "isolate" || id === activeEntityId;
+      const scaleFactor = Number(profile.entityScale[id] ?? 1);
+      objects.forEach((object) => {
+        object.visible = stageVisible && isolateVisible;
+        const baseScale = object.userData.atlasBaseScale;
+        if (baseScale) object.scale.copy(baseScale).multiplyScalar(scaleFactor);
+      });
+    });
+  }
+
+  function applyFlowMode() {
+    flowSpheres.forEach((mesh, index) => {
+      const label = flowMeta[index].label;
+      mesh.visible = activeFlowMode === "all" || activeFlowMode === label;
+    });
+    transpiration.forEach((item) => {
+      item.mesh.visible = activeFlowMode === "all" || activeFlowMode === "transpiration";
+    });
+  }
+
+  function applyVisualState() {
+    restoreMaterials();
+    applyStageGeometry();
+    anatomyGroup.visible = activeLayer === "anatomy" || activeLayer === "physiology" || activeLayer === "micro";
+    physiologyGroup.visible = activeLayer === "physiology";
+    microGroup.visible = activeLayer === "micro";
+    environmentGroup.visible = activeLayer === "environment";
+    diagnosticGroup.visible = activeLayer === "diagnostics";
+
+    Object.entries(materials).forEach(([id, material]) => {
+      if (id === activeEntityId) return;
+      let opacity = 1;
+      if (activeLayer === "anatomy") opacity = 0.5;
+      if (activeLayer === "micro") opacity = 0.28;
+      if (activeViewMode === "xray") opacity = Math.min(opacity, 0.14);
+      material.opacity = opacity;
+      material.transparent = opacity < 1 || material.userData.baseTransparent;
+      material.needsUpdate = true;
+    });
+    highlightEntity(activeEntityId);
+    applyFlowMode();
+
+    const stageLabel = STAGE_LABELS[activeStageId] || activeStageId;
+    const viewCopy = activeViewMode === "isolate" ? " Isolate mode hides unrelated semantic structures." : activeViewMode === "xray" ? " X-ray mode keeps unrelated structures translucent." : "";
+    const flowCopy = activeLayer === "physiology" && activeFlowMode !== "all" ? ` Showing ${activeFlowMode} only.` : "";
+    legend.textContent = `${LAYER_COPY[activeLayer] || LAYER_COPY.overview} Stage context: ${stageLabel}.${viewCopy}${flowCopy}`;
+  }
+
   function updateLayerVisibility(layer) {
-    activeLayer = layer;
-    anatomyGroup.visible = layer === "anatomy" || layer === "physiology" || layer === "micro";
-    physiologyGroup.visible = layer === "physiology";
-    microGroup.visible = layer === "micro";
-    environmentGroup.visible = layer === "environment";
-    diagnosticGroup.visible = layer === "diagnostics";
-    stemMat.opacity = layer === "anatomy" || layer === "micro" ? 0.32 : layer === "physiology" ? 0.58 : 1;
-    leafMat.opacity = layer === "micro" ? 0.34 : 1;
-    leafMat.transparent = layer === "micro";
-    flowerMat.opacity = layer === "micro" ? 0.42 : 1;
-    flowerMat.transparent = layer === "micro";
-    legend.textContent = LAYER_COPY[layer] || LAYER_COPY.overview;
+    activeLayer = LAYER_COPY[layer] ? layer : "overview";
+    applyVisualState();
   }
 
   function focusEntity(id, cameraPreset = { yaw: 0, pitch: 0, zoom: 1 }) {
     activeEntityId = id;
-    highlightEntity(id);
-    const target = new THREE.Vector3(...(ENTITY_TARGETS[id] || [0, 0.55, 0]));
-    const yaw = THREE.MathUtils.degToRad(cameraPreset.yaw || 0);
-    const elevation = THREE.MathUtils.degToRad(-(cameraPreset.pitch || 0));
-    const distance = THREE.MathUtils.clamp(7.2 / Math.max(cameraPreset.zoom || 1, 0.8), 3.15, 8.8);
+    applyVisualState();
+    const target = transformTarget(ENTITY_TARGETS[id] || [0, 0.55, 0]);
+    const yaw = THREE.MathUtils.degToRad(cameraPreset?.yaw || 0);
+    const elevation = THREE.MathUtils.degToRad(-(cameraPreset?.pitch || 0));
+    const distance = THREE.MathUtils.clamp(7.2 / Math.max(cameraPreset?.zoom || 1, 0.8), 3.15, 8.8);
     const horizontal = Math.cos(elevation) * distance;
     targetGoal.copy(target);
     cameraGoal.set(
@@ -433,11 +545,21 @@ export function startAtlasRuntime(THREE, OrbitControls) {
     const data = event.data;
     if (!data || typeof data !== "object") return;
     if (data.type === "atlas:set-state") {
-      updateLayerVisibility(data.layer || "overview");
+      activeStageId = STAGE_PROFILES[data.stageId] ? data.stageId : "flowering";
+      activeViewMode = ["context", "isolate", "xray"].includes(data.viewMode) ? data.viewMode : "context";
+      activeFlowMode = ["all", "xylem", "phloem", "transpiration"].includes(data.flowMode) ? data.flowMode : "all";
       lightOn = data.lightOn !== false;
       key.intensity = lightOn ? 2.7 : 1.25;
       rim.intensity = lightOn ? 1.5 : 0.8;
+      activeLayer = LAYER_COPY[data.layer] ? data.layer : "overview";
       focusEntity(data.selectedId || activeEntityId, data.camera || undefined);
+      window.parent.postMessage({
+        type: "atlas:state-applied",
+        stageId: activeStageId,
+        layer: activeLayer,
+        viewMode: activeViewMode,
+        flowMode: activeFlowMode,
+      }, window.location.origin);
     }
     if (data.type === "atlas:command") applyCommand(data.command);
   });
@@ -496,11 +618,13 @@ export function startAtlasRuntime(THREE, OrbitControls) {
     if (physiologyGroup.visible) {
       const elapsed = clock.elapsedTime;
       flowSpheres.forEach((mesh, index) => {
+        if (!mesh.visible) return;
         const meta = flowMeta[index];
         const t = reducedMotion ? meta.phase : (meta.phase + elapsed * meta.speed) % 1;
         mesh.position.copy(flowCurves[index].getPointAt(t));
       });
       transpiration.forEach((item) => {
+        if (!item.mesh.visible) return;
         const t = reducedMotion ? item.phase % 1 : (item.phase + elapsed * 0.12) % 1;
         item.mesh.position.copy(item.source).add(new THREE.Vector3(0.08 * Math.sin(t * Math.PI * 2), t * 0.82, 0));
         item.mesh.material.opacity = 0.55 * (1 - t);
@@ -516,7 +640,10 @@ export function startAtlasRuntime(THREE, OrbitControls) {
     renderer.render(scene, camera);
   }
 
-  updateLayerVisibility("overview");
+  activeStageId = "flowering";
+  activeLayer = "overview";
+  activeViewMode = "context";
+  activeFlowMode = "all";
   focusEntity("trichomes_resin", { yaw: 26, pitch: -14, zoom: 2.15 });
   animate();
   status.hidden = true;
