@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "hardRequirement": "The released THC Living Plant Atlas specimen must read as a real photographed flowering cannabis plant, not a stylized, low-poly, plastic, generic, or visibly AI-deformed model.",
+  "requiredReviewViews": [
+    "front_full_plant",
+    "rear_full_plant",
+    "left_profile",
+    "right_profile",
+    "canopy_top",
+    "root_system",
+    "flower_macro",
+    "node_stem_macro",
+    "mobile_lod_comparison"
+  ],
+  "criteria": [
+    {
+      "id": "overall_photographic_realism",
+      "label": "Overall photographic realism",
+      "blocking": true,
+      "requirement": "At normal desktop viewing distance the plant must plausibly read as a high-end photographed or scanned living flowering cannabis specimen."
+    },
+    {
+      "id": "leaflet_geometry_and_serration",
+      "label": "Leaflet geometry and serration",
+      "blocking": true,
+      "requirement": "Fan and sugar leaves must have believable cannabis leaflet proportions, taper, edge serration, curvature, petiole attachment, and non-repetitive natural variation."
+    },
+    {
+      "id": "leaf_surface_and_venation",
+      "label": "Leaf surface and venation",
+      "blocking": true,
+      "requirement": "Leaf surfaces, primary/secondary venation, thickness, translucency response, roughness, and color variation must avoid flat card, wax, rubber, or plastic appearance."
+    },
+    {
+      "id": "nodes_internodes_and_branching",
+      "label": "Nodes, internodes, and branching",
+      "blocking": true,
+      "requirement": "Node spacing, branch origins, phyllotaxy cues, internode transitions, branch taper, and junctions must be botanically plausible and free of fused or floating geometry."
+    },
+    {
+      "id": "stem_texture_and_taper",
+      "label": "Stem texture and taper",
+      "blocking": true,
+      "requirement": "Main stem and branches must show credible taper, surface texture, color variation, and mature plant structure without smooth toy-like cylinders."
+    },
+    {
+      "id": "mature_flower_morphology",
+      "label": "Mature flower morphology",
+      "blocking": true,
+      "requirement": "Flower clusters must show believable cannabis inflorescence architecture, bract density, pistil presence where appropriate, sugar-leaf integration, and non-generic blob structure."
+    },
+    {
+      "id": "sugar_leaves_and_resin_character",
+      "label": "Sugar leaves and resin character",
+      "blocking": true,
+      "requirement": "Sugar leaves and flower surfaces must carry convincing resin/trichome character at close inspection without painted glitter, uniform noise, or exaggerated crystalline artifacts."
+    },
+    {
+      "id": "root_architecture",
+      "label": "Exposed root architecture",
+      "blocking": true,
+      "requirement": "The exposed root system must have a plausible crown, primary/structural roots, branching laterals, taper, fine-root transition, and integration with the stem base; no spaghetti bundles or decorative tendrils."
+    },
+    {
+      "id": "material_and_pbr_response",
+      "label": "Material and PBR response",
+      "blocking": true,
+      "requirement": "Materials must respond naturally to lighting with credible roughness, normal detail, translucency/alpha handling where needed, and no glossy plastic or metallic plant tissue."
+    },
+    {
+      "id": "color_and_texture_realism",
+      "label": "Color and texture realism",
+      "blocking": true,
+      "requirement": "Texture color, mottling, gradients, flower coloration, stems, roots, and microvariation must look natural under neutral lighting with no baked yellow cast or obvious procedural tiling."
+    },
+    {
+      "id": "no_ai_or_generation_deformation",
+      "label": "No obvious AI or generation deformation",
+      "blocking": true,
+      "requirement": "Reject fused leaves, impossible leaflet counts, duplicated motifs, melted flowers, branch discontinuities, impossible intersections, asymmetry caused by generation errors, or other obvious AI/model-generation defects."
+    },
+    {
+      "id": "no_low_poly_or_cardboard_read",
+      "label": "No low-poly or cardboard read",
+      "blocking": true,
+      "requirement": "Silhouette and close views must not expose coarse faceting, billboard-only foliage, visibly flat flower cards, chunky decimation, or game-prop simplification inconsistent with the Atlas target."
+    },
+    {
+      "id": "full_plant_consistency",
+      "label": "Full-plant multi-angle consistency",
+      "blocking": true,
+      "requirement": "Front, rear, left, right, and top views must remain anatomically coherent with no hidden backside collapse or view-dependent geometry failure."
+    },
+    {
+      "id": "mobile_lod_fidelity",
+      "label": "Mobile LOD fidelity",
+      "blocking": true,
+      "requirement": "The mobile LOD may reduce hidden complexity and texture resolution but must preserve the realistic cannabis silhouette, leaf serration read, flowering structure, branch continuity, and root-system identity."
+    }
+  ],
+  "reviews": [
+    {
+      "candidateId": "meshy-cannabis-terracotta-019cfb59",
+      "state": "pending",
+      "overallDecision": "pending",
+      "reviewer": null,
+      "reviewedAt": null,
+      "evidence": {"views": {}},
+      "criteriaResults": {},
+      "notes": ["AI-generated gallery candidate. It cannot advance from rights/technical eligibility to release eligibility until the downloaded geometry passes this full visual review."]
+    },
+    {
+      "candidateId": "zbrojmistrz-cannabis-sativa-2023",
+      "state": "pending",
+      "overallDecision": "pending",
+      "reviewer": null,
+      "reviewedAt": null,
+      "evidence": {"views": {}},
+      "criteriaResults": {},
+      "notes": ["Public listing screenshots are not sufficient evidence. Review must use the acquired mesh rendered from every required view."]
+    },
+    {
+      "candidateId": "a23d-cannabis-002707a",
+      "state": "pending",
+      "overallDecision": "pending",
+      "reviewer": null,
+      "reviewedAt": null,
+      "evidence": {"views": {}},
+      "criteriaResults": {},
+      "notes": ["Benchmark-only candidate; the same fidelity criteria still apply if it is ever licensed for direct evaluation."]
+    }
+  ]
+}
