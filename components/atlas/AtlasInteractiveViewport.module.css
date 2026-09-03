@@ -1,498 +1,189 @@
 .viewport {
-  --atlas-accent: #a7d95f;
+  --atlas-accent: #acd667;
+  --viewer-line: rgba(196, 211, 143, 0.14);
   position: relative;
-  min-height: 760px;
+  min-height: 810px;
   overflow: hidden;
-  border: 1px solid rgba(181, 205, 119, 0.24);
-  border-radius: 28px;
+  border: 1px solid rgba(181, 205, 119, 0.15);
+  border-radius: 23px;
   background:
-    radial-gradient(circle at 52% 30%, rgba(70, 100, 66, 0.3), transparent 35%),
-    radial-gradient(circle at 50% 78%, rgba(121, 100, 55, 0.12), transparent 28%),
-    linear-gradient(145deg, #07100c 0%, #0a1510 45%, #0b110d 100%);
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.34), 0 28px 80px rgba(0, 0, 0, 0.28);
+    radial-gradient(ellipse at 52% 39%, rgba(72, 112, 71, 0.24), transparent 39%),
+    radial-gradient(ellipse at 50% 84%, rgba(113, 91, 50, 0.1), transparent 25%),
+    linear-gradient(152deg, #06100b 0%, #09150f 46%, #07100c 100%);
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, 0.35), 0 20px 58px rgba(0, 0, 0, 0.2);
   touch-action: pan-y;
   user-select: none;
 }
 
-.viewport::before {
+.viewport::before,
+.viewport::after {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.34), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.28));
   z-index: 2;
+  pointer-events: none;
 }
 
-.viewport:fullscreen {
-  border-radius: 0;
-  min-height: 100vh;
+.viewport::before {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 16%, transparent 84%, rgba(0, 0, 0, 0.26)),
+    linear-gradient(180deg, rgba(2, 7, 4, 0.1), transparent 26%, transparent 70%, rgba(2, 7, 4, 0.27));
 }
 
-.dragging {
-  cursor: grabbing;
+.viewport::after {
+  opacity: 0.2;
+  background-image: radial-gradient(rgba(222, 235, 192, 0.15) 0.55px, transparent 0.65px);
+  background-size: 7px 7px;
+  mask-image: linear-gradient(to bottom, #000, transparent 44%);
 }
+
+.viewport:fullscreen { min-height: 100vh; border-radius: 0; }
+.dragging { cursor: grabbing; }
 
 .environmentGlow {
   position: absolute;
-  inset: 7% 13% 18%;
+  inset: 10% 16% 16%;
+  z-index: 0;
   border-radius: 50%;
-  opacity: 0.5;
-  filter: blur(24px);
-  background: radial-gradient(circle, rgba(145, 211, 104, 0.16), rgba(49, 109, 77, 0.05) 45%, transparent 72%);
+  opacity: 0.6;
+  filter: blur(36px);
+  background: radial-gradient(circle, rgba(139, 204, 98, 0.15), rgba(53, 108, 72, 0.04) 48%, transparent 72%);
   pointer-events: none;
+  transition: opacity 220ms ease, background 220ms ease;
 }
-
-.layer_environment .environmentGlow {
-  opacity: 0.95;
-  background: radial-gradient(circle, rgba(97, 179, 183, 0.22), rgba(49, 112, 116, 0.08) 48%, transparent 73%);
-}
-
-.layer_diagnostics .environmentGlow {
-  opacity: 0.9;
-  background: radial-gradient(circle, rgba(214, 174, 79, 0.18), rgba(137, 93, 36, 0.06) 48%, transparent 73%);
-}
-
-.layer_micro .environmentGlow {
-  opacity: 0.9;
-  background: radial-gradient(circle, rgba(199, 218, 116, 0.2), rgba(67, 95, 50, 0.05) 50%, transparent 72%);
-}
+.layer_environment .environmentGlow { opacity: 0.92; background: radial-gradient(circle, rgba(91, 172, 177, 0.2), rgba(49, 112, 116, 0.07) 48%, transparent 73%); }
+.layer_diagnostics .environmentGlow { opacity: 0.9; background: radial-gradient(circle, rgba(214, 174, 79, 0.17), rgba(137, 93, 36, 0.05) 48%, transparent 73%); }
+.layer_micro .environmentGlow { opacity: 0.9; background: radial-gradient(circle, rgba(199, 218, 116, 0.18), rgba(67, 95, 50, 0.05) 50%, transparent 72%); }
 
 .gridFloor {
   position: absolute;
   z-index: 0;
-  left: 9%;
-  right: 9%;
-  bottom: -11%;
-  height: 34%;
-  opacity: 0.22;
-  transform: perspective(700px) rotateX(67deg);
+  left: 12%;
+  right: 12%;
+  bottom: -13%;
+  height: 32%;
+  opacity: 0.11;
+  transform: perspective(760px) rotateX(68deg);
   transform-origin: center bottom;
-  background-image:
-    linear-gradient(rgba(157, 181, 116, 0.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(157, 181, 116, 0.16) 1px, transparent 1px);
-  background-size: 54px 54px;
+  background-image: linear-gradient(rgba(157, 181, 116, 0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(157, 181, 116, 0.14) 1px, transparent 1px);
+  background-size: 64px 64px;
   mask-image: radial-gradient(ellipse at center, #000, transparent 68%);
 }
 
-.threeStage {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 220ms ease;
-  pointer-events: none;
-}
-
-.threeStage[data-runtime-state="ready"] {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.threeFrame {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #08100b;
-}
+.threeStage { position: absolute; z-index: 1; inset: 0; overflow: hidden; opacity: 0; transition: opacity 260ms ease; pointer-events: none; }
+.threeStage[data-runtime-state="ready"] { opacity: 1; pointer-events: auto; }
+.threeFrame { display: block; width: 100%; height: 100%; border: 0; background: #07100c; }
 
 .rendererStatus {
   position: absolute;
-  z-index: 2;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.35rem 0.55rem;
-  border: 1px solid rgba(193, 211, 137, 0.18);
+  z-index: 4;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 0.58rem;
+  border: 1px solid rgba(193, 211, 137, 0.14);
   border-radius: 999px;
-  background: rgba(7, 14, 9, 0.64);
-  color: rgba(230, 237, 206, 0.58);
-  font-size: 0.54rem;
-  letter-spacing: 0.08em;
+  background: rgba(5, 12, 8, 0.65);
+  color: rgba(228, 235, 205, 0.48);
+  font-size: 0.49rem;
+  font-weight: 740;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
   pointer-events: none;
 }
+.rendererStatus::before { content: ""; width: 5px; height: 5px; margin-right: 0.38rem; border-radius: 50%; background: #92c85d; box-shadow: 0 0 9px rgba(146, 200, 93, 0.58); }
 
-.plantModel {
-  position: absolute;
-  z-index: 1;
-  inset: 3% 16% 2%;
-  transform-style: preserve-3d;
-  transform-origin: 50% 57%;
-  transition: transform 180ms ease-out, filter 180ms ease-out, opacity 180ms ease;
-  filter: drop-shadow(0 28px 28px rgba(0, 0, 0, 0.42));
-  will-change: transform;
-}
-
-.plantModelHidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.dragging .plantModel {
-  transition: filter 180ms ease-out, opacity 180ms ease;
-}
-
-.plantArt {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.rootMass path,
-.branches path,
-.pistils path {
-  fill: none;
-  stroke-linecap: round;
-}
-
-.rootMass path {
-  stroke: url(#atlasRoot);
-  stroke-width: 7;
-  opacity: 0.94;
-}
-
-.rootMass path:nth-child(n + 4) {
-  stroke-width: 4;
-  opacity: 0.78;
-}
-
-.branches path {
-  stroke: #6c7e52;
-  stroke-width: 9;
-}
-
-.leaves path {
-  stroke: rgba(190, 212, 138, 0.2);
-  stroke-width: 1.8;
-}
-
-.flowers ellipse {
-  stroke: rgba(222, 226, 181, 0.2);
-  stroke-width: 2;
-  filter: drop-shadow(0 0 8px rgba(181, 199, 128, 0.12));
-}
-
-.pistils path {
-  stroke: #c79d77;
-  stroke-width: 3.2;
-}
-
-.nodes circle {
-  fill: #bfce78;
-  stroke: rgba(13, 33, 20, 0.9);
-  stroke-width: 3;
-}
-
-.soil {
-  fill: rgba(58, 43, 29, 0.7);
-}
-
-.layer_anatomy .plantArt {
-  filter: saturate(0.9) contrast(1.06);
-}
-
-.layer_physiology .stem,
-.layer_physiology .branches path {
-  filter: drop-shadow(0 0 7px rgba(147, 207, 111, 0.62));
-}
-
-.layer_micro .flowers ellipse {
-  filter: drop-shadow(0 0 14px rgba(206, 223, 127, 0.48));
-}
-
-.layer_diagnostics .leaves path {
-  filter: sepia(0.14) saturate(1.05);
-}
+.plantModel { position: absolute; z-index: 1; inset: 4% 13% 2%; transform-style: preserve-3d; transform-origin: 50% 57%; transition: transform 180ms ease-out, filter 180ms ease-out, opacity 180ms ease; filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.45)); will-change: transform; }
+.plantModelHidden { opacity: 0; pointer-events: none; }
+.dragging .plantModel { transition: filter 180ms ease-out, opacity 180ms ease; }
+.plantArt { width: 100%; height: 100%; overflow: visible; }
+.rootMass path, .branches path, .pistils path { fill: none; stroke-linecap: round; }
+.rootMass path { stroke: url(#atlasRoot); stroke-width: 7; opacity: 0.94; }
+.rootMass path:nth-child(n + 4) { stroke-width: 4; opacity: 0.78; }
+.branches path { stroke: #6c7e52; stroke-width: 9; }
+.leaves path { stroke: rgba(190, 212, 138, 0.18); stroke-width: 1.8; }
+.flowers ellipse { stroke: rgba(222, 226, 181, 0.18); stroke-width: 2; filter: drop-shadow(0 0 9px rgba(181, 199, 128, 0.1)); }
+.pistils path { stroke: #c79d77; stroke-width: 3.2; }
+.nodes circle { fill: #bfce78; stroke: rgba(13, 33, 20, 0.9); stroke-width: 3; }
+.soil { fill: rgba(58, 43, 29, 0.64); }
+.layer_anatomy .plantArt { filter: saturate(0.9) contrast(1.06); }
+.layer_physiology .stem, .layer_physiology .branches path { filter: drop-shadow(0 0 7px rgba(147, 207, 111, 0.58)); }
+.layer_micro .flowers ellipse { filter: drop-shadow(0 0 14px rgba(206, 223, 127, 0.42)); }
+.layer_diagnostics .leaves path { filter: sepia(0.14) saturate(1.05); }
 
 .viewerTools {
   position: absolute;
-  z-index: 6;
-  top: 48%;
-  left: 14px;
+  z-index: 8;
+  top: 50%;
+  left: 13px;
   display: grid;
   overflow: hidden;
-  border: 1px solid rgba(201, 214, 142, 0.18);
-  border-radius: 16px;
-  background: rgba(7, 15, 10, 0.82);
+  border: 1px solid var(--viewer-line);
+  border-radius: 14px;
+  background: rgba(5, 12, 8, 0.66);
   backdrop-filter: blur(18px);
   transform: translateY(-50%);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
 }
+.viewerTools button { display: grid; place-items: center; gap: 0.12rem; width: 52px; min-height: 52px; border: 0; border-bottom: 1px solid rgba(255,255,255,0.055); background: transparent; color: rgba(220,225,190,0.72); cursor: pointer; font-size: 1.04rem; transition: background 130ms ease, color 130ms ease; }
+.viewerTools button:last-child { border-bottom: 0; }
+.viewerTools button:hover, .viewerTools button:focus-visible { background: rgba(113,151,67,0.15); color: #f0f2c9; outline: none; }
+.viewerTools span { color: rgba(225,230,199,0.45); font-size: 0.48rem; letter-spacing: 0.04em; }
 
-.viewerTools button {
-  display: grid;
-  place-items: center;
-  gap: 0.18rem;
-  min-width: 64px;
-  min-height: 64px;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: transparent;
-  color: #d8deb8;
-  cursor: pointer;
-  font-size: 1.28rem;
-}
+.hotspot { position: absolute; z-index: 9; display: flex; align-items: center; gap: 0.48rem; max-width: 176px; transform: translate(-50%, -50%); border: 0; padding: 0; background: transparent; color: rgba(236,240,211,0.86); text-align: left; cursor: pointer; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.24)); }
+.hotspot::before { content: ""; position: absolute; left: 10px; width: 24px; height: 1px; background: linear-gradient(90deg, rgba(181,217,99,0.68), rgba(181,217,99,0.1)); transform: translateX(3px); pointer-events: none; }
+.hotspot > i { position: relative; z-index: 2; width: 12px; height: 12px; flex: 0 0 auto; border: 2px solid #e7efb5; border-radius: 50%; background: #7cac4d; box-shadow: 0 0 0 4px rgba(159,206,92,0.11), 0 0 16px rgba(159,206,92,0.48); transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease; }
+.hotspot > span { position: relative; z-index: 1; display: grid; min-width: 0; margin-left: 16px; padding: 0.36rem 0.48rem; border: 1px solid rgba(197,211,140,0.1); border-radius: 9px; background: rgba(6,14,9,0.58); backdrop-filter: blur(11px); transition: border-color 140ms ease, background 140ms ease; }
+.hotspot:hover, .hotspot:focus-visible, .hotspotActive { outline: none; }
+.hotspot:hover > i, .hotspot:focus-visible > i, .hotspotActive > i { transform: scale(1.16); background: #a6d45f; box-shadow: 0 0 0 5px rgba(171,215,94,0.15), 0 0 24px rgba(171,215,94,0.64); }
+.hotspot:hover > span, .hotspot:focus-visible > span, .hotspotActive > span { border-color: rgba(187,222,96,0.34); background: rgba(18,34,15,0.84); }
+.hotspot strong { color: #e5e7c5; font-size: 0.64rem; font-weight: 760; letter-spacing: 0.07em; text-transform: uppercase; }
+.hotspot small { overflow: hidden; max-width: 126px; margin-top: 0.1rem; color: rgba(229,236,203,0.44); font-size: 0.49rem; text-overflow: ellipsis; white-space: nowrap; }
 
-.viewerTools button:last-child {
-  border-bottom: 0;
-}
+.layerPanel { position: absolute; z-index: 9; right: 13px; bottom: 13px; display: flex; align-items: center; gap: 0.18rem; max-width: calc(100% - 26px); padding: 0.32rem; overflow-x: auto; border: 1px solid var(--viewer-line); border-radius: 13px; background: rgba(5,12,8,0.69); backdrop-filter: blur(18px); box-shadow: 0 10px 28px rgba(0,0,0,0.13); }
+.layerPanel > span { padding: 0 0.5rem; color: rgba(224,231,194,0.44); font-size: 0.48rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; white-space: nowrap; }
+.layerPanel button { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 34px; border: 1px solid transparent; border-radius: 9px; padding: 0 0.48rem; background: transparent; color: rgba(230,236,207,0.52); cursor: pointer; font-size: 0.57rem; text-align: left; white-space: nowrap; }
+.layerPanel button:hover, .layerPanel button:focus-visible, .layerPanel .layerActive { border-color: rgba(170,204,102,0.12); background: rgba(113,153,63,0.16); color: #edf2c7; outline: none; }
+.layerPanel i { color: var(--atlas-accent); font-style: normal; font-size: 0.5rem; }
 
-.viewerTools button:hover,
-.viewerTools button:focus-visible {
-  background: rgba(111, 143, 75, 0.18);
-  color: #ecf1c3;
-  outline: none;
-}
+.rotationHint { position: absolute; z-index: 8; bottom: 15px; left: 50%; display: grid; place-items: center; min-width: 176px; padding: 0.5rem 0.76rem; border: 1px solid rgba(218,225,168,0.17); border-radius: 999px; background: rgba(5,12,8,0.63); color: rgba(224,223,188,0.76); transform: translateX(-50%); backdrop-filter: blur(14px); pointer-events: none; }
+.rotationHint strong { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; }
+.rotationHint span { color: rgba(228,233,207,0.4); font-size: 0.48rem; }
 
-.viewerTools span {
-  font-size: 0.62rem;
-  letter-spacing: 0.03em;
-}
-
-.hotspot {
-  position: absolute;
-  z-index: 7;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  max-width: 174px;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(198, 215, 135, 0.21);
-  border-radius: 13px;
-  padding: 0.48rem 0.62rem 0.48rem 0.48rem;
-  background: rgba(8, 17, 11, 0.74);
-  color: rgba(236, 240, 211, 0.88);
-  text-align: left;
-  backdrop-filter: blur(13px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  cursor: pointer;
-  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
-}
-
-.hotspot:hover,
-.hotspot:focus-visible,
-.hotspotActive {
-  border-color: rgba(187, 222, 96, 0.74);
-  background: rgba(31, 49, 21, 0.92);
-  box-shadow: 0 0 0 1px rgba(181, 221, 92, 0.12), 0 0 28px rgba(157, 207, 80, 0.16);
-  transform: translate(-50%, -50%) scale(1.04);
-  outline: none;
-}
-
-.hotspot > i {
-  width: 13px;
-  height: 13px;
-  flex: 0 0 auto;
-  border: 2px solid #e7efb5;
-  border-radius: 50%;
-  background: #89b653;
-  box-shadow: 0 0 0 4px rgba(159, 206, 92, 0.16), 0 0 16px rgba(159, 206, 92, 0.58);
-}
-
-.hotspot > span {
-  display: grid;
-  min-width: 0;
-}
-
-.hotspot strong {
-  color: #e0e6be;
-  font-size: 0.71rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.hotspot small {
-  overflow: hidden;
-  color: rgba(229, 236, 203, 0.56);
-  font-size: 0.58rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.layerPanel {
-  position: absolute;
-  z-index: 7;
-  right: 15px;
-  bottom: 15px;
-  display: grid;
-  width: 154px;
-  padding: 0.65rem;
-  border: 1px solid rgba(198, 215, 135, 0.18);
-  border-radius: 16px;
-  background: rgba(8, 16, 11, 0.82);
-  backdrop-filter: blur(16px);
-}
-
-.layerPanel > span {
-  margin-bottom: 0.4rem;
-  color: rgba(224, 231, 194, 0.6);
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.layerPanel button {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-height: 34px;
-  border: 0;
-  border-radius: 9px;
-  padding: 0 0.52rem;
-  background: transparent;
-  color: rgba(230, 236, 207, 0.58);
-  cursor: pointer;
-  font-size: 0.66rem;
-  text-align: left;
-}
-
-.layerPanel button:hover,
-.layerPanel button:focus-visible,
-.layerPanel .layerActive {
-  background: rgba(117, 157, 63, 0.2);
-  color: #edf2c7;
-  outline: none;
-}
-
-.layerPanel i {
-  color: #a7d95f;
-  font-style: normal;
-}
-
-.rotationHint {
-  position: absolute;
-  z-index: 6;
-  bottom: 18px;
-  left: 50%;
-  display: grid;
-  place-items: center;
-  min-width: 188px;
-  padding: 0.62rem 0.85rem;
-  border: 1px solid rgba(218, 225, 168, 0.32);
-  border-radius: 999px;
-  background: rgba(6, 13, 9, 0.78);
-  color: #e0dfbc;
-  transform: translateX(-50%);
-  backdrop-filter: blur(14px);
-}
-
-.rotationHint strong {
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-}
-
-.rotationHint span {
-  color: rgba(228, 233, 207, 0.54);
-  font-size: 0.58rem;
+@media (max-width: 1240px) {
+  .hotspot small { display: none; }
+  .hotspot > span { padding-block: 0.32rem; }
+  .rotationHint { display: none; }
 }
 
 @media (max-width: 900px) {
-  .viewport {
-    min-height: 660px;
-    border-radius: 22px;
-  }
-
-  .plantModel {
-    inset: 2% 7% 5%;
-  }
-
-  .viewerTools {
-    top: auto;
-    bottom: 14px;
-    left: 12px;
-    grid-auto-flow: column;
-    transform: none;
-  }
-
-  .viewerTools button {
-    min-width: 54px;
-    min-height: 50px;
-    border-right: 1px solid rgba(255, 255, 255, 0.07);
-    border-bottom: 0;
-  }
-
-  .viewerTools span {
-    display: none;
-  }
-
-  .layerPanel {
-    right: 12px;
-    bottom: 72px;
-    width: 140px;
-  }
-
-  .rotationHint {
-    display: none;
-  }
-
-  .hotspot {
-    max-width: 126px;
-    padding: 0.42rem;
-  }
-
-  .hotspot small {
-    display: none;
-  }
+  .viewport { min-height: 690px; border-radius: 19px; }
+  .plantModel { inset: 3% 6% 5%; }
+  .viewerTools { top: auto; bottom: 13px; left: 12px; grid-auto-flow: column; transform: none; }
+  .viewerTools button { width: 48px; min-height: 46px; border-right: 1px solid rgba(255,255,255,0.055); border-bottom: 0; }
+  .viewerTools span { display: none; }
+  .layerPanel { right: 12px; bottom: 66px; }
+  .hotspot { max-width: 132px; }
 }
 
 @media (max-width: 620px) {
-  .viewport {
-    min-height: 590px;
-    touch-action: pan-y pinch-zoom;
-  }
-
-  .plantModel {
-    inset: 4% 2% 8%;
-  }
-
-  .rendererStatus {
-    top: auto;
-    bottom: 72px;
-  }
-
-  .hotspot {
-    max-width: 44px;
-    border-radius: 999px;
-    padding: 0.4rem;
-  }
-
-  .hotspot > span {
-    display: none;
-  }
-
-  .hotspot > i {
-    width: 16px;
-    height: 16px;
-  }
-
-  .layerPanel {
-    top: 12px;
-    right: 12px;
-    bottom: auto;
-    width: auto;
-    max-width: calc(100% - 24px);
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .layerPanel > span {
-    grid-column: 1 / -1;
-  }
-
-  .layerPanel button {
-    justify-content: center;
-    padding-inline: 0.35rem;
-    font-size: 0.6rem;
-  }
+  .viewport { min-height: 610px; border-radius: 16px; touch-action: pan-y pinch-zoom; }
+  .plantModel { inset: 5% 1% 10%; }
+  .rendererStatus { top: auto; right: 10px; bottom: 67px; }
+  .hotspot { width: 44px; height: 44px; max-width: 44px; justify-content: center; transform: translate(-50%, -50%); }
+  .hotspot::before, .hotspot > span { display: none; }
+  .hotspot > i { width: 15px; height: 15px; }
+  .layerPanel { top: 10px; right: 10px; bottom: auto; left: 10px; max-width: none; border-radius: 12px; scrollbar-width: none; }
+  .layerPanel::-webkit-scrollbar { display: none; }
+  .layerPanel > span { display: none; }
+  .layerPanel button { flex: 0 0 auto; min-height: 38px; padding-inline: 0.52rem; font-size: 0.53rem; }
+  .viewerTools { bottom: 10px; left: 10px; }
+  .viewerTools button { width: 44px; min-height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .plantModel,
-  .hotspot,
-  .threeStage {
-    transition: none;
-  }
+  .environmentGlow, .threeStage, .plantModel, .hotspot > i, .hotspot > span, .viewerTools button { transition: none; }
 }
