@@ -103,12 +103,18 @@ export function LivingPlantAtlas() {
 
   return (
     <div className={`${styles.atlasShell} ${lightOn ? styles.lightOn : styles.lightOff}`}>
-      <section className={styles.appFrame} aria-label="THC Living Plant Atlas interactive explorer">
+      <section
+        className={styles.appFrame}
+        aria-label="THC Living Plant Atlas interactive explorer"
+        data-atlas-shell="premium-v2"
+      >
         <aside className={styles.leftRail}>
           <div className={styles.brandMark} aria-label="THC Living Plant Atlas">
             <span aria-hidden="true">✦</span>
-            <strong>THC</strong>
-            <small>Living</small>
+            <div>
+              <strong>THC</strong>
+              <small>Living Plant Atlas</small>
+            </div>
           </div>
 
           <nav className={styles.primaryNav} aria-label="Atlas views">
@@ -122,22 +128,27 @@ export function LivingPlantAtlas() {
           </nav>
 
           <div className={styles.railFooter}>
-            <button type="button" aria-pressed={lightOn} onClick={() => setLightOn((value) => !value)}><span>☼ Light</span><i>{lightOn ? "On" : "Off"}</i></button>
-            <Link href="/learn/atlas/dashboard"><span>◫ Study</span><i>Open</i></Link>
+            <button type="button" aria-pressed={lightOn} onClick={() => setLightOn((value) => !value)}><span>☼ Lighting</span><i>{lightOn ? "On" : "Off"}</i></button>
+            <Link href="/learn/atlas/dashboard"><span>◫ Study dashboard</span><i>Open</i></Link>
           </div>
         </aside>
 
         <main className={styles.centerStage}>
           <header className={styles.titleBlock}>
-            <p>THC Living</p>
+            <p>THC Living · Interactive botanical reference</p>
             <h1>Plant Atlas</h1>
-            <span>3D Interactive Cannabis Anatomy Experience</span>
+            <span>Explore cannabis anatomy, physiology, development, environment, and evidence-backed observation in one connected 3D system.</span>
             <div className={styles.scopeLine}>
               <b>{atlasSections.length} systems</b>
               <b>{lessonCount} lessons</b>
               <b>{diagnosticFramework.observation_fields.length} observation fields</b>
             </div>
           </header>
+
+          <div className={styles.stageReadout} aria-hidden="true">
+            <span>{layer} layer</span>
+            <strong>{selectedEntity.label}</strong>
+          </div>
 
           <AtlasInteractiveViewport
             selectedId={selectedId}
@@ -149,7 +160,8 @@ export function LivingPlantAtlas() {
           />
         </main>
 
-        <aside className={styles.inspector} aria-live="polite">
+        <aside className={styles.inspector} aria-live="polite" data-atlas-inspector="responsive-sheet">
+          <div className={styles.mobileSheetHandle} aria-hidden="true"><span /></div>
           <div className={styles.inspectorTabs} role="tablist" aria-label="Selected structure information modes">
             {(["info", "micro", "data", "notes"] as PanelTab[]).map((tab) => (
               <button
@@ -172,6 +184,7 @@ export function LivingPlantAtlas() {
               <div>
                 <p>{selectedEntity.systemLabel}</p>
                 <h2>{selectedEntity.label}</h2>
+                <span className={styles.inspectorState}>{stateLabel(selectedState)} · {selectedCompleted}/{selectedRoutes.length} lessons</span>
               </div>
               <button type="button" onClick={() => selectEntity("trichomes_resin")} aria-label="Return to default trichome view">×</button>
             </header>
@@ -180,7 +193,7 @@ export function LivingPlantAtlas() {
               <>
                 <div className={styles.visualCard}>
                   <div className={styles.visualOrb} aria-hidden="true"><span>◎</span></div>
-                  <div><small>Visual focus</small><strong>{selectedSection.firstAsset}</strong></div>
+                  <div><small>Visual focus</small><strong>{selectedSection.firstAsset}</strong><span>{selectedEntity.microTitle}</span></div>
                 </div>
                 <p className={styles.summary}>{selectedSection.summary}</p>
                 <section className={styles.panelSection}>
@@ -188,7 +201,7 @@ export function LivingPlantAtlas() {
                   <div className={styles.functionList}>{selectedEntity.keyFunctions.map((item) => <span key={item}><i>✓</i>{item}</span>)}</div>
                 </section>
                 <section className={styles.learnMore}>
-                  <h3>Learn more</h3>
+                  <h3>Continue exploring</h3>
                   <Link href={sectionRoute(selectedSection)}>Open {selectedEntity.systemLabel}</Link>
                   {selectedNextRoute ? <Link href={selectedNextRoute}>{selectedCompleted === selectedRoutes.length ? "Review next lesson" : "Continue learning"}</Link> : null}
                   <Link href="/learn/atlas/paths">Guided learning paths</Link>
