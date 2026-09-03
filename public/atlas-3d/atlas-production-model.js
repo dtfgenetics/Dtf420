@@ -14,10 +14,19 @@ const ENTITY_TARGETS = {
 const LAYER_COPY = {
   overview: "Overview · photorealistic model · drag to orbit · pinch or wheel to zoom · tap named plant structures to inspect them.",
   anatomy: "Anatomy · named anatomical meshes are emphasized when the production asset provides them.",
-  physiology: "Physiology · use the lesson overlays and inspector to connect whole-plant form with transport and source-to-sink concepts.",
+  physiology: "Physiology · conceptual particles show xylem water, phloem source-to-sink transport, and transpiration pathways; they are not measured flux.",
   micro: "Micro · the whole-plant model stays contextual while tissue-level content opens in the Atlas inspector.",
-  environment: "Environment · use the whole-plant form with light, air, temperature, humidity, water, and root-zone overlays.",
+  environment: "Environment · teaching markers show where light and atmosphere meet plant surfaces; they are not sensor measurements.",
   diagnostics: "Diagnostics · observation targets support inspection only; the 3D model does not assert a diagnosis.",
+};
+
+const STAGE_LABELS = {
+  germination: "Germination",
+  seedling: "Seedling",
+  vegetative: "Vegetative Growth",
+  transition: "Transition / Preflower",
+  flowering: "Flower Development",
+  maturation: "Maturation",
 };
 
 const DEFAULT_SEMANTIC_MESHES = {
@@ -68,15 +77,17 @@ function cloneMaterial(material) {
     atlasBaseEmissiveIntensity: typeof cloned.emissiveIntensity === "number" ? cloned.emissiveIntensity : 0,
     atlasBaseOpacity: typeof cloned.opacity === "number" ? cloned.opacity : 1,
     atlasBaseTransparent: Boolean(cloned.transparent),
+    atlasBaseDepthWrite: cloned.depthWrite !== false,
   };
   return cloned;
 }
 
-function configureModelMaterials(model, entityMaterials, pickables, semanticMeshes) {
+function configureModelMaterials(model, entityMaterials, entityObjects, pickables, modelMeshes, semanticMeshes) {
   model.traverse((object) => {
     if (!object?.isMesh) return;
     object.castShadow = false;
     object.receiveShadow = false;
+    modelMeshes.push(object);
     if (Array.isArray(object.material)) object.material = object.material.map(cloneMaterial);
     else object.material = cloneMaterial(object.material);
 
@@ -84,6 +95,8 @@ function configureModelMaterials(model, entityMaterials, pickables, semanticMesh
     if (!entityId) return;
     object.userData.entityId = entityId;
     pickables.push(object);
+    if (!entityObjects.has(entityId)) entityObjects.set(entityId, new Set());
+    entityObjects.get(entityId).add(object);
     if (!entityMaterials.has(entityId)) entityMaterials.set(entityId, new Set());
     const set = entityMaterials.get(entityId);
     const materials = Array.isArray(object.material) ? object.material : [object.material];
@@ -100,6 +113,7 @@ function restoreMaterial(material) {
   if (typeof material.emissiveIntensity === "number") material.emissiveIntensity = material.userData?.atlasBaseEmissiveIntensity ?? 0;
   if (typeof material.opacity === "number") material.opacity = material.userData?.atlasBaseOpacity ?? 1;
   material.transparent = material.userData?.atlasBaseTransparent ?? material.transparent;
+  material.depthWrite = material.userData?.atlasBaseDepthWrite ?? true;
   material.needsUpdate = true;
 }
 
@@ -223,10 +237,70 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   grid.material.opacity = 0.12;
   scene.add(grid);
 
+  const physiologyGroup = new THREE.Group();
+  const environmentGroup = new THREE.Group();
+  const diagnosticGroup = new THREE.Group();
+  scene.add(physiologyGroup, environmentGroup, diagnosticGroup);
+
   const semanticMeshes = { ...DEFAULT_SEMANTIC_MESHES, ...(manifest.semanticMeshes || {}) };
   const entityMaterials = new Map();
+  const entityObjects = new Map();
   const pickables = [];
-  configureModelMaterials(model, entityMaterials, pickables, semanticMeshes);
+  const modelMeshes = [];
+  configureModelMaterials(model, entityMaterials, entityObjects, pickables, modelMeshes, semanticMeshes);
+
+  const flowSpheres = [];
+  const flowCurves = [];
+  const flowMeta = [];
+  function addFlowCurve(points, color, count, label, speed = 0.08) {
+    const curve = new THREE.CatmullRomCurve3(points.map((point) => new THREE.Vector3(...point)));
+    const material = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.86, depthWrite: false });
+    for (let i = 0; i < count; i += 1) {
+      const particle = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 6), material);
+      physiologyGroup.add(particle);
+      flowSpheres.push(particle);
+      flowCurves.push(curve);
+      flowMeta.push({ phase: i / count, speed, label });
+    }
+  }
+  addFlowCurve([[0, -2.5, 0], [0, -1.0, 0], [0, 0.8, 0], [0, 2.35, 0]], 0x74c9e4, 9, "xylem", 0.09);
+  addFlowCurve([[-1.45, 1.2, 0], [-0.55, 0.9, 0], [0, 0.4, 0], [0, -0.6, 0], [0, -2.2, 0]], 0xe7b85b, 6, "phloem", 0.055);
+  addFlowCurve([[1.35, 0.35, 0], [0.55, 0.85, 0], [0.08, 1.45, 0], [0, 2.45, 0]], 0xe7b85b, 5, "phloem", 0.05);
+
+  const transpirationMaterial = new THREE.MeshBasicMaterial({ color: 0xa8d8de, transparent: true, opacity: 0.5, depthWrite: false });
+  const transpiration = [];
+  [[-1.45, 1.2, 0], [1.4, 0.5, 0], [-1.05, 0.15, 0.08], [0.95, 1.4, 0]].forEach((source, sourceIndex) => {
+    for (let i = 0; i < 3; i += 1) {
+      const particle = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 6), transpirationMaterial);
+      physiologyGroup.add(particle);
+      transpiration.push({ particle, source: new THREE.Vector3(...source), phase: (i + sourceIndex) / 6 });
+    }
+  });
+
+  const lightRayMat = new THREE.LineBasicMaterial({ color: 0xd9df83, transparent: true, opacity: 0.42 });
+  [-1.4, -0.7, 0, 0.7, 1.4].forEach((x, index) => {
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(x, 3.7, -0.3),
+        new THREE.Vector3(x * 0.62, 1.25 + (index % 2) * 0.45, 0),
+      ]),
+      lightRayMat,
+    );
+    environmentGroup.add(line);
+  });
+  const envHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(2.65, 28, 18),
+    new THREE.MeshBasicMaterial({ color: 0x557b52, transparent: true, opacity: 0.05, side: THREE.BackSide, depthWrite: false }),
+  );
+  envHalo.position.y = 0.45;
+  environmentGroup.add(envHalo);
+
+  const diagnosticMaterial = new THREE.MeshBasicMaterial({ color: 0xe5a64c, transparent: true, opacity: 0.74, depthWrite: false });
+  [[-1.35, 1.12, 0.42], [1.05, 0.25, -0.38], [-0.7, -0.2, 0.36]].forEach((position, index) => {
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.18 + index * 0.02, 0.018, 10, 36), diagnosticMaterial);
+    ring.position.set(...position);
+    diagnosticGroup.add(ring);
+  });
 
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
@@ -236,6 +310,10 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   let pointerDown = null;
   let activeEntityId = "trichomes_resin";
   let activeLayer = "overview";
+  let activeStageId = "flowering";
+  let activeSystems = ["flowers", "trichomes_resin", "stem_vascular", "leaves", "environment_overlay"];
+  let activeViewMode = "context";
+  let activeFlowMode = "all";
   let flyFrames = 0;
   let paused = false;
   let disposed = false;
@@ -245,8 +323,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     entityMaterials.forEach((set) => set.forEach(restoreMaterial));
   }
 
-  function highlightEntity(id, reset = true) {
-    if (reset) restoreAllMaterials();
+  function highlightEntity(id) {
     const set = entityMaterials.get(id);
     if (!set) return;
     set.forEach((material) => {
@@ -256,26 +333,62 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     });
   }
 
+  function applyObjectVisibility() {
+    if (activeViewMode !== "isolate") {
+      modelMeshes.forEach((mesh) => { mesh.visible = true; });
+      return;
+    }
+    modelMeshes.forEach((mesh) => {
+      mesh.visible = mesh.userData?.entityId === activeEntityId;
+    });
+  }
+
+  function applyFlowMode() {
+    flowSpheres.forEach((mesh, index) => {
+      mesh.visible = activeFlowMode === "all" || activeFlowMode === flowMeta[index].label;
+    });
+    transpiration.forEach((item) => {
+      item.particle.visible = activeFlowMode === "all" || activeFlowMode === "transpiration";
+    });
+  }
+
+  function applyVisualState() {
+    restoreAllMaterials();
+    applyObjectVisibility();
+    const activeSet = new Set(activeSystems);
+    entityMaterials.forEach((set, id) => {
+      if (id === activeEntityId) return;
+      let opacity = 1;
+      if (activeViewMode === "xray") opacity = 0.13;
+      else if (activeLayer === "anatomy" || activeLayer === "micro") opacity = 0.42;
+      else if (!activeSet.has(id) && activeLayer !== "diagnostics" && activeLayer !== "environment") opacity = 0.34;
+      set.forEach((material) => {
+        if (typeof material.opacity === "number") material.opacity = opacity;
+        material.transparent = opacity < 1 || material.userData?.atlasBaseTransparent;
+        material.depthWrite = opacity >= 0.9;
+        material.needsUpdate = true;
+      });
+    });
+    highlightEntity(activeEntityId);
+    physiologyGroup.visible = activeLayer === "physiology";
+    environmentGroup.visible = activeLayer === "environment";
+    diagnosticGroup.visible = activeLayer === "diagnostics";
+    applyFlowMode();
+
+    const stageLabel = STAGE_LABELS[activeStageId] || activeStageId;
+    const viewCopy = activeViewMode === "isolate" ? " Isolate mode hides unrelated semantic meshes." : activeViewMode === "xray" ? " X-ray mode keeps unrelated structures translucent." : "";
+    const flowCopy = activeLayer === "physiology" && activeFlowMode !== "all" ? ` Showing ${activeFlowMode} only.` : "";
+    legend.textContent = `${LAYER_COPY[activeLayer] || LAYER_COPY.overview} Stage context: ${stageLabel}; this mature reference model highlights stage-relevant systems rather than simulating age-specific morphology.${viewCopy}${flowCopy}`;
+  }
+
   function updateLayerVisibility(layer) {
     activeLayer = LAYER_COPY[layer] ? layer : "overview";
-    restoreAllMaterials();
-    if (activeLayer === "anatomy" || activeLayer === "micro") {
-      entityMaterials.forEach((set, id) => {
-        if (id === activeEntityId) return;
-        set.forEach((material) => {
-          if (typeof material.opacity === "number") material.opacity = 0.48;
-          material.transparent = true;
-          material.needsUpdate = true;
-        });
-      });
-    }
-    highlightEntity(activeEntityId, false);
-    legend.textContent = LAYER_COPY[activeLayer];
+    applyVisualState();
   }
 
   function focusEntity(id, cameraPreset = { yaw: 0, pitch: 0, zoom: 1 }) {
     activeEntityId = id;
-    updateLayerVisibility(activeLayer);
+    applyVisualState();
     const target = new THREE.Vector3(...(ENTITY_TARGETS[id] || [0, 0.55, 0]));
     const yaw = THREE.MathUtils.degToRad(cameraPreset?.yaw || 0);
     const elevation = THREE.MathUtils.degToRad(-(cameraPreset?.pitch || 0));
@@ -324,8 +437,19 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     if (data.type === "atlas:set-state") {
       key.intensity = data.lightOn === false ? 1.3 : 2.9;
       rim.intensity = data.lightOn === false ? 0.75 : 1.4;
-      updateLayerVisibility(data.layer || "overview");
+      activeStageId = STAGE_LABELS[data.stageId] ? data.stageId : "flowering";
+      activeSystems = Array.isArray(data.activeSystems) ? data.activeSystems.filter((id) => typeof id === "string") : activeSystems;
+      activeViewMode = ["context", "isolate", "xray"].includes(data.viewMode) ? data.viewMode : "context";
+      activeFlowMode = ["all", "xylem", "phloem", "transpiration"].includes(data.flowMode) ? data.flowMode : "all";
+      activeLayer = LAYER_COPY[data.layer] ? data.layer : "overview";
       focusEntity(data.selectedId || activeEntityId, data.camera || undefined);
+      post("atlas:state-applied", {
+        stageId: activeStageId,
+        layer: activeLayer,
+        viewMode: activeViewMode,
+        flowMode: activeFlowMode,
+        renderer: "production",
+      });
     }
     if (data.type === "atlas:command") applyCommand(data.command);
   }
@@ -343,7 +467,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
-    const hit = raycaster.intersectObjects(pickables, true).find((item) => item.object?.userData?.entityId);
+    const hit = raycaster.intersectObjects(pickables.filter((item) => item.visible !== false), true).find((item) => item.object?.userData?.entityId);
     if (hit?.object?.userData?.entityId) post("atlas:select", { id: hit.object.userData.entityId });
   });
   controls.addEventListener("start", () => { flyFrames = 0; });
@@ -376,7 +500,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     if (disposed) return;
     raf = requestAnimationFrame(animate);
     if (paused) return;
-    clock.getDelta();
+    const delta = Math.min(clock.getDelta(), 0.05);
     if (flyFrames > 0) {
       camera.position.lerp(cameraGoal, 0.12);
       controls.target.lerp(targetGoal, 0.12);
@@ -386,6 +510,23 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
         controls.target.copy(targetGoal);
       }
     }
+    if (physiologyGroup.visible) {
+      const elapsed = clock.elapsedTime;
+      flowSpheres.forEach((particle, index) => {
+        if (!particle.visible) return;
+        const meta = flowMeta[index];
+        const t = reducedMotion ? meta.phase : (meta.phase + elapsed * meta.speed) % 1;
+        particle.position.copy(flowCurves[index].getPointAt(t));
+      });
+      transpiration.forEach((item) => {
+        if (!item.particle.visible) return;
+        const t = reducedMotion ? item.phase % 1 : (item.phase + elapsed * 0.12) % 1;
+        item.particle.position.copy(item.source).add(new THREE.Vector3(0.08 * Math.sin(t * Math.PI * 2), t * 0.82, 0));
+        item.particle.material.opacity = 0.55 * (1 - t);
+      });
+    }
+    diagnosticGroup.children.forEach((child) => child.lookAt(camera.position));
+    if (!reducedMotion && activeLayer === "environment") envHalo.rotation.y += delta * 0.03;
     controls.update();
     renderer.render(scene, camera);
   }
@@ -399,12 +540,10 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     window.removeEventListener("message", receiveMessage);
     renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
     controls.dispose();
-    model.traverse((object) => {
-      if (!object?.isMesh) return;
+    scene.traverse((object) => {
       object.geometry?.dispose?.();
-      const mats = Array.isArray(object.material) ? object.material : [object.material];
+      const mats = object.material ? (Array.isArray(object.material) ? object.material : [object.material]) : [];
       mats.forEach((material) => {
-        if (!material) return;
         Object.values(material).forEach((value) => value?.isTexture && value.dispose?.());
         material.dispose?.();
       });
@@ -413,6 +552,9 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   }
   window.addEventListener("pagehide", dispose, { once: true });
 
+  physiologyGroup.visible = false;
+  environmentGroup.visible = false;
+  diagnosticGroup.visible = false;
   updateLayerVisibility("overview");
   focusEntity("trichomes_resin", { yaw: 26, pitch: -14, zoom: 2.15 });
   status.hidden = true;
