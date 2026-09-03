@@ -49,6 +49,30 @@ function normalizedModelPath(value) {
   return path;
 }
 
+function normalizedMaxDpr(value, fallback) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed < 0.75 || parsed > 2) return fallback;
+  return parsed;
+}
+
+function selectModelVariant(manifest) {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const deviceMemory = Number(navigator.deviceMemory || 0);
+  const compactViewport = window.matchMedia("(max-width: 760px)").matches;
+  const constrainedDevice = connection?.saveData === true || (deviceMemory > 0 && deviceMemory <= 4);
+  const requestedTier = compactViewport || constrainedDevice ? "mobile" : "desktop";
+  const variants = manifest?.variants && typeof manifest.variants === "object" ? manifest.variants : null;
+  const selected = variants?.[requestedTier] || variants?.desktop || variants?.mobile || null;
+  const modelPath = normalizedModelPath(selected?.model || manifest?.model);
+  const defaultDpr = requestedTier === "mobile" ? 1.15 : 1.5;
+  return {
+    requestedTier,
+    tier: selected ? (variants?.[requestedTier] === selected ? requestedTier : variants?.desktop === selected ? "desktop" : "mobile") : "legacy",
+    modelPath,
+    maxDpr: normalizedMaxDpr(selected?.maxDpr, defaultDpr),
+  };
+}
+
 function resolveEntityId(name, semanticMeshes) {
   const normalized = String(name || "").trim().toLowerCase();
   if (!normalized) return null;
@@ -123,15 +147,17 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     return false;
   }
 
-  const modelPath = normalizedModelPath(manifest.model);
+  const modelVariant = selectModelVariant(manifest);
+  const modelPath = modelVariant.modelPath;
   if (!modelPath) {
     document.documentElement.dataset.atlasModelState = "procedural";
     post("atlas:model-state", { state: "procedural", reason: "invalid-model-manifest" });
     return false;
   }
 
+  document.documentElement.dataset.atlasModelTier = modelVariant.tier;
   status.hidden = false;
-  status.textContent = "Loading photorealistic plant model…";
+  status.textContent = `Loading photorealistic plant model (${modelVariant.tier})…`;
 
   const loader = new GLTFLoader();
   let gltf;
@@ -139,7 +165,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     gltf = await loader.loadAsync(modelPath, (event) => {
       if (!event?.total) return;
       const percent = Math.min(100, Math.max(1, Math.round((event.loaded / event.total) * 100)));
-      status.textContent = `Loading photorealistic plant model… ${percent}%`;
+      status.textContent = `Loading photorealistic plant model (${modelVariant.tier})… ${percent}%`;
     });
   } catch (error) {
     document.documentElement.dataset.atlasModelState = "procedural";
@@ -147,6 +173,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
     post("atlas:model-state", {
       state: "procedural",
       reason: "production-model-load-failed",
+      modelTier: modelVariant.tier,
       message: error instanceof Error ? error.message : String(error),
     });
     return false;
@@ -184,7 +211,7 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   camera.position.set(0, 0.8, 7.9);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, modelVariant.maxDpr));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = Number.isFinite(Number(manifest.exposure)) ? Number(manifest.exposure) : 1.05;
@@ -418,9 +445,11 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   status.hidden = true;
   document.documentElement.dataset.atlasModelState = "production";
   document.documentElement.dataset.atlasModelVersion = String(manifest.modelVersion || "unversioned");
+  document.documentElement.dataset.atlasModelTier = modelVariant.tier;
   post("atlas:model-state", {
     state: "production",
     modelVersion: String(manifest.modelVersion || "unversioned"),
+    modelTier: modelVariant.tier,
     semanticPickables: pickables.length,
   });
   animate();

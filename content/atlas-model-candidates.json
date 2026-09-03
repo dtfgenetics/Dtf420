@@ -25,8 +25,64 @@
   ],
   "candidates": [
     {
-      "id": "zbrojmistrz-cannabis-sativa-2023",
+      "id": "meshy-cannabis-terracotta-019cfb59",
       "role": "primary-candidate",
+      "status": "blocked-acquisition",
+      "title": "Cannabis Plant in a Terracotta Pot",
+      "creator": "r_aprs",
+      "source": {
+        "provider": "Meshy",
+        "url": "https://www.meshy.ai/3d-models/Cannabis-Plant-in-a-Terracotta-Pot-v2-019cfb59-980b-741d-a499-6fed91f57f2f",
+        "assetId": "019cfb59-980b-741d-a499-6fed91f57f2f",
+        "listingReviewedAt": "2026-09-02",
+        "listingNotes": "Public Meshy gallery listing identifies this pre-made model as CC0. Meshy gallery documentation states pre-made gallery assets are CC0 and lists GLB among supported download formats."
+      },
+      "rights": {
+        "state": "verified-for-public-web",
+        "licenseLabel": "CC0 1.0",
+        "licenseVersion": "1.0",
+        "rightsBasis": "The public model page is marked CC0 and Meshy's public gallery licensing states pre-made gallery assets are released under CC0. Preserve a copy of the listing/license evidence during ingest.",
+        "attributionRequired": false,
+        "attributionText": null,
+        "publicWebsiteUseApproved": true,
+        "modificationApproved": true,
+        "redistributionApproved": true
+      },
+      "sourceReportedGeometry": {
+        "triangles": null,
+        "vertices": null,
+        "meshes": null,
+        "textures": "PBR textures are supported by Meshy gallery GLB downloads",
+        "potSeparate": null
+      },
+      "acquisition": {
+        "state": "not-ingested",
+        "localCandidatePath": null,
+        "sha256": null,
+        "fileBytes": null,
+        "reason": "The browser-visible gallery confirms the model and CC0 rights, but this environment does not have an authenticated Meshy download session. Acquire the GLB through the normal Meshy download flow, then inspect it with npm run inspect:atlas-glb before repository ingest."
+      },
+      "atlasFit": {
+        "fullCanopyPresent": "pending-review",
+        "exposedRootsPresent": "no",
+        "potOrSceneryBakedIntoPlant": "pending-review",
+        "floweringMorphology": "pending-review",
+        "botanicalReview": "pending",
+        "semanticMeshMapping": "pending",
+        "mobileLod": "pending",
+        "notes": [
+          "Clean CC0 rights make this the preferred first binary acquisition target.",
+          "The terracotta pot must be removed, excluded, or proven to be a separate object before release.",
+          "The Atlas requires a separate exposed root system even if the canopy is retained.",
+          "Do not assume botanical accuracy from the AI-generated listing image; inspect geometry and textures directly after download."
+        ]
+      },
+      "measuredQa": null,
+      "releaseEligible": false
+    },
+    {
+      "id": "zbrojmistrz-cannabis-sativa-2023",
+      "role": "alternate-candidate",
       "status": "blocked-acquisition",
       "title": "Cannabis Sativa plant",
       "creator": "Zbrojmistrz",

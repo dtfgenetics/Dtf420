@@ -2,6 +2,16 @@
   "schemaVersion": 1,
   "available": false,
   "model": "./models/cannabis-plant.glb",
+  "variants": {
+    "desktop": {
+      "model": "./models/cannabis-plant.glb",
+      "maxDpr": 1.5
+    },
+    "mobile": {
+      "model": "./models/cannabis-plant-mobile.glb",
+      "maxDpr": 1.15
+    }
+  },
   "modelVersion": "pending-production-asset",
   "targetHeight": 5.2,
   "exposure": 1.05,
