@@ -207,6 +207,72 @@
   filter: sepia(0.14) saturate(1.05);
 }
 
+.sceneStateBar {
+  position: absolute;
+  z-index: 8;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  align-items: end;
+  gap: 0.5rem;
+  max-width: calc(100% - 28px);
+  padding: 0.55rem;
+  border: 1px solid rgba(199, 215, 139, 0.2);
+  border-radius: 16px;
+  background: rgba(7, 15, 10, 0.84);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(16px);
+}
+
+.sceneStateBar label {
+  display: grid;
+  gap: 0.22rem;
+}
+
+.sceneStateBar label > span {
+  color: rgba(226, 234, 202, 0.56);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sceneStateBar select {
+  min-height: 34px;
+  max-width: 190px;
+  border: 1px solid rgba(194, 214, 132, 0.18);
+  border-radius: 10px;
+  padding: 0 1.8rem 0 0.55rem;
+  background: #101b13;
+  color: #e8edc8;
+  font: inherit;
+  font-size: 0.66rem;
+  cursor: pointer;
+}
+
+.sceneStateBar select:focus-visible {
+  border-color: rgba(181, 221, 92, 0.72);
+  outline: 2px solid rgba(181, 221, 92, 0.18);
+  outline-offset: 2px;
+}
+
+.stageReadout {
+  display: grid;
+  min-width: 116px;
+  padding: 0.2rem 0.35rem 0.25rem;
+}
+
+.stageReadout b {
+  color: #dfe8b8;
+  font-size: 0.67rem;
+}
+
+.stageReadout small {
+  margin-top: 0.1rem;
+  color: rgba(226, 234, 202, 0.48);
+  font-size: 0.55rem;
+}
+
 .viewerTools {
   position: absolute;
   z-index: 6;
@@ -400,6 +466,25 @@
     inset: 2% 7% 5%;
   }
 
+  .sceneStateBar {
+    right: 12px;
+    left: 12px;
+    flex-wrap: wrap;
+  }
+
+  .sceneStateBar label {
+    flex: 1 1 120px;
+  }
+
+  .sceneStateBar select {
+    width: 100%;
+    max-width: none;
+  }
+
+  .stageReadout {
+    flex: 1 1 110px;
+  }
+
   .viewerTools {
     top: auto;
     bottom: 14px;
@@ -441,12 +526,35 @@
 
 @media (max-width: 620px) {
   .viewport {
-    min-height: 590px;
+    min-height: 650px;
     touch-action: pan-y pinch-zoom;
   }
 
   .plantModel {
-    inset: 4% 2% 8%;
+    inset: 7% 2% 8%;
+  }
+
+  .sceneStateBar {
+    top: 10px;
+    gap: 0.35rem;
+    padding: 0.45rem;
+  }
+
+  .sceneStateBar label {
+    flex: 1 1 calc(50% - 0.35rem);
+  }
+
+  .sceneStateBar label > span {
+    font-size: 0.48rem;
+  }
+
+  .sceneStateBar select {
+    min-height: 32px;
+    font-size: 0.6rem;
+  }
+
+  .stageReadout {
+    display: none;
   }
 
   .rendererStatus {
@@ -470,7 +578,7 @@
   }
 
   .layerPanel {
-    top: 12px;
+    top: 116px;
     right: 12px;
     bottom: auto;
     width: auto;

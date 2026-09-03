@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
 import atlasSections from "@/content/atlas-sections.json";
+import atlasGrowthStages from "@/content/atlas-growth-stages.json";
 import learningModules from "@/content/atlas-learning-modules.json";
 import diagnosticFramework from "@/content/diagnostic-framework.json";
-import { AtlasInteractiveViewport, type AtlasLayer } from "@/components/atlas/AtlasInteractiveViewport";
+import {
+  AtlasInteractiveViewport,
+  type AtlasFlowMode,
+  type AtlasLayer,
+  type AtlasViewMode,
+} from "@/components/atlas/AtlasInteractiveViewport";
 import { useAtlasProgress } from "@/components/atlas/AtlasLearningProgress";
 import { useAtlasMastery } from "@/components/atlas/AtlasMastery";
 import styles from "./LivingPlantAtlas.module.css";
@@ -17,6 +23,11 @@ type PanelTab = "info" | "micro" | "data" | "notes";
 type SystemState = "notStarted" | "inProgress" | "complete" | "mastered";
 
 const lessonCount = learningModules.reduce((total, module) => total + module.lessons.length, 0);
+const atlasLayers: AtlasLayer[] = ["overview", "anatomy", "physiology", "micro", "environment", "diagnostics"];
+const atlasViews: AtlasViewMode[] = ["context", "isolate", "xray"];
+const atlasFlows: AtlasFlowMode[] = ["all", "xylem", "phloem", "transpiration"];
+const atlasEntityIds = new Set(atlasEntities.map((entity) => entity.id));
+const atlasStageIds = new Set(atlasGrowthStages.map((stage) => stage.id));
 
 function slugify(value: string) {
   return value
@@ -53,8 +64,12 @@ function stateLabel(state: SystemState) {
 export function LivingPlantAtlas() {
   const [layer, setLayer] = useState<AtlasLayer>("overview");
   const [selectedId, setSelectedId] = useState("trichomes_resin");
+  const [stageId, setStageId] = useState("flowering");
+  const [viewMode, setViewMode] = useState<AtlasViewMode>("context");
+  const [flowMode, setFlowMode] = useState<AtlasFlowMode>("all");
   const [panelTab, setPanelTab] = useState<PanelTab>("info");
   const [lightOn, setLightOn] = useState(true);
+  const [sceneUrlReady, setSceneUrlReady] = useState(false);
   const { progress } = useAtlasProgress();
   const { mastery } = useAtlasMastery();
 
@@ -66,12 +81,47 @@ export function LivingPlantAtlas() {
     () => atlasEntities.find((entity) => entity.id === selectedId) ?? atlasEntities[0],
     [selectedId],
   );
+  const selectedStage = useMemo(
+    () => atlasGrowthStages.find((stage) => stage.id === stageId) ?? atlasGrowthStages[0],
+    [stageId],
+  );
 
   const selectedRoutes = lessonRoutesForSystem(selectedId);
   const selectedCompleted = selectedRoutes.filter((route) => progress.completed.includes(route)).length;
   const selectedMastered = selectedRoutes.filter((route) => mastery.lessons[route]?.mastered).length;
   const selectedState = stateForSystem(selectedRoutes.length, selectedCompleted, selectedMastered);
   const selectedNextRoute = selectedRoutes.find((route) => !progress.completed.includes(route)) ?? selectedRoutes[0];
+
+  useEffect(() => {
+    function applySceneUrl() {
+      const params = new URL(window.location.href).searchParams;
+      const focus = params.get("focus");
+      const nextLayer = params.get("layer") as AtlasLayer | null;
+      const nextStage = params.get("stage");
+      const nextView = params.get("view") as AtlasViewMode | null;
+      const nextFlow = params.get("flow") as AtlasFlowMode | null;
+      if (focus && atlasEntityIds.has(focus)) setSelectedId(focus);
+      if (nextLayer && atlasLayers.includes(nextLayer)) setLayer(nextLayer);
+      if (nextStage && atlasStageIds.has(nextStage)) setStageId(nextStage);
+      if (nextView && atlasViews.includes(nextView)) setViewMode(nextView);
+      if (nextFlow && atlasFlows.includes(nextFlow)) setFlowMode(nextFlow);
+      setSceneUrlReady(true);
+    }
+    applySceneUrl();
+    window.addEventListener("popstate", applySceneUrl);
+    return () => window.removeEventListener("popstate", applySceneUrl);
+  }, []);
+
+  useEffect(() => {
+    if (!sceneUrlReady) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("stage", stageId);
+    url.searchParams.set("layer", layer);
+    url.searchParams.set("focus", selectedId);
+    url.searchParams.set("view", viewMode);
+    url.searchParams.set("flow", flowMode);
+    window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [flowMode, layer, sceneUrlReady, selectedId, stageId, viewMode]);
 
   function statusForEntity(id: string) {
     const routes = lessonRoutesForSystem(id);
@@ -96,6 +146,20 @@ export function LivingPlantAtlas() {
     else if (selectedId === "environment_overlay" || selectedId === "diagnostic_overlay") setSelectedId("leaves");
   }
 
+  function changeStage(nextStageId: string) {
+    const nextStage = atlasGrowthStages.find((stage) => stage.id === nextStageId);
+    if (!nextStage) return;
+    setStageId(nextStageId);
+    if (
+      selectedId !== "environment_overlay" &&
+      selectedId !== "diagnostic_overlay" &&
+      !nextStage.activeSystems.includes(selectedId)
+    ) {
+      setSelectedId(nextStage.activeSystems[0] ?? "seed_germination");
+      setPanelTab("info");
+    }
+  }
+
   function changePanelTab(tab: PanelTab) {
     setPanelTab(tab);
     if (tab === "micro" && selectedEntity.layers.includes("micro")) setLayer("micro");
@@ -113,7 +177,7 @@ export function LivingPlantAtlas() {
 
           <nav className={styles.primaryNav} aria-label="Atlas views">
             <button type="button" className={layer === "overview" ? styles.navActive : ""} onClick={() => changeLayer("overview")}><i>⌾</i><span>Overview</span></button>
-            <button type="button" onClick={() => selectEntity("seed_germination")}><i>♧</i><span>Growth Stages</span></button>
+            <button type="button" onClick={() => { changeLayer("overview"); selectEntity("seed_germination"); }}><i>♧</i><span>Growth Stages</span></button>
             <button type="button" className={layer === "anatomy" ? styles.navActive : ""} onClick={() => changeLayer("anatomy")}><i>⌘</i><span>Anatomy</span></button>
             <button type="button" className={layer === "physiology" ? styles.navActive : ""} onClick={() => changeLayer("physiology")}><i>◉</i><span>Physiology</span></button>
             <button type="button" onClick={() => selectEntity("sex_pollen_seed")}><i>⌁</i><span>Genetics</span></button>
@@ -142,7 +206,13 @@ export function LivingPlantAtlas() {
           <AtlasInteractiveViewport
             selectedId={selectedId}
             layer={layer}
+            stageId={stageId}
+            viewMode={viewMode}
+            flowMode={flowMode}
             onLayerChange={changeLayer}
+            onStageChange={changeStage}
+            onViewModeChange={setViewMode}
+            onFlowModeChange={setFlowMode}
             onSelect={selectEntity}
             statusForEntity={statusForEntity}
             lightOn={lightOn}
@@ -183,6 +253,14 @@ export function LivingPlantAtlas() {
                   <div><small>Visual focus</small><strong>{selectedSection.firstAsset}</strong></div>
                 </div>
                 <p className={styles.summary}>{selectedSection.summary}</p>
+                <section className={styles.panelSection}>
+                  <h3>Stage context</h3>
+                  <div className={styles.functionList}>
+                    <span><i>↗</i><strong>{selectedStage.label}</strong></span>
+                    {selectedStage.observe.slice(0, 3).map((item) => <span key={item}><i>•</i>{item}</span>)}
+                  </div>
+                  <p>{selectedStage.summary}</p>
+                </section>
                 <section className={styles.panelSection}>
                   <h3>Key functions</h3>
                   <div className={styles.functionList}>{selectedEntity.keyFunctions.map((item) => <span key={item}><i>✓</i>{item}</span>)}</div>
