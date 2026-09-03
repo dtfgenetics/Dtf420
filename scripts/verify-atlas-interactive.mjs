@@ -6,12 +6,17 @@ const contentDir = path.join(root, "content");
 const entities = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-entities.json"), "utf8"));
 const sections = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-sections.json"), "utf8"));
 const modules = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-learning-modules.json"), "utf8"));
+const growthStages = JSON.parse(fs.readFileSync(path.join(contentDir, "atlas-growth-stages.json"), "utf8"));
 const viewportPath = path.join(root, "components", "atlas", "AtlasInteractiveViewport.tsx");
+const livingAtlasPath = path.join(root, "components", "atlas", "LivingPlantAtlas.tsx");
 const runtimeHtmlPath = path.join(root, "public", "atlas-3d", "index.html");
 const runtimeJsPath = path.join(root, "public", "atlas-3d", "atlas-runtime.js");
+const productionRuntimePath = path.join(root, "public", "atlas-3d", "atlas-production-model.js");
 const viewportSource = fs.readFileSync(viewportPath, "utf8");
+const livingAtlasSource = fs.readFileSync(livingAtlasPath, "utf8");
 const runtimeHtml = fs.readFileSync(runtimeHtmlPath, "utf8");
 const runtimeJs = fs.readFileSync(runtimeJsPath, "utf8");
+const productionRuntime = fs.readFileSync(productionRuntimePath, "utf8");
 
 const validLayers = new Set(["overview", "anatomy", "physiology", "micro", "environment", "diagnostics"]);
 const sectionIds = new Set(sections.map((section) => section.id));
@@ -74,6 +79,20 @@ for (const atlasModule of modules) {
   if (!entityIds.has(atlasModule.id)) errors.push(`Learning module is not represented in the interactive Atlas: ${atlasModule.id}`);
 }
 
+if (growthStages.length < 6) errors.push("Interactive Atlas must expose at least six lifecycle stages.");
+const stageIds = new Set();
+for (const stage of growthStages) {
+  if (!stage?.id || stageIds.has(stage.id)) errors.push(`Lifecycle stage has invalid or duplicate id: ${stage?.id}`);
+  stageIds.add(stage.id);
+  if (!Array.isArray(stage.activeSystems) || stage.activeSystems.length < 1) errors.push(`${stage.id}: lifecycle stage needs activeSystems.`);
+  for (const systemId of stage.activeSystems || []) {
+    if (!sectionIds.has(systemId)) errors.push(`${stage.id}: unknown active Atlas system ${systemId}.`);
+  }
+}
+for (const required of ["germination", "seedling", "vegetative", "transition", "flowering", "maturation"]) {
+  if (!stageIds.has(required)) errors.push(`Missing canonical lifecycle stage: ${required}`);
+}
+
 const requiredPlantTargets = [
   "plant.root_system",
   "plant.stem.main",
@@ -93,7 +112,11 @@ const runtimeContracts = [
   [runtimeJs.includes("new THREE.Raycaster"), "Atlas runtime must use mesh picking rather than DOM-only selection."],
   [runtimeJs.includes("atlas:select"), "Atlas runtime must send mesh selections to the React inspector."],
   [runtimeJs.includes("atlas:set-state"), "Atlas runtime must accept selected-entity and layer state from React."],
+  [runtimeJs.includes("atlas:state-applied"), "Atlas runtime must acknowledge lifecycle/view state application."],
   [runtimeJs.includes("atlas:command"), "Atlas runtime must accept camera/viewer commands."],
+  [runtimeJs.includes("STAGE_PROFILES"), "Procedural Atlas runtime must change the teaching silhouette across lifecycle stages."],
+  [runtimeJs.includes("activeViewMode"), "Procedural Atlas runtime must support context/isolate/x-ray modes."],
+  [runtimeJs.includes("activeFlowMode"), "Procedural Atlas runtime must support selectable physiology flow modes."],
   [runtimeJs.includes("anatomyGroup"), "Atlas runtime must expose an anatomy layer."],
   [runtimeJs.includes("physiologyGroup"), "Atlas runtime must expose a physiology layer."],
   [runtimeJs.includes("microGroup"), "Atlas runtime must expose a micro/tissue teaching layer."],
@@ -102,8 +125,21 @@ const runtimeContracts = [
   [runtimeJs.includes("prefers-reduced-motion"), "Atlas runtime must provide reduced-motion behavior."],
   [runtimeJs.includes("conceptual xylem water movement"), "Physiology legend must prevent flow particles from being misread as measured flux."],
   [runtimeJs.includes("do not assert a diagnosis"), "Diagnostic overlay must not present markers as diagnoses."],
+  [productionRuntime.includes("mature reference model highlights stage-relevant systems rather than simulating age-specific morphology"), "Production GLB runtime must not fake lifecycle morphology from one mature model."],
+  [productionRuntime.includes("activeFlowMode"), "Production GLB runtime must support selectable physiology flow overlays."],
+  [productionRuntime.includes("activeViewMode"), "Production GLB runtime must support isolate/x-ray semantic views."],
+  [productionRuntime.includes("atlas:state-applied"), "Production GLB runtime must acknowledge applied scene state."],
   [viewportSource.includes('src="/learn/atlas/atlas-3d/index.html"'), "React viewport must mount the Three.js runtime inside the owned Atlas child route."],
   [viewportSource.includes('aria-label={`${entity.label}.'), "Hotspots must keep explicit accessible names when compact mobile labels are hidden."],
+  [viewportSource.includes('aria-label="Growth stage"'), "Viewport must expose an accessible lifecycle selector."],
+  [viewportSource.includes('aria-label="Structure view"'), "Viewport must expose an accessible semantic view selector."],
+  [viewportSource.includes('aria-label="Physiology flow"'), "Viewport must expose an accessible physiology-flow selector."],
+  [viewportSource.includes("activeSystems: currentStage.activeSystems"), "React must send lifecycle relevance to the 3D runtime."],
+  [livingAtlasSource.includes('searchParams.set("stage"'), "Atlas scene state must deep-link the lifecycle stage."],
+  [livingAtlasSource.includes('searchParams.set("layer"'), "Atlas scene state must deep-link the layer."],
+  [livingAtlasSource.includes('searchParams.set("focus"'), "Atlas scene state must deep-link the selected structure."],
+  [livingAtlasSource.includes('searchParams.set("view"'), "Atlas scene state must deep-link the semantic view mode."],
+  [livingAtlasSource.includes('searchParams.set("flow"'), "Atlas scene state must deep-link the physiology flow mode."],
 ];
 for (const [condition, message] of runtimeContracts) if (!condition) errors.push(message);
 
@@ -113,4 +149,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Interactive Atlas verified: ${entities.length} entities, ${modelTargets.size} unique model targets, ${validLayers.size} supported layers, real Three.js renderer + fallback contract.`);
+console.log(`Interactive Atlas verified: ${entities.length} entities, ${growthStages.length} lifecycle stages, ${modelTargets.size} unique model targets, ${validLayers.size} supported layers, synchronized procedural + production Three.js scene state.`);
