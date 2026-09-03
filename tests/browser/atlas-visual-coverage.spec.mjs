@@ -40,6 +40,11 @@ test("Atlas gives lessons without specialized media a visual system study map", 
   const visual = await expectLearnerFacingVisual(page);
   await expect(visual.locator('[data-atlas-visual="system-study-map"]')).toBeVisible();
   await expect(visual.getByText("System study map", { exact: true })).toBeVisible();
-  await expect(visual.getByText("Temperature-response curve with germination percentage and rate separated", { exact: true })).toBeVisible();
+  await expect(
+    visual.getByRole("strong", {
+      name: "Temperature-response curve with germination percentage and rate separated",
+      exact: true,
+    }),
+  ).toBeVisible();
   await expect(visual.getByText("Seed & Germination", { exact: true })).toBeVisible();
 });
