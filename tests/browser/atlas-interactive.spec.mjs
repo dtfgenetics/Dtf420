@@ -28,6 +28,7 @@ async function expectThreeRuntime(app, page) {
 }
 
 test("interactive Plant Atlas selects structures, switches 3D layers, and controls the live renderer", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Run immersive desktop workspace assertions in the desktop project.");
   const errors = watchRuntimeErrors(page);
   const response = await page.goto("/learn/atlas", { waitUntil: "networkidle" });
 
