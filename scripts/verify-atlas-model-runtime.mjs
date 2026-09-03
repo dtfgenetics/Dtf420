@@ -52,6 +52,9 @@ for (const [needle, label] of [
   ["new THREE.Box3", "model normalization"],
   ["targetHeight", "height normalization"],
   ["semanticMeshes", "semantic mesh mapping"],
+  ["createSemanticProxyHotspots", "semantic proxy fallback"],
+  ["semanticHotspots", "semantic proxy manifest contract"],
+  ["atlasSemanticProxyCount", "semantic proxy reporting"],
   ["atlas:model-state", "model-state reporting"],
   ["production-model-load-failed", "GLB fallback handling"],
   ["webglcontextlost", "WebGL resilience"],
@@ -98,6 +101,33 @@ for (const entity of requiredEntities) {
   if (!mappedEntities.includes(entity)) throw new Error(`Atlas model manifest is missing semantic mapping for ${entity}.`);
 }
 
+if (!manifest.semanticHotspots || typeof manifest.semanticHotspots !== "object" || Array.isArray(manifest.semanticHotspots)) {
+  throw new Error("Atlas model manifest must define semanticHotspots fallback regions.");
+}
+for (const entity of requiredEntities) {
+  const raw = manifest.semanticHotspots[entity];
+  const entries = Array.isArray(raw) ? raw : raw ? [raw] : [];
+  if (entries.length < 1 || entries.length > 6) {
+    throw new Error(`Atlas semanticHotspots.${entity} must contain between 1 and 6 fallback regions.`);
+  }
+  for (const [index, entry] of entries.entries()) {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+      throw new Error(`Atlas semanticHotspots.${entity}[${index}] must be an object.`);
+    }
+    if (!Array.isArray(entry.position) || entry.position.length !== 3 || !entry.position.every((value) => Number.isFinite(Number(value)))) {
+      throw new Error(`Atlas semanticHotspots.${entity}[${index}].position must contain three finite numbers.`);
+    }
+    const [x, y, z] = entry.position.map(Number);
+    if (x < -1 || x > 1 || z < -1 || z > 1 || y < 0 || y > 1) {
+      throw new Error(`Atlas semanticHotspots.${entity}[${index}].position must use normalized x/z [-1,1] and y [0,1].`);
+    }
+    const radius = Number(entry.radius);
+    if (!Number.isFinite(radius) || radius < 0.02 || radius > 0.25) {
+      throw new Error(`Atlas semanticHotspots.${entity}[${index}].radius must be between 0.02 and 0.25 of plant height.`);
+    }
+  }
+}
+
 const releasePaths = new Set([manifest.model, ...variantPaths.values()]);
 const resolvedReleasePaths = [...releasePaths].map((relativePath) => ({
   relativePath,
@@ -122,4 +152,4 @@ if (manifest.available) {
   requireText(provenance, "No photorealistic production specimen set is released", "unreleased model provenance");
 }
 
-console.log(`Atlas production model pipeline verified (released=${manifest.available}, model=${manifest.modelVersion || "unversioned"}, variants=${variantPaths.size || 0}).`);
+console.log(`Atlas production model pipeline verified (released=${manifest.available}, model=${manifest.modelVersion || "unversioned"}, variants=${variantPaths.size || 0}, semanticHotspots=${requiredEntities.length}).`);

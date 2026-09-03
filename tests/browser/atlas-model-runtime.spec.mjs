@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-function makeTriangleGlb() {
+function makeTriangleGlb(nodeName = "fan_leaves") {
   const positions = Buffer.alloc(36);
   const vertices = [
     -0.65, 0, 0,
@@ -19,7 +19,7 @@ function makeTriangleGlb() {
     asset: { version: "2.0", generator: "DTF Atlas browser fixture" },
     scene: 0,
     scenes: [{ nodes: [0] }],
-    nodes: [{ mesh: 0, name: "fan_leaves" }],
+    nodes: [{ mesh: 0, name: nodeName }],
     meshes: [{ primitives: [{ attributes: { POSITION: 0 }, indices: 1, material: 0 }] }],
     materials: [{ pbrMetallicRoughness: { baseColorFactor: [0.2, 0.46, 0.22, 1], metallicFactor: 0, roughnessFactor: 0.82 } }],
     buffers: [{ byteLength: binary.length }],
@@ -53,7 +53,7 @@ function makeTriangleGlb() {
   return glb;
 }
 
-function releasedManifest() {
+function releasedManifest(overrides = {}) {
   return {
     schemaVersion: 1,
     available: true,
@@ -66,16 +66,18 @@ function releasedManifest() {
     targetHeight: 5.2,
     exposure: 1.05,
     semanticMeshes: { fan_leaves: "leaves" },
+    semanticHotspots: {},
+    ...overrides,
   };
 }
 
-async function routeReleasedFixture(page, requests) {
-  const glb = makeTriangleGlb();
+async function routeReleasedFixture(page, requests, options = {}) {
+  const glb = makeTriangleGlb(options.nodeName);
   await page.route("**/learn/atlas/atlas-3d/models/model-manifest.json*", async (route) => {
     await route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify(releasedManifest()),
+      body: JSON.stringify(releasedManifest(options.manifest || {})),
     });
   });
   for (const file of ["cannabis-plant.glb", "cannabis-plant-mobile.glb"]) {
@@ -102,7 +104,13 @@ test("Atlas runtime deliberately stays procedural while no production model is r
 test("Atlas runtime loads the desktop production GLB on a desktop viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 960 });
   const requests = [];
-  await routeReleasedFixture(page, requests);
+  await routeReleasedFixture(page, requests, {
+    manifest: {
+      semanticHotspots: {
+        leaves: [{ position: [0, 0.5, 0], radius: 0.12 }],
+      },
+    },
+  });
 
   const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
@@ -110,6 +118,7 @@ test("Atlas runtime loads the desktop production GLB on a desktop viewport", asy
   await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-version="browser-fixture"]')).toHaveCount(1);
   await expect(page.locator('html[data-atlas-model-tier="desktop"]')).toHaveCount(1);
+  await expect(page.locator('html[data-atlas-semantic-proxy-count="0"]')).toHaveCount(1);
   await expect(page.locator("#runtime-legend")).toContainText("photorealistic model");
   expect(requests).toEqual(["cannabis-plant.glb"]);
 });
@@ -125,4 +134,36 @@ test("Atlas runtime chooses the mobile GLB on a compact viewport", async ({ page
   await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-tier="mobile"]')).toHaveCount(1);
   expect(requests).toEqual(["cannabis-plant-mobile.glb"]);
+});
+
+test("Atlas runtime creates selectable semantic proxies for generically named GLB meshes", async ({ page }) => {
+  await page.setViewportSize({ width: 1200, height: 900 });
+  const requests = [];
+  await page.addInitScript(() => {
+    window.__atlasSelections = [];
+    window.addEventListener("message", (event) => {
+      if (event.data?.type === "atlas:select") window.__atlasSelections.push(event.data.id);
+    });
+  });
+  await routeReleasedFixture(page, requests, {
+    nodeName: "generic_plant_mesh",
+    manifest: {
+      semanticMeshes: { fan_leaves: "leaves" },
+      semanticHotspots: {
+        leaves: [{ position: [0.33, 0.956, 0], radius: 0.18 }],
+      },
+    },
+  });
+
+  const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
+  expect(response?.status()).toBe(200);
+  await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
+  await expect(page.locator('html[data-atlas-semantic-proxy-count="1"]')).toHaveCount(1);
+
+  const canvas = page.locator("canvas");
+  const box = await canvas.boundingBox();
+  expect(box).not.toBeNull();
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await expect.poll(async () => page.evaluate(() => window.__atlasSelections || [])).toContain("leaves");
+  expect(requests).toEqual(["cannabis-plant.glb"]);
 });
