@@ -1,0 +1,32 @@
+.atlasPage {
+  padding-block: 28px 96px;
+}
+
+.atlasWorkspace {
+  width: min(calc(100% - 28px), 1680px);
+  margin-inline: auto;
+}
+
+.atlasLearningContent {
+  width: min(calc(100% - 40px), 1180px);
+  margin: 34px auto 0;
+}
+
+.atlasLearningContent > * + * {
+  margin-top: 34px;
+}
+
+@media (max-width: 760px) {
+  .atlasPage {
+    padding-top: 14px;
+  }
+
+  .atlasWorkspace {
+    width: min(calc(100% - 12px), 1680px);
+  }
+
+  .atlasLearningContent {
+    width: min(calc(100% - 24px), 1180px);
+    margin-top: 24px;
+  }
+}
