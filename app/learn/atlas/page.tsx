@@ -6,6 +6,7 @@ import { AtlasVisualOverlays } from "@/components/atlas/AtlasVisualOverlays";
 import { AtlasOverlayLearningBridge } from "@/components/atlas/AtlasOverlayLearningBridge";
 import { AtlasLearningModules } from "@/components/atlas/AtlasLearningModules";
 import { buildEducationMetadata } from "@/lib/education-seo";
+import styles from "./AtlasPage.module.css";
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Living Plant Atlas Explorer",
@@ -15,13 +16,17 @@ export const metadata: Metadata = buildEducationMetadata({
 
 export default function AtlasPage() {
   return (
-    <section className="shell page-section">
-      <LivingPlantAtlas />
-      <AtlasSystemStatusGrid />
-      <AtlasGrowthStages />
-      <AtlasVisualOverlays />
-      <AtlasOverlayLearningBridge />
-      <AtlasLearningModules />
+    <section className={`page-section ${styles.atlasPage}`}>
+      <div className={styles.atlasWorkspace} data-atlas-workspace="immersive">
+        <LivingPlantAtlas />
+      </div>
+      <div className={styles.atlasLearningContent}>
+        <AtlasSystemStatusGrid />
+        <AtlasGrowthStages />
+        <AtlasVisualOverlays />
+        <AtlasOverlayLearningBridge />
+        <AtlasLearningModules />
+      </div>
     </section>
   );
 }
