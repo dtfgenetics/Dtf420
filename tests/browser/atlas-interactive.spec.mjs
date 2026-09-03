@@ -35,11 +35,13 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
   expect(response?.status()).toBe(200);
   const workspace = page.locator('[data-atlas-workspace="immersive"]');
   const app = page.locator('section[aria-label="THC Living Plant Atlas interactive explorer"]');
+  const threeStage = app.locator('[data-camera-mode]');
   await expect(workspace).toBeVisible();
   await expect(app).toBeVisible();
   await expect(app).toHaveAttribute("data-atlas-shell", "premium-v2");
   await expect(app.getByRole("heading", { name: "Plant Atlas", exact: true })).toBeVisible();
   await expect(app.getByRole("heading", { name: "Trichomes", exact: true })).toBeVisible();
+  await expect(threeStage).toHaveAttribute("data-camera-mode", "whole-plant");
   const workspaceBox = await workspace.boundingBox();
   expect(workspaceBox?.width ?? 0).toBeGreaterThan(1300);
   const desktopGrid = await app.evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(" ").filter(Boolean).length);
@@ -52,6 +54,7 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
   const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
   await expect(fanLeaves).toBeVisible();
   await fanLeaves.click();
+  await expect(threeStage).toHaveAttribute("data-camera-mode", "entity");
   await expect(app.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeVisible();
   await expect(app.getByText(/Capture light/)).toBeVisible();
 
@@ -77,6 +80,8 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
   await layerPanel.getByRole("button", { name: "Micro", exact: true }).click();
   await expect(app.getByRole("button", { name: /Trichomes/i }).first()).toBeVisible();
   await expect(runtime.locator("#runtime-legend")).toContainText("schematic");
+  await layerPanel.getByRole("button", { name: "Overview", exact: true }).click();
+  await expect(threeStage).toHaveAttribute("data-camera-mode", "whole-plant");
   await expectNoHorizontalOverflow(page);
   expect(errors, errors.join("\n")).toEqual([]);
 
@@ -94,10 +99,12 @@ test("interactive Plant Atlas keeps hotspots and inspector controls accessible a
 
   const app = page.locator('section[aria-label="THC Living Plant Atlas interactive explorer"]');
   const inspector = app.locator('[data-atlas-inspector="responsive-sheet"]');
+  const threeStage = app.locator('[data-camera-mode]');
   await expect(app).toBeVisible();
   await expect(app).toHaveAttribute("data-atlas-shell", "premium-v2");
   await expect(inspector).toBeVisible();
   await expect(app.getByRole("heading", { name: "Plant Atlas", exact: true })).toBeVisible();
+  await expect(threeStage).toHaveAttribute("data-camera-mode", "whole-plant");
   await expectThreeRuntime(app, page);
 
   const appDisplay = await app.evaluate((node) => getComputedStyle(node).display);
@@ -108,6 +115,7 @@ test("interactive Plant Atlas keeps hotspots and inspector controls accessible a
   const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
   await expect(fanLeaves).toBeVisible();
   await fanLeaves.click();
+  await expect(threeStage).toHaveAttribute("data-camera-mode", "entity");
   await expect(app.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeVisible();
 
   await expect(app.getByRole("tab", { name: "info", exact: true })).toBeVisible();
