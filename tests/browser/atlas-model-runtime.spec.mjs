@@ -2,18 +2,12 @@ import { expect, test } from "@playwright/test";
 
 function makeTriangleGlb() {
   const positions = Buffer.alloc(36);
-  const vertices = [
-    -0.65, 0, 0,
-    0.65, 0, 0,
-    0, 1.3, 0,
-  ];
+  const vertices = [-0.65, 0, 0, 0.65, 0, 0, 0, 1.3, 0];
   vertices.forEach((value, index) => positions.writeFloatLE(value, index * 4));
-
   const indices = Buffer.alloc(8);
   indices.writeUInt16LE(0, 0);
   indices.writeUInt16LE(1, 2);
   indices.writeUInt16LE(2, 4);
-
   const binary = Buffer.concat([positions, indices]);
   const gltf = {
     asset: { version: "2.0", generator: "DTF Atlas browser fixture" },
@@ -32,12 +26,9 @@ function makeTriangleGlb() {
       { bufferView: 1, componentType: 5123, count: 3, type: "SCALAR", min: [0], max: [2] },
     ],
   };
-
   const jsonRaw = Buffer.from(JSON.stringify(gltf), "utf8");
-  const jsonPadding = (4 - (jsonRaw.length % 4)) % 4;
-  const json = Buffer.concat([jsonRaw, Buffer.alloc(jsonPadding, 0x20)]);
-  const binPadding = (4 - (binary.length % 4)) % 4;
-  const bin = Buffer.concat([binary, Buffer.alloc(binPadding)]);
+  const json = Buffer.concat([jsonRaw, Buffer.alloc((4 - (jsonRaw.length % 4)) % 4, 0x20)]);
+  const bin = Buffer.concat([binary, Buffer.alloc((4 - (binary.length % 4)) % 4)]);
   const totalLength = 12 + 8 + json.length + 8 + bin.length;
   const glb = Buffer.alloc(totalLength);
   let offset = 0;
@@ -72,11 +63,7 @@ function releasedManifest() {
 async function routeReleasedFixture(page, requests) {
   const glb = makeTriangleGlb();
   await page.route("**/learn/atlas/atlas-3d/models/model-manifest.json*", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify(releasedManifest()),
-    });
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(releasedManifest()) });
   });
   for (const file of ["cannabis-plant.glb", "cannabis-plant-mobile.glb"]) {
     await page.route(`**/learn/atlas/atlas-3d/models/${file}*`, async (route) => {
@@ -86,24 +73,50 @@ async function routeReleasedFixture(page, requests) {
   }
 }
 
+async function applySceneState(page, overrides = {}) {
+  await page.evaluate((state) => {
+    window.postMessage({
+      type: "atlas:set-state",
+      selectedId: "leaves",
+      layer: "physiology",
+      stageId: "vegetative",
+      activeSystems: ["root_system", "stem_vascular", "nodes_branching", "leaves", "environment_overlay"],
+      viewMode: "xray",
+      flowMode: "xylem",
+      camera: { yaw: -24, pitch: -10, zoom: 1.4 },
+      lightOn: true,
+      ...state,
+    }, window.location.origin);
+  }, overrides);
+}
+
 test("Atlas runtime deliberately stays procedural while no production model is released", async ({ page }) => {
   const modelRequests = [];
   page.on("request", (request) => {
     if (request.url().includes("/models/cannabis-plant")) modelRequests.push(request.url());
   });
-
   const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
   await expect(page.locator("canvas")).toBeVisible({ timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-state="procedural"]')).toHaveCount(1);
   expect(modelRequests).toEqual([]);
+  await applySceneState(page, {
+    selectedId: "root_system",
+    layer: "overview",
+    stageId: "germination",
+    activeSystems: ["seed_germination", "root_system"],
+    viewMode: "isolate",
+    flowMode: "all",
+    camera: { yaw: 0, pitch: 0, zoom: 1 },
+  });
+  await expect(page.locator("#runtime-legend")).toContainText("Stage context: Germination");
+  await expect(page.locator("#runtime-legend")).toContainText("Isolate mode");
 });
 
-test("Atlas runtime loads the desktop production GLB on a desktop viewport", async ({ page }) => {
+test("Atlas runtime loads the desktop production GLB and applies scene state", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 960 });
   const requests = [];
   await routeReleasedFixture(page, requests);
-
   const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
   await expect(page.locator("canvas")).toBeVisible({ timeout: 20_000 });
@@ -112,17 +125,27 @@ test("Atlas runtime loads the desktop production GLB on a desktop viewport", asy
   await expect(page.locator('html[data-atlas-model-tier="desktop"]')).toHaveCount(1);
   await expect(page.locator("#runtime-legend")).toContainText("photorealistic model");
   expect(requests).toEqual(["cannabis-plant.glb"]);
+
+  await applySceneState(page);
+  await expect(page.locator("#runtime-legend")).toContainText("Stage context: Vegetative Growth");
+  await expect(page.locator("#runtime-legend")).toContainText("mature reference model highlights stage-relevant systems rather than simulating age-specific morphology");
+  await expect(page.locator("#runtime-legend")).toContainText("X-ray mode");
+  await expect(page.locator("#runtime-legend")).toContainText("Showing xylem only");
 });
 
-test("Atlas runtime chooses the mobile GLB on a compact viewport", async ({ page }) => {
+test("Atlas runtime chooses the mobile GLB on a compact viewport and keeps scene state", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const requests = [];
   await routeReleasedFixture(page, requests);
-
   const response = await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
   await expect(page.locator("canvas")).toBeVisible({ timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-tier="mobile"]')).toHaveCount(1);
   expect(requests).toEqual(["cannabis-plant-mobile.glb"]);
+
+  await applySceneState(page, { viewMode: "isolate", flowMode: "transpiration" });
+  await expect(page.locator("#runtime-legend")).toContainText("Stage context: Vegetative Growth");
+  await expect(page.locator("#runtime-legend")).toContainText("Isolate mode");
+  await expect(page.locator("#runtime-legend")).toContainText("Showing transpiration only");
 });
