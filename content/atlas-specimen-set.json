@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "releasePolicy": "The THC Living Plant Atlas production release requires all six photorealistic specimen states. No single generic cannabis model may stand in for sex phenotype or growth-stage differences.",
+  "defaultSpecimen": "flowering",
+  "requiredSpecimens": [
+    {
+      "id": "seedling",
+      "label": "Seedling",
+      "dimension": "growth-stage",
+      "blocking": true,
+      "requiredTraits": [
+        "cotyledons or clearly juvenile first growth",
+        "early true leaves with developmentally appropriate leaflet complexity",
+        "short juvenile stem and compact node spacing",
+        "small developing root system appropriate to seedling scale",
+        "no mature floral structures"
+      ]
+    },
+    {
+      "id": "vegetative",
+      "label": "Vegetative",
+      "dimension": "growth-stage",
+      "blocking": true,
+      "requiredTraits": [
+        "established branching architecture",
+        "mature fan leaves with realistic cannabis serration and venation",
+        "clear nodes and internodes",
+        "developed stem and root architecture",
+        "no mature flower clusters"
+      ]
+    },
+    {
+      "id": "flowering",
+      "label": "Flowering",
+      "dimension": "growth-stage",
+      "blocking": true,
+      "requiredTraits": [
+        "mature flowering whole-plant silhouette",
+        "realistic inflorescence distribution",
+        "bract and sugar-leaf integration",
+        "visible pistil and resin/trichome character where appropriate",
+        "full exposed root system"
+      ]
+    },
+    {
+      "id": "male",
+      "label": "Male",
+      "dimension": "reproductive-phenotype",
+      "blocking": true,
+      "requiredTraits": [
+        "staminate reproductive structures",
+        "believable pollen-sac clustering and attachment",
+        "male plant architecture without fake female bud masses",
+        "clear node-level reproductive morphology",
+        "no impossible mixed-sex structures unless explicitly teaching intersex expression"
+      ]
+    },
+    {
+      "id": "female",
+      "label": "Female",
+      "dimension": "reproductive-phenotype",
+      "blocking": true,
+      "requiredTraits": [
+        "pistillate reproductive structures",
+        "bracts and stigmas where developmentally appropriate",
+        "female floral architecture distinct from the male specimen",
+        "sugar leaves and resin-bearing floral surfaces where mature",
+        "no unexplained staminate clusters"
+      ]
+    },
+    {
+      "id": "hermaphrodite",
+      "label": "Hermaphrodite / Intersex",
+      "dimension": "reproductive-phenotype",
+      "blocking": true,
+      "requiredTraits": [
+        "clearly identifiable male and female reproductive expression on the same specimen",
+        "mixed structures placed at botanically plausible nodes or floral sites",
+        "female bract/stigma morphology remains recognizable",
+        "staminate or anther expression remains recognizable",
+        "no ambiguous AI deformation presented as intersex biology"
+      ]
+    }
+  ],
+  "releaseSlots": {
+    "seedling": {"candidateId": null, "desktopModel": null, "mobileModel": null, "state": "pending"},
+    "vegetative": {"candidateId": null, "desktopModel": null, "mobileModel": null, "state": "pending"},
+    "flowering": {"candidateId": null, "desktopModel": null, "mobileModel": null, "state": "pending"},
+    "male": {"candidateId": null, "desktopModel": null, "mobileModel": null, "state": "pending"},
+    "female": {"candidateId": null, "desktopModel": null, "mobileModel": null, "state": "pending"},
+    "hermaphrodite": {"candidateId": null, "desktopModel": null, "mobileModel": null, "state": "pending"}
+  }
+}
