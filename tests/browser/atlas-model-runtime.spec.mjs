@@ -64,9 +64,25 @@ test("Atlas runtime deliberately stays procedural while no production model is r
   await expect(page.locator("canvas")).toBeVisible({ timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-state="procedural"]')).toHaveCount(1);
   expect(modelRequests).toEqual([]);
+
+  await page.evaluate(() => {
+    window.postMessage({
+      type: "atlas:set-state",
+      selectedId: "root_system",
+      layer: "overview",
+      stageId: "germination",
+      activeSystems: ["seed_germination", "root_system"],
+      viewMode: "isolate",
+      flowMode: "all",
+      camera: { yaw: 0, pitch: 0, zoom: 1 },
+      lightOn: true,
+    }, window.location.origin);
+  });
+  await expect(page.locator("#runtime-legend")).toContainText("Stage context: Germination");
+  await expect(page.locator("#runtime-legend")).toContainText("Isolate mode");
 });
 
-test("Atlas runtime loads and normalizes a released GLB through the production path", async ({ page }) => {
+test("Atlas runtime loads, normalizes, and controls a released GLB through the production path", async ({ page }) => {
   const glb = makeTriangleGlb();
   await page.route("**/learn/atlas/atlas-3d/models/model-manifest.json*", async (route) => {
     await route.fulfill({
@@ -93,4 +109,23 @@ test("Atlas runtime loads and normalizes a released GLB through the production p
   await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-version="browser-fixture"]')).toHaveCount(1);
   await expect(page.locator("#runtime-legend")).toContainText("photorealistic model");
+
+  await page.evaluate(() => {
+    window.postMessage({
+      type: "atlas:set-state",
+      selectedId: "leaves",
+      layer: "physiology",
+      stageId: "vegetative",
+      activeSystems: ["root_system", "stem_vascular", "nodes_branching", "leaves", "environment_overlay"],
+      viewMode: "xray",
+      flowMode: "xylem",
+      camera: { yaw: -24, pitch: -10, zoom: 1.4 },
+      lightOn: true,
+    }, window.location.origin);
+  });
+
+  await expect(page.locator("#runtime-legend")).toContainText("Stage context: Vegetative Growth");
+  await expect(page.locator("#runtime-legend")).toContainText("mature reference model highlights stage-relevant systems rather than simulating age-specific morphology");
+  await expect(page.locator("#runtime-legend")).toContainText("X-ray mode");
+  await expect(page.locator("#runtime-legend")).toContainText("Showing xylem only");
 });
