@@ -89,6 +89,15 @@ function verifyMobileMetrics(metrics, candidateId) {
   if (maxTextureEdge > mobileBudget.maxTextureEdge) throw new Error(`${candidateId} mobile LOD exceeds texture-edge budget.`);
 }
 
+function hasClickableAtlasCoverage() {
+  const hotspots = manifest.semanticHotspots;
+  if (!hotspots || typeof hotspots !== "object" || Array.isArray(hotspots)) return false;
+  return registry.requiredSemanticEntities.every((entityId) => {
+    const entry = hotspots[entityId];
+    return Array.isArray(entry) ? entry.length > 0 : Boolean(entry);
+  });
+}
+
 for (const candidate of registry.candidates) {
   if (!candidate?.id || !/^[a-z0-9][a-z0-9-]+$/.test(candidate.id)) {
     throw new Error("Every Atlas model candidate needs a stable kebab-case id.");
@@ -158,7 +167,13 @@ for (const candidate of registry.candidates) {
   if (candidate.atlasFit.exposedRootsPresent !== "yes") throw new Error(`${candidate.id} must include exposed roots before release.`);
   if (candidate.atlasFit.potOrSceneryBakedIntoPlant !== "no") throw new Error(`${candidate.id} must contain no baked pot/scenery before release.`);
   if (candidate.atlasFit.botanicalReview !== "approved") throw new Error(`${candidate.id} needs approved botanical review before release.`);
-  if (candidate.atlasFit.semanticMeshMapping !== "complete") throw new Error(`${candidate.id} needs complete semantic mesh mapping before release.`);
+
+  const hasExactMeshMapping = candidate.atlasFit.semanticMeshMapping === "complete";
+  const usesClickableHotspots = candidate.atlasFit.semanticMeshMapping === "not-applicable" && hasClickableAtlasCoverage();
+  if (!hasExactMeshMapping && !usesClickableHotspots) {
+    throw new Error(`${candidate.id} needs either complete semantic meshes or complete clickable semanticHotspots before release.`);
+  }
+
   if (!candidate.measuredQa || candidate.measuredQa.result !== "pass") throw new Error(`${candidate.id} needs measuredQa.result=pass before release.`);
 
   const desktop = registry.performanceBudget.desktop;
