@@ -29,7 +29,7 @@ async function expectThreeRuntime(app, page) {
   return runtime;
 }
 
-test("interactive Plant Atlas selects structures, switches 3D layers, and controls the live renderer", async ({ page }, testInfo) => {
+test("interactive Plant Atlas selects structures, opens learning info, switches 3D layers, and controls the live renderer", async ({ page }, testInfo) => {
   const errors = watchRuntimeErrors(page);
   const response = await page.goto("/learn/atlas", { waitUntil: "networkidle" });
 
@@ -47,8 +47,12 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
   const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
   await expect(fanLeaves).toBeVisible();
   await fanLeaves.click();
-  await expect(app.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeVisible();
-  await expect(app.getByText(/Capture light/)).toBeVisible();
+
+  const inspector = app.locator("#atlas-inspector");
+  await expect(inspector).toHaveAttribute("aria-label", "Learn about Fan Leaves");
+  await expect(inspector.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeFocused();
+  await expect(inspector.getByText(/Capture light/)).toBeVisible();
+  await expect(inspector.getByRole("link", { name: "Learn more about Fan Leaves", exact: true })).toBeVisible();
 
   await app.getByRole("tab", { name: "micro", exact: true }).click();
   await expect(app.getByText("Microscopy layer", { exact: true })).toBeVisible();
@@ -126,7 +130,7 @@ test("changing lifecycle stage changes the relevant hotspot set", async ({ page 
   await expect(app.getByRole("button", { name: /Flowers/i }).first()).toBeVisible();
 });
 
-test("interactive Plant Atlas keeps hotspots, scene controls, and inspector accessible at phone width", async ({ page }, testInfo) => {
+test("interactive Plant Atlas reveals the learning panel after a hotspot tap at phone width", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile-chromium", "Run the dedicated phone containment check in the mobile project.");
   const errors = watchRuntimeErrors(page);
   await page.setViewportSize({ width: 390, height: 844 });
@@ -145,7 +149,12 @@ test("interactive Plant Atlas keeps hotspots, scene controls, and inspector acce
   const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
   await expect(fanLeaves).toBeVisible();
   await fanLeaves.click();
-  await expect(app.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeVisible();
+
+  const inspector = app.locator("#atlas-inspector");
+  await expect(inspector).toHaveAttribute("aria-label", "Learn about Fan Leaves");
+  await expect(inspector).toBeInViewport();
+  await expect(inspector.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeFocused();
+  await expect(inspector.getByRole("link", { name: "Learn more about Fan Leaves", exact: true })).toBeVisible();
 
   await expect(app.getByRole("tab", { name: "info", exact: true })).toBeVisible();
   await app.getByRole("tab", { name: "notes", exact: true }).click();
