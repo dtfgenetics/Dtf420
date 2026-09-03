@@ -119,7 +119,7 @@ if (manifest.available) {
       throw new Error(`Atlas GLB exists while manifest.available=false (${relativePath}). Review provenance and explicitly release it or remove the candidate from the public runtime path.`);
     }
   }
-  requireText(provenance, "No photorealistic production GLB is released", "unreleased model provenance");
+  requireText(provenance, "No photorealistic production specimen set is released", "unreleased model provenance");
 }
 
 console.log(`Atlas production model pipeline verified (released=${manifest.available}, model=${manifest.modelVersion || "unversioned"}, variants=${variantPaths.size || 0}).`);

@@ -12,6 +12,26 @@
       "maxDpr": 1.15
     }
   },
+  "specimenSet": {
+    "enabled": false,
+    "defaultSpecimen": "flowering",
+    "requiredSpecimens": [
+      "seedling",
+      "vegetative",
+      "flowering",
+      "male",
+      "female",
+      "hermaphrodite"
+    ],
+    "specimens": {
+      "seedling": {"label": "Seedling", "dimension": "growth-stage", "state": "pending"},
+      "vegetative": {"label": "Vegetative", "dimension": "growth-stage", "state": "pending"},
+      "flowering": {"label": "Flowering", "dimension": "growth-stage", "state": "pending"},
+      "male": {"label": "Male", "dimension": "reproductive-phenotype", "state": "pending"},
+      "female": {"label": "Female", "dimension": "reproductive-phenotype", "state": "pending"},
+      "hermaphrodite": {"label": "Hermaphrodite / Intersex", "dimension": "reproductive-phenotype", "state": "pending"}
+    }
+  },
   "modelVersion": "pending-production-asset",
   "targetHeight": 5.2,
   "exposure": 1.05,

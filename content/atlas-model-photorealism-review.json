@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 2,
+  "hardRequirement": "The released THC Living Plant Atlas specimen set must read as real photographed cannabis plants across six required states: seedling, vegetative, flowering, male, female, and hermaphrodite/intersex. No stylized, low-poly, plastic, generic, or visibly AI-deformed substitute may satisfy a slot.",
+  "requiredReviewViews": [
+    "front_full_plant",
+    "rear_full_plant",
+    "left_profile",
+    "right_profile",
+    "canopy_top",
+    "root_system",
+    "leaf_macro",
+    "node_stem_macro",
+    "reproductive_or_stage_macro",
+    "mobile_lod_comparison"
+  ],
+  "criteria": [
+    {"id":"overall_photographic_realism","label":"Overall photographic realism","blocking":true,"requirement":"At normal desktop viewing distance the specimen must plausibly read as a high-end photographed or scanned living cannabis plant appropriate to its declared stage or reproductive phenotype."},
+    {"id":"leaflet_geometry_and_serration","label":"Leaflet geometry and serration","blocking":true,"requirement":"Leaves must show developmentally appropriate cannabis leaflet proportions, taper, serration, curvature, petiole attachment, and non-repetitive natural variation."},
+    {"id":"leaf_surface_and_venation","label":"Leaf surface and venation","blocking":true,"requirement":"Leaf surfaces, primary/secondary venation, thickness, translucency response, roughness, and color variation must avoid flat card, wax, rubber, or plastic appearance."},
+    {"id":"nodes_internodes_and_branching","label":"Nodes, internodes, and branching","blocking":true,"requirement":"Node spacing, branch origins, phyllotaxy cues, internode transitions, branch taper, and junctions must be plausible for the declared developmental state and free of fused or floating geometry."},
+    {"id":"stem_texture_and_taper","label":"Stem texture and taper","blocking":true,"requirement":"Main stem and branches must show stage-appropriate taper, surface texture, color variation, and structure without smooth toy-like cylinders."},
+    {"id":"reproductive_or_stage_accuracy","label":"Stage and reproductive accuracy","blocking":true,"requirement":"The specimen must visibly support its declared state: seedling, vegetative, flowering, male, female, or hermaphrodite/intersex, without borrowing contradictory reproductive morphology from another slot."},
+    {"id":"flower_and_resin_accuracy","label":"Flower, sugar-leaf, and resin accuracy","blocking":true,"requirement":"Where flowers are expected, inflorescences, bracts, stigmas/anthers, sugar leaves, and resin/trichome character must be believable; where mature flowers are not expected, they must not be fabricated into the specimen."},
+    {"id":"root_architecture","label":"Exposed root architecture","blocking":true,"requirement":"The exposed root system must have stage-appropriate crown, structural roots, branching laterals, taper, fine-root transition, and integration with the stem base; no spaghetti bundles or decorative tendrils."},
+    {"id":"material_and_pbr_response","label":"Material and PBR response","blocking":true,"requirement":"Materials must respond naturally to lighting with credible roughness, normal detail, translucency/alpha handling where needed, and no glossy plastic or metallic plant tissue."},
+    {"id":"color_and_texture_realism","label":"Color and texture realism","blocking":true,"requirement":"Texture color, mottling, gradients, stems, roots, and microvariation must look natural under neutral lighting with no baked yellow cast or obvious procedural tiling."},
+    {"id":"no_ai_or_generation_deformation","label":"No obvious AI or generation deformation","blocking":true,"requirement":"Reject fused leaves, impossible leaflet counts, duplicated motifs, melted reproductive structures, branch discontinuities, impossible intersections, or any ambiguous deformation being presented as plant biology."},
+    {"id":"no_low_poly_or_cardboard_read","label":"No low-poly or cardboard read","blocking":true,"requirement":"Silhouette and close views must not expose coarse faceting, billboard-only foliage, visibly flat reproductive cards, chunky decimation, or game-prop simplification inconsistent with the Atlas target."},
+    {"id":"full_plant_consistency","label":"Full-plant multi-angle consistency","blocking":true,"requirement":"Front, rear, left, right, and top views must remain anatomically coherent with no hidden backside collapse or view-dependent geometry failure."},
+    {"id":"mobile_lod_fidelity","label":"Mobile LOD fidelity","blocking":true,"requirement":"The mobile LOD may reduce hidden complexity and texture resolution but must preserve the specimen's realistic cannabis silhouette, stage/sex identity, branch continuity, leaf serration read, and root-system identity."}
+  ],
+  "specimenSpecificRequirements": {
+    "seedling": ["juvenile scale", "cotyledon/early true-leaf morphology", "no mature flowers"],
+    "vegetative": ["established fan leaves and branching", "clear nodes/internodes", "no mature flower clusters"],
+    "flowering": ["mature flowering silhouette", "distributed inflorescences", "bract/sugar-leaf/resin character"],
+    "male": ["recognizable staminate structures", "credible pollen-sac clustering", "no fake female bud masses"],
+    "female": ["recognizable pistillate structures", "bracts/stigmas where appropriate", "female floral architecture distinct from male"],
+    "hermaphrodite": ["recognizable male and female expression on one specimen", "plausible mixed reproductive placement", "no AI deformation used as a substitute for intersex morphology"]
+  },
+  "specimenReviews": [
+    {"specimenId":"seedling","candidateId":null,"state":"pending","overallDecision":"pending","reviewer":null,"reviewedAt":null,"evidence":{"views":{}},"criteriaResults":{},"notes":["A dedicated photorealistic seedling specimen is required."]},
+    {"specimenId":"vegetative","candidateId":null,"state":"pending","overallDecision":"pending","reviewer":null,"reviewedAt":null,"evidence":{"views":{}},"criteriaResults":{},"notes":["A dedicated photorealistic vegetative specimen is required."]},
+    {"specimenId":"flowering","candidateId":null,"state":"pending","overallDecision":"pending","reviewer":null,"reviewedAt":null,"evidence":{"views":{}},"criteriaResults":{},"notes":["A mature flowering specimen is required and must show realistic inflorescence and resin character."]},
+    {"specimenId":"male","candidateId":null,"state":"pending","overallDecision":"pending","reviewer":null,"reviewedAt":null,"evidence":{"views":{}},"criteriaResults":{},"notes":["A dedicated male specimen must clearly show authentic staminate reproductive morphology."]},
+    {"specimenId":"female","candidateId":null,"state":"pending","overallDecision":"pending","reviewer":null,"reviewedAt":null,"evidence":{"views":{}},"criteriaResults":{},"notes":["A dedicated female specimen must clearly show authentic pistillate reproductive morphology."]},
+    {"specimenId":"hermaphrodite","candidateId":null,"state":"pending","overallDecision":"pending","reviewer":null,"reviewedAt":null,"evidence":{"views":{}},"criteriaResults":{},"notes":["Hermaphrodite/intersex biology must be represented with identifiable mixed reproductive structures, not visual ambiguity or AI defects."]}
+  ]
+}
