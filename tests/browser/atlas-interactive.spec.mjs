@@ -32,10 +32,17 @@ test("interactive Plant Atlas selects structures, switches 3D layers, and contro
   const response = await page.goto("/learn/atlas", { waitUntil: "networkidle" });
 
   expect(response?.status()).toBe(200);
+  const workspace = page.locator('[data-atlas-workspace="immersive"]');
   const app = page.locator('section[aria-label="THC Living Plant Atlas interactive explorer"]');
+  await expect(workspace).toBeVisible();
   await expect(app).toBeVisible();
+  await expect(app).toHaveAttribute("data-atlas-shell", "premium-v2");
   await expect(app.getByRole("heading", { name: "Plant Atlas", exact: true })).toBeVisible();
   await expect(app.getByRole("heading", { name: "Trichomes", exact: true })).toBeVisible();
+  const workspaceBox = await workspace.boundingBox();
+  expect(workspaceBox?.width ?? 0).toBeGreaterThan(1300);
+  const desktopGrid = await app.evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(" ").filter(Boolean).length);
+  expect(desktopGrid).toBe(3);
   await expectNoHorizontalOverflow(page);
 
   const runtime = await expectThreeRuntime(app, page);
@@ -85,9 +92,17 @@ test("interactive Plant Atlas keeps hotspots and inspector controls accessible a
   await page.goto("/learn/atlas", { waitUntil: "networkidle" });
 
   const app = page.locator('section[aria-label="THC Living Plant Atlas interactive explorer"]');
+  const inspector = app.locator('[data-atlas-inspector="responsive-sheet"]');
   await expect(app).toBeVisible();
+  await expect(app).toHaveAttribute("data-atlas-shell", "premium-v2");
+  await expect(inspector).toBeVisible();
   await expect(app.getByRole("heading", { name: "Plant Atlas", exact: true })).toBeVisible();
   await expectThreeRuntime(app, page);
+
+  const appDisplay = await app.evaluate((node) => getComputedStyle(node).display);
+  expect(appDisplay).toBe("block");
+  const inspectorRadius = await inspector.evaluate((node) => getComputedStyle(node).borderTopLeftRadius);
+  expect(Number.parseFloat(inspectorRadius)).toBeGreaterThanOrEqual(20);
 
   const fanLeaves = app.getByRole("button", { name: /Fan Leaves/i }).first();
   await expect(fanLeaves).toBeVisible();
