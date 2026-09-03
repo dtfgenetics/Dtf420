@@ -106,18 +106,17 @@ function AtlasSystemStudyVisual({ asset }: { asset: AtlasAssetRecord }) {
         <AtlasSystemGraphic systemId={asset.systemId} />
       </div>
       <div className={styles.studyCopy}>
-        <p>Interactive system study map</p>
+        <p>System study map</p>
         <h2>{asset.lessonTitle}</h2>
         <strong>{asset.visualSpec}</strong>
         <span>
-          Use the highlighted system as the anatomical context for this lesson, then connect it with the observation prompts,
-          evidence sources, and knowledge check below. The production media slot can be upgraded later without leaving the
-          lesson visually empty today.
+          Start with the highlighted plant system as the anatomical context. Then compare the lesson observations with the
+          evidence sources and knowledge check below so structure, process, and whole-plant consequences stay connected.
         </span>
         <dl>
-          <div><dt>System</dt><dd>{asset.systemLabel}</dd></div>
-          <div><dt>Study lens</dt><dd>{asset.assetType.replaceAll("-", " ")}</dd></div>
-          <div><dt>Visual state</dt><dd>Teaching fallback active</dd></div>
+          <div><dt>Plant system</dt><dd>{asset.systemLabel}</dd></div>
+          <div><dt>Lesson focus</dt><dd>{asset.visualSpec}</dd></div>
+          <div><dt>Study mode</dt><dd>Whole-plant context</dd></div>
         </dl>
       </div>
     </div>
