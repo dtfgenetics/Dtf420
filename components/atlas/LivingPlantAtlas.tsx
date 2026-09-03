@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
 import atlasSections from "@/content/atlas-sections.json";
 import learningModules from "@/content/atlas-learning-modules.json";
@@ -55,6 +55,8 @@ export function LivingPlantAtlas() {
   const [selectedId, setSelectedId] = useState("trichomes_resin");
   const [panelTab, setPanelTab] = useState<PanelTab>("info");
   const [lightOn, setLightOn] = useState(true);
+  const inspectorRef = useRef<HTMLElement>(null);
+  const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
   const { progress } = useAtlasProgress();
   const { mastery } = useAtlasMastery();
 
@@ -82,11 +84,21 @@ export function LivingPlantAtlas() {
     return state === "mastered" ? "Mastered" : `${completed}/${routes.length} · ${stateLabel(state)}`;
   }
 
+  function revealSelectedInfo() {
+    window.requestAnimationFrame(() => {
+      inspectorHeadingRef.current?.focus({ preventScroll: true });
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        inspectorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
   function selectEntity(id: string) {
     setSelectedId(id);
     setPanelTab("info");
     if (id === "environment_overlay") setLayer("environment");
     if (id === "diagnostic_overlay") setLayer("diagnostics");
+    revealSelectedInfo();
   }
 
   function changeLayer(nextLayer: AtlasLayer) {
@@ -149,7 +161,13 @@ export function LivingPlantAtlas() {
           />
         </main>
 
-        <aside className={styles.inspector} aria-live="polite">
+        <aside
+          ref={inspectorRef}
+          id="atlas-inspector"
+          className={styles.inspector}
+          aria-label={`Learn about ${selectedEntity.label}`}
+          aria-live="polite"
+        >
           <div className={styles.inspectorTabs} role="tablist" aria-label="Selected structure information modes">
             {(["info", "micro", "data", "notes"] as PanelTab[]).map((tab) => (
               <button
@@ -171,7 +189,7 @@ export function LivingPlantAtlas() {
             <header className={styles.inspectorHeader}>
               <div>
                 <p>{selectedEntity.systemLabel}</p>
-                <h2>{selectedEntity.label}</h2>
+                <h2 ref={inspectorHeadingRef} tabIndex={-1}>{selectedEntity.label}</h2>
               </div>
               <button type="button" onClick={() => selectEntity("trichomes_resin")} aria-label="Return to default trichome view">×</button>
             </header>
@@ -189,7 +207,7 @@ export function LivingPlantAtlas() {
                 </section>
                 <section className={styles.learnMore}>
                   <h3>Learn more</h3>
-                  <Link href={sectionRoute(selectedSection)}>Open {selectedEntity.systemLabel}</Link>
+                  <Link href={sectionRoute(selectedSection)}>Learn more about {selectedEntity.label}</Link>
                   {selectedNextRoute ? <Link href={selectedNextRoute}>{selectedCompleted === selectedRoutes.length ? "Review next lesson" : "Continue learning"}</Link> : null}
                   <Link href="/learn/atlas/paths">Guided learning paths</Link>
                 </section>
