@@ -9,9 +9,13 @@ The Atlas treats lesson visuals as replaceable, versioned teaching surfaces inst
 - `lib/atlas-asset-manifests.ts` combines the explicit interactive/media override manifests.
 - `lib/atlas-visual-brief-manifests.ts` normalizes the lesson-specific production-brief manifests for lessons that still use the study-map teaching fallback.
 - `components/atlas/AtlasAssetSlot.tsx` resolves each lesson to its best available teaching surface.
-- Production image/media files live under `public/atlas/...` and are referenced with root-relative paths such as `/atlas/roots/root-architecture-v1.webp`.
+- When approved static lesson media begins shipping, files belong under `public/atlas/<system>/` and are referenced with root-relative paths such as `/atlas/roots/root-architecture-v1.webp`. The `public/atlas/` lesson-media directory is not currently populated because no lesson production-media record is yet `ready` with a shipped path.
 
 The current production-metadata contract covers all 100 lessons explicitly: **60 specialized/code-native visual slots are represented by override records and 40 remaining lesson slots have detailed `brief_ready` production metadata. There are zero unplanned `needed` slots.** A future lesson must add its production metadata as part of the same change rather than silently relying on a generic placeholder record.
+
+### Legacy image-placement planning map
+
+`configuration/image-placement-map.csv` is **planning-only and non-authoritative**. Its historical `*_001` asset IDs, page-placement ideas, priorities, and `needed` statuses are not the current production asset state and must never override the canonical lesson registry. Production state comes from `content/atlas-learning-modules.json`, the `content/atlas-asset-overrides*.json` manifests, and the `content/atlas-*-visual-briefs.json` production briefs. The legacy placement map must not reuse canonical production asset IDs.
 
 ## Learner-facing rendering contract
 
@@ -65,7 +69,8 @@ The lesson page consumes the registry, so ordinary media replacement does not re
 - a `ready` asset has no path;
 - a referenced asset file is missing from `public/`;
 - alt text or a production brief is missing;
-- the canonical lesson count drifts away from the Atlas completion contract.
+- the canonical lesson count drifts away from the Atlas completion contract;
+- the legacy `configuration/image-placement-map.csv` drifts from its planning-only schema or reuses a canonical production asset ID.
 
 The full `npm run verify` path also validates the 100-lesson curriculum, Atlas runtime, model candidates, six-specimen acquisition queue, photorealism gate, guided paths, knowledge checks, mastery, diagnostics, system connections, visual identification, TypeScript, lint, and production build.
 
