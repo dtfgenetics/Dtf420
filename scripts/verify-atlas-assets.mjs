@@ -29,7 +29,7 @@ const allowedRenderers = new Set([
   "final-b",
   "advanced",
 ]);
-const allowedMediaExtensions = new Set([".png", ".jpg", ".jpeg", ".webp", ".svg"]);
+const allowedMediaExtensions = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 const disallowedEducationalPathPatterns = [
   /strain[-_ ]?card/i,
   /seed[-_ ]?card/i,
@@ -141,7 +141,7 @@ if (rendererAssetIds.size !== EXPECTED_CODE_NATIVE_COUNT) {
 }
 
 const runtimeManifestSource = fs.readFileSync(path.join(root, "lib", "atlas-asset-manifests.ts"), "utf8");
-const importedManifestFiles = [...runtimeManifestSource.matchAll(/@\/content\/(atlas-asset-overrides[^"']+\.json)/g)]
+const importedManifestFiles = [...runtimeManifestSource.matchAll(/@\/content\/(atlas-asset-overrides[^"']*\.json)/g)]
   .map((match) => match[1])
   .sort();
 if (JSON.stringify(importedManifestFiles) !== JSON.stringify(manifestFiles)) {
