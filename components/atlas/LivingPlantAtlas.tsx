@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
 import atlasSections from "@/content/atlas-sections.json";
 import learningModules from "@/content/atlas-learning-modules.json";
@@ -167,6 +167,7 @@ export function LivingPlantAtlas() {
 
         <main className={`${styles.centerStage} ${conceptStyles.centerStage}`}>
           <header className={`${styles.titleBlock} ${conceptStyles.titleBlock}`}>
+            <h1 className={conceptStyles.srOnly}>Plant Atlas</h1>
             <div>
               <p>Interactive cannabis anatomy</p>
               <span>Explore · Learn · Understand · Grow Better</span>
