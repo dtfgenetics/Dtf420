@@ -1,24 +1,24 @@
 [
   {
-    "lesson": "Axillary bud activation",
+    "title": "Axillary bud activation",
     "route": "/learn/atlas/nodes-branching/axillary-bud-activation",
     "assetType": "Scientific developmental sequence",
     "brief": "Create a Cannabis node close-up showing an established but non-elongating axillary bud, early bud release, vascular connection, leaf expansion, and sustained branch elongation. Keep the sequence anatomically grounded, label the node, petiole, axillary bud, subtending leaf, main stem, and emerging branch, and avoid implying that a visible bud must immediately grow out."
   },
   {
-    "lesson": "Hormones, sugars & bud outgrowth",
+    "title": "Hormones, sugars & bud outgrowth",
     "route": "/learn/atlas/nodes-branching/hormones-sugars-and-bud-outgrowth",
     "assetType": "Scientific signaling map",
     "brief": "Create a node-centered flowering-plant signaling diagram with the active shoot apex, basipetal auxin transport in the stem, cytokinin and strigolactone relationships, sugar supply from source leaves, light at the bud, and bud-local integration. Clearly mark this as a general plant branching model rather than Cannabis-specific hormone quantification."
   },
   {
-    "lesson": "Phyllotaxy & developmental nodes",
+    "title": "Phyllotaxy & developmental nodes",
     "route": "/learn/atlas/nodes-branching/phyllotaxy-and-developmental-nodes",
     "assetType": "Cannabis developmental reference strip",
     "brief": "Create a longitudinal Cannabis shoot reference showing juvenile nodes with axillary buds, later stipules at the petiole base, development of bracts and solitary flowers, and a transition from opposite to alternate phyllotaxy. Add a visible note that published node numbers vary by genotype and conditions and are not a universal Cannabis clock."
   },
   {
-    "lesson": "Pruning response & architectural plasticity",
+    "title": "Pruning response & architectural plasticity",
     "route": "/learn/atlas/nodes-branching/pruning-response-and-architectural-plasticity",
     "assetType": "Comparative architecture matrix",
     "brief": "Create a Cannabis architecture comparison showing unpruned control, apical cut, single prune, repeated prune, primary-branch removal, and side-shoot removal as study-informed examples. Emphasize changes in main-axis dominance, lateral branch development, plant height, canopy openness, and light distribution without assigning universal yield percentages."
