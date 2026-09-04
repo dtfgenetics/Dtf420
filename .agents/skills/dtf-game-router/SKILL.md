@@ -11,7 +11,7 @@ Use this skill first for game-related work in this repository.
 ## Project baseline
 
 - Preserve the repository's pinned stack unless the user explicitly requests a migration.
-- Current game-capable stack is Next.js + React + TypeScript + Phaser.
+- Current game-capable stack includes Next.js + React + TypeScript + Phaser, with Three.js / React Three Fiber available for games that genuinely require a 3D WebGL playfield.
 - Games belong inside the existing site and must not become disconnected external prototypes.
 - Mobile usability, asset integrity, working navigation, and deployability are release requirements.
 
@@ -20,14 +20,15 @@ Use this skill first for game-related work in this repository.
 Load the matching skills before editing:
 
 - Phaser scene, renderer, movement, board animation, sprite behavior -> `dtf-phaser-2d`
-- Missing images, sprites, boards, cards, atlases, audio, or broken asset paths -> `dtf-game-assets`
+- Three.js / React Three Fiber, 3D boards/pieces/environments, GLB/glTF, camera controls, raycast picking, WebGL performance -> `dtf-threejs-3d`
+- Missing images, sprites, boards, cards, atlases, audio, 3D models, or broken asset paths -> `dtf-game-assets`
 - HUD, menus, responsive layout, touch controls, readability -> `dtf-game-ui-mobile`
 - Board-game rules, cards, decks, turn state, deterministic resolution -> `dtf-board-card-games`
 - Rooms, invite links, player naming, synchronized turns -> `dtf-multiplayer-lobbies`
 - Broken gameplay, visual regressions, browser/mobile testing -> `dtf-game-playtest`
 - Build failures, route failures, production readiness, live-site verification -> `dtf-game-deploy`
 
-Multiple skills may compose. Example: a mobile Weedopolis multiplayer bug may require board/card + multiplayer + UI + playtest.
+Multiple skills may compose. Example: a 3D multiplayer chess repair may require Three.js 3D + board/card + multiplayer + UI + playtest + deploy.
 
 ## Mandatory workflow
 
@@ -36,7 +37,7 @@ Multiple skills may compose. Example: a mobile Weedopolis multiplayer bug may re
 3. Identify the current route, game state model, render layer, asset manifest/paths, and verification scripts.
 4. Make the smallest coherent change that moves the existing implementation forward.
 5. Never replace real game assets with placeholder rectangles, emoji, generic gradients, or invented art when the repository already contains approved assets.
-6. Keep simulation/rules separate from Phaser/React rendering state.
+6. Keep simulation/rules separate from Phaser/Three.js/React rendering state.
 7. Run the narrowest relevant checks, then lint, typecheck, and build when practical.
 8. Verify the route and asset URLs expected in production, not only local imports.
 9. Report what changed, what was verified, and any remaining blocker with exact file paths.
@@ -47,5 +48,5 @@ Multiple skills may compose. Example: a mobile Weedopolis multiplayer bug may re
 - Prefer repairing and integrating existing work.
 - Do not remove features to make tests pass unless the user explicitly approves the scope reduction.
 - Do not silently change game rules, board geometry, card data, branding, or approved visual assets.
-- Treat runtime warnings, missing assets, dead links, hydration errors, and mobile overflow as real defects.
+- Treat runtime warnings, missing assets, dead links, hydration errors, mobile overflow, WebGL initialization failures, and mismatched 3D picking coordinates as real defects.
 - Never claim a game is live until production deployment and the public route are verified.
