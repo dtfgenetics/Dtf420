@@ -9,6 +9,8 @@ import { AtlasCoreStructureVisual } from "./AtlasCoreStructureVisual";
 import { AtlasGrowthDiagnosticVisual } from "./AtlasGrowthDiagnosticVisual";
 import { AtlasFinalVisualA } from "./AtlasFinalVisualA";
 import { AtlasFinalVisualB } from "./AtlasFinalVisualB";
+import { AtlasAdvancedConceptVisual } from "./AtlasAdvancedConceptVisual";
+import { AtlasSystemGraphic } from "./AtlasSystemGraphic";
 import styles from "./AtlasAssetSlot.module.css";
 
 const priorityInteractiveAssetIds = new Set([
@@ -84,6 +86,43 @@ const finalBInteractiveAssetIds = new Set([
   "atlas-pattern-description-v1",
 ]);
 
+const advancedInteractiveAssetIds = new Set([
+  "atlas-seed-germination-reserve-mobilization-v0",
+  "atlas-root-system-root-zone-oxygen-diffusion-v0",
+  "atlas-stem-vascular-source-sink-integration-v0",
+  "atlas-nodes-branching-branch-angle-and-mechanical-support-v0",
+  "atlas-leaves-leaf-temperature-and-energy-balance-v0",
+  "atlas-flowers-photoperiod-sensing-and-floral-transition-v0",
+  "atlas-trichomes-resin-secretory-disk-and-storage-cavity-v0",
+  "atlas-sex-pollen-seed-fertilization-and-seed-filling-v0",
+  "atlas-environment-overlay-leaf-temperature-vs-air-temperature-v0",
+  "atlas-diagnostic-overlay-genotype-environment-context-v0",
+]);
+
+function AtlasSystemStudyVisual({ asset }: { asset: AtlasAssetRecord }) {
+  return (
+    <div className={styles.studyFrame} data-atlas-visual="system-study-map">
+      <div className={styles.studyGraphic}>
+        <AtlasSystemGraphic systemId={asset.systemId} />
+      </div>
+      <div className={styles.studyCopy}>
+        <p>System study map</p>
+        <h2>{asset.lessonTitle}</h2>
+        <strong>{asset.visualSpec}</strong>
+        <span>
+          Start with the highlighted plant system as the anatomical context. Then compare the lesson observations with the
+          evidence sources and knowledge check below so structure, process, and whole-plant consequences stay connected.
+        </span>
+        <dl>
+          <div><dt>Plant system</dt><dd>{asset.systemLabel}</dd></div>
+          <div><dt>Lesson focus</dt><dd>{asset.visualSpec}</dd></div>
+          <div><dt>Study mode</dt><dd>Whole-plant context</dd></div>
+        </dl>
+      </div>
+    </div>
+  );
+}
+
 export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const acheneInteractive = asset.assetId === "atlas-seed-anatomy-v1";
   const priorityInteractive = priorityInteractiveAssetIds.has(asset.assetId);
@@ -94,6 +133,7 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
   const growthDiagnosticInteractive = growthDiagnosticInteractiveAssetIds.has(asset.assetId);
   const finalAInteractive = finalAInteractiveAssetIds.has(asset.assetId);
   const finalBInteractive = finalBInteractiveAssetIds.has(asset.assetId);
+  const advancedInteractive = advancedInteractiveAssetIds.has(asset.assetId);
 
   return (
     <section className={styles.assetSlot} aria-label="Atlas primary visual">
@@ -115,23 +155,14 @@ export function AtlasAssetSlot({ asset }: { asset: AtlasAssetRecord }) {
         <AtlasFinalVisualA assetId={asset.assetId} />
       ) : finalBInteractive ? (
         <AtlasFinalVisualB assetId={asset.assetId} />
+      ) : advancedInteractive ? (
+        <AtlasAdvancedConceptVisual assetId={asset.assetId} />
       ) : asset.path ? (
         <div className={styles.imageFrame}>
           <Image src={asset.path} alt={asset.altText} fill sizes="(max-width: 900px) 100vw, 65vw" priority />
         </div>
       ) : (
-        <div className={styles.briefFrame}>
-          <div>
-            <p>Primary visual specification</p>
-            <h2>{asset.visualSpec}</h2>
-          </div>
-          <p>{asset.productionBrief}</p>
-          <dl>
-            <div><dt>Asset type</dt><dd>{asset.assetType.replaceAll("-", " ")}</dd></div>
-            <div><dt>System</dt><dd>{asset.systemLabel}</dd></div>
-            <div><dt>Alt text prepared</dt><dd>Yes</dd></div>
-          </dl>
-        </div>
+        <AtlasSystemStudyVisual asset={asset} />
       )}
     </section>
   );

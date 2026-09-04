@@ -18,6 +18,8 @@ type AtlasInteractiveViewportProps = {
   lightOn?: boolean;
 };
 
+const WHOLE_PLANT_CAMERA = { yaw: 0, pitch: 0, zoom: 0.82 } as const;
+
 const layerLabels: Array<{ id: AtlasLayer; label: string }> = [
   { id: "overview", label: "Overview" },
   { id: "anatomy", label: "Anatomy" },
@@ -126,23 +128,45 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
   const [zoom, setZoom] = useState(1);
   const [dragging, setDragging] = useState(false);
   const [runtimeState, setRuntimeState] = useState<RuntimeState>("loading");
+  const [wholePlantView, setWholePlantView] = useState(true);
   const pointer = useRef<{ id: number; x: number; rotation: number } | null>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const previousSelectedId = useRef(selectedId);
+  const previousLayer = useRef(layer);
 
   const visibleEntities = atlasEntities.filter((entity) => entityVisible(entity, layer));
   const selectedEntity = atlasEntities.find((entity) => entity.id === selectedId) ?? atlasEntities[0];
+  const wholePlantActive = wholePlantView && layer === "overview";
 
   const postState = useCallback(() => {
     frameRef.current?.contentWindow?.postMessage(
-      { type: "atlas:set-state", selectedId, layer, camera: selectedEntity.camera, lightOn },
+      {
+        type: "atlas:set-state",
+        selectedId: wholePlantActive ? "__whole_plant__" : selectedId,
+        layer,
+        camera: wholePlantActive ? WHOLE_PLANT_CAMERA : selectedEntity.camera,
+        lightOn,
+      },
       window.location.origin,
     );
-  }, [layer, lightOn, selectedEntity.camera, selectedId]);
+  }, [layer, lightOn, selectedEntity.camera, selectedId, wholePlantActive]);
 
   const sendCommand = useCallback((command: RuntimeCommand) => {
     frameRef.current?.contentWindow?.postMessage({ type: "atlas:command", command }, window.location.origin);
   }, []);
+
+  useEffect(() => {
+    if (previousSelectedId.current === selectedId) return;
+    previousSelectedId.current = selectedId;
+    setWholePlantView(false);
+  }, [selectedId]);
+
+  useEffect(() => {
+    if (previousLayer.current === layer) return;
+    previousLayer.current = layer;
+    setWholePlantView(layer === "overview");
+  }, [layer]);
 
   useEffect(() => {
     function receiveRuntimeMessage(event: MessageEvent) {
@@ -154,7 +178,10 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
         postState();
       }
       if (data.type === "atlas:runtime-error") setRuntimeState("fallback");
-      if (data.type === "atlas:select" && data.id && atlasEntities.some((entity) => entity.id === data.id)) onSelect(data.id);
+      if (data.type === "atlas:select" && data.id && atlasEntities.some((entity) => entity.id === data.id)) {
+        setWholePlantView(false);
+        onSelect(data.id);
+      }
     }
     window.addEventListener("message", receiveRuntimeMessage);
     return () => window.removeEventListener("message", receiveRuntimeMessage);
@@ -167,8 +194,9 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
   const reset = useCallback(() => {
     setRotation(-4);
     setZoom(1);
-    sendCommand("reset");
-  }, [sendCommand]);
+    if (wholePlantActive) postState();
+    else sendCommand("reset");
+  }, [postState, sendCommand, wholePlantActive]);
 
   const rotateBy = useCallback((degrees: number) => {
     setRotation((value) => value + degrees);
@@ -200,6 +228,16 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
 
+  function selectEntity(id: string) {
+    setWholePlantView(false);
+    onSelect(id);
+  }
+
+  function changeLayer(nextLayer: AtlasLayer) {
+    setWholePlantView(nextLayer === "overview");
+    onLayerChange(nextLayer);
+  }
+
   async function toggleFullscreen() {
     if (!viewportRef.current) return;
     if (document.fullscreenElement) await document.exitFullscreen();
@@ -218,7 +256,7 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
       <div className={styles.environmentGlow} aria-hidden="true" />
       <div className={styles.gridFloor} aria-hidden="true" />
 
-      <div className={styles.threeStage} data-runtime-state={runtimeState}>
+      <div className={styles.threeStage} data-runtime-state={runtimeState} data-camera-mode={wholePlantActive ? "whole-plant" : "entity"}>
         <iframe
           ref={frameRef}
           className={styles.threeFrame}
@@ -249,14 +287,14 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
       </div>
 
       {visibleEntities.map((entity) => {
-        const active = selectedId === entity.id;
+        const active = selectedId === entity.id && !wholePlantActive;
         return (
           <button
             key={entity.id}
             type="button"
             className={`${styles.hotspot} ${active ? styles.hotspotActive : ""}`}
             style={{ left: `${entity.hotspot.x}%`, top: `${entity.hotspot.y}%` }}
-            onClick={() => onSelect(entity.id)}
+            onClick={() => selectEntity(entity.id)}
             aria-pressed={active}
             aria-label={`${entity.label}. ${statusForEntity?.(entity.id) ?? entity.systemLabel}`}
           >
@@ -269,7 +307,7 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
       <div className={styles.layerPanel} aria-label="Plant visualization layers">
         <span>Layers</span>
         {layerLabels.map((item) => (
-          <button key={item.id} type="button" className={layer === item.id ? styles.layerActive : ""} onClick={() => onLayerChange(item.id)} aria-pressed={layer === item.id}>
+          <button key={item.id} type="button" className={layer === item.id ? styles.layerActive : ""} onClick={() => changeLayer(item.id)} aria-pressed={layer === item.id}>
             <i aria-hidden="true">◉</i>{item.label}
           </button>
         ))}
