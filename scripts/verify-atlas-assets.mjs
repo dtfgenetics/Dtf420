@@ -22,6 +22,8 @@ const visualBriefs = visualBriefFiles.flatMap((name) =>
 const assetManifestSource = fs.readFileSync(path.join(root, "lib", "atlas-asset-manifests.ts"), "utf8");
 const visualBriefManifestSource = fs.readFileSync(path.join(root, "lib", "atlas-visual-brief-manifests.ts"), "utf8");
 const assetRegistrySource = fs.readFileSync(path.join(root, "lib", "atlas-assets.ts"), "utf8");
+const visualPipelineDoc = fs.readFileSync(path.join(root, "docs", "ATLAS_VISUAL_PIPELINE.md"), "utf8");
+const planningMap = fs.readFileSync(path.join(root, "configuration", "image-placement-map.csv"), "utf8");
 
 const EXPECTED_SYSTEM_COUNT = 10;
 const EXPECTED_LESSON_COUNT = 100;
@@ -68,15 +70,9 @@ const seenBriefRoutes = new Set();
 const coveredKeys = new Set();
 const errors = [];
 
-if (modules.length !== EXPECTED_SYSTEM_COUNT) {
-  errors.push(`Expected ${EXPECTED_SYSTEM_COUNT} Atlas systems, found ${modules.length}.`);
-}
-if (lessonRecords.length !== EXPECTED_LESSON_COUNT) {
-  errors.push(`Expected ${EXPECTED_LESSON_COUNT} Atlas lesson visual slots, found ${lessonRecords.length}.`);
-}
-if (validKeys.size !== lessonRecords.length) {
-  errors.push(`Canonical lesson keys are not unique: ${lessonRecords.length} lessons produced ${validKeys.size} unique keys.`);
-}
+if (modules.length !== EXPECTED_SYSTEM_COUNT) errors.push(`Expected ${EXPECTED_SYSTEM_COUNT} Atlas systems, found ${modules.length}.`);
+if (lessonRecords.length !== EXPECTED_LESSON_COUNT) errors.push(`Expected ${EXPECTED_LESSON_COUNT} Atlas lesson visual slots, found ${lessonRecords.length}.`);
+if (validKeys.size !== lessonRecords.length) errors.push(`Canonical lesson keys are not unique: ${lessonRecords.length} lessons produced ${validKeys.size} unique keys.`);
 
 for (const lesson of lessonRecords) {
   if (!lesson.visual || typeof lesson.visual !== "string" || !lesson.visual.trim()) {
@@ -85,14 +81,10 @@ for (const lesson of lessonRecords) {
 }
 
 for (const manifestFile of manifestFiles) {
-  if (!assetManifestSource.includes(`@/content/${manifestFile}`)) {
-    errors.push(`Runtime asset manifest does not import production override file: ${manifestFile}`);
-  }
+  if (!assetManifestSource.includes(`@/content/${manifestFile}`)) errors.push(`Runtime asset manifest does not import production override file: ${manifestFile}`);
 }
 for (const briefFile of visualBriefFiles) {
-  if (!visualBriefManifestSource.includes(`@/content/${briefFile}`)) {
-    errors.push(`Runtime visual-brief manifest does not import detailed brief file: ${briefFile}`);
-  }
+  if (!visualBriefManifestSource.includes(`@/content/${briefFile}`)) errors.push(`Runtime visual-brief manifest does not import detailed brief file: ${briefFile}`);
 }
 if (!assetRegistrySource.includes("atlasVisualBriefs") || !assetRegistrySource.includes('visualBrief ? "brief_ready"')) {
   errors.push("Atlas asset registry must resolve detailed visual briefs as brief_ready production metadata.");
@@ -107,20 +99,11 @@ for (const item of overrides) {
   coveredKeys.add(item.key);
   if (item.assetId) seenAssetIds.add(item.assetId);
 
-  if (!allowedStatuses.has(item.status)) {
-    errors.push(`Unsupported asset status '${item.status}' for ${item.assetId || item.key}`);
-  }
-  if (item.status === "needed") {
-    errors.push(`Explicit Atlas production metadata cannot remain 'needed': ${item.assetId || item.key}`);
-  }
-  if (!Number.isInteger(item.version) || item.version < 0) {
-    errors.push(`Asset version must be a non-negative integer: ${item.assetId || item.key}`);
-  }
+  if (!allowedStatuses.has(item.status)) errors.push(`Unsupported asset status '${item.status}' for ${item.assetId || item.key}`);
+  if (item.status === "needed") errors.push(`Explicit Atlas production metadata cannot remain 'needed': ${item.assetId || item.key}`);
+  if (!Number.isInteger(item.version) || item.version < 0) errors.push(`Asset version must be a non-negative integer: ${item.assetId || item.key}`);
   if (!item.assetType?.trim()) errors.push(`Missing assetType: ${item.assetId || item.key}`);
-
-  if (item.status === "ready" && !item.path) {
-    errors.push(`Ready asset has no path: ${item.assetId}`);
-  }
+  if (item.status === "ready" && !item.path) errors.push(`Ready asset has no path: ${item.assetId}`);
 
   if (item.path) {
     if (!item.path.startsWith("/")) errors.push(`Asset path must begin with '/': ${item.assetId}`);
@@ -136,7 +119,6 @@ for (const item of overrides) {
 }
 
 for (const item of visualBriefs) {
-  const title = item.title ?? item.lesson;
   if (typeof item.route !== "string" || !item.route.startsWith("/learn/atlas/")) {
     errors.push(`Invalid visual brief route in ${item.sourceFile}: ${String(item.route)}`);
     continue;
@@ -148,31 +130,31 @@ for (const item of visualBriefs) {
   }
   if (seenBriefRoutes.has(item.route)) errors.push(`Duplicate visual brief route: ${item.route}`);
   seenBriefRoutes.add(item.route);
-  if (seenKeys.has(lesson.key)) {
-    errors.push(`Atlas lesson has both an explicit override and a detailed brief-only record: ${lesson.key}`);
-  }
+  if (seenKeys.has(lesson.key)) errors.push(`Atlas lesson has both an explicit override and a detailed brief-only record: ${lesson.key}`);
   coveredKeys.add(lesson.key);
 
-  if (typeof title !== "string" || title.trim() !== lesson.title) {
-    errors.push(`Visual brief title mismatch for ${item.route}: expected '${lesson.title}', found '${String(title)}'.`);
+  if (typeof item.title !== "string" || item.title.trim() !== lesson.title) {
+    errors.push(`Visual brief title mismatch for ${item.route}: expected '${lesson.title}', found '${String(item.title)}'.`);
   }
-  if (typeof item.brief !== "string" || item.brief.trim().length < 100) {
-    errors.push(`Visual brief must contain a substantive production brief: ${item.route}`);
-  }
-  if (item.assetType !== undefined && (typeof item.assetType !== "string" || !item.assetType.trim())) {
-    errors.push(`Visual brief assetType must be non-empty when provided: ${item.route}`);
-  }
+  if (Object.hasOwn(item, "lesson")) errors.push(`Visual brief schema still uses legacy 'lesson' field instead of 'title': ${item.route}`);
+  if (typeof item.brief !== "string" || item.brief.trim().length < 100) errors.push(`Visual brief must contain a substantive production brief: ${item.route}`);
+  if (item.assetType !== undefined && (typeof item.assetType !== "string" || !item.assetType.trim())) errors.push(`Visual brief assetType must be non-empty when provided: ${item.route}`);
 }
 
-if (overrides.length !== EXPECTED_EXPLICIT_OVERRIDE_COUNT) {
-  errors.push(`Expected ${EXPECTED_EXPLICIT_OVERRIDE_COUNT} explicit Atlas production overrides, found ${overrides.length}.`);
-}
-if (visualBriefs.length !== EXPECTED_DETAILED_BRIEF_COUNT) {
-  errors.push(`Expected ${EXPECTED_DETAILED_BRIEF_COUNT} detailed brief-only Atlas slots, found ${visualBriefs.length}.`);
-}
+if (overrides.length !== EXPECTED_EXPLICIT_OVERRIDE_COUNT) errors.push(`Expected ${EXPECTED_EXPLICIT_OVERRIDE_COUNT} explicit Atlas production overrides, found ${overrides.length}.`);
+if (visualBriefs.length !== EXPECTED_DETAILED_BRIEF_COUNT) errors.push(`Expected ${EXPECTED_DETAILED_BRIEF_COUNT} detailed brief-only Atlas slots, found ${visualBriefs.length}.`);
 if (coveredKeys.size !== EXPECTED_LESSON_COUNT) {
   const missing = lessonRecords.filter((lesson) => !coveredKeys.has(lesson.key)).map((lesson) => lesson.key);
   errors.push(`Every canonical lesson must have explicit production metadata; covered ${coveredKeys.size}/${EXPECTED_LESSON_COUNT}. Missing: ${missing.join(", ") || "none"}.`);
+}
+
+const planningHeader = "asset_id,section,page_slug,asset_type,placement,description,style,priority,status";
+if (!planningMap.startsWith(planningHeader)) errors.push("configuration/image-placement-map.csv header drifted from the documented planning-map contract.");
+for (const assetId of seenAssetIds) {
+  if (planningMap.includes(`${assetId},`)) errors.push(`Legacy image-placement planning map reuses canonical production assetId ${assetId}.`);
+}
+for (const marker of ["configuration/image-placement-map.csv", "planning-only", "non-authoritative"]) {
+  if (!visualPipelineDoc.toLowerCase().includes(marker.toLowerCase())) errors.push(`ATLAS_VISUAL_PIPELINE.md must document '${marker}'.`);
 }
 
 if (errors.length) {
@@ -184,5 +166,6 @@ if (errors.length) {
 console.log(
   `Atlas asset registry verified: ${lessonRecords.length} lesson slots across ${modules.length} systems; ` +
   `${overrides.length} explicit interactive/media records in ${manifestFiles.length} override manifests; ` +
-  `${visualBriefs.length} detailed brief-ready records in ${visualBriefFiles.length} brief manifests; 0 unplanned needed slots.`,
+  `${visualBriefs.length} detailed brief-ready records in ${visualBriefFiles.length} brief manifests; ` +
+  `0 unplanned needed slots; legacy placement map isolated as non-authoritative planning metadata.`,
 );
