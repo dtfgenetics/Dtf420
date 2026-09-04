@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-03",
+  "policy": "Source leads and scientific references in this file are acquisition inputs only. They do not populate atlas-specimen-set releaseSlots and do not authorize a model for production. Every final specimen must still pass binary intake, rights, botanical review, photorealism review, semantic mapping, desktop/mobile budgets, provenance review, and browser QA.",
+  "specimens": [
+    {
+      "id": "seedling",
+      "productionRoute": "acquire-or-custom-build",
+      "priority": 4,
+      "sourceLeads": [
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Small cannabis plant in a bonsai pot",
+          "url": "https://www.meshy.ai/3d-models/Small-cannabis-plant-in-a-bonsai-pot-v2-01976a27-cad0-7420-9d52-4625a1aed315",
+          "license": "CC0",
+          "state": "research-only",
+          "auditedAt": "2026-09-03",
+          "notes": "Public listing is currently marked CC0. Useful juvenile-scale geometry lead, but it must be rejected if it lacks cotyledons or juvenile leaflet complexity or merely reads as a miniature mature plant. Pot must be removed and a seedling-scale root system supplied."
+        }
+      ],
+      "scientificReference": {
+        "type": "atlas-required-traits",
+        "source": "content/atlas-specimen-set.json#seedling"
+      },
+      "blockingNeed": "A genuinely juvenile plant with seedling-scale roots; a bonsai-style mature plant cannot substitute for cannabis seedling morphology."
+    },
+    {
+      "id": "vegetative",
+      "productionRoute": "acquire-and-adapt",
+      "priority": 3,
+      "sourceLeads": [
+        {
+          "kind": "cc0-source-model",
+          "provider": "BlendSwap",
+          "title": "Hemp, Weed, Cannabis Sativa",
+          "url": "https://blendswap.com/blend/17492",
+          "license": "CC0",
+          "state": "blocked-acquisition",
+          "auditedAt": "2026-09-03",
+          "notes": "The current BlendSwap listing still identifies the asset as CC0 and describes three editable hemp bush variations with particle-system leaves. Strong vegetative base only if the acquired Blender source proves botanically useful and converts cleanly."
+        },
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Cannabis Plant in a Terracotta Pot",
+          "url": "https://www.meshy.ai/3d-models/019cfb59-980b-741d-a499-6fed91f57f2f",
+          "license": "CC0",
+          "state": "blocked-acquisition",
+          "auditedAt": "2026-09-03",
+          "notes": "Current public listing remains CC0. This is also the generic primary model candidate, but it must prove vegetative morphology, lose the pot, and gain an exposed root system before this specimen slot can use it."
+        }
+      ],
+      "scientificReference": {
+        "type": "atlas-required-traits",
+        "source": "content/atlas-specimen-set.json#vegetative"
+      },
+      "blockingNeed": "Mature fan leaves, nodes, internodes and branching without mature floral clusters, plus a developed exposed root system."
+    },
+    {
+      "id": "flowering",
+      "productionRoute": "acquire-and-adapt",
+      "priority": 1,
+      "sourceLeads": [
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Cannabis Bloom",
+          "url": "https://www.meshy.ai/3d-models/Cannabis-Bloom-v2-019bfa72-96be-7e42-98a3-b7421b91fe44",
+          "license": "CC0",
+          "state": "blocked-acquisition",
+          "auditedAt": "2026-09-03",
+          "notes": "Public listing is currently CC0. It is a flower/bud-specific lead and must be reviewed as a whole-plant specimen rather than accepted from listing title or preview; exposed roots are still required."
+        },
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Green Kush",
+          "url": "https://www.meshy.ai/3d-models/01986f7a-9e48-7829-97bd-406fbd4de627",
+          "license": "CC0",
+          "state": "research-only",
+          "auditedAt": "2026-09-03",
+          "notes": "Current public listing remains CC0 and cannabis/bud tagged. Do not infer complete flowering-plant anatomy from the title or gallery preview; direct binary and morphology review are required."
+        }
+      ],
+      "scientificReference": {
+        "type": "public-domain-photo",
+        "source": "https://commons.wikimedia.org/wiki/File:Cannabis_bloom.JPG",
+        "license": "CC0 1.0",
+        "auditedAt": "2026-09-03",
+        "notes": "Wikimedia currently identifies this as a CC0 female flowering Cannabis sativa subsp. indica photograph. Use for morphology review, not as a same-object multi-view reconstruction set."
+      },
+      "blockingNeed": "Default Atlas specimen: whole mature flowering plant, realistic inflorescence distribution, believable canopy architecture, and a full exposed root system."
+    },
+    {
+      "id": "male",
+      "productionRoute": "custom-scientific-build",
+      "priority": 2,
+      "sourceLeads": [],
+      "scientificReference": {
+        "type": "public-domain-photo-set",
+        "sources": [
+          "https://commons.wikimedia.org/wiki/File:Flowering_male_marijuana_plant.jpg",
+          "https://commons.wikimedia.org/wiki/File:Indoor_Hybrid_Flowering_Male_Medical_Cannabis.JPG",
+          "https://commons.wikimedia.org/wiki/File:Male_hemp_flowers.jpg"
+        ],
+        "license": "Public domain / CC0",
+        "auditedAt": "2026-09-03",
+        "notes": "All three Wikimedia references currently carry public-domain or CC0 release statements. Use them to review whole-plant male architecture, staminate clusters, and pollen-sac morphology."
+      },
+      "blockingNeed": "No credible reusable male cannabis 3D candidate has been approved. Build a distinct male specimen from reviewed reference material; do not relabel a generic or female plant."
+    },
+    {
+      "id": "female",
+      "productionRoute": "custom-build-or-distinct-acquisition",
+      "priority": 2,
+      "sourceLeads": [
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Purple Dream",
+          "url": "https://www.meshy.ai/3d-models/01986f62-6c33-781a-9998-ac807b65937b",
+          "license": "CC0",
+          "state": "research-only",
+          "auditedAt": "2026-09-03",
+          "notes": "Public listing remains CC0 and cannabis tagged, but sex phenotype is not established by the title. The binary and reproductive morphology must be reviewed before it can enter the female candidate pool."
+        }
+      ],
+      "scientificReference": {
+        "type": "public-domain-photo-set",
+        "sources": [
+          "https://commons.wikimedia.org/wiki/File:Cannabis_female.jpg",
+          "https://commons.wikimedia.org/wiki/File:Cannabis_bloom.JPG",
+          "https://commons.wikimedia.org/wiki/File:Cannbis_indica_female_flos.jpg"
+        ],
+        "license": "Public domain / CC0",
+        "auditedAt": "2026-09-03",
+        "notes": "Current Wikimedia file pages identify these sources as public domain or CC0. Use them for pistillate sex expression, bract/stigma morphology, and female inflorescence review."
+      },
+      "blockingNeed": "Must remain visually and geometrically distinct from the generic Flowering stage specimen, with clearly demonstrable female reproductive structures."
+    },
+    {
+      "id": "hermaphrodite",
+      "productionRoute": "custom-scientific-build",
+      "priority": 2,
+      "sourceLeads": [],
+      "scientificReference": {
+        "type": "peer-reviewed-morphology",
+        "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7329997/",
+        "license": "CC BY",
+        "auditedAt": "2026-09-03",
+        "notes": "Punja and Holmes documents anthers developing within otherwise pistillate Cannabis inflorescences and is currently distributed as open-access CC BY. Use it as a morphology constraint; do not present ambiguous AI deformation as intersex biology."
+      },
+      "blockingNeed": "No credible reusable intersex 3D candidate has been approved. Build this specimen manually or generatively from reviewed female plus anther morphology and require the strictest botanical review."
+    }
+  ]
+}

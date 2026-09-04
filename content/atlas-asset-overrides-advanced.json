@@ -1,0 +1,102 @@
+[
+  {
+    "key": "seed-germination__reserve-mobilization",
+    "assetId": "atlas-seed-germination-reserve-mobilization-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-reserve-mobilization-map",
+    "path": null,
+    "altText": "Interactive cannabis seed reserve-mobilization cutaway connecting stored lipids and proteins with embryo metabolism, radicle growth, cotyledon establishment, and the later transition toward leaf photosynthesis.",
+    "productionBrief": "Create a scientifically cautious cannabis achene and embryo cutaway that traces stored lipid and protein reserves into mobilization products supporting radicle, hypocotyl, and cotyledon growth before expanding true leaves become the dominant current carbon source. Keep the pericarp, true seed tissues, embryo, and residual endosperm anatomically distinct; do not imply one reserve pool or pathway alone controls germination success."
+  },
+  {
+    "key": "root-system__root-zone-oxygen-diffusion",
+    "assetId": "atlas-root-system-root-zone-oxygen-diffusion-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-root-zone-oxygen-map",
+    "path": null,
+    "altText": "Interactive root-zone pore-space diagram comparing air-filled and water-filled pores, oxygen diffusion, root respiration, microbial respiration, and oxygen replenishment around cannabis roots.",
+    "productionBrief": "Create a root-zone pore-space cutaway that compares well-aerated and persistently saturated media. Show gas-filled versus water-filled pore space, oxygen diffusion pathways, living root respiration, microbial oxygen demand, and the slower replenishment that can occur when pore space remains water-filled. Do not diagnose root health from color alone or imply a universal moisture threshold."
+  },
+  {
+    "key": "stem-vascular__source-sink-integration",
+    "assetId": "atlas-stem-vascular-source-sink-integration-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-whole-plant-source-sink-network",
+    "path": null,
+    "altText": "Interactive whole-plant source-sink network connecting exporting leaves with growing shoots, roots, flowers, and developing seeds through changing phloem allocation pathways.",
+    "productionBrief": "Create a whole-plant source-sink map in which mature exporting leaves connect through phloem to multiple simultaneous sinks such as expanding shoots, roots, flowers, and developing seeds. Show that sink strength and allocation change with development and local demand; do not depict phloem as a single gravity-driven downward pipe or claim fixed allocation percentages."
+  },
+  {
+    "key": "nodes-branching__branch-angle-and-mechanical-support",
+    "assetId": "atlas-nodes-branching-branch-angle-and-mechanical-support-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-branch-biomechanics-diagram",
+    "path": null,
+    "altText": "Interactive cannabis branch-junction biomechanics diagram relating attachment geometry, diameter, leverage, supported mass, tissue condition, movement, and external support.",
+    "productionBrief": "Create a cannabis branch-junction mechanics visual showing how attachment geometry, branch diameter, lever arm length, supported biomass, tissue condition, movement, and external support interact. Use general branch-junction biomechanics conceptually where Cannabis-specific strength data are unavailable. Do not convert one branch angle into a universal strength score."
+  },
+  {
+    "key": "leaves__leaf-temperature-and-energy-balance",
+    "assetId": "atlas-leaves-leaf-temperature-and-energy-balance-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-leaf-energy-balance",
+    "path": null,
+    "altText": "Interactive cannabis leaf energy-balance diagram connecting absorbed radiation, convection, airflow, stomatal behavior, transpiration, and the resulting difference between leaf and air temperature.",
+    "productionBrief": "Create a leaf-scale energy-balance visual with absorbed shortwave and longwave radiation, convective exchange, local airflow and boundary layer, stomatal behavior, and evaporative cooling. Make leaf temperature an outcome of interacting energy and water fluxes rather than assuming it equals air temperature or follows one universal offset."
+  },
+  {
+    "key": "flowers__photoperiod-sensing-and-floral-transition",
+    "assetId": "atlas-flowers-photoperiod-sensing-and-floral-transition-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-photoperiod-to-architecture-timeline",
+    "path": null,
+    "altText": "Interactive cannabis photoperiod timeline connecting daylength and nightlength sensing with shoot-apex reorganization, reproductive branching, internode change, and later visible floral development.",
+    "productionBrief": "Create a scientifically cautious timeline separating photoperiod sensing from later visible flower formation. Show adult shoot-apex reorganization, changing branch order, internode compression, and emerging reproductive structures under inductive conditions while keeping genotype and developmental-state dependence explicit. Do not portray flowering as an instantaneous on/off switch at one universal hour threshold."
+  },
+  {
+    "key": "trichomes-resin__secretory-disk-and-storage-cavity",
+    "assetId": "atlas-trichomes-resin-secretory-disk-and-storage-cavity-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-secretory-disk-cutaway",
+    "path": null,
+    "altText": "Interactive glandular trichome cutaway showing secretory disk cells, cuticle, subcuticular extracellular storage cavity, stipe, stalk, and surrounding epidermal tissue.",
+    "productionBrief": "Create a high-detail capitate-stalked trichome cutaway that clearly separates living secretory disk cells from the extracellular subcuticular storage cavity beneath the cuticle. Include the stipe, multicellular stalk, and epidermal context. Avoid drawing stored resin as if it fills secretory cells or presenting unresolved metabolite-export mechanisms as settled fact."
+  },
+  {
+    "key": "sex-pollen-seed__fertilization-and-seed-filling",
+    "assetId": "atlas-sex-pollen-seed-fertilization-and-seed-filling-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-fertilization-and-seed-filling-sequence",
+    "path": null,
+    "altText": "Interactive cannabis reproductive sequence separating pollen contact, pollen-tube growth, fertilization, embryo development, reserve accumulation, seed-coat maturation, and physical seed maturity.",
+    "productionBrief": "Create a flower-to-seed developmental sequence that clearly separates pollination from successful fertilization, then follows embryo formation, reserve accumulation, seed-coat differentiation, filling, and physical maturity. Keep surrounding bract and ovary relationships botanically plausible and do not imply that external seed appearance alone proves viability."
+  },
+  {
+    "key": "environment-overlay__leaf-temperature-vs-air-temperature",
+    "assetId": "atlas-environment-overlay-leaf-temperature-vs-air-temperature-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-leaf-air-temperature-comparison",
+    "path": null,
+    "altText": "Interactive comparison of cannabis leaf and air temperature linked to radiation, airflow, transpiration, humidity, and the vapor-pressure gradient at the leaf surface.",
+    "productionBrief": "Create a paired leaf-versus-air temperature visual using consistent measurement context. Connect the temperature difference to absorbed radiation, convection, airflow, stomatal conductance, transpiration, and humidity-derived vapor pressure. Avoid a universal leaf-air offset and make sensor placement and measurement method part of the teaching context."
+  },
+  {
+    "key": "diagnostic-overlay__genotype-environment-context",
+    "assetId": "atlas-diagnostic-overlay-genotype-environment-context-v0",
+    "status": "review",
+    "version": 0,
+    "assetType": "interactive-genotype-environment-diagnostic-matrix",
+    "path": null,
+    "altText": "Interactive diagnostic matrix comparing cultivar baseline, developmental stage, repeated plant observations, environmental conditions, and emerging symptom patterns before assigning a disorder.",
+    "productionBrief": "Create a genotype-by-environment diagnostic comparison that distinguishes stable cultivar or developmental traits from newly emerging stress or disease patterns. Use repeated plants, developmental stage, environment history, and within-cultivar comparison as evidence layers. Do not treat unusual morphology by itself as proof of deficiency, toxicity, pest, or pathogen."
+  }
+]

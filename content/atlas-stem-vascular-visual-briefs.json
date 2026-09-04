@@ -1,0 +1,26 @@
+[
+  {
+    "route": "/learn/atlas/stem-vascular/vascular-cambium-and-secondary-growth",
+    "title": "Vascular cambium & secondary growth",
+    "assetType": "Scientific stem-development cutaway",
+    "brief": "Create a Cannabis stem cross-section sequence from younger primary organization toward secondary thickening. Show the vascular cambium as a lateral meristem producing secondary xylem inward and secondary phloem outward, with tissue age and maturation changing along the stem. Keep proportions study- and developmental-stage dependent rather than drawing one universal ring pattern for every Cannabis stem."
+  },
+  {
+    "route": "/learn/atlas/stem-vascular/bast-fibers-and-structural-support",
+    "title": "Bast fibers & structural support",
+    "assetType": "Scientific support-tissue cutaway",
+    "brief": "Create a realistic Cannabis/hemp stem cutaway locating cellulose-rich bast fiber bundles toward the stem periphery and the more lignified xylem-rich inner core. Connect tissue position, wall composition, maturation, and load-bearing function without reducing the stem to an exaggerated single fiber ring or implying identical fiber organization at every age and internode."
+  },
+  {
+    "route": "/learn/atlas/stem-vascular/cohesion-tension-and-water-potential",
+    "title": "Cohesion-tension & water potential",
+    "assetType": "Whole-plant hydraulic gradient diagram",
+    "brief": "Create a soil-root-stem-leaf water-potential gradient showing water entering roots, moving through xylem conduits under tension, and exiting through transpiring leaves. Use arrows, pressure/tension cues, and a continuous water-column concept while making clear that the stem does not actively pump water. Avoid invented Cannabis-specific pressure thresholds or universal transpiration rates."
+  },
+  {
+    "route": "/learn/atlas/stem-vascular/hydraulic-disruption-and-embolism",
+    "title": "Hydraulic disruption & embolism",
+    "assetType": "Comparative xylem-function diagram",
+    "brief": "Create a side-by-side xylem conduit comparison showing functional water-filled pathways versus gas-filled or physically disrupted conduits and the resulting reduction in hydraulic continuity. Include drought-associated tension, wounding, and freeze-thaw only as general mechanisms where relevant; do not assign unsupported Cannabis cultivar cavitation thresholds or imply every wilt is embolism."
+  }
+]

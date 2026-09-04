@@ -6,11 +6,16 @@ The Atlas treats lesson visuals as replaceable, versioned teaching surfaces inst
 
 - `content/atlas-learning-modules.json` defines the canonical **100 lesson slots** across 10 Atlas systems and each lesson's visual requirement.
 - `lib/atlas-assets.ts` derives one asset record for every lesson automatically.
-- `lib/atlas-asset-manifests.ts` combines the hand-authored asset override manifests.
+- `lib/atlas-asset-manifests.ts` combines the explicit interactive/media override manifests.
+- `lib/atlas-visual-brief-manifests.ts` normalizes the lesson-specific production-brief manifests for lessons that still use the study-map teaching fallback.
 - `components/atlas/AtlasAssetSlot.tsx` resolves each lesson to its best available teaching surface.
-- Production image/media files live under `public/atlas/...` and are referenced with root-relative paths such as `/atlas/roots/root-architecture-v1.webp`.
+- When approved static lesson media begins shipping, files belong under `public/atlas/<system>/` and are referenced with root-relative paths such as `/atlas/roots/root-architecture-v1.webp`. The `public/atlas/` lesson-media directory is not currently populated because no lesson production-media record is yet `ready` with a shipped path.
 
-A new lesson automatically receives an asset slot even when no override has been written yet. It must not render as an empty box or expose an internal production prompt to learners.
+The current production-metadata contract covers all 100 lessons explicitly: **60 specialized/code-native visual slots are represented by override records and 40 remaining lesson slots have detailed `brief_ready` production metadata. There are zero unplanned `needed` slots.** A future lesson must add its production metadata as part of the same change rather than silently relying on a generic placeholder record.
+
+### Legacy image-placement planning map
+
+`configuration/image-placement-map.csv` is **planning-only and non-authoritative**. Its historical `*_001` asset IDs, page-placement ideas, priorities, and `needed` statuses are not the current production asset state and must never override the canonical lesson registry. Production state comes from `content/atlas-learning-modules.json`, the `content/atlas-asset-overrides*.json` manifests, and the `content/atlas-*-visual-briefs.json` production briefs. The legacy placement map must not reuse canonical production asset IDs.
 
 ## Learner-facing rendering contract
 
@@ -22,31 +27,32 @@ Visual availability and production-media status are related but separate concern
 
 The public lesson page must never use the internal `productionBrief` as the primary learner-facing visual. Production briefs are planning metadata for asset authors and reviewers.
 
-At the current implementation level, 60 lesson IDs resolve to specialized code-native visuals, while the remaining lessons retain the system study-map fallback until more specialized media or interactive visuals are approved.
+At the current implementation level, 60 lesson IDs resolve to specialized code-native visuals, while the remaining 40 lessons retain the system study-map fallback until more specialized media or interactive visuals are approved.
 
 ## Statuses
 
 These statuses describe the **production media pipeline**, not whether the lesson page is usable:
 
-- `needed` — visual requirement exists but has no custom production brief yet.
-- `brief_ready` — production brief, alt text, asset ID, and version are ready.
+- `needed` — reserved for a newly introduced visual requirement that has not yet received production metadata; the canonical 100-lesson Atlas currently permits zero such slots.
+- `brief_ready` — production brief, derived or explicit alt text, stable asset ID/version, and intended asset type are ready; current study-map lessons use this state while premium media is produced.
 - `in_production` — external or static production media is being created or revised.
 - `review` — the planned production asset or code-native teaching implementation is awaiting scientific/visual QA or replacement-media review.
 - `ready` — approved production media. A `ready` record must include a real path under `public/`.
 
-A lesson in `needed`, `brief_ready`, `in_production`, or `review` state can still have a complete code-native teaching visual. Do not infer learner-facing completeness from media-production status alone.
+A lesson in `brief_ready`, `in_production`, or `review` state can still have a complete learner-facing visual. Do not infer learner-facing completeness from media-production status alone.
 
 ## Replacing or upgrading a visual
 
 1. Keep the lesson URL and registry key stable.
 2. Create the specialized interactive visual or production media.
 3. For production files, add the file under `public/atlas/<system>/`.
-4. Update or add the lesson entry in the appropriate `content/atlas-asset-overrides*.json` manifest.
-5. Increase `version` when replacing an approved production asset.
-6. Set accurate `altText`, `productionBrief`, `assetType`, and status; set `path` only for a real shipped file.
-7. Confirm `AtlasAssetSlot` resolves the lesson to the intended teaching surface.
-8. Run `npm run verify` and the Atlas browser tests.
-9. Merge only after CI passes.
+4. If the lesson has an explicit interactive/media override, update the appropriate `content/atlas-asset-overrides*.json` record.
+5. If the lesson is still in the study-map production lane, update its system `*-visual-briefs.json` record until a real override/media asset replaces it.
+6. Increase `version` when replacing an approved production asset.
+7. Set accurate `altText`, `productionBrief`, `assetType`, and status; set `path` only for a real shipped file.
+8. Confirm `AtlasAssetSlot` resolves the lesson to the intended teaching surface.
+9. Run `npm run verify` and the Atlas browser tests.
+10. Merge only after CI passes.
 
 The lesson page consumes the registry, so ordinary media replacement does not require a page-route rewrite.
 
@@ -54,14 +60,19 @@ The lesson page consumes the registry, so ordinary media replacement does not re
 
 `npm run verify:atlas-assets` fails when:
 
-- an override references a lesson that does not exist;
-- duplicate override keys or asset IDs are present;
+- an override or production brief references a lesson that does not exist;
+- duplicate override keys, asset IDs, or visual-brief routes are present;
+- a lesson is represented by both an explicit override and a brief-only record;
+- a runtime manifest forgets to import a discovered override/brief file;
+- the production inventory drifts from the current **60 explicit records + 40 detailed brief-ready records = 100 lessons** contract;
+- any canonical lesson lacks lesson-specific production metadata;
 - a `ready` asset has no path;
 - a referenced asset file is missing from `public/`;
 - alt text or a production brief is missing;
-- the canonical lesson count drifts away from the Atlas completion contract.
+- the canonical lesson count drifts away from the Atlas completion contract;
+- the legacy `configuration/image-placement-map.csv` drifts from its planning-only schema or reuses a canonical production asset ID.
 
-The full `npm run verify` path also validates the 100-lesson curriculum, Atlas runtime, model candidates, photorealism gate, guided paths, knowledge checks, mastery, diagnostics, system connections, visual identification, TypeScript, lint, and production build.
+The full `npm run verify` path also validates the 100-lesson curriculum, Atlas runtime, model candidates, six-specimen acquisition queue, photorealism gate, guided paths, knowledge checks, mastery, diagnostics, system connections, visual identification, TypeScript, lint, and production build.
 
 ## 3D specimen release is a separate hard gate
 
@@ -75,6 +86,8 @@ Required production specimens are:
 - male;
 - female;
 - hermaphrodite / intersex.
+
+`content/atlas-specimen-acquisition.json` is the audited acquisition/build queue for those six slots. A source lead is **not** a released asset: every binary must still pass rights/provenance review, GLB inspection, botanical QA, semantic mapping, desktop/mobile budgets, and browser QA before a release slot can change from `pending`.
 
 Do not substitute one generic cannabis mesh for those growth-stage and reproductive-phenotype requirements. Licensing, provenance, botanical plausibility, browser performance, and the photorealism review must all be documented before enabling the production model manifest.
 

@@ -1,28 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02",
+  "updatedAt": "2026-09-03",
   "purpose": "Track unreleased THC Living Plant Atlas 3D specimen candidates outside the public runtime until rights, geometry, botanical review, anatomy mapping, and browser-performance gates are complete.",
   "performanceBudget": {
-    "desktop": {
-      "maxTriangles": 250000,
-      "maxGlbBytes": 20000000,
-      "maxTextureEdge": 4096
-    },
-    "mobile": {
-      "maxTriangles": 90000,
-      "maxGlbBytes": 10000000,
-      "maxTextureEdge": 2048
-    }
+    "desktop": {"maxTriangles": 250000, "maxGlbBytes": 20000000, "maxTextureEdge": 4096},
+    "mobile": {"maxTriangles": 90000, "maxGlbBytes": 10000000, "maxTextureEdge": 2048}
   },
-  "requiredSemanticEntities": [
-    "root_system",
-    "stem_vascular",
-    "nodes_branching",
-    "leaves",
-    "flowers",
-    "trichomes_resin",
-    "sex_pollen_seed"
-  ],
+  "requiredSemanticEntities": ["root_system", "stem_vascular", "nodes_branching", "leaves", "flowers", "trichomes_resin", "sex_pollen_seed"],
   "candidates": [
     {
       "id": "meshy-cannabis-terracotta-019cfb59",
@@ -34,8 +18,8 @@
         "provider": "Meshy",
         "url": "https://www.meshy.ai/3d-models/Cannabis-Plant-in-a-Terracotta-Pot-v2-019cfb59-980b-741d-a499-6fed91f57f2f",
         "assetId": "019cfb59-980b-741d-a499-6fed91f57f2f",
-        "listingReviewedAt": "2026-09-02",
-        "listingNotes": "Public Meshy gallery listing identifies this pre-made model as CC0. Meshy gallery documentation states pre-made gallery assets are CC0 and lists GLB among supported download formats."
+        "listingReviewedAt": "2026-09-03",
+        "listingNotes": "Current public Meshy gallery listing identifies this pre-made model as CC0. Meshy gallery licensing currently states pre-made gallery assets are CC0 and lists GLB among supported download formats."
       },
       "rights": {
         "state": "verified-for-public-web",
@@ -48,13 +32,7 @@
         "modificationApproved": true,
         "redistributionApproved": true
       },
-      "sourceReportedGeometry": {
-        "triangles": null,
-        "vertices": null,
-        "meshes": null,
-        "textures": "PBR textures are supported by Meshy gallery GLB downloads",
-        "potSeparate": null
-      },
+      "sourceReportedGeometry": {"triangles": null, "vertices": null, "meshes": null, "textures": "PBR textures are supported by Meshy gallery GLB downloads", "potSeparate": null},
       "acquisition": {
         "state": "not-ingested",
         "localCandidatePath": null,
@@ -90,27 +68,21 @@
         "provider": "Sketchfab",
         "url": "https://sketchfab.com/3d-models/cannabis-sativa-plant-ea31a5768c06457ea2fd67c3eb3458b8",
         "publishedDate": "2023-05-04",
-        "listingReviewedAt": "2026-09-02",
-        "listingNotes": "Listing describes a detailed, fully textured realistic plant. Bucket and plant are separate objects."
+        "listingReviewedAt": "2026-09-03",
+        "listingNotes": "Current listing describes a detailed fully textured plant, reports 40.8k triangles / 27.5k vertices, and states that bucket and plant are separate objects."
       },
       "rights": {
         "state": "listing-indicates-attribution-license",
         "licenseLabel": "Creative Commons Attribution",
         "licenseVersion": null,
-        "rightsBasis": "The public Sketchfab listing states CC Attribution. The exact license version and downloaded-package license must still be preserved and verified during ingest before public redistribution.",
+        "rightsBasis": "The public Sketchfab listing currently states CC Attribution. The exact license version and downloaded-package license must still be preserved and verified during ingest before public redistribution.",
         "attributionRequired": true,
         "attributionText": "Cannabis Sativa plant by Zbrojmistrz via Sketchfab — Creative Commons Attribution; exact version to be confirmed from the acquired package.",
         "publicWebsiteUseApproved": false,
         "modificationApproved": false,
         "redistributionApproved": false
       },
-      "sourceReportedGeometry": {
-        "triangles": 40800,
-        "vertices": 27500,
-        "meshes": null,
-        "textures": "fully textured",
-        "potSeparate": true
-      },
+      "sourceReportedGeometry": {"triangles": 40800, "vertices": 27500, "meshes": null, "textures": "fully textured", "potSeparate": true},
       "acquisition": {
         "state": "not-ingested",
         "localCandidatePath": null,
@@ -146,8 +118,8 @@
         "provider": "A23D",
         "url": "https://www.a23d.co/3dmodel/cannabisplant-002707A",
         "assetId": "002707A",
-        "listingReviewedAt": "2026-09-02",
-        "listingNotes": "Human-made commercial reference with GLTF availability, PBR metallic/roughness materials, two meshes, and 4K/2K/1K texture options."
+        "listingReviewedAt": "2026-09-03",
+        "listingNotes": "Current human-made commercial listing reports GLTF availability, PBR metallic/roughness materials, 2 meshes, 859344 vertices, 418384 faces, 2 materials, and 4K/2K/1K texture options."
       },
       "rights": {
         "state": "commercial-license-required",
@@ -160,15 +132,7 @@
         "modificationApproved": false,
         "redistributionApproved": false
       },
-      "sourceReportedGeometry": {
-        "triangles": null,
-        "vertices": 859344,
-        "faces": 418384,
-        "meshes": 2,
-        "materials": 2,
-        "textureSizes": [4096, 2048, 1024],
-        "pbrWorkflow": "metallic-roughness"
-      },
+      "sourceReportedGeometry": {"triangles": null, "vertices": 859344, "faces": 418384, "meshes": 2, "materials": 2, "textureSizes": [4096, 2048, 1024], "pbrWorkflow": "metallic-roughness"},
       "acquisition": {
         "state": "not-ingested",
         "localCandidatePath": null,
