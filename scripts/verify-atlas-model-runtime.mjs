@@ -19,6 +19,10 @@ function requireText(haystack, needle, label) {
   if (!haystack.includes(needle)) throw new Error(`${label} is missing required marker: ${needle}`);
 }
 
+function rejectText(haystack, needle, label) {
+  if (haystack.includes(needle)) throw new Error(`${label} contains forbidden marker: ${needle}`);
+}
+
 function safeModelPath(value, label) {
   if (typeof value !== "string" || !value.startsWith("./") || !value.toLowerCase().endsWith(".glb") || value.includes("..")) {
     throw new Error(`${label} must be a safe relative .glb path.`);
@@ -40,7 +44,22 @@ for (const [needle, label] of [
   ["startProductionAtlasRuntime", "Atlas runtime bootstrap"],
   ["startAtlasRuntime", "Atlas procedural fallback"],
   ["data-atlas-model-state", "Atlas model-state contract"],
+  ["async function loadRuntimeModules()", "Atlas recoverable module loader"],
+  ["import(\"three\")", "Atlas recoverable Three.js loader"],
+  ["Promise.all([", "Atlas recoverable module loader"],
+  ["announceRuntimeError", "Atlas bootstrap error surface"],
+  ["module-load-failed", "Atlas module-load fallback contract"],
+  ["boot-failed", "Atlas boot fallback contract"],
+  ["atlas:runtime-error", "Atlas parent error contract"],
+  ["dataset.atlasModelState = \"unavailable\"", "Atlas unavailable-state contract"],
+  ["The accessible Atlas navigation remains active.", "Atlas accessible runtime fallback"],
 ]) requireText(index, needle, label);
+
+for (const [needle, label] of [
+  ["import * as THREE from \"three\";", "Atlas runtime bootstrap"],
+  ["import { OrbitControls } from \"three/addons/controls/OrbitControls.js\";", "Atlas runtime bootstrap"],
+  ["import { GLTFLoader } from \"three/addons/loaders/GLTFLoader.js\";", "Atlas runtime bootstrap"],
+]) rejectText(index, needle, label);
 
 for (const [needle, label] of [
   ["model-manifest.json", "production manifest loader"],
@@ -122,4 +141,4 @@ if (manifest.available) {
   requireText(provenance, "No photorealistic production specimen set is released", "unreleased model provenance");
 }
 
-console.log(`Atlas production model pipeline verified (released=${manifest.available}, model=${manifest.modelVersion || "unversioned"}, variants=${variantPaths.size || 0}).`);
+console.log(`Atlas production model pipeline verified (released=${manifest.available}, model=${manifest.modelVersion || "unversioned"}, variants=${variantPaths.size || 0}, recoverableModuleLoad=true).`);

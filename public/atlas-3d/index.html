@@ -23,19 +23,27 @@
       position: absolute;
       inset: 50% auto auto 50%;
       transform: translate(-50%, -50%);
+      max-width: min(420px, calc(100% - 32px));
       padding: .62rem .86rem;
       border: 1px solid rgba(184, 207, 128, .18);
       border-radius: 999px;
       background: rgba(5, 12, 8, .72);
-      color: rgba(232, 239, 212, .7);
+      color: rgba(232, 239, 212, .78);
       font-size: 11px;
       font-weight: 650;
+      line-height: 1.4;
       letter-spacing: .055em;
+      text-align: center;
       backdrop-filter: blur(14px);
       box-shadow: 0 12px 34px rgba(0, 0, 0, .2);
       pointer-events: none;
     }
     #runtime-status[hidden] { display: none; }
+    #runtime-status[data-state="error"] {
+      border-color: rgba(222, 139, 112, .42);
+      color: rgba(255, 224, 213, .94);
+      border-radius: 12px;
+    }
     #runtime-legend {
       position: absolute;
       left: 14px;
@@ -69,6 +77,7 @@
         padding: .42rem .52rem;
         font-size: 9px;
       }
+      #runtime-status { font-size: 10px; }
     }
     @media (prefers-reduced-motion: reduce) {
       #runtime-status, #runtime-legend { backdrop-filter: none; }
@@ -88,19 +97,51 @@
   <div id="runtime-status" role="status">Initializing 3D anatomy…</div>
   <div id="runtime-legend" aria-live="polite">Overview · drag to orbit · pinch or wheel to zoom · tap a plant structure to inspect it.</div>
   <script type="module">
-    import * as THREE from "three";
-    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-    import { startProductionAtlasRuntime } from "./atlas-production-model.js";
-    import { startAtlasRuntime } from "./atlas-runtime.js";
-
     const parentOrigin = window.location.origin;
+    const status = document.getElementById("runtime-status");
 
     function announceReady(modelState) {
       window.parent.postMessage({ type: "atlas:ready", renderer: "three", version: "0.185.1", modelState }, parentOrigin);
     }
 
+    function announceRuntimeError(error, reason = "runtime-unavailable") {
+      const message = error instanceof Error ? error.message : String(error);
+      document.documentElement.dataset.atlasModelState = "unavailable";
+      if (status) {
+        status.hidden = false;
+        status.dataset.state = "error";
+        status.textContent = "3D runtime unavailable. The accessible Atlas navigation remains active.";
+      }
+      window.parent.postMessage({ type: "atlas:runtime-error", reason, message }, parentOrigin);
+    }
+
+    async function loadRuntimeModules() {
+      try {
+        const [THREE, controlsModule, loaderModule, productionModule, fallbackModule] = await Promise.all([
+          import("three"),
+          import("three/addons/controls/OrbitControls.js"),
+          import("three/addons/loaders/GLTFLoader.js"),
+          import("./atlas-production-model.js"),
+          import("./atlas-runtime.js"),
+        ]);
+        return {
+          THREE,
+          OrbitControls: controlsModule.OrbitControls,
+          GLTFLoader: loaderModule.GLTFLoader,
+          startProductionAtlasRuntime: productionModule.startProductionAtlasRuntime,
+          startAtlasRuntime: fallbackModule.startAtlasRuntime,
+        };
+      } catch (error) {
+        announceRuntimeError(error, "module-load-failed");
+        return null;
+      }
+    }
+
     async function boot() {
+      const modules = await loadRuntimeModules();
+      if (!modules) return;
+
+      const { THREE, OrbitControls, GLTFLoader, startProductionAtlasRuntime, startAtlasRuntime } = modules;
       let productionStarted = false;
       try {
         productionStarted = await startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoader);
@@ -124,12 +165,7 @@
       [150, 450, 900, 1600, 2600, 4000].forEach((delay) => window.setTimeout(() => announceReady(modelState), delay));
     }
 
-    boot().catch((error) => {
-      const status = document.getElementById("runtime-status");
-      status.hidden = false;
-      status.textContent = "3D runtime unavailable. The accessible Atlas fallback remains active.";
-      window.parent.postMessage({ type: "atlas:runtime-error", message: error instanceof Error ? error.message : String(error) }, parentOrigin);
-    });
+    boot().catch((error) => announceRuntimeError(error, "boot-failed"));
   </script>
 </body>
 </html>
