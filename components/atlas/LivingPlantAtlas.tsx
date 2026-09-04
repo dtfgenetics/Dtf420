@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
 import atlasSections from "@/content/atlas-sections.json";
 import learningModules from "@/content/atlas-learning-modules.json";
@@ -53,6 +53,8 @@ export function LivingPlantAtlas() {
   const [panelTab, setPanelTab] = useState<PanelTab>("info");
   const [lightOn, setLightOn] = useState(true);
   const [inspectorOpen, setInspectorOpen] = useState(true);
+  const inspectorRef = useRef<HTMLElement>(null);
+  const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
   const { progress } = useAtlasProgress();
   const { mastery } = useAtlasMastery();
 
@@ -80,12 +82,22 @@ export function LivingPlantAtlas() {
     return state === "mastered" ? "Mastered" : `${completed}/${routes.length} · ${stateLabel(state)}`;
   }
 
+  function revealSelectedInfo() {
+    window.requestAnimationFrame(() => {
+      inspectorHeadingRef.current?.focus({ preventScroll: true });
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        inspectorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
   function selectEntity(id: string) {
     setSelectedId(id);
     setPanelTab("info");
     setInspectorOpen(true);
     if (id === "environment_overlay") setLayer("environment");
     if (id === "diagnostic_overlay") setLayer("diagnostics");
+    revealSelectedInfo();
   }
 
   function changeLayer(nextLayer: AtlasLayer) {
@@ -154,6 +166,8 @@ export function LivingPlantAtlas() {
         </main>
 
         <aside
+          ref={inspectorRef}
+          id="atlas-inspector"
           className={`${styles.inspector} ${referenceStyles.inspectorShell}`}
           aria-live="polite"
           aria-label={`Learn about ${selectedEntity.label}`}
@@ -184,7 +198,7 @@ export function LivingPlantAtlas() {
             <header className={styles.inspectorHeader}>
               <div>
                 <p>{selectedEntity.systemLabel}</p>
-                <h2>{selectedEntity.label}</h2>
+                <h2 ref={inspectorHeadingRef} tabIndex={-1}>{selectedEntity.label}</h2>
                 <span className={styles.inspectorState}>{stateLabel(selectedState)} · {selectedCompleted}/{selectedRoutes.length} lessons</span>
               </div>
               <button type="button" onClick={() => setInspectorOpen(false)} aria-label="Collapse information panel">×</button>
@@ -203,7 +217,7 @@ export function LivingPlantAtlas() {
                 </section>
                 <section className={styles.learnMore}>
                   <h3>Continue exploring</h3>
-                  <Link href={sectionRoute(selectedSection)}>Open {selectedEntity.systemLabel}</Link>
+                  <Link href={sectionRoute(selectedSection)}>Learn more about {selectedEntity.label}</Link>
                   {selectedNextRoute ? <Link href={selectedNextRoute}>{selectedCompleted === selectedRoutes.length ? "Review next lesson" : "Continue learning"}</Link> : null}
                   <Link href="/learn/atlas/paths">Guided learning paths</Link>
                 </section>
