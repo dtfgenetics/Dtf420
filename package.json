@@ -22,6 +22,7 @@
     "assets:thc:import": "node scripts/import-thc-project-images.mjs",
     "assets:thc:verify": "node scripts/import-thc-project-images.mjs --verify-only",
     "inspect:atlas-glb": "node scripts/inspect-atlas-glb.mjs",
+    "stage:atlas-model": "node scripts/stage-atlas-model-candidate.mjs",
     "verify:bud-or-bluff": "node scripts/verify-bud-or-bluff.mjs",
     "verify:burn-buds": "node scripts/verify-burn-buds.mjs",
     "verify:high-iq": "node scripts/verify-high-iq.mjs",
