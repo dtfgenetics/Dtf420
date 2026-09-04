@@ -27,6 +27,12 @@ async function expectThreeRuntime(app, page) {
   return runtime;
 }
 
+async function expectStructureLearningLink(inspector) {
+  const learningLink = inspector.getByRole("link").filter({ hasText: /Learn more about/i }).first();
+  await expect(learningLink).toBeVisible();
+  await expect(learningLink).toHaveAttribute("href", /\/learn\/atlas\//);
+}
+
 test("interactive Plant Atlas selects structures, expands learning info, switches 3D layers, and controls the live renderer", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Run immersive desktop workspace assertions in the desktop project.");
   const errors = watchRuntimeErrors(page);
@@ -61,7 +67,7 @@ test("interactive Plant Atlas selects structures, expands learning info, switche
   await expect(inspector).toHaveAttribute("data-inspector-open", "true");
   await expect(inspector.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeFocused();
   await expect(inspector.getByText(/Capture light/)).toBeVisible();
-  await expect(inspector.getByRole("link", { name: "Learn more about Fan Leaves", exact: true })).toBeVisible();
+  await expectStructureLearningLink(inspector);
 
   await inspector.getByRole("button", { name: "Collapse information panel", exact: true }).first().click();
   await expect(app).toHaveAttribute("data-inspector-open", "false");
@@ -128,7 +134,7 @@ test("interactive Plant Atlas reveals the expandable learning panel after a hots
   await expect(inspector).toHaveAttribute("data-inspector-open", "true");
   await expect(inspector).toBeInViewport();
   await expect(inspector.getByRole("heading", { name: "Fan Leaves", exact: true })).toBeFocused();
-  await expect(inspector.getByRole("link", { name: "Learn more about Fan Leaves", exact: true })).toBeVisible();
+  await expectStructureLearningLink(inspector);
 
   await expect(app.getByRole("tab", { name: "info", exact: true })).toBeVisible();
   await app.getByRole("tab", { name: "notes", exact: true }).click();
