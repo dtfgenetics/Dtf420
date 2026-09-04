@@ -11,6 +11,7 @@ import { useAtlasProgress } from "@/components/atlas/AtlasLearningProgress";
 import { useAtlasMastery } from "@/components/atlas/AtlasMastery";
 import styles from "./LivingPlantAtlas.module.css";
 import referenceStyles from "./LivingPlantAtlasReference.module.css";
+import conceptStyles from "./LivingPlantAtlasConcept.module.css";
 import progressStyles from "./LivingPlantAtlasProgress.module.css";
 
 type AtlasSection = (typeof atlasSections)[number];
@@ -129,18 +130,18 @@ export function LivingPlantAtlas() {
   return (
     <div className={`${styles.atlasShell} ${lightOn ? styles.lightOn : styles.lightOff}`}>
       <section
-        className={`${styles.appFrame} ${inspectorOpen ? referenceStyles.inspectorOpen : referenceStyles.inspectorClosed}`}
+        className={`${styles.appFrame} ${conceptStyles.appFrame} ${inspectorOpen ? referenceStyles.inspectorOpen : referenceStyles.inspectorClosed}`}
         aria-label="THC Living Plant Atlas interactive explorer"
         data-atlas-shell="premium-v2"
         data-inspector-open={inspectorOpen ? "true" : "false"}
       >
-        <aside className={styles.leftRail}>
+        <aside className={`${styles.leftRail} ${conceptStyles.leftRail}`}>
           <div className={styles.brandMark} aria-label="DTF Genetics Plant Atlas">
             <span aria-hidden="true">☘</span>
             <div><strong>DTF</strong><small>Genetics · Plant Atlas</small></div>
           </div>
 
-          <div className={styles.railPromise} aria-hidden="true">
+          <div className={conceptStyles.railPromise} aria-hidden="true">
             <b>Real plants</b><b>Real science</b><b>A safer tomorrow</b>
           </div>
 
@@ -160,24 +161,24 @@ export function LivingPlantAtlas() {
           <div className={styles.railFooter}>
             <button type="button" aria-pressed={lightOn} onClick={() => setLightOn((value) => !value)}><span>☼ Lighting</span><i>{lightOn ? "On" : "Off"}</i></button>
             <Link href="/learn/atlas/dashboard"><span>◫ Study dashboard</span><i>Open</i></Link>
-            <em>Dream the Future</em>
+            <em className={conceptStyles.dreamLine}>Dream the Future</em>
           </div>
         </aside>
 
-        <main className={styles.centerStage}>
-          <header className={styles.titleBlock}>
+        <main className={`${styles.centerStage} ${conceptStyles.centerStage}`}>
+          <header className={`${styles.titleBlock} ${conceptStyles.titleBlock}`}>
             <div>
               <p>Interactive cannabis anatomy</p>
               <span>Explore · Learn · Understand · Grow Better</span>
             </div>
-            <form className={styles.atlasSearch} onSubmit={searchAtlas} role="search">
-              <label className={styles.srOnly} htmlFor="atlas-search">Search the Atlas</label>
+            <form className={conceptStyles.atlasSearch} onSubmit={searchAtlas} role="search">
+              <label className={conceptStyles.srOnly} htmlFor="atlas-search">Search the Atlas</label>
               <input id="atlas-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the Atlas…" autoComplete="off" />
               <button type="submit" aria-label="Search the Atlas">⌕</button>
             </form>
           </header>
 
-          <div className={styles.stageReadout} aria-hidden="true"><span>{layer} layer</span><strong>{selectedEntity.label}</strong></div>
+          <div className={`${styles.stageReadout} ${conceptStyles.stageReadout}`} aria-hidden="true"><span>{layer} layer</span><strong>{selectedEntity.label}</strong></div>
 
           <AtlasInteractiveViewport
             selectedId={selectedId}
@@ -192,7 +193,7 @@ export function LivingPlantAtlas() {
         <aside
           ref={inspectorRef}
           id="atlas-inspector"
-          className={`${styles.inspector} ${referenceStyles.inspectorShell}`}
+          className={`${styles.inspector} ${conceptStyles.inspector} ${referenceStyles.inspectorShell}`}
           aria-live="polite"
           aria-label={`Learn about ${selectedEntity.label}`}
           data-atlas-inspector="responsive-sheet"
@@ -223,7 +224,7 @@ export function LivingPlantAtlas() {
               <div>
                 <p>Plant anatomy · {selectedEntity.systemLabel}</p>
                 <h2 ref={inspectorHeadingRef} tabIndex={-1}>{selectedEntity.label}</h2>
-                <span className={styles.inspectorSubtitle}>{selectedEntity.microTitle}</span>
+                <span className={conceptStyles.inspectorSubtitle}>{selectedEntity.microTitle}</span>
                 <span className={styles.inspectorState}>{stateLabel(selectedState)} · {selectedCompleted}/{selectedRoutes.length} lessons</span>
               </div>
               <button type="button" onClick={() => setInspectorOpen(false)} aria-label="Collapse information panel">×</button>
@@ -231,7 +232,7 @@ export function LivingPlantAtlas() {
 
             {panelTab === "info" ? (
               <>
-                <div className={styles.visualCard} data-entity={selectedEntity.id}>
+                <div className={`${styles.visualCard} ${conceptStyles.visualCard}`} data-entity={selectedEntity.id}>
                   <div className={styles.visualOrb} aria-hidden="true"><span>◎</span></div>
                   <div><small>Scientific detail preview</small><strong>{selectedSection.firstAsset}</strong><span>{selectedEntity.microTitle}</span></div>
                 </div>
@@ -240,7 +241,7 @@ export function LivingPlantAtlas() {
                   <h3>Key functions</h3>
                   <div className={styles.functionList}>{selectedEntity.keyFunctions.map((item) => <span key={item}><i>✓</i>{item}</span>)}</div>
                 </section>
-                <section className={styles.learnMore}>
+                <section className={`${styles.learnMore} ${conceptStyles.learnMore}`}>
                   <h3>Explore this structure</h3>
                   <button type="button" onClick={() => changeLayer("anatomy")}>Anatomy <small>Structure & cell types</small></button>
                   <button type="button" onClick={() => changeLayer("physiology")}>Physiology <small>Development & function</small></button>
