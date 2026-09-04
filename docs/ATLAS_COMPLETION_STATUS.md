@@ -39,6 +39,7 @@ A complete Atlas must satisfy all of these dimensions:
 
 - 60 lesson IDs currently resolve to specialized code-native interactive scientific visuals.
 - The remaining 40 lessons render a lesson-specific system study map rather than an empty state or internal production brief.
+- All 100 lessons now have explicit production metadata: the 60 specialized/code-native slots have explicit review records and the 40 study-map slots have detailed `brief_ready` production briefs. There are zero unplanned `needed` lesson assets.
 - Approved production images/media can replace or augment these teaching surfaces without changing the lesson route.
 - Internal production prompts, review labels, and asset workflow language must not appear as the learner's primary visual.
 
@@ -61,9 +62,12 @@ Photorealistic production 3D is **not** considered complete until six distinct s
 
 Each specimen must satisfy the documented licensing, provenance, geometry, botanical-realism, material, root/canopy, browser-performance, and review requirements. A single generic cannabis mesh cannot satisfy all six states.
 
+`content/atlas-specimen-acquisition.json` tracks audited acquisition leads and scientific references for those six slots. It is research and production-planning metadata only: it cannot populate a release slot or enable the production manifest by itself.
+
 Until those assets pass review:
 
-- `public/atlas-3d/models/model-manifest.json` must remain unavailable for production GLB release;
+- all six `content/atlas-specimen-set.json` release slots remain `pending`;
+- `public/atlas-3d/models/model-manifest.json` remains unavailable and its specimen set remains disabled;
 - the project-owned procedural Three.js specimen remains the resilient teaching runtime;
 - the public Atlas must not describe the procedural specimen as photorealistic.
 
@@ -74,9 +78,10 @@ The repository must remain fail-closed. The main `npm run verify` gate covers:
 - interactive Atlas structure;
 - production model runtime contract;
 - model candidate licensing/acquisition metadata;
+- audited six-specimen acquisition queue;
 - photorealism release criteria;
 - 100-lesson completion;
-- 100 lesson visual slots;
+- complete 60 + 40 production-asset metadata coverage;
 - all-lesson evidence coverage;
 - guided learning paths;
 - 100 knowledge checks;
