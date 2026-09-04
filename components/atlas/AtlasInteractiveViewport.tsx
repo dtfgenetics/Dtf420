@@ -294,6 +294,9 @@ export function AtlasInteractiveViewport({ selectedId, layer, onLayerChange, onS
             type="button"
             className={`${styles.hotspot} ${active ? styles.hotspotActive : ""}`}
             style={{ left: `${entity.hotspot.x}%`, top: `${entity.hotspot.y}%` }}
+            data-entity-id={entity.id}
+            data-label-side={entity.labelSide}
+            data-selected={active ? "true" : "false"}
             onClick={() => selectEntity(entity.id)}
             aria-pressed={active}
             aria-label={`${entity.label}. ${statusForEntity?.(entity.id) ?? entity.systemLabel}`}

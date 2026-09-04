@@ -1,0 +1,315 @@
+.inspectorOpen {
+  grid-template-columns: 220px minmax(0, 1fr) minmax(360px, 410px);
+  transition: grid-template-columns 220ms ease;
+}
+
+.inspectorClosed {
+  grid-template-columns: 220px minmax(0, 1fr) 60px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.inspectorOpen > :global([class*="centerStage"]) {
+  transform: translateX(-0.7%);
+  transition: transform 220ms ease;
+}
+
+.inspectorClosed > :global([class*="centerStage"]) {
+  transform: translateX(0);
+  transition: transform 220ms ease;
+}
+
+.inspectorShell {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 4%, rgba(159, 191, 91, 0.09), transparent 31%),
+    linear-gradient(180deg, rgba(8, 18, 12, 0.965), rgba(5, 12, 8, 0.985));
+  box-shadow: -18px 0 46px rgba(0, 0, 0, 0.24), inset 1px 0 rgba(214, 226, 165, 0.045);
+  backdrop-filter: blur(22px) saturate(1.04);
+  transition: width 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.inspectorShell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255,255,255,.022), transparent 32%);
+}
+
+.inspectorShell > :global([class*="inspectorBody"]) {
+  position: relative;
+  z-index: 1;
+  padding: 1.25rem 1.15rem 1.55rem;
+}
+
+.inspectorShell > :global([class*="inspectorTabs"]) {
+  position: relative;
+  z-index: 2;
+  width: 54px;
+  background: rgba(5, 12, 8, 0.54);
+  backdrop-filter: blur(18px);
+}
+
+.inspectorShell :global([class*="inspectorHeader"]) {
+  padding-bottom: .8rem;
+  border-bottom-color: rgba(213, 224, 167, .09);
+}
+
+.inspectorShell :global([class*="inspectorHeader"]) h2 {
+  letter-spacing: -.025em;
+  text-shadow: 0 8px 24px rgba(0,0,0,.32);
+}
+
+.inspectorShell :global([class*="visualCard"]) {
+  min-height: 184px;
+  grid-template-columns: 1fr;
+  align-content: end;
+  overflow: hidden;
+  padding: 1rem;
+  border-color: rgba(193, 213, 129, .16);
+  background:
+    radial-gradient(circle at 38% 28%, rgba(153, 186, 92, .18), transparent 27%),
+    radial-gradient(circle at 64% 42%, rgba(67, 105, 64, .22), transparent 37%),
+    linear-gradient(145deg, rgba(22, 38, 25, .9), rgba(7, 15, 10, .96));
+  box-shadow: inset 0 1px rgba(255,255,255,.025), 0 14px 34px rgba(0,0,0,.16);
+}
+
+.inspectorShell :global([class*="visualOrb"]) {
+  width: 98px;
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  opacity: .62;
+  border-color: rgba(190, 220, 111, .22);
+  background: radial-gradient(circle, rgba(182, 213, 103, .11), rgba(12, 25, 14, .2) 64%, transparent 65%);
+  box-shadow: 0 0 38px rgba(161, 204, 89, .09);
+}
+
+.inspectorShell :global([class*="visualCard"]) > div:last-child {
+  position: relative;
+  z-index: 2;
+  max-width: 78%;
+}
+
+.inspectorShell :global([class*="summary"]) {
+  color: rgba(231, 232, 207, .7);
+  font-size: .76rem;
+  line-height: 1.62;
+}
+
+.inspectorShell :global([class*="functionList"]) span {
+  min-height: 38px;
+  padding: .52rem .2rem;
+  border-bottom: 1px solid rgba(226, 232, 190, .055);
+}
+
+.inspectorShell :global([class*="learnMore"]) a {
+  position: relative;
+  padding-right: 2rem;
+}
+
+.inspectorShell :global([class*="learnMore"]) a::after {
+  content: "›";
+  position: absolute;
+  right: .72rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(197, 220, 128, .72);
+  font-size: 1rem;
+}
+
+.inspectorOpen :global(button[data-label-side]) {
+  max-width: 208px;
+}
+
+.inspectorOpen :global(button[data-label-side] > span) {
+  min-width: 112px;
+  padding: .22rem .1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,.72);
+}
+
+.inspectorOpen :global(button[data-label-side]::before) {
+  width: 48px;
+  opacity: .8;
+}
+
+.inspectorOpen :global(button[data-label-side="left"]) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.inspectorOpen :global(button[data-label-side="left"]::before) {
+  left: auto;
+  right: 10px;
+  transform: translateX(-3px);
+  background: linear-gradient(270deg, rgba(181,217,99,.68), rgba(181,217,99,.08));
+}
+
+.inspectorOpen :global(button[data-label-side="left"] > span) {
+  margin-left: 0;
+  margin-right: 40px;
+}
+
+.inspectorOpen :global(button[data-label-side="right"] > span) {
+  margin-left: 40px;
+}
+
+.inspectorOpen :global(button[data-selected="true"] > span) {
+  padding: .42rem .58rem;
+  border: 1px solid rgba(196, 225, 111, .28);
+  border-radius: 9px;
+  background: rgba(8, 18, 11, .82);
+  box-shadow: 0 7px 28px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.018);
+  backdrop-filter: blur(14px);
+}
+
+.inspectorOpen :global(button[data-selected="true"]::before) {
+  width: 58px;
+  opacity: 1;
+}
+
+.inspectorOpen :global(button[data-label-side] strong) {
+  font-size: .66rem;
+  letter-spacing: .055em;
+}
+
+.inspectorOpen :global(button[data-label-side] small) {
+  max-width: 146px;
+  color: rgba(230,235,206,.52);
+}
+
+.inspectorClosed .inspectorShell {
+  grid-template-columns: 60px;
+  box-shadow: -8px 0 28px rgba(0, 0, 0, 0.16);
+}
+
+.inspectorClosed .inspectorShell > :global([class*="inspectorBody"]) {
+  display: none;
+}
+
+.inspectorClosed .inspectorShell > :global([class*="inspectorTabs"]) {
+  grid-column: 1;
+  width: 60px;
+}
+
+.inspectorToggle {
+  min-height: 64px !important;
+  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+  background: linear-gradient(180deg, rgba(141,177,76,.13), rgba(92,127,52,.07)) !important;
+}
+
+.inspectorToggle:hover,
+.inspectorToggle:focus-visible {
+  background: rgba(143, 180, 77, .19) !important;
+}
+
+.inspectorToggle i {
+  font-size: 1.12rem !important;
+}
+
+.inspectorToggle span {
+  font-size: .48rem !important;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1180px) {
+  .inspectorOpen {
+    grid-template-columns: 178px minmax(0, 1fr) minmax(330px, 370px);
+  }
+
+  .inspectorClosed {
+    grid-template-columns: 178px minmax(0, 1fr) 58px;
+  }
+
+  .inspectorShell > :global([class*="inspectorTabs"]) {
+    width: 52px;
+  }
+
+  .inspectorOpen :global(button[data-label-side] > span) {
+    min-width: 96px;
+  }
+
+  .inspectorOpen :global(button[data-label-side]::before) {
+    width: 34px;
+  }
+
+  .inspectorOpen :global(button[data-label-side="left"] > span) {
+    margin-right: 29px;
+  }
+
+  .inspectorOpen :global(button[data-label-side="right"] > span) {
+    margin-left: 29px;
+  }
+}
+
+@media (max-width: 900px) {
+  .inspectorOpen,
+  .inspectorClosed {
+    grid-template-columns: 1fr;
+  }
+
+  .inspectorOpen > :global([class*="centerStage"]),
+  .inspectorClosed > :global([class*="centerStage"]) {
+    transform: none;
+  }
+
+  .inspectorShell {
+    position: relative;
+    width: 100%;
+    max-height: 72vh;
+    border-left: 0;
+    border-top: 1px solid rgba(196,205,143,.16);
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -18px 44px rgba(0,0,0,.22);
+  }
+
+  .inspectorShell > :global([class*="inspectorTabs"]) {
+    width: 100%;
+  }
+
+  .inspectorClosed .inspectorShell {
+    grid-template-columns: repeat(5, minmax(0,1fr));
+    max-height: 72px;
+  }
+
+  .inspectorClosed .inspectorShell > :global([class*="inspectorTabs"]) {
+    grid-column: 1 / -1;
+    width: 100%;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(5, minmax(0,1fr));
+  }
+
+  .inspectorShell :global([class*="visualCard"]) {
+    min-height: 152px;
+  }
+
+  .inspectorOpen :global(button[data-label-side] > span),
+  .inspectorOpen :global(button[data-label-side]::before) {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .inspectorShell > :global([class*="inspectorBody"]) {
+    padding: 1rem .9rem 1.3rem;
+  }
+
+  .inspectorShell :global([class*="visualCard"]) > div:last-child {
+    max-width: 86%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inspectorOpen,
+  .inspectorClosed,
+  .inspectorOpen > :global([class*="centerStage"]),
+  .inspectorClosed > :global([class*="centerStage"]),
+  .inspectorShell {
+    transition: none;
+  }
+}
