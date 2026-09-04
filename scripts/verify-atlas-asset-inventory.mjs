@@ -87,6 +87,7 @@ if (slotSource.includes("Primary visual specification")) {
 }
 
 const visualCounts = { codeNative: 0, fileBacked: 0, detailedBrief: 0, studyMap: 0 };
+const genericStudyMapRoutes = [];
 for (const lesson of lessonRecords) {
   const override = overrideByKey.get(lesson.key);
   const assetId = override?.assetId || lesson.defaultAssetId;
@@ -97,11 +98,17 @@ for (const lesson of lessonRecords) {
   if (fileBacked) visualCounts.fileBacked += 1;
   else if (codeNative) visualCounts.codeNative += 1;
   else if (detailedBrief) visualCounts.detailedBrief += 1;
-  else visualCounts.studyMap += 1;
+  else {
+    visualCounts.studyMap += 1;
+    genericStudyMapRoutes.push(lesson.route);
+  }
 
   if (override?.status === "review" && !fileBacked && !codeNative) {
     errors.push(`Asset override is in review but has neither shipped media nor a wired code-native visual: ${assetId}`);
   }
+}
+if (genericStudyMapRoutes.length) {
+  errors.push(`Every Atlas lesson needs specialized media/code or a lesson-specific detailed brief. Generic-only study maps remain at: ${genericStudyMapRoutes.join(", ")}`);
 }
 
 const planningHeader = "asset_id,section,page_slug,asset_type,placement,description,style,priority,status";
