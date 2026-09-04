@@ -118,6 +118,70 @@
   font-size: 1rem;
 }
 
+.inspectorOpen :global(button[data-label-side]) {
+  max-width: 208px;
+}
+
+.inspectorOpen :global(button[data-label-side] > span) {
+  min-width: 112px;
+  padding: .22rem .1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,.72);
+}
+
+.inspectorOpen :global(button[data-label-side]::before) {
+  width: 48px;
+  opacity: .8;
+}
+
+.inspectorOpen :global(button[data-label-side="left"]) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.inspectorOpen :global(button[data-label-side="left"]::before) {
+  left: auto;
+  right: 10px;
+  transform: translateX(-3px);
+  background: linear-gradient(270deg, rgba(181,217,99,.68), rgba(181,217,99,.08));
+}
+
+.inspectorOpen :global(button[data-label-side="left"] > span) {
+  margin-left: 0;
+  margin-right: 40px;
+}
+
+.inspectorOpen :global(button[data-label-side="right"] > span) {
+  margin-left: 40px;
+}
+
+.inspectorOpen :global(button[data-selected="true"] > span) {
+  padding: .42rem .58rem;
+  border: 1px solid rgba(196, 225, 111, .28);
+  border-radius: 9px;
+  background: rgba(8, 18, 11, .82);
+  box-shadow: 0 7px 28px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.018);
+  backdrop-filter: blur(14px);
+}
+
+.inspectorOpen :global(button[data-selected="true"]::before) {
+  width: 58px;
+  opacity: 1;
+}
+
+.inspectorOpen :global(button[data-label-side] strong) {
+  font-size: .66rem;
+  letter-spacing: .055em;
+}
+
+.inspectorOpen :global(button[data-label-side] small) {
+  max-width: 146px;
+  color: rgba(230,235,206,.52);
+}
+
 .inspectorClosed .inspectorShell {
   grid-template-columns: 60px;
   box-shadow: -8px 0 28px rgba(0, 0, 0, 0.16);
@@ -165,6 +229,22 @@
   .inspectorShell > :global([class*="inspectorTabs"]) {
     width: 52px;
   }
+
+  .inspectorOpen :global(button[data-label-side] > span) {
+    min-width: 96px;
+  }
+
+  .inspectorOpen :global(button[data-label-side]::before) {
+    width: 34px;
+  }
+
+  .inspectorOpen :global(button[data-label-side="left"] > span) {
+    margin-right: 29px;
+  }
+
+  .inspectorOpen :global(button[data-label-side="right"] > span) {
+    margin-left: 29px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -206,6 +286,11 @@
 
   .inspectorShell :global([class*="visualCard"]) {
     min-height: 152px;
+  }
+
+  .inspectorOpen :global(button[data-label-side] > span),
+  .inspectorOpen :global(button[data-label-side]::before) {
+    display: none;
   }
 }
 
