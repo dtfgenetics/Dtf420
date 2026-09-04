@@ -16,10 +16,11 @@ if (!sourceDir && !verifyOnly) {
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const errors = [];
 const imported = [];
+const pending = [];
 
 function candidateNames(item) {
-  const names = new Set([item.sourceName]);
-  if (item.sourceMimeType === "image/jpeg" && item.sourceName.toLowerCase().endsWith(".png")) {
+  const names = new Set([item.sourceResolvedName, item.sourceName].filter(Boolean));
+  if (item.sourceMimeType === "image/jpeg" && item.sourceName?.toLowerCase().endsWith(".png")) {
     names.add(`${item.sourceName}.jpg`);
     names.add(item.sourceName.replace(/\.png$/i, ".jpg"));
     names.add(item.sourceName.replace(/\.png$/i, ".jpeg"));
@@ -35,6 +36,7 @@ function sniff(bytes) {
 }
 
 for (const item of manifest) {
+  if (item.publicationState === "rejected") continue;
   const target = path.join(root, "public", item.targetPath.replace(/^\//, ""));
 
   if (!verifyOnly) {
@@ -47,10 +49,14 @@ for (const item of manifest) {
       continue;
     }
 
-    const bytes = fs.readFileSync(source);
-    const detected = sniff(bytes);
+    const sourceBytes = fs.readFileSync(source);
+    const detected = sniff(sourceBytes);
     if (detected === "unknown") {
       errors.push(`Unsupported or invalid image bytes: ${source}`);
+      continue;
+    }
+    if (detected !== item.sourceMimeType) {
+      errors.push(`Source MIME mismatch for ${item.assetId}: expected ${item.sourceMimeType}, detected ${detected}`);
       continue;
     }
 
@@ -59,6 +65,10 @@ for (const item of manifest) {
   }
 
   if (!fs.existsSync(target)) {
+    if (verifyOnly && item.publicationState === "approved-source-only") {
+      pending.push({ assetId: item.assetId, path: item.targetPath });
+      continue;
+    }
     errors.push(`Target missing: ${item.targetPath}`);
     continue;
   }
@@ -68,10 +78,21 @@ for (const item of manifest) {
     errors.push(`Target is empty: ${item.targetPath}`);
     continue;
   }
+  const detected = sniff(bytes);
+  if (detected !== item.sourceMimeType) {
+    errors.push(`Target MIME mismatch for ${item.assetId}: expected ${item.sourceMimeType}, detected ${detected}`);
+    continue;
+  }
+
+  if (verifyOnly && item.publicationState !== "published") {
+    errors.push(`Target exists but intake record is not published: ${item.assetId} -> ${item.targetPath}`);
+    continue;
+  }
 
   imported.push({
     assetId: item.assetId,
     path: item.targetPath,
+    mimeType: detected,
     bytes: bytes.length,
     sha256: crypto.createHash("sha256").update(bytes).digest("hex"),
   });
@@ -83,7 +104,10 @@ if (errors.length) {
   process.exit(1);
 }
 
-const outputManifest = path.join(root, "public", "images", "thc-project", "manifest.json");
-fs.mkdirSync(path.dirname(outputManifest), { recursive: true });
-fs.writeFileSync(outputManifest, `${JSON.stringify(imported, null, 2)}\n`);
-console.log(`THC project images verified: ${imported.length} assets.`);
+if (!verifyOnly) {
+  const outputManifest = path.join(root, "public", "images", "thc-project", "manifest.json");
+  fs.mkdirSync(path.dirname(outputManifest), { recursive: true });
+  fs.writeFileSync(outputManifest, `${JSON.stringify(imported, null, 2)}\n`);
+}
+
+console.log(`THC project images verified: ${imported.length} published/imported; ${pending.length} approved-source-only pending publication.`);

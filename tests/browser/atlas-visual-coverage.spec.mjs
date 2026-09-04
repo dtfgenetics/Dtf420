@@ -20,11 +20,13 @@ async function expectLearnerFacingVisual(page) {
   return visual;
 }
 
-test("Atlas exposes the existing advanced concept visual instead of a production placeholder", async ({ page }) => {
+test("Atlas exposes an audited code-native advanced visual instead of a production placeholder", async ({ page }) => {
   const response = await page.goto("/learn/atlas/seed-germination/reserve-mobilization", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
 
   const visual = await expectLearnerFacingVisual(page);
+  await expect(visual).toHaveAttribute("data-atlas-learner-surface", "code-native");
+  await expect(visual).toHaveAttribute("data-atlas-renderer", "advanced");
   await expect(visual.getByText("Interactive concept map", { exact: true })).toBeVisible();
   await expect(visual.getByRole("tab")).toHaveCount(3);
 
@@ -33,11 +35,13 @@ test("Atlas exposes the existing advanced concept visual instead of a production
   await expect.poll(() => visual.innerHTML()).not.toBe(before);
 });
 
-test("Atlas gives lessons without specialized media a visual system study map", async ({ page }) => {
+test("Atlas gives lessons without specialized or approved production media a visual system study map", async ({ page }) => {
   const response = await page.goto("/learn/atlas/seed-germination/thermal-limits-and-germination-rate", { waitUntil: "networkidle" });
   expect(response?.status()).toBe(200);
 
   const visual = await expectLearnerFacingVisual(page);
+  await expect(visual).toHaveAttribute("data-atlas-learner-surface", "system-study-map");
+  await expect(visual).not.toHaveAttribute("data-atlas-renderer", /.+/);
   await expect(visual.locator('[data-atlas-visual="system-study-map"]')).toBeVisible();
   await expect(visual.getByText("System study map", { exact: true })).toBeVisible();
   await expect(
