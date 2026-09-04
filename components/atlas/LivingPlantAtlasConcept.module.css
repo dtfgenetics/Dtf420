@@ -1,0 +1,249 @@
+.appFrame {
+  min-height: 900px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 46% 35%, rgba(39, 82, 50, .22), transparent 30%),
+    linear-gradient(180deg, #07110d 0%, #06100b 54%, #050b08 100%);
+  box-shadow: 0 32px 90px rgba(0,0,0,.48), inset 0 1px rgba(255,255,255,.025);
+}
+
+.leftRail {
+  background:
+    radial-gradient(circle at 50% 8%, rgba(89, 189, 78, .08), transparent 23%),
+    linear-gradient(180deg, #06120d 0%, #06100c 100%);
+}
+
+.railPromise {
+  display: grid;
+  gap: .18rem;
+  padding: .8rem 1rem .95rem;
+  border-bottom: 1px solid rgba(189, 214, 139, .09);
+  color: rgba(234, 240, 218, .72);
+  text-transform: uppercase;
+}
+
+.railPromise b {
+  font-size: .5rem;
+  font-weight: 650;
+  letter-spacing: .15em;
+}
+
+.dreamLine {
+  display: block;
+  padding: .8rem .68rem .2rem;
+  color: #92e95e;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .76rem;
+  font-style: italic;
+  letter-spacing: .02em;
+}
+
+.centerStage {
+  padding: 0;
+  background:
+    radial-gradient(circle at 48% 33%, rgba(49, 92, 58, .22), transparent 31%),
+    linear-gradient(180deg, rgba(7,16,11,.96), rgba(4,10,7,.99));
+}
+
+.titleBlock {
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: none;
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-left: 0;
+  border-bottom: 1px solid rgba(196, 217, 150, .08);
+  background: linear-gradient(180deg, rgba(4,11,8,.9), rgba(4,11,8,.42));
+  backdrop-filter: blur(16px);
+  pointer-events: auto;
+}
+
+.titleBlock > div {
+  display: grid;
+  gap: .18rem;
+}
+
+.titleBlock p {
+  margin: 0;
+  color: rgba(239, 245, 226, .92);
+  font-size: .72rem;
+  font-weight: 760;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.titleBlock > div > span {
+  color: rgba(229, 236, 215, .52);
+  font-size: .62rem;
+  letter-spacing: .05em;
+}
+
+.atlasSearch {
+  display: flex;
+  width: min(290px, 38vw);
+  min-height: 38px;
+  overflow: hidden;
+  border: 1px solid rgba(213, 228, 178, .22);
+  border-radius: 10px;
+  background: rgba(7,16,11,.72);
+  box-shadow: inset 0 1px rgba(255,255,255,.02);
+}
+
+.atlasSearch input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  padding: 0 .8rem;
+  background: transparent;
+  color: #eef2df;
+  font: inherit;
+  font-size: .68rem;
+  outline: none;
+}
+
+.atlasSearch input::placeholder { color: rgba(234, 239, 218, .44); }
+
+.atlasSearch button {
+  width: 42px;
+  border: 0;
+  border-left: 1px solid rgba(210,225,171,.09);
+  background: rgba(111, 182, 75, .08);
+  color: #a5ed69;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stageReadout {
+  top: 88px;
+  right: 18px;
+  padding: .45rem .55rem;
+  border: 1px solid rgba(204, 221, 158, .1);
+  border-radius: 9px;
+  background: rgba(4,11,8,.5);
+  backdrop-filter: blur(10px);
+}
+
+.inspector {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(80, 152, 72, .09), transparent 24%),
+    linear-gradient(180deg, rgba(7,18,12,.995), rgba(5,13,9,.995));
+}
+
+.inspectorSubtitle {
+  display: block;
+  max-width: 290px;
+  margin-top: .28rem;
+  color: rgba(233, 238, 218, .74);
+  font-size: .7rem;
+  line-height: 1.38;
+}
+
+.visualCard {
+  min-height: 205px;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 62% 34%, rgba(183, 228, 116, .28) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 38%, rgba(226, 244, 189, .2) 0 4px, transparent 5px),
+    radial-gradient(circle at 73% 55%, rgba(165, 219, 103, .16) 0 3px, transparent 4px),
+    radial-gradient(circle at 38% 66%, rgba(207, 236, 155, .18) 0 2px, transparent 3px),
+    radial-gradient(circle at 45% 45%, rgba(60, 119, 53, .32), transparent 32%),
+    linear-gradient(145deg, #102617, #07110b 62%, #050b08);
+}
+
+.visualCard[data-entity="trichomes_resin"] {
+  background:
+    radial-gradient(circle at 64% 28%, rgba(239,245,214,.7) 0 3px, rgba(196,225,151,.25) 4px 8px, transparent 9px),
+    radial-gradient(circle at 48% 36%, rgba(239,245,214,.6) 0 3px, rgba(196,225,151,.2) 4px 8px, transparent 9px),
+    radial-gradient(circle at 72% 54%, rgba(239,245,214,.5) 0 2px, rgba(196,225,151,.18) 3px 7px, transparent 8px),
+    radial-gradient(circle at 38% 61%, rgba(239,245,214,.55) 0 3px, rgba(196,225,151,.19) 4px 8px, transparent 9px),
+    radial-gradient(circle at 52% 49%, rgba(80, 149, 60, .34), transparent 36%),
+    linear-gradient(145deg, #112819, #07120c 63%, #050b08);
+}
+
+.learnMore {
+  gap: .42rem;
+}
+
+.learnMore button,
+.learnMore a {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0,auto) 1fr auto;
+  align-items: center;
+  gap: .6rem;
+  min-height: 42px;
+  border: 1px solid rgba(148, 217, 105, .22);
+  border-radius: 8px;
+  padding: .58rem .7rem;
+  background: linear-gradient(90deg, rgba(63, 126, 62, .17), rgba(20, 39, 24, .28));
+  color: #edf2df;
+  cursor: pointer;
+  font-size: .68rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+.learnMore button::after,
+.learnMore a::after {
+  content: "›";
+  color: #9aef63;
+  font-size: 1rem;
+}
+
+.learnMore button small {
+  color: rgba(229, 235, 214, .46);
+  font-size: .56rem;
+}
+
+.learnMore button:hover,
+.learnMore button:focus-visible,
+.learnMore a:hover,
+.learnMore a:focus-visible {
+  border-color: rgba(140, 240, 82, .56);
+  background: linear-gradient(90deg, rgba(65, 157, 65, .28), rgba(20, 43, 25, .34));
+  outline: none;
+}
+
+@media (max-width: 1120px) {
+  .railPromise { display: none; }
+  .titleBlock { min-height: 66px; padding: .82rem 1rem; }
+  .titleBlock p { font-size: .64rem; }
+  .atlasSearch { width: min(240px, 42vw); }
+}
+
+@media (max-width: 900px) {
+  .appFrame { min-height: auto; }
+  .titleBlock {
+    position: relative;
+    min-height: 0;
+    flex-wrap: wrap;
+    align-items: stretch;
+    background: rgba(5,13,9,.95);
+  }
+  .atlasSearch { width: 100%; }
+  .stageReadout { display: none; }
+  .inspectorSubtitle { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .titleBlock p { font-size: .58rem; letter-spacing: .12em; }
+  .titleBlock > div > span { font-size: .55rem; }
+  .visualCard { min-height: 170px; }
+}
