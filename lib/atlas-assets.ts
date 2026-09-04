@@ -54,11 +54,12 @@ export const atlasAssetRegistry: AtlasAssetRecord[] = modules.flatMap((atlasModu
     const key = `${systemSlug}__${lessonSlug}`;
     const override = overrideMap.get(key);
     const assetId = override?.assetId ?? `atlas-${systemSlug}-${lessonSlug}-v0`;
+    const status = (override?.status ?? "needed") as AtlasAssetStatus;
     const path = override?.path ?? null;
     const renderer = rendererMap.get(assetId) ?? null;
     const learnerSurface: AtlasLearnerSurface = renderer
       ? "code-native"
-      : path
+      : status === "ready" && path
         ? "production-media"
         : "system-study-map";
 
@@ -70,7 +71,7 @@ export const atlasAssetRegistry: AtlasAssetRecord[] = modules.flatMap((atlasModu
       lessonTitle: lesson.title,
       lessonSlug,
       visualSpec: lesson.visual,
-      status: (override?.status ?? "needed") as AtlasAssetStatus,
+      status,
       version: override?.version ?? 0,
       assetType: override?.assetType ?? "lesson-visual",
       path,
