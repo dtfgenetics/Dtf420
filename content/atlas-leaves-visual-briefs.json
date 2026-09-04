@@ -1,24 +1,28 @@
 [
   {
     "lesson":"Leaf tissue anatomy",
+    "title":"Leaf tissue anatomy",
     "route":"/learn/atlas/leaves/leaf-tissue-anatomy",
     "assetType":"Scientific cross-section",
     "brief":"Create a realistic Cannabis fan-leaf lamina and midrib cross-section. Label upper and lower epidermis, cuticle, palisade mesophyll, spongy mesophyll, vascular bundle with xylem and phloem orientation, supporting tissues near the midrib, and representative nonglandular/glandular trichomes. Use scale-aware microscopy styling and do not imply that every cultivar has identical tissue proportions."
   },
   {
     "lesson":"Leaf morphogenesis & leaflet complexity",
+    "title":"Leaf morphogenesis & leaflet complexity",
     "route":"/learn/atlas/leaves/leaf-morphogenesis-and-leaflet-complexity",
     "assetType":"Developmental reference strip",
     "brief":"Create a Cannabis leaf-development sequence from simple early true leaves to increasingly compound fan leaves and later reduced leaflet complexity near reproductive development. Use the published White Widow pattern as a labeled study example, with a prominent note that exact leaflet counts and node numbers vary by genotype and conditions."
   },
   {
     "lesson":"Leaf age & photosynthetic capacity",
+    "title":"Leaf age & photosynthetic capacity",
     "route":"/learn/atlas/leaves/leaf-age-and-photosynthetic-capacity",
     "assetType":"Physiology timeline and canopy map",
     "brief":"Compare newly fully expanded, intermediate-age, and older still-green hemp/Cannabis leaves. Show declining photosynthetic-capacity indicators as conceptual trajectories rather than universal numerical cutoffs, and distinguish leaf chronological/physiological age from canopy position and light history."
   },
   {
     "lesson":"Stomatal traits & sampling context",
+    "title":"Stomatal traits & sampling context",
     "route":"/learn/atlas/leaves/stomatal-traits-and-sampling-context",
     "assetType":"Microscope sampling plate",
     "brief":"Show standardized epidermal sampling with leaf surface, developmental stage, genotype/ploidy, field of view, magnification, and counted area recorded. Include example stomata of different sizes/densities as study-context comparisons, not species-wide reference values."

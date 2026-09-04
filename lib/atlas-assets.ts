@@ -1,5 +1,6 @@
 import modules from "@/content/atlas-learning-modules.json";
 import { atlasAssetOverrides } from "@/lib/atlas-asset-manifests";
+import { atlasVisualBriefs } from "@/lib/atlas-visual-brief-manifests";
 
 export type AtlasAssetStatus = "needed" | "brief_ready" | "in_production" | "ready" | "review";
 
@@ -28,13 +29,16 @@ function slugify(value: string) {
 }
 
 const overrideMap = new Map(atlasAssetOverrides.map((item) => [item.key, item]));
+const visualBriefMap = new Map(atlasVisualBriefs.map((item) => [item.route, item]));
 
 export const atlasAssetRegistry: AtlasAssetRecord[] = modules.flatMap((atlasModule) =>
   atlasModule.lessons.map((lesson) => {
     const systemSlug = slugify(atlasModule.id);
     const lessonSlug = slugify(lesson.title);
     const key = `${systemSlug}__${lessonSlug}`;
+    const route = `/learn/atlas/${systemSlug}/${lessonSlug}`;
     const override = overrideMap.get(key);
+    const visualBrief = visualBriefMap.get(route);
 
     return {
       key,
@@ -44,13 +48,14 @@ export const atlasAssetRegistry: AtlasAssetRecord[] = modules.flatMap((atlasModu
       lessonTitle: lesson.title,
       lessonSlug,
       visualSpec: lesson.visual,
-      status: (override?.status ?? "needed") as AtlasAssetStatus,
+      status: (override?.status ?? (visualBrief ? "brief_ready" : "needed")) as AtlasAssetStatus,
       version: override?.version ?? 0,
       assetType: override?.assetType ?? "lesson-visual",
       path: override?.path ?? null,
       altText: override?.altText ?? `${lesson.visual} for the ${lesson.title} lesson in the THC Living Plant Atlas.`,
       productionBrief:
         override?.productionBrief ??
+        visualBrief?.brief ??
         `Create an academically accurate ${lesson.visual.toLowerCase()} for the ${lesson.title} lesson. Use neutral studio lighting or clean academic illustration conventions, realistic botanical proportions, readable labels where needed, no yellow cast, and no decorative elements that compete with the teaching objective.`,
     };
   }),

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-03",
+  "policy": "Source leads and scientific references in this file are acquisition inputs only. They do not populate atlas-specimen-set releaseSlots and do not authorize a model for production. Every final specimen must still pass binary intake, rights, botanical review, photorealism review, semantic mapping, desktop/mobile budgets, and browser QA.",
+  "specimens": [
+    {
+      "id": "seedling",
+      "productionRoute": "acquire-or-custom-build",
+      "priority": 4,
+      "sourceLeads": [
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Small cannabis plant in a bonsai pot",
+          "url": "https://www.meshy.ai/3d-models/Small-cannabis-plant-in-a-bonsai-pot-v2-01976a27-cad0-7420-9d52-4625a1aed315",
+          "license": "CC0",
+          "state": "research-only",
+          "notes": "Useful juvenile-scale geometry lead, but must be rejected if it lacks cotyledons/juvenile leaflet complexity or reads as a miniature mature plant. Pot must be removed and roots added."
+        }
+      ],
+      "scientificReference": {
+        "type": "atlas-required-traits",
+        "source": "content/atlas-specimen-set.json#seedling"
+      },
+      "blockingNeed": "A genuinely juvenile plant with seedling-scale roots; a bonsai-style mature plant cannot substitute."
+    },
+    {
+      "id": "vegetative",
+      "productionRoute": "acquire-and-adapt",
+      "priority": 3,
+      "sourceLeads": [
+        {
+          "kind": "cc0-source-model",
+          "provider": "BlendSwap",
+          "title": "Hemp, Weed, Cannabis Sativa",
+          "url": "https://blendswap.com/blend/17492",
+          "license": "CC0",
+          "state": "blocked-acquisition",
+          "notes": "Three editable hemp bush variations; leaves use a particle system and can be adjusted. Strong vegetative base candidate if the authenticated Blender download can be acquired and converted cleanly."
+        },
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Cannabis Plant in a Terracotta Pot",
+          "url": "https://www.meshy.ai/3d-models/019cfb59-980b-741d-a499-6fed91f57f2f",
+          "license": "CC0",
+          "state": "blocked-acquisition",
+          "notes": "Current generic canopy candidate. Must prove vegetative morphology, remove pot, and add exposed roots before this slot can use it."
+        }
+      ],
+      "scientificReference": {
+        "type": "atlas-required-traits",
+        "source": "content/atlas-specimen-set.json#vegetative"
+      },
+      "blockingNeed": "Mature fan leaves, nodes/internodes and branching without mature floral clusters, plus a developed exposed root system."
+    },
+    {
+      "id": "flowering",
+      "productionRoute": "acquire-and-adapt",
+      "priority": 1,
+      "sourceLeads": [
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Cannabis Bloom",
+          "url": "https://www.meshy.ai/3d-models/Cannabis-Bloom-v2-019bfa72-96be-7e42-98a3-b7421b91fe44",
+          "license": "CC0",
+          "state": "blocked-acquisition",
+          "notes": "Flower/bud-specific CC0 lead. Must be reviewed as a whole-plant specimen rather than a decorative bud model and must receive an exposed root system."
+        },
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Green Kush",
+          "url": "https://www.meshy.ai/3d-models/01986f7a-9e48-7829-97bd-406fbd4de627",
+          "license": "CC0",
+          "state": "research-only",
+          "notes": "Bud-tagged alternate visual lead; do not assume full-plant or accurate floral morphology from the listing title."
+        }
+      ],
+      "scientificReference": {
+        "type": "public-domain-photo",
+        "source": "https://commons.wikimedia.org/wiki/File:Cannabis_bloom.JPG",
+        "license": "CC0",
+        "notes": "Female flowering Cannabis sativa subsp. indica; useful for floral morphology review, not a same-object multi-view reconstruction set."
+      },
+      "blockingNeed": "Default Atlas specimen: whole mature flowering plant, realistic inflorescence distribution and full exposed roots."
+    },
+    {
+      "id": "male",
+      "productionRoute": "custom-scientific-build",
+      "priority": 2,
+      "sourceLeads": [],
+      "scientificReference": {
+        "type": "public-domain-photo-set",
+        "sources": [
+          "https://commons.wikimedia.org/wiki/File:Flowering_male_marijuana_plant.jpg",
+          "https://commons.wikimedia.org/wiki/File:Indoor_Hybrid_Flowering_Male_Medical_Cannabis.JPG",
+          "https://commons.wikimedia.org/wiki/File:Male_hemp_flowers.jpg"
+        ],
+        "license": "Public domain / CC0",
+        "notes": "Use to review whole-plant male architecture, staminate clusters and pollen-sac morphology."
+      },
+      "blockingNeed": "No credible reusable male cannabis 3D candidate has been found. Build a distinct male specimen from reviewed reference material; do not relabel a generic/female plant."
+    },
+    {
+      "id": "female",
+      "productionRoute": "custom-build-or-distinct-acquisition",
+      "priority": 2,
+      "sourceLeads": [
+        {
+          "kind": "cc0-3d-lead",
+          "provider": "Meshy",
+          "title": "Purple Dream",
+          "url": "https://www.meshy.ai/3d-models/01986f62-6c33-781a-9998-ac807b65937b",
+          "license": "CC0",
+          "state": "research-only",
+          "notes": "Distinct cannabis asset lead, but sex phenotype must be demonstrated from the binary/screenshots before it can enter the female candidate pool."
+        }
+      ],
+      "scientificReference": {
+        "type": "public-domain-photo-set",
+        "sources": [
+          "https://commons.wikimedia.org/wiki/File:Cannabis_female.jpg",
+          "https://commons.wikimedia.org/wiki/File:Cannabis_bloom.JPG",
+          "https://commons.wikimedia.org/wiki/File:Cannbis_indica_female_flos.jpg"
+        ],
+        "license": "Public domain / CC0",
+        "notes": "Use for pistillate sex expression, bract/stigma morphology and female inflorescence review."
+      },
+      "blockingNeed": "Must remain visually and geometrically distinct from the generic Flowering stage specimen, with clearly demonstrable female reproductive structures."
+    },
+    {
+      "id": "hermaphrodite",
+      "productionRoute": "custom-scientific-build",
+      "priority": 2,
+      "sourceLeads": [],
+      "scientificReference": {
+        "type": "peer-reviewed-morphology",
+        "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7329997/",
+        "notes": "Punja et al. documents anthers developing within otherwise pistillate inflorescences, including recognizable anther clusters adjacent to stigmas. Use as a morphology constraint; do not present AI deformation as intersex biology."
+      },
+      "blockingNeed": "No credible reusable intersex 3D candidate has been found. Build this specimen manually/generatively from reviewed female + anther morphology and require the strictest botanical review."
+    }
+  ]
+}

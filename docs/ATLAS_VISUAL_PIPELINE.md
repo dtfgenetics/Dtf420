@@ -4,13 +4,22 @@ The Atlas treats lesson visuals as replaceable, versioned teaching surfaces inst
 
 ## Source of truth
 
-- `content/atlas-learning-modules.json` defines the canonical **100 lesson slots** across 10 Atlas systems and each lesson's visual requirement.
-- `lib/atlas-assets.ts` derives one asset record for every lesson automatically.
-- `lib/atlas-asset-manifests.ts` combines the hand-authored asset override manifests.
-- `components/atlas/AtlasAssetSlot.tsx` resolves each lesson to its best available teaching surface.
-- Production image/media files live under `public/atlas/...` and are referenced with root-relative paths such as `/atlas/roots/root-architecture-v1.webp`.
+The production hierarchy is explicit:
 
-A new lesson automatically receives an asset slot even when no override has been written yet. It must not render as an empty box or expose an internal production prompt to learners.
+1. `content/atlas-learning-modules.json` defines the canonical **100 lesson slots** across 10 Atlas systems and each lesson's visual requirement.
+2. `lib/atlas-assets.ts` derives one production asset record for every canonical lesson.
+3. `lib/atlas-asset-manifests.ts` combines the hand-authored `content/atlas-asset-overrides*.json` manifests. Overrides are authoritative for asset ID, status, version, media path, alt text, and production metadata.
+4. `lib/atlas-visual-brief-manifests.ts` combines the detailed `content/atlas-*-visual-briefs.json` files. A detailed brief upgrades a non-overridden lesson from `needed` to `brief_ready`; an override always takes precedence.
+5. `components/atlas/AtlasAssetSlot.tsx` resolves each lesson to its best available learner-facing teaching surface.
+6. Production image/media files live under `public/atlas/...` and are referenced with root-relative paths such as `/atlas/roots/root-architecture-v1.webp`.
+
+A new lesson automatically receives an asset slot even when no override or detailed brief has been written yet. It must not render as an empty box or expose an internal production prompt to learners.
+
+## Planning map is non-authoritative
+
+`configuration/image-placement-map.csv` is a **planning-only, non-authoritative** placement backlog retained for historical composition and page-placement context. Its legacy asset IDs and `needed` statuses are not production status and must never override `lib/atlas-assets.ts`, the override manifests, or the 100-lesson canonical registry.
+
+When a planning-map idea becomes real production work, create or update the canonical lesson override or detailed visual brief. Do not copy the planning CSV status into learner-facing or release logic.
 
 ## Learner-facing rendering contract
 
@@ -29,7 +38,7 @@ At the current implementation level, 60 lesson IDs resolve to specialized code-n
 These statuses describe the **production media pipeline**, not whether the lesson page is usable:
 
 - `needed` — visual requirement exists but has no custom production brief yet.
-- `brief_ready` — production brief, alt text, asset ID, and version are ready.
+- `brief_ready` — a detailed production brief exists and is connected to the canonical lesson asset record.
 - `in_production` — external or static production media is being created or revised.
 - `review` — the planned production asset or code-native teaching implementation is awaiting scientific/visual QA or replacement-media review.
 - `ready` — approved production media. A `ready` record must include a real path under `public/`.
@@ -50,18 +59,35 @@ A lesson in `needed`, `brief_ready`, `in_production`, or `review` state can stil
 
 The lesson page consumes the registry, so ordinary media replacement does not require a page-route rewrite.
 
+## Six-specimen 3D acquisition and release hierarchy
+
+The 3D specimen pipeline has separate planning, candidate, review, and release layers:
+
+- `content/atlas-specimen-acquisition.json` — research/acquisition queue for Seedling, Vegetative, Flowering, Male, Female, and Hermaphrodite / Intersex. Source leads here are not release authorization.
+- `content/atlas-model-candidates.json` — candidate-level rights, geometry, acquisition, and measured QA records.
+- `content/atlas-specimen-set.json` — the six required production release slots.
+- `content/atlas-model-photorealism-review.json` — blocking multi-view botanical/visual review for each specimen.
+- `public/atlas-3d/models/model-manifest.json` — public runtime release state. It remains fail-closed until all required approvals pass.
+
+Do not promote a source lead directly into the public model manifest. Acquisition, rights verification, binary inspection, semantic mapping, botanical review, desktop/mobile budgets, photorealism review, and browser QA are separate required gates.
+
 ## Automated safeguards
 
-`npm run verify:atlas-assets` fails when:
+`npm run verify:atlas-assets` validates the canonical 100 lesson slots and production overrides.
 
-- an override references a lesson that does not exist;
-- duplicate override keys or asset IDs are present;
-- a `ready` asset has no path;
-- a referenced asset file is missing from `public/`;
-- alt text or a production brief is missing;
-- the canonical lesson count drifts away from the Atlas completion contract.
+`npm run verify:atlas-asset-inventory` additionally reconciles:
 
-The full `npm run verify` path also validates the 100-lesson curriculum, Atlas runtime, model candidates, photorealism gate, guided paths, knowledge checks, mastery, diagnostics, system connections, visual identification, TypeScript, lint, and production build.
+- all canonical lesson routes and keys;
+- every override manifest;
+- every detailed visual-brief manifest;
+- code-native renderer wiring and the system study-map fallback;
+- the non-authoritative planning CSV boundary;
+- the six-specimen acquisition queue, specimen set, photorealism reviews, candidate registry, and public model manifest;
+- absence of unreleased GLBs from public runtime paths.
+
+`npm run verify:atlas-specimen-acquisition` validates that the acquisition/build queue remains exactly aligned with the six production specimen slots and preserves the custom scientific-build lanes where no credible reusable sex-specific model exists.
+
+The full `npm run verify` path also validates the 100-lesson curriculum, Atlas runtime, model candidates, photorealism gate, evidence coverage, guided paths, knowledge checks, mastery, diagnostics, system connections, visual identification, TypeScript, lint, and production build.
 
 ## 3D specimen release is a separate hard gate
 

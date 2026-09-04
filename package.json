@@ -33,8 +33,10 @@
     "verify:atlas-model-runtime": "node scripts/verify-atlas-model-runtime.mjs",
     "verify:atlas-model-candidates": "node scripts/verify-atlas-model-candidates.mjs",
     "verify:atlas-model-photorealism": "node scripts/verify-atlas-model-photorealism.mjs",
+    "verify:atlas-specimen-acquisition": "node scripts/verify-atlas-specimen-acquisition.mjs",
     "verify:atlas-completion": "node scripts/verify-atlas-completion.mjs",
     "verify:atlas-assets": "node scripts/verify-atlas-assets.mjs",
+    "verify:atlas-asset-inventory": "node scripts/verify-atlas-asset-inventory.mjs",
     "verify:atlas-evidence": "node scripts/verify-atlas-evidence-coverage.mjs",
     "verify:atlas-paths": "node scripts/verify-atlas-guided-paths.mjs",
     "verify:atlas-checks": "node scripts/verify-atlas-knowledge-checks.mjs",
@@ -49,7 +51,7 @@
     "verify:education-sops": "node scripts/verify-education-sops.mjs",
     "verify:academy": "node scripts/verify-academy.mjs",
     "verify:routes": "node scripts/verify-internal-routes.mjs",
-    "verify": "npm run verify:bud-or-bluff && npm run verify:burn-buds && npm run verify:high-iq && npm run verify:grower-conversations && npm run verify:seed-ascent && npm run verify:strain-showdown && npm run verify:thc-rpg && npm run verify:atlas-interactive && npm run verify:atlas-model-runtime && npm run verify:atlas-model-candidates && npm run verify:atlas-model-photorealism && npm run verify:atlas-completion && npm run verify:atlas-assets && npm run verify:atlas-evidence && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:education-glossary && npm run verify:education-sops && npm run verify:academy && npm run verify:routes && npm run lint && npm run typecheck && npm run build"
+    "verify": "npm run verify:bud-or-bluff && npm run verify:burn-buds && npm run verify:high-iq && npm run verify:grower-conversations && npm run verify:seed-ascent && npm run verify:strain-showdown && npm run verify:thc-rpg && npm run verify:atlas-interactive && npm run verify:atlas-model-runtime && npm run verify:atlas-model-candidates && npm run verify:atlas-model-photorealism && npm run verify:atlas-specimen-acquisition && npm run verify:atlas-completion && npm run verify:atlas-assets && npm run verify:atlas-asset-inventory && npm run verify:atlas-evidence && npm run verify:atlas-paths && npm run verify:atlas-checks && npm run verify:atlas-badges && npm run verify:atlas-cases && npm run verify:atlas-connections && npm run verify:atlas-visual-practice && npm run verify:education-content && npm run verify:education-links && npm run verify:education-sources && npm run verify:education-glossary && npm run verify:education-sops && npm run verify:academy && npm run verify:routes && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "16.3.3",
