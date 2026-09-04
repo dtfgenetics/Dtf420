@@ -1,0 +1,30 @@
+[
+  {
+    "lesson": "Vascular cambium & secondary growth",
+    "title": "Vascular cambium & secondary growth",
+    "route": "/learn/atlas/stem-vascular/vascular-cambium-and-secondary-growth",
+    "assetType": "Labeled radial anatomy sequence",
+    "brief": "Create a Cannabis/hemp stem cross-section and short radial-development sequence showing epidermis, cortex, phloem, cambial region, developing secondary xylem, mature xylem, and pith. Emphasize the cambium as a lateral meristem that contributes to radial growth and vascular tissue production. Keep proportions study-informed rather than universal, and do not assign fixed age, diameter, or growth-rate values to Cannabis cultivars."
+  },
+  {
+    "lesson": "Bast fibers & structural support",
+    "title": "Bast fibers & structural support",
+    "route": "/learn/atlas/stem-vascular/bast-fibers-and-structural-support",
+    "assetType": "Cross-section plus longitudinal fiber map",
+    "brief": "Create paired Cannabis/hemp stem cross-section and longitudinal views locating bast fiber bundles in the outer stem tissues relative to cortex, phloem, cambial region, xylem, and pith. Show how long fiber bundles contribute to tensile reinforcement and stem mechanics without depicting them as rigid cables or claiming a single cultivar-independent strength value. Use hemp/Cannabis-specific anatomy where supported and label mechanical interpretation separately from vascular transport."
+  },
+  {
+    "lesson": "Cohesion-tension & water potential",
+    "title": "Cohesion-tension & water potential",
+    "route": "/learn/atlas/stem-vascular/cohesion-tension-and-water-potential",
+    "assetType": "Whole-plant hydraulic continuum diagram",
+    "brief": "Create a soil-to-atmosphere hydraulic continuum for Cannabis showing water moving from substrate into roots, through connected xylem conduits in root and stem, into leaf veins, and toward evaporating leaf surfaces. Use a conceptual water-potential gradient, cohesion of the water column, and transpiration-generated tension to explain movement. Do not depict the stem as a pump and do not invent Cannabis-specific water-potential thresholds or cavitation limits."
+  },
+  {
+    "lesson": "Hydraulic disruption & embolism",
+    "title": "Hydraulic disruption & embolism",
+    "route": "/learn/atlas/stem-vascular/hydraulic-disruption-and-embolism",
+    "assetType": "Comparative xylem integrity plate",
+    "brief": "Create a comparative plant-hydraulics plate showing continuous water-filled xylem versus a conduit containing an air embolism, plus a localized damaged or compressed vascular region that reduces conductive continuity. Relate these states conceptually to reduced hydraulic conductivity and downstream water supply while avoiding diagnostic certainty from appearance alone. Do not fabricate Cannabis cultivar-specific vulnerability curves, cavitation pressures, or universal recovery rates."
+  }
+]
