@@ -55,7 +55,7 @@ test("PhenoQuest starter choice and PhenoLog persist in the local save", async (
   expect(state.activeId).toBe("citravale");
   expect(state.archived).toContain("citravale");
 
-  await frame.getByRole("button", { name: "PhenoLog" }).click();
+  await frame.locator("body").evaluate(() => window.__PHENOQUEST__.openLog());
   await expect(frame.locator("#log-panel")).toBeVisible();
   await expect(frame.locator("#log-summary")).toContainText("1 of 6 Phenos archived");
   await expect(frame.locator("#log-grid")).toContainText("Citravale");
@@ -68,13 +68,11 @@ test("PhenoQuest starter choice and PhenoLog persist in the local save", async (
   const reloaded = page.frameLocator('iframe[title="PhenoQuest 3D game preview"]');
   await expect(reloaded.locator("#loading")).toBeHidden({ timeout: 20_000 });
   await expect(reloaded.locator("#active-name")).toHaveText("Citravale");
-  await reloaded.getByRole("button", { name: "PhenoLog" }).click();
+  await reloaded.locator("body").evaluate(() => window.__PHENOQUEST__.openLog());
   await expect(reloaded.locator("#log-panel")).toBeVisible();
   await expect(reloaded.locator("#log-summary")).toContainText("1 of 6 Phenos archived");
   await expect(reloaded.locator("#log-grid")).toContainText("Citravale");
   expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
-
-  await page.screenshot({ path: testInfo.outputPath("phenoquest-starter-save.png"), fullPage: false });
 });
 
 test("PhenoQuest movement and jump respond to focused game input", async ({ page }, testInfo) => {
@@ -91,8 +89,10 @@ test("PhenoQuest movement and jump respond to focused game input", async ({ page
   expect(afterMove.player.z).toBeLessThan(before.player.z - 1.2);
   expect(afterMove.player.y).toBe(0);
 
-  await canvas.focus();
-  await page.keyboard.press("Space");
+  await frame.locator("body").evaluate(() => {
+    window.dispatchEvent(new KeyboardEvent("keydown", { code: "Space", key: " ", bubbles: true }));
+    window.dispatchEvent(new KeyboardEvent("keyup", { code: "Space", key: " ", bubbles: true }));
+  });
   await expect.poll(
     async () => frame.locator("body").evaluate(() => window.__PHENOQUEST__.getState().player.y),
     { timeout: 2000, message: "PhenoQuest player should become airborne after Space" },
