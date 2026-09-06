@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-03",
+  "purpose": "Dated public-source evidence supporting the rights classifications in atlas-model-candidates.json. This evidence is necessary but not sufficient for release; acquired packages must still preserve their license/provenance records.",
+  "evidence": [
+    {
+      "candidateId": "meshy-cannabis-terracotta-019cfb59",
+      "expectedRightsState": "verified-for-public-web",
+      "distributionCompatibility": "compatible-standalone-browser-glb",
+      "evidenceUrls": [
+        "https://www.meshy.ai/3d-models/Cannabis-Plant-in-a-Terracotta-Pot-v2-019cfb59-980b-741d-a499-6fed91f57f2f",
+        "https://www.meshy.ai/tags/gltf"
+      ],
+      "finding": "The current public model page labels this pre-made Cannabis Plant in a Terracotta Pot as CC0. Meshy's current gallery/GLTF documentation states pre-made gallery assets are CC0, royalty-free for commercial use with no attribution required, and available in GLB among supported download formats.",
+      "releaseCaveat": "Preserve the acquired model page/license evidence with the downloaded package. CC0 rights do not waive botanical, root-system, pot-removal, semantic-mesh, photorealism, or performance review requirements."
+    },
+    {
+      "candidateId": "zbrojmistrz-cannabis-sativa-2023",
+      "expectedRightsState": "listing-indicates-attribution-license",
+      "distributionCompatibility": "pending-package-license-verification",
+      "evidenceUrls": [
+        "https://sketchfab.com/3d-models/cannabis-sativa-plant-ea31a5768c06457ea2fd67c3eb3458b8"
+      ],
+      "finding": "The public listing has been recorded as indicating a Creative Commons Attribution license, but the exact license version and downloaded-package license evidence have not yet been preserved in the DTF intake lane.",
+      "releaseCaveat": "Do not upgrade this candidate to verified-for-public-web or commit its binary until the acquired package confirms the exact license, attribution requirements, modification rights, and redistribution rights."
+    },
+    {
+      "candidateId": "a23d-cannabis-002707a",
+      "expectedRightsState": "commercial-license-required",
+      "distributionCompatibility": "incompatible-standalone-browser-glb",
+      "evidenceUrls": [
+        "https://www.a23d.co/legal",
+        "https://www.a23d.co/faqs",
+        "https://www.a23d.co/licenses"
+      ],
+      "finding": "A23D's current license permits assets inside authorized projects only when third parties cannot extract or isolate the asset. Current terms prohibit raw or easily extractable redistribution and public asset sharing.",
+      "releaseCaveat": "A browser-served standalone GLB is readily retrievable and therefore must remain benchmark-only under ordinary A23D terms. Do not use it as an Atlas production binary without explicit written/custom rights covering this distribution model."
+    }
+  ]
+}
