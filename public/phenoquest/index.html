@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071108" />
+  <title>PhenoQuest: The Living Seed Vault</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main id="game-shell" aria-label="PhenoQuest game">
+    <div id="viewport" aria-label="PhenoQuest 3D world"></div>
+
+    <section id="loading" class="center-card" aria-live="polite">
+      <p class="kicker">THE LIVING SEED VAULT</p>
+      <h1>Opening Seedling Town…</h1>
+      <p>Preparing the world, Pheno records, and local save.</p>
+    </section>
+
+    <section id="error-panel" class="center-card error-card" hidden>
+      <p class="kicker">WORLD STARTUP ERROR</p>
+      <h1>PhenoQuest could not start.</h1>
+      <p id="error-copy">The 3D runtime did not initialize.</p>
+    </section>
+
+    <div id="hud" hidden>
+      <section class="objective-card" aria-live="polite">
+        <p class="kicker">CURRENT OBJECTIVE</p>
+        <h2 id="objective-title">Choose a starter Pheno</h2>
+        <p id="objective-copy">The Living Seed Vault needs its first field partner.</p>
+      </section>
+
+      <section class="status-strip" aria-label="Player status">
+        <span><small>ACTIVE</small><strong id="active-name">—</strong></span>
+        <span><small>LEVEL</small><strong id="level-readout">1</strong></span>
+        <span><small>ARCHIVED</small><strong id="archive-readout">0 / 6</strong></span>
+        <span><small>ZONE</small><strong id="zone-readout">Seedling Town</strong></span>
+      </section>
+
+      <div class="hud-actions">
+        <button id="log-button" type="button">PhenoLog</button>
+        <button id="save-button" type="button">Save</button>
+      </div>
+
+      <div id="prompt" class="interaction-prompt" hidden>
+        <kbd>E</kbd><span id="prompt-copy">Interact</span>
+      </div>
+
+      <section class="diagnostics" aria-label="Performance diagnostics">
+        <span><small>FPS</small><strong id="fps">—</strong></span>
+        <span><small>CALLS</small><strong id="calls">—</strong></span>
+        <span><small>TRIS</small><strong id="triangles">—</strong></span>
+      </section>
+    </div>
+
+    <section id="starter-panel" class="modal-layer" hidden aria-labelledby="starter-title">
+      <div class="modal-card starter-card">
+        <p class="kicker">SEEDLING TOWN · VAULT INTAKE</p>
+        <h2 id="starter-title">Choose your first Pheno.</h2>
+        <p class="modal-lede">Each starter has a different trial style. Your choice is archived immediately and becomes your active field partner.</p>
+        <div id="starter-grid" class="starter-grid"></div>
+      </div>
+    </section>
+
+    <section id="battle-panel" class="modal-layer" hidden aria-labelledby="battle-title">
+      <div class="modal-card battle-card">
+        <div class="battle-heading">
+          <div>
+            <p id="battle-kicker" class="kicker">RESOLVE TRIAL</p>
+            <h2 id="battle-title">Field sample</h2>
+          </div>
+          <span id="battle-turn" class="turn-chip">Turn 1</span>
+        </div>
+
+        <div class="battle-grid">
+          <article class="combatant player-combatant">
+            <div id="player-orb" class="pheno-orb"></div>
+            <div>
+              <p class="combatant-label">YOUR PHENO</p>
+              <h3 id="battle-player-name">—</h3>
+              <div class="resolve-bar"><span id="player-resolve-bar"></span></div>
+              <p><strong id="player-resolve">0 / 0</strong> Resolve · <span id="player-charge">0</span> Focus</p>
+            </div>
+          </article>
+
+          <div class="versus" aria-hidden="true">VS</div>
+
+          <article class="combatant enemy-combatant">
+            <div id="enemy-orb" class="pheno-orb"></div>
+            <div>
+              <p class="combatant-label">CHALLENGER</p>
+              <h3 id="battle-enemy-name">—</h3>
+              <div class="resolve-bar"><span id="enemy-resolve-bar"></span></div>
+              <p><strong id="enemy-resolve">0 / 0</strong> Resolve · <span id="enemy-affinity">—</span></p>
+            </div>
+          </article>
+        </div>
+
+        <p id="battle-message" class="battle-message" aria-live="polite">Choose an action.</p>
+
+        <div id="battle-actions" class="battle-actions">
+          <button type="button" data-action="pulse"><strong>Pulse</strong><span>Reliable Resolve damage</span></button>
+          <button type="button" data-action="brace"><strong>Brace</strong><span>Guard the next hit + Focus</span></button>
+          <button type="button" data-action="cultivate"><strong>Cultivate</strong><span>Recover Resolve + Focus</span></button>
+          <button id="signature-button" type="button" data-action="signature"><strong id="signature-name">Signature</strong><span>Costs 2 Focus</span></button>
+        </div>
+
+        <button id="battle-continue" class="primary-wide" type="button" hidden>Return to the world</button>
+      </div>
+    </section>
+
+    <section id="log-panel" class="modal-layer" hidden aria-labelledby="log-title">
+      <div class="modal-card log-card">
+        <div class="modal-heading-row">
+          <div>
+            <p class="kicker">LIVING SEED VAULT</p>
+            <h2 id="log-title">PhenoLog</h2>
+          </div>
+          <button id="log-close" type="button" aria-label="Close PhenoLog">Close</button>
+        </div>
+        <p id="log-summary" class="modal-lede">Archive living samples to reveal their field records.</p>
+        <div id="log-grid" class="log-grid"></div>
+      </div>
+    </section>
+
+    <section id="trial-complete" class="modal-layer" hidden aria-labelledby="complete-title">
+      <div class="modal-card completion-card">
+        <p class="kicker">GARDEN TRIAL CLEARED</p>
+        <h2 id="complete-title">The first vault route is secure.</h2>
+        <p>You chose a partner, stabilized field samples, broke Team Lockout’s gate, and cleared the first Garden Trial. Continue exploring to complete the six-entry PhenoLog.</p>
+        <button id="complete-continue" class="primary-wide" type="button">Keep exploring</button>
+        <button id="new-run-button" type="button">Start a new save</button>
+      </div>
+    </section>
+
+    <div id="touch-ui" aria-label="Touch controls">
+      <div id="move-pad" class="touch-pad" aria-label="Movement joystick"><span id="move-knob"></span></div>
+      <div id="look-pad" class="look-pad" aria-label="Camera look area"></div>
+      <div class="touch-buttons">
+        <button id="jump-button" type="button">Jump</button>
+        <button id="interact-button" type="button">Interact</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    const errorPanel = document.getElementById("error-panel");
+    const errorCopy = document.getElementById("error-copy");
+    try {
+      const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.min.js");
+      const { startPhenoQuest } = await import("./game.js");
+      await startPhenoQuest(THREE);
+    } catch (error) {
+      document.getElementById("loading").hidden = true;
+      errorCopy.textContent = error instanceof Error ? error.message : "Unknown startup error.";
+      errorPanel.hidden = false;
+      console.error(error);
+    }
+  </script>
+</body>
+</html>
