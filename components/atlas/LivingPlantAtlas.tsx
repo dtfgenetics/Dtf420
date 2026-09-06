@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import atlasEntities from "@/content/atlas-entities.json";
 import atlasSections from "@/content/atlas-sections.json";
 import learningModules from "@/content/atlas-learning-modules.json";
@@ -11,6 +11,7 @@ import { useAtlasProgress } from "@/components/atlas/AtlasLearningProgress";
 import { useAtlasMastery } from "@/components/atlas/AtlasMastery";
 import styles from "./LivingPlantAtlas.module.css";
 import referenceStyles from "./LivingPlantAtlasReference.module.css";
+import conceptStyles from "./LivingPlantAtlasConcept.module.css";
 import progressStyles from "./LivingPlantAtlasProgress.module.css";
 
 type AtlasSection = (typeof atlasSections)[number];
@@ -53,6 +54,7 @@ export function LivingPlantAtlas() {
   const [panelTab, setPanelTab] = useState<PanelTab>("info");
   const [lightOn, setLightOn] = useState(true);
   const [inspectorOpen, setInspectorOpen] = useState(true);
+  const [query, setQuery] = useState("");
   const inspectorRef = useRef<HTMLElement>(null);
   const inspectorHeadingRef = useRef<HTMLHeadingElement>(null);
   const { progress } = useAtlasProgress();
@@ -113,18 +115,34 @@ export function LivingPlantAtlas() {
     if (tab === "micro" && selectedEntity.layers.includes("micro")) setLayer("micro");
   }
 
+  function searchAtlas(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const normalized = query.trim().toLowerCase();
+    if (!normalized) return;
+    const match = atlasEntities.find((entity) =>
+      entity.label.toLowerCase().includes(normalized)
+      || entity.systemLabel.toLowerCase().includes(normalized)
+      || entity.microTitle.toLowerCase().includes(normalized),
+    );
+    if (match) selectEntity(match.id);
+  }
+
   return (
     <div className={`${styles.atlasShell} ${lightOn ? styles.lightOn : styles.lightOff}`}>
       <section
-        className={`${styles.appFrame} ${inspectorOpen ? referenceStyles.inspectorOpen : referenceStyles.inspectorClosed}`}
+        className={`${styles.appFrame} ${conceptStyles.appFrame} ${inspectorOpen ? referenceStyles.inspectorOpen : referenceStyles.inspectorClosed}`}
         aria-label="THC Living Plant Atlas interactive explorer"
         data-atlas-shell="premium-v2"
         data-inspector-open={inspectorOpen ? "true" : "false"}
       >
-        <aside className={styles.leftRail}>
-          <div className={styles.brandMark} aria-label="THC Living Plant Atlas">
-            <span aria-hidden="true">✦</span>
-            <div><strong>THC</strong><small>Living Plant Atlas</small></div>
+        <aside className={`${styles.leftRail} ${conceptStyles.leftRail}`}>
+          <div className={styles.brandMark} aria-label="DTF Genetics Plant Atlas">
+            <span aria-hidden="true">☘</span>
+            <div><strong>DTF</strong><small>Genetics · Plant Atlas</small></div>
+          </div>
+
+          <div className={conceptStyles.railPromise} aria-hidden="true">
+            <b>Real plants</b><b>Real science</b><b>A safer tomorrow</b>
           </div>
 
           <nav className={styles.primaryNav} aria-label="Atlas views">
@@ -134,26 +152,34 @@ export function LivingPlantAtlas() {
             <button type="button" className={layer === "physiology" ? styles.navActive : ""} onClick={() => changeLayer("physiology")}><i>◉</i><span>Physiology</span></button>
             <button type="button" onClick={() => selectEntity("sex_pollen_seed")}><i>⌁</i><span>Genetics</span></button>
             <button type="button" className={layer === "environment" ? styles.navActive : ""} onClick={() => changeLayer("environment")}><i>☼</i><span>Environment</span></button>
+            <button type="button" className={layer === "diagnostics" ? styles.navActive : ""} onClick={() => changeLayer("diagnostics")}><i>◌</i><span>Pests & Disease</span></button>
+            <button type="button" onClick={() => selectEntity("nodes_branching")}><i>⌁</i><span>Cultivation</span></button>
             <button type="button" onClick={() => changePanelTab("data")}><i>▤</i><span>Glossary</span></button>
+            <button type="button" onClick={() => changePanelTab("data")}><i>◇</i><span>3D Model Info</span></button>
           </nav>
 
           <div className={styles.railFooter}>
             <button type="button" aria-pressed={lightOn} onClick={() => setLightOn((value) => !value)}><span>☼ Lighting</span><i>{lightOn ? "On" : "Off"}</i></button>
             <Link href="/learn/atlas/dashboard"><span>◫ Study dashboard</span><i>Open</i></Link>
+            <em className={conceptStyles.dreamLine}>Dream the Future</em>
           </div>
         </aside>
 
-        <main className={styles.centerStage}>
-          <header className={styles.titleBlock}>
-            <p>THC Living · Interactive botanical reference</p>
-            <h1>Plant Atlas</h1>
-            <span>Explore cannabis anatomy, physiology, development, environment, and evidence-backed observation in one connected 3D system.</span>
-            <div className={styles.scopeLine}>
-              <b>{atlasSections.length} systems</b><b>{lessonCount} lessons</b><b>{diagnosticFramework.observation_fields.length} observation fields</b>
+        <main className={`${styles.centerStage} ${conceptStyles.centerStage}`}>
+          <header className={`${styles.titleBlock} ${conceptStyles.titleBlock}`}>
+            <h1 className={conceptStyles.srOnly}>Plant Atlas</h1>
+            <div>
+              <p>Interactive cannabis anatomy</p>
+              <span>Explore · Learn · Understand · Grow Better</span>
             </div>
+            <form className={conceptStyles.atlasSearch} onSubmit={searchAtlas} role="search">
+              <label className={conceptStyles.srOnly} htmlFor="atlas-search">Search the Atlas</label>
+              <input id="atlas-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the Atlas…" autoComplete="off" />
+              <button type="submit" aria-label="Search the Atlas">⌕</button>
+            </form>
           </header>
 
-          <div className={styles.stageReadout} aria-hidden="true"><span>{layer} layer</span><strong>{selectedEntity.label}</strong></div>
+          <div className={`${styles.stageReadout} ${conceptStyles.stageReadout}`} aria-hidden="true"><span>{layer} layer</span><strong>{selectedEntity.label}</strong></div>
 
           <AtlasInteractiveViewport
             selectedId={selectedId}
@@ -168,7 +194,7 @@ export function LivingPlantAtlas() {
         <aside
           ref={inspectorRef}
           id="atlas-inspector"
-          className={`${styles.inspector} ${referenceStyles.inspectorShell}`}
+          className={`${styles.inspector} ${conceptStyles.inspector} ${referenceStyles.inspectorShell}`}
           aria-live="polite"
           aria-label={`Learn about ${selectedEntity.label}`}
           data-atlas-inspector="responsive-sheet"
@@ -197,8 +223,9 @@ export function LivingPlantAtlas() {
           <div className={styles.inspectorBody}>
             <header className={styles.inspectorHeader}>
               <div>
-                <p>{selectedEntity.systemLabel}</p>
+                <p>Plant anatomy · {selectedEntity.systemLabel}</p>
                 <h2 ref={inspectorHeadingRef} tabIndex={-1}>{selectedEntity.label}</h2>
+                <span className={conceptStyles.inspectorSubtitle}>{selectedEntity.microTitle}</span>
                 <span className={styles.inspectorState}>{stateLabel(selectedState)} · {selectedCompleted}/{selectedRoutes.length} lessons</span>
               </div>
               <button type="button" onClick={() => setInspectorOpen(false)} aria-label="Collapse information panel">×</button>
@@ -206,20 +233,23 @@ export function LivingPlantAtlas() {
 
             {panelTab === "info" ? (
               <>
-                <div className={styles.visualCard}>
+                <div className={`${styles.visualCard} ${conceptStyles.visualCard}`} data-entity={selectedEntity.id}>
                   <div className={styles.visualOrb} aria-hidden="true"><span>◎</span></div>
-                  <div><small>Visual focus</small><strong>{selectedSection.firstAsset}</strong><span>{selectedEntity.microTitle}</span></div>
+                  <div><small>Scientific detail preview</small><strong>{selectedSection.firstAsset}</strong><span>{selectedEntity.microTitle}</span></div>
                 </div>
                 <p className={styles.summary}>{selectedSection.summary}</p>
                 <section className={styles.panelSection}>
                   <h3>Key functions</h3>
                   <div className={styles.functionList}>{selectedEntity.keyFunctions.map((item) => <span key={item}><i>✓</i>{item}</span>)}</div>
                 </section>
-                <section className={styles.learnMore}>
-                  <h3>Continue exploring</h3>
+                <section className={`${styles.learnMore} ${conceptStyles.learnMore}`}>
+                  <h3>Explore this structure</h3>
+                  <button type="button" onClick={() => changeLayer("anatomy")}>Anatomy <small>Structure & cell types</small></button>
+                  <button type="button" onClick={() => changeLayer("physiology")}>Physiology <small>Development & function</small></button>
+                  <button type="button" onClick={() => changePanelTab("micro")}>Microscopy <small>Detailed imagery & analysis</small></button>
+                  <button type="button" onClick={() => changePanelTab("data")}>Data <small>Measurements, research & references</small></button>
                   <Link href={sectionRoute(selectedSection)}>Learn more about {selectedEntity.label}</Link>
                   {selectedNextRoute ? <Link href={selectedNextRoute}>{selectedCompleted === selectedRoutes.length ? "Review next lesson" : "Continue learning"}</Link> : null}
-                  <Link href="/learn/atlas/paths">Guided learning paths</Link>
                 </section>
               </>
             ) : null}
