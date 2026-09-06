@@ -17,11 +17,11 @@ function slugify(value) {
 }
 
 const canonical = new Map();
-for (const module of modules) {
-  const systemSlug = slugify(module.id);
-  for (const lesson of module.lessons || []) {
+for (const learningModule of modules) {
+  const systemSlug = slugify(learningModule.id);
+  for (const lesson of learningModule.lessons || []) {
     const route = `/learn/atlas/${systemSlug}/${slugify(lesson.title)}`;
-    canonical.set(route, { systemId: module.id, title: lesson.title });
+    canonical.set(route, { systemId: learningModule.id, title: lesson.title });
   }
 }
 
