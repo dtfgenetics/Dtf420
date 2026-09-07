@@ -117,6 +117,41 @@ function configureModelMaterials(model, entityMaterials, pickables, semanticMesh
   });
 }
 
+function createSemanticHotspotProxies(THREE, scene, bounds, semanticHotspots, entityMaterials, pickables) {
+  if (!semanticHotspots || typeof semanticHotspots !== "object" || Array.isArray(semanticHotspots)) return [];
+  const size = bounds.getSize(new THREE.Vector3());
+  if (![size.x, size.y, size.z].every(Number.isFinite) || size.y <= 0) return [];
+
+  const proxies = [];
+  for (const [entityId, regions] of Object.entries(semanticHotspots)) {
+    // Named model geometry is more precise and always takes precedence.
+    if (entityMaterials.has(entityId) || !Array.isArray(regions)) continue;
+    for (const region of regions) {
+      const position = region?.position;
+      const radius = Number(region?.radius);
+      if (!Array.isArray(position) || position.length !== 3 || !position.every(Number.isFinite)) continue;
+      if (!Number.isFinite(radius) || radius < 0.02 || radius > 0.25) continue;
+
+      const proxy = new THREE.Mesh(
+        new THREE.SphereGeometry(radius * size.y, 18, 12),
+        new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false }),
+      );
+      proxy.name = `atlas_hotspot_${entityId}`;
+      proxy.userData.entityId = entityId;
+      proxy.userData.atlasSemanticProxy = true;
+      proxy.position.set(
+        bounds.min.x + ((position[0] + 1) / 2) * size.x,
+        bounds.min.y + position[1] * size.y,
+        bounds.min.z + ((position[2] + 1) / 2) * size.z,
+      );
+      scene.add(proxy);
+      pickables.push(proxy);
+      proxies.push(proxy);
+    }
+  }
+  return proxies;
+}
+
 function restoreMaterial(material) {
   if (!material) return;
   const baseEmissive = material.userData?.atlasBaseEmissive;
@@ -254,6 +289,15 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   const entityMaterials = new Map();
   const pickables = [];
   configureModelMaterials(model, entityMaterials, pickables, semanticMeshes);
+  const finalBounds = new THREE.Box3().setFromObject(model);
+  const semanticProxies = createSemanticHotspotProxies(
+    THREE,
+    scene,
+    finalBounds,
+    manifest.semanticHotspots,
+    entityMaterials,
+    pickables,
+  );
 
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
@@ -436,6 +480,11 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
         material.dispose?.();
       });
     });
+    semanticProxies.forEach((proxy) => {
+      scene.remove(proxy);
+      proxy.geometry?.dispose?.();
+      proxy.material?.dispose?.();
+    });
     renderer.dispose();
   }
   window.addEventListener("pagehide", dispose, { once: true });
@@ -446,11 +495,15 @@ export async function startProductionAtlasRuntime(THREE, OrbitControls, GLTFLoad
   document.documentElement.dataset.atlasModelState = "production";
   document.documentElement.dataset.atlasModelVersion = String(manifest.modelVersion || "unversioned");
   document.documentElement.dataset.atlasModelTier = modelVariant.tier;
+  document.documentElement.dataset.atlasSemanticMeshes = String(entityMaterials.size);
+  document.documentElement.dataset.atlasSemanticProxies = String(semanticProxies.length);
   post("atlas:model-state", {
     state: "production",
     modelVersion: String(manifest.modelVersion || "unversioned"),
     modelTier: modelVariant.tier,
     semanticPickables: pickables.length,
+    semanticMeshes: entityMaterials.size,
+    semanticProxies: semanticProxies.length,
   });
   animate();
   return true;

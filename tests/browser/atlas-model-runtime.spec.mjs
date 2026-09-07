@@ -53,7 +53,7 @@ function makeTriangleGlb() {
   return glb;
 }
 
-function releasedManifest() {
+function releasedManifest(overrides = {}) {
   return {
     schemaVersion: 1,
     available: true,
@@ -66,16 +66,17 @@ function releasedManifest() {
     targetHeight: 5.2,
     exposure: 1.05,
     semanticMeshes: { fan_leaves: "leaves" },
+    ...overrides,
   };
 }
 
-async function routeReleasedFixture(page, requests) {
+async function routeReleasedFixture(page, requests, manifestOverrides = {}) {
   const glb = makeTriangleGlb();
   await page.route("**/learn/atlas/atlas-3d/models/model-manifest.json*", async (route) => {
     await route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify(releasedManifest()),
+      body: JSON.stringify(releasedManifest(manifestOverrides)),
     });
   });
   for (const file of ["cannabis-plant.glb", "cannabis-plant-mobile.glb"]) {
@@ -125,4 +126,19 @@ test("Atlas runtime chooses the mobile GLB on a compact viewport", async ({ page
   await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
   await expect(page.locator('html[data-atlas-model-tier="mobile"]')).toHaveCount(1);
   expect(requests).toEqual(["cannabis-plant-mobile.glb"]);
+});
+
+test("Atlas runtime creates fallback hotspots only for entities without real semantic meshes", async ({ page }) => {
+  const requests = [];
+  await routeReleasedFixture(page, requests, {
+    semanticHotspots: {
+      leaves: [{ position: [0, 0.6, 0], radius: 0.1 }],
+      root_system: [{ position: [0, 0.08, 0], radius: 0.11 }],
+    },
+  });
+
+  await page.goto("/learn/atlas/atlas-3d/index.html", { waitUntil: "networkidle" });
+  await expect(page.locator('html[data-atlas-model-state="production"]')).toHaveCount(1, { timeout: 20_000 });
+  await expect(page.locator('html[data-atlas-semantic-meshes="1"]')).toHaveCount(1);
+  await expect(page.locator('html[data-atlas-semantic-proxies="1"]')).toHaveCount(1);
 });
