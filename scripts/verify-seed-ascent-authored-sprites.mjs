@@ -5,6 +5,7 @@ const files={
   launcher:"public/seed-ascent.html",
   manifest:"public/seed-ascent/animation-manifest.js",
   loader:"public/seed-ascent/authored-sprite-loader.js",
+  renderer:"public/seed-ascent/authored-sprite-renderer.js",
   runtime:"public/seed-ascent/player-animation-runtime.js",
 };
 
@@ -15,12 +16,14 @@ for(const path of Object.values(files)){
 const launcher=fs.readFileSync(files.launcher,"utf8");
 const manifestSource=fs.readFileSync(files.manifest,"utf8");
 const loaderSource=fs.readFileSync(files.loader,"utf8");
+const rendererSource=fs.readFileSync(files.renderer,"utf8");
 const runtimeSource=fs.readFileSync(files.runtime,"utf8");
 
 for(const marker of [
   '/seed-ascent/animation-manifest.js',
   '/seed-ascent/authored-sprite-loader.js',
   '/seed-ascent/player-animation-controller.js',
+  '/seed-ascent/authored-sprite-renderer.js',
   '/seed-ascent/engine.js',
   '/seed-ascent/player-animation-runtime.js',
 ]){
@@ -31,13 +34,15 @@ const order=[
   launcher.indexOf('/seed-ascent/animation-manifest.js'),
   launcher.indexOf('/seed-ascent/authored-sprite-loader.js'),
   launcher.indexOf('/seed-ascent/player-animation-controller.js'),
+  launcher.indexOf('/seed-ascent/authored-sprite-renderer.js'),
   launcher.indexOf('/seed-ascent/engine.js'),
   launcher.indexOf('/seed-ascent/player-animation-runtime.js'),
 ];
-if(!order.every((value,index)=>index===0||value>order[index-1]))throw new Error('Authored sprite scripts must load manifest -> loader -> controller -> engine -> runtime');
+if(!order.every((value,index)=>index===0||value>order[index-1]))throw new Error('Authored sprite scripts must load manifest -> loader -> controller -> renderer -> engine -> runtime');
 
 new vm.Script(manifestSource,{filename:files.manifest});
 new vm.Script(loaderSource,{filename:files.loader});
+new vm.Script(rendererSource,{filename:files.renderer});
 new vm.Script(runtimeSource,{filename:files.runtime});
 
 class FakeImage{
@@ -60,10 +65,13 @@ const cases=[
   ['run','NONE','base'],
   ['jump','FIRE','base'],
   ['transform','FIRE','fire'],
+  ['revert','FIRE','fire'],
   ['fireAttack','FIRE','fire'],
   ['transform','ELECTRIC','electric'],
+  ['revert','ELECTRIC','electric'],
   ['electricAttack','ELECTRIC','electric'],
   ['transform','ICE','ice'],
+  ['revert','ICE','ice'],
   ['iceAttack','ICE','ice'],
 ];
 for(const [state,power,expected] of cases){
@@ -78,6 +86,23 @@ for(const key of ['base','fire','electric','ice']){
 }
 
 for(const marker of [
+  'fallbackSuffix',
+  "selected?.status!=='ready'",
+  'context.canvas!==canvas',
+  'target.states?.indexOf(state)',
+  "context.filter='none'",
+  'playerRenderedAuthored',
+  'window.__seedAscentAuthoredRenderer',
+]){
+  if(!rendererSource.includes(marker))throw new Error(`Authored renderer missing fail-safe marker: ${marker}`);
+}
+
+for(const marker of [
+  'visualPower',
+  "if(current.power==='NONE')",
+  'visualPower=previous.power',
+  "if(state.state!=='revert')visualPower=currentPower",
+  'playerAnimationPower',
   'playerAnimationSheet',
   'playerAnimationSheetStatus',
   'playerAnimationUsingAuthored',
@@ -87,4 +112,4 @@ for(const marker of [
   if(!runtimeSource.includes(marker))throw new Error(`Animation runtime missing authored sprite fallback marker: ${marker}`);
 }
 
-console.log('Seed Ascent authored sprite integration verification passed: loader routing, script order, runtime status publication, and fallback contract.');
+console.log('Seed Ascent authored sprite integration verification passed: loader routing, phenotype-preserving revert, fail-safe renderer substitution, script order, runtime status publication, and fallback contract.');
