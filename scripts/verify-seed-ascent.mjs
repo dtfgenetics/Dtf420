@@ -4,11 +4,15 @@ import vm from "node:vm";
 const files = {
   launcher: "public/seed-ascent.html",
   styles: "public/seed-ascent/styles.css",
+  phenotypeStyles: "public/seed-ascent/phenotype-ui.css",
   levels: "public/seed-ascent/levels.js",
   engine: "public/seed-ascent/engine.js",
   route: "app/games/seed-ascent/page.tsx",
   library: "lib/game-catalog.ts",
   sitemap: "app/sitemap.ts",
+  seedSprites: "public/seed-ascent/assets/seed-man-sprites.webp",
+  gameplaySprites: "public/seed-ascent/assets/gameplay-sprites.webp",
+  growRoom: "public/seed-ascent/assets/grow-room-background.webp",
 };
 
 for (const path of Object.values(files)) {
@@ -28,7 +32,8 @@ for (const path of Object.values(files)) {
 }
 
 for (const marker of [
-  'id="game"', 'id="jumpBtn"', 'id="runBtn"',
+  'id="game"', 'id="jumpBtn"', 'id="runBtn"', 'id="attackBtn"', 'id="phenotypePanel"',
+  '/seed-ascent/phenotype-ui.css',
   '/seed-ascent/levels.js', '/seed-ascent/engine.js',
 ]) {
   if (!launcher.includes(marker)) throw new Error(`Seed Ascent launcher missing: ${marker}`);
@@ -61,6 +66,12 @@ for (const marker of [
   "if(!input.jumpHeld&&game.mode==='playing')",
   "document.addEventListener('visibilitychange'", "window.__seedAscentDebug",
   "addEventListener('pointerdown'", "window.addEventListener('blur'",
+  "EMBER_BEETLE:'FIRE'", "STORM_MOTH:'ELECTRIC'", "FROST_GRUB:'ICE'",
+  "CINDER_WARDEN:'FIRE'", "VOLT_WARDEN:'ELECTRIC'", "GLACIER_WARDEN:'ICE'",
+  "function activatePhenotypePower()", "function updateCombat()", "game.power==='FIRE'",
+  "game.power==='ELECTRIC'", "game.power==='ICE'", "canvas.dataset.playerForm",
+  "/seed-ascent/assets/seed-man-sprites.webp", "/seed-ascent/assets/gameplay-sprites.webp", "/seed-ascent/assets/grow-room-background.webp",
+  "MINOR_BOSSES.has(e.type)?2700:1800", "PHENOTYPE_UI", "--power-progress",
 ]) {
   if (!engine.includes(marker)) throw new Error(`Seed Ascent engine missing mechanic: ${marker}`);
 }
@@ -156,6 +167,9 @@ if (!advanced.every((level) => Array.isArray(level.hazards) && level.hazards.len
   throw new Error("Every advanced Seed Ascent stage must contain an environmental hazard");
 }
 if (!levels.at(-1)?.boss) throw new Error("The final Seed Ascent stage must contain a boss encounter");
+for (const type of ["EMBER_BEETLE", "STORM_MOTH", "FROST_GRUB", "CINDER_WARDEN", "VOLT_WARDEN", "GLACIER_WARDEN"]) {
+  if (!levels.some((level) => level.enemies.some((enemy) => enemy[2] === type))) throw new Error(`Seed Ascent campaign missing combat phenotype source: ${type}`);
+}
 if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent route is not wired to the launcher");
 if (!library.includes('slug: "seed-ascent"')) throw new Error("Seed Ascent is missing from the Games catalog");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
