@@ -81,6 +81,12 @@ The render-only world animation layer already defines the atmospheric identity f
 - 6-1 Storm Canopy: wind-driven leaves, charged clouds, electric flashes.
 - 6-2 Final Trichome stage: dense trichome fields, final sparkle layers, celebratory phenotype motifs.
 
+## Runtime integration gate
+
+The approved six-frame Seed Man sheet remains the fallback until an authored replacement sheet exists and passes QA. New character sheets are integrated only when the runtime can resolve the named state from `animation-manifest.js` and the asset has passed validation. Missing optional sheets must fall back cleanly instead of breaking boot or drawing empty frames.
+
+Animation playback stays presentation-only: movement, damage, attacks, power duration, collision, checkpoints, and boss state are committed by the simulation independently of animation completion.
+
 ## QA gate
 
 Every generated or converted sprite family must:
