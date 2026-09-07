@@ -29,12 +29,20 @@
     tri: document.getElementById('trichomeLabel'),
     health: document.getElementById('healthLabel'),
     power: document.getElementById('powerLabel'),
+    attack: document.getElementById('attackBtn'),
+    phenotypePanel: document.getElementById('phenotypePanel'),
+    phenotypeIcon: document.getElementById('phenotypeIcon'),
+    phenotypeName: document.getElementById('phenotypeName'),
+    phenotypeAbility: document.getElementById('phenotypeAbility'),
+    phenotypeMeterFill: document.getElementById('phenotypeMeterFill'),
+    phenotypeTime: document.getElementById('phenotypeTime'),
   };
 
   const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
   const overlap = (a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
   const horizontalOverlap = (a,b,grace=0)=>a.x+a.w-grace>b.x&&a.x+grace<b.x+b.w;
   const rand = (a,b)=>a+Math.random()*(b-a);
+  const setText = (element,value)=>{const text=String(value);if(element&&element.textContent!==text)element.textContent=text};
 
   const unlocked = clamp(parseInt(localStorage.getItem('seedAscentUnlocked')||'1',10)||1,1,LEVELS.length||1);
   const game = {
@@ -42,7 +50,7 @@
     score:0, trichomes:0, levelStartScore:0, levelStartTrichomes:0,
     health:3, maxHealth:3,
     cameraX:0, shake:0, level:null, checkpoint:null,
-    power:'NONE', powerTimer:0, shield:false, attackCooldown:0,
+    power:'NONE', powerTimer:0, powerDuration:0, shield:false, attackCooldown:0,
     best:parseInt(localStorage.getItem('seedAscentRetroBest')||'0',10)||0,
   };
   const input = {left:false,right:false,jumpHeld:false,jumpPressed:false,jumpReleased:false,run:false,attackPressed:false};
@@ -58,6 +66,15 @@
 
   const ENEMY_POWER={EMBER_BEETLE:'FIRE',CINDER_WARDEN:'FIRE',STORM_MOTH:'ELECTRIC',VOLT_WARDEN:'ELECTRIC',FROST_GRUB:'ICE',GLACIER_WARDEN:'ICE'};
   const MINOR_BOSSES=new Set(['CINDER_WARDEN','VOLT_WARDEN','GLACIER_WARDEN']);
+  const COMBAT_POWERS=new Set(['FIRE','ELECTRIC','ICE']);
+  const PHENOTYPE_UI={
+    LIGHT:{icon:'☀',name:'LIGHT PHENOTYPE',ability:'Higher speed and stronger jumps.',color:'#efff55'},
+    RUSH:{icon:'✦',name:'RUSH PHENOTYPE',ability:'Charge through pests without taking damage.',color:'#ec62ff'},
+    SHIELD:{icon:'⬢',name:'SHIELD PHENOTYPE',ability:'Botanical armor blocks the next hit.',color:'#53f0bd'},
+    FIRE:{icon:'●',name:'FIRE PHENOTYPE',ability:'Press X, E, or POWER to launch a fireball.',color:'#ff7045'},
+    ELECTRIC:{icon:'ϟ',name:'ELECTRIC PHENOTYPE',ability:'Call lightning onto the nearest enemy ahead.',color:'#ffe45e'},
+    ICE:{icon:'◆',name:'ICE PHENOTYPE',ability:'Freeze enemies, then pass or stomp safely.',color:'#84eaff'},
+  };
 
   function audio(){
     if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch{}}
@@ -81,12 +98,15 @@
   };
 
   function sync(){
-    if(ui.level) ui.level.textContent=game.level?game.level.world:LEVELS[game.selectedLevel]?.world||'1-1';
-    if(ui.score) ui.score.textContent=String(game.score).padStart(6,'0');
-    if(ui.tri) ui.tri.textContent=game.trichomes;
-    if(ui.health) ui.health.textContent=game.health;
-    if(ui.power) ui.power.textContent=game.shield?'SHIELD':game.power;
-    canvas.dataset.playerForm=game.shield?'SHIELD':game.power;
+    const form=game.shield?'SHIELD':game.power;
+    setText(ui.level,game.level?game.level.world:LEVELS[game.selectedLevel]?.world||'1-1');
+    setText(ui.score,String(game.score).padStart(6,'0'));
+    setText(ui.tri,game.trichomes);setText(ui.health,game.health);
+    setText(ui.power,form==='NONE'?'NONE':form==='SHIELD'?'SHIELD':`${form} ${Math.ceil(game.powerTimer/60)}s`);
+    if(ui.attack){const equipped=COMBAT_POWERS.has(game.power);ui.attack.disabled=!equipped||game.attackCooldown>0;setText(ui.attack,equipped?(game.attackCooldown>0?'✦ RECHARGE':`✦ ${game.power}`):'✦ POWER')}
+    const phenotype=PHENOTYPE_UI[form];
+    if(ui.phenotypePanel){ui.phenotypePanel.hidden=!phenotype;if(phenotype){const seconds=form==='SHIELD'?'READY':`${Math.ceil(game.powerTimer/60)}s`;const progress=form==='SHIELD'?100:Math.max(0,game.powerDuration?game.powerTimer/game.powerDuration*100:0);ui.phenotypePanel.style.setProperty('--phenotype',phenotype.color);ui.phenotypePanel.style.setProperty('--power-progress',`${progress}%`);setText(ui.phenotypeIcon,phenotype.icon);setText(ui.phenotypeName,phenotype.name);setText(ui.phenotypeAbility,phenotype.ability);setText(ui.phenotypeTime,seconds);if(ui.attack)ui.attack.style.setProperty('--phenotype',phenotype.color)}}
+    canvas.dataset.playerForm=form;
     canvas.dataset.attackReady=String(game.attackCooldown<=0);
   }
   function score(n){game.score+=n;sync()}
@@ -164,7 +184,7 @@
   function loadLevel(i){
     clearInput();
     game.levelIndex=clamp(i,0,LEVELS.length-1);game.selectedLevel=game.levelIndex;game.level=LEVELS[game.levelIndex];buildLevel(game.level);
-    game.cameraX=0;game.power='NONE';game.powerTimer=0;game.shield=false;game.health=game.maxHealth;game.checkpoint=null;
+    game.cameraX=0;game.power='NONE';game.powerTimer=0;game.powerDuration=0;game.shield=false;game.health=game.maxHealth;game.checkpoint=null;
     Object.assign(player,{invuln:0,surface:null,riding:null});
     snapPlayerToFloor(96,340);sync();
   }
@@ -180,13 +200,13 @@
   }
   function respawn(){
     clearInput();
-    game.power='NONE';game.powerTimer=0;game.shield=false;
+    game.power='NONE';game.powerTimer=0;game.powerDuration=0;game.shield=false;
     const cp=game.checkpoint;
     snapPlayerToFloor(cp?cp.x+30:96,cp?cp.y:320);
     player.invuln=100;
     game.cameraX=clamp(player.x-W*.35,0,game.level.width-W);sync();
   }
-  function gameOver(){clearInput();game.mode='gameOver';game.power='NONE';game.powerTimer=0;game.shield=false;commitBest();sounds.hit();sync()}
+  function gameOver(){clearInput();game.mode='gameOver';game.power='NONE';game.powerTimer=0;game.powerDuration=0;game.shield=false;commitBest();sounds.hit();sync()}
   function fallDeath(){if(game.mode!=='playing')return;game.health--;sounds.hit();game.shake=18;if(game.health<=0)gameOver();else respawn()}
   function hurt(){
     if(player.invuln>0||game.power==='RUSH'||game.mode!=='playing')return;
@@ -195,13 +215,13 @@
     if(game.health<=0)gameOver();
   }
   function collectPower(type){
-    if(type==='SHIELD'){game.shield=true;game.power='NONE';game.powerTimer=0}
-    else{game.power=type;game.powerTimer=type==='RUSH'?600:900}
+    if(type==='SHIELD'){game.shield=true;game.power='NONE';game.powerTimer=0;game.powerDuration=0}
+    else{game.power=type;game.powerTimer=type==='RUSH'?600:900;game.powerDuration=game.powerTimer}
     score(500);sounds.power();
   }
   function grantEnemyPower(e){
     const type=ENEMY_POWER[e.type];if(!type)return;
-    game.power=type;game.powerTimer=MINOR_BOSSES.has(e.type)?1800:900;game.attackCooldown=0;
+    game.power=type;game.powerTimer=MINOR_BOSSES.has(e.type)?2700:1800;game.powerDuration=game.powerTimer;game.attackCooldown=0;
     particle(e.x+e.w/2,e.y+e.h/2,type==='FIRE'?'#ff7a42':type==='ELECTRIC'?'#ffe45e':'#8feaff',22);sounds.power();sync();
   }
   function defeatEnemy(e,points=250){
@@ -439,7 +459,7 @@
     updateMoving();updatePlayer();
     if(game.mode!=='playing')return;
     updateCoins();updatePowerups();updateHazards();updateEnemies();updateCombat();updateCheckpoints();updateBoss();updateExit();
-    if(game.powerTimer>0&&--game.powerTimer<=0){game.power='NONE';sync()}
+    if(game.powerTimer>0&&--game.powerTimer<=0){game.power='NONE';game.powerDuration=0;sync()}
     for(const b of blocks)if(b.bump>0)b.bump--;
     for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.life--}
     particles=particles.filter(p=>p.life>0);
@@ -554,7 +574,7 @@
   window.__seedAscentDebug={
     snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,score:game.score,trichomes:game.trichomes,power:game.shield?'SHIELD':game.power,attackCooldown:game.attackCooldown,projectileCount:projectiles.length,player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length,simulationHz:Math.round(1000/SIM_STEP_MS)}},
     start(){startSelected()},
-    setPower(type){if(['NONE','LIGHT','RUSH','FIRE','ELECTRIC','ICE'].includes(type)){game.power=type;game.powerTimer=type==='NONE'?0:900;game.attackCooldown=0;sync()}},
+    setPower(type){if(['NONE','LIGHT','RUSH','FIRE','ELECTRIC','ICE'].includes(type)){game.power=type;game.powerTimer=type==='NONE'?0:1800;game.powerDuration=game.powerTimer;game.attackCooldown=0;sync()}},
   };
 
   sync();requestAnimationFrame(loop);

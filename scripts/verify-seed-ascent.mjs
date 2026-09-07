@@ -4,6 +4,7 @@ import vm from "node:vm";
 const files = {
   launcher: "public/seed-ascent.html",
   styles: "public/seed-ascent/styles.css",
+  phenotypeStyles: "public/seed-ascent/phenotype-ui.css",
   levels: "public/seed-ascent/levels.js",
   engine: "public/seed-ascent/engine.js",
   route: "app/games/seed-ascent/page.tsx",
@@ -31,7 +32,8 @@ for (const path of Object.values(files)) {
 }
 
 for (const marker of [
-  'id="game"', 'id="jumpBtn"', 'id="runBtn"', 'id="attackBtn"',
+  'id="game"', 'id="jumpBtn"', 'id="runBtn"', 'id="attackBtn"', 'id="phenotypePanel"',
+  '/seed-ascent/phenotype-ui.css',
   '/seed-ascent/levels.js', '/seed-ascent/engine.js',
 ]) {
   if (!launcher.includes(marker)) throw new Error(`Seed Ascent launcher missing: ${marker}`);
@@ -69,6 +71,7 @@ for (const marker of [
   "function activatePhenotypePower()", "function updateCombat()", "game.power==='FIRE'",
   "game.power==='ELECTRIC'", "game.power==='ICE'", "canvas.dataset.playerForm",
   "/seed-ascent/assets/seed-man-sprites.webp", "/seed-ascent/assets/gameplay-sprites.webp", "/seed-ascent/assets/grow-room-background.webp",
+  "MINOR_BOSSES.has(e.type)?2700:1800", "PHENOTYPE_UI", "--power-progress",
 ]) {
   if (!engine.includes(marker)) throw new Error(`Seed Ascent engine missing mechanic: ${marker}`);
 }

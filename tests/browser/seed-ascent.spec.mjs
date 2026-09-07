@@ -59,9 +59,15 @@ test("Seed Ascent visibly changes phenotype and fires the equipped combat power"
   await frame.locator("#startBtn").click();
   await frame.locator("#game").evaluate(() => window.__seedAscentDebug.setPower("FIRE"));
   await expect(frame.locator("#game")).toHaveAttribute("data-player-form", "FIRE");
+  await expect(frame.locator("#phenotypePanel")).toBeVisible();
+  await expect(frame.locator("#phenotypeName")).toHaveText("FIRE PHENOTYPE");
+  await expect(frame.locator("#phenotypeAbility")).toContainText("launch a fireball");
+  await expect(frame.locator("#phenotypeTime")).toHaveText(/30s|29s/);
+  await expect(frame.locator("#attackBtn")).toBeEnabled();
   await frame.locator("#game").focus();
   await page.keyboard.press("x");
   await expect.poll(async () => (await snapshot(frame))?.projectileCount).toBeGreaterThan(0);
+  await expect(frame.locator("#attackBtn")).toBeDisabled();
 });
 
 test("Seed Ascent jump control lifts the player from the floor", async ({ page }) => {
