@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Seed Ascent | DTF Games",
-  description: "Run through 12 stages across six cannabis-themed grow worlds, stomp pests, collect trichomes, find power-ups, and defeat the final boss in Seed Ascent.",
+  description: "Transform Seed Man with enemy-earned Fire, Electric, and Ice phenotypes across 12 cannabis-themed platforming stages.",
   alternates: {
     canonical: "/games/seed-ascent",
   },
@@ -16,7 +16,7 @@ export default function SeedAscentPage() {
           <p className="eyebrow">DTF Games · Retro platformer</p>
           <h1>Seed Ascent</h1>
           <p className="lede">
-            Run through 12 side-scrolling stages across six grow worlds. Build momentum, double jump across gaps, stomp pests, collect trichomes, hit checkpoints, find power-ups, and defeat the final garden boss.
+            Run through 12 side-scrolling stages across six grow worlds. Defeat powered enemies and minor bosses to transform Seed Man, then launch fireballs, call lightning, or freeze pests before the phenotype timer expires.
           </p>
         </div>
         <Link className="button" href="/games">All games</Link>
