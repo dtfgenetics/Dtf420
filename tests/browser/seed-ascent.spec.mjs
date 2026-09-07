@@ -24,6 +24,7 @@ test("Seed Ascent loads the verified 12-stage retro campaign and starts world 1-
   await expect(frame.locator("#startBtn")).toBeVisible();
   await expect(frame.locator("#jumpBtn")).toBeAttached();
   await expect(frame.locator("#runBtn")).toBeAttached();
+  await expect(frame.locator("#attackBtn")).toBeAttached();
 
   const campaign = await frame.locator("body").evaluate(() => ({
     count: window.SEED_ASCENT_LEVELS?.length ?? 0,
@@ -50,6 +51,17 @@ test("Seed Ascent loads the verified 12-stage retro campaign and starts world 1-
   expect(Math.max(...state.pits)).toBeLessThanOrEqual(state.maxSafePit);
   expect(state.simulationHz).toBe(60);
   await expectNoHorizontalOverflow(page);
+});
+
+test("Seed Ascent visibly changes phenotype and fires the equipped combat power", async ({ page }) => {
+  await page.goto("/games/seed-ascent", { waitUntil: "networkidle" });
+  const frame = await getGameFrame(page);
+  await frame.locator("#startBtn").click();
+  await frame.locator("#game").evaluate(() => window.__seedAscentDebug.setPower("FIRE"));
+  await expect(frame.locator("#game")).toHaveAttribute("data-player-form", "FIRE");
+  await frame.locator("#game").focus();
+  await page.keyboard.press("x");
+  await expect.poll(async () => (await snapshot(frame))?.projectileCount).toBeGreaterThan(0);
 });
 
 test("Seed Ascent jump control lifts the player from the floor", async ({ page }) => {
@@ -188,5 +200,6 @@ test("Seed Ascent exposes playable touch controls at 390px", async ({ page }, te
   await expect(frame.locator("#rightBtn")).toBeVisible();
   await expect(frame.locator("#jumpBtn")).toBeVisible();
   await expect(frame.locator("#runBtn")).toBeVisible();
+  await expect(frame.locator("#attackBtn")).toBeVisible();
   await expectNoHorizontalOverflow(page);
 });
