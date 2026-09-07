@@ -15,7 +15,7 @@
 
     function config(name=state){return manifest.states?.[name]||manifest.states.idle}
     function duration(name=state){
-      const c=config(name);return Math.max(1,(c.authoredFrames||c.frames?.length||1)/Math.max(1,c.fps||1));
+      const c=config(name);return Math.max(1,(c.targetFrames||c.frames?.length||1)/Math.max(1,c.fps||1));
     }
     function setState(next,{force=false}={}){
       if(!manifest.states?.[next])return state;
@@ -49,7 +49,7 @@
       return frames[Math.min(frames.length-1,index)];
     }
     function authoredFrame(){
-      const c=config();const count=Math.max(1,c.authoredFrames||c.frames?.length||1),fps=Math.max(1,c.fps||1);
+      const c=config();const count=Math.max(1,c.targetFrames||c.frames?.length||1),fps=Math.max(1,c.fps||1);
       const index=Math.floor(elapsed*fps);return c.loop?index%count:Math.min(count-1,index);
     }
     function snapshot(){return {state,elapsed,forcedUntil,frame:frame(),authoredFrame:authoredFrame(),priority:PRIORITY[state]||0}}
