@@ -65,4 +65,4 @@ If an asset works locally but not on the live site, inspect:
 
 ## Completion gate
 
-A repaired asset is not complete until the runtime renders the intended asset on desktop and mobile-sized viewports with no 404s, console asset errors, or placeholder fallbacks.
+A repaired asset is not complete until it passes `dtf-game-asset-qa` when generated or converted, and the runtime renders the intended asset on desktop and mobile-sized viewports with no 404s, console asset errors, or placeholder fallbacks.

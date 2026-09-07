@@ -22,6 +22,7 @@ Load the matching skills before editing:
 - Phaser scene, renderer, movement, board animation, sprite behavior -> `dtf-phaser-2d`
 - Three.js / React Three Fiber, 3D boards/pieces/environments, GLB/glTF, camera controls, raycast picking, WebGL performance -> `dtf-threejs-3d`
 - Missing images, sprites, boards, cards, atlases, audio, 3D models, or broken asset paths -> `dtf-game-assets`
+- Newly generated, converted, optimized, or atlas-packed images -> `dtf-game-asset-qa` after `dtf-game-assets`
 - HUD, menus, responsive layout, touch controls, readability -> `dtf-game-ui-mobile`
 - Board-game rules, cards, decks, turn state, deterministic resolution -> `dtf-board-card-games`
 - Rooms, invite links, player naming, synchronized turns -> `dtf-multiplayer-lobbies`

@@ -25,6 +25,9 @@ test("Seed Ascent loads the verified 12-stage retro campaign and starts world 1-
   await expect(frame.locator("#jumpBtn")).toBeAttached();
   await expect(frame.locator("#runBtn")).toBeAttached();
   await expect(frame.locator("#attackBtn")).toBeAttached();
+  await expect.poll(async () => (await snapshot(frame))?.assetsReady, {
+    message: "all authored Seed Ascent sprite families and backgrounds should load",
+  }).toBe(true);
 
   const campaign = await frame.locator("body").evaluate(() => ({
     count: window.SEED_ASCENT_LEVELS?.length ?? 0,
