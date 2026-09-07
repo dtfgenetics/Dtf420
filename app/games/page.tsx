@@ -43,7 +43,7 @@ export default function GamesPage() {
             <span>Playable now</span>
           </div>
           <div className={styles.statChip}>
-            <strong>4</strong>
+            <strong>5</strong>
             <span>Preview builds</span>
           </div>
           <div className={styles.statChip}>
@@ -261,6 +261,35 @@ export default function GamesPage() {
             </div>
             <div className={styles.cardAction}>
               <Link className={styles.secondaryAction} href="/games/strain-showdown" aria-label="Test Strain Showdown Battle Lab">Test Battle Lab</Link>
+            </div>
+          </div>
+        </article>
+
+        <article className={styles.gameCard}>
+          <div className={`${styles.poster} ${styles.budPoster}`}>
+            <div className={styles.posterTop}>
+              <span className={`${styles.status} ${styles.previewStatus}`}>Development preview</span>
+              <span className={styles.posterMeta}>3D exploration RPG · 1 player</span>
+            </div>
+            <div className={styles.posterTitle}>
+              <span>Explore. Stabilize. Archive.</span>
+              <strong>PhenoQuest</strong>
+            </div>
+          </div>
+
+          <div className={styles.cardBody}>
+            <h3>Build the Living Seed Vault.</h3>
+            <p>
+              Choose a starter Pheno, explore Seedling Town and the Terp Fields in a real Three.js world, stabilize living samples through Resolve Trials, fill the PhenoLog, break Team Lockout’s barrier, and clear the first Garden Trial.
+            </p>
+            <div className={styles.tagRow} aria-label="PhenoQuest preview details">
+              <span className={styles.tag}>3 explorable regions</span>
+              <span className={styles.tag}>6 original Phenos</span>
+              <span className={styles.tag}>Resolve Trials</span>
+              <span className={styles.tag}>Keyboard + touch</span>
+            </div>
+            <div className={styles.cardAction}>
+              <Link className={styles.secondaryAction} href="/games/phenoquest" aria-label="Test PhenoQuest 3D preview">Explore preview</Link>
             </div>
           </div>
         </article>
