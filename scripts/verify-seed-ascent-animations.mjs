@@ -4,33 +4,38 @@ import vm from "node:vm";
 const launcherPath="public/seed-ascent.html";
 const manifestPath="public/seed-ascent/animation-manifest.js";
 const loaderPath="public/seed-ascent/authored-sprite-loader.js";
+const rendererPath="public/seed-ascent/authored-sprite-renderer.js";
 const controllerPath="public/seed-ascent/player-animation-controller.js";
 const runtimePath="public/seed-ascent/player-animation-runtime.js";
 
-for(const path of [launcherPath,manifestPath,loaderPath,controllerPath,runtimePath]){
+for(const path of [launcherPath,manifestPath,loaderPath,rendererPath,controllerPath,runtimePath]){
   if(!fs.existsSync(path))throw new Error(`Missing Seed Ascent animation file: ${path}`);
 }
 
 const launcher=fs.readFileSync(launcherPath,"utf8");
 const source=fs.readFileSync(manifestPath,"utf8");
 const loaderSource=fs.readFileSync(loaderPath,"utf8");
+const rendererSource=fs.readFileSync(rendererPath,"utf8");
 const controllerSource=fs.readFileSync(controllerPath,"utf8");
 const runtimeSource=fs.readFileSync(runtimePath,"utf8");
 if(!launcher.includes('/seed-ascent/animation-manifest.js'))throw new Error("Seed Ascent launcher must load the animation manifest");
 if(!launcher.includes('/seed-ascent/authored-sprite-loader.js'))throw new Error("Seed Ascent launcher must load the authored sprite loader");
+if(!launcher.includes('/seed-ascent/authored-sprite-renderer.js'))throw new Error("Seed Ascent launcher must load the authored sprite renderer");
 if(!launcher.includes('/seed-ascent/player-animation-controller.js'))throw new Error("Seed Ascent launcher must load the player animation controller");
 if(!launcher.includes('/seed-ascent/player-animation-runtime.js'))throw new Error("Seed Ascent launcher must load the player animation runtime bridge");
 const scriptOrder=[
   launcher.indexOf('/seed-ascent/animation-manifest.js'),
   launcher.indexOf('/seed-ascent/authored-sprite-loader.js'),
   launcher.indexOf('/seed-ascent/player-animation-controller.js'),
+  launcher.indexOf('/seed-ascent/authored-sprite-renderer.js'),
   launcher.indexOf('/seed-ascent/engine.js'),
   launcher.indexOf('/seed-ascent/player-animation-runtime.js'),
 ];
-if(!scriptOrder.every((value,index)=>index===0||value>scriptOrder[index-1]))throw new Error("Seed Ascent animation scripts must load manifest -> authored loader -> controller -> engine -> runtime");
+if(!scriptOrder.every((value,index)=>index===0||value>scriptOrder[index-1]))throw new Error("Seed Ascent animation scripts must load manifest -> authored loader -> controller -> renderer -> engine -> runtime");
 
 new vm.Script(source,{filename:manifestPath});
 new vm.Script(loaderSource,{filename:loaderPath});
+new vm.Script(rendererSource,{filename:rendererPath});
 new vm.Script(controllerSource,{filename:controllerPath});
 new vm.Script(runtimeSource,{filename:runtimePath});
 
@@ -77,10 +82,13 @@ const authoredRouting=[
   ['run','NONE','base'],
   ['jump','FIRE','base'],
   ['transform','FIRE','fire'],
+  ['revert','FIRE','fire'],
   ['fireAttack','FIRE','fire'],
   ['transform','ELECTRIC','electric'],
+  ['revert','ELECTRIC','electric'],
   ['electricAttack','ELECTRIC','electric'],
   ['transform','ICE','ice'],
+  ['revert','ICE','ice'],
   ['iceAttack','ICE','ice'],
 ];
 for(const [state,power,expected] of authoredRouting){
@@ -115,14 +123,29 @@ controller.reset();
 if(controller.authoredFrame()!==0)throw new Error("Animation controller reset must return to frame zero");
 
 for(const marker of [
+  'fallbackSuffix',
+  "selected?.status!=='ready'",
+  'context.canvas!==canvas',
+  'target.states?.indexOf(state)',
+  "context.filter='none'",
+  'playerRenderedAuthored',
+  'window.__seedAscentAuthoredRenderer',
+]){
+  if(!rendererSource.includes(marker))throw new Error(`Authored renderer missing fail-safe marker: ${marker}`);
+}
+
+for(const marker of [
   "window.__seedAscentDebug",
   "controller.trigger('hurt')",
   "controller.trigger('transform')",
   "controller.trigger('revert')",
   "controller.trigger('attack',{power:current.power})",
+  "visualPower=previous.power",
+  "if(state.state!=='revert')visualPower=currentPower",
   "canvas.dataset.playerAnimation",
   "canvas.dataset.playerAnimationFrame",
   "canvas.dataset.playerAuthoredFrame",
+  "canvas.dataset.playerAnimationPower",
   "canvas.dataset.playerAnimationSheet",
   "canvas.dataset.playerAnimationSheetStatus",
   "canvas.dataset.playerAnimationUsingAuthored",
@@ -132,4 +155,4 @@ for(const marker of [
   if(!runtimeSource.includes(marker))throw new Error(`Animation runtime bridge missing integration marker: ${marker}`);
 }
 
-console.log(`Seed Ascent animation verification passed: ${requiredStates.length} character states, authored sheet routing/fallback, controller priority/state timing, runtime gameplay bridge, 3 phenotype attack families, ${worlds.length} world motion profiles.`);
+console.log(`Seed Ascent animation verification passed: ${requiredStates.length} character states, phenotype-preserving authored sheet routing, fail-safe renderer substitution, controller priority/state timing, runtime gameplay bridge, 3 phenotype attack families, ${worlds.length} world motion profiles.`);
