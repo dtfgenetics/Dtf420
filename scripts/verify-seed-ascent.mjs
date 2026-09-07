@@ -13,6 +13,9 @@ const files = {
   seedSprites: "public/seed-ascent/assets/seed-man-sprites.webp",
   gameplaySprites: "public/seed-ascent/assets/gameplay-sprites.webp",
   growRoom: "public/seed-ascent/assets/grow-room-background.webp",
+  fireEnemies: "public/seed-ascent/assets/fire-enemies.webp",
+  electricEnemies: "public/seed-ascent/assets/electric-enemies.webp",
+  iceEnemies: "public/seed-ascent/assets/ice-enemies.webp",
 };
 
 for (const path of Object.values(files)) {
@@ -71,6 +74,7 @@ for (const marker of [
   "function activatePhenotypePower()", "function updateCombat()", "game.power==='FIRE'",
   "game.power==='ELECTRIC'", "game.power==='ICE'", "canvas.dataset.playerForm",
   "/seed-ascent/assets/seed-man-sprites.webp", "/seed-ascent/assets/gameplay-sprites.webp", "/seed-ascent/assets/grow-room-background.webp",
+  "/seed-ascent/assets/fire-enemies.webp", "/seed-ascent/assets/electric-enemies.webp", "/seed-ascent/assets/ice-enemies.webp",
   "MINOR_BOSSES.has(e.type)?2700:1800", "PHENOTYPE_UI", "--power-progress",
 ]) {
   if (!engine.includes(marker)) throw new Error(`Seed Ascent engine missing mechanic: ${marker}`);
