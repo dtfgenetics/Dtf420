@@ -54,6 +54,14 @@ test("homepage shell exposes the intended visual hierarchy and valid destination
   await attachFullPageScreenshot(page, testInfo, mobileProject ? "homepage-mobile-default" : "homepage-desktop");
 });
 
+test("global shell exposes skip navigation and current-section state", async ({ page }) => {
+  await page.goto("/games");
+
+  await expect(page.getByRole("link", { name: "Skip to main content" })).toHaveAttribute("href", "#main-content");
+  await expect(page.locator("main#main-content")).toHaveAttribute("tabindex", "-1");
+  await expect(page.locator('.desktop-nav a[aria-current="page"]')).toHaveText("Games");
+});
+
 test("mobile homepage remains contained at 390px and 430px", async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.includes("mobile"), "mobile-only responsive coverage");
 

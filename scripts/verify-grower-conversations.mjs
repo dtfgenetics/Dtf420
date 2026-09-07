@@ -8,10 +8,10 @@ const files = {
   css: path.join(root, "app/games/grower-conversations/page.module.css"),
   engine: path.join(root, "lib/games/grower-conversations.ts"),
   data: path.join(root, "data/games/grower-conversations/prompts.json"),
-  hub: path.join(root, "app/games/page.tsx"),
+  catalog: path.join(root, "lib/game-catalog.ts"),
 };
 
-const [route, component, css, engine, dataText, hub] = await Promise.all(
+const [route, component, css, engine, dataText, catalog] = await Promise.all(
   Object.values(files).map((file) => fs.readFile(file, "utf8")),
 );
 
@@ -77,8 +77,8 @@ requireText(engine, "mulberry32", "seeded shuffle generator");
 requireText(engine, "filterGrowerConversationPrompts", "prompt filters");
 requireText(css, "@media (max-width: 430px)", "phone layout");
 requireText(css, "@media (prefers-reduced-motion: reduce)", "reduced-motion support");
-requireText(hub, 'href="/games/grower-conversations"', "games hub route");
-requireText(hub, "Grower Conversations", "games hub title");
+requireText(catalog, 'slug: "grower-conversations"', "games catalog route");
+requireText(catalog, 'title: "Grower Conversations"', "games catalog title");
 
 const forbiddenScoreLanguage = ["leaderboard", "highest score", "points awarded", "winner takes"];
 for (const phrase of forbiddenScoreLanguage) {

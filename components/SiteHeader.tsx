@@ -1,21 +1,5 @@
 import Link from "next/link";
-
-const navigation = [
-  { href: "/seeds", label: "Genetics" },
-  { href: "/learn", label: "Learn" },
-  { href: "/tools", label: "Tools" },
-  { href: "/games", label: "Games" },
-  { href: "/community", label: "Community" },
-  { href: "/journal", label: "Journal" },
-];
-
-function NavigationLinks() {
-  return navigation.map((item) => (
-    <li key={item.href}>
-      <Link href={item.href}>{item.label}</Link>
-    </li>
-  ));
-}
+import { SiteNavigationLinks } from "@/components/SiteNavigation";
 
 export function SiteHeader() {
   return (
@@ -31,7 +15,7 @@ export function SiteHeader() {
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           <ul className="nav-list">
-            <NavigationLinks />
+          <SiteNavigationLinks />
           </ul>
         </nav>
 
@@ -47,7 +31,7 @@ export function SiteHeader() {
             <summary>Menu</summary>
             <nav className="mobile-menu__panel" aria-label="Mobile navigation">
               <ul className="mobile-menu__links">
-                <NavigationLinks />
+                <SiteNavigationLinks />
                 <li><Link href="/contact">Contact</Link></li>
               </ul>
             </nav>

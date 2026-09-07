@@ -15,6 +15,18 @@ test("games hub separates playable releases from development previews", async ({
   await expect(page.getByRole("link", { name: "Play Burn Buds beta", exact: true })).toHaveAttribute("href", "/games/burn-buds");
   await expect(page.getByRole("link", { name: "Play Burn Buds", exact: true })).toHaveCount(0);
   await expect(page.getByText(/migration standard/i)).toHaveCount(0);
+  await expect(page.getByText("Showing 9 of 9 games", { exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "Playable now" }).click();
+  await expect(page.getByText("Showing 4 of 9 games", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Play Bud or Bluff", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Play Burn Buds beta", exact: true })).toHaveCount(0);
+
+  await page.getByRole("button", { name: "All games" }).click();
+  await page.getByPlaceholder("Search games or genres").fill("RPG");
+  await expect(page.getByText("Showing 2 of 9 games", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Play THC RPG", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Test PhenoQuest 3D preview", exact: true })).toBeVisible();
   await expectNoHorizontalOverflow(page);
 });
 
@@ -25,6 +37,8 @@ test("games hub stays readable at phone width", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Pick a game. Get into it." })).toBeVisible();
   await expect(page.getByRole("link", { name: "Play Bud or Bluff", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Play Burn Buds beta", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Previews" }).click();
+  await expect(page.getByText("Showing 5 of 9 games", { exact: true })).toBeVisible();
   await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: "test-results/games-hub-mobile.png", fullPage: true });
 });
