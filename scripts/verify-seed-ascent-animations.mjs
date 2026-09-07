@@ -3,21 +3,28 @@ import vm from "node:vm";
 
 const launcherPath="public/seed-ascent.html";
 const manifestPath="public/seed-ascent/animation-manifest.js";
+const controllerPath="public/seed-ascent/player-animation-controller.js";
 
-for(const path of [launcherPath,manifestPath]){
+for(const path of [launcherPath,manifestPath,controllerPath]){
   if(!fs.existsSync(path))throw new Error(`Missing Seed Ascent animation file: ${path}`);
 }
 
 const launcher=fs.readFileSync(launcherPath,"utf8");
 const source=fs.readFileSync(manifestPath,"utf8");
+const controllerSource=fs.readFileSync(controllerPath,"utf8");
 if(!launcher.includes('/seed-ascent/animation-manifest.js'))throw new Error("Seed Ascent launcher must load the animation manifest");
+if(!launcher.includes('/seed-ascent/player-animation-controller.js'))throw new Error("Seed Ascent launcher must load the player animation controller");
 
 new vm.Script(source,{filename:manifestPath});
+new vm.Script(controllerSource,{filename:controllerPath});
 const sandbox={window:{}};
 vm.createContext(sandbox);
 vm.runInContext(source,sandbox);
+vm.runInContext(controllerSource,sandbox);
 const manifest=sandbox.window.SEED_ASCENT_ANIMATIONS;
+const controllerApi=sandbox.window.SEED_ASCENT_PLAYER_ANIMATION;
 if(!manifest)throw new Error("Seed Ascent animation manifest did not register");
+if(!controllerApi?.createController)throw new Error("Seed Ascent player animation controller did not register");
 
 const requiredStates=['idle','run','jump','fall','land','hurt','fireAttack','electricAttack','iceAttack','transform','revert'];
 for(const name of requiredStates){
@@ -50,4 +57,18 @@ for(const [power,state] of Object.entries(attackMap)){
   if(manifest.resolveAttack(power)!==state)throw new Error(`Attack resolver mismatch for ${power}`);
 }
 
-console.log(`Seed Ascent animation verification passed: ${requiredStates.length} character states, authored frame budgets, 3 phenotype attack families, ${worlds.length} world motion profiles, approved-sheet fallback.`);
+const controller=controllerApi.createController();
+if(controller.snapshot().state!=='idle')throw new Error("Animation controller must initialize idle");
+if(controller.update(1/60,{grounded:true,vx:4,vy:0}).state!=='run')throw new Error("Animation controller must resolve running movement");
+if(controller.update(1/60,{grounded:false,vx:4,vy:-5}).state!=='jump')throw new Error("Animation controller must resolve jump ascent");
+if(controller.update(1/60,{grounded:false,vx:4,vy:5}).state!=='fall')throw new Error("Animation controller must resolve falling movement");
+controller.trigger('attack',{power:'FIRE'});
+if(controller.snapshot().state!=='fireAttack')throw new Error("Animation controller must route FIRE attacks");
+controller.update(1/60,{grounded:true,vx:0,vy:0});
+if(controller.snapshot().state!=='fireAttack')throw new Error("Movement cannot interrupt a forced attack animation");
+controller.trigger('hurt');
+if(controller.snapshot().state!=='hurt')throw new Error("Hurt must override lower-priority animation states");
+controller.reset();
+if(controller.authoredFrame()!==0)throw new Error("Animation controller reset must return to frame zero");
+
+console.log(`Seed Ascent animation verification passed: ${requiredStates.length} character states, authored frame budgets, controller priority/state timing, 3 phenotype attack families, ${worlds.length} world motion profiles, approved-sheet fallback.`);
