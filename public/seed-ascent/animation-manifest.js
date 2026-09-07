@@ -4,17 +4,17 @@
   const fallbackSheet='/seed-ascent/assets/seed-man-sprites.webp';
 
   const states={
-    idle:{frames:[0],fps:4,loop:true,anchor:[0.5,0.86]},
-    run:{frames:[1,2,3,2],fps:10,loop:true,anchor:[0.5,0.86]},
-    jump:{frames:[4],fps:8,loop:false,anchor:[0.5,0.86]},
-    fall:{frames:[5],fps:8,loop:true,anchor:[0.5,0.86]},
-    land:{frames:[5,0],fps:12,loop:false,anchor:[0.5,0.86]},
-    hurt:{frames:[5,0,5],fps:12,loop:false,anchor:[0.5,0.86]},
-    fireAttack:{frames:[0,1,0],fps:14,loop:false,anchor:[0.5,0.86],power:'FIRE'},
-    electricAttack:{frames:[0,2,0],fps:14,loop:false,anchor:[0.5,0.86],power:'ELECTRIC'},
-    iceAttack:{frames:[0,3,0],fps:14,loop:false,anchor:[0.5,0.86],power:'ICE'},
-    transform:{frames:[0,1,2,3,0],fps:12,loop:false,anchor:[0.5,0.86]},
-    revert:{frames:[3,2,1,0],fps:12,loop:false,anchor:[0.5,0.86]},
+    idle:{frames:[0],fps:4,loop:true,anchor:[0.5,0.86],targetFrames:6},
+    run:{frames:[1,2,3,2],fps:10,loop:true,anchor:[0.5,0.86],targetFrames:8},
+    jump:{frames:[4],fps:8,loop:false,anchor:[0.5,0.86],targetFrames:4},
+    fall:{frames:[5],fps:8,loop:true,anchor:[0.5,0.86],targetFrames:4},
+    land:{frames:[5,0],fps:12,loop:false,anchor:[0.5,0.86],targetFrames:4},
+    hurt:{frames:[5,0,5],fps:12,loop:false,anchor:[0.5,0.86],targetFrames:4},
+    fireAttack:{frames:[0,1,0],fps:14,loop:false,anchor:[0.5,0.86],power:'FIRE',targetFrames:8},
+    electricAttack:{frames:[0,2,0],fps:14,loop:false,anchor:[0.5,0.86],power:'ELECTRIC',targetFrames:8},
+    iceAttack:{frames:[0,3,0],fps:14,loop:false,anchor:[0.5,0.86],power:'ICE',targetFrames:8},
+    transform:{frames:[0,1,2,3,0],fps:12,loop:false,anchor:[0.5,0.86],targetFrames:6},
+    revert:{frames:[3,2,1,0],fps:12,loop:false,anchor:[0.5,0.86],targetFrames:5},
   };
 
   const authoredTargets={
