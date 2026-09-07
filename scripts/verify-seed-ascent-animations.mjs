@@ -26,6 +26,7 @@ for(const name of requiredStates){
   if(!Array.isArray(state.frames)||state.frames.length===0)throw new Error(`Animation ${name} has no fallback frames`);
   if(!Number.isFinite(state.fps)||state.fps<1||state.fps>30)throw new Error(`Animation ${name} has invalid fps: ${state.fps}`);
   if(!Array.isArray(state.anchor)||state.anchor.length!==2)throw new Error(`Animation ${name} requires a shared 2D anchor`);
+  if(!Number.isInteger(state.targetFrames)||state.targetFrames<4||state.targetFrames>12)throw new Error(`Animation ${name} needs a practical authored frame budget`);
 }
 
 if(manifest.fallback?.src!=='/seed-ascent/assets/seed-man-sprites.webp')throw new Error("Animation fallback must preserve the approved Seed Man sheet");
@@ -49,4 +50,4 @@ for(const [power,state] of Object.entries(attackMap)){
   if(manifest.resolveAttack(power)!==state)throw new Error(`Attack resolver mismatch for ${power}`);
 }
 
-console.log(`Seed Ascent animation verification passed: ${requiredStates.length} character states, 3 phenotype attack families, ${worlds.length} world motion profiles, approved-sheet fallback.`);
+console.log(`Seed Ascent animation verification passed: ${requiredStates.length} character states, authored frame budgets, 3 phenotype attack families, ${worlds.length} world motion profiles, approved-sheet fallback.`);
