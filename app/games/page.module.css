@@ -95,6 +95,65 @@
   gap: 18px;
 }
 
+.libraryControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.filterGroup { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.filterButton,
+.searchField input,
+.emptyState button {
+  min-height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.filterButton { padding: 0 16px; cursor: pointer; }
+
+.filterButton:hover,
+.filterButton:focus-visible,
+.filterButton[data-active="true"] {
+  border-color: var(--accent);
+  background: rgba(183, 226, 93, 0.12);
+  color: var(--accent-strong);
+}
+
+.searchField { width: min(100%, 320px); }
+.searchField input { width: 100%; padding: 0 15px; }
+.searchField input::placeholder { color: #859288; }
+
+.resultCount {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.emptyState {
+  display: grid;
+  min-height: 280px;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  text-align: center;
+}
+
+.emptyState h3,
+.emptyState p { margin: 0; }
+.emptyState p { color: var(--muted); }
+.emptyState button { margin-top: 12px; padding: 0 18px; cursor: pointer; }
+
 .gameCard {
   display: flex;
   flex-direction: column;
@@ -272,9 +331,7 @@
   transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
 }
 
-.primaryAction::after,
-.secondaryAction::after {
-  content: "→";
+.actionArrow {
   margin-left: 8px;
   opacity: 0.7;
   transition: transform 150ms ease;
@@ -298,10 +355,10 @@
   transform: translateY(-2px);
 }
 
-.primaryAction:hover::after,
-.primaryAction:focus-visible::after,
-.secondaryAction:hover::after,
-.secondaryAction:focus-visible::after {
+.primaryAction:hover .actionArrow,
+.primaryAction:focus-visible .actionArrow,
+.secondaryAction:hover .actionArrow,
+.secondaryAction:focus-visible .actionArrow {
   transform: translateX(3px);
 }
 
@@ -380,6 +437,9 @@
     grid-template-columns: 1fr;
   }
 
+  .libraryControls { align-items: stretch; flex-direction: column; }
+  .searchField { width: 100%; }
+
   .gameCard {
     min-height: 0;
   }
@@ -410,6 +470,9 @@
   .heroStats {
     grid-template-columns: 1fr;
   }
+
+  .filterGroup { display: grid; grid-template-columns: 1fr 1fr; }
+  .filterButton:first-child { grid-column: 1 / -1; }
 
   .libraryHeading {
     margin-top: 42px;
@@ -442,8 +505,7 @@
 @media (prefers-reduced-motion: reduce) {
   .primaryAction,
   .secondaryAction,
-  .primaryAction::after,
-  .secondaryAction::after {
+  .actionArrow {
     transition: none;
   }
 }

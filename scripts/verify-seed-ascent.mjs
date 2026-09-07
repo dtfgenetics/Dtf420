@@ -7,7 +7,7 @@ const files = {
   levels: "public/seed-ascent/levels.js",
   engine: "public/seed-ascent/engine.js",
   route: "app/games/seed-ascent/page.tsx",
-  library: "app/games/page.tsx",
+  library: "lib/game-catalog.ts",
   sitemap: "app/sitemap.ts",
 };
 
@@ -157,7 +157,7 @@ if (!advanced.every((level) => Array.isArray(level.hazards) && level.hazards.len
 }
 if (!levels.at(-1)?.boss) throw new Error("The final Seed Ascent stage must contain a boss encounter");
 if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent route is not wired to the launcher");
-if (!library.includes('href="/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the Games library");
+if (!library.includes('slug: "seed-ascent"')) throw new Error("Seed Ascent is missing from the Games catalog");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
 console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent and interruption-safe pointer input, neutral opposing input, safe menu-state level selection, restart reward snapshots, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
