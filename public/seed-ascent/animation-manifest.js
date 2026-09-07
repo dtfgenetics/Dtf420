@@ -24,6 +24,15 @@
     ice:{src:'/seed-ascent/assets/seed-man-ice-animations.webp',frameWidth:222,frameHeight:222,columns:8,rows:3,states:['iceAttack','transform','revert']},
   };
 
+  const enemyAnimationTargets={
+    EMBER_BEETLE:{src:'/seed-ascent/assets/ember-beetle-animations.webp',states:['move','attack','hurt','defeat'],frameWidth:222,frameHeight:222},
+    CINDER_WARDEN:{src:'/seed-ascent/assets/cinder-warden-animations.webp',states:['move','charge','attack','hurt','defeat'],frameWidth:222,frameHeight:222},
+    STORM_MOTH:{src:'/seed-ascent/assets/storm-moth-animations.webp',states:['move','attack','hurt','defeat'],frameWidth:222,frameHeight:222},
+    VOLT_WARDEN:{src:'/seed-ascent/assets/volt-warden-animations.webp',states:['move','charge','attack','hurt','defeat'],frameWidth:222,frameHeight:222},
+    FROST_GRUB:{src:'/seed-ascent/assets/frost-grub-animations.webp',states:['move','attack','hurt','defeat'],frameWidth:222,frameHeight:222},
+    GLACIER_WARDEN:{src:'/seed-ascent/assets/glacier-warden-animations.webp',states:['move','charge','attack','hurt','defeat'],frameWidth:222,frameHeight:222},
+  };
+
   const worldMotion={
     '1-1':['pollen','leafDrift'],
     '1-2':['leafDrift','canopySway'],
@@ -44,6 +53,7 @@
     fallback:{src:fallbackSheet,frameWidth:222,frameHeight:222,columns:4,rows:2},
     states,
     authoredTargets,
+    enemyAnimationTargets,
     worldMotion,
     resolveMovement(player){
       if(!player?.grounded)return player?.vy<0?'jump':'fall';
