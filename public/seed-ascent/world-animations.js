@@ -109,7 +109,8 @@
     for(const p of particles){
       p.phase+=p.spin*dt;
       p.x+=profile.wind*p.speed*dt*5;
-      p.y+=(p.kind==='ember'?-1:p.kind==='mist'?.15:.28)*p.speed*dt;
+      const verticalSpeed=p.kind==='ember'?-1:p.kind==='mist'?0.15:0.28;
+      p.y+=verticalSpeed*p.speed*dt;
       if(p.x>fx.width+20)p.x=-20;
       if(p.y>fx.height+20)p.y=-20;
       if(p.y<-20)p.y=fx.height+20;
