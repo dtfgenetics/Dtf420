@@ -322,8 +322,25 @@ export default function WhoTookItGame() {
   const selectedSuspect = suspects.find((suspect) => suspect.id === selectedSuspectId);
   const selectedItem = items.find((item) => item.id === selectedItemId);
 
-  function updateSlice(field: "eliminatedByPlayer" | "eliminatedItemsByPlayer" | "historyByPlayer", value: string[] | QuestionHistory[]) {
-    setRound((current) => ({ ...current, [field]: { ...current[field], [stateKey(current)]: value } }));
+  function updateEliminatedSuspects(nextIds: string[]) {
+    setRound((current) => ({
+      ...current,
+      eliminatedByPlayer: { ...current.eliminatedByPlayer, [stateKey(current)]: nextIds },
+    }));
+  }
+
+  function updateEliminatedItems(nextIds: string[]) {
+    setRound((current) => ({
+      ...current,
+      eliminatedItemsByPlayer: { ...current.eliminatedItemsByPlayer, [stateKey(current)]: nextIds },
+    }));
+  }
+
+  function updateHistory(nextHistory: QuestionHistory[]) {
+    setRound((current) => ({
+      ...current,
+      historyByPlayer: { ...current.historyByPlayer, [stateKey(current)]: nextHistory },
+    }));
   }
 
   function newCase(nextMode = mode) {
@@ -341,7 +358,7 @@ export default function WhoTookItGame() {
     const answer = answerQuestion(mystery, question);
     const entry: QuestionHistory = { question, answer, answerLabel: answer ? "Yes" : "No", player: round.activePlayer };
     setLatest(entry);
-    updateSlice("historyByPlayer", [...history, entry]);
+    updateHistory([...history, entry]);
   }
 
   function accuse() {
@@ -354,7 +371,11 @@ export default function WhoTookItGame() {
   }
 
   function confirmAge() {
-    try { window.localStorage.setItem(AGE_KEY, "confirmed"); } catch {}
+    try {
+      window.localStorage.setItem(AGE_KEY, "confirmed");
+    } catch {
+      // If storage is unavailable, keep the acknowledgement for this session.
+    }
     setAgeConfirmed(true);
   }
 
@@ -399,7 +420,7 @@ export default function WhoTookItGame() {
               const avatarStyle = { "--hue": `${(index * 37) % 360}` } as HueStyle;
               return (
                 <article className={`${styles.suspectCard} ${eliminated ? styles.eliminated : ""}`} key={suspect.id}>
-                  <button type="button" aria-pressed={eliminated} onClick={() => updateSlice("eliminatedByPlayer", toggle(eliminatedSuspects, suspect.id))}>
+                  <button type="button" aria-pressed={eliminated} onClick={() => updateEliminatedSuspects(toggle(eliminatedSuspects, suspect.id))}>
                     <span className={styles.coord}>{suspect.coord}</span>
                     <span className={styles.avatar} style={avatarStyle}>{initials(suspect.name)}</span>
                     <strong>{suspect.name}</strong>
@@ -445,7 +466,7 @@ export default function WhoTookItGame() {
             <p className="eyebrow">03 · Evidence locker</p>
             {items.map((item) => {
               const eliminated = eliminatedItems.includes(item.id);
-              return <button key={item.id} type="button" className={eliminated ? styles.eliminatedItem : ""} onClick={() => updateSlice("eliminatedItemsByPlayer", toggle(eliminatedItems, item.id))}><strong>{item.name}</strong><span>{item.tags.join(" · ")}</span></button>;
+              return <button key={item.id} type="button" className={eliminated ? styles.eliminatedItem : ""} onClick={() => updateEliminatedItems(toggle(eliminatedItems, item.id))}><strong>{item.name}</strong><span>{item.tags.join(" · ")}</span></button>;
             })}
           </section>
 
