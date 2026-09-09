@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import styles from "./page.module.css";
 
 type Mode = "solo" | "shared" | "duel";
 type EntityTraits = Record<string, true>;
+type HueStyle = CSSProperties & { "--hue": string };
 
 type Suspect = {
   id: string;
@@ -45,9 +46,21 @@ type RoundState = {
   historyByPlayer: Record<string, QuestionHistory[]>;
 };
 
+type SavedPayload = {
+  schemaVersion: 1;
+  mode: Mode;
+  round: RoundState;
+  selectedSuspectId: string;
+  selectedItemId: string;
+  category: string;
+  result: Result;
+  latest: QuestionHistory | null;
+};
+
 const STORAGE_KEY = "who-took-it:dtf420:v1";
 const AGE_KEY = "who-took-it:dtf420:age-confirmed:v1";
 const PLAYERS = ["Player 1", "Player 2"];
+const ACTIVE_PLAYER_BY_MODE: Record<Exclude<Mode, "duel">, string> = { solo: "Solo Player", shared: "Group" };
 const MODES: { id: Mode; label: string; description: string }[] = [
   { id: "solo", label: "Solo", description: "The app hides one mystery for you to solve." },
   { id: "shared", label: "Group", description: "Everyone solves one shared app-run mystery." },
@@ -191,11 +204,66 @@ function bestLead(remainingSuspects: Suspect[], remainingItems: Item[], usedIds:
   return ranked[0] ?? null;
 }
 
-function readSaved() {
+function isMode(value: unknown): value is Mode {
+  return value === "solo" || value === "shared" || value === "duel";
+}
+
+function isObject(value: unknown): value is Record<string, unknown> {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function isMystery(value: unknown): value is Mystery {
+  if (!isObject(value)) return false;
+  const suspect = value.suspect;
+  const item = value.item;
+  return isObject(suspect) && typeof suspect.id === "string" && isObject(item) && typeof item.id === "string";
+}
+
+function isRoundState(value: unknown): value is RoundState {
+  if (!isObject(value) || !isMode(value.mode)) return false;
+  if (typeof value.activePlayer !== "string") return false;
+  if (!isObject(value.mysteries) || !isObject(value.eliminatedByPlayer) || !isObject(value.eliminatedItemsByPlayer) || !isObject(value.historyByPlayer)) return false;
+
+  if (value.mode === "duel") {
+    if (!PLAYERS.includes(value.activePlayer)) return false;
+    return PLAYERS.every((player) =>
+      isMystery(value.mysteries[player]) &&
+      Array.isArray(value.eliminatedByPlayer[player]) &&
+      Array.isArray(value.eliminatedItemsByPlayer[player]) &&
+      Array.isArray(value.historyByPlayer[player]),
+    );
+  }
+
+  if (value.activePlayer !== ACTIVE_PLAYER_BY_MODE[value.mode]) return false;
+  return (
+    isMystery(value.mysteries.shared) &&
+    Array.isArray(value.eliminatedByPlayer.shared) &&
+    Array.isArray(value.eliminatedItemsByPlayer.shared) &&
+    Array.isArray(value.historyByPlayer.shared)
+  );
+}
+
+function isSavedPayload(value: unknown): value is SavedPayload {
+  if (!isObject(value) || value.schemaVersion !== 1 || !isMode(value.mode) || !isRoundState(value.round)) return false;
+  if (value.round.mode !== value.mode) return false;
+  if (typeof value.selectedSuspectId !== "string" || typeof value.selectedItemId !== "string") return false;
+  if (typeof value.category !== "string" || !categories.includes(value.category)) return false;
+  if (value.result !== null && !isObject(value.result)) return false;
+  if (value.latest !== null && !isObject(value.latest)) return false;
+  return true;
+}
+
+function readSaved(): SavedPayload | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) as { mode: Mode; round: RoundState; selectedSuspectId: string; selectedItemId: string; category: string; result: Result; latest: QuestionHistory | null } : null;
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (!isSavedPayload(parsed)) {
+      window.localStorage.removeItem(STORAGE_KEY);
+      return null;
+    }
+    return parsed;
   } catch {
     window.localStorage.removeItem(STORAGE_KEY);
     return null;
@@ -207,7 +275,7 @@ function initials(name: string) {
 }
 
 export default function WhoTookItGame() {
-  const saved = readSaved();
+  const [saved] = useState(() => readSaved());
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [mode, setMode] = useState<Mode>(saved?.mode ?? "solo");
   const [round, setRound] = useState<RoundState>(() => saved?.round ?? createRoundState(saved?.mode ?? "solo"));
@@ -223,7 +291,7 @@ export default function WhoTookItGame() {
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, round, selectedSuspectId, selectedItemId, category, result, latest }));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ schemaVersion: 1, mode, round, selectedSuspectId, selectedItemId, category, result, latest }));
     } catch {
       // storage can fail in private browsing; gameplay should continue.
     }
@@ -315,16 +383,17 @@ export default function WhoTookItGame() {
           <div className={styles.suspectGrid}>
             {suspects.map((suspect, index) => {
               const eliminated = eliminatedSuspects.includes(suspect.id);
+              const avatarStyle = { "--hue": `${(index * 37) % 360}` } as HueStyle;
               return (
                 <article className={`${styles.suspectCard} ${eliminated ? styles.eliminated : ""}`} key={suspect.id}>
                   <button type="button" aria-pressed={eliminated} onClick={() => updateSlice("eliminatedByPlayer", toggle(eliminatedSuspects, suspect.id))}>
                     <span className={styles.coord}>{suspect.coord}</span>
-                    <span className={styles.avatar} style={{ "--hue": `${(index * 37) % 360}` } as React.CSSProperties}>{initials(suspect.name)}</span>
+                    <span className={styles.avatar} style={avatarStyle}>{initials(suspect.name)}</span>
                     <strong>{suspect.name}</strong>
                     <em>“{suspect.quote}”</em>
                     <span className={styles.tags}>{suspect.tags.join(" · ")}</span>
                   </button>
-                  <button type="button" className={styles.accuseChip} onClick={() => setSelectedSuspectId(suspect.id)}>Accuse</button>
+                  <button type="button" className={styles.accuseChip} disabled={Boolean(result)} onClick={() => setSelectedSuspectId(suspect.id)}>Accuse</button>
                 </article>
               );
             })}
@@ -342,7 +411,7 @@ export default function WhoTookItGame() {
               <p className="eyebrow">Detective assist · no spoilers</p>
               <strong>{recommended.question.text}</strong>
               <span>{recommended.yes} yes · {recommended.no} no · ~{recommended.expected.toFixed(1)} expected eliminations</span>
-              <button type="button" onClick={() => ask(recommended.question)}>Ask best lead</button>
+              <button type="button" disabled={Boolean(result)} onClick={() => ask(recommended.question)}>Ask best lead</button>
             </section>
           )}
 
