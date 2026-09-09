@@ -33,6 +33,9 @@ for (const phrase of [
   'AGE_KEY',
   'schemaVersion: 1',
   'isSavedPayload',
+  'hasMounted',
+  'setHasMounted(true)',
+  'if (!hasMounted) return;',
   'bestLead',
   'aria-live="polite"',
   'aria-modal="true"',
@@ -42,6 +45,7 @@ for (const phrase of [
   assert(game.includes(phrase), `WhoTookItGame missing required feature marker: ${phrase}`);
 }
 
+assert(!game.includes('const [saved] = useState(() => readSaved())'), 'saved browser state must not be read during initial render');
 assert(!game.includes('React.CSSProperties'), 'use imported CSSProperties type instead of React namespace');
 assert(!game.includes('contentEditable'), 'first release must not use free-form questions');
 assert(!game.includes('textarea'), 'first release must not use typed/free-form question input');
