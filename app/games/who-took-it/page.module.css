@@ -2,6 +2,8 @@
   position: relative;
   display: grid;
   gap: 1.25rem;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .modeBar,
@@ -30,7 +32,8 @@
 .bestLead button,
 .result button,
 .ageCard button,
-.suspectCard button {
+.suspectCard button,
+.accusation select {
   font: inherit;
 }
 
@@ -108,9 +111,11 @@
   grid-template-columns: minmax(0, 1fr) minmax(20rem, 25rem);
   gap: 1rem;
   align-items: start;
+  max-width: 100%;
 }
 
 .board {
+  min-width: 0;
   padding: 1rem;
 }
 
@@ -135,6 +140,7 @@
 
 .suspectCard {
   position: relative;
+  min-width: 0;
 }
 
 .suspectCard > button:first-child {
@@ -213,6 +219,7 @@
 .rail {
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 
 .rail > section {
@@ -304,9 +311,26 @@
 }
 
 .questionList button:disabled,
-.accusation button:disabled {
+.accusation button:disabled,
+.bestLead button:disabled,
+.accuseChip:disabled {
   cursor: not-allowed;
   opacity: 0.45;
+}
+
+.modeBar button:focus-visible,
+.hud button:focus-visible,
+.suspectCard button:focus-visible,
+.tabs button:focus-visible,
+.questionList button:focus-visible,
+.items button:focus-visible,
+.accusation button:focus-visible,
+.accusation select:focus-visible,
+.bestLead button:focus-visible,
+.result button:focus-visible,
+.ageCard button:focus-visible {
+  outline: 3px solid #f2b84b;
+  outline-offset: 3px;
 }
 
 .questionList button > span,
@@ -400,11 +424,40 @@
     grid-template-columns: 1fr;
   }
 
+  .sectionHead {
+    display: grid;
+    align-items: start;
+  }
+
   .suspectGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .suspectCard > button:first-child {
     min-height: 10.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .suspectGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result,
+  .ageGate {
+    backdrop-filter: none;
+  }
+
+  .modeBar button,
+  .hud button,
+  .suspectCard button,
+  .tabs button,
+  .questionList button,
+  .items button,
+  .accusation button,
+  .bestLead button {
+    transition: none !important;
   }
 }
