@@ -275,27 +275,40 @@ function initials(name: string) {
 }
 
 export default function WhoTookItGame() {
-  const [saved] = useState(() => readSaved());
+  const [hasMounted, setHasMounted] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
-  const [mode, setMode] = useState<Mode>(saved?.mode ?? "solo");
-  const [round, setRound] = useState<RoundState>(() => saved?.round ?? createRoundState(saved?.mode ?? "solo"));
-  const [selectedSuspectId, setSelectedSuspectId] = useState(saved?.selectedSuspectId ?? "");
-  const [selectedItemId, setSelectedItemId] = useState(saved?.selectedItemId ?? "");
-  const [category, setCategory] = useState(saved?.category ?? categories[0]);
-  const [latest, setLatest] = useState<QuestionHistory | null>(saved?.latest ?? null);
-  const [result, setResult] = useState<Result>(saved?.result ?? null);
+  const [mode, setMode] = useState<Mode>("solo");
+  const [round, setRound] = useState<RoundState>(() => createRoundState("solo"));
+  const [selectedSuspectId, setSelectedSuspectId] = useState("");
+  const [selectedItemId, setSelectedItemId] = useState("");
+  const [category, setCategory] = useState(categories[0]);
+  const [latest, setLatest] = useState<QuestionHistory | null>(null);
+  const [result, setResult] = useState<Result>(null);
 
   useEffect(() => {
+    const saved = readSaved();
+    if (saved) {
+      setMode(saved.mode);
+      setRound(saved.round);
+      setSelectedSuspectId(saved.selectedSuspectId);
+      setSelectedItemId(saved.selectedItemId);
+      setCategory(saved.category);
+      setLatest(saved.latest);
+      setResult(saved.result);
+    }
+
     try { setAgeConfirmed(window.localStorage.getItem(AGE_KEY) === "confirmed"); } catch { setAgeConfirmed(false); }
+    setHasMounted(true);
   }, []);
 
   useEffect(() => {
+    if (!hasMounted) return;
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ schemaVersion: 1, mode, round, selectedSuspectId, selectedItemId, category, result, latest }));
     } catch {
       // storage can fail in private browsing; gameplay should continue.
     }
-  }, [mode, round, selectedSuspectId, selectedItemId, category, result, latest]);
+  }, [hasMounted, mode, round, selectedSuspectId, selectedItemId, category, result, latest]);
 
   const key = stateKey(round);
   const mystery = targetMystery(round);
