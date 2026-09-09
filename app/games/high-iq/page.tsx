@@ -3,7 +3,7 @@ import HighIqGame from "./HighIqGame";
 
 export const metadata = {
   title: "High IQ | DTF Games",
-  description: "Test your cannabis plant-science and genetics knowledge in the High IQ browser trivia challenge.",
+  description: "Test higher cognition with cannabis plant-science, genetics, environment, and cultivation-science trivia.",
 };
 
 export default function HighIqPage() {
@@ -11,11 +11,7 @@ export default function HighIqPage() {
     <section className="shell page-section">
       <div className="game-page-heading">
         <div>
-          <p className="eyebrow">DTF Games · Educational Trivia</p>
-          <h1>High IQ</h1>
-          <p className="lede">
-            Test higher cognition with plant biology, genetics, environment, reproduction, and cultivation-science questions.
-          </p>
+          <p className="eyebrow">DTF Games · High IQ · Development Preview</p>
         </div>
         <Link className="button" href="/games">All games</Link>
       </div>
