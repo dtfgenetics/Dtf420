@@ -30,6 +30,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      - name: Enforce browser tool policy
+        run: node scripts/verify-browser-tool-policy.mjs
+
       - name: Use Node.js 22
         uses: actions/setup-node@v7
         with:
