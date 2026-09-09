@@ -61,4 +61,14 @@ for (const className of ['gameShell', 'modeBar', 'suspectGrid', 'bestLead', 'age
   assert(css.includes(`.${className}`), `CSS module missing .${className}`);
 }
 
+for (const cssMarker of [
+  ':focus-visible',
+  'prefers-reduced-motion',
+  '@media (max-width: 380px)',
+  'overflow-x: clip',
+  'minmax(0, 1fr)',
+]) {
+  assert(css.includes(cssMarker), `CSS module missing accessibility/mobile marker: ${cssMarker}`);
+}
+
 console.log('Who Took It? route verification passed.');
