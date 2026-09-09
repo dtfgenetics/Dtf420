@@ -1,0 +1,410 @@
+.gameShell {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.modeBar,
+.hud,
+.board,
+.rail > section,
+.result > div {
+  border: 1px solid rgba(214, 232, 194, 0.2);
+  border-radius: 1.35rem;
+  background: linear-gradient(145deg, rgba(8, 18, 11, 0.96), rgba(21, 35, 20, 0.94));
+  box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.22);
+}
+
+.modeBar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+
+.modeBar button,
+.hud button,
+.questionList button,
+.items button,
+.accusation button,
+.bestLead button,
+.result button,
+.ageCard button,
+.suspectCard button {
+  font: inherit;
+}
+
+.modeBar button,
+.hud button,
+.bestLead button,
+.accusation button,
+.result button,
+.ageCard button {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(201, 244, 109, 0.14);
+  color: #f3f8ee;
+  cursor: pointer;
+}
+
+.modeBar button {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  text-align: left;
+}
+
+.modeBar button span {
+  color: rgba(232, 240, 223, 0.72);
+  font-size: 0.84rem;
+  line-height: 1.3;
+}
+
+.modeBar .activeMode {
+  background: #c9f46d;
+  color: #09140b;
+}
+
+.modeBar .activeMode span {
+  color: rgba(9, 20, 11, 0.72);
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.hud div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.hud span,
+.bestLead span,
+.liveClue span,
+.items span,
+.history span {
+  color: rgba(232, 240, 223, 0.7);
+}
+
+.hud strong {
+  color: #ffffff;
+  font-size: 1.05rem;
+}
+
+.hud button,
+.bestLead button,
+.accusation button,
+.result button,
+.ageCard button {
+  padding: 0.7rem 1rem;
+  font-weight: 900;
+}
+
+.playArea {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 25rem);
+  gap: 1rem;
+  align-items: start;
+}
+
+.board {
+  padding: 1rem;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sectionHead h2 {
+  margin: 0.25rem 0 0;
+  color: #fff;
+}
+
+.suspectGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.suspectCard {
+  position: relative;
+}
+
+.suspectCard > button:first-child {
+  width: 100%;
+  min-height: 12rem;
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  border: 1px solid rgba(214, 232, 194, 0.18);
+  border-radius: 1rem;
+  padding: 0.7rem;
+  background: rgba(244, 248, 238, 0.06);
+  color: #f4f7ee;
+  text-align: left;
+  cursor: pointer;
+}
+
+.coord {
+  color: #c9f46d;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 0.9rem;
+  background: radial-gradient(circle at 35% 30%, hsl(var(--hue) 70% 68%), hsl(var(--hue) 58% 34%));
+  color: #08120a;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 1000;
+}
+
+.suspectCard strong {
+  color: #fff;
+  line-height: 1.1;
+}
+
+.suspectCard em {
+  color: rgba(232, 240, 223, 0.72);
+  font-size: 0.72rem;
+  font-style: normal;
+  line-height: 1.25;
+}
+
+.tags {
+  display: block;
+  color: #f2b84b;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.eliminated > button:first-child,
+.eliminatedItem {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.accuseChip {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.35rem 0.55rem;
+  background: #c9f46d;
+  color: #08120a;
+  font-size: 0.66rem;
+  font-weight: 1000;
+  cursor: pointer;
+}
+
+.rail {
+  display: grid;
+  gap: 1rem;
+}
+
+.rail > section {
+  padding: 1rem;
+}
+
+.liveClue {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.liveClue strong {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  background: #f2b84b;
+  color: #08120a;
+  font-size: 1.35rem;
+  font-weight: 1000;
+}
+
+.liveClue.yes strong {
+  background: #c9f46d;
+}
+
+.liveClue.no strong {
+  background: #ff8978;
+}
+
+.bestLead {
+  display: grid;
+  gap: 0.5rem;
+  border-color: rgba(242, 184, 75, 0.45) !important;
+}
+
+.bestLead strong {
+  color: #fff;
+}
+
+.bestLead button,
+.accusation button,
+.result button,
+.ageCard button {
+  background: #c9f46d;
+  color: #09140b;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.75rem 0;
+}
+
+.tabs button {
+  border: 1px solid rgba(214, 232, 194, 0.16);
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8f0df;
+  cursor: pointer;
+}
+
+.tabs .activeTab {
+  background: #f2b84b;
+  color: #08120a;
+}
+
+.questionList,
+.items,
+.accusation,
+.history {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.questionList button,
+.items button {
+  width: 100%;
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid rgba(214, 232, 194, 0.16);
+  border-radius: 0.9rem;
+  padding: 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f4f7ee;
+  text-align: left;
+  cursor: pointer;
+}
+
+.questionList button:disabled,
+.accusation button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.questionList button > span,
+.questionList button > b {
+  color: #c9f46d;
+  font-size: 0.66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.accusation label {
+  display: grid;
+  gap: 0.35rem;
+  color: #f4f7ee;
+  font-weight: 800;
+}
+
+.accusation select {
+  width: 100%;
+  min-height: 2.6rem;
+  border: 1px solid rgba(214, 232, 194, 0.24);
+  border-radius: 0.75rem;
+  padding: 0.55rem;
+  background: #101e14;
+  color: #f4f7ee;
+}
+
+.history ol {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(232, 240, 223, 0.8);
+}
+
+.result,
+.ageGate {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(4, 10, 6, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.result > div,
+.ageCard {
+  width: min(36rem, 100%);
+  display: grid;
+  gap: 0.9rem;
+  padding: clamp(1.3rem, 4vw, 2.2rem);
+  text-align: center;
+}
+
+.result h2,
+.ageCard h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2rem, 7vw, 4rem);
+  line-height: 0.95;
+}
+
+.result p,
+.ageCard p {
+  color: rgba(232, 240, 223, 0.78);
+}
+
+.win > div {
+  border-color: rgba(201, 244, 109, 0.55);
+}
+
+.loss > div {
+  border-color: rgba(255, 137, 120, 0.55);
+}
+
+@media (max-width: 1050px) {
+  .playArea,
+  .hud {
+    grid-template-columns: 1fr;
+  }
+
+  .suspectGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .modeBar {
+    grid-template-columns: 1fr;
+  }
+
+  .suspectGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .suspectCard > button:first-child {
+    min-height: 10.5rem;
+  }
+}
