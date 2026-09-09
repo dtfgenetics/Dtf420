@@ -222,24 +222,28 @@ function isMystery(value: unknown): value is Mystery {
 function isRoundState(value: unknown): value is RoundState {
   if (!isObject(value) || !isMode(value.mode)) return false;
   if (typeof value.activePlayer !== "string") return false;
-  if (!isObject(value.mysteries) || !isObject(value.eliminatedByPlayer) || !isObject(value.eliminatedItemsByPlayer) || !isObject(value.historyByPlayer)) return false;
+  const mysteries = value.mysteries;
+  const eliminatedByPlayer = value.eliminatedByPlayer;
+  const eliminatedItemsByPlayer = value.eliminatedItemsByPlayer;
+  const historyByPlayer = value.historyByPlayer;
+  if (!isObject(mysteries) || !isObject(eliminatedByPlayer) || !isObject(eliminatedItemsByPlayer) || !isObject(historyByPlayer)) return false;
 
   if (value.mode === "duel") {
     if (!PLAYERS.includes(value.activePlayer)) return false;
     return PLAYERS.every((player) =>
-      isMystery(value.mysteries[player]) &&
-      Array.isArray(value.eliminatedByPlayer[player]) &&
-      Array.isArray(value.eliminatedItemsByPlayer[player]) &&
-      Array.isArray(value.historyByPlayer[player]),
+      isMystery(mysteries[player]) &&
+      Array.isArray(eliminatedByPlayer[player]) &&
+      Array.isArray(eliminatedItemsByPlayer[player]) &&
+      Array.isArray(historyByPlayer[player]),
     );
   }
 
   if (value.activePlayer !== ACTIVE_PLAYER_BY_MODE[value.mode]) return false;
   return (
-    isMystery(value.mysteries.shared) &&
-    Array.isArray(value.eliminatedByPlayer.shared) &&
-    Array.isArray(value.eliminatedItemsByPlayer.shared) &&
-    Array.isArray(value.historyByPlayer.shared)
+    isMystery(mysteries.shared) &&
+    Array.isArray(eliminatedByPlayer.shared) &&
+    Array.isArray(eliminatedItemsByPlayer.shared) &&
+    Array.isArray(historyByPlayer.shared)
   );
 }
 
@@ -287,18 +291,24 @@ export default function WhoTookItGame() {
 
   useEffect(() => {
     const saved = readSaved();
-    if (saved) {
-      setMode(saved.mode);
-      setRound(saved.round);
-      setSelectedSuspectId(saved.selectedSuspectId);
-      setSelectedItemId(saved.selectedItemId);
-      setCategory(saved.category);
-      setLatest(saved.latest);
-      setResult(saved.result);
-    }
+    let confirmed = false;
+    try { confirmed = window.localStorage.getItem(AGE_KEY) === "confirmed"; } catch {}
 
-    try { setAgeConfirmed(window.localStorage.getItem(AGE_KEY) === "confirmed"); } catch { setAgeConfirmed(false); }
-    setHasMounted(true);
+    const hydrationTimer = window.setTimeout(() => {
+      if (saved) {
+        setMode(saved.mode);
+        setRound(saved.round);
+        setSelectedSuspectId(saved.selectedSuspectId);
+        setSelectedItemId(saved.selectedItemId);
+        setCategory(saved.category);
+        setLatest(saved.latest);
+        setResult(saved.result);
+      }
+      setAgeConfirmed(confirmed);
+      setHasMounted(true);
+    }, 0);
+
+    return () => window.clearTimeout(hydrationTimer);
   }, []);
 
   useEffect(() => {
@@ -312,9 +322,9 @@ export default function WhoTookItGame() {
 
   const key = stateKey(round);
   const mystery = targetMystery(round);
-  const eliminatedSuspects = round.eliminatedByPlayer[key] ?? [];
-  const eliminatedItems = round.eliminatedItemsByPlayer[key] ?? [];
-  const history = round.historyByPlayer[key] ?? [];
+  const eliminatedSuspects = useMemo(() => round.eliminatedByPlayer[key] ?? [], [key, round.eliminatedByPlayer]);
+  const eliminatedItems = useMemo(() => round.eliminatedItemsByPlayer[key] ?? [], [key, round.eliminatedItemsByPlayer]);
+  const history = useMemo(() => round.historyByPlayer[key] ?? [], [key, round.historyByPlayer]);
   const usedIds = useMemo(() => new Set(history.map((entry) => entry.question.id)), [history]);
   const remainingSuspects = useMemo(() => suspects.filter((suspect) => !eliminatedSuspects.includes(suspect.id)), [eliminatedSuspects]);
   const remainingItems = useMemo(() => items.filter((item) => !eliminatedItems.includes(item.id)), [eliminatedItems]);

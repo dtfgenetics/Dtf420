@@ -33,6 +33,7 @@ for (const phrase of [
   'AGE_KEY',
   'schemaVersion: 1',
   'isSavedPayload',
+  'const mysteries = value.mysteries;',
   'hasMounted',
   'setHasMounted(true)',
   'if (!hasMounted) return;',
