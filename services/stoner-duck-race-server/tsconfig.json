@@ -8,5 +8,12 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "../../game/stoner-duck-race/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "../../game/stoner-duck-race/config.ts",
+    "../../game/stoner-duck-race/modes.ts",
+    "../../game/stoner-duck-race/rng.ts",
+    "../../game/stoner-duck-race/simulation.ts",
+    "../../game/stoner-duck-race/types.ts"
+  ]
 }
