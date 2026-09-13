@@ -1,0 +1,44 @@
+.shell {
+  width: 100%;
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(84, 148, 96, 0.18), transparent 38%),
+    #0b1f25;
+}
+
+.canvas {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 360px;
+}
+
+.canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.loading {
+  color: #eff6d8;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.loadingInner {
+  padding: 2rem;
+}
+
+@media (max-width: 700px) {
+  .shell {
+    min-height: 280px;
+    border-radius: 14px;
+  }
+
+  .canvas {
+    min-height: 240px;
+  }
+}
