@@ -105,6 +105,15 @@ export class RaceSimulation {
     if (name?.trim()) duck.name = name.trim().slice(0, 24);
   }
 
+  releaseDuck(duckId: string): void {
+    const duck = this.state.ducks.find((candidate) => candidate.id === duckId);
+    if (!duck) return;
+
+    duck.playerId = null;
+    duck.isBot = true;
+    this.inputs.delete(duckId);
+  }
+
   setInput(duckId: string, input: DuckInput): void {
     const duck = this.state.ducks.find((candidate) => candidate.id === duckId);
     if (!duck || duck.finished) return;
