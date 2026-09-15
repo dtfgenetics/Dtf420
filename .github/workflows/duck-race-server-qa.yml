@@ -1,0 +1,51 @@
+name: Duck Race Server QA
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "services/stoner-duck-race-server/**"
+      - "game/stoner-duck-race/**"
+      - ".github/workflows/duck-race-server-qa.yml"
+  push:
+    branches:
+      - main
+      - "feature/stoner-duck-race-**"
+    paths:
+      - "services/stoner-duck-race-server/**"
+      - "game/stoner-duck-race/**"
+      - ".github/workflows/duck-race-server-qa.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duck-race-server-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck-server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: services/stoner-duck-race-server
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: services/stoner-duck-race-server/package.json
+
+      - name: Install isolated server dependencies
+        run: npm install --no-package-lock --no-audit --no-fund
+
+      - name: Typecheck authoritative race server
+        run: npm run typecheck
