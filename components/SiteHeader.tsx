@@ -1,30 +1,33 @@
 import Link from "next/link";
 import { SiteNavigationLinks } from "@/components/SiteNavigation";
+import siteShell from "@/configuration/site-shell.json";
 
 export function SiteHeader() {
+  const search = siteShell.utilityNavigation[0];
+
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <Link className="brand" href="/" aria-label="DTF Genetics home">
+        <Link className="brand" href={siteShell.brand.homeHref} aria-label="DTF Genetics home">
           <span className="brand__mark" aria-hidden="true">DTF</span>
           <span className="brand__identity">
-            <strong>DTF Genetics</strong>
-            <small>Dream the Future</small>
+            <strong>{siteShell.brand.name}</strong>
+            <small>{siteShell.brand.tagline}</small>
           </span>
         </Link>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           <ul className="nav-list">
-          <SiteNavigationLinks />
+            <SiteNavigationLinks />
           </ul>
         </nav>
 
-        <Link className="header-action desktop-search" href="/learn/search">
-          Search THC
+        <Link className="header-action desktop-search" href={search.href}>
+          {search.label}
         </Link>
 
         <div className="mobile-nav-actions">
-          <Link className="mobile-search" href="/learn/search" aria-label="Search THC">
+          <Link className="mobile-search" href={search.href} aria-label={search.label}>
             Search
           </Link>
           <details className="mobile-menu">
