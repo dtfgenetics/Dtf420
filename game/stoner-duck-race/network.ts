@@ -1,5 +1,5 @@
 import { Client } from "@colyseus/sdk";
-import type { DuckInput, RaceModeId } from "./types";
+import type { DuckInput, RaceModeId, TrackId } from "./types";
 
 const ROOM_NAME = "stoner_duck_race";
 
@@ -10,6 +10,7 @@ export interface DuckRaceRoomOptions {
   intent: DuckRaceRoomIntent;
   roomId?: string;
   mode: RaceModeId;
+  trackId: TrackId;
   racerCount: number;
   seed: string;
   playerName: string;
@@ -18,19 +19,22 @@ export interface DuckRaceRoomOptions {
 
 export interface NetworkDuckSnapshot {
   id: string;
-  ownerSessionId: string;
+  ownerSessionId: string | null;
   name: string;
+  characterId: string;
   progress: number;
   lateral: number;
   rank: number;
   boostCharge: number;
   heldPowerup: string | null;
+  shieldCharges: number;
   finished: boolean;
 }
 
 export interface DuckRaceRoomSnapshot {
   phase: string;
   mode: RaceModeId;
+  trackId: TrackId;
   seed: string;
   tick: number;
   tickRate: number;
@@ -65,19 +69,26 @@ function normalizeMode(value: unknown): RaceModeId {
   return value === "rally" || value === "chaos" ? value : "derby";
 }
 
+function normalizeTrack(value: unknown): TrackId {
+  if (value === "munchie-marsh" || value === "cloud-9-canal" || value === "rosin-river") return value;
+  return "kush-creek";
+}
+
 function snapshotFromState(state: any): DuckRaceRoomSnapshot {
   const ducks: NetworkDuckSnapshot[] = [];
 
   state?.ducks?.forEach?.((duck: any) => {
     ducks.push({
       id: String(duck.id ?? ""),
-      ownerSessionId: String(duck.ownerSessionId ?? ""),
+      ownerSessionId: duck.ownerSessionId ? String(duck.ownerSessionId) : null,
       name: String(duck.name ?? "Duck"),
+      characterId: String(duck.characterId ?? "mellow-mallard"),
       progress: Number(duck.progress ?? 0),
       lateral: Number(duck.lateral ?? 0),
       rank: Number(duck.rank ?? 0),
       boostCharge: Number(duck.boostCharge ?? 0),
       heldPowerup: duck.heldPowerup ? String(duck.heldPowerup) : null,
+      shieldCharges: Number(duck.shieldCharges ?? 0),
       finished: Boolean(duck.finished),
     });
   });
@@ -87,6 +98,7 @@ function snapshotFromState(state: any): DuckRaceRoomSnapshot {
   return {
     phase: String(state?.phase ?? "lobby"),
     mode: normalizeMode(state?.mode),
+    trackId: normalizeTrack(state?.trackId),
     seed: String(state?.seed ?? "DTF-420"),
     tick: Number(state?.tick ?? 0),
     tickRate: Math.max(1, Number(state?.tickRate ?? 20)),
@@ -105,6 +117,7 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
   const client = new Client(endpoint);
   const joinOptions = {
     mode: options.mode,
+    trackId: options.trackId,
     racerCount: Math.max(1, Math.min(50, Math.floor(options.racerCount))),
     seed: options.seed.trim().slice(0, 64) || "DTF-420",
     name: options.playerName.trim().slice(0, 24) || "YOU",
