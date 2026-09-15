@@ -12,6 +12,17 @@ export interface DuckRaceLaunchOptions {
   racerCount: number;
   seed: string;
   playerName: string;
+  characterId: string;
+}
+
+export interface DuckRaceResult {
+  mode: RaceModeId;
+  trackId: TrackId;
+  racerCount: number;
+  rank: number | null;
+  winnerName: string;
+  playerName: string | null;
+  tick: number;
 }
 
 export interface DuckInput {
