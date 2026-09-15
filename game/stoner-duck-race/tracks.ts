@@ -345,14 +345,14 @@ export const FINAL_SMOKEOUT: TrackDefinition = {
 };
 
 export const TRACKS: Readonly<Record<TrackId, TrackDefinition>> = {
-  [KUSH_CREEK.id]: KUSH_CREEK,
-  [MUNCHIE_MARSH.id]: MUNCHIE_MARSH,
-  [CLOUD_9_CANAL.id]: CLOUD_9_CANAL,
-  [DAB_RAPIDS.id]: DAB_RAPIDS,
-  [TRICHOME_TRAIL.id]: TRICHOME_TRAIL,
-  [GREENHOUSE_RUN.id]: GREENHOUSE_RUN,
-  [ROSIN_RIVER.id]: ROSIN_RIVER,
-  [FINAL_SMOKEOUT.id]: FINAL_SMOKEOUT,
+  "kush-creek": KUSH_CREEK,
+  "munchie-marsh": MUNCHIE_MARSH,
+  "cloud-9-canal": CLOUD_9_CANAL,
+  "dab-rapids": DAB_RAPIDS,
+  "trichome-trail": TRICHOME_TRAIL,
+  "greenhouse-run": GREENHOUSE_RUN,
+  "rosin-river": ROSIN_RIVER,
+  "final-smokeout": FINAL_SMOKEOUT,
 };
 
 export const TRACK_LIST = Object.values(TRACKS);
