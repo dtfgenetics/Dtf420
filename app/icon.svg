@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">THC cannabis leaf favicon</title>
+  <desc id="desc">A high-contrast cannabis leaf above the letters THC.</desc>
+  <rect width="512" height="512" rx="96" fill="#07150d"/>
+  <g fill="#55d66b" stroke="#d9ffe0" stroke-width="8" stroke-linejoin="round">
+    <path d="M256 54c-28 54-42 100-42 139 0 33 15 57 42 74 27-17 42-41 42-74 0-39-14-85-42-139z"/>
+    <path d="M197 99c-11 63-4 109 21 139 18 22 40 31 65 27-1-25-10-46-28-68-25-30-44-62-58-98z" transform="rotate(-24 256 256)"/>
+    <path d="M315 99c11 63 4 109-21 139-18 22-40 31-65 27 1-25 10-46 28-68 25-30 44-62 58-98z" transform="rotate(24 256 256)"/>
+    <path d="M145 161c8 56 28 95 60 118 22 16 46 20 70 10-7-23-21-42-43-58-31-22-60-45-87-70z" transform="rotate(-18 224 256)"/>
+    <path d="M367 161c-8 56-28 95-60 118-22 16-46 20-70 10 7-23 21-42 43-58 31-22 60-45 87-70z" transform="rotate(18 288 256)"/>
+    <path d="M116 229c24 42 53 70 86 83 23 9 45 8 66-4-11-18-28-32-51-41-32-12-66-25-101-38z"/>
+    <path d="M396 229c-24 42-53 70-86 83-23 9-45 8-66-4 11-18 28-32 51-41 32-12 66-25 101-38z"/>
+  </g>
+  <path d="M256 255v98" stroke="#d9ffe0" stroke-width="18" stroke-linecap="round"/>
+  <text x="256" y="438" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="900" letter-spacing="4" fill="#ffffff">THC</text>
+</svg>
