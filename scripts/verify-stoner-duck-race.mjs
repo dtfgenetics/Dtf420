@@ -23,7 +23,9 @@ const required = [
   "services/stoner-duck-race-server/DEPLOYMENT.md",
   "services/stoner-duck-race-server/src/index.ts",
   "services/stoner-duck-race-server/src/rooms/RaceRoom.ts",
+  "services/stoner-duck-race-server/src/smoke.ts",
   "docs/games/stoner-duck-race/ARCHITECTURE.md",
+  "docs/games/stoner-duck-race/ASSET_PRODUCTION.md",
   "docs/games/stoner-duck-race/OPEN_SOURCE.md",
 ];
 
@@ -45,6 +47,9 @@ const wrapper = readFileSync(resolve(root, "components/game/StonerDuckRaceGame.t
 const page = readFileSync(resolve(root, "app/games/stoner-duck-race/page.tsx"), "utf8");
 const server = readFileSync(resolve(root, "services/stoner-duck-race-server/src/rooms/RaceRoom.ts"), "utf8");
 const serverIndex = readFileSync(resolve(root, "services/stoner-duck-race-server/src/index.ts"), "utf8");
+const smoke = readFileSync(resolve(root, "services/stoner-duck-race-server/src/smoke.ts"), "utf8");
+const deployment = readFileSync(resolve(root, "services/stoner-duck-race-server/DEPLOYMENT.md"), "utf8");
+const assetProduction = readFileSync(resolve(root, "docs/games/stoner-duck-race/ASSET_PRODUCTION.md"), "utf8");
 const serverTsconfig = JSON.parse(readFileSync(resolve(root, "services/stoner-duck-race-server/tsconfig.json"), "utf8"));
 const packageJson = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8"));
 const serverPackage = JSON.parse(readFileSync(resolve(root, "services/stoner-duck-race-server/package.json"), "utf8"));
@@ -100,6 +105,7 @@ if (!assets.includes("idle: { start:") || !assets.includes("paddle: { start:") |
 if (!assets.includes("hasAuthoredAsset") || !scene.includes("hasAuthoredAsset") || !scene.includes("this.load.spritesheet")) failures.push("Phaser must load authored assets through the fallback manifest");
 if (!scene.includes("this.textures.exists(authored.textureKey)")) failures.push("duck renderer must retain procedural fallback when authored textures are absent");
 if (!scene.includes("TRACK_ART_ASSETS") || !scene.includes("POWERUP_ASSETS") || !scene.includes("HAZARD_ASSETS")) failures.push("scene must consume track, powerup, and hazard asset manifests");
+if (!assetProduction.includes("128 × 128") || !assetProduction.includes("00–03  idle") || !assetProduction.includes("20–27  win")) failures.push("production sprite documentation must preserve normalized frame contract");
 
 if (simulation.includes("Math.random(")) failures.push("shared simulation must not use Math.random()");
 if (!simulation.includes("DeterministicRng")) failures.push("shared simulation must use deterministic RNG");
@@ -149,15 +155,25 @@ if (!packageJson.dependencies?.["@colyseus/sdk"]) failures.push("browser multipl
 if (!serverPackage.dependencies?.colyseus) failures.push("multiplayer server must declare Colyseus");
 if (!serverPackage.scripts?.build?.includes("tsc")) failures.push("multiplayer server must compile with TypeScript for production");
 if (!serverPackage.scripts?.start?.includes("node build/")) failures.push("multiplayer production start must use compiled Node output");
+if (!serverPackage.scripts?.smoke?.includes("smoke.js")) failures.push("multiplayer server must expose the compiled deterministic smoke suite");
 if (serverTsconfig.compilerOptions?.outDir !== "build") failures.push("multiplayer server must emit production output into build/");
+if (serverTsconfig.compilerOptions?.module !== "ES2022") failures.push("multiplayer shared runtime must compile as ESM");
 if (!serverIndex.includes('app.get("/healthz"')) failures.push("multiplayer server health endpoint is missing");
 if (!network.includes("client.create") || !network.includes("client.joinById")) failures.push("room adapter must support create and join-by-id");
 if (!network.includes("room.onStateChange")) failures.push("room adapter must subscribe to authoritative state");
 if (!network.includes("characterId")) failures.push("room adapter must send selected character identity");
+if (!network.includes("room.reconnection.enabled = true") || !network.includes("maxRetries") || !network.includes("maxEnqueuedMessages")) failures.push("browser room adapter must configure bounded automatic reconnection");
 if (!server.includes('this.onMessage("start-race"')) failures.push("server must gate race start through host action");
 if (!server.includes("hostSessionId")) failures.push("server must track room host ownership");
 if (!server.includes("trackId")) failures.push("server must synchronize selected track");
 if (!server.includes("normalizeCharacter")) failures.push("server must validate player cosmetic identity");
+if (!server.includes("onDrop(client: Client)") || !server.includes("allowReconnection(client, RECONNECT_GRACE_SECONDS)") || !server.includes("onReconnect(client: Client)")) failures.push("server reconnect lifecycle is incomplete");
+if (!server.includes("duck.isBot = true") || !server.includes("reconnectingRacers")) failures.push("dropped racers must temporarily hand control to AI and remain separately counted");
+if (!deployment.includes("20-second") || !deployment.includes("npm run smoke")) failures.push("deployment guide must document reconnect grace and mass-race smoke validation");
+
+if (!smoke.includes("const RACERS = 50") || !smoke.includes("const MAX_TICKS") || !smoke.includes("TRACK_IDS")) failures.push("mass-race smoke suite must exercise bounded 50-racer races across the track catalog");
+if (!smoke.includes("JSON.stringify(first) !== JSON.stringify(second)")) failures.push("mass-race smoke suite must compare repeated seeded finish records");
+if (!smoke.includes("simulation.state.phase !== \"finished\"")) failures.push("mass-race smoke suite must fail races that do not finish");
 
 if (failures.length) {
   console.error("Stoner Duck Race verification failed:");
@@ -165,4 +181,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Stoner Duck Race verification passed: eight tracks, eight characters, eight power-ups, authored-asset fallbacks, deterministic 1–50 racer simulation, Quick/Cup/Time Trial progression, pause/mute controls, local/online lobby, invite links, authoritative room flow, production server compile/health surface, touch/keyboard controls, scrolling cameras, and persistent results are present.");
+console.log("Stoner Duck Race verification passed: eight tracks, eight characters, eight power-ups, authored-asset fallbacks, deterministic 1–50 racer simulation, Quick/Cup/Time Trial progression, pause/mute controls, automatic reconnect with AI grace, local/online lobby, invite links, production ESM server compile/health surface, deterministic 50-racer smoke coverage, touch/keyboard controls, scrolling cameras, and persistent results are present.");
