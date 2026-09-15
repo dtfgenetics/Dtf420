@@ -2,6 +2,16 @@ import { Client } from "@colyseus/sdk";
 import type { DuckInput, RaceModeId, TrackId } from "./types";
 
 const ROOM_NAME = "stoner_duck_race";
+const TRACK_IDS: readonly TrackId[] = [
+  "kush-creek",
+  "munchie-marsh",
+  "cloud-9-canal",
+  "dab-rapids",
+  "trichome-trail",
+  "greenhouse-run",
+  "rosin-river",
+  "final-smokeout",
+];
 
 export type DuckRaceRoomIntent = "create" | "join";
 
@@ -71,8 +81,9 @@ function normalizeMode(value: unknown): RaceModeId {
 }
 
 function normalizeTrack(value: unknown): TrackId {
-  if (value === "munchie-marsh" || value === "cloud-9-canal" || value === "rosin-river") return value;
-  return "kush-creek";
+  return typeof value === "string" && TRACK_IDS.includes(value as TrackId)
+    ? value as TrackId
+    : "kush-creek";
 }
 
 function snapshotFromState(state: any): DuckRaceRoomSnapshot {
