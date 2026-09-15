@@ -59,6 +59,7 @@ export interface DuckRaceRoomSnapshot {
   hostSessionId: string | null;
   racerCapacity: number;
   connectedRacers: number;
+  reconnectingRacers: number;
   spectatorCount: number;
   ducks: NetworkDuckSnapshot[];
 }
@@ -140,6 +141,7 @@ function snapshotFromState(state: unknown): DuckRaceRoomSnapshot {
     hostSessionId: stateRecord.hostSessionId ? String(stateRecord.hostSessionId) : null,
     racerCapacity: Math.max(1, Number(stateRecord.racerCapacity ?? fallbackCapacity)),
     connectedRacers: Math.max(0, Number(stateRecord.connectedRacers ?? 0)),
+    reconnectingRacers: Math.max(0, Number(stateRecord.reconnectingRacers ?? 0)),
     spectatorCount: Math.max(0, Number(stateRecord.spectatorCount ?? 0)),
     ducks,
   };
@@ -165,6 +167,11 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
   const room = options.intent === "create"
     ? await client.create(ROOM_NAME, joinOptions)
     : await client.joinById(options.roomId!.trim(), joinOptions);
+
+  room.reconnection.enabled = true;
+  room.reconnection.maxRetries = 12;
+  room.reconnection.maxDelay = 3_000;
+  room.reconnection.maxEnqueuedMessages = 20;
 
   let latest = snapshotFromState(room.state);
   const listeners = new Set<(snapshot: DuckRaceRoomSnapshot) => void>();
