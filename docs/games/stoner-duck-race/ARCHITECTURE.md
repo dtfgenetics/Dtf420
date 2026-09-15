@@ -10,7 +10,7 @@ Build one extensible 2D arcade river-racing engine for the DTF Games hub. The sa
 - **Quack & Bake Cup** — four local championship races with cumulative points and persistent player progression.
 - **Time Trial** — one controlled duck, deterministic course conditions, and persistent personal-best times per track.
 
-The hard racer target remains **1–50 active ducks**. Spectators are separate from racer slots.
+The hard racer target remains **1–50 active ducks**. Spectators and temporarily reconnecting players are tracked separately from active racer slots.
 
 ## Runtime boundaries
 
@@ -23,11 +23,12 @@ Renderer-independent game rules plus a thin Phaser adapter.
 - `rng.ts` — deterministic seeded random source.
 - `modes.ts` — Derby, Rally, and Chaos rule profiles.
 - `characters.ts` — eight cosmetic duck identities and presentation metadata.
+- `assets.ts` — stable production texture/audio keys plus procedural-fallback paths and animation contracts.
 - `tracks.ts` — eight data-driven courses, current zones, hazards, and item placement.
 - `simulation.ts` — authoritative fixed-step movement, AI, hazards, power-ups, ranking, Chaos events, shields, and finish state.
-- `network.ts` — Colyseus browser adapter for create/join/input/state/leave.
+- `network.ts` — Colyseus browser adapter for create/join/input/state/leave plus automatic reconnection tuning.
 - `progression.ts` — optional local profile persistence for races, wins, podiums, best finishes, time-trial PBs, level, and Bud Bucks.
-- `scenes/RaceScene.ts` — Phaser world renderer, camera, touch/keyboard input, and local/online state adapter.
+- `scenes/RaceScene.ts` — Phaser world renderer, authored-asset loader, procedural fallback renderer, camera, touch/keyboard input, and local/online state adapter.
 - `main.ts` — Phaser bootstrap and race-result callback boundary.
 
 The shared simulation does not depend on Phaser, React, DOM APIs, browser timing, canvas state, or network transport.
@@ -46,6 +47,8 @@ The React/DOM shell owns text-heavy and responsive game setup:
 - Create Room / Join Room / spectator intent.
 - Shareable `?duckRoom=<room-id>` invite links that prefill the Join flow.
 - Host start control and room population status.
+- Local Pause / Resume.
+- Client-side audio mute that does not alter authoritative online state.
 - Persistent local profile summary and per-track Time Trial PBs.
 - Post-race results and Cup continuation.
 
@@ -56,6 +59,19 @@ Keeping these controls outside Phaser prevents text/input accessibility from bei
 Standalone Colyseus service. `RaceRoom` imports the same deterministic simulation used for local play.
 
 The server owns race truth. Clients only send control intent. Authoritative position, rank, item state, shields, finish state, track choice, room host, racer ownership, and race phase are synchronized from the room.
+
+Production service behavior includes:
+
+- Node 22+ runtime.
+- TypeScript compilation to plain ESM JavaScript under `build/`.
+- Plain-Node `npm start`; production does not depend on `tsx`.
+- `/healthz` readiness endpoint.
+- 20-second reconnect grace for racers and spectators.
+- Temporary AI takeover while a racer is dropped.
+- Same-session ownership restoration through `onReconnect`.
+- Permanent release/host migration only after reconnection grace expires or the player intentionally leaves.
+
+Deployment details live in `services/stoner-duck-race-server/DEPLOYMENT.md`.
 
 ## Current content catalog
 
@@ -112,7 +128,9 @@ All simulation randomness comes from `DeterministicRng` initialized with `RaceCo
 
 The shared simulation must never call `Math.random()`.
 
-A future replay record can be compact because race reconstruction is based on:
+The compiled server QA now runs every track twice with 50 AI racers under the same seed and requires exact finish-record equality. It also fails if any track cannot complete all 50 racers within the bounded simulation budget. This validates the mass-race target against executable production output instead of only checking source structure.
+
+A future replay record can remain compact because race reconstruction is based on:
 
 1. simulation/content version,
 2. race seed,
@@ -132,14 +150,17 @@ Create room
   -> host starts race
   -> 3-second simulation countdown
   -> server-authoritative race
+  -> temporary disconnect: seat retained + duck switches to AI
+  -> reconnect inside grace window: same session regains duck
+  -> permanent leave: seat released / host migrates if needed
   -> synchronized finish state
 ```
 
-If a human racer disconnects, its duck returns to AI control. Spectators never consume racer slots. If the host leaves before start, host ownership migrates to another connected racer.
+The browser SDK uses automatic reconnection with bounded retries and a small outgoing-message queue. During the server grace window, dropped racers are counted separately as reconnecting racers rather than active racers. Spectators never consume racer slots.
 
 The browser only attempts Online play when a real `NEXT_PUBLIC_DUCK_RACE_SERVER_URL` is configured. The UI reports the unconfigured state instead of simulating fake connectivity.
 
-Remaining network production enhancements after server deployment are reconnection UX, latency/interpolation tuning, and bandwidth/load profiling.
+Remaining network production work after server deployment is latency/interpolation tuning, bandwidth/load profiling, and live multi-device soak testing through the actual reverse proxy/WSS endpoint.
 
 ## Progression
 
@@ -149,10 +170,26 @@ Bud Bucks are cosmetic progression currency only. The game does not contain cash
 
 ## Production asset boundary
 
-The current renderer deliberately uses procedural duck/course presentation so game rules can be verified independently of final artwork. Production assets should land through stable manifest keys under:
+`game/stoner-duck-race/assets.ts` is the runtime source of truth for authored presentation. Every production path is optional. Phaser loads a production file only when its manifest path is populated and keeps procedural rendering as a safety fallback when the path is `null` or the authored asset is not yet present.
+
+Stable asset families include:
 
 ```text
-assets/stoner-duck-race/
+duck:<character-id>
+powerup:<powerup-id>
+hazard:<hazard-id>
+track:<track-id>:background
+track:<track-id>:foreground
+track:<track-id>:preview
+audio:<audio-id>
+```
+
+Duck sprite sheets use a normalized 128×128 frame contract with idle, paddle, boost, hit, and win animation ranges. Exact frame order, file destinations, transparent-background requirements, track-strip rules, and audio keys are documented in `docs/games/stoner-duck-race/ASSET_PRODUCTION.md`.
+
+The recommended public runtime domain is:
+
+```text
+public/games/stoner-duck-race/
   ducks/
   tracks/
   hazards/
@@ -162,7 +199,7 @@ assets/stoner-duck-race/
   audio/
 ```
 
-Final duck sprite strips, course backgrounds/foregrounds, water animation, item icons, impact FX, title treatment, music, ambience, and SFX can replace procedural presentation without changing simulation state or multiplayer protocol.
+Final sprite strips, track backgrounds/foregrounds, water animation, item icons, impact FX, title treatment, music, ambience, and SFX can therefore replace the procedural presentation incrementally without changing simulation state or multiplayer protocol.
 
 ## QA policy
 
@@ -175,6 +212,9 @@ The repository protects this game with:
 - lint,
 - production Next.js build,
 - static overlay export validation,
-- isolated Colyseus server dependency install and server typecheck.
+- isolated Colyseus dependency install and strict server typecheck,
+- production ESM server compilation,
+- compiled-entry verification,
+- deterministic executable smoke tests across **8 tracks × 50 racers × 2 identical seeded runs**.
 
-Future performance QA should add repeated seeded 50-racer headless simulations and server load/bandwidth profiling while preserving deterministic finishing order for identical inputs and seeds.
+Before public multiplayer launch, add live load/bandwidth profiling and multi-device WSS soak tests against the deployed endpoint while keeping deterministic simulation verification in CI.
