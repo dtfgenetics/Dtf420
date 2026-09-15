@@ -22,10 +22,14 @@
 .lobbyHeader p { max-width: 800px; margin: 0; color: var(--duck-muted); line-height: 1.55; }
 .kicker { color: var(--duck-accent); font-size: 0.78rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
 
-.capacityBadge { min-width: 104px; padding: 0.9rem 1rem; display: grid; justify-items: center; border: 1px solid var(--duck-border); border-radius: 18px; background: rgba(7, 23, 29, 0.74); color: var(--duck-text); }
+.capacityBadge, .profileBadge { min-width: 104px; padding: 0.9rem 1rem; display: grid; justify-items: center; border: 1px solid var(--duck-border); border-radius: 18px; background: rgba(7, 23, 29, 0.74); color: var(--duck-text); }
 .capacityBadge strong { color: var(--duck-accent); font-size: 2rem; line-height: 1; }
-.capacityBadge span { margin-top: 0.25rem; color: var(--duck-muted); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.capacityBadge span, .profileBadge span { margin-top: 0.25rem; color: var(--duck-muted); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.profileBadge { min-width: 180px; justify-items: end; gap: 0.22rem; }
+.profileBadge strong { color: var(--duck-accent); font-size: 1rem; }
+.profileBadge small { color: var(--duck-muted); font-size: 0.7rem; }
 
+.sourceRow { display: flex; align-items: center; justify-content: space-between; gap: 0.7rem; flex-wrap: wrap; }
 .sourceSwitch { width: fit-content; padding: 4px; display: flex; flex-wrap: wrap; gap: 4px; border: 1px solid var(--duck-border); border-radius: 13px; background: rgba(6, 22, 27, 0.64); }
 .sourceSwitch button { min-height: 40px; padding: 0 1rem; border: 0; border-radius: 9px; background: transparent; color: var(--duck-muted); font: inherit; font-size: 0.82rem; font-weight: 900; cursor: pointer; }
 .sourceSwitch button[data-active="true"] { background: var(--duck-accent); color: #17201b; }
@@ -41,8 +45,8 @@
 .modeFieldset legend { margin-bottom: 0.7rem; color: var(--duck-text); font-size: 0.9rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; }
 .modeGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
 .modeButton { min-height: 150px; padding: 1rem; display: grid; align-content: start; gap: 0.35rem; border: 1px solid var(--duck-border); border-radius: 17px; background: rgba(15, 43, 47, 0.72); color: var(--duck-text); text-align: left; cursor: pointer; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease; }
-.modeButton:hover, .trackButton:hover { transform: translateY(-2px); border-color: rgba(240, 206, 88, 0.55); }
-.modeButton[data-active="true"], .trackButton[data-active="true"] { border-color: rgba(240, 206, 88, 0.82); background: linear-gradient(135deg, rgba(77, 134, 85, 0.42), rgba(18, 45, 49, 0.92)); box-shadow: inset 0 0 0 1px rgba(240, 206, 88, 0.16); }
+.modeButton:hover, .trackButton:hover, .characterButton:hover { transform: translateY(-2px); border-color: rgba(240, 206, 88, 0.55); }
+.modeButton[data-active="true"], .trackButton[data-active="true"], .characterButton[data-active="true"] { border-color: rgba(240, 206, 88, 0.82); background: linear-gradient(135deg, rgba(77, 134, 85, 0.42), rgba(18, 45, 49, 0.92)); box-shadow: inset 0 0 0 1px rgba(240, 206, 88, 0.16); }
 .modeButton span { color: var(--duck-accent); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.09em; text-transform: uppercase; }
 .modeButton strong { font-size: 1.1rem; }
 .modeButton small { color: var(--duck-muted); font-size: 0.78rem; line-height: 1.45; }
@@ -52,6 +56,15 @@
 .trackButton strong { font-size: 0.95rem; }
 .trackButton small { color: var(--duck-muted); font-size: 0.72rem; line-height: 1.35; }
 .trackButton span { margin-top: auto; color: var(--duck-accent); font-size: 0.68rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.cupRoute { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; }
+.cupRoute span { padding: 0.75rem; border: 1px solid var(--duck-border); border-radius: 12px; background: rgba(7, 23, 29, 0.58); color: var(--duck-text); font-size: 0.78rem; font-weight: 800; }
+
+.characterGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.65rem; }
+.characterButton { min-height: 92px; padding: 0.75rem; display: grid; grid-template-columns: 28px 1fr; grid-template-rows: auto auto; column-gap: 0.6rem; align-items: center; border: 1px solid var(--duck-border); border-radius: 14px; background: rgba(10, 31, 36, 0.72); color: var(--duck-text); text-align: left; cursor: pointer; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease; }
+.characterButton i { grid-row: 1 / 3; width: 26px; height: 26px; border: 2px solid rgba(255,255,255,0.7); border-radius: 50%; }
+.characterButton strong { font-size: 0.82rem; }
+.characterButton small { color: var(--duck-muted); font-size: 0.68rem; line-height: 1.3; }
 
 .fieldGrid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 0.8rem; }
 .field { padding: 0.9rem; display: grid; align-content: start; gap: 0.45rem; border: 1px solid var(--duck-border); border-radius: 15px; background: rgba(6, 22, 27, 0.58); }
@@ -69,7 +82,7 @@
 .setupSummary span { color: var(--duck-muted); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; }
 .setupSummary strong { color: var(--duck-text); font-size: 0.9rem; }
 .launchButton, .backButton, .startButton { border: 0; border-radius: 12px; font: inherit; font-weight: 900; cursor: pointer; }
-.launchButton { min-height: 48px; padding: 0 1.2rem; display: inline-flex; align-items: center; gap: 0.7rem; background: var(--duck-accent); color: #17201b; }
+.launchButton { min-height: 48px; padding: 0 1.2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; background: var(--duck-accent); color: #17201b; }
 .launchButton:hover { filter: brightness(1.06); }
 .launchButton:disabled { opacity: 0.55; cursor: progress; }
 
@@ -84,11 +97,17 @@
 
 .canvas { width: 100%; aspect-ratio: 16 / 9; min-height: 360px; }
 .canvas canvas { display: block; width: 100% !important; height: auto !important; }
+.resultsPanel { padding: 0.9rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; border-top: 1px solid var(--duck-border); background: rgba(7, 23, 29, 0.97); }
+.resultsPanel > div { display: grid; gap: 0.12rem; }
+.resultsPanel span { color: var(--duck-accent); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.resultsPanel strong { color: var(--duck-text); font-size: 1rem; }
+.resultsPanel small { color: var(--duck-muted); font-size: 0.72rem; }
+.cupFinish { padding: 0.55rem 0.75rem; border: 1px solid rgba(240, 206, 88, 0.35); border-radius: 11px; background: rgba(77, 134, 85, 0.2); }
 .loading { place-items: center; color: var(--duck-text); font-weight: 800; letter-spacing: 0.04em; }
 .loadingInner { padding: 2rem; }
 
 @media (max-width: 1000px) {
-  .trackGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trackGrid, .characterGrid, .cupRoute { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .onlinePanel { grid-template-columns: 1fr 1fr; }
   .onlinePanel .sourceSwitch, .connectionNote { grid-column: 1 / -1; }
 }
@@ -98,18 +117,20 @@
   .modeButton { min-height: auto; }
   .lobbyHeader { align-items: stretch; }
   .capacityBadge { min-width: 86px; }
+  .profileBadge { min-width: 0; justify-items: start; }
 }
 
 @media (max-width: 700px) {
   .shell { min-height: 280px; border-radius: 14px; }
   .lobbyShell { min-height: 520px; }
   .lobby { padding: 1rem; gap: 1rem; }
-  .lobbyHeader, .lobbyFooter, .gameBar { align-items: stretch; flex-direction: column; }
+  .lobbyHeader, .lobbyFooter, .gameBar, .resultsPanel { align-items: stretch; flex-direction: column; }
   .capacityBadge { width: 100%; grid-template-columns: auto auto; justify-content: start; gap: 0.6rem; }
   .capacityBadge span { margin-top: 0; align-self: center; }
+  .sourceRow { align-items: stretch; flex-direction: column; }
   .sourceSwitch { width: 100%; }
   .sourceSwitch button { flex: 1; }
-  .onlinePanel, .trackGrid { grid-template-columns: 1fr; }
+  .onlinePanel, .trackGrid, .characterGrid, .cupRoute { grid-template-columns: 1fr; }
   .onlinePanel .sourceSwitch, .connectionNote { grid-column: auto; }
   .launchButton, .backButton, .startButton { justify-content: center; width: 100%; }
   .gameBar > div, .gameActions { justify-content: space-between; }
