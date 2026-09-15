@@ -21,6 +21,9 @@ export const DuckRaceRoomState = schema({
   mode: t.string(),
   tick: t.number(),
   winnerId: t.string(),
+  hostSessionId: t.string(),
+  racerCount: t.number(),
+  spectatorCount: t.number(),
   ducks: t.map(NetworkDuck),
 });
 
@@ -59,7 +62,9 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   maxClients = DUCK_RACE_LIMITS.massRaceMax + DUCK_RACE_LIMITS.spectatorTarget;
 
   private simulation!: RaceSimulation;
+  private started = false;
   private readonly duckBySession = new Map<string, string>();
+  private readonly spectatorSessions = new Set<string>();
 
   onCreate(options: RaceRoomOptions): void {
     const mode = normalizeMode(options.mode);
@@ -73,48 +78,79 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
 
     this.simulation = new RaceSimulation(createRaceConfig(mode, racerCount, seed));
     this.state.mode = mode;
+    this.state.phase = "lobby";
+    this.state.hostSessionId = "";
     this.syncState();
 
     this.onMessage("input", (client, rawInput) => {
+      if (!this.started) return;
       const duckId = this.duckBySession.get(client.sessionId);
       const input = normalizeInput(rawInput);
       if (!duckId || !input) return;
       this.simulation.setInput(duckId, input);
     });
 
+    this.onMessage("start-race", (client) => {
+      if (this.started || client.sessionId !== this.state.hostSessionId) return;
+      this.started = true;
+      this.syncState();
+    });
+
     this.setSimulationInterval(() => {
-      this.simulation.step();
+      if (this.started) this.simulation.step();
       this.syncState();
     }, 1000 / this.simulation.state.config.tickRate);
   }
 
   onJoin(client: Client, options: JoinOptions): void {
     const wantsSpectator = Boolean(options.spectator);
-    if (wantsSpectator) return;
+    if (wantsSpectator) {
+      this.spectatorSessions.add(client.sessionId);
+      this.syncState();
+      return;
+    }
 
     const available = this.simulation.state.ducks.find((duck) => duck.playerId === null && !duck.finished);
-    if (!available) return;
+    if (!available) {
+      this.spectatorSessions.add(client.sessionId);
+      this.syncState();
+      return;
+    }
 
     this.simulation.claimDuck(available.id, client.sessionId, options.name);
     this.duckBySession.set(client.sessionId, available.id);
+
+    if (!this.state.hostSessionId) {
+      this.state.hostSessionId = client.sessionId;
+    }
+
     this.syncState();
   }
 
   onLeave(client: Client): void {
-    const duckId = this.duckBySession.get(client.sessionId);
-    if (!duckId) return;
+    this.spectatorSessions.delete(client.sessionId);
 
-    this.simulation.releaseDuck(duckId);
-    this.duckBySession.delete(client.sessionId);
+    const duckId = this.duckBySession.get(client.sessionId);
+    if (duckId) {
+      this.simulation.releaseDuck(duckId);
+      this.duckBySession.delete(client.sessionId);
+    }
+
+    if (client.sessionId === this.state.hostSessionId) {
+      this.state.hostSessionId = this.duckBySession.keys().next().value ?? "";
+    }
+
     this.syncState();
   }
 
   private syncState(): void {
     const source = this.simulation.state;
-    this.state.phase = source.phase;
+    this.state.phase = this.started ? source.phase : "lobby";
     this.state.mode = source.config.mode;
     this.state.tick = source.tick;
     this.state.winnerId = source.winnerId ?? "";
+    this.state.racerCount = this.duckBySession.size;
+    this.state.spectatorCount = this.spectatorSessions.size;
 
     const liveIds = new Set<string>();
     for (const duck of source.ducks) {
