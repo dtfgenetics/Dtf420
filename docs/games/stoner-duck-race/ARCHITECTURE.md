@@ -1,114 +1,149 @@
-# Stoner Duck Race architecture
+# Quack & Bake: Stoner Duck Race architecture
 
-## Goal
+## Product goal
 
-Build one extensible river-racing engine that supports three rulesets without forking the game code:
+Build one extensible 2D arcade river-racing engine for the DTF Games hub. The same deterministic simulation supports:
 
-- **Duck Derby** — AI/spectator-first party racing, up to 50 racers.
-- **River Rally** — direct-control arcade racing using the same race simulation.
-- **Chaos Derby** — the shared simulation with high-frequency global events and stronger comeback pressure.
+- **Duck Derby** — AI/spectator-first party racing.
+- **River Rally** — direct-control skill racing.
+- **Chaos Derby** — Rally controls plus deterministic global chaos events.
+- **Quack & Bake Cup** — four local races across the complete track rotation with cumulative points and persistent player progression.
 
-The architectural hard target is **50 active racers**. Spectators are separate from racer slots.
+The hard racer target remains **1–50 active ducks**. Spectators are separate from racer slots.
 
 ## Runtime boundaries
 
 ### `game/stoner-duck-race/`
 
-Renderer-independent gameplay plus the Phaser adapter used by the DTF site.
+Renderer-independent game rules plus a thin Phaser adapter.
 
-- `types.ts` — network-safe game contracts.
-- `config.ts` — racer limits, tick rate, default track configuration.
-- `rng.ts` — deterministic seeded PRNG used by simulation logic.
+- `types.ts` — shared launch, race, network, and result contracts.
+- `config.ts` — racer limits, tick rate, and track-aware configuration.
+- `rng.ts` — deterministic seeded random source.
 - `modes.ts` — Derby, Rally, and Chaos rule profiles.
-- `simulation.ts` — authoritative race state and fixed-step rules.
-- `scenes/RaceScene.ts` — Phaser presentation/input adapter only.
-- `main.ts` — Phaser bootstrap.
+- `characters.ts` — eight cosmetic duck identities and presentation metadata.
+- `tracks.ts` — four data-driven courses, current zones, hazards, and item placement.
+- `simulation.ts` — authoritative fixed-step movement, AI, hazards, power-ups, ranking, Chaos events, shields, and finish state.
+- `network.ts` — Colyseus browser adapter for create/join/input/state/leave.
+- `progression.ts` — optional local profile persistence for races, wins, podiums, best track finishes, level, and Bud Bucks.
+- `scenes/RaceScene.ts` — Phaser world renderer, camera, touch/keyboard input, and local/online state adapter.
+- `main.ts` — Phaser bootstrap and race-result callback boundary.
 
-The simulation must never depend on Phaser, React, DOM APIs, browser timing, or canvas state.
+The shared simulation does not depend on Phaser, React, DOM APIs, browser timing, canvas state, or network transport.
 
-### `components/game/`
+### `components/game/StonerDuckRaceGame.tsx`
 
-React client boundary used by Next.js. Phaser is dynamically loaded with SSR disabled and destroyed when the route unmounts.
+The React/DOM shell owns text-heavy and responsive game setup:
 
-### `app/games/stoner-duck-race/`
+- Local or Online source.
+- Quick Race or four-race Cup.
+- Derby, Rally, or Chaos mode.
+- Track selection.
+- 1–50 racer count.
+- Seed and player name.
+- Duck cosmetic selection.
+- Create Room / Join Room / spectator intent.
+- Host start control and room population status.
+- Persistent local profile summary.
+- Post-race results and Cup continuation.
 
-DTF site route and development-facing shell.
+Keeping these controls outside Phaser prevents text/input accessibility from being coupled to canvas rendering.
 
 ### `services/stoner-duck-race-server/`
 
-Colyseus authoritative multiplayer service. It imports the same shared simulation used by the local prototype.
+Standalone Colyseus service. `RaceRoom` imports the same deterministic simulation used for local play.
 
-The room owns race truth. Clients send intent/input; they do not submit authoritative position, rank, progress, or finish state.
+The server owns race truth. Clients only send control intent. Authoritative position, rank, item state, shields, finish state, track choice, room host, racer ownership, and race phase are synchronized from the room.
+
+## Current content catalog
+
+### Tracks
+
+1. **Kush Creek** — balanced baseline river with marsh, spray, logs, reeds, and a whirlpool finish section.
+2. **Munchie Marsh** — sticky mud and reed-heavy technical routing.
+3. **Cloud 9 Canal** — higher turbulence, fans, spray, whiteout sections, and a waterfall finish.
+4. **Rosin River** — longest course with barrels, heavy current changes, falls, and a technical closing section.
+
+Each course owns its length, colors, current zones, hazards, and pickup positions through `TrackDefinition`.
+
+### Duck identities
+
+Eight cosmetic identities are defined in `characters.ts`: Mellow Mallard, Dab Duck, Hippie Quacker, Grower Goose, Rosin Runner, Cloud Nine, Science Duck, and Old School Quack. Character selection never changes competitive physics or hidden stats.
+
+### Power-ups
+
+The deterministic item catalog currently contains:
+
+- `munchie-rush`
+- `dab-blast`
+- `cloud-screen`
+- `bubble-shield`
+- `feather-boost`
+- `snack-magnet`
+- `mega-quack`
+- `super-duck`
+
+### Hazards
+
+The reusable hazard catalog currently contains logs, mud, whirlpools, reeds, sprinklers, fans, barrels, and waterfalls.
 
 ## Simulation model
 
-Each duck is represented by lightweight logical state rather than a rigid-body physics object.
+Each duck uses lightweight logical state rather than rigid-body multiplayer physics.
 
 Primary coordinates:
 
 - `progress` — normalized course completion from 0 to 1.
-- `lateral` — river-relative horizontal position from -1 to +1.
+- `lateral` — river-relative position from -1 to +1.
 
-This gives deterministic ranking and allows future curved rivers, forks, shortcuts, current zones, and waterfalls without ranking racers from screen coordinates.
+Simulation runs at **20 authoritative ticks per second**. Rendering can run at display refresh rate. Large fields use soft-body separation instead of rigid-body duck pileups.
 
-The current prototype runs at **20 simulation ticks per second**. Phaser may render more frequently and interpolated multiplayer clients may render at 60 FPS.
+AI reads upcoming hazards and item lines, combines them with per-duck deterministic personality values, and decides steering, boost, dive, and item use without `Math.random()`.
 
-## 50-player rules
+## Determinism and replayability
 
-`DUCK_RACE_LIMITS.massRaceMax` is the canonical racer cap and is set to 50.
+All simulation randomness comes from `DeterministicRng` initialized with `RaceConfig.seed`.
 
-Large races use soft-body separation rather than full rigid-body duck-on-duck physics. Explicit hazards and future powerup effects may remain authoritative, while cosmetic wake, particles, camera effects, and animation are client-side.
+The shared simulation must never call `Math.random()`.
 
-This avoids 50-body pileups and keeps network state compact.
+A future replay record can be compact because race reconstruction is based on:
 
-## Determinism
+1. simulation/content version,
+2. race seed,
+3. mode and track,
+4. racer configuration,
+5. timestamped player inputs.
 
-Simulation randomness comes only from `DeterministicRng` initialized by `RaceConfig.seed`.
+## Multiplayer lifecycle
 
-Do not call `Math.random()` from the shared simulation.
-
-A production replay record should eventually require only:
-
-1. race seed,
-2. track/version,
-3. racer configuration,
-4. timestamped inputs,
-5. externally-authored race events if any.
-
-This enables exact bug reproduction, daily seeds, ghost races, server verification, and compact replays.
-
-## Multiplayer
-
-The Colyseus room is prepared for:
-
-- up to 50 racer slots,
-- additional spectators,
-- server-authoritative fixed-step simulation,
-- input messages only,
-- schema-based state synchronization,
-- automatic AI takeover when a racer disconnects.
-
-Production networking work still needs interpolation, client prediction for River Rally, reconnection UX, room-code matchmaking, bandwidth profiling, and deployment infrastructure.
-
-## Content expansion
-
-Tracks, duck characters, cosmetics, hazards, and powerups should be data-driven content packages. Avoid adding new tracks or ducks by editing `RaceScene`.
-
-Planned track package shape:
+The online room lifecycle is:
 
 ```text
-content/tracks/kush-creek/
-  track.json
-  river.json
-  currents.json
-  hazards.json
-  pickups.json
-  shortcuts.json
-  checkpoints.json
-  preview.webp
+Create room
+  -> authoritative lobby
+  -> first racer becomes host
+  -> racers/spectators join by room ID
+  -> host starts race
+  -> 3-second simulation countdown
+  -> server-authoritative race
+  -> synchronized finish state
 ```
 
-Planned production asset domains:
+If a human racer disconnects, its duck returns to AI control. Spectators never consume racer slots. If the host leaves before start, host ownership migrates to another connected racer.
+
+The browser only exposes Online controls when a real `NEXT_PUBLIC_DUCK_RACE_SERVER_URL` can be used. The UI reports the unconfigured state instead of simulating fake connectivity.
+
+Remaining network production enhancements after server deployment are reconnection UX, invite/deep links, latency/interpolation tuning, and bandwidth/load profiling.
+
+## Progression
+
+Local player progression is optional and stored in browser local storage under a versioned key. It records races, wins, podiums, cosmetic currency, and best rank per track. It is intentionally not part of authoritative race physics.
+
+Bud Bucks are cosmetic progression currency only. The game does not contain cash wagering or real-money race betting.
+
+## Production asset boundary
+
+The current renderer deliberately uses procedural duck/course presentation so game rules can be verified independently of final artwork. Production assets should land through stable manifest keys under:
 
 ```text
 assets/stoner-duck-race/
@@ -121,8 +156,19 @@ assets/stoner-duck-race/
   audio/
 ```
 
+Final duck sprite strips, course backgrounds/foregrounds, water animation, item icons, impact FX, title treatment, music, ambience, and SFX can replace procedural presentation without changing simulation state or multiplayer protocol.
+
 ## QA policy
 
-Do not use Playwright for this game. Prefer deterministic Node-based tests, static route/package validation, TypeScript checks, production builds, and seeded headless simulation tests.
+Do **not** use Playwright for this game.
 
-The first performance target is not merely visual FPS; verification must eventually simulate repeated 50-racer races headlessly and confirm deterministic finishing order from identical seeds and inputs.
+The repository protects this game with:
+
+- deterministic/static game verification,
+- TypeScript checks,
+- lint,
+- production Next.js build,
+- static overlay export validation,
+- isolated Colyseus server dependency install and server typecheck.
+
+Future performance QA should add repeated seeded 50-racer headless simulations and server load/bandwidth profiling while preserving deterministic finishing order for identical inputs and seeds.
