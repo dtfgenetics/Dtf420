@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "brand": {
+    "name": "DTF Genetics",
+    "tagline": "Dream the Future",
+    "homeHref": "/"
+  },
+  "primaryNavigation": [
+    { "href": "/seeds", "label": "Genetics" },
+    { "href": "/learn", "label": "Learn" },
+    { "href": "/tools", "label": "Tools" },
+    { "href": "/games", "label": "Games" },
+    { "href": "/community", "label": "Community" },
+    { "href": "/shop", "label": "Shop" }
+  ],
+  "utilityNavigation": [
+    { "href": "/learn/search", "label": "Search THC" }
+  ],
+  "secondaryNavigation": [
+    { "href": "/journal", "label": "Journal" },
+    { "href": "/about", "label": "About" },
+    { "href": "/contact", "label": "Contact" }
+  ],
+  "wordpressContract": {
+    "purpose": "Keep WordPress-owned top-level routes visually and structurally aligned with the Next.js static overlay.",
+    "requiredPrimaryLabels": ["Genetics", "Learn", "Tools", "Games", "Community", "Shop"]
+  }
+}
