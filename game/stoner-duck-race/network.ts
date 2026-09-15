@@ -14,6 +14,7 @@ export interface DuckRaceRoomOptions {
   racerCount: number;
   seed: string;
   playerName: string;
+  characterId: string;
   spectator?: boolean;
 }
 
@@ -76,7 +77,6 @@ function normalizeTrack(value: unknown): TrackId {
 
 function snapshotFromState(state: any): DuckRaceRoomSnapshot {
   const ducks: NetworkDuckSnapshot[] = [];
-
   state?.ducks?.forEach?.((duck: any) => {
     ducks.push({
       id: String(duck.id ?? ""),
@@ -92,7 +92,6 @@ function snapshotFromState(state: any): DuckRaceRoomSnapshot {
       finished: Boolean(duck.finished),
     });
   });
-
   ducks.sort((left, right) => left.rank - right.rank);
 
   return {
@@ -121,6 +120,7 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
     racerCount: Math.max(1, Math.min(50, Math.floor(options.racerCount))),
     seed: options.seed.trim().slice(0, 64) || "DTF-420",
     name: options.playerName.trim().slice(0, 24) || "YOU",
+    characterId: options.characterId.trim() || "mellow-mallard",
     spectator: Boolean(options.spectator),
   };
 
@@ -154,12 +154,8 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
       listener(latest);
       return () => listeners.delete(listener);
     },
-    sendInput(input) {
-      room.send("input", input);
-    },
-    startRace() {
-      room.send("start-race");
-    },
+    sendInput(input) { room.send("input", input); },
+    startRace() { room.send("start-race"); },
     async leave() {
       listeners.clear();
       await room.leave();
