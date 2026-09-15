@@ -1,4 +1,13 @@
 import Phaser from "phaser";
+import {
+  AUDIO_ASSETS,
+  DUCK_SPRITE_ASSETS,
+  HAZARD_ASSETS,
+  POWERUP_ASSETS,
+  TRACK_ART_ASSETS,
+  getDuckSpriteAsset,
+  hasAuthoredAsset,
+} from "../assets";
 import { getDuckCharacter } from "../characters";
 import { createRaceConfig } from "../config";
 import type { DuckRaceRoomConnection, DuckRaceRoomSnapshot, NetworkDuckSnapshot } from "../network";
@@ -13,32 +22,11 @@ const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
 const SIM_STEP_MS = 50;
 
-const POWERUP_LABELS: Record<PowerupId, string> = {
-  "munchie-rush": "MUNCH",
-  "dab-blast": "DAB",
-  "cloud-screen": "CLOUD",
-  "bubble-shield": "SHIELD",
-  "feather-boost": "FEATHER",
-  "snack-magnet": "MAGNET",
-  "mega-quack": "QUACK",
-  "super-duck": "SUPER",
-};
-
-const POWERUP_COLORS: Record<PowerupId, number> = {
-  "munchie-rush": 0xf2c14e,
-  "dab-blast": 0xa978e3,
-  "cloud-screen": 0x9fb8c8,
-  "bubble-shield": 0x63c7da,
-  "feather-boost": 0xf4e6a2,
-  "snack-magnet": 0xe58f65,
-  "mega-quack": 0xff9f1c,
-  "super-duck": 0xffd166,
-};
-
 interface DuckView {
   container: Phaser.GameObjects.Container;
   label: Phaser.GameObjects.Text;
   shield: Phaser.GameObjects.Arc;
+  sprite?: Phaser.GameObjects.Sprite;
 }
 
 interface TouchState {
@@ -82,6 +70,7 @@ export class RaceScene extends Phaser.Scene {
   private networkSnapshot?: DuckRaceRoomSnapshot;
   private unsubscribeNetwork?: () => void;
   private duckViews = new Map<string, DuckView>();
+  private ambientSounds: Phaser.Sound.BaseSound[] = [];
   private accumulator = 0;
   private selectedMode: RaceModeId;
   private inputSequence = 0;
@@ -112,8 +101,36 @@ export class RaceScene extends Phaser.Scene {
     this.selectedMode = options.mode;
   }
 
+  preload(): void {
+    for (const asset of DUCK_SPRITE_ASSETS) {
+      if (!hasAuthoredAsset(asset.sheetPath)) continue;
+      this.load.spritesheet(asset.textureKey, asset.sheetPath, {
+        frameWidth: asset.frameWidth,
+        frameHeight: asset.frameHeight,
+      });
+    }
+
+    for (const asset of Object.values(POWERUP_ASSETS)) {
+      if (hasAuthoredAsset(asset.path)) this.load.image(asset.textureKey, asset.path);
+    }
+    for (const asset of Object.values(HAZARD_ASSETS)) {
+      if (hasAuthoredAsset(asset.path)) this.load.image(asset.textureKey, asset.path);
+    }
+
+    const trackArt = TRACK_ART_ASSETS[this.launchOptions.trackId];
+    if (hasAuthoredAsset(trackArt.backgroundPath)) this.load.image(trackArt.backgroundKey, trackArt.backgroundPath);
+    if (hasAuthoredAsset(trackArt.foregroundPath)) this.load.image(trackArt.foregroundKey, trackArt.foregroundPath);
+    if (hasAuthoredAsset(trackArt.previewPath)) this.load.image(trackArt.previewKey, trackArt.previewPath);
+
+    for (const audio of AUDIO_ASSETS) {
+      if (hasAuthoredAsset(audio.path)) this.load.audio(audio.key, audio.path);
+    }
+  }
+
   create(): void {
     const track = this.track;
+    this.registerAuthoredDuckAnimations();
+    this.startAuthoredAudio();
     this.cameras.main.setBackgroundColor("#0d242d");
     this.cameras.main.setBounds(0, 0, this.worldEndX + 260, VIEW_HEIGHT);
     this.drawTrack();
@@ -145,7 +162,14 @@ export class RaceScene extends Phaser.Scene {
     }
 
     this.input.on("pointerup", () => this.resetTouchState());
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsubscribeNetwork?.());
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.unsubscribeNetwork?.();
+      for (const sound of this.ambientSounds) {
+        sound.stop();
+        sound.destroy();
+      }
+      this.ambientSounds = [];
+    });
     this.eventText.setText(`${track.name.toUpperCase()} · ${track.tagline}`);
   }
 
@@ -168,6 +192,31 @@ export class RaceScene extends Phaser.Scene {
   private get track() { return getTrackDefinition(this.networkSnapshot?.trackId ?? this.launchOptions.trackId); }
   private get courseWidth(): number { return this.track.length; }
   private get worldEndX(): number { return WORLD_START_X + this.courseWidth; }
+
+  private registerAuthoredDuckAnimations(): void {
+    for (const asset of DUCK_SPRITE_ASSETS) {
+      if (!this.textures.exists(asset.textureKey)) continue;
+      for (const [animationId, animation] of Object.entries(asset.animations)) {
+        const key = `${asset.textureKey}:${animationId}`;
+        if (this.anims.exists(key)) continue;
+        this.anims.create({
+          key,
+          frames: this.anims.generateFrameNumbers(asset.textureKey, { start: animation.start, end: animation.end }),
+          frameRate: animation.frameRate,
+          repeat: animation.repeat,
+        });
+      }
+    }
+  }
+
+  private startAuthoredAudio(): void {
+    for (const asset of AUDIO_ASSETS) {
+      if (!asset.loop || !this.cache.audio.exists(asset.key)) continue;
+      const sound = this.sound.add(asset.key, { loop: true, volume: asset.volume });
+      sound.play();
+      this.ambientSounds.push(sound);
+    }
+  }
 
   private readPlayerInput() {
     this.inputSequence += 1;
@@ -286,18 +335,32 @@ export class RaceScene extends Phaser.Scene {
     for (const duck of state.ducks) {
       if (this.duckViews.has(duck.id)) continue;
       const character = getDuckCharacter(duck.characterId);
+      const authored = getDuckSpriteAsset(duck.characterId);
       const container = this.add.container(0, 0);
       const size = duck.isPlayer ? 1.18 : 1;
-      const body = this.add.ellipse(0, 0, 24 * size, 18 * size, character.bodyColor);
-      const wing = this.add.ellipse(-6 * size, 1 * size, 11 * size, 7 * size, character.accentColor, 0.75).setRotation(-0.25);
-      const head = this.add.ellipse(9 * size, -9 * size, 14 * size, 14 * size, character.headColor);
-      const bill = this.add.rectangle(18 * size, -7 * size, 10 * size, 4 * size, character.billColor);
-      const eye = this.add.circle(11 * size, -11 * size, 1.6 * size, 0x142126);
-      const shield = this.add.circle(0, -1, 20 * size, 0x63c7da, 0.08).setStrokeStyle(2, 0x9de7f0, 0.9).setVisible(false);
-      const label = this.add.text(0, 14 * size, String(duck.rank), { fontFamily: "Arial, sans-serif", fontSize: duck.isPlayer ? "10px" : "8px", color: "#ffffff", backgroundColor: duck.isPlayer ? "#234f2c" : "#00000066", padding: { x: 2, y: 1 } }).setOrigin(0.5, 0);
-      container.add([shield, body, wing, head, bill, eye, label]);
+      const shield = this.add.circle(0, -1, 25 * size, 0x63c7da, 0.08).setStrokeStyle(2, 0x9de7f0, 0.9).setVisible(false);
+      let sprite: Phaser.GameObjects.Sprite | undefined;
+      const visualObjects: Phaser.GameObjects.GameObject[] = [shield];
+
+      if (this.textures.exists(authored.textureKey)) {
+        sprite = this.add.sprite(0, -2, authored.textureKey, 0).setDisplaySize(48 * size, 48 * size);
+        const paddleKey = `${authored.textureKey}:paddle`;
+        if (this.anims.exists(paddleKey)) sprite.play(paddleKey);
+        visualObjects.push(sprite);
+      } else {
+        const body = this.add.ellipse(0, 0, 24 * size, 18 * size, character.bodyColor);
+        const wing = this.add.ellipse(-6 * size, 1 * size, 11 * size, 7 * size, character.accentColor, 0.75).setRotation(-0.25);
+        const head = this.add.ellipse(9 * size, -9 * size, 14 * size, 14 * size, character.headColor);
+        const bill = this.add.rectangle(18 * size, -7 * size, 10 * size, 4 * size, character.billColor);
+        const eye = this.add.circle(11 * size, -11 * size, 1.6 * size, 0x142126);
+        visualObjects.push(body, wing, head, bill, eye);
+      }
+
+      const label = this.add.text(0, 20 * size, String(duck.rank), { fontFamily: "Arial, sans-serif", fontSize: duck.isPlayer ? "10px" : "8px", color: "#ffffff", backgroundColor: duck.isPlayer ? "#234f2c" : "#00000066", padding: { x: 2, y: 1 } }).setOrigin(0.5, 0);
+      visualObjects.push(label);
+      container.add(visualObjects);
       container.setDepth(duck.isPlayer ? 30 : 20);
-      this.duckViews.set(duck.id, { container, label, shield });
+      this.duckViews.set(duck.id, { container, label, shield, sprite });
     }
   }
 
@@ -315,6 +378,13 @@ export class RaceScene extends Phaser.Scene {
       view.container.setAlpha(duck.finished ? 0.58 : 1);
       view.container.setScale(duck.isPlayer && duck.heldPowerup ? 1.08 : 1);
       view.shield.setVisible(duck.shieldCharges > 0);
+
+      if (view.sprite) {
+        const authored = getDuckSpriteAsset(duck.characterId);
+        const animationId = duck.finished ? "win" : duck.heldPowerup ? "boost" : "paddle";
+        const animationKey = `${authored.textureKey}:${animationId}`;
+        if (this.anims.exists(animationKey)) view.sprite.play(animationKey, true);
+      }
     }
 
     const countdownRemaining = Math.max(0, state.countdownTicks - state.tick);
@@ -415,6 +485,13 @@ export class RaceScene extends Phaser.Scene {
       this.add.text(x + 20, WORLD_TOP + 18, zone.label.toUpperCase(), { fontFamily: "Arial, sans-serif", fontSize: "18px", color: "#d7eee2", fontStyle: "bold" }).setAlpha(0.62).setDepth(2);
     });
 
+    const trackArt = TRACK_ART_ASSETS[track.id];
+    if (this.textures.exists(trackArt.backgroundKey)) {
+      this.add.tileSprite(WORLD_START_X, WORLD_TOP, this.courseWidth, riverHeight, trackArt.backgroundKey)
+        .setOrigin(0, 0)
+        .setDepth(1);
+    }
+
     graphics.lineStyle(2, 0x9ccbb0, 0.22);
     for (let lane = 1; lane < 6; lane += 1) graphics.lineBetween(WORLD_START_X, WORLD_TOP + (riverHeight / 6) * lane, this.worldEndX, WORLD_TOP + (riverHeight / 6) * lane);
     for (let marker = 0; marker <= 10; marker += 1) {
@@ -428,10 +505,20 @@ export class RaceScene extends Phaser.Scene {
     for (const pickup of track.pickups) {
       const x = WORLD_START_X + pickup.progress * this.courseWidth;
       const y = WORLD_TOP + ((pickup.lateral + 1) / 2) * riverHeight;
-      const label = POWERUP_LABELS[pickup.powerup];
-      this.add.circle(x, y, 18, POWERUP_COLORS[pickup.powerup], 0.96).setStrokeStyle(3, 0xffffff, 0.82).setDepth(8);
-      this.add.text(x, y, label.slice(0, 2), { fontFamily: "Arial", fontSize: "10px", color: "#102027", fontStyle: "bold" }).setOrigin(0.5).setDepth(9);
-      this.add.text(x, y - 30, label, { fontFamily: "Arial", fontSize: "9px", color: "#edf6e8" }).setOrigin(0.5).setDepth(9);
+      const asset = POWERUP_ASSETS[pickup.powerup];
+      if (this.textures.exists(asset.textureKey)) {
+        this.add.image(x, y, asset.textureKey).setDisplaySize(42, 42).setDepth(8);
+      } else {
+        this.add.circle(x, y, 18, asset.fallbackColor, 0.96).setStrokeStyle(3, 0xffffff, 0.82).setDepth(8);
+        this.add.text(x, y, asset.fallbackLabel.slice(0, 2), { fontFamily: "Arial", fontSize: "10px", color: "#102027", fontStyle: "bold" }).setOrigin(0.5).setDepth(9);
+      }
+      this.add.text(x, y - 30, asset.fallbackLabel, { fontFamily: "Arial", fontSize: "9px", color: "#edf6e8" }).setOrigin(0.5).setDepth(9);
+    }
+
+    if (this.textures.exists(trackArt.foregroundKey)) {
+      this.add.tileSprite(WORLD_START_X, WORLD_TOP, this.courseWidth, riverHeight, trackArt.foregroundKey)
+        .setOrigin(0, 0)
+        .setDepth(12);
     }
 
     this.add.text(WORLD_START_X + 12, WORLD_TOP - 58, `${track.name.toUpperCase()} · START`, { fontFamily: "Arial, sans-serif", fontSize: "15px", color: "#e8efc5", fontStyle: "bold" }).setDepth(7);
@@ -442,21 +529,24 @@ export class RaceScene extends Phaser.Scene {
     const riverHeight = WORLD_BOTTOM - WORLD_TOP;
     const x = WORLD_START_X + progress * this.courseWidth;
     const y = WORLD_TOP + ((lateral + 1) / 2) * riverHeight;
-    if (type === "log" || type === "barrel") {
-      this.add.rectangle(x, y, type === "log" ? 74 : 42, 18, type === "log" ? 0x75442b : 0x8d5b32).setRotation(type === "log" ? 0.25 : -0.18).setDepth(6);
+    const asset = HAZARD_ASSETS[type];
+
+    if (this.textures.exists(asset.textureKey)) {
+      this.add.image(x, y, asset.textureKey).setDisplaySize(type === "waterfall" ? 70 : 72, type === "waterfall" ? 190 : 72).setDepth(6);
+    } else if (type === "log" || type === "barrel") {
+      this.add.rectangle(x, y, type === "log" ? 74 : 42, 18, asset.fallbackColor).setRotation(type === "log" ? 0.25 : -0.18).setDepth(6);
     } else if (type === "mud" || type === "reeds") {
-      this.add.ellipse(x, y, type === "mud" ? 160 : 110, type === "mud" ? 94 : 70, type === "mud" ? 0x62513c : 0x3f6b45, 0.8).setDepth(4);
+      this.add.ellipse(x, y, type === "mud" ? 160 : 110, type === "mud" ? 94 : 70, asset.fallbackColor, 0.8).setDepth(4);
       if (type === "reeds") for (let reed = -2; reed <= 2; reed += 1) this.add.rectangle(x + reed * 13, y - 5, 4, 54, 0x6f8b4a).setRotation(reed * 0.04).setDepth(6);
     } else if (type === "whirlpool") {
-      this.add.circle(x, y, 55, 0x0a303b, 0.84).setStrokeStyle(8, 0x6ca2a0, 0.75).setDepth(5);
+      this.add.circle(x, y, 55, asset.fallbackColor, 0.84).setStrokeStyle(8, 0x6ca2a0, 0.75).setDepth(5);
       this.add.circle(x, y, 22, 0x071e27, 1).setDepth(6);
     } else if (type === "waterfall") {
-      this.add.rectangle(x, y, 52, 190, 0xb8dfe8, 0.24).setStrokeStyle(3, 0xd9f5f7, 0.55).setDepth(5);
+      this.add.rectangle(x, y, 52, 190, asset.fallbackColor, 0.24).setStrokeStyle(3, 0xd9f5f7, 0.55).setDepth(5);
     } else {
-      const color = type === "fan" ? 0xb7c3c7 : 0x80c5d6;
-      this.add.circle(x, y, 32, color, 0.38).setStrokeStyle(3, color, 0.82).setDepth(5);
-      this.add.text(x, y, type === "fan" ? "FAN" : "SPRAY", { fontFamily: "Arial", fontSize: "10px", color: "#eef8f6", fontStyle: "bold" }).setOrigin(0.5).setDepth(7);
+      this.add.circle(x, y, 32, asset.fallbackColor, 0.38).setStrokeStyle(3, asset.fallbackColor, 0.82).setDepth(5);
+      this.add.text(x, y, asset.fallbackLabel, { fontFamily: "Arial", fontSize: "10px", color: "#eef8f6", fontStyle: "bold" }).setOrigin(0.5).setDepth(7);
     }
-    this.add.text(x, y - 38, type.toUpperCase(), { fontFamily: "Arial", fontSize: "9px", color: "#f1dcc5" }).setOrigin(0.5).setDepth(7);
+    this.add.text(x, y - 38, asset.fallbackLabel, { fontFamily: "Arial", fontSize: "9px", color: "#f1dcc5" }).setOrigin(0.5).setDepth(7);
   }
 }
