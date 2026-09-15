@@ -1,6 +1,13 @@
 export type RaceModeId = "derby" | "rally" | "chaos";
 export type RacePhase = "lobby" | "countdown" | "racing" | "finished";
 
+export interface DuckRaceLaunchOptions {
+  mode: RaceModeId;
+  racerCount: number;
+  seed: string;
+  playerName: string;
+}
+
 export interface DuckInput {
   steer: number;
   boost: boolean;
