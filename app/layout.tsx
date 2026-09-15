@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description:
     "DTF Genetics combines original cannabis genetics, Teaching Healthy Cultivation plant-science education, grow tools, browser games, and community resources.",
   applicationName: "DTF Genetics",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }],
+    shortcut: ["/icon.svg"],
+  },
   openGraph: {
     type: "website",
     siteName: "DTF Genetics",
