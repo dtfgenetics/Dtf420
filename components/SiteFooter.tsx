@@ -1,13 +1,7 @@
 import Link from "next/link";
+import siteShell from "@/configuration/site-shell.json";
 
-const exploreLinks = [
-  { href: "/seeds", label: "Genetics" },
-  { href: "/learn", label: "Teaching Healthy Cultivation" },
-  { href: "/tools", label: "Grow tools" },
-  { href: "/games", label: "Games" },
-  { href: "/community", label: "Community" },
-  { href: "/journal", label: "Journal" },
-];
+const exploreLinks = siteShell.primaryNavigation;
 
 const learningLinks = [
   { href: "/learn/academy", label: "Academy" },
@@ -21,11 +15,11 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="shell site-footer__grid">
         <div className="site-footer__brand">
-          <Link className="brand brand--footer" href="/" aria-label="DTF Genetics home">
+          <Link className="brand brand--footer" href={siteShell.brand.homeHref} aria-label="DTF Genetics home">
             <span className="brand__mark" aria-hidden="true">DTF</span>
             <span className="brand__identity">
-              <strong>DTF Genetics</strong>
-              <small>Dream the Future</small>
+              <strong>{siteShell.brand.name}</strong>
+              <small>{siteShell.brand.tagline}</small>
             </span>
           </Link>
           <p>
@@ -54,8 +48,9 @@ export function SiteFooter() {
         <div className="site-footer__column">
           <h2>Company</h2>
           <ul>
-            <li><Link href="/about">About DTF</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+            {siteShell.secondaryNavigation.map((item) => (
+              <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
+            ))}
             <li><Link href="/learn/search">Search education</Link></li>
           </ul>
         </div>
