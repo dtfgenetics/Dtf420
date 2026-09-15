@@ -1,12 +1,14 @@
 import Phaser from "phaser";
 import { createRaceConfig } from "../config";
 import { RaceSimulation } from "../simulation";
+import { getTrackDefinition } from "../tracks";
 import type { DuckState, RaceModeId } from "../types";
 
 const WORLD_MARGIN_X = 72;
-const WORLD_TOP = 128;
-const WORLD_BOTTOM = 662;
+const WORLD_TOP = 132;
+const WORLD_BOTTOM = 612;
 const SIM_STEP_MS = 50;
+const TRACK = getTrackDefinition("kush-creek");
 
 interface DuckView {
   container: Phaser.GameObjects.Container;
@@ -16,56 +18,59 @@ interface DuckView {
   label: Phaser.GameObjects.Text;
 }
 
+interface TouchState {
+  left: boolean;
+  right: boolean;
+  boost: boolean;
+  dive: boolean;
+  usePowerup: boolean;
+}
+
 export class RaceScene extends Phaser.Scene {
   private simulation!: RaceSimulation;
   private duckViews = new Map<string, DuckView>();
   private accumulator = 0;
-  private selectedMode: RaceModeId = "derby";
+  private selectedMode: RaceModeId = "rally";
   private inputSequence = 0;
   private statusText!: Phaser.GameObjects.Text;
   private standingsText!: Phaser.GameObjects.Text;
   private helpText!: Phaser.GameObjects.Text;
+  private eventText!: Phaser.GameObjects.Text;
+  private playerText!: Phaser.GameObjects.Text;
+  private controlLayer!: Phaser.GameObjects.Container;
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
   private boostKey?: Phaser.Input.Keyboard.Key;
   private diveKey?: Phaser.Input.Keyboard.Key;
+  private powerupKey?: Phaser.Input.Keyboard.Key;
+  private touchState: TouchState = {
+    left: false,
+    right: false,
+    boost: false,
+    dive: false,
+    usePowerup: false,
+  };
 
   constructor() {
     super("StonerDuckRace");
   }
 
   create(): void {
-    this.cameras.main.setBackgroundColor("#102a32");
+    this.cameras.main.setBackgroundColor("#0d242d");
     this.drawTrack();
     this.createSimulation(this.selectedMode);
-
-    this.statusText = this.add.text(28, 22, "", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "26px",
-      color: "#f4f7df",
-      fontStyle: "bold",
-    });
-
-    this.standingsText = this.add.text(28, 64, "", {
-      fontFamily: "monospace",
-      fontSize: "15px",
-      color: "#d8f5dd",
-      lineSpacing: 3,
-    });
-
-    this.helpText = this.add.text(1260, 24, "1 Derby  ·  2 Rally  ·  3 Chaos  ·  R restart", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "15px",
-      color: "#b8d7c0",
-    }).setOrigin(1, 0);
+    this.createHud();
+    this.createControls();
 
     this.cursors = this.input.keyboard?.createCursorKeys();
     this.boostKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.diveKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+    this.powerupKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     this.input.keyboard?.on("keydown-ONE", () => this.resetRace("derby"));
     this.input.keyboard?.on("keydown-TWO", () => this.resetRace("rally"));
     this.input.keyboard?.on("keydown-THREE", () => this.resetRace("chaos"));
     this.input.keyboard?.on("keydown-R", () => this.resetRace(this.selectedMode));
+    this.input.on("pointerup", () => this.resetTouchState());
   }
 
   update(_time: number, delta: number): void {
@@ -73,11 +78,14 @@ export class RaceScene extends Phaser.Scene {
 
     if (this.selectedMode !== "derby") {
       this.inputSequence += 1;
+      const keyboardSteer = (this.cursors?.left?.isDown ? -1 : 0) + (this.cursors?.right?.isDown ? 1 : 0);
+      const touchSteer = (this.touchState.left ? -1 : 0) + (this.touchState.right ? 1 : 0);
+
       this.simulation.setInput("duck-1", {
-        steer: (this.cursors?.left?.isDown ? -1 : 0) + (this.cursors?.right?.isDown ? 1 : 0),
-        boost: Boolean(this.boostKey?.isDown),
-        dive: Boolean(this.diveKey?.isDown),
-        usePowerup: false,
+        steer: Phaser.Math.Clamp(keyboardSteer + touchSteer, -1, 1),
+        boost: Boolean(this.boostKey?.isDown) || this.touchState.boost,
+        dive: Boolean(this.diveKey?.isDown) || this.touchState.dive,
+        usePowerup: Boolean(this.powerupKey?.isDown) || this.touchState.usePowerup,
         sequence: this.inputSequence,
       });
     }
@@ -88,6 +96,103 @@ export class RaceScene extends Phaser.Scene {
     }
 
     this.renderState();
+  }
+
+  private createHud(): void {
+    this.statusText = this.add.text(28, 20, "", {
+      fontFamily: "Arial, sans-serif",
+      fontSize: "25px",
+      color: "#f4f7df",
+      fontStyle: "bold",
+    }).setDepth(100);
+
+    this.standingsText = this.add.text(28, 58, "", {
+      fontFamily: "monospace",
+      fontSize: "14px",
+      color: "#d8f5dd",
+      lineSpacing: 3,
+      backgroundColor: "#07171dbb",
+      padding: { x: 9, y: 7 },
+    }).setDepth(100);
+
+    this.helpText = this.add.text(1252, 22, "1 Derby  ·  2 Rally  ·  3 Chaos  ·  R restart", {
+      fontFamily: "Arial, sans-serif",
+      fontSize: "14px",
+      color: "#b8d7c0",
+    }).setOrigin(1, 0).setDepth(100);
+
+    this.eventText = this.add.text(640, 24, "", {
+      fontFamily: "Arial, sans-serif",
+      fontSize: "15px",
+      color: "#ffe28a",
+      fontStyle: "bold",
+      backgroundColor: "#152b22cc",
+      padding: { x: 10, y: 6 },
+    }).setOrigin(0.5, 0).setDepth(100);
+
+    this.playerText = this.add.text(1250, 60, "", {
+      fontFamily: "Arial, sans-serif",
+      fontSize: "14px",
+      color: "#f8f4d8",
+      align: "right",
+      backgroundColor: "#07171dbb",
+      padding: { x: 9, y: 7 },
+    }).setOrigin(1, 0).setDepth(100);
+  }
+
+  private createControls(): void {
+    this.controlLayer = this.add.container(0, 0).setDepth(120);
+
+    this.makeTouchButton(74, 666, "◀", () => { this.touchState.left = true; });
+    this.makeTouchButton(144, 666, "▶", () => { this.touchState.right = true; });
+    this.makeTouchButton(1042, 666, "DIVE", () => { this.touchState.dive = true; }, 62);
+    this.makeTouchButton(1122, 666, "BOOST", () => { this.touchState.boost = true; }, 66);
+    this.makeTouchButton(1210, 666, "ITEM", () => { this.touchState.usePowerup = true; }, 66);
+
+    const modes: Array<[RaceModeId, string, number]> = [
+      ["derby", "DERBY", 950],
+      ["rally", "RALLY", 1045],
+      ["chaos", "CHAOS", 1140],
+    ];
+
+    for (const [mode, label, x] of modes) {
+      const button = this.add.text(x, 93, label, {
+        fontFamily: "Arial, sans-serif",
+        fontSize: "13px",
+        color: "#e9f1d0",
+        backgroundColor: mode === this.selectedMode ? "#396e3f" : "#17333a",
+        padding: { x: 10, y: 7 },
+      }).setInteractive({ useHandCursor: true }).setDepth(120);
+      button.on("pointerdown", () => this.resetRace(mode));
+    }
+
+    this.updateControlVisibility();
+  }
+
+  private makeTouchButton(x: number, y: number, label: string, onDown: () => void, width = 58): void {
+    const background = this.add.rectangle(0, 0, width, 48, 0x17333a, 0.94)
+      .setStrokeStyle(2, 0x8bb889, 0.9)
+      .setInteractive({ useHandCursor: true });
+    const text = this.add.text(0, 0, label, {
+      fontFamily: "Arial, sans-serif",
+      fontSize: label.length > 2 ? "12px" : "21px",
+      color: "#f4f7df",
+      fontStyle: "bold",
+    }).setOrigin(0.5);
+    const container = this.add.container(x, y, [background, text]);
+    this.controlLayer.add(container);
+
+    background.on("pointerdown", onDown);
+    background.on("pointerup", () => this.resetTouchState());
+    background.on("pointerout", () => this.resetTouchState());
+  }
+
+  private resetTouchState(): void {
+    this.touchState.left = false;
+    this.touchState.right = false;
+    this.touchState.boost = false;
+    this.touchState.dive = false;
+    this.touchState.usePowerup = false;
   }
 
   private createSimulation(mode: RaceModeId): void {
@@ -105,20 +210,25 @@ export class RaceScene extends Phaser.Scene {
     this.selectedMode = mode;
     this.accumulator = 0;
     this.inputSequence = 0;
+    this.resetTouchState();
 
-    for (const view of this.duckViews.values()) {
-      view.container.destroy(true);
-    }
+    for (const view of this.duckViews.values()) view.container.destroy(true);
     this.duckViews.clear();
 
     this.createSimulation(mode);
+    this.updateControlVisibility();
+  }
+
+  private updateControlVisibility(): void {
+    if (!this.controlLayer) return;
+    this.controlLayer.setVisible(this.selectedMode !== "derby");
   }
 
   private buildDuckViews(): void {
     for (const duck of this.simulation.state.ducks) {
       const container = this.add.container(0, 0);
       const isPlayer = duck.playerId === "local-player";
-      const body = this.add.ellipse(0, 0, isPlayer ? 24 : 20, isPlayer ? 18 : 15, isPlayer ? 0xf8d347 : 0xe9c440);
+      const body = this.add.ellipse(0, 0, isPlayer ? 25 : 20, isPlayer ? 19 : 15, isPlayer ? 0xf8d347 : 0xe9c440);
       const head = this.add.ellipse(8, -8, isPlayer ? 14 : 12, isPlayer ? 14 : 12, isPlayer ? 0xffe067 : 0xf4d35e);
       const bill = this.add.rectangle(15, -7, isPlayer ? 10 : 8, 4, 0xf28c28);
       const label = this.add.text(0, 13, duck.rank.toString(), {
@@ -130,7 +240,7 @@ export class RaceScene extends Phaser.Scene {
       }).setOrigin(0.5, 0);
 
       container.add([body, head, bill, label]);
-      container.setDepth(isPlayer ? 20 : 10);
+      container.setDepth(isPlayer ? 30 : 20);
       this.duckViews.set(duck.id, { container, body, head, bill, label });
     }
   }
@@ -148,7 +258,8 @@ export class RaceScene extends Phaser.Scene {
       const y = WORLD_TOP + ((duck.lateral + 1) / 2) * riverHeight;
       view.container.setPosition(x, y);
       view.label.setText(duck.playerId === "local-player" ? "YOU" : String(duck.rank));
-      view.container.setAlpha(duck.finished ? 0.68 : 1);
+      view.container.setAlpha(duck.finished ? 0.58 : 1);
+      view.container.setScale(duck.playerId === "local-player" && duck.heldPowerup ? 1.12 : 1);
     }
 
     const countdownRemaining = Math.max(0, state.config.countdownTicks - state.tick);
@@ -156,10 +267,10 @@ export class RaceScene extends Phaser.Scene {
     const winner = state.winnerId ? state.ducks.find((duck) => duck.id === state.winnerId) : null;
 
     const phaseLabel = state.phase === "countdown"
-      ? `STARTING IN ${countdownSeconds}`
+      ? `KUSH CREEK · STARTING IN ${countdownSeconds}`
       : state.phase === "finished"
         ? `WINNER: ${winner?.name ?? "Duck"}`
-        : `${this.selectedMode.toUpperCase()} · 50 DUCKS`;
+        : `${this.selectedMode.toUpperCase()} · 50 DUCKS · KUSH CREEK`;
 
     this.statusText.setText(phaseLabel);
 
@@ -168,21 +279,92 @@ export class RaceScene extends Phaser.Scene {
       .slice(0, 5)
       .map((duck) => `${String(duck.rank).padStart(2, "0")}. ${duck.name.padEnd(10, " ")} ${Math.round(duck.progress * 100)}%`)
       .join("\n");
+    this.standingsText.setText(leaders);
 
     const player = state.ducks.find((duck) => duck.playerId === "local-player");
-    const playerLine = player ? `\n\nYOU: ${player.rank}/50 · BOOST ${Math.round(player.boostCharge * 100)}%` : "";
-    this.standingsText.setText(`${leaders}${playerLine}`);
+    if (player) {
+      const zone = TRACK.currentZones.find((candidate) => player.progress >= candidate.start && player.progress < candidate.end)
+        ?? TRACK.currentZones[TRACK.currentZones.length - 1];
+      this.playerText.setText([
+        `YOU · ${player.rank}/50`,
+        `${zone.label} · ${Math.round(player.progress * 100)}%`,
+        `BOOST ${Math.round(player.boostCharge * 100)}%`,
+        `ITEM ${player.heldPowerup ? player.heldPowerup.toUpperCase().replace("-", " ") : "—"}`,
+        "← → steer · SPACE boost · ↓ dive · E item",
+      ]);
+    } else {
+      this.playerText.setText("SPECTATOR DERBY\n50 AI ducks · seeded race");
+    }
+
+    const latestEvent = state.events[state.events.length - 1];
+    if (!latestEvent || state.tick - latestEvent.tick > state.config.tickRate * 3) {
+      this.eventText.setText("");
+    } else if (latestEvent.type === "powerup-collected") {
+      this.eventText.setText(`PICKUP · ${String(latestEvent.payload?.powerup ?? "POWERUP").toUpperCase()}`);
+    } else if (latestEvent.type === "powerup-used") {
+      this.eventText.setText(`POWERUP FIRED · ${String(latestEvent.payload?.powerup ?? "").toUpperCase()}`);
+    } else if (latestEvent.type === "hazard-hit") {
+      this.eventText.setText(`SPLASH · ${String(latestEvent.payload?.hazardType ?? "HAZARD").toUpperCase()}`);
+    } else if (["munchie-storm", "hotbox-fog", "mega-whirlpool", "dab-wave", "sticky-river"].includes(latestEvent.type)) {
+      this.eventText.setText(`CHAOS EVENT · ${latestEvent.type.toUpperCase().replaceAll("-", " ")}`);
+    } else {
+      this.eventText.setText("");
+    }
   }
 
   private drawTrack(): void {
     const graphics = this.add.graphics();
-    graphics.fillStyle(0x174753, 1);
-    graphics.fillRoundedRect(42, WORLD_TOP - 34, 1196, WORLD_BOTTOM - WORLD_TOP + 68, 38);
+    const raceWidth = 1280 - WORLD_MARGIN_X * 2;
+    const riverHeight = WORLD_BOTTOM - WORLD_TOP;
 
-    graphics.lineStyle(3, 0x5d8f75, 0.8);
+    graphics.fillStyle(0x0b1f26, 1);
+    graphics.fillRoundedRect(42, WORLD_TOP - 34, 1196, riverHeight + 68, 38);
+
+    TRACK.currentZones.forEach((zone, index) => {
+      const x = WORLD_MARGIN_X + zone.start * raceWidth;
+      const width = Math.max(2, (zone.end - zone.start) * raceWidth);
+      graphics.fillStyle(index % 2 === 0 ? 0x174753 : 0x1d5660, 0.92);
+      graphics.fillRect(x, WORLD_TOP, width, riverHeight);
+      this.add.text(x + 8, WORLD_TOP + 8, zone.label, {
+        fontFamily: "Arial, sans-serif",
+        fontSize: "11px",
+        color: "#b9ddca",
+      }).setAlpha(0.78).setDepth(2);
+    });
+
+    graphics.lineStyle(2, 0x5d8f75, 0.42);
     for (let lane = 1; lane < 6; lane += 1) {
-      const y = WORLD_TOP + ((WORLD_BOTTOM - WORLD_TOP) / 6) * lane;
-      graphics.lineBetween(64, y, 1216, y);
+      const y = WORLD_TOP + (riverHeight / 6) * lane;
+      graphics.lineBetween(WORLD_MARGIN_X, y, 1280 - WORLD_MARGIN_X, y);
+    }
+
+    for (const hazard of TRACK.hazards) {
+      const x = WORLD_MARGIN_X + hazard.progress * raceWidth;
+      const y = WORLD_TOP + ((hazard.lateral + 1) / 2) * riverHeight;
+
+      if (hazard.type === "log") {
+        this.add.rectangle(x, y, 34, 10, 0x75442b).setRotation(0.25).setDepth(6);
+        this.add.text(x, y - 18, "LOG", { fontFamily: "Arial", fontSize: "9px", color: "#f1dcc5" }).setOrigin(0.5).setDepth(7);
+      } else if (hazard.type === "mud") {
+        this.add.ellipse(x, y, 70, 50, 0x62513c, 0.78).setDepth(4);
+        this.add.text(x, y, "MUD", { fontFamily: "Arial", fontSize: "9px", color: "#eadfc6" }).setOrigin(0.5).setDepth(7);
+      } else {
+        this.add.circle(x, y, 28, 0x0a303b, 0.84).setStrokeStyle(5, 0x6ca2a0, 0.75).setDepth(5);
+        this.add.circle(x, y, 12, 0x071e27, 1).setDepth(6);
+        this.add.text(x, y - 38, "WHIRLPOOL", { fontFamily: "Arial", fontSize: "9px", color: "#cae7df" }).setOrigin(0.5).setDepth(7);
+      }
+    }
+
+    for (const pickup of TRACK.pickups) {
+      const x = WORLD_MARGIN_X + pickup.progress * raceWidth;
+      const y = WORLD_TOP + ((pickup.lateral + 1) / 2) * riverHeight;
+      const letter = pickup.powerup === "munchie-rush" ? "M" : "D";
+      this.add.circle(x, y, 11, pickup.powerup === "munchie-rush" ? 0xf2c14e : 0xa978e3, 0.95)
+        .setStrokeStyle(2, 0xffffff, 0.78)
+        .setDepth(8);
+      this.add.text(x, y, letter, { fontFamily: "Arial", fontSize: "10px", color: "#102027", fontStyle: "bold" })
+        .setOrigin(0.5)
+        .setDepth(9);
     }
 
     graphics.lineStyle(4, 0xe8efc5, 0.9);
@@ -196,7 +378,7 @@ export class RaceScene extends Phaser.Scene {
       fontStyle: "bold",
     });
 
-    this.add.text(1161, WORLD_TOP - 29, "FINISH", {
+    this.add.text(1158, WORLD_TOP - 29, "FINISH", {
       fontFamily: "Arial, sans-serif",
       fontSize: "12px",
       color: "#e8efc5",
