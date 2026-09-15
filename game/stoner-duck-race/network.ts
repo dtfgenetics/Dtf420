@@ -105,6 +105,8 @@ function snapshotFromState(state: any): DuckRaceRoomSnapshot {
   });
   ducks.sort((left, right) => left.rank - right.rank);
 
+  const fallbackCapacity = Math.max(1, ducks.length);
+
   return {
     phase: String(state?.phase ?? "lobby"),
     mode: normalizeMode(state?.mode),
@@ -115,7 +117,7 @@ function snapshotFromState(state: any): DuckRaceRoomSnapshot {
     countdownTicks: Math.max(0, Number(state?.countdownTicks ?? 60)),
     winnerId: state?.winnerId ? String(state.winnerId) : null,
     hostSessionId: state?.hostSessionId ? String(state.hostSessionId) : null,
-    racerCapacity: Math.max(1, Number(state?.racerCapacity ?? ducks.length || 1)),
+    racerCapacity: Math.max(1, Number(state?.racerCapacity ?? fallbackCapacity)),
     connectedRacers: Math.max(0, Number(state?.connectedRacers ?? 0)),
     spectatorCount: Math.max(0, Number(state?.spectatorCount ?? 0)),
     ducks,
