@@ -60,8 +60,12 @@ for (const hazard of ["log", "mud", "whirlpool", "reeds", "sprinkler", "fan", "b
 
 for (const powerup of ["munchie-rush", "dab-blast", "cloud-screen", "bubble-shield", "feather-boost", "snack-magnet", "mega-quack", "super-duck"]) {
   if (!tracks.includes(`"${powerup}"`)) failures.push(`powerup catalog is missing ${powerup}`);
-  if (!simulation.includes(`"${powerup}"`)) failures.push(`simulation is missing ${powerup} behavior`);
 }
+if (!simulation.includes("activatePowerup")) failures.push("simulation must activate collected powerups");
+for (const directPowerup of ["munchie-rush", "cloud-screen", "bubble-shield", "feather-boost", "snack-magnet", "mega-quack", "super-duck"]) {
+  if (!simulation.includes(`"${directPowerup}"`)) failures.push(`simulation is missing explicit ${directPowerup} handling`);
+}
+if (!simulation.includes("powerup-impact") || !simulation.includes("affected += 1")) failures.push("simulation must retain the shared offensive-item impact branch used by dab-blast");
 
 for (const characterId of ["mellow-mallard", "dab-duck", "hippie-quacker", "grower-goose", "rosin-runner", "cloud-nine", "science-duck", "old-school-quack"]) {
   if (!characters.includes(`id: "${characterId}"`)) failures.push(`character catalog is missing ${characterId}`);
