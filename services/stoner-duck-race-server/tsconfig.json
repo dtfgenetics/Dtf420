@@ -6,14 +6,19 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": ["node"],
+    "rootDir": "../..",
+    "outDir": "build",
+    "sourceMap": true
   },
   "include": [
     "src/**/*.ts",
+    "../../game/stoner-duck-race/characters.ts",
     "../../game/stoner-duck-race/config.ts",
     "../../game/stoner-duck-race/modes.ts",
     "../../game/stoner-duck-race/rng.ts",
     "../../game/stoner-duck-race/simulation.ts",
+    "../../game/stoner-duck-race/tracks.ts",
     "../../game/stoner-duck-race/types.ts"
   ]
 }
