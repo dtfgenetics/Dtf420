@@ -33,6 +33,9 @@ jobs:
       - name: Enforce browser tool policy
         run: node scripts/verify-browser-tool-policy.mjs
 
+      - name: Verify search favicon compatibility
+        run: node scripts/verify-favicon.mjs
+
       - name: Use Node.js 22
         uses: actions/setup-node@v7
         with:
