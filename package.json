@@ -16,6 +16,7 @@
     "build": "next build",
     "build:static-overlay": "DTF_STATIC_EXPORT=1 next build",
     "verify:static-overlay": "node scripts/verify-static-overlay.mjs",
+    "package:static-overlay": "node scripts/package-static-overlay.mjs",
     "verify:site-shell": "node scripts/verify-site-shell.mjs",
     "start": "next start",
     "lint": "eslint .",
