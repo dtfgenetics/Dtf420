@@ -55,6 +55,11 @@ export function recordDuckRaceResult(profile: DuckRaceProfile, result: DuckRaceR
   const previousBest = profile.bestRankByTrack[result.trackId];
   const durationSeconds = resultDurationSeconds(result);
   const previousTime = profile.bestTimeByTrack[result.trackId];
+  const bestTimeByTrack = { ...profile.bestTimeByTrack };
+  if (result.racerCount === 1) {
+    bestTimeByTrack[result.trackId] = previousTime ? Math.min(previousTime, durationSeconds) : durationSeconds;
+  }
+
   const next: DuckRaceProfile = {
     version: 1,
     races: profile.races + 1,
@@ -65,10 +70,7 @@ export function recordDuckRaceResult(profile: DuckRaceProfile, result: DuckRaceR
       ...profile.bestRankByTrack,
       [result.trackId]: previousBest ? Math.min(previousBest, result.rank) : result.rank,
     },
-    bestTimeByTrack: {
-      ...profile.bestTimeByTrack,
-      [result.trackId]: previousTime ? Math.min(previousTime, durationSeconds) : durationSeconds,
-    },
+    bestTimeByTrack,
   };
   if (typeof window !== "undefined") {
     try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch { /* storage is optional */ }
