@@ -10,6 +10,7 @@ const fail = (message) => {
 };
 
 const shell = JSON.parse(read("configuration/site-shell.json"));
+const siteHeader = read("components/SiteHeader.tsx");
 const siteNavigation = read("components/SiteNavigation.tsx");
 const siteFooter = read("components/SiteFooter.tsx");
 const overlay = JSON.parse(read("deployment/static-overlay.json"));
@@ -28,6 +29,12 @@ if (JSON.stringify(actualPrimary) !== JSON.stringify(expectedPrimary)) {
   fail(`primary navigation must remain ${expectedPrimary.map(([, label]) => label).join(" → ")}`);
 }
 
+if (!siteHeader.includes('import siteShell from "@/configuration/site-shell.json"')) {
+  fail("SiteHeader must consume configuration/site-shell.json");
+}
+if (!siteHeader.includes("siteShell.brand") || !siteHeader.includes("siteShell.utilityNavigation")) {
+  fail("SiteHeader must use canonical brand and utility navigation values");
+}
 if (!siteNavigation.includes('import siteShell from "@/configuration/site-shell.json"')) {
   fail("SiteNavigation must consume configuration/site-shell.json");
 }
