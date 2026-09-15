@@ -49,3 +49,9 @@ jobs:
 
       - name: Typecheck authoritative race server
         run: npm run typecheck
+
+      - name: Compile production race server
+        run: npm run build
+
+      - name: Verify compiled production entry
+        run: test -f build/services/stoner-duck-race-server/src/index.js
