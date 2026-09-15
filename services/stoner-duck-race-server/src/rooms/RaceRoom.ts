@@ -5,6 +5,17 @@ import { createRaceConfig, DUCK_RACE_LIMITS } from "../../../../game/stoner-duck
 import { RaceSimulation } from "../../../../game/stoner-duck-race/simulation.js";
 import type { DuckInput, RaceModeId, TrackId } from "../../../../game/stoner-duck-race/types.js";
 
+const TRACK_IDS: readonly TrackId[] = [
+  "kush-creek",
+  "munchie-marsh",
+  "cloud-9-canal",
+  "dab-rapids",
+  "trichome-trail",
+  "greenhouse-run",
+  "rosin-river",
+  "final-smokeout",
+];
+
 const NetworkDuck = schema({
   id: t.string(),
   ownerSessionId: t.string(),
@@ -57,8 +68,9 @@ function normalizeMode(value: unknown): RaceModeId {
 }
 
 function normalizeTrack(value: unknown): TrackId {
-  if (value === "munchie-marsh" || value === "cloud-9-canal" || value === "rosin-river") return value;
-  return "kush-creek";
+  return typeof value === "string" && TRACK_IDS.includes(value as TrackId)
+    ? value as TrackId
+    : "kush-creek";
 }
 
 function normalizeCharacter(value: unknown): string {
