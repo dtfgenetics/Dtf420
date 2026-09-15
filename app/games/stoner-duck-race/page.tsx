@@ -4,14 +4,14 @@ import { StonerDuckRaceLoader } from "@/components/game/StonerDuckRaceLoader";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Stoner Duck Race | DTF Games",
-  description: "Development build of the 50-racer Stoner Duck Race engine with Duck Derby, River Rally, and Chaos Derby modes.",
+  title: "Quack & Bake: Stoner Duck Race | DTF Games",
+  description: "Race up to 50 ducks across four cannabis-comedy river courses in Duck Derby, River Rally, Chaos Derby, local Cup, and online room play.",
 };
 
 const modes = [
-  ["Duck Derby", "Up to 50 AI-driven or named community ducks race through a deterministic seeded course. Built for events, giveaways, streams, and instant party races."],
-  ["River Rally", "Direct-control arcade racing with paddling, boost management, route choice, soft body interaction, and server-authoritative multiplayer as the target architecture."],
-  ["Chaos Derby", "The same race engine with high-frequency powerups, catch-up pressure, global events, and intentionally wild course conditions."],
+  ["Duck Derby", "Seed a deterministic race and watch up to 50 AI ducks battle currents, hazards, shields, pickups, and each other. Great for streams, community events, and quick party races."],
+  ["River Rally", "Take direct control with steering, dive control, rechargeable boost, item timing, hazard reading, character choice, persistent results, and a four-track championship Cup."],
+  ["Chaos Derby", "Keep Rally controls but add deterministic global events, stronger comeback pressure, wider disruption tools, and the most unpredictable large-field races."],
 ] as const;
 
 export default function StonerDuckRacePage() {
@@ -19,41 +19,42 @@ export default function StonerDuckRacePage() {
     <section className={`shell ${styles.page}`}>
       <div className={styles.topline}>
         <Link className={styles.backLink} href="/games">← Back to games</Link>
-        <span className={styles.status}>Engine prototype</span>
+        <span className={styles.status}>Playable build</span>
       </div>
 
       <header className={styles.hero}>
         <div>
-          <p className="eyebrow">DTF Games · 50-player river racer</p>
+          <p className="eyebrow">DTF Games · Quack &amp; Bake</p>
           <h1>Stoner Duck Race</h1>
           <p className={styles.lede}>
-            One deterministic duck-racing engine, three game modes, and a hard architecture target of fifty racers. The current build proves shared race state, seeded simulation, AI racing, ranking, and Phaser rendering before production art and networking are layered in.
+            A deterministic arcade river racer built for one duck or a fifty-duck stampede. Pick from eight duck personalities, race four different rivers, collect eight power-ups, dodge dynamic hazards, run a four-race Cup, or create an authoritative online room when the multiplayer endpoint is deployed.
           </p>
         </div>
 
-        <aside className={styles.meta} aria-label="Stoner Duck Race prototype details">
+        <aside className={styles.meta} aria-label="Stoner Duck Race game details">
           <div><span>Race capacity</span><strong>1–50 ducks</strong></div>
-          <div><span>Modes</span><strong>Derby · Rally · Chaos</strong></div>
-          <div><span>Simulation</span><strong>20 Hz deterministic</strong></div>
+          <div><span>Tracks</span><strong>4 river courses</strong></div>
+          <div><span>Power-ups</span><strong>8 gameplay items</strong></div>
+          <div><span>Modes</span><strong>Derby · Rally · Chaos · Cup</strong></div>
         </aside>
       </header>
 
       <div className={styles.frame}>
         <div className={styles.frameHeader}>
-          <strong>50-duck engine test</strong>
-          <span>Keyboard: 1 Derby · 2 Rally · 3 Chaos · R Restart</span>
+          <strong>Quack &amp; Bake race control</strong>
+          <span>Keyboard: ← → steer · Space boost · ↓ dive · E item</span>
         </div>
         <StonerDuckRaceLoader />
         <div className={styles.frameFooter}>
-          <span>Prototype art is procedural. Production duck sprites, river assets, hazards, powerups, audio, and multiplayer are intentionally separated from the simulation layer.</span>
+          <span>Local play works without a server. Online Create/Join controls only activate when the public Colyseus endpoint is configured, so the game never displays fake connectivity.</span>
         </div>
       </div>
 
       <section className={styles.modeSection} aria-labelledby="duck-race-modes">
         <div className={styles.sectionIntro}>
-          <p className="eyebrow">Shared engine · distinct rulesets</p>
-          <h2 id="duck-race-modes">Three races. One foundation.</h2>
-          <p>Tracks, duck definitions, seeded race state, replays, ranking, and networking can be shared while each mode changes who controls the ducks and how much chaos the rules allow.</p>
+          <p className="eyebrow">One race engine · multiple ways to play</p>
+          <h2 id="duck-race-modes">Race it, watch it, or turn the river loose.</h2>
+          <p>Kush Creek, Munchie Marsh, Cloud 9 Canal, and Rosin River share the same seeded simulation while changing currents, lane forces, hazards, item placement, pacing, and route pressure.</p>
         </div>
 
         <div className={styles.modeGrid}>
