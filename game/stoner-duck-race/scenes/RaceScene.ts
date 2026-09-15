@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { createRaceConfig } from "../config";
 import { RaceSimulation } from "../simulation";
 import { getTrackDefinition } from "../tracks";
-import type { DuckState, RaceModeId } from "../types";
+import type { DuckRaceLaunchOptions, RaceModeId } from "../types";
 
 const WORLD_START_X = 140;
 const COURSE_WIDTH = 5_200;
@@ -31,10 +31,11 @@ interface TouchState {
 }
 
 export class RaceScene extends Phaser.Scene {
+  private readonly launchOptions: DuckRaceLaunchOptions;
   private simulation!: RaceSimulation;
   private duckViews = new Map<string, DuckView>();
   private accumulator = 0;
-  private selectedMode: RaceModeId = "rally";
+  private selectedMode: RaceModeId;
   private inputSequence = 0;
   private statusText!: Phaser.GameObjects.Text;
   private standingsText!: Phaser.GameObjects.Text;
@@ -55,8 +56,10 @@ export class RaceScene extends Phaser.Scene {
     usePowerup: false,
   };
 
-  constructor() {
+  constructor(options: DuckRaceLaunchOptions) {
     super("StonerDuckRace");
+    this.launchOptions = options;
+    this.selectedMode = options.mode;
   }
 
   create(): void {
@@ -212,11 +215,11 @@ export class RaceScene extends Phaser.Scene {
   }
 
   private createSimulation(mode: RaceModeId): void {
-    const config = createRaceConfig(mode, 50, `DTF-${mode}-420`);
+    const config = createRaceConfig(mode, this.launchOptions.racerCount, this.launchOptions.seed);
     this.simulation = new RaceSimulation(config);
 
     if (mode !== "derby") {
-      this.simulation.claimDuck("duck-1", "local-player", "YOU");
+      this.simulation.claimDuck("duck-1", "local-player", this.launchOptions.playerName);
     }
 
     this.buildDuckViews();
@@ -286,7 +289,7 @@ export class RaceScene extends Phaser.Scene {
       ? `KUSH CREEK · STARTING IN ${countdownSeconds}`
       : state.phase === "finished"
         ? `WINNER: ${winner?.name ?? "Duck"}`
-        : `${this.selectedMode.toUpperCase()} · 50 DUCKS · KUSH CREEK`;
+        : `${this.selectedMode.toUpperCase()} · ${state.ducks.length} DUCKS · KUSH CREEK`;
 
     this.statusText.setText(phaseLabel);
 
@@ -305,7 +308,7 @@ export class RaceScene extends Phaser.Scene {
       const zone = TRACK.currentZones.find((candidate) => player.progress >= candidate.start && player.progress < candidate.end)
         ?? TRACK.currentZones[TRACK.currentZones.length - 1];
       this.playerText.setText([
-        `YOU · ${player.rank}/50`,
+        `${player.name} · ${player.rank}/${state.ducks.length}`,
         `${zone.label} · ${Math.round(player.progress * 100)}%`,
         `BOOST ${Math.round(player.boostCharge * 100)}%`,
         `ITEM ${player.heldPowerup ? player.heldPowerup.toUpperCase().replace("-", " ") : "—"}`,
