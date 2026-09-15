@@ -9,6 +9,7 @@ export interface DuckRaceProfile {
   podiums: number;
   coins: number;
   bestRankByTrack: Partial<Record<TrackId, number>>;
+  bestTimeByTrack: Partial<Record<TrackId, number>>;
 }
 
 export const EMPTY_DUCK_RACE_PROFILE: DuckRaceProfile = {
@@ -18,6 +19,7 @@ export const EMPTY_DUCK_RACE_PROFILE: DuckRaceProfile = {
   podiums: 0,
   coins: 0,
   bestRankByTrack: {},
+  bestTimeByTrack: {},
 };
 
 export function loadDuckRaceProfile(): DuckRaceProfile {
@@ -32,10 +34,18 @@ export function loadDuckRaceProfile(): DuckRaceProfile {
       podiums: Math.max(0, Math.floor(parsed.podiums ?? 0)),
       coins: Math.max(0, Math.floor(parsed.coins ?? 0)),
       bestRankByTrack: parsed.bestRankByTrack ?? {},
+      bestTimeByTrack: parsed.bestTimeByTrack ?? {},
     };
   } catch {
     return EMPTY_DUCK_RACE_PROFILE;
   }
+}
+
+export function resultDurationSeconds(result: DuckRaceResult): number {
+  if (typeof result.durationSeconds === "number" && Number.isFinite(result.durationSeconds)) {
+    return Math.max(0, result.durationSeconds);
+  }
+  return Math.max(0, (result.tick - 60) / 20);
 }
 
 export function recordDuckRaceResult(profile: DuckRaceProfile, result: DuckRaceResult): DuckRaceProfile {
@@ -43,6 +53,8 @@ export function recordDuckRaceResult(profile: DuckRaceProfile, result: DuckRaceR
   const positionReward = Math.max(4, Math.round((result.racerCount - result.rank + 1) * 1.5));
   const podiumReward = result.rank === 1 ? 40 : result.rank <= 3 ? 20 : 0;
   const previousBest = profile.bestRankByTrack[result.trackId];
+  const durationSeconds = resultDurationSeconds(result);
+  const previousTime = profile.bestTimeByTrack[result.trackId];
   const next: DuckRaceProfile = {
     version: 1,
     races: profile.races + 1,
@@ -52,6 +64,10 @@ export function recordDuckRaceResult(profile: DuckRaceProfile, result: DuckRaceR
     bestRankByTrack: {
       ...profile.bestRankByTrack,
       [result.trackId]: previousBest ? Math.min(previousBest, result.rank) : result.rank,
+    },
+    bestTimeByTrack: {
+      ...profile.bestTimeByTrack,
+      [result.trackId]: previousTime ? Math.min(previousTime, durationSeconds) : durationSeconds,
     },
   };
   if (typeof window !== "undefined") {
