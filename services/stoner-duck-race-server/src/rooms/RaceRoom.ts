@@ -1,5 +1,6 @@
 import { Room, type Client } from "colyseus";
 import { schema, t, type SchemaType } from "@colyseus/schema";
+import { DUCK_CHARACTERS } from "../../../../game/stoner-duck-race/characters.js";
 import { createRaceConfig, DUCK_RACE_LIMITS } from "../../../../game/stoner-duck-race/config.js";
 import { RaceSimulation } from "../../../../game/stoner-duck-race/simulation.js";
 import type { DuckInput, RaceModeId, TrackId } from "../../../../game/stoner-duck-race/types.js";
@@ -47,6 +48,7 @@ type RaceRoomOptions = {
 
 type JoinOptions = {
   name?: string;
+  characterId?: string;
   spectator?: boolean;
 };
 
@@ -59,10 +61,14 @@ function normalizeTrack(value: unknown): TrackId {
   return "kush-creek";
 }
 
+function normalizeCharacter(value: unknown): string {
+  if (typeof value !== "string") return "mellow-mallard";
+  return DUCK_CHARACTERS.some((character) => character.id === value) ? value : "mellow-mallard";
+}
+
 function normalizeInput(value: unknown): DuckInput | null {
   if (!value || typeof value !== "object") return null;
   const candidate = value as Partial<DuckInput>;
-
   return {
     steer: typeof candidate.steer === "number" ? candidate.steer : 0,
     boost: Boolean(candidate.boost),
@@ -121,8 +127,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   }
 
   onJoin(client: Client, options: JoinOptions): void {
-    const wantsSpectator = Boolean(options.spectator);
-    if (wantsSpectator) {
+    if (Boolean(options.spectator)) {
       this.spectatorSessions.add(client.sessionId);
       this.syncState();
       return;
@@ -136,6 +141,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
     }
 
     this.simulation.claimDuck(available.id, client.sessionId, options.name);
+    available.characterId = normalizeCharacter(options.characterId);
     this.duckBySession.set(client.sessionId, available.id);
     if (!this.state.hostSessionId) this.state.hostSessionId = client.sessionId;
     this.syncState();
@@ -177,7 +183,6 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
         networkDuck.id = duck.id;
         this.state.ducks.set(duck.id, networkDuck);
       }
-
       networkDuck.ownerSessionId = duck.playerId ?? "";
       networkDuck.name = duck.name;
       networkDuck.characterId = duck.characterId;
