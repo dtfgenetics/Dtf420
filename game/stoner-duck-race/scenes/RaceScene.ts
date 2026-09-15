@@ -11,9 +11,15 @@ import {
 import { getDuckCharacter } from "../characters";
 import { createRaceConfig } from "../config";
 import type { DuckRaceRoomConnection, DuckRaceRoomSnapshot, NetworkDuckSnapshot } from "../network";
+import {
+  ReplayInputCursor,
+  createDuckRaceReplay,
+  recordReplayInput,
+  type DuckRaceReplay,
+} from "../replay";
 import { RaceSimulation } from "../simulation";
-import { getTrackDefinition, type HazardType, type PowerupId } from "../tracks";
-import type { DuckRaceLaunchOptions, DuckRaceResult, DuckState, RaceModeId, RacePhase } from "../types";
+import { getTrackDefinition, type HazardType } from "../tracks";
+import type { DuckInput, DuckRaceLaunchOptions, DuckRaceResult, DuckState, RaceModeId, RacePhase } from "../types";
 
 const WORLD_START_X = 140;
 const WORLD_TOP = 132;
@@ -21,6 +27,14 @@ const WORLD_BOTTOM = 612;
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
 const SIM_STEP_MS = 50;
+
+const NEUTRAL_INPUT: DuckInput = {
+  steer: 0,
+  boost: false,
+  dive: false,
+  usePowerup: false,
+  sequence: 0,
+};
 
 interface DuckView {
   container: Phaser.GameObjects.Container;
@@ -66,9 +80,14 @@ export class RaceScene extends Phaser.Scene {
   private readonly launchOptions: DuckRaceLaunchOptions;
   private readonly networkConnection?: DuckRaceRoomConnection;
   private readonly onRaceFinished?: (result: DuckRaceResult) => void;
+  private readonly playbackReplay?: DuckRaceReplay;
+  private readonly onReplayReady?: (replay: DuckRaceReplay) => void;
   private simulation?: RaceSimulation;
   private networkSnapshot?: DuckRaceRoomSnapshot;
   private unsubscribeNetwork?: () => void;
+  private recordingReplay?: DuckRaceReplay;
+  private replayCursor?: ReplayInputCursor;
+  private replayDelivered = false;
   private duckViews = new Map<string, DuckView>();
   private ambientSounds: Phaser.Sound.BaseSound[] = [];
   private accumulator = 0;
@@ -93,12 +112,16 @@ export class RaceScene extends Phaser.Scene {
     options: DuckRaceLaunchOptions,
     networkConnection?: DuckRaceRoomConnection,
     onRaceFinished?: (result: DuckRaceResult) => void,
+    playbackReplay?: DuckRaceReplay,
+    onReplayReady?: (replay: DuckRaceReplay) => void,
   ) {
     super("StonerDuckRace");
     this.launchOptions = options;
     this.networkConnection = networkConnection;
     this.onRaceFinished = onRaceFinished;
-    this.selectedMode = options.mode;
+    this.playbackReplay = playbackReplay;
+    this.onReplayReady = onReplayReady;
+    this.selectedMode = playbackReplay?.mode ?? options.mode;
   }
 
   preload(): void {
@@ -154,7 +177,7 @@ export class RaceScene extends Phaser.Scene {
     this.diveKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     this.powerupKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    if (!this.networkConnection) {
+    if (!this.networkConnection && !this.playbackReplay) {
       this.input.keyboard?.on("keydown-ONE", () => this.resetRace("derby"));
       this.input.keyboard?.on("keydown-TWO", () => this.resetRace("rally"));
       this.input.keyboard?.on("keydown-THREE", () => this.resetRace("chaos"));
@@ -170,18 +193,31 @@ export class RaceScene extends Phaser.Scene {
       }
       this.ambientSounds = [];
     });
-    this.eventText.setText(`${track.name.toUpperCase()} · ${track.tagline}`);
+    this.eventText.setText(`${this.playbackReplay ? "REPLAY · " : ""}${track.name.toUpperCase()} · ${track.tagline}`);
   }
 
   update(_time: number, delta: number): void {
     this.accumulator += Math.min(delta, 100);
     while (this.accumulator >= SIM_STEP_MS) {
       this.accumulator -= SIM_STEP_MS;
-      const input = this.readPlayerInput();
+
       if (this.networkConnection) {
+        const input = this.readPlayerInput();
         if (this.selectedMode !== "derby" && this.networkConnection.getOwnedDuck()) this.networkConnection.sendInput(input);
       } else if (this.simulation) {
-        if (this.selectedMode !== "derby") this.simulation.setInput("duck-1", input);
+        const nextTick = this.simulation.state.tick + 1;
+        let input = NEUTRAL_INPUT;
+
+        if (this.selectedMode !== "derby") {
+          input = this.playbackReplay && this.replayCursor
+            ? this.replayCursor.inputForTick(nextTick)
+            : this.readPlayerInput();
+          this.simulation.setInput("duck-1", input);
+          if (!this.playbackReplay && this.recordingReplay) {
+            recordReplayInput(this.recordingReplay, nextTick, input);
+          }
+        }
+
         this.simulation.step();
       }
     }
@@ -218,7 +254,7 @@ export class RaceScene extends Phaser.Scene {
     }
   }
 
-  private readPlayerInput() {
+  private readPlayerInput(): DuckInput {
     this.inputSequence += 1;
     const keyboardSteer = (this.cursors?.left?.isDown ? -1 : 0) + (this.cursors?.right?.isDown ? 1 : 0);
     const touchSteer = (this.touchState.left ? -1 : 0) + (this.touchState.right ? 1 : 0);
@@ -234,7 +270,12 @@ export class RaceScene extends Phaser.Scene {
   private createHud(): void {
     this.statusText = this.add.text(28, 20, "", { fontFamily: "Arial, sans-serif", fontSize: "25px", color: "#f4f7df", fontStyle: "bold" }).setScrollFactor(0).setDepth(100);
     this.standingsText = this.add.text(28, 58, "", { fontFamily: "monospace", fontSize: "14px", color: "#d8f5dd", lineSpacing: 3, backgroundColor: "#07171dbb", padding: { x: 9, y: 7 } }).setScrollFactor(0).setDepth(100);
-    this.helpText = this.add.text(1252, 22, this.networkConnection ? "ONLINE · server-authoritative" : "1 Derby · 2 Rally · 3 Chaos · R restart", { fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#b8d7c0" }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
+    const help = this.networkConnection
+      ? "ONLINE · server-authoritative"
+      : this.playbackReplay
+        ? "REPLAY · deterministic input playback"
+        : "1 Derby · 2 Rally · 3 Chaos · R restart";
+    this.helpText = this.add.text(1252, 22, help, { fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#b8d7c0" }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
     this.eventText = this.add.text(640, 24, "", { fontFamily: "Arial, sans-serif", fontSize: "15px", color: "#ffe28a", fontStyle: "bold", backgroundColor: "#152b22cc", padding: { x: 10, y: 6 } }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
     this.playerText = this.add.text(1250, 60, "", { fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#f8f4d8", align: "right", backgroundColor: "#07171dbb", padding: { x: 9, y: 7 } }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
     this.add.rectangle(640, 704, 560, 8, 0x07171d, 0.88).setStrokeStyle(1, 0x7ba68b, 0.7).setScrollFactor(0).setDepth(100);
@@ -250,7 +291,7 @@ export class RaceScene extends Phaser.Scene {
     this.makeTouchButton(1122, 666, "BOOST", () => { this.touchState.boost = true; }, 66);
     this.makeTouchButton(1210, 666, "ITEM", () => { this.touchState.usePowerup = true; }, 66);
 
-    if (!this.networkConnection) {
+    if (!this.networkConnection && !this.playbackReplay) {
       const modes: Array<[RaceModeId, string, number]> = [["derby", "DERBY", 950], ["rally", "RALLY", 1045], ["chaos", "CHAOS", 1140]];
       for (const [mode, label, x] of modes) {
         const button = this.add.text(x, 93, label, { fontFamily: "Arial, sans-serif", fontSize: "13px", color: "#e9f1d0", backgroundColor: mode === this.selectedMode ? "#396e3f" : "#17333a", padding: { x: 10, y: 7 } }).setInteractive({ useHandCursor: true });
@@ -276,6 +317,10 @@ export class RaceScene extends Phaser.Scene {
   private createSimulation(mode: RaceModeId): void {
     const config = createRaceConfig(mode, this.launchOptions.racerCount, this.launchOptions.seed, this.launchOptions.trackId);
     this.simulation = new RaceSimulation(config);
+    this.recordingReplay = this.playbackReplay ? undefined : createDuckRaceReplay({ ...this.launchOptions, mode });
+    this.replayCursor = this.playbackReplay ? new ReplayInputCursor(this.playbackReplay) : undefined;
+    this.replayDelivered = false;
+
     if (mode !== "derby") {
       this.simulation.claimDuck("duck-1", "local-player", this.launchOptions.playerName);
       const player = this.simulation.state.ducks.find((duck) => duck.id === "duck-1");
@@ -285,7 +330,7 @@ export class RaceScene extends Phaser.Scene {
   }
 
   private resetRace(mode: RaceModeId): void {
-    if (this.networkConnection) return;
+    if (this.networkConnection || this.playbackReplay) return;
     this.selectedMode = mode;
     this.accumulator = 0;
     this.inputSequence = 0;
@@ -298,34 +343,60 @@ export class RaceScene extends Phaser.Scene {
     this.updateControlVisibility();
   }
 
-  private updateControlVisibility(): void { this.controlLayer?.setVisible(this.selectedMode !== "derby"); }
+  private updateControlVisibility(): void {
+    this.controlLayer?.setVisible(this.selectedMode !== "derby" && !this.playbackReplay);
+  }
 
   private getRenderState(): RenderRaceState {
     if (this.networkConnection && this.networkSnapshot) {
       const snapshot = this.networkSnapshot;
       const ducks = snapshot.ducks.map((duck: NetworkDuckSnapshot): RenderDuck => ({
-        id: duck.id, name: duck.name, characterId: duck.characterId,
+        id: duck.id,
+        name: duck.name,
+        characterId: duck.characterId,
         isPlayer: duck.ownerSessionId === this.networkConnection!.sessionId,
-        progress: duck.progress, lateral: duck.lateral, rank: duck.rank,
-        boostCharge: duck.boostCharge, heldPowerup: duck.heldPowerup,
-        shieldCharges: duck.shieldCharges, finished: duck.finished,
+        progress: duck.progress,
+        lateral: duck.lateral,
+        rank: duck.rank,
+        boostCharge: duck.boostCharge,
+        heldPowerup: duck.heldPowerup,
+        shieldCharges: duck.shieldCharges,
+        finished: duck.finished,
       }));
       return {
         phase: (snapshot.phase === "countdown" || snapshot.phase === "racing" || snapshot.phase === "finished") ? snapshot.phase : "lobby",
-        tick: snapshot.tick, tickRate: snapshot.tickRate, countdownTicks: snapshot.countdownTicks,
-        winnerId: snapshot.winnerId, ducks, connectedRacers: snapshot.connectedRacers, spectatorCount: snapshot.spectatorCount,
+        tick: snapshot.tick,
+        tickRate: snapshot.tickRate,
+        countdownTicks: snapshot.countdownTicks,
+        winnerId: snapshot.winnerId,
+        ducks,
+        connectedRacers: snapshot.connectedRacers,
+        spectatorCount: snapshot.spectatorCount,
       };
     }
 
     const state = this.simulation!.state;
     return {
-      phase: state.phase, tick: state.tick, tickRate: state.config.tickRate, countdownTicks: state.config.countdownTicks, winnerId: state.winnerId,
+      phase: state.phase,
+      tick: state.tick,
+      tickRate: state.config.tickRate,
+      countdownTicks: state.config.countdownTicks,
+      winnerId: state.winnerId,
       ducks: state.ducks.map((duck: DuckState): RenderDuck => ({
-        id: duck.id, name: duck.name, characterId: duck.characterId, isPlayer: duck.playerId === "local-player",
-        progress: duck.progress, lateral: duck.lateral, rank: duck.rank, boostCharge: duck.boostCharge,
-        heldPowerup: duck.heldPowerup, shieldCharges: duck.shieldCharges, finished: duck.finished,
+        id: duck.id,
+        name: duck.name,
+        characterId: duck.characterId,
+        isPlayer: duck.playerId === "local-player",
+        progress: duck.progress,
+        lateral: duck.lateral,
+        rank: duck.rank,
+        boostCharge: duck.boostCharge,
+        heldPowerup: duck.heldPowerup,
+        shieldCharges: duck.shieldCharges,
+        finished: duck.finished,
       })),
-      connectedRacers: state.ducks.filter((duck) => duck.playerId).length, spectatorCount: 0,
+      connectedRacers: state.ducks.filter((duck) => duck.playerId).length,
+      spectatorCount: 0,
     };
   }
 
@@ -391,13 +462,14 @@ export class RaceScene extends Phaser.Scene {
     const countdownSeconds = Math.ceil(countdownRemaining / state.tickRate);
     const winner = state.winnerId ? state.ducks.find((duck) => duck.id === state.winnerId) : null;
     const onlineSuffix = this.networkConnection ? ` · ${state.connectedRacers} LIVE + ${state.spectatorCount} WATCHING` : "";
+    const replaySuffix = this.playbackReplay ? " · REPLAY" : "";
     const phaseLabel = state.phase === "lobby"
       ? `${this.track.name.toUpperCase()} · ONLINE LOBBY${onlineSuffix}`
       : state.phase === "countdown"
-        ? `${this.track.name.toUpperCase()} · STARTING IN ${countdownSeconds}`
+        ? `${this.track.name.toUpperCase()} · STARTING IN ${countdownSeconds}${replaySuffix}`
         : state.phase === "finished"
-          ? `WINNER: ${winner?.name ?? "Duck"}`
-          : `${this.selectedMode.toUpperCase()} · ${state.ducks.length} DUCKS · ${this.track.name.toUpperCase()}${onlineSuffix}`;
+          ? `WINNER: ${winner?.name ?? "Duck"}${replaySuffix}`
+          : `${this.selectedMode.toUpperCase()} · ${state.ducks.length} DUCKS · ${this.track.name.toUpperCase()}${onlineSuffix}${replaySuffix}`;
     this.statusText.setText(phaseLabel);
 
     const leaders = [...state.ducks].sort((a, b) => a.rank - b.rank).slice(0, 5)
@@ -412,12 +484,12 @@ export class RaceScene extends Phaser.Scene {
     if (player) {
       const zone = this.track.currentZones.find((candidate) => player.progress >= candidate.start && player.progress < candidate.end) ?? this.track.currentZones[this.track.currentZones.length - 1];
       this.playerText.setText([
-        `${player.name} · ${player.rank}/${state.ducks.length}`,
+        `${player.name} · ${player.rank}/${state.ducks.length}${this.playbackReplay ? " · REPLAY" : ""}`,
         `${zone.label} · ${Math.round(player.progress * 100)}%`,
         `BOOST ${Math.round(player.boostCharge * 100)}%`,
         `ITEM ${player.heldPowerup ? player.heldPowerup.toUpperCase().replaceAll("-", " ") : "—"}`,
         `SHIELD ${player.shieldCharges}`,
-        "← → steer · SPACE boost · ↓ dive · E item",
+        this.playbackReplay ? "Recorded deterministic input" : "← → steer · SPACE boost · ↓ dive · E item",
       ]);
     } else {
       this.playerText.setText(`LEADER CAM · ${focusDuck.name}\n${Math.round(focusDuck.progress * 100)}% · ${state.ducks.length} ducks`);
@@ -440,6 +512,15 @@ export class RaceScene extends Phaser.Scene {
     this.resultReported = true;
     const winner = state.winnerId ? state.ducks.find((duck) => duck.id === state.winnerId) : state.ducks.find((duck) => duck.rank === 1);
     const player = state.ducks.find((duck) => duck.isPlayer);
+
+    if (!this.playbackReplay && this.recordingReplay && !this.replayDelivered) {
+      this.replayDelivered = true;
+      this.onReplayReady?.({
+        ...this.recordingReplay,
+        frames: this.recordingReplay.frames.map((frame) => ({ ...frame })),
+      });
+    }
+
     this.onRaceFinished?.({
       mode: this.selectedMode,
       trackId: this.track.id,
@@ -448,6 +529,7 @@ export class RaceScene extends Phaser.Scene {
       winnerName: winner?.name ?? "Duck",
       playerName: player?.name ?? null,
       tick: state.tick,
+      durationSeconds: state.tick / state.tickRate,
     });
   }
 
