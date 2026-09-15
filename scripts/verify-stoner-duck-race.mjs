@@ -8,6 +8,7 @@ const required = [
   "game/stoner-duck-race/rng.ts",
   "game/stoner-duck-race/modes.ts",
   "game/stoner-duck-race/characters.ts",
+  "game/stoner-duck-race/assets.ts",
   "game/stoner-duck-race/tracks.ts",
   "game/stoner-duck-race/simulation.ts",
   "game/stoner-duck-race/network.ts",
@@ -18,6 +19,8 @@ const required = [
   "components/game/StonerDuckRaceLoader.tsx",
   "app/games/stoner-duck-race/page.tsx",
   "services/stoner-duck-race-server/package.json",
+  "services/stoner-duck-race-server/tsconfig.json",
+  "services/stoner-duck-race-server/DEPLOYMENT.md",
   "services/stoner-duck-race-server/src/index.ts",
   "services/stoner-duck-race-server/src/rooms/RaceRoom.ts",
   "docs/games/stoner-duck-race/ARCHITECTURE.md",
@@ -31,6 +34,7 @@ const types = readFileSync(resolve(root, "game/stoner-duck-race/types.ts"), "utf
 const config = readFileSync(resolve(root, "game/stoner-duck-race/config.ts"), "utf8");
 const modes = readFileSync(resolve(root, "game/stoner-duck-race/modes.ts"), "utf8");
 const characters = readFileSync(resolve(root, "game/stoner-duck-race/characters.ts"), "utf8");
+const assets = readFileSync(resolve(root, "game/stoner-duck-race/assets.ts"), "utf8");
 const tracks = readFileSync(resolve(root, "game/stoner-duck-race/tracks.ts"), "utf8");
 const simulation = readFileSync(resolve(root, "game/stoner-duck-race/simulation.ts"), "utf8");
 const network = readFileSync(resolve(root, "game/stoner-duck-race/network.ts"), "utf8");
@@ -40,6 +44,8 @@ const scene = readFileSync(resolve(root, "game/stoner-duck-race/scenes/RaceScene
 const wrapper = readFileSync(resolve(root, "components/game/StonerDuckRaceGame.tsx"), "utf8");
 const page = readFileSync(resolve(root, "app/games/stoner-duck-race/page.tsx"), "utf8");
 const server = readFileSync(resolve(root, "services/stoner-duck-race-server/src/rooms/RaceRoom.ts"), "utf8");
+const serverIndex = readFileSync(resolve(root, "services/stoner-duck-race-server/src/index.ts"), "utf8");
+const serverTsconfig = JSON.parse(readFileSync(resolve(root, "services/stoner-duck-race-server/tsconfig.json"), "utf8"));
 const packageJson = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8"));
 const serverPackage = JSON.parse(readFileSync(resolve(root, "services/stoner-duck-race-server/package.json"), "utf8"));
 
@@ -64,16 +70,19 @@ for (const trackId of trackIds) {
   if (!types.includes(`"${trackId}"`)) failures.push(`TrackId is missing ${trackId}`);
   if (!network.includes(`"${trackId}"`)) failures.push(`browser network validation is missing ${trackId}`);
   if (!server.includes(`"${trackId}"`)) failures.push(`server track validation is missing ${trackId}`);
+  if (!assets.includes(`"${trackId}": trackArt("${trackId}")`)) failures.push(`asset manifest is missing ${trackId}`);
 }
 if (!tracks.includes("export const TRACK_LIST = Object.values(TRACKS)")) failures.push("track selection must remain data-driven through TRACK_LIST");
 if (!page.includes("8 river courses") || !page.includes("Final Smokeout")) failures.push("public game page must describe the eight-track build");
 
 for (const hazard of ["log", "mud", "whirlpool", "reeds", "sprinkler", "fan", "barrel", "waterfall"]) {
   if (!tracks.includes(`"${hazard}"`)) failures.push(`hazard catalog is missing ${hazard}`);
+  if (!assets.includes(`${hazard}: { textureKey:`) && !assets.includes(`"${hazard}": { textureKey:`)) failures.push(`asset manifest is missing ${hazard} fallback`);
 }
 
 for (const powerup of ["munchie-rush", "dab-blast", "cloud-screen", "bubble-shield", "feather-boost", "snack-magnet", "mega-quack", "super-duck"]) {
   if (!tracks.includes(`"${powerup}"`)) failures.push(`powerup catalog is missing ${powerup}`);
+  if (!assets.includes(`"${powerup}": { textureKey:`)) failures.push(`asset manifest is missing ${powerup}`);
 }
 if (!simulation.includes("activatePowerup")) failures.push("simulation must activate collected powerups");
 for (const directPowerup of ["munchie-rush", "cloud-screen", "bubble-shield", "feather-boost", "snack-magnet", "mega-quack", "super-duck"]) {
@@ -83,7 +92,14 @@ if (!simulation.includes("powerup-impact") || !simulation.includes("affected += 
 
 for (const characterId of ["mellow-mallard", "dab-duck", "hippie-quacker", "grower-goose", "rosin-runner", "cloud-nine", "science-duck", "old-school-quack"]) {
   if (!characters.includes(`id: "${characterId}"`)) failures.push(`character catalog is missing ${characterId}`);
+  if (!assets.includes(`duckAsset("${characterId}")`)) failures.push(`sprite manifest is missing ${characterId}`);
 }
+if (!assets.includes("idle: { start:") || !assets.includes("paddle: { start:") || !assets.includes("boost: { start:") || !assets.includes("hit: { start:") || !assets.includes("win: { start:")) {
+  failures.push("duck sprite manifest must define idle/paddle/boost/hit/win animation contracts");
+}
+if (!assets.includes("hasAuthoredAsset") || !scene.includes("hasAuthoredAsset") || !scene.includes("this.load.spritesheet")) failures.push("Phaser must load authored assets through the fallback manifest");
+if (!scene.includes("this.textures.exists(authored.textureKey)")) failures.push("duck renderer must retain procedural fallback when authored textures are absent");
+if (!scene.includes("TRACK_ART_ASSETS") || !scene.includes("POWERUP_ASSETS") || !scene.includes("HAZARD_ASSETS")) failures.push("scene must consume track, powerup, and hazard asset manifests");
 
 if (simulation.includes("Math.random(")) failures.push("shared simulation must not use Math.random()");
 if (!simulation.includes("DeterministicRng")) failures.push("shared simulation must use deterministic RNG");
@@ -117,6 +133,8 @@ if (!wrapper.includes("Create room") || !wrapper.includes("Join room") || !wrapp
 if (!wrapper.includes("4-race Cup") || !wrapper.includes("CUP_TRACKS")) failures.push("four-race championship flow is missing");
 if (!wrapper.includes("time-trial") || !wrapper.includes("Start Time Trial") || !wrapper.includes("resultDurationSeconds")) failures.push("Time Trial flow is incomplete");
 if (!wrapper.includes("duckRoom") || !wrapper.includes("Copy invite")) failures.push("online invite deep links are missing");
+if (!wrapper.includes("togglePause") || !wrapper.includes('game.scene.pause("StonerDuckRace")') || !wrapper.includes('game.scene.resume("StonerDuckRace")')) failures.push("local pause/resume controls are missing");
+if (!wrapper.includes("toggleMute") || !wrapper.includes("sound.mute")) failures.push("client audio mute control is missing");
 if (!wrapper.includes("DUCK_CHARACTERS")) failures.push("character selection UI is missing");
 if (!wrapper.includes("recordDuckRaceResult")) failures.push("race results must update persistent progression");
 if (!wrapper.includes("Race setup")) failures.push("running game must provide a return-to-lobby control");
@@ -129,6 +147,10 @@ if (!progression.includes("coins")) failures.push("progression must award cosmet
 
 if (!packageJson.dependencies?.["@colyseus/sdk"]) failures.push("browser multiplayer SDK must be locked in root dependencies");
 if (!serverPackage.dependencies?.colyseus) failures.push("multiplayer server must declare Colyseus");
+if (!serverPackage.scripts?.build?.includes("tsc")) failures.push("multiplayer server must compile with TypeScript for production");
+if (!serverPackage.scripts?.start?.includes("node build/")) failures.push("multiplayer production start must use compiled Node output");
+if (serverTsconfig.compilerOptions?.outDir !== "build") failures.push("multiplayer server must emit production output into build/");
+if (!serverIndex.includes('app.get("/healthz"')) failures.push("multiplayer server health endpoint is missing");
 if (!network.includes("client.create") || !network.includes("client.joinById")) failures.push("room adapter must support create and join-by-id");
 if (!network.includes("room.onStateChange")) failures.push("room adapter must subscribe to authoritative state");
 if (!network.includes("characterId")) failures.push("room adapter must send selected character identity");
@@ -143,4 +165,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Stoner Duck Race verification passed: eight tracks, eight characters, eight power-ups, expanded hazards, deterministic 1–50 racer simulation, Quick/Cup/Time Trial progression, local/online lobby, invite links, authoritative room flow, touch/keyboard controls, scrolling cameras, persistent results, and locked Colyseus client/server support are present.");
+console.log("Stoner Duck Race verification passed: eight tracks, eight characters, eight power-ups, authored-asset fallbacks, deterministic 1–50 racer simulation, Quick/Cup/Time Trial progression, pause/mute controls, local/online lobby, invite links, authoritative room flow, production server compile/health surface, touch/keyboard controls, scrolling cameras, and persistent results are present.");
