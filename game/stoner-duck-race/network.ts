@@ -13,6 +13,11 @@ const TRACK_IDS: readonly TrackId[] = [
   "final-smokeout",
 ];
 
+type UnknownRecord = Record<string, unknown>;
+type ForEachCollection = {
+  forEach(callback: (value: unknown) => void): void;
+};
+
 export type DuckRaceRoomIntent = "create" | "join";
 
 export interface DuckRaceRoomOptions {
@@ -70,6 +75,16 @@ export interface DuckRaceRoomConnection {
   leave(): Promise<void>;
 }
 
+function asRecord(value: unknown): UnknownRecord {
+  return value !== null && typeof value === "object" ? value as UnknownRecord : {};
+}
+
+function isForEachCollection(value: unknown): value is ForEachCollection {
+  if (value === null || typeof value !== "object") return false;
+  const candidate = value as { forEach?: unknown };
+  return typeof candidate.forEach === "function";
+}
+
 function normalizeEndpoint(endpoint: string): string {
   const trimmed = endpoint.trim();
   if (!trimmed) throw new Error("Duck Race server endpoint is not configured.");
@@ -86,40 +101,46 @@ function normalizeTrack(value: unknown): TrackId {
     : "kush-creek";
 }
 
-function snapshotFromState(state: any): DuckRaceRoomSnapshot {
+function snapshotFromState(state: unknown): DuckRaceRoomSnapshot {
+  const stateRecord = asRecord(state);
   const ducks: NetworkDuckSnapshot[] = [];
-  state?.ducks?.forEach?.((duck: any) => {
-    ducks.push({
-      id: String(duck.id ?? ""),
-      ownerSessionId: duck.ownerSessionId ? String(duck.ownerSessionId) : null,
-      name: String(duck.name ?? "Duck"),
-      characterId: String(duck.characterId ?? "mellow-mallard"),
-      progress: Number(duck.progress ?? 0),
-      lateral: Number(duck.lateral ?? 0),
-      rank: Number(duck.rank ?? 0),
-      boostCharge: Number(duck.boostCharge ?? 0),
-      heldPowerup: duck.heldPowerup ? String(duck.heldPowerup) : null,
-      shieldCharges: Number(duck.shieldCharges ?? 0),
-      finished: Boolean(duck.finished),
-    });
-  });
-  ducks.sort((left, right) => left.rank - right.rank);
+  const duckCollection = stateRecord.ducks;
 
+  if (isForEachCollection(duckCollection)) {
+    duckCollection.forEach((rawDuck) => {
+      const duck = asRecord(rawDuck);
+      ducks.push({
+        id: String(duck.id ?? ""),
+        ownerSessionId: duck.ownerSessionId ? String(duck.ownerSessionId) : null,
+        name: String(duck.name ?? "Duck"),
+        characterId: String(duck.characterId ?? "mellow-mallard"),
+        progress: Number(duck.progress ?? 0),
+        lateral: Number(duck.lateral ?? 0),
+        rank: Number(duck.rank ?? 0),
+        boostCharge: Number(duck.boostCharge ?? 0),
+        heldPowerup: duck.heldPowerup ? String(duck.heldPowerup) : null,
+        shieldCharges: Number(duck.shieldCharges ?? 0),
+        finished: Boolean(duck.finished),
+      });
+    });
+  }
+
+  ducks.sort((left, right) => left.rank - right.rank);
   const fallbackCapacity = Math.max(1, ducks.length);
 
   return {
-    phase: String(state?.phase ?? "lobby"),
-    mode: normalizeMode(state?.mode),
-    trackId: normalizeTrack(state?.trackId),
-    seed: String(state?.seed ?? "DTF-420"),
-    tick: Number(state?.tick ?? 0),
-    tickRate: Math.max(1, Number(state?.tickRate ?? 20)),
-    countdownTicks: Math.max(0, Number(state?.countdownTicks ?? 60)),
-    winnerId: state?.winnerId ? String(state.winnerId) : null,
-    hostSessionId: state?.hostSessionId ? String(state.hostSessionId) : null,
-    racerCapacity: Math.max(1, Number(state?.racerCapacity ?? fallbackCapacity)),
-    connectedRacers: Math.max(0, Number(state?.connectedRacers ?? 0)),
-    spectatorCount: Math.max(0, Number(state?.spectatorCount ?? 0)),
+    phase: String(stateRecord.phase ?? "lobby"),
+    mode: normalizeMode(stateRecord.mode),
+    trackId: normalizeTrack(stateRecord.trackId),
+    seed: String(stateRecord.seed ?? "DTF-420"),
+    tick: Number(stateRecord.tick ?? 0),
+    tickRate: Math.max(1, Number(stateRecord.tickRate ?? 20)),
+    countdownTicks: Math.max(0, Number(stateRecord.countdownTicks ?? 60)),
+    winnerId: stateRecord.winnerId ? String(stateRecord.winnerId) : null,
+    hostSessionId: stateRecord.hostSessionId ? String(stateRecord.hostSessionId) : null,
+    racerCapacity: Math.max(1, Number(stateRecord.racerCapacity ?? fallbackCapacity)),
+    connectedRacers: Math.max(0, Number(stateRecord.connectedRacers ?? 0)),
+    spectatorCount: Math.max(0, Number(stateRecord.spectatorCount ?? 0)),
     ducks,
   };
 }
@@ -148,7 +169,7 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
   let latest = snapshotFromState(room.state);
   const listeners = new Set<(snapshot: DuckRaceRoomSnapshot) => void>();
 
-  const publish = (state: any) => {
+  const publish = (state: unknown) => {
     latest = snapshotFromState(state);
     for (const listener of listeners) listener(latest);
   };
