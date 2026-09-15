@@ -1,7 +1,26 @@
 name: Static Overlay QA
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - app/**
+      - components/**
+      - configuration/site-shell.json
+      - data/**
+      - lib/**
+      - public/**
+      - deployment/static-overlay.json
+      - scripts/verify-static-overlay.mjs
+      - scripts/package-static-overlay.mjs
+      - next.config.ts
+      - package.json
+      - package-lock.json
+      - .github/workflows/static-overlay-qa.yml
   pull_request:
+    branches:
+      - main
     paths:
       - app/**
       - components/**
@@ -20,6 +39,10 @@ on:
 
 permissions:
   contents: read
+
+concurrency:
+  group: static-overlay-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   static-overlay:
