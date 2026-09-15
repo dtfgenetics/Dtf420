@@ -27,7 +27,7 @@ export interface DuckRaceResult {
   winnerName: string;
   playerName: string | null;
   tick: number;
-  durationSeconds: number;
+  durationSeconds?: number;
 }
 
 export interface DuckInput {
