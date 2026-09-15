@@ -57,7 +57,6 @@ export function StonerDuckRaceGame() {
   const [spectator, setSpectator] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState("");
-  const [inviteUrl, setInviteUrl] = useState("");
   const [inviteMessage, setInviteMessage] = useState("");
   const [launchOptions, setLaunchOptions] = useState<DuckRaceLaunchOptions | null>(null);
   const [roomConnection, setRoomConnection] = useState<DuckRaceRoomConnection | null>(null);
@@ -67,14 +66,26 @@ export function StonerDuckRaceGame() {
   const [cupIndex, setCupIndex] = useState(0);
   const [cupPoints, setCupPoints] = useState(0);
 
+  const inviteUrl = roomConnection && typeof window !== "undefined"
+    ? (() => {
+        const url = new URL(window.location.href);
+        url.searchParams.set("duckRoom", roomConnection.roomId);
+        return url.toString();
+      })()
+    : "";
+
   useEffect(() => {
-    setProfile(loadDuckRaceProfile());
-    const invitedRoom = new URLSearchParams(window.location.search).get("duckRoom")?.trim();
-    if (invitedRoom) {
-      setSource("online");
-      setOnlineIntent("join");
-      setRoomId(invitedRoom.slice(0, 80));
-    }
+    const animationFrame = window.requestAnimationFrame(() => {
+      setProfile(loadDuckRaceProfile());
+      const invitedRoom = new URLSearchParams(window.location.search).get("duckRoom")?.trim();
+      if (invitedRoom) {
+        setSource("online");
+        setOnlineIntent("join");
+        setRoomId(invitedRoom.slice(0, 80));
+      }
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
   }, []);
 
   useLayoutEffect(() => {
@@ -85,10 +96,11 @@ export function StonerDuckRaceGame() {
       roomConnection ?? undefined,
       (result) => {
         setLastResult(result);
-        if (result.rank !== null) {
+        const rank = result.rank;
+        if (rank !== null) {
           setProfile((current) => recordDuckRaceResult(current, result));
           if (source === "local" && localFormat === "cup") {
-            setCupPoints((points) => points + Math.max(1, result.racerCount - result.rank + 1));
+            setCupPoints((points) => points + Math.max(1, result.racerCount - rank + 1));
           }
         }
       },
@@ -101,18 +113,7 @@ export function StonerDuckRaceGame() {
 
   useEffect(() => {
     if (!roomConnection) return;
-    setRoomSnapshot(roomConnection.getSnapshot());
     return roomConnection.subscribe(setRoomSnapshot);
-  }, [roomConnection]);
-
-  useEffect(() => {
-    if (!roomConnection) {
-      setInviteUrl("");
-      return;
-    }
-    const url = new URL(window.location.href);
-    url.searchParams.set("duckRoom", roomConnection.roomId);
-    setInviteUrl(url.toString());
   }, [roomConnection]);
 
   useEffect(() => () => {
