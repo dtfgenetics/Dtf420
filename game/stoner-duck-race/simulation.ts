@@ -1,7 +1,13 @@
+import { getDuckCharacter, DUCK_CHARACTERS } from "./characters";
 import { DUCK_RACE_LIMITS } from "./config";
 import { getRaceModeProfile } from "./modes";
 import { DeterministicRng } from "./rng";
-import { currentZoneAt, getTrackDefinition, type HazardDefinition, type PowerupId } from "./tracks";
+import {
+  currentZoneAt,
+  getTrackDefinition,
+  type HazardDefinition,
+  type PowerupId,
+} from "./tracks";
 import type {
   DuckInput,
   DuckPersonality,
@@ -20,7 +26,7 @@ const EMPTY_INPUT: DuckInput = {
 };
 
 const BASE_FORWARD_SPEED = 61;
-const MAX_FORWARD_SPEED = 110;
+const MAX_FORWARD_SPEED = 118;
 const LATERAL_ACCELERATION = 2.4;
 const LATERAL_DRAG = 0.82;
 const MAX_LATERAL_SPEED = 0.075;
@@ -49,12 +55,13 @@ function createDuck(index: number, rng: DeterministicRng): DuckState {
   const row = Math.floor(index / 10);
   const column = index % 10;
   const lateral = -0.9 + (column / 9) * 1.8 + rng.range(-0.025, 0.025);
+  const character = DUCK_CHARACTERS[index % DUCK_CHARACTERS.length];
 
   return {
     id: `duck-${index + 1}`,
     playerId: null,
-    name: `Duck ${String(index + 1).padStart(2, "0")}`,
-    characterId: index % 2 === 0 ? "mellow-mallard" : "dab-duck",
+    name: `${character.name} ${Math.floor(index / DUCK_CHARACTERS.length) + 1}`,
+    characterId: character.id,
     isBot: true,
     personality: createPersonality(rng),
     progress: Math.max(0, -row * 0.0025),
@@ -68,6 +75,7 @@ function createDuck(index: number, rng: DeterministicRng): DuckState {
     finishTick: null,
     statusEffects: [],
     heldPowerup: null,
+    shieldCharges: 0,
     lastInputSequence: 0,
   };
 }
@@ -88,12 +96,10 @@ export class RaceSimulation {
 
     this.rng = new DeterministicRng(config.seed);
     this.track = getTrackDefinition(config.trackId);
-    const ducks = Array.from({ length: config.racerCount }, (_, index) =>
-      createDuck(index, this.rng),
-    );
+    const ducks = Array.from({ length: config.racerCount }, (_, index) => createDuck(index, this.rng));
 
     this.state = {
-      config: { ...config, trackLength: this.track.length },
+      config: { ...config, trackId: this.track.id, trackLength: this.track.length },
       tick: 0,
       phase: "countdown",
       ducks,
@@ -155,11 +161,9 @@ export class RaceSimulation {
 
     for (const duck of this.state.ducks) {
       if (duck.finished) continue;
-
       const input = duck.isBot || !mode.humanControl
         ? this.createAiInput(duck)
         : this.inputs.get(duck.id) ?? EMPTY_INPUT;
-
       this.updateDuck(duck, input, deltaSeconds);
     }
 
@@ -206,9 +210,7 @@ export class RaceSimulation {
 
     duck.forwardSpeed += (targetSpeed - duck.forwardSpeed) * 0.12;
     duck.forwardSpeed = clamp(duck.forwardSpeed, 0, MAX_FORWARD_SPEED);
-
-    const distanceThisTick = duck.forwardSpeed * deltaSeconds;
-    duck.progress += distanceThisTick / this.state.config.trackLength;
+    duck.progress += (duck.forwardSpeed * deltaSeconds) / this.state.config.trackLength;
 
     this.resolveTrackInteractions(duck);
     if (input.usePowerup && duck.heldPowerup) this.activatePowerup(duck, duck.heldPowerup as PowerupId);
@@ -238,8 +240,14 @@ export class RaceSimulation {
       const key = `${duck.id}:${hazard.id}`;
       const lastHit = this.hazardCooldowns.get(key) ?? -Infinity;
       if (this.state.tick - lastHit < HAZARD_COOLDOWN_TICKS) continue;
-
       this.hazardCooldowns.set(key, this.state.tick);
+
+      if (duck.shieldCharges > 0) {
+        duck.shieldCharges -= 1;
+        this.emit("shield-block", { duckId: duck.id, hazardId: hazard.id });
+        continue;
+      }
+
       this.applyHazard(duck, hazard);
       this.emit("hazard-hit", { duckId: duck.id, hazardId: hazard.id, hazardType: hazard.type });
     }
@@ -252,26 +260,43 @@ export class RaceSimulation {
       const inProgress = Math.abs(duck.progress - pickup.progress) <= pickup.progressRadius;
       const inLane = Math.abs(duck.lateral - pickup.lateral) <= pickup.lateralRadius;
       if (!inProgress || !inLane) continue;
-
-      collected.add(pickup.id);
-      this.collectedPickups.set(duck.id, collected);
-      duck.heldPowerup = pickup.powerup;
-      this.emit("powerup-collected", { duckId: duck.id, powerup: pickup.powerup });
+      this.collectPickup(duck, pickup.id, pickup.powerup, collected);
       break;
     }
   }
 
+  private collectPickup(duck: DuckState, pickupId: string, powerup: PowerupId, collected?: Set<string>): void {
+    const collection = collected ?? this.collectedPickups.get(duck.id) ?? new Set<string>();
+    collection.add(pickupId);
+    this.collectedPickups.set(duck.id, collection);
+    duck.heldPowerup = powerup;
+    this.emit("powerup-collected", { duckId: duck.id, powerup });
+  }
+
   private applyHazard(duck: DuckState, hazard: HazardDefinition): void {
-    if (hazard.type === "mud") {
-      duck.forwardSpeed *= 0.68;
-      duck.lateralSpeed *= 0.5;
+    if (hazard.type === "mud" || hazard.type === "reeds") {
+      duck.forwardSpeed *= hazard.type === "mud" ? 0.66 : 0.76;
+      duck.lateralSpeed *= 0.45;
       return;
     }
 
-    if (hazard.type === "log") {
-      duck.forwardSpeed *= 0.52;
+    if (hazard.type === "log" || hazard.type === "barrel") {
+      duck.forwardSpeed *= hazard.type === "log" ? 0.52 : 0.58;
       const direction = duck.lateral >= hazard.lateral ? 1 : -1;
-      duck.lateralSpeed = clamp(duck.lateralSpeed + direction * 0.035, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      duck.lateralSpeed = clamp(duck.lateralSpeed + direction * 0.04, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      return;
+    }
+
+    if (hazard.type === "sprinkler" || hazard.type === "fan") {
+      const direction = hazard.lateral >= 0 ? -1 : 1;
+      duck.lateralSpeed = clamp(duck.lateralSpeed + direction * 0.05, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      duck.forwardSpeed *= 0.86;
+      return;
+    }
+
+    if (hazard.type === "waterfall") {
+      duck.forwardSpeed *= 0.7;
+      duck.lateralSpeed = clamp(duck.lateralSpeed + this.rng.range(-0.055, 0.055), -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
       return;
     }
 
@@ -286,53 +311,93 @@ export class RaceSimulation {
     if (powerup === "munchie-rush") {
       duck.boostCharge = clamp(duck.boostCharge + 0.5, 0, 1);
       duck.forwardSpeed = clamp(duck.forwardSpeed + 24, 0, MAX_FORWARD_SPEED);
-      this.emit("powerup-used", { duckId: duck.id, powerup });
-      return;
+    } else if (powerup === "feather-boost") {
+      duck.boostCharge = clamp(duck.boostCharge + 0.25, 0, 1);
+      duck.forwardSpeed = clamp(duck.forwardSpeed + 32, 0, MAX_FORWARD_SPEED);
+    } else if (powerup === "bubble-shield") {
+      duck.shieldCharges = Math.min(2, duck.shieldCharges + 1);
+    } else if (powerup === "super-duck") {
+      duck.boostCharge = 1;
+      duck.forwardSpeed = MAX_FORWARD_SPEED;
+    } else if (powerup === "snack-magnet") {
+      const collected = this.collectedPickups.get(duck.id) ?? new Set<string>();
+      const target = this.track.pickups
+        .filter((candidate) => !collected.has(candidate.id) && candidate.progress > duck.progress)
+        .sort((a, b) => a.progress - b.progress)[0];
+      if (target && target.progress - duck.progress <= 0.16) {
+        this.collectPickup(duck, target.id, target.powerup, collected);
+      } else {
+        duck.boostCharge = clamp(duck.boostCharge + 0.3, 0, 1);
+      }
+    } else {
+      const radius = powerup === "mega-quack" ? 0.085 : powerup === "cloud-screen" ? 0.065 : 0.04;
+      const lateralRadius = powerup === "mega-quack" ? 0.65 : 0.38;
+      const speedMultiplier = powerup === "cloud-screen" ? 0.62 : powerup === "mega-quack" ? 0.68 : 0.72;
+      let affected = 0;
+
+      for (const rival of this.state.ducks) {
+        if (rival.id === duck.id || rival.finished) continue;
+        if (Math.abs(rival.progress - duck.progress) > radius) continue;
+        if (Math.abs(rival.lateral - duck.lateral) > lateralRadius) continue;
+        if (rival.shieldCharges > 0) {
+          rival.shieldCharges -= 1;
+          continue;
+        }
+        rival.forwardSpeed *= speedMultiplier;
+        const direction = rival.lateral >= duck.lateral ? 1 : -1;
+        rival.lateralSpeed = clamp(
+          rival.lateralSpeed + direction * (powerup === "mega-quack" ? 0.05 : 0.025),
+          -MAX_LATERAL_SPEED,
+          MAX_LATERAL_SPEED,
+        );
+        affected += 1;
+      }
+      this.emit("powerup-impact", { duckId: duck.id, powerup, affected });
     }
 
-    let affected = 0;
-    for (const rival of this.state.ducks) {
-      if (rival.id === duck.id || rival.finished) continue;
-      if (Math.abs(rival.progress - duck.progress) > 0.04) continue;
-      if (Math.abs(rival.lateral - duck.lateral) > 0.34) continue;
-
-      rival.forwardSpeed *= 0.72;
-      const direction = rival.lateral >= duck.lateral ? 1 : -1;
-      rival.lateralSpeed = clamp(rival.lateralSpeed + direction * 0.025, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
-      affected += 1;
-    }
-
-    this.emit("powerup-used", { duckId: duck.id, powerup, affected });
+    this.emit("powerup-used", { duckId: duck.id, powerup });
   }
 
   private createAiInput(duck: DuckState): DuckInput {
-    const wave = Math.sin((this.state.tick * 0.035) + duck.rank) * 0.6;
-    const noise = this.rng.range(-0.25, 0.25);
-    const steer = clamp(wave + noise, -1, 1);
+    let steer = Math.sin((this.state.tick * 0.035) + duck.rank) * 0.45 + this.rng.range(-0.18, 0.18);
+    const upcomingHazard = this.track.hazards
+      .filter((hazard) => hazard.progress > duck.progress && hazard.progress - duck.progress < 0.045)
+      .sort((a, b) => a.progress - b.progress)[0];
+
+    if (upcomingHazard && Math.abs(duck.lateral - upcomingHazard.lateral) < upcomingHazard.lateralRadius + 0.14) {
+      const direction = duck.lateral >= upcomingHazard.lateral ? 1 : -1;
+      steer += direction * duck.personality.hazardAwareness * 1.15;
+    } else if (!duck.heldPowerup) {
+      const pickup = this.track.pickups
+        .filter((candidate) => candidate.progress > duck.progress && candidate.progress - duck.progress < 0.055)
+        .sort((a, b) => a.progress - b.progress)[0];
+      if (pickup && duck.personality.greed > 0.45) {
+        steer += clamp((pickup.lateral - duck.lateral) * 1.35, -0.8, 0.8);
+      }
+    }
+
+    steer = clamp(steer, -1, 1);
     const trailing = duck.rank > Math.max(3, Math.ceil(this.state.ducks.length * 0.5));
     const boostChance = 0.015 + duck.personality.aggression * 0.02 + (trailing ? 0.015 : 0);
 
     return {
       steer,
       boost: duck.boostCharge > 0.3 && this.rng.chance(boostChance),
-      dive: this.rng.chance(0.002 + duck.personality.hazardAwareness * 0.002),
-      usePowerup: Boolean(duck.heldPowerup) && this.rng.chance(0.01 + duck.personality.greed * 0.025),
+      dive: Boolean(upcomingHazard) && this.rng.chance(0.01 + duck.personality.riskTolerance * 0.012),
+      usePowerup: Boolean(duck.heldPowerup) && this.rng.chance(0.012 + duck.personality.greed * 0.03),
       sequence: this.state.tick,
     };
   }
 
   private resolveSoftBodySpacing(strength: number): void {
     const active = this.state.ducks.filter((duck) => !duck.finished);
-
     for (let left = 0; left < active.length; left += 1) {
       for (let right = left + 1; right < active.length; right += 1) {
         const a = active[left];
         const b = active[right];
         if (Math.abs(a.progress - b.progress) > 0.006) continue;
-
         const lateralGap = a.lateral - b.lateral;
         if (Math.abs(lateralGap) > 0.08) continue;
-
         const push = (0.08 - Math.abs(lateralGap)) * strength;
         const direction = lateralGap >= 0 ? 1 : -1;
         a.lateral = clamp(a.lateral + push * direction, -1, 1);
@@ -343,9 +408,21 @@ export class RaceSimulation {
 
   private maybeTriggerChaosEvent(): void {
     if (!this.rng.chance(0.6)) return;
-
-    const chaosTypes = ["munchie-storm", "hotbox-fog", "mega-whirlpool", "dab-wave", "sticky-river"];
+    const chaosTypes = ["munchie-storm", "hotbox-fog", "mega-whirlpool", "dab-wave", "sticky-river"] as const;
     const type = chaosTypes[this.rng.int(0, chaosTypes.length - 1)];
+
+    for (const duck of this.state.ducks) {
+      if (duck.finished) continue;
+      if (type === "munchie-storm") duck.boostCharge = clamp(duck.boostCharge + 0.18, 0, 1);
+      if (type === "hotbox-fog") duck.lateralSpeed = clamp(duck.lateralSpeed + this.rng.range(-0.025, 0.025), -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      if (type === "mega-whirlpool") {
+        duck.lateralSpeed = clamp(duck.lateralSpeed + (0 - duck.lateral) * 0.045, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+        duck.forwardSpeed *= 0.86;
+      }
+      if (type === "dab-wave") duck.lateralSpeed = clamp(duck.lateralSpeed + this.rng.range(-0.04, 0.04), -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      if (type === "sticky-river") duck.forwardSpeed *= 0.9;
+    }
+
     this.emit(type);
   }
 
@@ -356,10 +433,7 @@ export class RaceSimulation {
       if (b.finished) return 1;
       return b.progress - a.progress;
     });
-
-    ordered.forEach((duck, index) => {
-      duck.rank = index + 1;
-    });
+    ordered.forEach((duck, index) => { duck.rank = index + 1; });
   }
 
   private finishedCount(): number {
@@ -373,9 +447,12 @@ export class RaceSimulation {
       tick: this.state.tick,
       payload,
     });
-
     if (this.state.events.length > 250) {
       this.state.events.splice(0, this.state.events.length - 250);
     }
   }
+}
+
+export function getDuckDisplayName(characterId: string): string {
+  return getDuckCharacter(characterId).name;
 }
