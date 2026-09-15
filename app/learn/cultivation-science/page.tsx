@@ -43,7 +43,7 @@ const categories = [
 
 export default function CultivationSciencePage() {
   return (
-    <section className="shell page-section">
+    <section className="shell page-section" data-reference-progressive-disclosure="true">
       <header className={styles.hero}>
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Cultivation Science Reference Library</h1>
@@ -66,32 +66,38 @@ export default function CultivationSciencePage() {
         <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.visualNeeds.length, 0)}</strong><span>lesson visuals specified</span></div>
       </div>
 
-      {categories.map((category) => {
-        const entries = library.filter((item) => item.category === category);
-        if (!entries.length) return null;
-        return (
-          <section className={styles.section} key={category}>
-            <div className={styles.sectionHeader}>
-              <div>
-                <p className="eyebrow">Reference group</p>
-                <h2>{category}</h2>
+      <div className={styles.referenceGroups}>
+        {categories.map((category) => {
+          const entries = library.filter((item) => item.category === category);
+          if (!entries.length) return null;
+          return (
+            <details className={styles.referenceGroup} data-reference-group="true" key={category}>
+              <summary className={styles.referenceGroupSummary}>
+                <span>
+                  <span className="eyebrow">Reference group</span>
+                  <span className={styles.referenceGroupTitle}>{category}</span>
+                  <span className={styles.referenceGroupDescription}>Focused lessons that move from overview concepts into practical plant-science reference material.</span>
+                </span>
+                <span className={styles.referenceGroupMeta}>
+                  <span className={styles.referenceGroupCount}>{entries.length} references</span>
+                </span>
+              </summary>
+              <div className={styles.referenceGroupBody}>
+                <div className={styles.grid}>
+                  {entries.map((item) => (
+                    <Link className={styles.card} data-reference-record="true" href={`/learn/cultivation-science/${item.slug}`} key={item.slug}>
+                      <p className={styles.cardCategory}>{item.category}</p>
+                      <h3>{item.title}</h3>
+                      <p>{item.summary}</p>
+                      <span>Open reference →</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-              <p>{entries.length} focused lessons designed to replace overview-only coverage with practical plant-science reference material.</p>
-            </div>
-
-            <div className={styles.grid}>
-              {entries.map((item) => (
-                <Link className={styles.card} href={`/learn/cultivation-science/${item.slug}`} key={item.slug}>
-                  <p className={styles.cardCategory}>{item.category}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.summary}</p>
-                  <span>Open reference →</span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })}
+            </details>
+          );
+        })}
+      </div>
     </section>
   );
 }
