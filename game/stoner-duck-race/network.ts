@@ -152,7 +152,9 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
     subscribe(listener) {
       listeners.add(listener);
       listener(latest);
-      return () => listeners.delete(listener);
+      return () => {
+        listeners.delete(listener);
+      };
     },
     sendInput(input) { room.send("input", input); },
     startRace() { room.send("start-race"); },
