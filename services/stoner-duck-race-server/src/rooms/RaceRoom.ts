@@ -6,11 +6,13 @@ import type { DuckInput, RaceModeId } from "../../../../game/stoner-duck-race/ty
 
 const NetworkDuck = schema({
   id: t.string(),
+  ownerSessionId: t.string(),
   name: t.string(),
   progress: t.number(),
   lateral: t.number(),
   rank: t.number(),
   boostCharge: t.number(),
+  heldPowerup: t.string(),
   finished: t.boolean(),
 });
 
@@ -19,10 +21,14 @@ type NetworkDuck = SchemaType<typeof NetworkDuck>;
 export const DuckRaceRoomState = schema({
   phase: t.string(),
   mode: t.string(),
+  seed: t.string(),
   tick: t.number(),
+  tickRate: t.number(),
+  countdownTicks: t.number(),
   winnerId: t.string(),
   hostSessionId: t.string(),
-  racerCount: t.number(),
+  racerCapacity: t.number(),
+  connectedRacers: t.number(),
   spectatorCount: t.number(),
   ducks: t.map(NetworkDuck),
 });
@@ -78,6 +84,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
 
     this.simulation = new RaceSimulation(createRaceConfig(mode, racerCount, seed));
     this.state.mode = mode;
+    this.state.seed = seed;
     this.state.phase = "lobby";
     this.state.hostSessionId = "";
     this.syncState();
@@ -147,9 +154,13 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
     const source = this.simulation.state;
     this.state.phase = this.started ? source.phase : "lobby";
     this.state.mode = source.config.mode;
+    this.state.seed = source.config.seed;
     this.state.tick = source.tick;
+    this.state.tickRate = source.config.tickRate;
+    this.state.countdownTicks = source.config.countdownTicks;
     this.state.winnerId = source.winnerId ?? "";
-    this.state.racerCount = this.duckBySession.size;
+    this.state.racerCapacity = source.config.racerCount;
+    this.state.connectedRacers = this.duckBySession.size;
     this.state.spectatorCount = this.spectatorSessions.size;
 
     const liveIds = new Set<string>();
@@ -162,11 +173,13 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
         this.state.ducks.set(duck.id, networkDuck);
       }
 
+      networkDuck.ownerSessionId = duck.playerId ?? "";
       networkDuck.name = duck.name;
       networkDuck.progress = duck.progress;
       networkDuck.lateral = duck.lateral;
       networkDuck.rank = duck.rank;
       networkDuck.boostCharge = duck.boostCharge;
+      networkDuck.heldPowerup = duck.heldPowerup ?? "";
       networkDuck.finished = duck.finished;
     }
 
