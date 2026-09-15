@@ -44,6 +44,7 @@ function formatSeconds(seconds: number): string {
 
 export function StonerDuckRaceGame() {
   const gameRef = useRef<Game | null>(null);
+  const mutedRef = useRef(false);
   const [source, setSource] = useState<PlaySource>("local");
   const [localFormat, setLocalFormat] = useState<LocalFormat>("quick");
   const [onlineIntent, setOnlineIntent] = useState<OnlineIntent>("create");
@@ -58,6 +59,8 @@ export function StonerDuckRaceGame() {
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState("");
   const [inviteMessage, setInviteMessage] = useState("");
+  const [paused, setPaused] = useState(false);
+  const [muted, setMuted] = useState(false);
   const [launchOptions, setLaunchOptions] = useState<DuckRaceLaunchOptions | null>(null);
   const [roomConnection, setRoomConnection] = useState<DuckRaceRoomConnection | null>(null);
   const [roomSnapshot, setRoomSnapshot] = useState<DuckRaceRoomSnapshot | null>(null);
@@ -90,7 +93,7 @@ export function StonerDuckRaceGame() {
 
   useLayoutEffect(() => {
     if (!launchOptions || gameRef.current) return;
-    gameRef.current = startStonerDuckRace(
+    const game = startStonerDuckRace(
       GAME_PARENT_ID,
       launchOptions,
       roomConnection ?? undefined,
@@ -105,6 +108,8 @@ export function StonerDuckRaceGame() {
         }
       },
     );
+    game.sound.mute = mutedRef.current;
+    gameRef.current = game;
     return () => {
       gameRef.current?.destroy(true);
       gameRef.current = null;
@@ -136,6 +141,7 @@ export function StonerDuckRaceGame() {
     event.preventDefault();
     setError("");
     setLastResult(null);
+    setPaused(false);
 
     const selectedTrack = source === "local" && localFormat === "cup" ? CUP_TRACKS[0] : trackId;
     const raceSeed = source === "local" && localFormat === "cup" ? `${seed}-CUP-1` : seed;
@@ -195,6 +201,7 @@ export function StonerDuckRaceGame() {
     setRoomConnection(null);
     setRoomSnapshot(null);
     setInviteMessage("");
+    setPaused(false);
     setLaunchOptions(null);
     setLastResult(null);
   }
@@ -205,9 +212,25 @@ export function StonerDuckRaceGame() {
     if (nextIndex >= CUP_TRACKS.length) return;
     gameRef.current?.destroy(true);
     gameRef.current = null;
+    setPaused(false);
     setCupIndex(nextIndex);
     setLastResult(null);
     setLaunchOptions(buildOptions(CUP_TRACKS[nextIndex], `${seed}-CUP-${nextIndex + 1}`));
+  }
+
+  function togglePause() {
+    const game = gameRef.current;
+    if (!game || source !== "local" || lastResult) return;
+    if (paused) game.scene.resume("StonerDuckRace");
+    else game.scene.pause("StonerDuckRace");
+    setPaused((current) => !current);
+  }
+
+  function toggleMute() {
+    const nextMuted = !mutedRef.current;
+    mutedRef.current = nextMuted;
+    if (gameRef.current) gameRef.current.sound.mute = nextMuted;
+    setMuted(nextMuted);
   }
 
   async function copyInviteLink() {
@@ -359,11 +382,14 @@ export function StonerDuckRaceGame() {
         <div className={styles.gameActions}>
           {source === "local" && localFormat === "cup" && <span className={styles.roomStatus}>Cup {cupIndex + 1}/4 · {cupPoints} pts</span>}
           {roomConnection && roomSnapshot && <span className={styles.roomStatus}>{roomSnapshot.connectedRacers}/{roomSnapshot.racerCapacity} racers · {roomSnapshot.spectatorCount} watching</span>}
+          {source === "local" && !lastResult && <button aria-pressed={paused} className={styles.backButton} onClick={togglePause} type="button">{paused ? "Resume" : "Pause"}</button>}
+          <button aria-pressed={muted} className={styles.backButton} onClick={toggleMute} type="button">{muted ? "Sound on" : "Mute"}</button>
           {roomConnection?.isHost() && roomSnapshot?.phase === "lobby" && <button className={styles.startButton} onClick={() => roomConnection.startRace()} type="button">Start online race</button>}
           {roomConnection && <button className={styles.backButton} onClick={() => void copyInviteLink()} type="button">Copy invite</button>}
           <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Race setup</button>
         </div>
       </div>
+      {paused && source === "local" && <div className={styles.pauseBanner} role="status">Race paused · resume when ready</div>}
       {roomConnection && inviteUrl && (
         <div className={styles.inviteBar}>
           <span>{inviteMessage || "Share this room"}</span>
