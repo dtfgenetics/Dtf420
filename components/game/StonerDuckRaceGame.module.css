@@ -40,6 +40,11 @@
 .checkField input { width: 18px; height: 18px; accent-color: var(--duck-accent); }
 .connectionNote { grid-column: 1 / -1; margin: 0; color: #f3c983; font-size: 0.78rem; line-height: 1.45; }
 .errorText { margin: 0; padding: 0.8rem 1rem; border: 1px solid rgba(242, 128, 112, 0.35); border-radius: 12px; background: rgba(91, 34, 31, 0.45); color: #ffd4cd; font-size: 0.85rem; }
+.timeTrialNote { padding: 0.9rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 1px solid rgba(240, 206, 88, 0.32); border-radius: 15px; background: rgba(77, 134, 85, 0.16); }
+.timeTrialNote > div { display: grid; gap: 0.2rem; }
+.timeTrialNote span { color: var(--duck-accent); font-size: 0.68rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.timeTrialNote strong { color: var(--duck-text); font-size: 0.92rem; }
+.timeTrialNote small { color: var(--duck-muted); font-size: 0.76rem; }
 
 .modeFieldset { margin: 0; padding: 0; border: 0; }
 .modeFieldset legend { margin-bottom: 0.7rem; color: var(--duck-text); font-size: 0.9rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; }
@@ -94,6 +99,9 @@
 .roomStatus { padding: 0.35rem 0.55rem; border: 1px solid var(--duck-border); border-radius: 9px; background: rgba(16, 51, 56, 0.72); }
 .startButton { min-height: 36px; padding: 0 0.85rem; background: var(--duck-accent); color: #17201b; white-space: nowrap; }
 .backButton { min-height: 36px; padding: 0 0.85rem; border: 1px solid var(--duck-border); background: #16343a; color: var(--duck-text); white-space: nowrap; }
+.inviteBar { padding: 0.5rem 0.75rem; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.65rem; border-bottom: 1px solid var(--duck-border); background: rgba(10, 42, 50, 0.92); }
+.inviteBar span { color: var(--duck-accent); font-size: 0.72rem; font-weight: 900; white-space: nowrap; }
+.inviteBar input { width: 100%; min-width: 0; min-height: 34px; padding: 0 0.6rem; border: 1px solid var(--duck-border); border-radius: 8px; background: #07171d; color: var(--duck-muted); font-size: 0.72rem; }
 
 .canvas { width: 100%; aspect-ratio: 16 / 9; min-height: 360px; }
 .canvas canvas { display: block; width: 100% !important; height: auto !important; }
@@ -124,7 +132,7 @@
   .shell { min-height: 280px; border-radius: 14px; }
   .lobbyShell { min-height: 520px; }
   .lobby { padding: 1rem; gap: 1rem; }
-  .lobbyHeader, .lobbyFooter, .gameBar, .resultsPanel { align-items: stretch; flex-direction: column; }
+  .lobbyHeader, .lobbyFooter, .gameBar, .resultsPanel, .timeTrialNote { align-items: stretch; flex-direction: column; }
   .capacityBadge { width: 100%; grid-template-columns: auto auto; justify-content: start; gap: 0.6rem; }
   .capacityBadge span { margin-top: 0; align-self: center; }
   .sourceRow { align-items: stretch; flex-direction: column; }
@@ -134,5 +142,6 @@
   .onlinePanel .sourceSwitch, .connectionNote { grid-column: auto; }
   .launchButton, .backButton, .startButton { justify-content: center; width: 100%; }
   .gameBar > div, .gameActions { justify-content: space-between; }
+  .inviteBar { grid-template-columns: 1fr; }
   .canvas { min-height: 240px; }
 }
