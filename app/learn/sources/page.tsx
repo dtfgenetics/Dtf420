@@ -7,6 +7,7 @@ import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "../plant-health/page.module.css";
 
 const sources = [...coreSources, ...abioticSources, ...plantHealthIpmSources];
+const sourceTypes = Array.from(new Set(sources.map((source) => source.sourceType)));
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "Evidence & Sources — Teaching Healthy Cultivation",
@@ -21,7 +22,7 @@ for (const ids of Object.values(sourceMap)) {
 
 export default function EducationSourcesPage() {
   return (
-    <section className="shell page-section">
+    <section className="shell page-section" data-reference-progressive-disclosure="true">
       <header className={styles.hero}>
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Evidence & Sources</h1>
@@ -33,7 +34,7 @@ export default function EducationSourcesPage() {
       <div className={styles.stats} aria-label="Evidence library summary">
         <div className={styles.stat}><strong>{sources.length}</strong><span>evidence sources</span></div>
         <div className={styles.stat}><strong>{Object.keys(sourceMap).length}</strong><span>lesson pages mapped</span></div>
-        <div className={styles.stat}><strong>{new Set(sources.map((source) => source.sourceType)).size}</strong><span>source types</span></div>
+        <div className={styles.stat}><strong>{sourceTypes.length}</strong><span>source types</span></div>
       </div>
 
       <section className={styles.section}>
@@ -45,15 +46,36 @@ export default function EducationSourcesPage() {
           <p>Peer-reviewed research is prioritized for cannabis-specific claims, with university extension and government guidance used for broader greenhouse, IPM, biosecurity, environmental-stress, and diagnostic principles.</p>
         </div>
 
-        <div className={styles.grid}>
-          {sources.map((source) => (
-            <a className={styles.card} href={source.url} target="_blank" rel="noreferrer" key={source.id}>
-              <p className={styles.cardCategory}>{source.sourceType}</p>
-              <h3>{source.title}</h3>
-              <p>{source.scope}</p>
-              <span>{source.publisher}{"year" in source && source.year ? ` · ${source.year}` : ""} · used on {usageCount.get(source.id) ?? 0} lesson page{usageCount.get(source.id) === 1 ? "" : "s"} ↗</span>
-            </a>
-          ))}
+        <div className={styles.referenceGroups}>
+          {sourceTypes.map((sourceType) => {
+            const entries = sources.filter((source) => source.sourceType === sourceType);
+            return (
+              <details className={styles.referenceGroup} data-reference-group="true" key={sourceType}>
+                <summary className={styles.referenceGroupSummary}>
+                  <span>
+                    <span className="eyebrow">Source type</span>
+                    <span className={styles.referenceGroupTitle}>{sourceType}</span>
+                    <span className={styles.referenceGroupDescription}>Expand to review the traceable sources in this evidence category and see how widely each source is mapped across lessons.</span>
+                  </span>
+                  <span className={styles.referenceGroupMeta}>
+                    <span className={styles.referenceGroupCount}>{entries.length} sources</span>
+                  </span>
+                </summary>
+                <div className={styles.referenceGroupBody}>
+                  <div className={styles.grid}>
+                    {entries.map((source) => (
+                      <a className={styles.card} data-reference-record="true" href={source.url} target="_blank" rel="noreferrer" key={source.id}>
+                        <p className={styles.cardCategory}>{source.sourceType}</p>
+                        <h3>{source.title}</h3>
+                        <p>{source.scope}</p>
+                        <span>{source.publisher}{"year" in source && source.year ? ` · ${source.year}` : ""} · used on {usageCount.get(source.id) ?? 0} lesson page{usageCount.get(source.id) === 1 ? "" : "s"} ↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </details>
+            );
+          })}
         </div>
       </section>
     </section>
