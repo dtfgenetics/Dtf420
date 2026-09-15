@@ -55,3 +55,6 @@ jobs:
 
       - name: Verify compiled production entry
         run: test -f build/services/stoner-duck-race-server/src/index.js
+
+      - name: Run deterministic 50-racer smoke suite
+        run: npm run smoke
