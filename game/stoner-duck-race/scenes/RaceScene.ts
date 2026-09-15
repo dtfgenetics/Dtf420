@@ -4,7 +4,7 @@ import { createRaceConfig } from "../config";
 import type { DuckRaceRoomConnection, DuckRaceRoomSnapshot, NetworkDuckSnapshot } from "../network";
 import { RaceSimulation } from "../simulation";
 import { getTrackDefinition, type HazardType, type PowerupId } from "../tracks";
-import type { DuckRaceLaunchOptions, DuckState, RaceModeId, RacePhase } from "../types";
+import type { DuckRaceLaunchOptions, DuckRaceResult, DuckState, RaceModeId, RacePhase } from "../types";
 
 const WORLD_START_X = 140;
 const WORLD_TOP = 132;
@@ -77,6 +77,7 @@ interface RenderRaceState {
 export class RaceScene extends Phaser.Scene {
   private readonly launchOptions: DuckRaceLaunchOptions;
   private readonly networkConnection?: DuckRaceRoomConnection;
+  private readonly onRaceFinished?: (result: DuckRaceResult) => void;
   private simulation?: RaceSimulation;
   private networkSnapshot?: DuckRaceRoomSnapshot;
   private unsubscribeNetwork?: () => void;
@@ -84,6 +85,7 @@ export class RaceScene extends Phaser.Scene {
   private accumulator = 0;
   private selectedMode: RaceModeId;
   private inputSequence = 0;
+  private resultReported = false;
   private statusText!: Phaser.GameObjects.Text;
   private standingsText!: Phaser.GameObjects.Text;
   private helpText!: Phaser.GameObjects.Text;
@@ -96,18 +98,17 @@ export class RaceScene extends Phaser.Scene {
   private boostKey?: Phaser.Input.Keyboard.Key;
   private diveKey?: Phaser.Input.Keyboard.Key;
   private powerupKey?: Phaser.Input.Keyboard.Key;
-  private touchState: TouchState = {
-    left: false,
-    right: false,
-    boost: false,
-    dive: false,
-    usePowerup: false,
-  };
+  private touchState: TouchState = { left: false, right: false, boost: false, dive: false, usePowerup: false };
 
-  constructor(options: DuckRaceLaunchOptions, networkConnection?: DuckRaceRoomConnection) {
+  constructor(
+    options: DuckRaceLaunchOptions,
+    networkConnection?: DuckRaceRoomConnection,
+    onRaceFinished?: (result: DuckRaceResult) => void,
+  ) {
     super("StonerDuckRace");
     this.launchOptions = options;
     this.networkConnection = networkConnection;
+    this.onRaceFinished = onRaceFinished;
     this.selectedMode = options.mode;
   }
 
@@ -131,7 +132,6 @@ export class RaceScene extends Phaser.Scene {
     this.createHud();
     this.createControls();
     this.ensureDuckViews();
-
     this.cursors = this.input.keyboard?.createCursorKeys();
     this.boostKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.diveKey = this.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -151,42 +151,28 @@ export class RaceScene extends Phaser.Scene {
 
   update(_time: number, delta: number): void {
     this.accumulator += Math.min(delta, 100);
-
     while (this.accumulator >= SIM_STEP_MS) {
       this.accumulator -= SIM_STEP_MS;
       const input = this.readPlayerInput();
-
       if (this.networkConnection) {
-        if (this.selectedMode !== "derby" && this.networkConnection.getOwnedDuck()) {
-          this.networkConnection.sendInput(input);
-        }
+        if (this.selectedMode !== "derby" && this.networkConnection.getOwnedDuck()) this.networkConnection.sendInput(input);
       } else if (this.simulation) {
         if (this.selectedMode !== "derby") this.simulation.setInput("duck-1", input);
         this.simulation.step();
       }
     }
-
     this.renderState();
     this.updateCamera();
   }
 
-  private get track() {
-    return getTrackDefinition(this.networkSnapshot?.trackId ?? this.launchOptions.trackId);
-  }
-
-  private get courseWidth(): number {
-    return this.track.length;
-  }
-
-  private get worldEndX(): number {
-    return WORLD_START_X + this.courseWidth;
-  }
+  private get track() { return getTrackDefinition(this.networkSnapshot?.trackId ?? this.launchOptions.trackId); }
+  private get courseWidth(): number { return this.track.length; }
+  private get worldEndX(): number { return WORLD_START_X + this.courseWidth; }
 
   private readPlayerInput() {
     this.inputSequence += 1;
     const keyboardSteer = (this.cursors?.left?.isDown ? -1 : 0) + (this.cursors?.right?.isDown ? 1 : 0);
     const touchSteer = (this.touchState.left ? -1 : 0) + (this.touchState.right ? 1 : 0);
-
     return {
       steer: Phaser.Math.Clamp(keyboardSteer + touchSteer, -1, 1),
       boost: Boolean(this.boostKey?.isDown) || this.touchState.boost,
@@ -197,62 +183,18 @@ export class RaceScene extends Phaser.Scene {
   }
 
   private createHud(): void {
-    this.statusText = this.add.text(28, 20, "", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "25px",
-      color: "#f4f7df",
-      fontStyle: "bold",
-    }).setScrollFactor(0).setDepth(100);
-
-    this.standingsText = this.add.text(28, 58, "", {
-      fontFamily: "monospace",
-      fontSize: "14px",
-      color: "#d8f5dd",
-      lineSpacing: 3,
-      backgroundColor: "#07171dbb",
-      padding: { x: 9, y: 7 },
-    }).setScrollFactor(0).setDepth(100);
-
-    this.helpText = this.add.text(1252, 22, this.networkConnection
-      ? "ONLINE · server-authoritative"
-      : "1 Derby · 2 Rally · 3 Chaos · R restart", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "14px",
-      color: "#b8d7c0",
-    }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
-
-    this.eventText = this.add.text(640, 24, "", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "15px",
-      color: "#ffe28a",
-      fontStyle: "bold",
-      backgroundColor: "#152b22cc",
-      padding: { x: 10, y: 6 },
-    }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
-
-    this.playerText = this.add.text(1250, 60, "", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "14px",
-      color: "#f8f4d8",
-      align: "right",
-      backgroundColor: "#07171dbb",
-      padding: { x: 9, y: 7 },
-    }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
-
-    this.add.rectangle(640, 704, 560, 8, 0x07171d, 0.88)
-      .setStrokeStyle(1, 0x7ba68b, 0.7)
-      .setScrollFactor(0)
-      .setDepth(100);
-    this.progressFill = this.add.rectangle(362, 704, 0, 6, 0xf0ce58, 1)
-      .setOrigin(0, 0.5)
-      .setScrollFactor(0)
-      .setDepth(101);
+    this.statusText = this.add.text(28, 20, "", { fontFamily: "Arial, sans-serif", fontSize: "25px", color: "#f4f7df", fontStyle: "bold" }).setScrollFactor(0).setDepth(100);
+    this.standingsText = this.add.text(28, 58, "", { fontFamily: "monospace", fontSize: "14px", color: "#d8f5dd", lineSpacing: 3, backgroundColor: "#07171dbb", padding: { x: 9, y: 7 } }).setScrollFactor(0).setDepth(100);
+    this.helpText = this.add.text(1252, 22, this.networkConnection ? "ONLINE · server-authoritative" : "1 Derby · 2 Rally · 3 Chaos · R restart", { fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#b8d7c0" }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
+    this.eventText = this.add.text(640, 24, "", { fontFamily: "Arial, sans-serif", fontSize: "15px", color: "#ffe28a", fontStyle: "bold", backgroundColor: "#152b22cc", padding: { x: 10, y: 6 } }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
+    this.playerText = this.add.text(1250, 60, "", { fontFamily: "Arial, sans-serif", fontSize: "14px", color: "#f8f4d8", align: "right", backgroundColor: "#07171dbb", padding: { x: 9, y: 7 } }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
+    this.add.rectangle(640, 704, 560, 8, 0x07171d, 0.88).setStrokeStyle(1, 0x7ba68b, 0.7).setScrollFactor(0).setDepth(100);
+    this.progressFill = this.add.rectangle(362, 704, 0, 6, 0xf0ce58, 1).setOrigin(0, 0.5).setScrollFactor(0).setDepth(101);
   }
 
   private createControls(): void {
     this.controlLayer = this.add.container(0, 0).setScrollFactor(0).setDepth(120);
     this.modeLayer = this.add.container(0, 0).setScrollFactor(0).setDepth(120);
-
     this.makeTouchButton(74, 666, "◀", () => { this.touchState.left = true; });
     this.makeTouchButton(144, 666, "▶", () => { this.touchState.right = true; });
     this.makeTouchButton(1042, 666, "DIVE", () => { this.touchState.dive = true; }, 62);
@@ -260,37 +202,19 @@ export class RaceScene extends Phaser.Scene {
     this.makeTouchButton(1210, 666, "ITEM", () => { this.touchState.usePowerup = true; }, 66);
 
     if (!this.networkConnection) {
-      const modes: Array<[RaceModeId, string, number]> = [
-        ["derby", "DERBY", 950],
-        ["rally", "RALLY", 1045],
-        ["chaos", "CHAOS", 1140],
-      ];
+      const modes: Array<[RaceModeId, string, number]> = [["derby", "DERBY", 950], ["rally", "RALLY", 1045], ["chaos", "CHAOS", 1140]];
       for (const [mode, label, x] of modes) {
-        const button = this.add.text(x, 93, label, {
-          fontFamily: "Arial, sans-serif",
-          fontSize: "13px",
-          color: "#e9f1d0",
-          backgroundColor: mode === this.selectedMode ? "#396e3f" : "#17333a",
-          padding: { x: 10, y: 7 },
-        }).setInteractive({ useHandCursor: true });
+        const button = this.add.text(x, 93, label, { fontFamily: "Arial, sans-serif", fontSize: "13px", color: "#e9f1d0", backgroundColor: mode === this.selectedMode ? "#396e3f" : "#17333a", padding: { x: 10, y: 7 } }).setInteractive({ useHandCursor: true });
         button.on("pointerdown", () => this.resetRace(mode));
         this.modeLayer.add(button);
       }
     }
-
     this.updateControlVisibility();
   }
 
   private makeTouchButton(x: number, y: number, label: string, onDown: () => void, width = 58): void {
-    const background = this.add.rectangle(0, 0, width, 48, 0x17333a, 0.94)
-      .setStrokeStyle(2, 0x8bb889, 0.9)
-      .setInteractive({ useHandCursor: true });
-    const text = this.add.text(0, 0, label, {
-      fontFamily: "Arial, sans-serif",
-      fontSize: label.length > 2 ? "12px" : "21px",
-      color: "#f4f7df",
-      fontStyle: "bold",
-    }).setOrigin(0.5);
+    const background = this.add.rectangle(0, 0, width, 48, 0x17333a, 0.94).setStrokeStyle(2, 0x8bb889, 0.9).setInteractive({ useHandCursor: true });
+    const text = this.add.text(0, 0, label, { fontFamily: "Arial, sans-serif", fontSize: label.length > 2 ? "12px" : "21px", color: "#f4f7df", fontStyle: "bold" }).setOrigin(0.5);
     const container = this.add.container(x, y, [background, text]);
     this.controlLayer.add(container);
     background.on("pointerdown", onDown);
@@ -298,24 +222,15 @@ export class RaceScene extends Phaser.Scene {
     background.on("pointerout", () => this.resetTouchState());
   }
 
-  private resetTouchState(): void {
-    this.touchState.left = false;
-    this.touchState.right = false;
-    this.touchState.boost = false;
-    this.touchState.dive = false;
-    this.touchState.usePowerup = false;
-  }
+  private resetTouchState(): void { this.touchState = { left: false, right: false, boost: false, dive: false, usePowerup: false }; }
 
   private createSimulation(mode: RaceModeId): void {
-    const config = createRaceConfig(
-      mode,
-      this.launchOptions.racerCount,
-      this.launchOptions.seed,
-      this.launchOptions.trackId,
-    );
+    const config = createRaceConfig(mode, this.launchOptions.racerCount, this.launchOptions.seed, this.launchOptions.trackId);
     this.simulation = new RaceSimulation(config);
     if (mode !== "derby") {
       this.simulation.claimDuck("duck-1", "local-player", this.launchOptions.playerName);
+      const player = this.simulation.state.ducks.find((duck) => duck.id === "duck-1");
+      if (player) player.characterId = this.launchOptions.characterId;
     }
     this.ensureDuckViews();
   }
@@ -325,6 +240,7 @@ export class RaceScene extends Phaser.Scene {
     this.selectedMode = mode;
     this.accumulator = 0;
     this.inputSequence = 0;
+    this.resultReported = false;
     this.resetTouchState();
     this.cameras.main.scrollX = 0;
     for (const view of this.duckViews.values()) view.container.destroy(true);
@@ -333,67 +249,40 @@ export class RaceScene extends Phaser.Scene {
     this.updateControlVisibility();
   }
 
-  private updateControlVisibility(): void {
-    this.controlLayer?.setVisible(this.selectedMode !== "derby");
-  }
+  private updateControlVisibility(): void { this.controlLayer?.setVisible(this.selectedMode !== "derby"); }
 
   private getRenderState(): RenderRaceState {
     if (this.networkConnection && this.networkSnapshot) {
       const snapshot = this.networkSnapshot;
       const ducks = snapshot.ducks.map((duck: NetworkDuckSnapshot): RenderDuck => ({
-        id: duck.id,
-        name: duck.name,
-        characterId: duck.characterId,
+        id: duck.id, name: duck.name, characterId: duck.characterId,
         isPlayer: duck.ownerSessionId === this.networkConnection!.sessionId,
-        progress: duck.progress,
-        lateral: duck.lateral,
-        rank: duck.rank,
-        boostCharge: duck.boostCharge,
-        heldPowerup: duck.heldPowerup,
-        shieldCharges: duck.shieldCharges,
-        finished: duck.finished,
+        progress: duck.progress, lateral: duck.lateral, rank: duck.rank,
+        boostCharge: duck.boostCharge, heldPowerup: duck.heldPowerup,
+        shieldCharges: duck.shieldCharges, finished: duck.finished,
       }));
       return {
         phase: (snapshot.phase === "countdown" || snapshot.phase === "racing" || snapshot.phase === "finished") ? snapshot.phase : "lobby",
-        tick: snapshot.tick,
-        tickRate: snapshot.tickRate,
-        countdownTicks: snapshot.countdownTicks,
-        winnerId: snapshot.winnerId,
-        ducks,
-        connectedRacers: snapshot.connectedRacers,
-        spectatorCount: snapshot.spectatorCount,
+        tick: snapshot.tick, tickRate: snapshot.tickRate, countdownTicks: snapshot.countdownTicks,
+        winnerId: snapshot.winnerId, ducks, connectedRacers: snapshot.connectedRacers, spectatorCount: snapshot.spectatorCount,
       };
     }
 
     const state = this.simulation!.state;
     return {
-      phase: state.phase,
-      tick: state.tick,
-      tickRate: state.config.tickRate,
-      countdownTicks: state.config.countdownTicks,
-      winnerId: state.winnerId,
+      phase: state.phase, tick: state.tick, tickRate: state.config.tickRate, countdownTicks: state.config.countdownTicks, winnerId: state.winnerId,
       ducks: state.ducks.map((duck: DuckState): RenderDuck => ({
-        id: duck.id,
-        name: duck.name,
-        characterId: duck.characterId,
-        isPlayer: duck.playerId === "local-player",
-        progress: duck.progress,
-        lateral: duck.lateral,
-        rank: duck.rank,
-        boostCharge: duck.boostCharge,
-        heldPowerup: duck.heldPowerup,
-        shieldCharges: duck.shieldCharges,
-        finished: duck.finished,
+        id: duck.id, name: duck.name, characterId: duck.characterId, isPlayer: duck.playerId === "local-player",
+        progress: duck.progress, lateral: duck.lateral, rank: duck.rank, boostCharge: duck.boostCharge,
+        heldPowerup: duck.heldPowerup, shieldCharges: duck.shieldCharges, finished: duck.finished,
       })),
-      connectedRacers: state.ducks.filter((duck) => duck.playerId).length,
-      spectatorCount: 0,
+      connectedRacers: state.ducks.filter((duck) => duck.playerId).length, spectatorCount: 0,
     };
   }
 
   private ensureDuckViews(): void {
     const state = this.networkConnection && this.networkSnapshot ? this.getRenderState() : this.simulation ? this.getRenderState() : null;
     if (!state) return;
-
     for (const duck of state.ducks) {
       if (this.duckViews.has(duck.id)) continue;
       const character = getDuckCharacter(duck.characterId);
@@ -405,13 +294,7 @@ export class RaceScene extends Phaser.Scene {
       const bill = this.add.rectangle(18 * size, -7 * size, 10 * size, 4 * size, character.billColor);
       const eye = this.add.circle(11 * size, -11 * size, 1.6 * size, 0x142126);
       const shield = this.add.circle(0, -1, 20 * size, 0x63c7da, 0.08).setStrokeStyle(2, 0x9de7f0, 0.9).setVisible(false);
-      const label = this.add.text(0, 14 * size, String(duck.rank), {
-        fontFamily: "Arial, sans-serif",
-        fontSize: duck.isPlayer ? "10px" : "8px",
-        color: "#ffffff",
-        backgroundColor: duck.isPlayer ? "#234f2c" : "#00000066",
-        padding: { x: 2, y: 1 },
-      }).setOrigin(0.5, 0);
+      const label = this.add.text(0, 14 * size, String(duck.rank), { fontFamily: "Arial, sans-serif", fontSize: duck.isPlayer ? "10px" : "8px", color: "#ffffff", backgroundColor: duck.isPlayer ? "#234f2c" : "#00000066", padding: { x: 2, y: 1 } }).setOrigin(0.5, 0);
       container.add([shield, body, wing, head, bill, eye, label]);
       container.setDepth(duck.isPlayer ? 30 : 20);
       this.duckViews.set(duck.id, { container, label, shield });
@@ -422,7 +305,6 @@ export class RaceScene extends Phaser.Scene {
     const state = this.getRenderState();
     this.ensureDuckViews();
     const riverHeight = WORLD_BOTTOM - WORLD_TOP;
-
     for (const duck of state.ducks) {
       const view = this.duckViews.get(duck.id);
       if (!view) continue;
@@ -439,7 +321,6 @@ export class RaceScene extends Phaser.Scene {
     const countdownSeconds = Math.ceil(countdownRemaining / state.tickRate);
     const winner = state.winnerId ? state.ducks.find((duck) => duck.id === state.winnerId) : null;
     const onlineSuffix = this.networkConnection ? ` · ${state.connectedRacers} LIVE + ${state.spectatorCount} WATCHING` : "";
-
     const phaseLabel = state.phase === "lobby"
       ? `${this.track.name.toUpperCase()} · ONLINE LOBBY${onlineSuffix}`
       : state.phase === "countdown"
@@ -449,11 +330,8 @@ export class RaceScene extends Phaser.Scene {
           : `${this.selectedMode.toUpperCase()} · ${state.ducks.length} DUCKS · ${this.track.name.toUpperCase()}${onlineSuffix}`;
     this.statusText.setText(phaseLabel);
 
-    const leaders = [...state.ducks]
-      .sort((a, b) => a.rank - b.rank)
-      .slice(0, 5)
-      .map((duck) => `${String(duck.rank).padStart(2, "0")}. ${duck.name.slice(0, 12).padEnd(12, " ")} ${Math.round(duck.progress * 100)}%`)
-      .join("\n");
+    const leaders = [...state.ducks].sort((a, b) => a.rank - b.rank).slice(0, 5)
+      .map((duck) => `${String(duck.rank).padStart(2, "0")}. ${duck.name.slice(0, 12).padEnd(12, " ")} ${Math.round(duck.progress * 100)}%`).join("\n");
     this.standingsText.setText(leaders);
 
     const player = state.ducks.find((duck) => duck.isPlayer);
@@ -462,8 +340,7 @@ export class RaceScene extends Phaser.Scene {
     this.progressFill.width = Math.max(0, 556 * focusDuck.progress);
 
     if (player) {
-      const zone = this.track.currentZones.find((candidate) => player.progress >= candidate.start && player.progress < candidate.end)
-        ?? this.track.currentZones[this.track.currentZones.length - 1];
+      const zone = this.track.currentZones.find((candidate) => player.progress >= candidate.start && player.progress < candidate.end) ?? this.track.currentZones[this.track.currentZones.length - 1];
       this.playerText.setText([
         `${player.name} · ${player.rank}/${state.ducks.length}`,
         `${zone.label} · ${Math.round(player.progress * 100)}%`,
@@ -478,17 +355,30 @@ export class RaceScene extends Phaser.Scene {
 
     if (!this.networkConnection && this.simulation) {
       const latestEvent = this.simulation.state.events[this.simulation.state.events.length - 1];
-      if (!latestEvent || this.simulation.state.tick - latestEvent.tick > this.simulation.state.config.tickRate * 3) {
-        this.eventText.setText("");
-      } else {
-        const eventName = latestEvent.type.toUpperCase().replaceAll("-", " ");
-        this.eventText.setText(eventName);
-      }
+      this.eventText.setText(!latestEvent || this.simulation.state.tick - latestEvent.tick > this.simulation.state.config.tickRate * 3 ? "" : latestEvent.type.toUpperCase().replaceAll("-", " "));
     } else if (state.phase === "lobby") {
       this.eventText.setText(this.networkConnection?.isHost() ? "HOST · START THE RACE FROM THE LOBBY" : "WAITING FOR HOST");
     } else {
       this.eventText.setText("");
     }
+
+    this.maybeReportResult(state);
+  }
+
+  private maybeReportResult(state: RenderRaceState): void {
+    if (state.phase !== "finished" || this.resultReported) return;
+    this.resultReported = true;
+    const winner = state.winnerId ? state.ducks.find((duck) => duck.id === state.winnerId) : state.ducks.find((duck) => duck.rank === 1);
+    const player = state.ducks.find((duck) => duck.isPlayer);
+    this.onRaceFinished?.({
+      mode: this.selectedMode,
+      trackId: this.track.id,
+      racerCount: state.ducks.length,
+      rank: player?.rank ?? null,
+      winnerName: winner?.name ?? "Duck",
+      playerName: player?.name ?? null,
+      tick: state.tick,
+    });
   }
 
   private updateCamera(): void {
@@ -498,12 +388,10 @@ export class RaceScene extends Phaser.Scene {
     if (!focusDuck) return;
     const focusX = WORLD_START_X + focusDuck.progress * this.courseWidth;
     const desiredX = Phaser.Math.Clamp(focusX - (player ? 390 : 520), 0, Math.max(0, this.worldEndX - VIEW_WIDTH + 220));
-
     if (state.phase === "countdown" || state.phase === "lobby") {
       this.cameras.main.scrollX += (0 - this.cameras.main.scrollX) * 0.12;
       return;
     }
-
     this.cameras.main.scrollX += (desiredX - this.cameras.main.scrollX) * (player ? 0.1 : 0.055);
   }
 
@@ -511,7 +399,6 @@ export class RaceScene extends Phaser.Scene {
     const track = this.track;
     const graphics = this.add.graphics();
     const riverHeight = WORLD_BOTTOM - WORLD_TOP;
-
     graphics.fillStyle(0x08191f, 1);
     graphics.fillRect(0, 0, this.worldEndX + 260, VIEW_HEIGHT);
     graphics.fillStyle(track.bankColor, 1);
@@ -525,71 +412,41 @@ export class RaceScene extends Phaser.Scene {
       const width = Math.max(2, (zone.end - zone.start) * this.courseWidth);
       graphics.fillStyle(index % 2 === 0 ? track.waterColor : Phaser.Display.Color.IntegerToColor(track.waterColor).brighten(8).color, 0.95);
       graphics.fillRect(x, WORLD_TOP, width, riverHeight);
-      this.add.text(x + 20, WORLD_TOP + 18, zone.label.toUpperCase(), {
-        fontFamily: "Arial, sans-serif",
-        fontSize: "18px",
-        color: "#d7eee2",
-        fontStyle: "bold",
-      }).setAlpha(0.62).setDepth(2);
+      this.add.text(x + 20, WORLD_TOP + 18, zone.label.toUpperCase(), { fontFamily: "Arial, sans-serif", fontSize: "18px", color: "#d7eee2", fontStyle: "bold" }).setAlpha(0.62).setDepth(2);
     });
 
     graphics.lineStyle(2, 0x9ccbb0, 0.22);
-    for (let lane = 1; lane < 6; lane += 1) {
-      const y = WORLD_TOP + (riverHeight / 6) * lane;
-      graphics.lineBetween(WORLD_START_X, y, this.worldEndX, y);
-    }
-
+    for (let lane = 1; lane < 6; lane += 1) graphics.lineBetween(WORLD_START_X, WORLD_TOP + (riverHeight / 6) * lane, this.worldEndX, WORLD_TOP + (riverHeight / 6) * lane);
     for (let marker = 0; marker <= 10; marker += 1) {
       const x = WORLD_START_X + (marker / 10) * this.courseWidth;
       graphics.lineStyle(2, 0xe8efc5, marker === 0 || marker === 10 ? 0.9 : 0.18);
       graphics.lineBetween(x, WORLD_TOP - 12, x, WORLD_BOTTOM + 12);
-      this.add.text(x + 6, WORLD_BOTTOM + 20, `${marker * 10}%`, {
-        fontFamily: "monospace",
-        fontSize: "11px",
-        color: "#9eb8a4",
-      }).setDepth(3);
+      this.add.text(x + 6, WORLD_BOTTOM + 20, `${marker * 10}%`, { fontFamily: "monospace", fontSize: "11px", color: "#9eb8a4" }).setDepth(3);
     }
 
     for (const obstacle of track.hazards) this.drawHazard(obstacle.type, obstacle.progress, obstacle.lateral);
-
     for (const pickup of track.pickups) {
       const x = WORLD_START_X + pickup.progress * this.courseWidth;
       const y = WORLD_TOP + ((pickup.lateral + 1) / 2) * riverHeight;
       const label = POWERUP_LABELS[pickup.powerup];
       this.add.circle(x, y, 18, POWERUP_COLORS[pickup.powerup], 0.96).setStrokeStyle(3, 0xffffff, 0.82).setDepth(8);
-      this.add.text(x, y, label.slice(0, 2), { fontFamily: "Arial", fontSize: "10px", color: "#102027", fontStyle: "bold" })
-        .setOrigin(0.5).setDepth(9);
-      this.add.text(x, y - 30, label, { fontFamily: "Arial", fontSize: "9px", color: "#edf6e8" })
-        .setOrigin(0.5).setDepth(9);
+      this.add.text(x, y, label.slice(0, 2), { fontFamily: "Arial", fontSize: "10px", color: "#102027", fontStyle: "bold" }).setOrigin(0.5).setDepth(9);
+      this.add.text(x, y - 30, label, { fontFamily: "Arial", fontSize: "9px", color: "#edf6e8" }).setOrigin(0.5).setDepth(9);
     }
 
-    this.add.text(WORLD_START_X + 12, WORLD_TOP - 58, `${track.name.toUpperCase()} · START`, {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "15px",
-      color: "#e8efc5",
-      fontStyle: "bold",
-    }).setDepth(7);
-    this.add.text(this.worldEndX - 80, WORLD_TOP - 58, "FINISH", {
-      fontFamily: "Arial, sans-serif",
-      fontSize: "15px",
-      color: "#e8efc5",
-      fontStyle: "bold",
-    }).setDepth(7);
+    this.add.text(WORLD_START_X + 12, WORLD_TOP - 58, `${track.name.toUpperCase()} · START`, { fontFamily: "Arial, sans-serif", fontSize: "15px", color: "#e8efc5", fontStyle: "bold" }).setDepth(7);
+    this.add.text(this.worldEndX - 80, WORLD_TOP - 58, "FINISH", { fontFamily: "Arial, sans-serif", fontSize: "15px", color: "#e8efc5", fontStyle: "bold" }).setDepth(7);
   }
 
   private drawHazard(type: HazardType, progress: number, lateral: number): void {
     const riverHeight = WORLD_BOTTOM - WORLD_TOP;
     const x = WORLD_START_X + progress * this.courseWidth;
     const y = WORLD_TOP + ((lateral + 1) / 2) * riverHeight;
-
     if (type === "log" || type === "barrel") {
-      const width = type === "log" ? 74 : 42;
-      this.add.rectangle(x, y, width, 18, type === "log" ? 0x75442b : 0x8d5b32).setRotation(type === "log" ? 0.25 : -0.18).setDepth(6);
+      this.add.rectangle(x, y, type === "log" ? 74 : 42, 18, type === "log" ? 0x75442b : 0x8d5b32).setRotation(type === "log" ? 0.25 : -0.18).setDepth(6);
     } else if (type === "mud" || type === "reeds") {
       this.add.ellipse(x, y, type === "mud" ? 160 : 110, type === "mud" ? 94 : 70, type === "mud" ? 0x62513c : 0x3f6b45, 0.8).setDepth(4);
-      if (type === "reeds") {
-        for (let reed = -2; reed <= 2; reed += 1) this.add.rectangle(x + reed * 13, y - 5, 4, 54, 0x6f8b4a).setRotation(reed * 0.04).setDepth(6);
-      }
+      if (type === "reeds") for (let reed = -2; reed <= 2; reed += 1) this.add.rectangle(x + reed * 13, y - 5, 4, 54, 0x6f8b4a).setRotation(reed * 0.04).setDepth(6);
     } else if (type === "whirlpool") {
       this.add.circle(x, y, 55, 0x0a303b, 0.84).setStrokeStyle(8, 0x6ca2a0, 0.75).setDepth(5);
       this.add.circle(x, y, 22, 0x071e27, 1).setDepth(6);
@@ -600,7 +457,6 @@ export class RaceScene extends Phaser.Scene {
       this.add.circle(x, y, 32, color, 0.38).setStrokeStyle(3, color, 0.82).setDepth(5);
       this.add.text(x, y, type === "fan" ? "FAN" : "SPRAY", { fontFamily: "Arial", fontSize: "10px", color: "#eef8f6", fontStyle: "bold" }).setOrigin(0.5).setDepth(7);
     }
-
     this.add.text(x, y - 38, type.toUpperCase(), { fontFamily: "Arial", fontSize: "9px", color: "#f1dcc5" }).setOrigin(0.5).setDepth(7);
   }
 }
