@@ -15,6 +15,7 @@ const TRACK_IDS: readonly TrackId[] = [
   "rosin-river",
   "final-smokeout",
 ];
+const RECONNECT_GRACE_SECONDS = 20;
 
 const NetworkDuck = schema({
   id: t.string(),
@@ -44,6 +45,7 @@ export const DuckRaceRoomState = schema({
   hostSessionId: t.string(),
   racerCapacity: t.number(),
   connectedRacers: t.number(),
+  reconnectingRacers: t.number(),
   spectatorCount: t.number(),
   ducks: t.map(NetworkDuck),
 });
@@ -98,6 +100,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   private started = false;
   private readonly duckBySession = new Map<string, string>();
   private readonly spectatorSessions = new Set<string>();
+  private readonly droppedSessions = new Set<string>();
 
   onCreate(options: RaceRoomOptions): void {
     const mode = normalizeMode(options.mode);
@@ -119,7 +122,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
     this.syncState();
 
     this.onMessage("input", (client, rawInput) => {
-      if (!this.started) return;
+      if (!this.started || this.droppedSessions.has(client.sessionId)) return;
       const duckId = this.duckBySession.get(client.sessionId);
       const input = normalizeInput(rawInput);
       if (!duckId || !input) return;
@@ -127,7 +130,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
     });
 
     this.onMessage("start-race", (client) => {
-      if (this.started || client.sessionId !== this.state.hostSessionId) return;
+      if (this.started || client.sessionId !== this.state.hostSessionId || this.droppedSessions.has(client.sessionId)) return;
       this.started = true;
       this.syncState();
     });
@@ -159,7 +162,32 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
     this.syncState();
   }
 
+  onDrop(client: Client): void {
+    const knownRacer = this.duckBySession.has(client.sessionId);
+    const knownSpectator = this.spectatorSessions.has(client.sessionId);
+    if (!knownRacer && !knownSpectator) return;
+
+    this.droppedSessions.add(client.sessionId);
+    const duckId = this.duckBySession.get(client.sessionId);
+    const duck = duckId ? this.simulation.state.ducks.find((candidate) => candidate.id === duckId) : undefined;
+    if (duck) duck.isBot = true;
+    this.allowReconnection(client, RECONNECT_GRACE_SECONDS);
+    this.syncState();
+  }
+
+  onReconnect(client: Client): void {
+    this.droppedSessions.delete(client.sessionId);
+    const duckId = this.duckBySession.get(client.sessionId);
+    const duck = duckId ? this.simulation.state.ducks.find((candidate) => candidate.id === duckId) : undefined;
+    if (duck) {
+      duck.playerId = client.sessionId;
+      duck.isBot = false;
+    }
+    this.syncState();
+  }
+
   onLeave(client: Client): void {
+    this.droppedSessions.delete(client.sessionId);
     this.spectatorSessions.delete(client.sessionId);
     const duckId = this.duckBySession.get(client.sessionId);
     if (duckId) {
@@ -183,8 +211,11 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
     this.state.countdownTicks = source.config.countdownTicks;
     this.state.winnerId = source.winnerId ?? "";
     this.state.racerCapacity = source.config.racerCount;
-    this.state.connectedRacers = this.duckBySession.size;
-    this.state.spectatorCount = this.spectatorSessions.size;
+    const reconnectingRacers = [...this.droppedSessions].filter((sessionId) => this.duckBySession.has(sessionId)).length;
+    const reconnectingSpectators = [...this.droppedSessions].filter((sessionId) => this.spectatorSessions.has(sessionId)).length;
+    this.state.reconnectingRacers = reconnectingRacers;
+    this.state.connectedRacers = Math.max(0, this.duckBySession.size - reconnectingRacers);
+    this.state.spectatorCount = Math.max(0, this.spectatorSessions.size - reconnectingSpectators);
 
     const liveIds = new Set<string>();
     for (const duck of source.ducks) {
