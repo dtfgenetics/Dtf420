@@ -48,11 +48,23 @@ for (const mode of ["derby", "rally", "chaos"]) {
   if (!wrapper.includes(`id: "${mode}"`)) failures.push(`lobby is missing ${mode} selection`);
 }
 
-for (const trackId of ["kush-creek", "munchie-marsh", "cloud-9-canal", "rosin-river"]) {
+const trackIds = [
+  "kush-creek",
+  "munchie-marsh",
+  "cloud-9-canal",
+  "dab-rapids",
+  "trichome-trail",
+  "greenhouse-run",
+  "rosin-river",
+  "final-smokeout",
+];
+for (const trackId of trackIds) {
   if (!tracks.includes(`id: "${trackId}"`)) failures.push(`missing ${trackId} track definition`);
   if (!types.includes(`"${trackId}"`)) failures.push(`TrackId is missing ${trackId}`);
-  if (!wrapper.includes(`"${trackId}"`)) failures.push(`Cup/lobby does not reference ${trackId}`);
+  if (!network.includes(`"${trackId}"`)) failures.push(`browser network validation is missing ${trackId}`);
+  if (!server.includes(`"${trackId}"`)) failures.push(`server track validation is missing ${trackId}`);
 }
+if (!tracks.includes("export const TRACK_LIST = Object.values(TRACKS)")) failures.push("track selection must remain data-driven through TRACK_LIST");
 
 for (const hazard of ["log", "mud", "whirlpool", "reeds", "sprinkler", "fan", "barrel", "waterfall"]) {
   if (!tracks.includes(`"${hazard}"`)) failures.push(`hazard catalog is missing ${hazard}`);
@@ -125,4 +137,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Stoner Duck Race verification passed: four tracks, eight characters, eight power-ups, expanded hazards, deterministic 1–50 racer simulation, Quick/Cup progression, local/online lobby, authoritative room flow, touch/keyboard controls, scrolling cameras, persistent results, and locked Colyseus client/server support are present.");
+console.log("Stoner Duck Race verification passed: eight tracks, eight characters, eight power-ups, expanded hazards, deterministic 1–50 racer simulation, Quick/Cup progression, local/online lobby, authoritative room flow, touch/keyboard controls, scrolling cameras, persistent results, and locked Colyseus client/server support are present.");
