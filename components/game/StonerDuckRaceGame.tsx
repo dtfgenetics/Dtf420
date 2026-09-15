@@ -14,6 +14,7 @@ import {
   loadDuckRaceProfile,
   profileLevel,
   recordDuckRaceResult,
+  resultDurationSeconds,
   type DuckRaceProfile,
 } from "@/game/stoner-duck-race/progression";
 import { TRACK_LIST } from "@/game/stoner-duck-race/tracks";
@@ -26,13 +27,20 @@ const CUP_TRACKS: readonly TrackId[] = ["kush-creek", "munchie-marsh", "cloud-9-
 
 type PlaySource = "local" | "online";
 type OnlineIntent = "create" | "join";
-type LocalFormat = "quick" | "cup";
+type LocalFormat = "quick" | "cup" | "time-trial";
 
 const MODE_OPTIONS: ReadonlyArray<{ id: RaceModeId; title: string; eyebrow: string; description: string }> = [
   { id: "derby", title: "Duck Derby", eyebrow: "Spectator race", description: "Seed the river and watch the AI field battle through hazards and pickups." },
   { id: "rally", title: "River Rally", eyebrow: "Skill race", description: "Control your duck, read the water, dodge hazards, grab items, and race the field." },
   { id: "chaos", title: "Chaos Derby", eyebrow: "Party mayhem", description: "Rally controls plus global chaos events and stronger comeback pressure." },
 ];
+
+function formatSeconds(seconds: number): string {
+  const safe = Math.max(0, seconds);
+  const minutes = Math.floor(safe / 60);
+  const remainder = safe - minutes * 60;
+  return `${minutes}:${remainder.toFixed(2).padStart(5, "0")}`;
+}
 
 export function StonerDuckRaceGame() {
   const gameRef = useRef<Game | null>(null);
@@ -49,6 +57,8 @@ export function StonerDuckRaceGame() {
   const [spectator, setSpectator] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState("");
+  const [inviteUrl, setInviteUrl] = useState("");
+  const [inviteMessage, setInviteMessage] = useState("");
   const [launchOptions, setLaunchOptions] = useState<DuckRaceLaunchOptions | null>(null);
   const [roomConnection, setRoomConnection] = useState<DuckRaceRoomConnection | null>(null);
   const [roomSnapshot, setRoomSnapshot] = useState<DuckRaceRoomSnapshot | null>(null);
@@ -57,7 +67,15 @@ export function StonerDuckRaceGame() {
   const [cupIndex, setCupIndex] = useState(0);
   const [cupPoints, setCupPoints] = useState(0);
 
-  useEffect(() => setProfile(loadDuckRaceProfile()), []);
+  useEffect(() => {
+    setProfile(loadDuckRaceProfile());
+    const invitedRoom = new URLSearchParams(window.location.search).get("duckRoom")?.trim();
+    if (invitedRoom) {
+      setSource("online");
+      setOnlineIntent("join");
+      setRoomId(invitedRoom.slice(0, 80));
+    }
+  }, []);
 
   useLayoutEffect(() => {
     if (!launchOptions || gameRef.current) return;
@@ -87,15 +105,26 @@ export function StonerDuckRaceGame() {
     return roomConnection.subscribe(setRoomSnapshot);
   }, [roomConnection]);
 
+  useEffect(() => {
+    if (!roomConnection) {
+      setInviteUrl("");
+      return;
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set("duckRoom", roomConnection.roomId);
+    setInviteUrl(url.toString());
+  }, [roomConnection]);
+
   useEffect(() => () => {
     if (roomConnection) void roomConnection.leave();
   }, [roomConnection]);
 
   function buildOptions(selectedTrack: TrackId, raceSeed = seed): DuckRaceLaunchOptions {
+    const timeTrial = source === "local" && localFormat === "time-trial";
     return {
-      mode,
+      mode: timeTrial ? "rally" : mode,
       trackId: selectedTrack,
-      racerCount: Math.max(1, Math.min(50, Math.floor(racerCount))),
+      racerCount: timeTrial ? 1 : Math.max(1, Math.min(50, Math.floor(racerCount))),
       seed: raceSeed.trim().slice(0, 64) || "DTF-420",
       playerName: playerName.trim().slice(0, 24) || "YOU",
       characterId,
@@ -108,7 +137,8 @@ export function StonerDuckRaceGame() {
     setLastResult(null);
 
     const selectedTrack = source === "local" && localFormat === "cup" ? CUP_TRACKS[0] : trackId;
-    const options = buildOptions(selectedTrack, source === "local" && localFormat === "cup" ? `${seed}-CUP-1` : seed);
+    const raceSeed = source === "local" && localFormat === "cup" ? `${seed}-CUP-1` : seed;
+    const options = buildOptions(selectedTrack, raceSeed);
 
     if (source === "local") {
       if (localFormat === "cup") {
@@ -163,6 +193,7 @@ export function StonerDuckRaceGame() {
     if (roomConnection) await roomConnection.leave();
     setRoomConnection(null);
     setRoomSnapshot(null);
+    setInviteMessage("");
     setLaunchOptions(null);
     setLastResult(null);
   }
@@ -178,9 +209,21 @@ export function StonerDuckRaceGame() {
     setLaunchOptions(buildOptions(CUP_TRACKS[nextIndex], `${seed}-CUP-${nextIndex + 1}`));
   }
 
+  async function copyInviteLink() {
+    if (!inviteUrl) return;
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+      setInviteMessage("Invite link copied");
+    } catch {
+      setInviteMessage("Copy the invite URL shown below");
+    }
+  }
+
   if (!launchOptions) {
     const selectedTrack = TRACK_LIST.find((track) => track.id === trackId)!;
     const selectedCharacter = DUCK_CHARACTERS.find((character) => character.id === characterId) ?? DUCK_CHARACTERS[0];
+    const displayedRacerCount = source === "local" && localFormat === "time-trial" ? 1 : racerCount;
+    const bestTime = profile.bestTimeByTrack[trackId];
     return (
       <div className={`${styles.shell} ${styles.lobbyShell}`}>
         <form className={styles.lobby} onSubmit={launchRace}>
@@ -188,7 +231,7 @@ export function StonerDuckRaceGame() {
             <div>
               <span className={styles.kicker}>Quack &amp; Bake · Stoner Duck Race</span>
               <h2>Choose the river, load the ducks, start the chaos.</h2>
-              <p>Four tracks, eight power-ups, eight duck personalities, championship play, deterministic races, up to 50 racers, and optional server-authoritative rooms.</p>
+              <p>Eight tracks, eight power-ups, eight duck personalities, championship and time-trial play, deterministic races, up to 50 racers, and optional server-authoritative rooms.</p>
             </div>
             <div className={styles.profileBadge}>
               <span>Level {profileLevel(profile)}</span>
@@ -206,6 +249,7 @@ export function StonerDuckRaceGame() {
               <div className={styles.sourceSwitch} role="group" aria-label="Local race format">
                 <button type="button" data-active={localFormat === "quick"} onClick={() => setLocalFormat("quick")}>Quick race</button>
                 <button type="button" data-active={localFormat === "cup"} onClick={() => { setLocalFormat("cup"); setMode((current) => current === "derby" ? "rally" : current); }}>4-race Cup</button>
+                <button type="button" data-active={localFormat === "time-trial"} onClick={() => { setLocalFormat("time-trial"); setMode("rally"); }}>Time Trial</button>
               </div>
             )}
           </div>
@@ -224,26 +268,36 @@ export function StonerDuckRaceGame() {
             </section>
           )}
 
-          <fieldset className={styles.modeFieldset}>
-            <legend>Race mode</legend>
-            <div className={styles.modeGrid}>
-              {MODE_OPTIONS.filter((option) => !(source === "local" && localFormat === "cup" && option.id === "derby")).map((option) => (
-                <button aria-pressed={mode === option.id} className={styles.modeButton} data-active={mode === option.id} key={option.id} onClick={() => setMode(option.id)} type="button">
-                  <span>{option.eyebrow}</span><strong>{option.title}</strong><small>{option.description}</small>
-                </button>
-              ))}
+          {source === "local" && localFormat === "time-trial" ? (
+            <div className={styles.timeTrialNote}>
+              <div><span>Solo format</span><strong>Time Trial uses River Rally physics with one duck.</strong></div>
+              <small>{bestTime ? `Personal best on ${selectedTrack.name}: ${formatSeconds(bestTime)}` : `No recorded time yet on ${selectedTrack.name}.`}</small>
             </div>
-          </fieldset>
+          ) : (
+            <fieldset className={styles.modeFieldset}>
+              <legend>Race mode</legend>
+              <div className={styles.modeGrid}>
+                {MODE_OPTIONS.filter((option) => !(source === "local" && localFormat === "cup" && option.id === "derby")).map((option) => (
+                  <button aria-pressed={mode === option.id} className={styles.modeButton} data-active={mode === option.id} key={option.id} onClick={() => setMode(option.id)} type="button">
+                    <span>{option.eyebrow}</span><strong>{option.title}</strong><small>{option.description}</small>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          )}
 
           {!(source === "local" && localFormat === "cup") && (
             <fieldset className={styles.modeFieldset}>
               <legend>Track</legend>
               <div className={styles.trackGrid}>
-                {TRACK_LIST.map((track) => (
-                  <button aria-pressed={trackId === track.id} className={styles.trackButton} data-active={trackId === track.id} key={track.id} onClick={() => setTrackId(track.id)} type="button">
-                    <strong>{track.name}</strong><small>{track.tagline}</small><span>{(track.length / 1000).toFixed(1)}k course</span>
-                  </button>
-                ))}
+                {TRACK_LIST.map((track) => {
+                  const trackBest = profile.bestTimeByTrack[track.id];
+                  return (
+                    <button aria-pressed={trackId === track.id} className={styles.trackButton} data-active={trackId === track.id} key={track.id} onClick={() => setTrackId(track.id)} type="button">
+                      <strong>{track.name}</strong><small>{track.tagline}</small><span>{(track.length / 1000).toFixed(1)}k course{trackBest ? ` · PB ${formatSeconds(trackBest)}` : ""}</span>
+                    </button>
+                  );
+                })}
               </div>
             </fieldset>
           )}
@@ -267,7 +321,14 @@ export function StonerDuckRaceGame() {
           </fieldset>
 
           <div className={styles.fieldGrid}>
-            <label className={`${styles.field} ${styles.racerField}`}><span>Racers</span><div className={styles.rangeRow}><input aria-label="Number of racers" max={50} min={1} onChange={(event) => setRacerCount(Number(event.target.value))} type="range" value={racerCount} /><output>{racerCount}</output></div><small>From a solo run to the full 50-duck stampede.</small></label>
+            <label className={`${styles.field} ${styles.racerField}`}>
+              <span>Racers</span>
+              <div className={styles.rangeRow}>
+                <input aria-label="Number of racers" disabled={source === "local" && localFormat === "time-trial"} max={50} min={1} onChange={(event) => setRacerCount(Number(event.target.value))} type="range" value={displayedRacerCount} />
+                <output>{displayedRacerCount}</output>
+              </div>
+              <small>{localFormat === "time-trial" && source === "local" ? "Time Trial locks the field to one controlled duck." : "From a solo run to the full 50-duck stampede."}</small>
+            </label>
             <label className={styles.field}><span>Player name</span><input disabled={mode === "derby" || spectator} maxLength={24} onChange={(event) => setPlayerName(event.target.value)} placeholder="YOU" type="text" value={playerName} /><small>{spectator ? "Spectators do not claim a racer." : mode === "derby" ? "Derby is spectator-controlled." : `Racing as ${selectedCharacter.name}.`}</small></label>
             <label className={styles.field}><span>Race seed</span><input disabled={source === "online" && onlineIntent === "join"} maxLength={64} onChange={(event) => setSeed(event.target.value)} placeholder="DTF-420" type="text" value={seed} /><small>Reuse a seed to reproduce the same deterministic conditions.</small></label>
           </div>
@@ -276,10 +337,10 @@ export function StonerDuckRaceGame() {
 
           <div className={styles.lobbyFooter}>
             <div className={styles.setupSummary}>
-              <span>{localFormat === "cup" && source === "local" ? "Quack & Bake Cup" : `${MODE_OPTIONS.find((option) => option.id === mode)?.title} · ${selectedTrack.name}`}</span>
-              <strong>{racerCount} ducks · {source === "online" ? `${onlineIntent} online` : localFormat} · {selectedCharacter.name}</strong>
+              <span>{source === "local" && localFormat === "cup" ? "Quack & Bake Cup" : source === "local" && localFormat === "time-trial" ? `Time Trial · ${selectedTrack.name}` : `${MODE_OPTIONS.find((option) => option.id === mode)?.title} · ${selectedTrack.name}`}</span>
+              <strong>{displayedRacerCount} duck{displayedRacerCount === 1 ? "" : "s"} · {source === "online" ? `${onlineIntent} online` : localFormat} · {selectedCharacter.name}</strong>
             </div>
-            <button className={styles.launchButton} disabled={connecting} type="submit">{connecting ? "Connecting…" : source === "online" ? (onlineIntent === "create" ? "Create room →" : "Join room →") : localFormat === "cup" ? "Start Cup →" : "Launch race →"}</button>
+            <button className={styles.launchButton} disabled={connecting} type="submit">{connecting ? "Connecting…" : source === "online" ? (onlineIntent === "create" ? "Create room →" : "Join room →") : localFormat === "cup" ? "Start Cup →" : localFormat === "time-trial" ? "Start Time Trial →" : "Launch race →"}</button>
           </div>
         </form>
       </div>
@@ -288,22 +349,34 @@ export function StonerDuckRaceGame() {
 
   const selectedTrackName = TRACK_LIST.find((track) => track.id === launchOptions.trackId)?.name ?? launchOptions.trackId;
   const cupComplete = source === "local" && localFormat === "cup" && cupIndex === CUP_TRACKS.length - 1 && Boolean(lastResult);
+  const timeTrialResult = source === "local" && localFormat === "time-trial" && lastResult ? resultDurationSeconds(lastResult) : null;
 
   return (
     <div className={styles.shell}>
       <div className={styles.gameBar}>
-        <div><strong>{MODE_OPTIONS.find((option) => option.id === launchOptions.mode)?.title} · {selectedTrackName}</strong><span>{launchOptions.racerCount} racers · Seed {launchOptions.seed}{roomConnection ? ` · Room ${roomConnection.roomId}` : ""}</span></div>
+        <div><strong>{localFormat === "time-trial" && source === "local" ? "Time Trial" : MODE_OPTIONS.find((option) => option.id === launchOptions.mode)?.title} · {selectedTrackName}</strong><span>{launchOptions.racerCount} racer{launchOptions.racerCount === 1 ? "" : "s"} · Seed {launchOptions.seed}{roomConnection ? ` · Room ${roomConnection.roomId}` : ""}</span></div>
         <div className={styles.gameActions}>
           {source === "local" && localFormat === "cup" && <span className={styles.roomStatus}>Cup {cupIndex + 1}/4 · {cupPoints} pts</span>}
           {roomConnection && roomSnapshot && <span className={styles.roomStatus}>{roomSnapshot.connectedRacers}/{roomSnapshot.racerCapacity} racers · {roomSnapshot.spectatorCount} watching</span>}
           {roomConnection?.isHost() && roomSnapshot?.phase === "lobby" && <button className={styles.startButton} onClick={() => roomConnection.startRace()} type="button">Start online race</button>}
+          {roomConnection && <button className={styles.backButton} onClick={() => void copyInviteLink()} type="button">Copy invite</button>}
           <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Race setup</button>
         </div>
       </div>
+      {roomConnection && inviteUrl && (
+        <div className={styles.inviteBar}>
+          <span>{inviteMessage || "Share this room"}</span>
+          <input aria-label="Room invite URL" readOnly value={inviteUrl} />
+        </div>
+      )}
       <div id={GAME_PARENT_ID} className={styles.canvas} aria-label={`Stoner Duck Race ${launchOptions.mode} on ${selectedTrackName} with ${launchOptions.racerCount} racers`} />
       {lastResult && (
         <section className={styles.resultsPanel} aria-live="polite">
-          <div><span>Race complete</span><strong>{lastResult.rank === null ? `${lastResult.winnerName} wins` : `You finished #${lastResult.rank}`}</strong><small>{selectedTrackName} · winner {lastResult.winnerName}</small></div>
+          <div>
+            <span>{timeTrialResult !== null ? "Time Trial complete" : "Race complete"}</span>
+            <strong>{timeTrialResult !== null ? formatSeconds(timeTrialResult) : lastResult.rank === null ? `${lastResult.winnerName} wins` : `You finished #${lastResult.rank}`}</strong>
+            <small>{selectedTrackName}{timeTrialResult !== null ? ` · PB ${formatSeconds(profile.bestTimeByTrack[lastResult.trackId] ?? timeTrialResult)}` : ` · winner ${lastResult.winnerName}`}</small>
+          </div>
           {source === "local" && localFormat === "cup" && !cupComplete && <button className={styles.launchButton} onClick={nextCupRace} type="button">Next Cup race →</button>}
           {cupComplete && <div className={styles.cupFinish}><span>Cup complete</span><strong>{cupPoints} points</strong></div>}
           <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Back to setup</button>
