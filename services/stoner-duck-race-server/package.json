@@ -10,7 +10,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node build/services/stoner-duck-race-server/src/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "smoke": "node build/services/stoner-duck-race-server/src/smoke.js"
   },
   "dependencies": {
     "@colyseus/schema": "^5.0.8",
