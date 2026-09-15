@@ -4,7 +4,11 @@ export type TrackId =
   | "kush-creek"
   | "munchie-marsh"
   | "cloud-9-canal"
-  | "rosin-river";
+  | "dab-rapids"
+  | "trichome-trail"
+  | "greenhouse-run"
+  | "rosin-river"
+  | "final-smokeout";
 
 export interface DuckRaceLaunchOptions {
   mode: RaceModeId;
