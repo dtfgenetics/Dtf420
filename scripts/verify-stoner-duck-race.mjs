@@ -55,6 +55,10 @@ if (!simulation.includes("resolveTrackInteractions")) failures.push("simulation 
 if (!simulation.includes("activatePowerup")) failures.push("simulation must activate collected powerups");
 if (!scene.includes("touchState")) failures.push("Rally/Chaos must retain touch controls");
 if (!scene.includes("KeyCodes.E")) failures.push("keyboard powerup control is missing");
+if (!scene.includes("COURSE_WIDTH = 5_200")) failures.push("Kush Creek must render as a full scrolling course");
+if (!scene.includes("updateCamera()")) failures.push("race camera follow logic is missing");
+if (!scene.includes("setScrollFactor(0)")) failures.push("HUD must remain fixed while the river scrolls");
+if (!scene.includes("LEADER CAM")) failures.push("Derby spectator leader camera feedback is missing");
 if (!serverPackage.dependencies?.colyseus) failures.push("multiplayer server must declare Colyseus");
 
 if (failures.length) {
@@ -63,4 +67,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Stoner Duck Race verification passed: 50 racers, three modes, Kush Creek currents/hazards/pickups, deterministic simulation, touch controls, route, docs, and multiplayer scaffold are present.");
+console.log("Stoner Duck Race verification passed: 50 racers, three modes, scrolling Kush Creek, currents/hazards/pickups, deterministic simulation, touch controls, fixed HUD, spectator camera, route, docs, and multiplayer scaffold are present.");
