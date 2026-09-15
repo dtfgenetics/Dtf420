@@ -2,15 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import siteShell from "@/configuration/site-shell.json";
 
-export const navigation = [
-  { href: "/seeds", label: "Genetics" },
-  { href: "/learn", label: "Learn" },
-  { href: "/tools", label: "Tools" },
-  { href: "/games", label: "Games" },
-  { href: "/community", label: "Community" },
-  { href: "/journal", label: "Journal" },
-] as const;
+export const navigation = siteShell.primaryNavigation;
 
 export function SiteNavigationLinks() {
   const pathname = usePathname();
