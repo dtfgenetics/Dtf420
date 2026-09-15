@@ -17,9 +17,21 @@ export const metadata: Metadata = buildEducationMetadata({
 
 const categories = ["Foundations", "Abiotic disorders", "Arthropod pests", "Diseases", "Systemic pathogens"] as const;
 
+function categoryDescription(category: (typeof categories)[number]) {
+  return category === "Foundations"
+    ? "Build observation, sampling, beneficial-organism, scouting, and sanitation habits that make later diagnoses more reliable."
+    : category === "Abiotic disorders"
+      ? "Separate irrigation, root oxygen, salinity, pH, light, temperature, and chemical injury from pests, pathogens, and nutrient look-alikes."
+      : category === "Arthropod pests"
+        ? "Identify the organism and life stage instead of treating leaf damage as a diagnosis by itself."
+        : category === "Diseases"
+          ? "Separate pathogen evidence from environmental and root-zone conditions that can create similar symptoms."
+          : "Use testing and propagation records when visual symptoms cannot establish infection.";
+}
+
 export default function PlantHealthPage() {
   return (
-    <section className="shell page-section">
+    <section className="shell page-section" data-reference-progressive-disclosure="true">
       <header className={styles.hero}>
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Plant Health, IPM & Disease Library</h1>
@@ -41,43 +53,39 @@ export default function PlantHealthPage() {
         <div className={styles.stat}><strong>3</strong><span>diagnostic layers: symptom, cause, evidence</span></div>
       </div>
 
-      {categories.map((category) => {
-        const entries = library.filter((item) => item.category === category);
-        if (!entries.length) return null;
+      <div className={styles.referenceGroups}>
+        {categories.map((category) => {
+          const entries = library.filter((item) => item.category === category);
+          if (!entries.length) return null;
 
-        return (
-          <section className={styles.section} key={category}>
-            <div className={styles.sectionHeader}>
-              <div>
-                <p className="eyebrow">Reference group</p>
-                <h2>{category}</h2>
+          return (
+            <details className={styles.referenceGroup} data-reference-group="true" key={category}>
+              <summary className={styles.referenceGroupSummary}>
+                <span>
+                  <span className="eyebrow">Reference group</span>
+                  <span className={styles.referenceGroupTitle}>{category}</span>
+                  <span className={styles.referenceGroupDescription}>{categoryDescription(category)}</span>
+                </span>
+                <span className={styles.referenceGroupMeta}>
+                  <span className={styles.referenceGroupCount}>{entries.length} references</span>
+                </span>
+              </summary>
+              <div className={styles.referenceGroupBody}>
+                <div className={styles.grid}>
+                  {entries.map((item) => (
+                    <Link className={styles.card} data-reference-record="true" href={`/learn/plant-health/${item.slug}`} key={item.slug}>
+                      <p className={styles.cardCategory}>{item.category}</p>
+                      <h3>{item.title}</h3>
+                      <p>{item.summary}</p>
+                      <span>Open reference →</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-              <p>
-                {category === "Foundations"
-                  ? "Build observation, sampling, beneficial-organism, scouting, and sanitation habits that make later diagnoses more reliable."
-                  : category === "Abiotic disorders"
-                    ? "Separate irrigation, root oxygen, salinity, pH, light, temperature, and chemical injury from pests, pathogens, and nutrient look-alikes."
-                    : category === "Arthropod pests"
-                      ? "Identify the organism and life stage instead of treating leaf damage as a diagnosis by itself."
-                      : category === "Diseases"
-                        ? "Separate pathogen evidence from environmental and root-zone conditions that can create similar symptoms."
-                        : "Use testing and propagation records when visual symptoms cannot establish infection."}
-              </p>
-            </div>
-
-            <div className={styles.grid}>
-              {entries.map((item) => (
-                <Link className={styles.card} href={`/learn/plant-health/${item.slug}`} key={item.slug}>
-                  <p className={styles.cardCategory}>{item.category}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.summary}</p>
-                  <span>Open reference →</span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })}
+            </details>
+          );
+        })}
+      </div>
     </section>
   );
 }
