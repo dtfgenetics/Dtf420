@@ -15,7 +15,7 @@ export const metadata: Metadata = buildEducationMetadata({
 
 export default function SymptomDifferentialPage() {
   return (
-    <section className="shell page-section">
+    <section className="shell page-section" data-reference-progressive-disclosure="true">
       <header className={styles.hero}>
         <p className="eyebrow">Teaching Healthy Cultivation</p>
         <h1>Visual Symptom Differential Library</h1>
@@ -35,15 +35,31 @@ export default function SymptomDifferentialPage() {
         <div className={styles.stat}><strong>{library.reduce((sum, item) => sum + item.discriminatingChecks.length, 0)}</strong><span>evidence checks mapped</span></div>
       </div>
 
-      <div className={styles.grid}>
-        {library.map((item) => (
-          <Link className={styles.card} href={`/learn/symptoms/${item.slug}`} key={item.slug}>
-            <p className={styles.cardCategory}>Symptom differential</p>
-            <h3>{item.title}</h3>
-            <p>{item.summary}</p>
-            <span>Open differential →</span>
-          </Link>
-        ))}
+      <div className={styles.referenceGroups}>
+        <details className={styles.referenceGroup} data-reference-group="true">
+          <summary className={styles.referenceGroupSummary}>
+            <span>
+              <span className="eyebrow">Diagnostic index</span>
+              <span className={styles.referenceGroupTitle}>Symptom differentials</span>
+              <span className={styles.referenceGroupDescription}>Expand this index when you need to compare a visible symptom. Each entry opens a dedicated differential page with plausible causes and discriminating checks.</span>
+            </span>
+            <span className={styles.referenceGroupMeta}>
+              <span className={styles.referenceGroupCount}>{library.length} differentials</span>
+            </span>
+          </summary>
+          <div className={styles.referenceGroupBody}>
+            <div className={styles.grid}>
+              {library.map((item) => (
+                <Link className={styles.card} data-reference-record="true" href={`/learn/symptoms/${item.slug}`} key={item.slug}>
+                  <p className={styles.cardCategory}>Symptom differential</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.summary}</p>
+                  <span>Open differential →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </details>
       </div>
     </section>
   );
