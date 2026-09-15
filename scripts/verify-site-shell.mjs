@@ -41,7 +41,25 @@ if (!siteFooter.includes("siteShell.primaryNavigation")) {
   fail("SiteFooter Explore links must use the canonical primaryNavigation array");
 }
 
-const requiredWordPressRoutes = ["/", "/learn/", "/community/", "/games/", "/seeds/", "/tools/"];
+const requiredWordPressRoutes = [
+  "/",
+  "/about/",
+  "/cart/",
+  "/checkout/",
+  "/community/",
+  "/contact/",
+  "/gallery/",
+  "/games/",
+  "/growlens/",
+  "/journal/",
+  "/learn/",
+  "/my-account/",
+  "/seeds/",
+  "/shop/",
+  "/thc-grow-doc/",
+  "/tools/",
+  "/yellow-leaves/",
+];
 for (const route of requiredWordPressRoutes) {
   if (!overlay.wordpressOwnedRoutes.includes(route)) {
     fail(`static-overlay ownership contract is missing WordPress route ${route}`);
