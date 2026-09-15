@@ -18,21 +18,27 @@ export interface DuckRaceRoomOptions {
 
 export interface NetworkDuckSnapshot {
   id: string;
+  ownerSessionId: string;
   name: string;
   progress: number;
   lateral: number;
   rank: number;
   boostCharge: number;
+  heldPowerup: string | null;
   finished: boolean;
 }
 
 export interface DuckRaceRoomSnapshot {
   phase: string;
   mode: RaceModeId;
+  seed: string;
   tick: number;
+  tickRate: number;
+  countdownTicks: number;
   winnerId: string | null;
   hostSessionId: string | null;
-  racerCount: number;
+  racerCapacity: number;
+  connectedRacers: number;
   spectatorCount: number;
   ducks: NetworkDuckSnapshot[];
 }
@@ -41,6 +47,7 @@ export interface DuckRaceRoomConnection {
   roomId: string;
   sessionId: string;
   isHost(): boolean;
+  getOwnedDuck(): NetworkDuckSnapshot | null;
   getSnapshot(): DuckRaceRoomSnapshot;
   subscribe(listener: (snapshot: DuckRaceRoomSnapshot) => void): () => void;
   sendInput(input: DuckInput): void;
@@ -64,11 +71,13 @@ function snapshotFromState(state: any): DuckRaceRoomSnapshot {
   state?.ducks?.forEach?.((duck: any) => {
     ducks.push({
       id: String(duck.id ?? ""),
+      ownerSessionId: String(duck.ownerSessionId ?? ""),
       name: String(duck.name ?? "Duck"),
       progress: Number(duck.progress ?? 0),
       lateral: Number(duck.lateral ?? 0),
       rank: Number(duck.rank ?? 0),
       boostCharge: Number(duck.boostCharge ?? 0),
+      heldPowerup: duck.heldPowerup ? String(duck.heldPowerup) : null,
       finished: Boolean(duck.finished),
     });
   });
@@ -78,11 +87,15 @@ function snapshotFromState(state: any): DuckRaceRoomSnapshot {
   return {
     phase: String(state?.phase ?? "lobby"),
     mode: normalizeMode(state?.mode),
+    seed: String(state?.seed ?? "DTF-420"),
     tick: Number(state?.tick ?? 0),
+    tickRate: Math.max(1, Number(state?.tickRate ?? 20)),
+    countdownTicks: Math.max(0, Number(state?.countdownTicks ?? 60)),
     winnerId: state?.winnerId ? String(state.winnerId) : null,
     hostSessionId: state?.hostSessionId ? String(state.hostSessionId) : null,
-    racerCount: Number(state?.racerCount ?? 0),
-    spectatorCount: Number(state?.spectatorCount ?? 0),
+    racerCapacity: Math.max(1, Number(state?.racerCapacity ?? ducks.length || 1)),
+    connectedRacers: Math.max(0, Number(state?.connectedRacers ?? 0)),
+    spectatorCount: Math.max(0, Number(state?.spectatorCount ?? 0)),
     ducks,
   };
 }
@@ -98,9 +111,13 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
     spectator: Boolean(options.spectator),
   };
 
+  if (options.intent === "join" && !options.roomId?.trim()) {
+    throw new Error("Enter a room ID to join an online race.");
+  }
+
   const room = options.intent === "create"
     ? await client.create(ROOM_NAME, joinOptions)
-    : await client.joinById(options.roomId?.trim() ?? "", joinOptions);
+    : await client.joinById(options.roomId!.trim(), joinOptions);
 
   let latest = snapshotFromState(room.state);
   const listeners = new Set<(snapshot: DuckRaceRoomSnapshot) => void>();
@@ -117,6 +134,7 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
     roomId: room.roomId,
     sessionId: room.sessionId,
     isHost: () => latest.hostSessionId === room.sessionId,
+    getOwnedDuck: () => latest.ducks.find((duck) => duck.ownerSessionId === room.sessionId) ?? null,
     getSnapshot: () => latest,
     subscribe(listener) {
       listeners.add(listener);
