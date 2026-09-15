@@ -1,0 +1,44 @@
+name: Lock Duck Race Colyseus Client
+
+on:
+  push:
+    branches:
+      - feature/stoner-duck-race-colyseus-client
+    paths:
+      - ".github/workflows/duck-race-lock-colyseus-client.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  lock-client-sdk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out dependency branch
+        uses: actions/checkout@v7
+        with:
+          ref: feature/stoner-duck-race-colyseus-client
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Generate package and lockfile changes with npm
+        run: npm install --save-exact @colyseus/sdk@0.18.2 --no-audit --no-fund
+
+      - name: Commit npm-generated lockfile
+        shell: bash
+        run: |
+          if git diff --quiet -- package.json package-lock.json; then
+            echo "Colyseus SDK is already locked."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Add Colyseus browser SDK [skip ci]"
+          git push origin HEAD:feature/stoner-duck-race-colyseus-client
