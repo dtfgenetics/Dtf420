@@ -11,6 +11,7 @@ const required = [
   "game/stoner-duck-race/tracks.ts",
   "game/stoner-duck-race/simulation.ts",
   "game/stoner-duck-race/network.ts",
+  "game/stoner-duck-race/progression.ts",
   "game/stoner-duck-race/main.ts",
   "game/stoner-duck-race/scenes/RaceScene.ts",
   "components/game/StonerDuckRaceGame.tsx",
@@ -33,6 +34,7 @@ const characters = readFileSync(resolve(root, "game/stoner-duck-race/characters.
 const tracks = readFileSync(resolve(root, "game/stoner-duck-race/tracks.ts"), "utf8");
 const simulation = readFileSync(resolve(root, "game/stoner-duck-race/simulation.ts"), "utf8");
 const network = readFileSync(resolve(root, "game/stoner-duck-race/network.ts"), "utf8");
+const progression = readFileSync(resolve(root, "game/stoner-duck-race/progression.ts"), "utf8");
 const main = readFileSync(resolve(root, "game/stoner-duck-race/main.ts"), "utf8");
 const scene = readFileSync(resolve(root, "game/stoner-duck-race/scenes/RaceScene.ts"), "utf8");
 const wrapper = readFileSync(resolve(root, "components/game/StonerDuckRaceGame.tsx"), "utf8");
@@ -49,6 +51,7 @@ for (const mode of ["derby", "rally", "chaos"]) {
 for (const trackId of ["kush-creek", "munchie-marsh", "cloud-9-canal", "rosin-river"]) {
   if (!tracks.includes(`id: "${trackId}"`)) failures.push(`missing ${trackId} track definition`);
   if (!types.includes(`"${trackId}"`)) failures.push(`TrackId is missing ${trackId}`);
+  if (!wrapper.includes(`"${trackId}"`)) failures.push(`Cup/lobby does not reference ${trackId}`);
 }
 
 for (const hazard of ["log", "mud", "whirlpool", "reeds", "sprinkler", "fan", "barrel", "waterfall"]) {
@@ -78,24 +81,39 @@ if (!scene.includes("updateCamera()")) failures.push("race camera follow logic i
 if (!scene.includes("setScrollFactor(0)")) failures.push("HUD must remain fixed while the river scrolls");
 if (!scene.includes("LEADER CAM")) failures.push("Derby spectator leader camera feedback is missing");
 if (!scene.includes("networkConnection")) failures.push("scene must support synchronized online state");
+if (!scene.includes("maybeReportResult")) failures.push("scene must report final race results");
+if (!scene.includes("this.launchOptions.characterId")) failures.push("scene must apply selected local duck cosmetic");
 
 if (!types.includes("DuckRaceLaunchOptions")) failures.push("shared launch-options contract is missing");
 if (!types.includes("trackId: TrackId")) failures.push("launch options must carry trackId");
+if (!types.includes("characterId: string")) failures.push("launch options must carry character identity");
+if (!types.includes("DuckRaceResult")) failures.push("race result contract is missing");
 if (!main.includes("Math.max(1, Math.min(50")) failures.push("game launch must clamp racers to 1–50");
+if (!main.includes("onRaceFinished")) failures.push("Phaser launch must surface completed race results");
 if (!main.includes("networkConnection")) failures.push("Phaser launch must accept online room connection");
+
 if (!wrapper.includes("connectDuckRaceRoom")) failures.push("online lobby must call the room adapter");
 if (!wrapper.includes("NEXT_PUBLIC_DUCK_RACE_SERVER_URL")) failures.push("online lobby must use an explicit public server endpoint");
 if (!wrapper.includes('type="range"') || !wrapper.includes("max={50}")) failures.push("lobby must expose a 1–50 racer control");
 if (!wrapper.includes("Create room") || !wrapper.includes("Join room") || !wrapper.includes("Start online race")) failures.push("online room controls are incomplete");
+if (!wrapper.includes("4-race Cup") || !wrapper.includes("CUP_TRACKS")) failures.push("four-race championship flow is missing");
+if (!wrapper.includes("DUCK_CHARACTERS")) failures.push("character selection UI is missing");
+if (!wrapper.includes("recordDuckRaceResult")) failures.push("race results must update persistent progression");
 if (!wrapper.includes("Race setup")) failures.push("running game must provide a return-to-lobby control");
+
+if (!progression.includes("localStorage")) failures.push("local progression must persist between sessions");
+if (!progression.includes("bestRankByTrack")) failures.push("progression must track best finishes per track");
+if (!progression.includes("coins")) failures.push("progression must award cosmetic currency");
 
 if (!packageJson.dependencies?.["@colyseus/sdk"]) failures.push("browser multiplayer SDK must be locked in root dependencies");
 if (!serverPackage.dependencies?.colyseus) failures.push("multiplayer server must declare Colyseus");
 if (!network.includes("client.create") || !network.includes("client.joinById")) failures.push("room adapter must support create and join-by-id");
 if (!network.includes("room.onStateChange")) failures.push("room adapter must subscribe to authoritative state");
+if (!network.includes("characterId")) failures.push("room adapter must send selected character identity");
 if (!server.includes('this.onMessage("start-race"')) failures.push("server must gate race start through host action");
 if (!server.includes("hostSessionId")) failures.push("server must track room host ownership");
 if (!server.includes("trackId")) failures.push("server must synchronize selected track");
+if (!server.includes("normalizeCharacter")) failures.push("server must validate player cosmetic identity");
 
 if (failures.length) {
   console.error("Stoner Duck Race verification failed:");
@@ -103,4 +121,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("Stoner Duck Race verification passed: four tracks, eight duck identities, eight power-ups, expanded hazards, deterministic 1–50 racer simulation, local/online lobby, authoritative room flow, touch/keyboard controls, scrolling cameras, and locked Colyseus client/server support are present.");
+console.log("Stoner Duck Race verification passed: four tracks, eight characters, eight power-ups, expanded hazards, deterministic 1–50 racer simulation, Quick/Cup progression, local/online lobby, authoritative room flow, touch/keyboard controls, scrolling cameras, persistent results, and locked Colyseus client/server support are present.");
