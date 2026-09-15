@@ -1,6 +1,7 @@
 import { DUCK_RACE_LIMITS } from "./config";
 import { getRaceModeProfile } from "./modes";
 import { DeterministicRng } from "./rng";
+import { currentZoneAt, getTrackDefinition, type HazardDefinition, type PowerupId } from "./tracks";
 import type {
   DuckInput,
   DuckPersonality,
@@ -19,7 +20,7 @@ const EMPTY_INPUT: DuckInput = {
 };
 
 const BASE_FORWARD_SPEED = 61;
-const MAX_FORWARD_SPEED = 98;
+const MAX_FORWARD_SPEED = 110;
 const LATERAL_ACCELERATION = 2.4;
 const LATERAL_DRAG = 0.82;
 const MAX_LATERAL_SPEED = 0.075;
@@ -27,6 +28,7 @@ const BOOST_SPEED = 18;
 const BOOST_DRAIN = 0.035;
 const BOOST_REGEN = 0.009;
 const FINISH_PROGRESS = 1;
+const HAZARD_COOLDOWN_TICKS = 16;
 
 function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
@@ -74,7 +76,10 @@ export class RaceSimulation {
   readonly state: RaceState;
 
   private readonly rng: DeterministicRng;
+  private readonly track;
   private readonly inputs = new Map<string, DuckInput>();
+  private readonly hazardCooldowns = new Map<string, number>();
+  private readonly collectedPickups = new Map<string, Set<string>>();
 
   constructor(config: RaceConfig) {
     if (config.racerCount > DUCK_RACE_LIMITS.massRaceMax) {
@@ -82,12 +87,13 @@ export class RaceSimulation {
     }
 
     this.rng = new DeterministicRng(config.seed);
+    this.track = getTrackDefinition(config.trackId);
     const ducks = Array.from({ length: config.racerCount }, (_, index) =>
       createDuck(index, this.rng),
     );
 
     this.state = {
-      config,
+      config: { ...config, trackLength: this.track.length },
       tick: 0,
       phase: "countdown",
       ducks,
@@ -175,21 +181,21 @@ export class RaceSimulation {
   private updateDuck(duck: DuckState, input: DuckInput, deltaSeconds: number): void {
     const leaderProgress = Math.max(...this.state.ducks.map((candidate) => candidate.progress));
     const mode = getRaceModeProfile(this.state.config.mode);
+    const current = currentZoneAt(this.track, duck.progress);
     const deficit = Math.max(0, leaderProgress - duck.progress);
     const catchup = deficit * mode.catchupStrength * 100;
 
     duck.lateralSpeed += input.steer * LATERAL_ACCELERATION * deltaSeconds;
+    duck.lateralSpeed += current.lateralForce;
+    duck.lateralSpeed += Math.sin((this.state.tick * 0.17) + (duck.rank * 0.9)) * current.turbulence * 0.0013;
     duck.lateralSpeed *= LATERAL_DRAG;
     duck.lateralSpeed = clamp(duck.lateralSpeed, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
 
-    if (input.dive) {
-      duck.lateralSpeed *= 0.55;
-    }
-
+    if (input.dive) duck.lateralSpeed *= 0.55;
     duck.lateral = clamp(duck.lateral + duck.lateralSpeed, -1, 1);
 
     const currentPulse = 4 + Math.sin((duck.progress * 32) + (this.state.tick * 0.05)) * 3;
-    let targetSpeed = BASE_FORWARD_SPEED + currentPulse + catchup;
+    let targetSpeed = (BASE_FORWARD_SPEED + currentPulse + catchup) * current.speedMultiplier;
 
     if (input.boost && duck.boostCharge > 0.02) {
       targetSpeed += BOOST_SPEED;
@@ -203,6 +209,9 @@ export class RaceSimulation {
 
     const distanceThisTick = duck.forwardSpeed * deltaSeconds;
     duck.progress += distanceThisTick / this.state.config.trackLength;
+
+    this.resolveTrackInteractions(duck);
+    if (input.usePowerup && duck.heldPowerup) this.activatePowerup(duck, duck.heldPowerup as PowerupId);
 
     const newCheckpoint = Math.min(4, Math.floor(duck.progress * 5));
     if (newCheckpoint > duck.checkpoint && newCheckpoint < 5) {
@@ -220,6 +229,82 @@ export class RaceSimulation {
     }
   }
 
+  private resolveTrackInteractions(duck: DuckState): void {
+    for (const hazard of this.track.hazards) {
+      const inProgress = Math.abs(duck.progress - hazard.progress) <= hazard.progressRadius;
+      const inLane = Math.abs(duck.lateral - hazard.lateral) <= hazard.lateralRadius;
+      if (!inProgress || !inLane) continue;
+
+      const key = `${duck.id}:${hazard.id}`;
+      const lastHit = this.hazardCooldowns.get(key) ?? -Infinity;
+      if (this.state.tick - lastHit < HAZARD_COOLDOWN_TICKS) continue;
+
+      this.hazardCooldowns.set(key, this.state.tick);
+      this.applyHazard(duck, hazard);
+      this.emit("hazard-hit", { duckId: duck.id, hazardId: hazard.id, hazardType: hazard.type });
+    }
+
+    if (duck.heldPowerup) return;
+    const collected = this.collectedPickups.get(duck.id) ?? new Set<string>();
+
+    for (const pickup of this.track.pickups) {
+      if (collected.has(pickup.id)) continue;
+      const inProgress = Math.abs(duck.progress - pickup.progress) <= pickup.progressRadius;
+      const inLane = Math.abs(duck.lateral - pickup.lateral) <= pickup.lateralRadius;
+      if (!inProgress || !inLane) continue;
+
+      collected.add(pickup.id);
+      this.collectedPickups.set(duck.id, collected);
+      duck.heldPowerup = pickup.powerup;
+      this.emit("powerup-collected", { duckId: duck.id, powerup: pickup.powerup });
+      break;
+    }
+  }
+
+  private applyHazard(duck: DuckState, hazard: HazardDefinition): void {
+    if (hazard.type === "mud") {
+      duck.forwardSpeed *= 0.68;
+      duck.lateralSpeed *= 0.5;
+      return;
+    }
+
+    if (hazard.type === "log") {
+      duck.forwardSpeed *= 0.52;
+      const direction = duck.lateral >= hazard.lateral ? 1 : -1;
+      duck.lateralSpeed = clamp(duck.lateralSpeed + direction * 0.035, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      return;
+    }
+
+    const pull = hazard.lateral - duck.lateral;
+    duck.lateralSpeed = clamp(duck.lateralSpeed + pull * 0.08, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+    duck.forwardSpeed *= 0.8;
+  }
+
+  private activatePowerup(duck: DuckState, powerup: PowerupId): void {
+    duck.heldPowerup = null;
+
+    if (powerup === "munchie-rush") {
+      duck.boostCharge = clamp(duck.boostCharge + 0.5, 0, 1);
+      duck.forwardSpeed = clamp(duck.forwardSpeed + 24, 0, MAX_FORWARD_SPEED);
+      this.emit("powerup-used", { duckId: duck.id, powerup });
+      return;
+    }
+
+    let affected = 0;
+    for (const rival of this.state.ducks) {
+      if (rival.id === duck.id || rival.finished) continue;
+      if (Math.abs(rival.progress - duck.progress) > 0.04) continue;
+      if (Math.abs(rival.lateral - duck.lateral) > 0.34) continue;
+
+      rival.forwardSpeed *= 0.72;
+      const direction = rival.lateral >= duck.lateral ? 1 : -1;
+      rival.lateralSpeed = clamp(rival.lateralSpeed + direction * 0.025, -MAX_LATERAL_SPEED, MAX_LATERAL_SPEED);
+      affected += 1;
+    }
+
+    this.emit("powerup-used", { duckId: duck.id, powerup, affected });
+  }
+
   private createAiInput(duck: DuckState): DuckInput {
     const wave = Math.sin((this.state.tick * 0.035) + duck.rank) * 0.6;
     const noise = this.rng.range(-0.25, 0.25);
@@ -231,7 +316,7 @@ export class RaceSimulation {
       steer,
       boost: duck.boostCharge > 0.3 && this.rng.chance(boostChance),
       dive: this.rng.chance(0.002 + duck.personality.hazardAwareness * 0.002),
-      usePowerup: this.rng.chance(0.001 + duck.personality.greed * 0.003),
+      usePowerup: Boolean(duck.heldPowerup) && this.rng.chance(0.01 + duck.personality.greed * 0.025),
       sequence: this.state.tick,
     };
   }
