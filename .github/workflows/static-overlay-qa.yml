@@ -5,11 +5,13 @@ on:
     paths:
       - app/**
       - components/**
+      - configuration/site-shell.json
       - data/**
       - lib/**
       - public/**
       - deployment/static-overlay.json
       - scripts/verify-static-overlay.mjs
+      - scripts/package-static-overlay.mjs
       - next.config.ts
       - package.json
       - package-lock.json
@@ -40,10 +42,13 @@ jobs:
       - name: Verify child-route ownership and export
         run: npm run verify:static-overlay
 
-      - name: Upload validated static export
+      - name: Package deployment-safe child routes only
+        run: npm run package:static-overlay
+
+      - name: Upload validated static overlay
         uses: actions/upload-artifact@v7
         with:
           name: dtfseeds-static-overlay-${{ github.run_id }}
-          path: out/
+          path: overlay-dist/
           if-no-files-found: error
           retention-days: 7
