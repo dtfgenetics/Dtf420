@@ -4,9 +4,14 @@ import { RaceRoom } from "./rooms/RaceRoom.js";
 
 const port = Number(process.env.PORT ?? 2567);
 
+type HealthResponse = {
+  status(code: number): HealthResponse;
+  json(payload: Record<string, unknown>): void;
+};
+
 const server = defineServer({
   express: (app) => {
-    app.get("/healthz", (_request, response) => {
+    app.get("/healthz", (_request: unknown, response: HealthResponse) => {
       response.status(200).json({
         ok: true,
         service: "stoner-duck-race",
