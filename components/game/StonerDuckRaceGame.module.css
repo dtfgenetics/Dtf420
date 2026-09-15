@@ -102,6 +102,7 @@
 .inviteBar { padding: 0.5rem 0.75rem; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.65rem; border-bottom: 1px solid var(--duck-border); background: rgba(10, 42, 50, 0.92); }
 .inviteBar span { color: var(--duck-accent); font-size: 0.72rem; font-weight: 900; white-space: nowrap; }
 .inviteBar input { width: 100%; min-width: 0; min-height: 34px; padding: 0 0.6rem; border: 1px solid var(--duck-border); border-radius: 8px; background: #07171d; color: var(--duck-muted); font-size: 0.72rem; }
+.pauseBanner { padding: 0.55rem 0.8rem; border-bottom: 1px solid rgba(240, 206, 88, 0.34); background: rgba(77, 134, 85, 0.3); color: var(--duck-accent); font-size: 0.78rem; font-weight: 900; letter-spacing: 0.06em; text-align: center; text-transform: uppercase; }
 
 .canvas { width: 100%; aspect-ratio: 16 / 9; min-height: 360px; }
 .canvas canvas { display: block; width: 100% !important; height: auto !important; }
