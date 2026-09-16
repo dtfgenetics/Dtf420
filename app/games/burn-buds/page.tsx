@@ -5,12 +5,12 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Burn Buds | DTF Games",
-  description: "Play the Burn Buds 15 × 15 tactical fleet-battle beta with manual or automatic placement, hit-and-sink combat, and a hunt-target opponent.",
+  description: "Play Burn Buds on a 15 × 15 tactical grid with manual or automatic fleet placement, hit-and-sink combat, and a hunt-and-target opponent.",
 };
 
 const playSystems = [
   ["Build your fleet", "Place five cannabis-themed pieces manually, rotate their direction, or use seeded auto-placement to get into a match quickly."],
-  ["Call the target", "Switch to the opponent grid, select a coordinate, and commit each shot with a large FIRE control built to remain usable on phones."],
+  ["Call the target", "Switch to the opponent grid, select a coordinate, and commit each shot with a large FIRE control designed for pointer and touch input."],
   ["Read the battle", "Hits, misses, sunk pieces, fleet survival, incoming shots, and turn ownership stay visible while the opponent hunts damaged pieces."],
 ] as const;
 
@@ -19,7 +19,7 @@ export default function BurnBudsPage() {
     <section className={`shell ${styles.page}`}>
       <div className={styles.topline}>
         <Link className={styles.backLink} href="/games">← Back to games</Link>
-        <span className={styles.status}>Development preview</span>
+        <span className={styles.status}>Playable preview</span>
       </div>
 
       <header className={styles.hero}>
@@ -31,10 +31,10 @@ export default function BurnBudsPage() {
           </p>
         </div>
 
-        <aside className={styles.previewMeta} aria-label="Burn Buds beta details">
+        <aside className={styles.previewMeta} aria-label="Burn Buds game details">
           <div className={styles.metaItem}>
-            <span>Current state</span>
-            <strong>Playable beta</strong>
+            <span>Mode</span>
+            <strong>Solo battle</strong>
           </div>
           <div className={styles.metaItem}>
             <span>Board</span>
@@ -49,15 +49,15 @@ export default function BurnBudsPage() {
 
       <div className={styles.previewFrame}>
         <div className={styles.frameHeader}>
-          <div><span className={styles.windowDot} /><strong>Burn Buds battle console</strong></div>
-          <span>Pointer + touch controls</span>
+          <div><span className={styles.windowDot} /><strong>Burn Buds</strong></div>
+          <span>Pointer + touch</span>
         </div>
         <div className={styles.canvasWrap}>
           <BurnBudsLoader />
         </div>
         <div className={styles.frameFooter}>
-          <span><strong>Beta:</strong> core placement, turn, hit/miss, sink, AI, victory, and reset systems are playable; audiovisual polish and multiplayer remain in development.</span>
-          <span>15 × 15 · Phaser</span>
+          <span>Place your fleet, fire by coordinate, follow hit/miss feedback, sink every opposing piece, and restart for another match.</span>
+          <span>15 × 15</span>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ export default function BurnBudsPage() {
         <div className={styles.nextIntro}>
           <p className="eyebrow">How it plays</p>
           <h2 id="burn-buds-how-to-play">Set the fleet. Call the square. Burn the board.</h2>
-          <p>Manual placement is there when you want strategy; auto-place gets a match started immediately. During battle, the fleet and target views keep information separated so hidden enemy positions stay hidden.</p>
+          <p>Manual placement gives you control over formation; auto-place starts a match immediately. During battle, fleet and target views stay separated so hidden enemy positions remain hidden.</p>
         </div>
         <div className={styles.nextGrid}>
           {playSystems.map(([title, copy], index) => (
