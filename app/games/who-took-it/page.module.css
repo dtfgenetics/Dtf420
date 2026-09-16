@@ -34,6 +34,7 @@
 .ageCard button,
 .suspectCard button,
 .accusation select {
+  min-height: 44px;
   font: inherit;
 }
 
@@ -206,6 +207,7 @@
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
+  min-height: 44px;
   border: 0;
   border-radius: 999px;
   padding: 0.35rem 0.55rem;
@@ -275,6 +277,7 @@
 }
 
 .tabs button {
+  min-height: 44px;
   border: 1px solid rgba(214, 232, 194, 0.16);
   border-radius: 999px;
   padding: 0.45rem 0.7rem;
@@ -350,7 +353,7 @@
 
 .accusation select {
   width: 100%;
-  min-height: 2.6rem;
+  min-height: 44px;
   border: 1px solid rgba(214, 232, 194, 0.24);
   border-radius: 0.75rem;
   padding: 0.55rem;
@@ -409,9 +412,16 @@
 }
 
 @media (max-width: 1050px) {
-  .playArea,
-  .hud {
+  .playArea {
     grid-template-columns: 1fr;
+  }
+
+  .hud {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hud button {
+    grid-column: 1 / -1;
   }
 
   .suspectGrid {
@@ -420,13 +430,92 @@
 }
 
 @media (max-width: 640px) {
+  .gameShell {
+    gap: 0.7rem;
+  }
+
   .modeBar {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 0.45rem;
+    padding: 0.45rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .modeBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modeBar button {
+    min-width: 8.5rem;
+    flex: 1 0 8.5rem;
+    scroll-snap-align: start;
+    padding: 0.68rem 0.78rem;
+    text-align: center;
+  }
+
+  .modeBar button span {
+    display: none;
+  }
+
+  .hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    padding: 0.65rem;
+  }
+
+  .hud div {
+    min-width: 0;
+    padding: 0.2rem 0.1rem;
+  }
+
+  .hud span {
+    font-size: 0.72rem;
+  }
+
+  .hud strong {
+    overflow: hidden;
+    font-size: 0.94rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .sectionHead {
     display: grid;
     align-items: start;
+    margin-bottom: 0.7rem;
+  }
+
+  .board,
+  .rail > section {
+    padding: 0.75rem;
+  }
+
+  .suspectGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .suspectCard > button:first-child {
+    min-height: 10rem;
+    padding: 0.55rem;
+  }
+
+  .suspectCard em {
+    display: none;
+  }
+
+  .accuseChip {
+    right: 0.3rem;
+    top: 0.3rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .modeBar button {
+    min-width: 7.75rem;
+    flex-basis: 7.75rem;
   }
 
   .suspectGrid {
@@ -434,13 +523,11 @@
   }
 
   .suspectCard > button:first-child {
-    min-height: 10.5rem;
+    min-height: 9.5rem;
   }
-}
 
-@media (max-width: 380px) {
-  .suspectGrid {
-    grid-template-columns: 1fr;
+  .tags {
+    font-size: 0.62rem;
   }
 }
 
