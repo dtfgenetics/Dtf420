@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import tierOne from "@/data/games/strain-showdown/tier-1.json";
 import {
-  STRAIN_SHOWDOWN_BATTLE_RULESET,
   createBattleUnit,
   resolveStrainBattle,
   type BattleResult,
@@ -26,7 +25,7 @@ const familyShort: Record<Family, string> = {
 };
 
 function resultLabel(result: BattleResult | null) {
-  if (!result) return "Awaiting matchup";
+  if (!result) return "Choose your matchup";
   if (result.winner === "attacker") return "Attacker wins";
   if (result.winner === "defender") return "Defender wins";
   if (result.winner === "double-ko") return "Double knockout";
@@ -76,12 +75,12 @@ function StrainCard({ card, role, afterVigor }: { card: Card; role: string; afte
         </div>
       </div>
 
-      <div className={styles.vigorTrack} aria-label={`${card.name} Vigor ${current} of ${card.vigor}`}>
+      <div className={styles.vigorTrack} role="progressbar" aria-label={`${card.name} Vigor`} aria-valuemin={0} aria-valuemax={card.vigor} aria-valuenow={current}>
         <span style={{ width: `${pct}%` }} />
       </div>
 
       <p className={styles.effect}>{card.effectText}</p>
-      {card.sourceReview !== "normal" && <p className={styles.reviewFlag}>Lineage source review still open</p>}
+      {card.sourceReview !== "normal" && <p className={styles.reviewFlag}>Lineage documentation under review</p>}
     </article>
   );
 }
@@ -139,10 +138,10 @@ export function StrainShowdownGame() {
       <section className={styles.controlDeck} aria-label="Strain Showdown matchup controls">
         <div className={styles.controlHeading}>
           <div>
-            <p>Tier 1 battle lab</p>
+            <p>Tier 1 showdown</p>
             <h2>Build a matchup</h2>
           </div>
-          <span className={styles.ruleset}>{STRAIN_SHOWDOWN_BATTLE_RULESET.status} ruleset</span>
+          <span className={styles.ruleset}>Playable preview</span>
         </div>
 
         <div className={styles.pickerGrid}>
@@ -199,7 +198,7 @@ export function StrainShowdownGame() {
               <span>{result.defenderPower} counter → {result.attackerDamageTaken} damage</span>
             </div>
           ) : (
-            <p>Both Strains exchange Power damage simultaneously in this experimental Tier 1 rules layer.</p>
+            <p>Both Strains exchange Power damage at the same time. Effects can modify Power, Vigor, damage, or what happens after the exchange.</p>
           )}
           <div className={styles.battleActions}>
             <button type="button" onClick={resolve}>Resolve showdown</button>
@@ -213,7 +212,7 @@ export function StrainShowdownGame() {
       <section className={styles.eventPanel} aria-live="polite">
         <div>
           <p>Battle log</p>
-          <h2>{result ? `${attacker.name} vs ${defender.name}` : "Resolve a matchup to inspect effects"}</h2>
+          <h2>{result ? `${attacker.name} vs ${defender.name}` : "Choose two strains and resolve the showdown"}</h2>
         </div>
         {result ? (
           <ol>
@@ -224,7 +223,7 @@ export function StrainShowdownGame() {
             <li><strong>Result:</strong> {resultLabel(result)}. Final Vigor {result.attackerVigorAfter}–{result.defenderVigorAfter}.</li>
           </ol>
         ) : (
-          <p className={styles.emptyLog}>Select any of the 48 Tier 1 cards, then resolve the battle. Source-review flags stay visible instead of being hidden from the player/developer workflow.</p>
+          <p className={styles.emptyLog}>Select any of the 48 Tier 1 cards and resolve the battle. Cards with lineage documentation still being reviewed are clearly marked.</p>
         )}
       </section>
     </div>
