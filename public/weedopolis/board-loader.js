@@ -52,11 +52,11 @@
 
       board.style.backgroundImage = 'url("data:image/webp;base64,' + base64 + '")';
       frame.dataset.artStatus = 'approved-board';
-      setStatus('Approved Weedopolis V1 board artwork loaded. Gameplay tokens and controls are active.', false);
+      setStatus('Board ready. Player tokens and game controls are active.', false);
     } catch (error) {
       console.error('Weedopolis approved board load failed', error);
       frame.dataset.artStatus = 'fallback-board';
-      setStatus('Approved board artwork could not load. Gameplay remains available on the fallback board.', true);
+      setStatus('Board artwork could not load. You can continue playing with the simplified board.', true);
     }
   }
 
