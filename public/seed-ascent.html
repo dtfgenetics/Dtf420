@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Seed Ascent | DTF Games</title>
+<title>Seed Man: Seed Ascent | DTF Games</title>
+<meta name="description" content="Run Seed Man through six grow worlds, defeat pests, collect trichomes, and unlock Fire, Electric, and Ice phenotype powers." />
 <link rel="stylesheet" href="/seed-ascent/styles.css" />
 <link rel="stylesheet" href="/seed-ascent/phenotype-ui.css" />
 </head>
 <body>
 <main class="shell">
   <div class="hud">
-    <div class="brand">🌱 SEED ASCENT: SPROUT RUN</div>
-    <div class="stats">
+    <div class="brand">🌱 SEED MAN · SEED ASCENT</div>
+    <div class="stats" aria-label="Current game status">
       <span>WORLD <b id="levelLabel">1-1</b></span><span>SCORE <b id="scoreLabel">000000</b></span>
-      <span>✨ <b class="gold" id="trichomeLabel">0</b></span><span>❤️ <b id="healthLabel">3</b></span><span>⚡ <b id="powerLabel" aria-live="polite">NONE</b></span>
+      <span>TRICHOMES <b class="gold" id="trichomeLabel">0</b></span><span>HEALTH <b id="healthLabel">3</b></span><span>POWER <b id="powerLabel" aria-live="polite">NONE</b></span>
     </div>
   </div>
   <section class="phenotypePanel" id="phenotypePanel" aria-live="polite" hidden>
@@ -22,10 +23,10 @@
     <span class="phenotypeMeter" aria-label="Phenotype time remaining"><i id="phenotypeMeterFill"></i></span>
     <b class="phenotypeTime" id="phenotypeTime">0s</b>
   </section>
-  <div class="stage"><canvas id="game" width="960" height="540" tabindex="0" aria-label="Seed Ascent retro side-scrolling platform game"></canvas></div>
-  <div class="bar"><button class="primary" id="startBtn">▶ START</button><button class="desktopMove" id="prevBtn">◀ WORLD</button><button class="desktopMove" id="nextBtn">WORLD ▶</button><button id="pauseBtn">Ⅱ PAUSE</button><button id="restartBtn">↻ RESTART</button></div>
-  <div class="mobile" aria-label="Touch controls"><button id="leftBtn" aria-label="Move left">◀</button><button id="rightBtn" aria-label="Move right">▶</button><button class="jump" id="jumpBtn">⬆ JUMP</button><button class="run" id="runBtn">⚡ RUN</button><button class="attack" id="attackBtn" aria-label="Use phenotype power" disabled>✦ POWER</button></div>
-  <div class="hint">Move: ← → / A D · Jump: Space / W / ↑ · Shift = run · X / E = phenotype power · Double jump · P = pause</div>
+  <div class="stage"><canvas id="game" width="960" height="540" tabindex="0" aria-label="Seed Man Seed Ascent side-scrolling platform game. Use arrow keys or A and D to move, Space to jump, Shift to run, and X or E to use a phenotype power."></canvas></div>
+  <div class="bar" aria-label="Game session controls"><button class="primary" id="startBtn">▶ START</button><button class="desktopMove" id="prevBtn">◀ WORLD</button><button class="desktopMove" id="nextBtn">WORLD ▶</button><button id="pauseBtn">Ⅱ PAUSE</button><button id="restartBtn">↻ RESTART</button></div>
+  <div class="mobile" aria-label="Touch gameplay controls"><button id="leftBtn" aria-label="Move left">◀</button><button id="rightBtn" aria-label="Move right">▶</button><button class="jump" id="jumpBtn" aria-label="Jump">⬆ JUMP</button><button class="run" id="runBtn" aria-label="Run">⚡ RUN</button><button class="attack" id="attackBtn" aria-label="Use phenotype power" disabled>✦ POWER</button></div>
+  <div class="hint">Keyboard: ← → / A D move · Space / W / ↑ jump · Shift run · X / E power · P pause · Double jump is enabled.</div>
 </main>
 <script src="/seed-ascent/levels.js"></script>
 <script src="/seed-ascent/animation-manifest.js"></script>
