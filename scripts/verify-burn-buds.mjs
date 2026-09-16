@@ -103,8 +103,8 @@ for (const token of [
   assert(scene.includes(token) || page.includes(token), `missing playable system marker: ${token}`);
 }
 
-assert(page.includes("Playable build"), "route must describe the current playable state truthfully");
-assert(page.includes("Preview build"), "route must retain an honest preview release label");
+assert(page.includes("Playable preview"), "route must describe the current playable-preview state truthfully");
+assert(page.includes("Solo battle"), "route must state the current single-player mode clearly");
 assert(gameComponent.includes("tactical fleet battle"), "game surface accessibility label must describe playable battle");
 assert(!loader.includes("board preview"), "loader must not describe the old static preview");
 assert(gameCss.includes("aspect-ratio: 5 / 7"), "game shell must preserve the 600×840 responsive aspect ratio");
