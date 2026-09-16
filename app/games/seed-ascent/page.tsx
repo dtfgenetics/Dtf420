@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Seed Ascent | DTF Games",
-  description: "Transform Seed Man with enemy-earned Fire, Electric, and Ice phenotypes across 12 cannabis-themed platforming stages.",
+  title: "Seed Man: Seed Ascent | DTF Games",
+  description: "Run Seed Man through six grow worlds and unlock Fire, Electric, and Ice phenotype powers across 12 platforming stages.",
   alternates: {
     canonical: "/games/seed-ascent",
   },
@@ -14,7 +14,7 @@ export default function SeedAscentPage() {
       <div className="game-page-heading">
         <div>
           <p className="eyebrow">DTF Games · Retro platformer</p>
-          <h1>Seed Ascent</h1>
+          <h1>Seed Man: Seed Ascent</h1>
           <p className="lede">
             Run through 12 side-scrolling stages across six grow worlds. Defeat powered enemies and minor bosses to transform Seed Man, then launch fireballs, call lightning, or freeze pests before the phenotype timer expires.
           </p>
@@ -32,12 +32,12 @@ export default function SeedAscentPage() {
         }}
       >
         <iframe
-          title="Seed Ascent browser game"
+          title="Seed Man: Seed Ascent browser game"
           src="/seed-ascent.html"
           style={{
             display: "block",
             width: "100%",
-            height: "clamp(540px, 70vw, 820px)",
+            height: "clamp(600px, 76vw, 860px)",
             border: 0,
             background: "#071108",
           }}
