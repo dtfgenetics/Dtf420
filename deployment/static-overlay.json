@@ -16,7 +16,8 @@
     "community/grow-offs",
     "games/seed-ascent",
     "games/weedopolis",
-    "games/strain-showdown"
+    "games/strain-showdown",
+    "games/burn-buds"
   ],
   "sharedPaths": [
     "_next/static",
@@ -58,6 +59,7 @@
     "games/seed-ascent/index.html",
     "games/weedopolis/index.html",
     "games/strain-showdown/index.html",
+    "games/burn-buds/index.html",
     "seed-ascent.html",
     "seed-ascent/engine.js",
     "seed-ascent/levels.js",
