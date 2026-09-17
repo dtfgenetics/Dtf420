@@ -8,6 +8,9 @@ import {
 
 const root = process.cwd();
 const data = JSON.parse(fs.readFileSync(path.join(root, "data/games/strain-showdown/tier-1.json"), "utf8"));
+const pageSource = fs.readFileSync(path.join(root, "app/games/strain-showdown/page.tsx"), "utf8");
+const gameSource = fs.readFileSync(path.join(root, "app/games/strain-showdown/StrainShowdownGame.tsx"), "utf8");
+const pageCss = fs.readFileSync(path.join(root, "app/games/strain-showdown/page.module.css"), "utf8");
 
 function assert(condition, message) {
   if (!condition) throw new Error(`Strain Showdown verification failed: ${message}`);
@@ -67,6 +70,15 @@ for (let page = 0; page < 6; page += 1) {
 }
 
 assert(STRAIN_SHOWDOWN_BATTLE_RULESET.status === "experimental", "battle resolver must remain explicitly experimental until the full ruleset is locked");
+assert(pageSource.includes("Tier 1 battle arena"), "player-facing page must use battle-arena language");
+assert(!pageSource.includes("Playable preview"), "player-facing page must not present the game as a preview");
+assert(gameSource.includes("function randomizeMatchup()"), "battle UI must provide quick random matchup");
+assert(gameSource.includes("function swapSides()"), "battle UI must provide side swapping");
+assert(gameSource.includes("Random matchup"), "random matchup control must be visible");
+assert(gameSource.includes("Swap sides"), "swap sides control must be visible");
+assert(/min-height:\s*44px/.test(pageCss), "interactive controls must retain a 44px minimum hit target");
+assert(pageCss.includes("touch-action: manipulation"), "touch controls must avoid delayed gesture behavior");
+assert(pageCss.includes("@media (forced-colors: active)"), "battle controls must retain forced-colors support");
 
 const chemIntoHindu = resolveStrainBattle(createBattleUnit(card("Chemdawg")), createBattleUnit(card("Hindu Kush")));
 assert(chemIntoHindu.attackerPower === 5, "Chemdawg must gain +1 Power while attacking");
