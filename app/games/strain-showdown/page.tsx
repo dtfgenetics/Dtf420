@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Strain Showdown | DTF Games",
   description:
-    "Play the 48-card Strain Showdown Tier 1 battle preview: choose two strains, compare Vigor and Power, trigger family effects, and follow the battle result.",
+    "Play Strain Showdown Tier 1 battles: choose two strains, compare Vigor and Power, trigger family effects, and resolve the matchup.",
 };
 
 const availableNow = [
@@ -29,7 +29,7 @@ export default function StrainShowdownPage() {
     <main className={`shell ${styles.page} ${containment.guard}`}>
       <div className={styles.topline}>
         <Link href="/games" className={styles.backLink}>← Back to games</Link>
-        <span className={styles.status}>Playable preview · Tier 1 battles</span>
+        <span className={styles.status}>Tier 1 battle arena</span>
       </div>
 
       <header className={styles.hero}>
@@ -37,7 +37,7 @@ export default function StrainShowdownPage() {
           <p className="eyebrow">DTF Games · Cannabis battle card game</p>
           <h1>Strain Showdown</h1>
           <p className={styles.lede}>
-            Choose any two Tier 1 strains, compare Vigor and Power, activate family effects, and resolve the matchup. The current preview focuses on fast one-on-one battles while the larger deck-building game continues to expand.
+            Choose any two Tier 1 strains, compare Vigor and Power, activate family effects, and resolve the matchup. Randomize battles, swap sides, and replay quickly while the complete deck-building ruleset continues to expand.
           </p>
         </div>
         <div className={styles.heroMetric}>
