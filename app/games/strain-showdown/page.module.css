@@ -688,3 +688,65 @@
     transition: none;
   }
 }
+
+
+/* Battle-loop production polish — fast replay, mobile controls, accessible hit areas. */
+.pickerGrid select,
+.battleActions button,
+.ruleToggles label {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+.ruleToggles label {
+  padding-block: 6px;
+}
+.battleActions {
+  grid-template-columns: 1fr 1fr;
+}
+.battleActions button {
+  width: 100%;
+}
+@media (max-width: 920px) {
+  .battleActions {
+    max-width: 520px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 680px) {
+  .controlDeck {
+    position: relative;
+  }
+  .pickerGrid fieldset {
+    padding: 14px;
+  }
+  .arena {
+    gap: 10px;
+  }
+  .centerConsole {
+    padding: 18px 14px;
+  }
+  .battleActions {
+    width: 100%;
+    max-width: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
+@media (max-width: 430px) {
+  .battleActions {
+    grid-template-columns: 1fr;
+  }
+  .battleActions button {
+    min-height: 48px;
+  }
+  .strainCard {
+    min-height: 360px;
+  }
+}
+@media (forced-colors: active) {
+  .pickerGrid select,
+  .battleActions button,
+  .ruleToggles label {
+    border: 1px solid ButtonText;
+  }
+}
