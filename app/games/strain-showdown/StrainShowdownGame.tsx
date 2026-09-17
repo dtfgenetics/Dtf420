@@ -95,6 +95,11 @@ export function StrainShowdownGame() {
   const [purpleLocation, setPurpleLocation] = useState(false);
   const [ogVigor, setOgVigor] = useState(true);
 
+  function randomCard(excludeId?: string) {
+    const pool = excludeId ? cards.filter((card) => card.id !== excludeId) : cards;
+    return pool[Math.floor(Math.random() * pool.length)] ?? cards[0];
+  }
+
   const attackerPool = useMemo(
     () => cards.filter((card) => attackerFamily === "All" || card.family === attackerFamily),
     [cards, attackerFamily],
@@ -133,6 +138,26 @@ export function StrainShowdownGame() {
     setResult(null);
   }
 
+  function randomizeMatchup() {
+    const nextAttacker = randomCard();
+    const nextDefender = randomCard(nextAttacker.id);
+    setAttackerFamily(nextAttacker.family as Family);
+    setDefenderFamily(nextDefender.family as Family);
+    setAttackerId(nextAttacker.id);
+    setDefenderId(nextDefender.id);
+    setResult(null);
+  }
+
+  function swapSides() {
+    const previousAttacker = attacker;
+    const previousDefender = defender;
+    setAttackerFamily(previousDefender.family as Family);
+    setDefenderFamily(previousAttacker.family as Family);
+    setAttackerId(previousDefender.id);
+    setDefenderId(previousAttacker.id);
+    setResult(null);
+  }
+
   return (
     <div className={styles.gameShell}>
       <section className={styles.controlDeck} aria-label="Strain Showdown matchup controls">
@@ -141,7 +166,7 @@ export function StrainShowdownGame() {
             <p>Tier 1 showdown</p>
             <h2>Build a matchup</h2>
           </div>
-          <span className={styles.ruleset}>Playable preview</span>
+          <span className={styles.ruleset}>Tier 1 battle mode</span>
         </div>
 
         <div className={styles.pickerGrid}>
@@ -201,8 +226,10 @@ export function StrainShowdownGame() {
             <p>Both Strains exchange Power damage at the same time. Effects can modify Power, Vigor, damage, or what happens after the exchange.</p>
           )}
           <div className={styles.battleActions}>
-            <button type="button" onClick={resolve}>Resolve showdown</button>
-            <button type="button" className={styles.secondaryButton} onClick={reset} disabled={!result}>Reset</button>
+            <button type="button" onClick={resolve}>{result ? "Run rematch" : "Resolve showdown"}</button>
+            <button type="button" className={styles.secondaryButton} onClick={swapSides}>Swap sides</button>
+            <button type="button" className={styles.secondaryButton} onClick={randomizeMatchup}>Random matchup</button>
+            <button type="button" className={styles.secondaryButton} onClick={reset} disabled={!result}>Clear result</button>
           </div>
         </div>
 
