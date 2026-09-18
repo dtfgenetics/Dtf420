@@ -1,4 +1,4 @@
-import type { TrackId } from "./types";
+import type { TrackId } from "./types.js";
 
 export type HazardType =
   | "log"
