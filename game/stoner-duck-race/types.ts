@@ -1,11 +1,33 @@
 export type RaceModeId = "derby" | "rally" | "chaos";
 export type RacePhase = "lobby" | "countdown" | "racing" | "finished";
+export type TrackId =
+  | "kush-creek"
+  | "munchie-marsh"
+  | "cloud-9-canal"
+  | "dab-rapids"
+  | "trichome-trail"
+  | "greenhouse-run"
+  | "rosin-river"
+  | "final-smokeout";
 
 export interface DuckRaceLaunchOptions {
   mode: RaceModeId;
+  trackId: TrackId;
   racerCount: number;
   seed: string;
   playerName: string;
+  characterId: string;
+}
+
+export interface DuckRaceResult {
+  mode: RaceModeId;
+  trackId: TrackId;
+  racerCount: number;
+  rank: number | null;
+  winnerName: string;
+  playerName: string | null;
+  tick: number;
+  durationSeconds?: number;
 }
 
 export interface DuckInput {
@@ -43,6 +65,7 @@ export interface DuckState {
   finishTick: number | null;
   statusEffects: string[];
   heldPowerup: string | null;
+  shieldCharges: number;
   lastInputSequence: number;
 }
 
@@ -56,7 +79,7 @@ export interface RaceEvent {
 export interface RaceConfig {
   seed: string;
   mode: RaceModeId;
-  trackId: string;
+  trackId: TrackId;
   trackLength: number;
   racerCount: number;
   tickRate: number;

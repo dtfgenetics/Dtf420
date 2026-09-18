@@ -1,4 +1,5 @@
-import type { RaceConfig, RaceModeId } from "./types";
+import { getTrackDefinition } from "./tracks.ts";
+import type { RaceConfig, RaceModeId, TrackId } from "./types.ts";
 
 export const DUCK_RACE_LIMITS = {
   minRacers: 1,
@@ -9,18 +10,21 @@ export const DUCK_RACE_LIMITS = {
 } as const;
 
 export const DEFAULT_TICK_RATE = 20;
-export const DEFAULT_TRACK_LENGTH = 5_200;
+export const DEFAULT_TRACK_ID: TrackId = "kush-creek";
 
 export function createRaceConfig(
   mode: RaceModeId = "derby",
   racerCount = 12,
   seed = "DTF-420",
+  trackId: TrackId = DEFAULT_TRACK_ID,
 ): RaceConfig {
+  const track = getTrackDefinition(trackId);
+
   return {
     seed,
     mode,
-    trackId: "kush-creek",
-    trackLength: DEFAULT_TRACK_LENGTH,
+    trackId: track.id,
+    trackLength: track.length,
     racerCount: Math.max(
       DUCK_RACE_LIMITS.minRacers,
       Math.min(DUCK_RACE_LIMITS.massRaceMax, Math.floor(racerCount)),

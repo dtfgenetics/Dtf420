@@ -1,19 +1,27 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ],
+    "rootDir": "../..",
+    "outDir": "build",
+    "sourceMap": true,
+    "rewriteRelativeImportExtensions": true
   },
   "include": [
     "src/**/*.ts",
+    "../../game/stoner-duck-race/characters.ts",
     "../../game/stoner-duck-race/config.ts",
     "../../game/stoner-duck-race/modes.ts",
     "../../game/stoner-duck-race/rng.ts",
     "../../game/stoner-duck-race/simulation.ts",
+    "../../game/stoner-duck-race/tracks.ts",
     "../../game/stoner-duck-race/types.ts"
   ]
 }

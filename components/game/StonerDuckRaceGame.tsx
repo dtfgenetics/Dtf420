@@ -1,105 +1,390 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import type { Game } from "phaser";
+import { DUCK_CHARACTERS } from "@/game/stoner-duck-race/characters";
 import { startStonerDuckRace } from "@/game/stoner-duck-race/main";
-import type { DuckRaceLaunchOptions, RaceModeId } from "@/game/stoner-duck-race/types";
+import {
+  connectDuckRaceRoom,
+  type DuckRaceRoomConnection,
+  type DuckRaceRoomSnapshot,
+} from "@/game/stoner-duck-race/network";
+import {
+  EMPTY_DUCK_RACE_PROFILE,
+  loadDuckRaceProfile,
+  profileLevel,
+  recordDuckRaceResult,
+  resultDurationSeconds,
+  type DuckRaceProfile,
+} from "@/game/stoner-duck-race/progression";
+import {
+  loadLastDuckRaceReplay,
+  replayLaunchOptions,
+  saveLastDuckRaceReplay,
+  type DuckRaceReplay,
+} from "@/game/stoner-duck-race/replay";
+import { TRACK_LIST } from "@/game/stoner-duck-race/tracks";
+import type { DuckRaceLaunchOptions, DuckRaceResult, RaceModeId, TrackId } from "@/game/stoner-duck-race/types";
 import styles from "./StonerDuckRaceGame.module.css";
 
 const GAME_PARENT_ID = "stoner-duck-race-game";
+const ONLINE_ENDPOINT = process.env.NEXT_PUBLIC_DUCK_RACE_SERVER_URL ?? "";
+const CUP_TRACKS: readonly TrackId[] = ["kush-creek", "munchie-marsh", "cloud-9-canal", "rosin-river"];
 
-const MODE_OPTIONS: ReadonlyArray<{
-  id: RaceModeId;
-  title: string;
-  eyebrow: string;
-  description: string;
-}> = [
-  {
-    id: "derby",
-    title: "Duck Derby",
-    eyebrow: "Spectator race",
-    description: "Seed the river and watch up to 50 AI ducks fight through currents, hazards, and pickups.",
-  },
-  {
-    id: "rally",
-    title: "River Rally",
-    eyebrow: "Skill race",
-    description: "Control your duck, read the water, dodge hazards, grab items, and race the field yourself.",
-  },
-  {
-    id: "chaos",
-    title: "Chaos Derby",
-    eyebrow: "Party mayhem",
-    description: "Rally controls plus global chaos events, stronger comeback pressure, and less predictable races.",
-  },
+type PlaySource = "local" | "online";
+type OnlineIntent = "create" | "join";
+type LocalFormat = "quick" | "cup" | "time-trial";
+
+const MODE_OPTIONS: ReadonlyArray<{ id: RaceModeId; title: string; eyebrow: string; description: string }> = [
+  { id: "derby", title: "Duck Derby", eyebrow: "Spectator race", description: "Seed the river and watch the AI field battle through hazards and pickups." },
+  { id: "rally", title: "River Rally", eyebrow: "Skill race", description: "Control your duck, read the water, dodge hazards, grab items, and race the field." },
+  { id: "chaos", title: "Chaos Derby", eyebrow: "Party mayhem", description: "Rally controls plus global chaos events and stronger comeback pressure." },
 ];
+
+function formatSeconds(seconds: number): string {
+  const safe = Math.max(0, seconds);
+  const minutes = Math.floor(safe / 60);
+  const remainder = safe - minutes * 60;
+  return `${minutes}:${remainder.toFixed(2).padStart(5, "0")}`;
+}
 
 export function StonerDuckRaceGame() {
   const gameRef = useRef<Game | null>(null);
+  const mutedRef = useRef(false);
+  const [source, setSource] = useState<PlaySource>("local");
+  const [localFormat, setLocalFormat] = useState<LocalFormat>("quick");
+  const [onlineIntent, setOnlineIntent] = useState<OnlineIntent>("create");
   const [mode, setMode] = useState<RaceModeId>("rally");
+  const [trackId, setTrackId] = useState<TrackId>("kush-creek");
   const [racerCount, setRacerCount] = useState(24);
   const [playerName, setPlayerName] = useState("YOU");
+  const [characterId, setCharacterId] = useState("mellow-mallard");
   const [seed, setSeed] = useState("DTF-420");
+  const [roomId, setRoomId] = useState("");
+  const [spectator, setSpectator] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const [error, setError] = useState("");
+  const [inviteMessage, setInviteMessage] = useState("");
+  const [paused, setPaused] = useState(false);
+  const [muted, setMuted] = useState(false);
   const [launchOptions, setLaunchOptions] = useState<DuckRaceLaunchOptions | null>(null);
+  const [roomConnection, setRoomConnection] = useState<DuckRaceRoomConnection | null>(null);
+  const [roomSnapshot, setRoomSnapshot] = useState<DuckRaceRoomSnapshot | null>(null);
+  const [profile, setProfile] = useState<DuckRaceProfile>(EMPTY_DUCK_RACE_PROFILE);
+  const [lastResult, setLastResult] = useState<DuckRaceResult | null>(null);
+  const [lastReplay, setLastReplay] = useState<DuckRaceReplay | null>(null);
+  const [playbackReplay, setPlaybackReplay] = useState<DuckRaceReplay | null>(null);
+  const [cupIndex, setCupIndex] = useState(0);
+  const [cupPoints, setCupPoints] = useState(0);
+
+  const inviteUrl = roomConnection && typeof window !== "undefined"
+    ? (() => {
+        const url = new URL(window.location.href);
+        url.searchParams.set("duckRoom", roomConnection.roomId);
+        return url.toString();
+      })()
+    : "";
+
+  useEffect(() => {
+    const animationFrame = window.requestAnimationFrame(() => {
+      setProfile(loadDuckRaceProfile());
+      setLastReplay(loadLastDuckRaceReplay());
+      const invitedRoom = new URLSearchParams(window.location.search).get("duckRoom")?.trim();
+      if (invitedRoom) {
+        setSource("online");
+        setOnlineIntent("join");
+        setRoomId(invitedRoom.slice(0, 80));
+      }
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, []);
 
   useLayoutEffect(() => {
     if (!launchOptions || gameRef.current) return;
-
-    gameRef.current = startStonerDuckRace(GAME_PARENT_ID, launchOptions);
-
+    const game = startStonerDuckRace(
+      GAME_PARENT_ID,
+      launchOptions,
+      roomConnection ?? undefined,
+      (result) => {
+        setLastResult(result);
+        if (playbackReplay) return;
+        const rank = result.rank;
+        if (rank !== null) {
+          setProfile((current) => recordDuckRaceResult(current, result));
+          if (source === "local" && localFormat === "cup") {
+            setCupPoints((points) => points + Math.max(1, result.racerCount - rank + 1));
+          }
+        }
+      },
+      playbackReplay ?? undefined,
+      (replay) => {
+        setLastReplay(replay);
+        saveLastDuckRaceReplay(replay);
+      },
+    );
+    game.sound.mute = mutedRef.current;
+    gameRef.current = game;
     return () => {
       gameRef.current?.destroy(true);
       gameRef.current = null;
     };
-  }, [launchOptions]);
+  }, [launchOptions, roomConnection, source, localFormat, playbackReplay]);
 
-  function launchRace(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLaunchOptions({
-      mode,
-      racerCount: Math.max(1, Math.min(50, Math.floor(racerCount))),
-      seed: seed.trim().slice(0, 64) || "DTF-420",
+  useEffect(() => {
+    if (!roomConnection) return;
+    return roomConnection.subscribe(setRoomSnapshot);
+  }, [roomConnection]);
+
+  useEffect(() => () => {
+    if (roomConnection) void roomConnection.leave();
+  }, [roomConnection]);
+
+  function buildOptions(selectedTrack: TrackId, raceSeed = seed): DuckRaceLaunchOptions {
+    const timeTrial = source === "local" && localFormat === "time-trial";
+    return {
+      mode: timeTrial ? "rally" : mode,
+      trackId: selectedTrack,
+      racerCount: timeTrial ? 1 : Math.max(1, Math.min(50, Math.floor(racerCount))),
+      seed: raceSeed.trim().slice(0, 64) || "DTF-420",
       playerName: playerName.trim().slice(0, 24) || "YOU",
-    });
+      characterId,
+    };
   }
 
-  function returnToLobby() {
+  async function launchRace(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setLastResult(null);
+    setPlaybackReplay(null);
+    setPaused(false);
+
+    const selectedTrack = source === "local" && localFormat === "cup" ? CUP_TRACKS[0] : trackId;
+    const raceSeed = source === "local" && localFormat === "cup" ? `${seed}-CUP-1` : seed;
+    const options = buildOptions(selectedTrack, raceSeed);
+
+    if (source === "local") {
+      if (localFormat === "cup") {
+        setCupIndex(0);
+        setCupPoints(0);
+      }
+      setLaunchOptions(options);
+      return;
+    }
+
+    if (!ONLINE_ENDPOINT) {
+      setError("Online racing is not deployed yet. Configure NEXT_PUBLIC_DUCK_RACE_SERVER_URL to enable room play.");
+      return;
+    }
+
+    setConnecting(true);
+    try {
+      const connection = await connectDuckRaceRoom({
+        endpoint: ONLINE_ENDPOINT,
+        intent: onlineIntent,
+        roomId,
+        mode,
+        trackId,
+        racerCount: options.racerCount,
+        seed: options.seed,
+        playerName: options.playerName,
+        characterId,
+        spectator,
+      });
+      const snapshot = connection.getSnapshot();
+      setRoomConnection(connection);
+      setRoomSnapshot(snapshot);
+      setRoomId(connection.roomId);
+      setLaunchOptions({
+        mode: snapshot.mode,
+        trackId: snapshot.trackId,
+        racerCount: snapshot.racerCapacity,
+        seed: snapshot.seed,
+        playerName: options.playerName,
+        characterId,
+      });
+    } catch (connectionError) {
+      setError(connectionError instanceof Error ? connectionError.message : "Unable to connect to the race room.");
+    } finally {
+      setConnecting(false);
+    }
+  }
+
+  async function returnToLobby() {
     gameRef.current?.destroy(true);
     gameRef.current = null;
+    if (roomConnection) await roomConnection.leave();
+    setRoomConnection(null);
+    setRoomSnapshot(null);
+    setInviteMessage("");
+    setPaused(false);
+    setPlaybackReplay(null);
     setLaunchOptions(null);
+    setLastResult(null);
+  }
+
+  function nextCupRace() {
+    if (!launchOptions || localFormat !== "cup") return;
+    setPlaybackReplay(null);
+    const nextIndex = cupIndex + 1;
+    if (nextIndex >= CUP_TRACKS.length) return;
+    gameRef.current?.destroy(true);
+    gameRef.current = null;
+    setPaused(false);
+    setCupIndex(nextIndex);
+    setLastResult(null);
+    setLaunchOptions(buildOptions(CUP_TRACKS[nextIndex], `${seed}-CUP-${nextIndex + 1}`));
+  }
+
+  async function watchLastReplay() {
+    if (!lastReplay) return;
+    gameRef.current?.destroy(true);
+    gameRef.current = null;
+    if (roomConnection) await roomConnection.leave();
+
+    setSource("local");
+    setLocalFormat("quick");
+    setRoomConnection(null);
+    setRoomSnapshot(null);
+    setInviteMessage("");
+    setPaused(false);
+    setLastResult(null);
+    setMode(lastReplay.mode);
+    setTrackId(lastReplay.trackId);
+    setRacerCount(lastReplay.racerCount);
+    setSeed(lastReplay.seed);
+    setPlayerName(lastReplay.playerName);
+    setCharacterId(lastReplay.characterId);
+    setPlaybackReplay(lastReplay);
+    setLaunchOptions(replayLaunchOptions(lastReplay));
+  }
+
+  function togglePause() {
+    const game = gameRef.current;
+    if (!game || source !== "local" || lastResult) return;
+    if (paused) game.scene.resume("StonerDuckRace");
+    else game.scene.pause("StonerDuckRace");
+    setPaused((current) => !current);
+  }
+
+  function toggleMute() {
+    const nextMuted = !mutedRef.current;
+    mutedRef.current = nextMuted;
+    if (gameRef.current) gameRef.current.sound.mute = nextMuted;
+    setMuted(nextMuted);
+  }
+
+  async function copyInviteLink() {
+    if (!inviteUrl) return;
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+      setInviteMessage("Invite link copied");
+    } catch {
+      setInviteMessage("Copy the invite URL shown below");
+    }
   }
 
   if (!launchOptions) {
+    const selectedTrack = TRACK_LIST.find((track) => track.id === trackId)!;
+    const selectedCharacter = DUCK_CHARACTERS.find((character) => character.id === characterId) ?? DUCK_CHARACTERS[0];
+    const displayedRacerCount = source === "local" && localFormat === "time-trial" ? 1 : racerCount;
+    const bestTime = profile.bestTimeByTrack[trackId];
     return (
       <div className={`${styles.shell} ${styles.lobbyShell}`}>
         <form className={styles.lobby} onSubmit={launchRace}>
           <header className={styles.lobbyHeader}>
             <div>
-              <span className={styles.kicker}>Kush Creek · Local race setup</span>
-              <h2>Choose how the ducks hit the river.</h2>
-              <p>Every setup uses the same deterministic 50-racer engine. Change the seed to replay or share the same race conditions.</p>
+              <span className={styles.kicker}>Quack &amp; Bake · Stoner Duck Race</span>
+              <h2>Choose the river, load the ducks, start the chaos.</h2>
+              <p>Eight tracks, eight power-ups, eight duck personalities, championship and time-trial play, deterministic races, up to 50 racers, and optional server-authoritative rooms.</p>
             </div>
-            <div className={styles.capacityBadge}>
-              <strong>50</strong>
-              <span>max racers</span>
+            <div className={styles.profileBadge}>
+              <span>Level {profileLevel(profile)}</span>
+              <strong>{profile.coins} Bud Bucks</strong>
+              <small>{profile.wins} wins · {profile.podiums} podiums · {profile.races} races</small>
+              {lastReplay && (
+                <button className={styles.replayButton} onClick={() => void watchLastReplay()} type="button">
+                  Watch last replay
+                </button>
+              )}
             </div>
           </header>
 
+          <div className={styles.sourceRow}>
+            <div className={styles.sourceSwitch} role="group" aria-label="Play source">
+              <button type="button" data-active={source === "local"} onClick={() => setSource("local")}>Local</button>
+              <button type="button" data-active={source === "online"} onClick={() => setSource("online")}>Online</button>
+            </div>
+            {source === "local" && (
+              <div className={styles.sourceSwitch} role="group" aria-label="Local race format">
+                <button type="button" data-active={localFormat === "quick"} onClick={() => setLocalFormat("quick")}>Quick race</button>
+                <button type="button" data-active={localFormat === "cup"} onClick={() => { setLocalFormat("cup"); setMode((current) => current === "derby" ? "rally" : current); }}>4-race Cup</button>
+                <button type="button" data-active={localFormat === "time-trial"} onClick={() => { setLocalFormat("time-trial"); setMode("rally"); }}>Time Trial</button>
+              </div>
+            )}
+          </div>
+
+          {source === "online" && (
+            <section className={styles.onlinePanel}>
+              <div className={styles.sourceSwitch} role="group" aria-label="Online room action">
+                <button type="button" data-active={onlineIntent === "create"} onClick={() => setOnlineIntent("create")}>Create room</button>
+                <button type="button" data-active={onlineIntent === "join"} onClick={() => setOnlineIntent("join")}>Join room</button>
+              </div>
+              {onlineIntent === "join" && (
+                <label className={styles.field}><span>Room ID</span><input value={roomId} onChange={(event) => setRoomId(event.target.value)} maxLength={80} placeholder="Paste room ID" /></label>
+              )}
+              <label className={styles.checkField}><input type="checkbox" checked={spectator} onChange={(event) => setSpectator(event.target.checked)} /><span>Spectate only — do not claim a duck</span></label>
+              {!ONLINE_ENDPOINT && <p className={styles.connectionNote}>Online UI is ready, but the public multiplayer server endpoint has not been configured.</p>}
+            </section>
+          )}
+
+          {source === "local" && localFormat === "time-trial" ? (
+            <div className={styles.timeTrialNote}>
+              <div><span>Solo format</span><strong>Time Trial uses River Rally physics with one duck.</strong></div>
+              <small>{bestTime ? `Personal best on ${selectedTrack.name}: ${formatSeconds(bestTime)}` : `No recorded time yet on ${selectedTrack.name}.`}</small>
+            </div>
+          ) : (
+            <fieldset className={styles.modeFieldset}>
+              <legend>Race mode</legend>
+              <div className={styles.modeGrid}>
+                {MODE_OPTIONS.filter((option) => !(source === "local" && localFormat === "cup" && option.id === "derby")).map((option) => (
+                  <button aria-pressed={mode === option.id} className={styles.modeButton} data-active={mode === option.id} key={option.id} onClick={() => setMode(option.id)} type="button">
+                    <span>{option.eyebrow}</span><strong>{option.title}</strong><small>{option.description}</small>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          )}
+
+          {!(source === "local" && localFormat === "cup") && (
+            <fieldset className={styles.modeFieldset}>
+              <legend>Track</legend>
+              <div className={styles.trackGrid}>
+                {TRACK_LIST.map((track) => {
+                  const trackBest = profile.bestTimeByTrack[track.id];
+                  return (
+                    <button aria-pressed={trackId === track.id} className={styles.trackButton} data-active={trackId === track.id} key={track.id} onClick={() => setTrackId(track.id)} type="button">
+                      <strong>{track.name}</strong><small>{track.tagline}</small><span>{(track.length / 1000).toFixed(1)}k course{trackBest ? ` · PB ${formatSeconds(trackBest)}` : ""}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
+          )}
+
+          {source === "local" && localFormat === "cup" && (
+            <div className={styles.cupRoute}>
+              {CUP_TRACKS.map((cupTrack, index) => <span key={cupTrack}>{index + 1}. {TRACK_LIST.find((track) => track.id === cupTrack)?.name}</span>)}
+            </div>
+          )}
+
           <fieldset className={styles.modeFieldset}>
-            <legend>Race mode</legend>
-            <div className={styles.modeGrid}>
-              {MODE_OPTIONS.map((option) => (
-                <button
-                  aria-pressed={mode === option.id}
-                  className={styles.modeButton}
-                  data-active={mode === option.id}
-                  key={option.id}
-                  onClick={() => setMode(option.id)}
-                  type="button"
-                >
-                  <span>{option.eyebrow}</span>
-                  <strong>{option.title}</strong>
-                  <small>{option.description}</small>
+            <legend>Your duck</legend>
+            <div className={styles.characterGrid}>
+              {DUCK_CHARACTERS.map((character) => (
+                <button type="button" key={character.id} data-active={characterId === character.id} className={styles.characterButton} onClick={() => setCharacterId(character.id)}>
+                  <i style={{ backgroundColor: `#${character.bodyColor.toString(16).padStart(6, "0")}` }} aria-hidden="true" />
+                  <strong>{character.name}</strong><small>{character.tagline}</small>
                 </button>
               ))}
             </div>
@@ -109,73 +394,78 @@ export function StonerDuckRaceGame() {
             <label className={`${styles.field} ${styles.racerField}`}>
               <span>Racers</span>
               <div className={styles.rangeRow}>
-                <input
-                  aria-label="Number of racers"
-                  max={50}
-                  min={1}
-                  onChange={(event) => setRacerCount(Number(event.target.value))}
-                  type="range"
-                  value={racerCount}
-                />
-                <output>{racerCount}</output>
+                <input aria-label="Number of racers" disabled={source === "local" && localFormat === "time-trial"} max={50} min={1} onChange={(event) => setRacerCount(Number(event.target.value))} type="range" value={displayedRacerCount} />
+                <output>{displayedRacerCount}</output>
               </div>
-              <small>From a quick solo test to the full 50-duck stampede.</small>
+              <small>{localFormat === "time-trial" && source === "local" ? "Time Trial locks the field to one controlled duck." : "From a solo run to the full 50-duck stampede."}</small>
             </label>
-
-            <label className={styles.field}>
-              <span>Player name</span>
-              <input
-                disabled={mode === "derby"}
-                maxLength={24}
-                onChange={(event) => setPlayerName(event.target.value)}
-                placeholder="YOU"
-                type="text"
-                value={playerName}
-              />
-              <small>{mode === "derby" ? "Derby is spectator-controlled." : "Shown on your duck and race HUD."}</small>
-            </label>
-
-            <label className={styles.field}>
-              <span>Race seed</span>
-              <input
-                maxLength={64}
-                onChange={(event) => setSeed(event.target.value)}
-                placeholder="DTF-420"
-                type="text"
-                value={seed}
-              />
-              <small>Reuse a seed to reproduce the same deterministic race setup.</small>
-            </label>
+            <label className={styles.field}><span>Player name</span><input disabled={mode === "derby" || spectator} maxLength={24} onChange={(event) => setPlayerName(event.target.value)} placeholder="YOU" type="text" value={playerName} /><small>{spectator ? "Spectators do not claim a racer." : mode === "derby" ? "Derby is spectator-controlled." : `Racing as ${selectedCharacter.name}.`}</small></label>
+            <label className={styles.field}><span>Race seed</span><input disabled={source === "online" && onlineIntent === "join"} maxLength={64} onChange={(event) => setSeed(event.target.value)} placeholder="DTF-420" type="text" value={seed} /><small>Reuse a seed to reproduce the same deterministic conditions.</small></label>
           </div>
+
+          {error && <p className={styles.errorText} role="alert">{error}</p>}
 
           <div className={styles.lobbyFooter}>
             <div className={styles.setupSummary}>
-              <span>{MODE_OPTIONS.find((option) => option.id === mode)?.title}</span>
-              <strong>{racerCount} ducks · Kush Creek · {seed.trim() || "DTF-420"}</strong>
+              <span>{source === "local" && localFormat === "cup" ? "Quack & Bake Cup" : source === "local" && localFormat === "time-trial" ? `Time Trial · ${selectedTrack.name}` : `${MODE_OPTIONS.find((option) => option.id === mode)?.title} · ${selectedTrack.name}`}</span>
+              <strong>{displayedRacerCount} duck{displayedRacerCount === 1 ? "" : "s"} · {source === "online" ? `${onlineIntent} online` : localFormat} · {selectedCharacter.name}</strong>
             </div>
-            <button className={styles.launchButton} type="submit">
-              Launch race <span aria-hidden="true">→</span>
-            </button>
+            <button className={styles.launchButton} disabled={connecting} type="submit">{connecting ? "Connecting…" : source === "online" ? (onlineIntent === "create" ? "Create room →" : "Join room →") : localFormat === "cup" ? "Start Cup →" : localFormat === "time-trial" ? "Start Time Trial →" : "Launch race →"}</button>
           </div>
         </form>
       </div>
     );
   }
 
+  const selectedTrackName = TRACK_LIST.find((track) => track.id === launchOptions.trackId)?.name ?? launchOptions.trackId;
+  const cupComplete = source === "local" && localFormat === "cup" && cupIndex === CUP_TRACKS.length - 1 && Boolean(lastResult);
+  const timeTrialResult = source === "local" && localFormat === "time-trial" && lastResult ? resultDurationSeconds(lastResult) : null;
+
   return (
     <div className={styles.shell}>
       <div className={styles.gameBar}>
-        <div>
-          <strong>{MODE_OPTIONS.find((option) => option.id === launchOptions.mode)?.title}</strong>
-          <span>{launchOptions.racerCount} racers · Seed {launchOptions.seed}</span>
+        <div className={styles.gameIdentity}>
+          {playbackReplay && <span className={styles.replayBadge}>Replay</span>}
+          <div>
+            <strong>{localFormat === "time-trial" && source === "local" && !playbackReplay ? "Time Trial" : MODE_OPTIONS.find((option) => option.id === launchOptions.mode)?.title} · {selectedTrackName}</strong>
+            <span>{launchOptions.racerCount} racer{launchOptions.racerCount === 1 ? "" : "s"} · Seed {launchOptions.seed}{roomConnection ? ` · Room ${roomConnection.roomId}` : ""}</span>
+          </div>
         </div>
-        <button className={styles.backButton} onClick={returnToLobby} type="button">Race setup</button>
+        <div className={styles.gameActions}>
+          {source === "local" && localFormat === "cup" && <span className={styles.roomStatus}>Cup {cupIndex + 1}/4 · {cupPoints} pts</span>}
+          {roomConnection && roomSnapshot && <span className={styles.roomStatus}>{roomSnapshot.connectedRacers}/{roomSnapshot.racerCapacity} racers · {roomSnapshot.spectatorCount} watching</span>}
+          {source === "local" && !lastResult && <button aria-pressed={paused} className={styles.backButton} onClick={togglePause} type="button">{paused ? "Resume" : "Pause"}</button>}
+          <button aria-pressed={muted} className={styles.backButton} onClick={toggleMute} type="button">{muted ? "Sound on" : "Mute"}</button>
+          {roomConnection?.isHost() && roomSnapshot?.phase === "lobby" && <button className={styles.startButton} onClick={() => roomConnection.startRace()} type="button">Start online race</button>}
+          {roomConnection && <button className={styles.backButton} onClick={() => void copyInviteLink()} type="button">Copy invite</button>}
+          <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Race setup</button>
+        </div>
       </div>
-      <div
-        id={GAME_PARENT_ID}
-        className={styles.canvas}
-        aria-label={`Stoner Duck Race ${launchOptions.mode} with ${launchOptions.racerCount} racers`}
-      />
+      {roomConnection && inviteUrl && (
+        <div className={styles.inviteBar}>
+          <span>{inviteMessage || "Share this room"}</span>
+          <input aria-label="Room invite URL" readOnly value={inviteUrl} />
+        </div>
+      )}
+      <div className={styles.stageWrap}>
+        <div id={GAME_PARENT_ID} className={styles.canvas} aria-label={`Stoner Duck Race ${launchOptions.mode} on ${selectedTrackName} with ${launchOptions.racerCount} racers`} />
+        {paused && source === "local" && <div className={styles.pauseBanner} role="status"><strong>Paused</strong><span>The river is holding. Resume when you’re ready.</span></div>}
+        {lastResult && (
+          <section className={styles.resultsPanel} aria-live="polite">
+            <div className={styles.resultCopy}>
+              <span>{playbackReplay ? "Replay complete" : timeTrialResult !== null ? "Time Trial complete" : "Race complete"}</span>
+              <strong>{playbackReplay ? `${lastResult.winnerName} takes the replay` : timeTrialResult !== null ? formatSeconds(timeTrialResult) : lastResult.rank === null ? `${lastResult.winnerName} wins` : `You finished #${lastResult.rank}`}</strong>
+              <small>{selectedTrackName}{playbackReplay ? ` · ${lastReplay?.frames.length ?? 0} recorded input changes` : timeTrialResult !== null ? ` · PB ${formatSeconds(profile.bestTimeByTrack[lastResult.trackId] ?? timeTrialResult)}` : ` · winner ${lastResult.winnerName}`}</small>
+            </div>
+            <div className={styles.resultActions}>
+              {!playbackReplay && source === "local" && lastReplay && <button className={styles.replayButton} onClick={() => void watchLastReplay()} type="button">Watch replay</button>}
+              {!playbackReplay && source === "local" && localFormat === "cup" && !cupComplete && <button className={styles.launchButton} onClick={nextCupRace} type="button">Next Cup race →</button>}
+              {!playbackReplay && cupComplete && <div className={styles.cupFinish}><span>Cup complete</span><strong>{cupPoints} points</strong></div>}
+              <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">{playbackReplay ? "Exit replay" : "Back to setup"}</button>
+            </div>
+          </section>
+        )}
+      </div>
     </div>
   );
 }
