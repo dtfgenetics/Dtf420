@@ -1,13 +1,13 @@
-import { getDuckCharacter, DUCK_CHARACTERS } from "./characters";
-import { DUCK_RACE_LIMITS } from "./config";
-import { getRaceModeProfile } from "./modes";
-import { DeterministicRng } from "./rng";
+import { getDuckCharacter, DUCK_CHARACTERS } from "./characters.js";
+import { DUCK_RACE_LIMITS } from "./config.js";
+import { getRaceModeProfile } from "./modes.js";
+import { DeterministicRng } from "./rng.js";
 import {
   currentZoneAt,
   getTrackDefinition,
   type HazardDefinition,
   type PowerupId,
-} from "./tracks";
+} from "./tracks.js";
 import type {
   DuckInput,
   DuckPersonality,
@@ -15,7 +15,7 @@ import type {
   RaceConfig,
   RaceEvent,
   RaceState,
-} from "./types";
+} from "./types.js";
 
 const EMPTY_INPUT: DuckInput = {
   steer: 0,
