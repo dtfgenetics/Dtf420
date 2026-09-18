@@ -1,5 +1,5 @@
-import { getTrackDefinition } from "./tracks";
-import type { RaceConfig, RaceModeId, TrackId } from "./types";
+import { getTrackDefinition } from "./tracks.js";
+import type { RaceConfig, RaceModeId, TrackId } from "./types.js";
 
 export const DUCK_RACE_LIMITS = {
   minRacers: 1,
