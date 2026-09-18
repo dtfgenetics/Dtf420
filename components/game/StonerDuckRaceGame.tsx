@@ -17,6 +17,12 @@ import {
   resultDurationSeconds,
   type DuckRaceProfile,
 } from "@/game/stoner-duck-race/progression";
+import {
+  loadLastDuckRaceReplay,
+  replayLaunchOptions,
+  saveLastDuckRaceReplay,
+  type DuckRaceReplay,
+} from "@/game/stoner-duck-race/replay";
 import { TRACK_LIST } from "@/game/stoner-duck-race/tracks";
 import type { DuckRaceLaunchOptions, DuckRaceResult, RaceModeId, TrackId } from "@/game/stoner-duck-race/types";
 import styles from "./StonerDuckRaceGame.module.css";
@@ -66,6 +72,8 @@ export function StonerDuckRaceGame() {
   const [roomSnapshot, setRoomSnapshot] = useState<DuckRaceRoomSnapshot | null>(null);
   const [profile, setProfile] = useState<DuckRaceProfile>(EMPTY_DUCK_RACE_PROFILE);
   const [lastResult, setLastResult] = useState<DuckRaceResult | null>(null);
+  const [lastReplay, setLastReplay] = useState<DuckRaceReplay | null>(null);
+  const [playbackReplay, setPlaybackReplay] = useState<DuckRaceReplay | null>(null);
   const [cupIndex, setCupIndex] = useState(0);
   const [cupPoints, setCupPoints] = useState(0);
 
@@ -80,6 +88,7 @@ export function StonerDuckRaceGame() {
   useEffect(() => {
     const animationFrame = window.requestAnimationFrame(() => {
       setProfile(loadDuckRaceProfile());
+      setLastReplay(loadLastDuckRaceReplay());
       const invitedRoom = new URLSearchParams(window.location.search).get("duckRoom")?.trim();
       if (invitedRoom) {
         setSource("online");
@@ -99,6 +108,7 @@ export function StonerDuckRaceGame() {
       roomConnection ?? undefined,
       (result) => {
         setLastResult(result);
+        if (playbackReplay) return;
         const rank = result.rank;
         if (rank !== null) {
           setProfile((current) => recordDuckRaceResult(current, result));
@@ -107,6 +117,11 @@ export function StonerDuckRaceGame() {
           }
         }
       },
+      playbackReplay ?? undefined,
+      (replay) => {
+        setLastReplay(replay);
+        saveLastDuckRaceReplay(replay);
+      },
     );
     game.sound.mute = mutedRef.current;
     gameRef.current = game;
@@ -114,7 +129,7 @@ export function StonerDuckRaceGame() {
       gameRef.current?.destroy(true);
       gameRef.current = null;
     };
-  }, [launchOptions, roomConnection, source, localFormat]);
+  }, [launchOptions, roomConnection, source, localFormat, playbackReplay]);
 
   useEffect(() => {
     if (!roomConnection) return;
@@ -141,6 +156,7 @@ export function StonerDuckRaceGame() {
     event.preventDefault();
     setError("");
     setLastResult(null);
+    setPlaybackReplay(null);
     setPaused(false);
 
     const selectedTrack = source === "local" && localFormat === "cup" ? CUP_TRACKS[0] : trackId;
@@ -202,12 +218,14 @@ export function StonerDuckRaceGame() {
     setRoomSnapshot(null);
     setInviteMessage("");
     setPaused(false);
+    setPlaybackReplay(null);
     setLaunchOptions(null);
     setLastResult(null);
   }
 
   function nextCupRace() {
     if (!launchOptions || localFormat !== "cup") return;
+    setPlaybackReplay(null);
     const nextIndex = cupIndex + 1;
     if (nextIndex >= CUP_TRACKS.length) return;
     gameRef.current?.destroy(true);
@@ -216,6 +234,29 @@ export function StonerDuckRaceGame() {
     setCupIndex(nextIndex);
     setLastResult(null);
     setLaunchOptions(buildOptions(CUP_TRACKS[nextIndex], `${seed}-CUP-${nextIndex + 1}`));
+  }
+
+  async function watchLastReplay() {
+    if (!lastReplay) return;
+    gameRef.current?.destroy(true);
+    gameRef.current = null;
+    if (roomConnection) await roomConnection.leave();
+
+    setSource("local");
+    setLocalFormat("quick");
+    setRoomConnection(null);
+    setRoomSnapshot(null);
+    setInviteMessage("");
+    setPaused(false);
+    setLastResult(null);
+    setMode(lastReplay.mode);
+    setTrackId(lastReplay.trackId);
+    setRacerCount(lastReplay.racerCount);
+    setSeed(lastReplay.seed);
+    setPlayerName(lastReplay.playerName);
+    setCharacterId(lastReplay.characterId);
+    setPlaybackReplay(lastReplay);
+    setLaunchOptions(replayLaunchOptions(lastReplay));
   }
 
   function togglePause() {
@@ -261,6 +302,11 @@ export function StonerDuckRaceGame() {
               <span>Level {profileLevel(profile)}</span>
               <strong>{profile.coins} Bud Bucks</strong>
               <small>{profile.wins} wins · {profile.podiums} podiums · {profile.races} races</small>
+              {lastReplay && (
+                <button className={styles.replayButton} onClick={() => void watchLastReplay()} type="button">
+                  Watch last replay
+                </button>
+              )}
             </div>
           </header>
 
@@ -378,7 +424,13 @@ export function StonerDuckRaceGame() {
   return (
     <div className={styles.shell}>
       <div className={styles.gameBar}>
-        <div><strong>{localFormat === "time-trial" && source === "local" ? "Time Trial" : MODE_OPTIONS.find((option) => option.id === launchOptions.mode)?.title} · {selectedTrackName}</strong><span>{launchOptions.racerCount} racer{launchOptions.racerCount === 1 ? "" : "s"} · Seed {launchOptions.seed}{roomConnection ? ` · Room ${roomConnection.roomId}` : ""}</span></div>
+        <div className={styles.gameIdentity}>
+          {playbackReplay && <span className={styles.replayBadge}>Replay</span>}
+          <div>
+            <strong>{localFormat === "time-trial" && source === "local" && !playbackReplay ? "Time Trial" : MODE_OPTIONS.find((option) => option.id === launchOptions.mode)?.title} · {selectedTrackName}</strong>
+            <span>{launchOptions.racerCount} racer{launchOptions.racerCount === 1 ? "" : "s"} · Seed {launchOptions.seed}{roomConnection ? ` · Room ${roomConnection.roomId}` : ""}</span>
+          </div>
+        </div>
         <div className={styles.gameActions}>
           {source === "local" && localFormat === "cup" && <span className={styles.roomStatus}>Cup {cupIndex + 1}/4 · {cupPoints} pts</span>}
           {roomConnection && roomSnapshot && <span className={styles.roomStatus}>{roomSnapshot.connectedRacers}/{roomSnapshot.racerCapacity} racers · {roomSnapshot.spectatorCount} watching</span>}
@@ -389,26 +441,31 @@ export function StonerDuckRaceGame() {
           <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Race setup</button>
         </div>
       </div>
-      {paused && source === "local" && <div className={styles.pauseBanner} role="status">Race paused · resume when ready</div>}
       {roomConnection && inviteUrl && (
         <div className={styles.inviteBar}>
           <span>{inviteMessage || "Share this room"}</span>
           <input aria-label="Room invite URL" readOnly value={inviteUrl} />
         </div>
       )}
-      <div id={GAME_PARENT_ID} className={styles.canvas} aria-label={`Stoner Duck Race ${launchOptions.mode} on ${selectedTrackName} with ${launchOptions.racerCount} racers`} />
-      {lastResult && (
-        <section className={styles.resultsPanel} aria-live="polite">
-          <div>
-            <span>{timeTrialResult !== null ? "Time Trial complete" : "Race complete"}</span>
-            <strong>{timeTrialResult !== null ? formatSeconds(timeTrialResult) : lastResult.rank === null ? `${lastResult.winnerName} wins` : `You finished #${lastResult.rank}`}</strong>
-            <small>{selectedTrackName}{timeTrialResult !== null ? ` · PB ${formatSeconds(profile.bestTimeByTrack[lastResult.trackId] ?? timeTrialResult)}` : ` · winner ${lastResult.winnerName}`}</small>
-          </div>
-          {source === "local" && localFormat === "cup" && !cupComplete && <button className={styles.launchButton} onClick={nextCupRace} type="button">Next Cup race →</button>}
-          {cupComplete && <div className={styles.cupFinish}><span>Cup complete</span><strong>{cupPoints} points</strong></div>}
-          <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Back to setup</button>
-        </section>
-      )}
+      <div className={styles.stageWrap}>
+        <div id={GAME_PARENT_ID} className={styles.canvas} aria-label={`Stoner Duck Race ${launchOptions.mode} on ${selectedTrackName} with ${launchOptions.racerCount} racers`} />
+        {paused && source === "local" && <div className={styles.pauseBanner} role="status"><strong>Paused</strong><span>The river is holding. Resume when you’re ready.</span></div>}
+        {lastResult && (
+          <section className={styles.resultsPanel} aria-live="polite">
+            <div className={styles.resultCopy}>
+              <span>{playbackReplay ? "Replay complete" : timeTrialResult !== null ? "Time Trial complete" : "Race complete"}</span>
+              <strong>{playbackReplay ? `${lastResult.winnerName} takes the replay` : timeTrialResult !== null ? formatSeconds(timeTrialResult) : lastResult.rank === null ? `${lastResult.winnerName} wins` : `You finished #${lastResult.rank}`}</strong>
+              <small>{selectedTrackName}{playbackReplay ? ` · ${lastReplay?.frames.length ?? 0} recorded input changes` : timeTrialResult !== null ? ` · PB ${formatSeconds(profile.bestTimeByTrack[lastResult.trackId] ?? timeTrialResult)}` : ` · winner ${lastResult.winnerName}`}</small>
+            </div>
+            <div className={styles.resultActions}>
+              {!playbackReplay && source === "local" && lastReplay && <button className={styles.replayButton} onClick={() => void watchLastReplay()} type="button">Watch replay</button>}
+              {!playbackReplay && source === "local" && localFormat === "cup" && !cupComplete && <button className={styles.launchButton} onClick={nextCupRace} type="button">Next Cup race →</button>}
+              {!playbackReplay && cupComplete && <div className={styles.cupFinish}><span>Cup complete</span><strong>{cupPoints} points</strong></div>}
+              <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">{playbackReplay ? "Exit replay" : "Back to setup"}</button>
+            </div>
+          </section>
+        )}
+      </div>
     </div>
   );
 }
