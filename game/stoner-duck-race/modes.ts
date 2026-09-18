@@ -1,4 +1,4 @@
-import type { RaceModeId, RaceModeProfile } from "./types";
+import type { RaceModeId, RaceModeProfile } from "./types.js";
 
 export const RACE_MODE_PROFILES: Record<RaceModeId, RaceModeProfile> = {
   derby: {
