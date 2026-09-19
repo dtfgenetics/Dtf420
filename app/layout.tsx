@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   applicationName: "DTF Genetics",
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: [{ url: "/dtf-thc-favicon.svg", type: "image/svg+xml", sizes: "any" }],
-    shortcut: [{ url: "/dtf-thc-favicon.svg", type: "image/svg+xml", sizes: "any" }],
+    icon: [{ url: "/favicon", type: "image/png", sizes: "512x512" }],
+    shortcut: [{ url: "/favicon", type: "image/png", sizes: "512x512" }],
   },
   openGraph: {
     type: "website",
