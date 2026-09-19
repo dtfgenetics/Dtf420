@@ -20,7 +20,7 @@
     "_next/static",
     "seed-ascent",
     "seed-ascent.html",
-    "dtf-thc-favicon.svg"
+    "favicon"
   ],
   "wordpressOwnedRoutes": [
     "/",
@@ -58,6 +58,6 @@
     "seed-ascent/engine.js",
     "seed-ascent/levels.js",
     "seed-ascent/styles.css",
-    "dtf-thc-favicon.svg"
+    "favicon"
   ]
 }
