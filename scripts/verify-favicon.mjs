@@ -46,10 +46,14 @@ requireText("next.config.ts", [
   'destination: "/favicon"',
 ]);
 
+requireText("deployment/static-overlay.json", [
+  '"favicon"',
+]);
+
 if (failures.length > 0) {
   console.error("Favicon verification failed:\n");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Favicon verification passed: PNG search icon, manifest metadata, and legacy fallback are present.");
+console.log("Favicon verification passed: PNG search icon, manifest metadata, legacy fallback, and static-overlay packaging are present.");
