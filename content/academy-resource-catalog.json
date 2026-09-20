@@ -1,0 +1,4171 @@
+{
+  "schemaVersion": 1,
+  "id": "legacy-420-resource-reconciliation",
+  "source": {
+    "repository": "dtfgenetics/Thc-learning-courses-",
+    "file": "registry/legacy-420-resource-reconciliation.json",
+    "sha256": "df71135833936604bdcedacba4be302cd9a31dd72278fdde638022e37befff94",
+    "importedAt": "2026-09-20"
+  },
+  "architecture": {
+    "legacyObjectType": "misclassified-course-record",
+    "canonicalObjectType": "comprehensive-educational-resource",
+    "credentialBearing": false
+  },
+  "summary": {
+    "total": 420,
+    "confirmedReuse": 3,
+    "confirmedUpgrade": 119,
+    "candidateReview": 298,
+    "unmatched": 252,
+    "createRequired": 0
+  },
+  "records": [
+    {
+      "id": "THC-C001",
+      "title": "Cannabis as a Plant: Origins, Uses, and Study",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-004",
+        "title": "Domestication, Dispersal, and Human Selection"
+      }
+    },
+    {
+      "id": "THC-C002",
+      "title": "Cannabis Taxonomy and Classification",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-002",
+        "title": "Accepted Botanical Identity and Nomenclature"
+      }
+    },
+    {
+      "id": "THC-C003",
+      "title": "Seed Plant Biology for Growers",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-007",
+        "title": "The Cannabis Achene: What Growers Call a Seed"
+      }
+    },
+    {
+      "id": "THC-C004",
+      "title": "Cells, Tissues, and Meristems",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-061",
+        "title": "Plant Cells, Tissues, and Organ Systems"
+      }
+    },
+    {
+      "id": "THC-C005",
+      "title": "Root Anatomy and Function",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-009",
+        "title": "Root System Architecture"
+      }
+    },
+    {
+      "id": "THC-C006",
+      "title": "Stem Anatomy and Vascular Transport",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "reuse",
+      "match": {
+        "id": "THC-ENC-010",
+        "title": "Stem Anatomy and Vascular Transport"
+      }
+    },
+    {
+      "id": "THC-C007",
+      "title": "Leaf Anatomy and Gas Exchange",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-068",
+        "title": "Stomata, Guard Cells, and Gas Exchange"
+      }
+    },
+    {
+      "id": "THC-C008",
+      "title": "Flower Anatomy and Reproductive Structures",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-017",
+        "title": "Female Flower, Bract, Stigma, and Inflorescence Anatomy"
+      }
+    },
+    {
+      "id": "THC-C009",
+      "title": "Trichomes and Secretory Biology",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-019",
+        "title": "Glandular and Nonglandular Trichome Classes"
+      }
+    },
+    {
+      "id": "THC-C010",
+      "title": "Photosynthesis Fundamentals",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-063",
+        "title": "The Light Reactions of Photosynthesis"
+      }
+    },
+    {
+      "id": "THC-C011",
+      "title": "Respiration and Plant Energy",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-067",
+        "title": "Cellular Respiration and Night Metabolism"
+      }
+    },
+    {
+      "id": "THC-C012",
+      "title": "Transpiration and Water Movement",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-082",
+        "title": "Transpiration as a Physical and Biological Process"
+      }
+    },
+    {
+      "id": "THC-C013",
+      "title": "Hormones and Plant Signaling",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-073",
+        "title": "Plant Hormones: Auxin"
+      }
+    },
+    {
+      "id": "THC-C014",
+      "title": "Tropisms and Environmental Responses",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-184",
+        "title": "Low-Stress Bending and Thigmomorphogenesis"
+      }
+    },
+    {
+      "id": "THC-C015",
+      "title": "Source-Sink Relationships",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-071",
+        "title": "Source Leaves and Sink Tissues"
+      }
+    },
+    {
+      "id": "THC-C016",
+      "title": "Developmental Stages and Morphogenesis",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-079",
+        "title": "Growth Rate, Development, and Biomass Partitioning"
+      }
+    },
+    {
+      "id": "THC-C017",
+      "title": "Genotype, Phenotype, and Environment",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-146",
+        "title": "Genotype, Phenotype, and Phenotypic Plasticity"
+      }
+    },
+    {
+      "id": "THC-C018",
+      "title": "Stress Physiology Fundamentals",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-094",
+        "title": "Drought Stress and Recovery"
+      }
+    },
+    {
+      "id": "THC-C019",
+      "title": "Plant-Microbe Relationships",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-047",
+        "title": "Rhizosphere Microbes: Functions and Limits of Claims"
+      }
+    },
+    {
+      "id": "THC-C020",
+      "title": "Reading Scientific Plant Diagrams",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-001",
+        "title": "How to Read Cannabis Plant Science Critically"
+      }
+    },
+    {
+      "id": "THC-C021",
+      "title": "Plant Science Foundations Capstone",
+      "level": 1,
+      "domainId": "THC-A01",
+      "domain": "Plant Science Foundations",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C022",
+      "title": "Responsible and Lawful Use Orientation",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LEGAL-JURISDICTION-001",
+        "title": "Jurisdiction, Licensing and How to Verify Current Rules"
+      }
+    },
+    {
+      "id": "THC-C023",
+      "title": "Educational Boundaries and Scope",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-08",
+        "title": "Working Within Authorization and Escalation Boundaries"
+      }
+    },
+    {
+      "id": "THC-C024",
+      "title": "Personal Protective Equipment Basics",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-02",
+        "title": "PPE, Chemical Labels and Safety Data Sheets"
+      }
+    },
+    {
+      "id": "THC-C025",
+      "title": "Electrical Safety in Grow Spaces",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SAFETY-HAZARDS-001",
+        "title": "Cultivation Hazards: Tools, Machinery, Electrical and Work Areas"
+      }
+    },
+    {
+      "id": "THC-C026",
+      "title": "Water and Electricity Hazard Control",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-01",
+        "title": "Hazard Recognition and Control Boundaries"
+      }
+    },
+    {
+      "id": "THC-C027",
+      "title": "Chemical Handling Fundamentals",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SAFETY-CHEMICAL-003",
+        "title": "Chemical Labels, Pesticide Worker Protection and Decontamination"
+      }
+    },
+    {
+      "id": "THC-C028",
+      "title": "Labels, SDS, and Hazard Communication",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-02",
+        "title": "PPE, Chemical Labels and Safety Data Sheets"
+      }
+    },
+    {
+      "id": "THC-C029",
+      "title": "CO2 Safety and Enrichment Hazards",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-03",
+        "title": "Cannabis-Specific Workplace Exposures and Emergency Escalation"
+      }
+    },
+    {
+      "id": "THC-C030",
+      "title": "Heat, Humidity, and Indoor Air Risks",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SAFETY-HEAT-PPE-002",
+        "title": "Heat Stress, Hydration, PPE and Emergency Response"
+      }
+    },
+    {
+      "id": "THC-C031",
+      "title": "Mold, Dust, Allergen, and Particulate Exposure",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-03",
+        "title": "Cannabis-Specific Workplace Exposures and Emergency Escalation"
+      }
+    },
+    {
+      "id": "THC-C032",
+      "title": "Ladder, Tool, and Ergonomic Safety",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SAFETY-HAZARDS-001",
+        "title": "Cultivation Hazards: Tools, Machinery, Electrical and Work Areas"
+      }
+    },
+    {
+      "id": "THC-C033",
+      "title": "Fire Prevention and Emergency Readiness",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-03",
+        "title": "Cannabis-Specific Workplace Exposures and Emergency Escalation"
+      }
+    },
+    {
+      "id": "THC-C034",
+      "title": "Sanitation and Cross-Contamination Prevention",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-05",
+        "title": "Cleaning, Disinfection and Sanitation Verification"
+      }
+    },
+    {
+      "id": "THC-C035",
+      "title": "Waste Handling and Disposal Principles",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-12",
+        "title": "Discrepancies, Waste and Destruction Documentation"
+      }
+    },
+    {
+      "id": "THC-C036",
+      "title": "Child, Pet, and Visitor Safety",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-01",
+        "title": "Hazard Recognition and Control Boundaries"
+      }
+    },
+    {
+      "id": "THC-C037",
+      "title": "Security, Privacy, and Responsible Documentation",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-16",
+        "title": "Contemporaneous Records and Data Integrity"
+      }
+    },
+    {
+      "id": "THC-C038",
+      "title": "Stop-Work and Escalation Decisions",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-08",
+        "title": "Working Within Authorization and Escalation Boundaries"
+      }
+    },
+    {
+      "id": "THC-C039",
+      "title": "Incident Reporting and Corrective Action",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-RESPONSIBLE-RECORDS-003",
+        "title": "Responsible Cultivation Records, Traceability and Corrective Action"
+      }
+    },
+    {
+      "id": "THC-C040",
+      "title": "Ethical Cultivation Education",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LEGAL-JURISDICTION-001",
+        "title": "Jurisdiction, Licensing and How to Verify Current Rules"
+      }
+    },
+    {
+      "id": "THC-C041",
+      "title": "Building a Personal Safety Plan",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-01",
+        "title": "Hazard Recognition and Control Boundaries"
+      }
+    },
+    {
+      "id": "THC-C042",
+      "title": "Responsible Practice and Safety Capstone",
+      "level": 1,
+      "domainId": "THC-A02",
+      "domain": "Responsible Practice and Safety",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-18",
+        "title": "Integrated Technician Workflow Case"
+      }
+    },
+    {
+      "id": "THC-C043",
+      "title": "Measurement Mindset for Cultivators",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-003-03",
+        "title": "Sensor Placement, Verification and Data-Quality Triage"
+      }
+    },
+    {
+      "id": "THC-C044",
+      "title": "Units, Conversions, and Significant Figures",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C045",
+      "title": "Temperature Measurement and Sensor Placement",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-099",
+        "title": "Sensor Placement, Mapping, and Calibration"
+      }
+    },
+    {
+      "id": "THC-C046",
+      "title": "Relative Humidity Measurement",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-083",
+        "title": "Relative Humidity, Dew Point, and Condensation"
+      }
+    },
+    {
+      "id": "THC-C047",
+      "title": "VPD Measurement and Interpretation",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-085",
+        "title": "Vapor Pressure Deficit: Meaning and Calculation"
+      }
+    },
+    {
+      "id": "THC-C048",
+      "title": "Light Measurement: PPFD, DLI, and Photoperiod",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-103",
+        "title": "Daily Light Integral Calculation"
+      }
+    },
+    {
+      "id": "THC-C049",
+      "title": "pH Measurement and Calibration",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-132",
+        "title": "Solution pH and Root-Zone pH"
+      }
+    },
+    {
+      "id": "THC-C050",
+      "title": "EC, PPM, and Conductivity Concepts",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-134",
+        "title": "Electrical Conductivity and Salinity"
+      }
+    },
+    {
+      "id": "THC-C051",
+      "title": "Water Volume, Flow, and Pressure Measurement",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-091",
+        "title": "Irrigation Volume, Frequency, and Distribution Uniformity"
+      }
+    },
+    {
+      "id": "THC-C052",
+      "title": "Media Moisture and Dryback Measurement",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-092",
+        "title": "Dryback: Measurement, Interpretation, and Limits"
+      }
+    },
+    {
+      "id": "THC-C053",
+      "title": "Runoff and Drainage Data",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-093",
+        "title": "Runoff, Leaching Fraction, and Salt Movement"
+      }
+    },
+    {
+      "id": "THC-C054",
+      "title": "Plant Height, Canopy, and Biomass Measurements",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-200",
+        "title": "Canopy Measurements, Maps, and Yield Interpretation"
+      }
+    },
+    {
+      "id": "THC-C055",
+      "title": "Root-Zone Temperature and Oxygen Indicators",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-043",
+        "title": "Root Respiration and Oxygen Demand"
+      }
+    },
+    {
+      "id": "THC-C056",
+      "title": "Trichome and Maturity Observation Records",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-239",
+        "title": "Trichome Color as a Subjective Field Indicator"
+      }
+    },
+    {
+      "id": "THC-C057",
+      "title": "Scouting Counts and Pest Pressure Data",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-300",
+        "title": "Pest Records, Mapping, and Trend Analysis"
+      }
+    },
+    {
+      "id": "THC-C058",
+      "title": "Building Reliable Grow Logs",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-16",
+        "title": "Contemporaneous Records and Data Integrity"
+      }
+    },
+    {
+      "id": "THC-C059",
+      "title": "Batch, Plant, and Cultivar Identification",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-10",
+        "title": "Identity Through the Cultivation Workflow"
+      }
+    },
+    {
+      "id": "THC-C060",
+      "title": "Data Quality, Missing Data, and Outliers",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-003-03",
+        "title": "Sensor Placement, Verification and Data-Quality Triage"
+      }
+    },
+    {
+      "id": "THC-C061",
+      "title": "Charts, Trends, and Decision Thresholds",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-003-04",
+        "title": "Alarms, Trends, Environmental Records and Shift Handoff"
+      }
+    },
+    {
+      "id": "THC-C062",
+      "title": "Digital Grow Logs and GrowLens Workflows",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-002-04",
+        "title": "Crop Observation Records, Photographs and Shift Handoff"
+      }
+    },
+    {
+      "id": "THC-C063",
+      "title": "Measurement, Data, and Records Capstone",
+      "level": 1,
+      "domainId": "THC-A03",
+      "domain": "Measurement, Data, and Records",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C064",
+      "title": "Understanding Indoor, Outdoor, and Greenhouse Systems",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-HOME-SCOPE-001",
+        "title": "Plan the Home Grow Before Starting Plants"
+      }
+    },
+    {
+      "id": "THC-C065",
+      "title": "Grow Tents, Rooms, and Zones",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SPACE-ZONING-001",
+        "title": "Grow-Space Zoning, Movement and Sanitation Flow"
+      }
+    },
+    {
+      "id": "THC-C066",
+      "title": "Soil, Soilless, and Hydroponic Overview",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-HYDRO-SYSTEMS-001",
+        "title": "Hydroponic Systems: Recirculating, Drain-to-Waste and Water Movement"
+      }
+    },
+    {
+      "id": "THC-C067",
+      "title": "Containers, Beds, and Root Volumes",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-059",
+        "title": "Container Geometry, Root Restriction, and Transplanting"
+      }
+    },
+    {
+      "id": "THC-C068",
+      "title": "Airflow, Ventilation, and Circulation Basics",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-ENV-AIRFLOW-002",
+        "title": "Airflow, Boundary Layers and Environmental Uniformity"
+      }
+    },
+    {
+      "id": "THC-C069",
+      "title": "Lighting System Components",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-120",
+        "title": "Lighting Energy, Heat, Efficacy, and Crop Response"
+      }
+    },
+    {
+      "id": "THC-C070",
+      "title": "Irrigation System Components",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-004-03",
+        "title": "Authorized Irrigation and Fertigation Work-Order Execution"
+      }
+    },
+    {
+      "id": "THC-C071",
+      "title": "Water Sources and Treatment Overview",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-WATER-001",
+        "title": "Water Quality, pH, EC and Irrigation Context"
+      }
+    },
+    {
+      "id": "THC-C072",
+      "title": "Environmental Controllers and Sensors",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-ENV-SENSORS-002",
+        "title": "Environmental Sensors, Placement, Calibration and Data Quality"
+      }
+    },
+    {
+      "id": "THC-C073",
+      "title": "Drainage, Runoff, and Spill Control",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-093",
+        "title": "Runoff, Leaching Fraction, and Salt Movement"
+      }
+    },
+    {
+      "id": "THC-C074",
+      "title": "Cleanable Surfaces and Sanitation Design",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SPACE-ZONING-001",
+        "title": "Grow-Space Zoning, Movement and Sanitation Flow"
+      }
+    },
+    {
+      "id": "THC-C075",
+      "title": "Workflow, Access, and Plant Spacing",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SPACE-ZONING-001",
+        "title": "Grow-Space Zoning, Movement and Sanitation Flow"
+      }
+    },
+    {
+      "id": "THC-C076",
+      "title": "Biosecurity Zones and Movement Control",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-04",
+        "title": "Contamination Routes and Zone Discipline"
+      }
+    },
+    {
+      "id": "THC-C077",
+      "title": "Equipment Selection and Load Planning",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SPACE-CAPACITY-003",
+        "title": "Environmental, Utility and Equipment Capacity Before Crop Loading"
+      }
+    },
+    {
+      "id": "THC-C078",
+      "title": "Basic HVAC and Dehumidification Concepts",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-ENV-LOADS-003",
+        "title": "Heat, Moisture Loads, Dehumidification and Control Capacity"
+      }
+    },
+    {
+      "id": "THC-C079",
+      "title": "Power Planning and Circuit Awareness",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SPACE-CAPACITY-003",
+        "title": "Environmental, Utility and Equipment Capacity Before Crop Loading"
+      }
+    },
+    {
+      "id": "THC-C080",
+      "title": "Outdoor Site Selection Fundamentals",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-OUTDOOR-SITE-001",
+        "title": "Outdoor Site Selection, Sun, Drainage and Water Access"
+      }
+    },
+    {
+      "id": "THC-C081",
+      "title": "Greenhouse Structure and Climate Basics",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-GREENHOUSE-CLIMATE-002",
+        "title": "Greenhouse and High-Tunnel Climate Management"
+      }
+    },
+    {
+      "id": "THC-C082",
+      "title": "Small-Grow Commissioning Checklist",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-007-02",
+        "title": "Room Inspection, Measurement and Irrigation Integration"
+      }
+    },
+    {
+      "id": "THC-C083",
+      "title": "Grow-System Risk Assessment",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-001-01",
+        "title": "Hazard Recognition and Control Boundaries"
+      }
+    },
+    {
+      "id": "THC-C084",
+      "title": "Grow Systems Foundations Capstone",
+      "level": 1,
+      "domainId": "THC-A04",
+      "domain": "Grow Systems Foundations",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C085",
+      "title": "Seed Anatomy and Viability",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-023",
+        "title": "Seed Viability Versus Seed Vigor"
+      }
+    },
+    {
+      "id": "THC-C086",
+      "title": "Seed Storage and Inventory Control",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-024",
+        "title": "Seed Moisture, Temperature, Oxygen, and Storage Life"
+      }
+    },
+    {
+      "id": "THC-C087",
+      "title": "Seed Intake, Labeling, and Traceability",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SPACE-INTAKE-002",
+        "title": "Plant Intake, Quarantine and Source Verification"
+      }
+    },
+    {
+      "id": "THC-C088",
+      "title": "Germination Biology and Environmental Needs",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-PROP-SEED-002",
+        "title": "Seed Viability, Germination and Seedling Establishment"
+      }
+    },
+    {
+      "id": "THC-C089",
+      "title": "Paper Towel, Plug, and Direct-Sow Methods",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-PROP-SEED-002",
+        "title": "Seed Viability, Germination and Seedling Establishment"
+      }
+    },
+    {
+      "id": "THC-C090",
+      "title": "Germination Failure Diagnosis",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-040",
+        "title": "Germination Testing, Metrics, and Failure Analysis"
+      }
+    },
+    {
+      "id": "THC-C091",
+      "title": "Seedling Emergence and Early Development",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-033",
+        "title": "Cotyledon Function and the First True Leaves"
+      }
+    },
+    {
+      "id": "THC-C092",
+      "title": "Seedling Lighting and Stretch Control",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-034",
+        "title": "Seedling Light Acclimation"
+      }
+    },
+    {
+      "id": "THC-C093",
+      "title": "Seedling Irrigation and Root-Zone Care",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-035",
+        "title": "Seedling Watering and Root-Zone Oxygen"
+      }
+    },
+    {
+      "id": "THC-C094",
+      "title": "Seedling Nutrition and Transplant Timing",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-036",
+        "title": "Seedling Nutrition and Salinity Sensitivity"
+      }
+    },
+    {
+      "id": "THC-C095",
+      "title": "Damping-Off Prevention",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-037",
+        "title": "Damping-Off Biology and Prevention"
+      }
+    },
+    {
+      "id": "THC-C096",
+      "title": "Donor and Mother Plant Fundamentals",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-162",
+        "title": "Mother-Plant Identity and Health Status"
+      }
+    },
+    {
+      "id": "THC-C097",
+      "title": "Cutting Selection and Preparation",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-164",
+        "title": "Cutting Selection and Carbohydrate Status"
+      }
+    },
+    {
+      "id": "THC-C098",
+      "title": "Cloning Tools, Sanitation, and Workflow",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-170",
+        "title": "Sanitation and Tool-Mediated Pathogen Spread"
+      }
+    },
+    {
+      "id": "THC-C099",
+      "title": "Rooting Hormones and Application Methods",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-166",
+        "title": "Auxin Biology and Rooting Hormones"
+      }
+    },
+    {
+      "id": "THC-C100",
+      "title": "Clone Environment and Humidity Management",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-168",
+        "title": "Humidity Management and Transpiration Control"
+      }
+    },
+    {
+      "id": "THC-C101",
+      "title": "Rooting Media and Propagation Systems",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-167",
+        "title": "Rooting Media, Moisture, and Oxygen"
+      }
+    },
+    {
+      "id": "THC-C102",
+      "title": "Hardening-Off Rooted Clones",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-172",
+        "title": "Hardening-Off Rooted Cuttings"
+      }
+    },
+    {
+      "id": "THC-C103",
+      "title": "Transplanting Seedlings and Clones",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-039",
+        "title": "Transplant Readiness and Hardening-Off"
+      }
+    },
+    {
+      "id": "THC-C104",
+      "title": "Propagation Records and Release Criteria",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-005-01",
+        "title": "Propagation, Transplant Identity and Sanitation Control"
+      }
+    },
+    {
+      "id": "THC-C105",
+      "title": "Seed and Propagation Practice Capstone",
+      "level": 2,
+      "domainId": "THC-A05",
+      "domain": "Seed and Propagation Practice",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C106",
+      "title": "Root-Zone Ecology and the Rhizosphere",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SOIL-MICROBES-002",
+        "title": "Rhizosphere, Endophytes, Mycorrhizae and Microbial Risk"
+      }
+    },
+    {
+      "id": "THC-C107",
+      "title": "Soil Texture, Structure, and Drainage",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-050",
+        "title": "Soil Texture, Structure, and Aggregation"
+      }
+    },
+    {
+      "id": "THC-C108",
+      "title": "Organic Matter and Soil Carbon",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-051",
+        "title": "Organic Matter, Humus, and Carbon Cycling"
+      }
+    },
+    {
+      "id": "THC-C109",
+      "title": "Coco Coir Properties and Preparation",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-055",
+        "title": "Coco Coir Properties and Management"
+      }
+    },
+    {
+      "id": "THC-C110",
+      "title": "Peat-Based Media and Buffering",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-054",
+        "title": "Peat-Based Substrates"
+      }
+    },
+    {
+      "id": "THC-C111",
+      "title": "Perlite, Pumice, and Aeration Amendments",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-057",
+        "title": "Rockwool, Perlite, and Inert Media"
+      }
+    },
+    {
+      "id": "THC-C112",
+      "title": "Rockwool and Inert Media",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-057",
+        "title": "Rockwool, Perlite, and Inert Media"
+      }
+    },
+    {
+      "id": "THC-C113",
+      "title": "Container Size and Root Architecture",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-059",
+        "title": "Container Geometry, Root Restriction, and Transplanting"
+      }
+    },
+    {
+      "id": "THC-C114",
+      "title": "pH Availability in Soil and Soilless Media",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-WATER-PH-002",
+        "title": "pH Measurement, Buffering and Nutrient Availability Context"
+      }
+    },
+    {
+      "id": "THC-C115",
+      "title": "Cation Exchange Capacity",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "THC-ENC-052",
+        "title": "Cation Exchange Capacity and Nutrient Buffering"
+      }
+    },
+    {
+      "id": "THC-C116",
+      "title": "Macronutrients: Nitrogen, Phosphorus, and Potassium",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-NUTRITION-MACRO-002",
+        "title": "Macronutrients: N, P, K, Ca, Mg and S"
+      }
+    },
+    {
+      "id": "THC-C117",
+      "title": "Secondary Nutrients: Calcium, Magnesium, and Sulfur",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-NUTRITION-MACRO-002",
+        "title": "Macronutrients: N, P, K, Ca, Mg and S"
+      }
+    },
+    {
+      "id": "THC-C118",
+      "title": "Micronutrients and Trace Elements",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-NUTRITION-MICRO-003",
+        "title": "Micronutrients, Availability and Nutrient Antagonism"
+      }
+    },
+    {
+      "id": "THC-C119",
+      "title": "Nutrient Ratios and Antagonisms",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-NUTRIENT-INTERACT-001",
+        "title": "Nutrient Interactions, Balance and Developmental Context"
+      }
+    },
+    {
+      "id": "THC-C120",
+      "title": "Organic Amendments and Mineralization",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SOIL-AMENDMENTS-003",
+        "title": "Amendments, Humic/Fulvic Inputs, Enzymes and Biostimulant Evidence"
+      }
+    },
+    {
+      "id": "THC-C121",
+      "title": "Microbes, Mycorrhizae, and Inoculants",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SOIL-MICROBES-002",
+        "title": "Rhizosphere, Endophytes, Mycorrhizae and Microbial Risk"
+      }
+    },
+    {
+      "id": "THC-C122",
+      "title": "Enzymes, Humic, Fulvic, and Amino Inputs",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-SOIL-AMENDMENTS-003",
+        "title": "Amendments, Humic/Fulvic Inputs, Enzymes and Biostimulant Evidence"
+      }
+    },
+    {
+      "id": "THC-C123",
+      "title": "Mixing Nutrient Solutions Safely",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-004-03",
+        "title": "Authorized Irrigation and Fertigation Work-Order Execution"
+      }
+    },
+    {
+      "id": "THC-C124",
+      "title": "Root-Zone Monitoring and Runoff Interpretation",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-004-02",
+        "title": "Root-Zone Moisture, Dryback and EC Trend Context"
+      }
+    },
+    {
+      "id": "THC-C125",
+      "title": "Building a Stage-Based Nutrition Plan",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "upgrade",
+      "match": {
+        "id": "LESSON-LH-TECH1-004-04",
+        "title": "Nutrition Context, Irrigation Deviations and Shift Handoff"
+      }
+    },
+    {
+      "id": "THC-C126",
+      "title": "Root Zone, Media, and Nutrition Capstone",
+      "level": 2,
+      "domainId": "THC-A06",
+      "domain": "Root Zone, Media, and Nutrition",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C127",
+      "title": "Temperature Management Through the Lifecycle",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C128",
+      "title": "Relative Humidity Management",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C129",
+      "title": "Vapor Pressure Deficit in Practice",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C130",
+      "title": "Airflow Patterns and Leaf Movement",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C131",
+      "title": "Ventilation and Air Exchange",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C132",
+      "title": "CO2 Basics and When Enrichment Applies",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C133",
+      "title": "Photoperiod and Light Scheduling",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C134",
+      "title": "PPFD Mapping and Canopy Uniformity",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C135",
+      "title": "Daily Light Integral Planning",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C136",
+      "title": "Spectrum and Plant Responses",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C137",
+      "title": "Fixture Height and Light Stress Prevention",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C138",
+      "title": "Water Quality and Source Testing",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C139",
+      "title": "pH and EC Targets by System",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C140",
+      "title": "Hand-Watering Technique",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C141",
+      "title": "Drip Irrigation Fundamentals",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C142",
+      "title": "Irrigation Frequency and Shot Size",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C143",
+      "title": "Dryback and Root-Zone Oxygen",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C144",
+      "title": "Runoff Targets and Drainage Management",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C145",
+      "title": "Environmental Data Logging",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C146",
+      "title": "Coordinating Light, VPD, and Irrigation",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C147",
+      "title": "Environment, Lighting, and Irrigation Capstone",
+      "level": 2,
+      "domainId": "THC-A07",
+      "domain": "Environment, Lighting, and Irrigation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C148",
+      "title": "Vegetative Growth Objectives",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C149",
+      "title": "Apical Dominance and Branch Development",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C150",
+      "title": "Low-Stress Training Fundamentals",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C151",
+      "title": "Topping and FIM Techniques",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C152",
+      "title": "Supercropping and High-Stress Training",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C153",
+      "title": "Mainlining and Manifolding",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C154",
+      "title": "SCROG Design and Net Management",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C155",
+      "title": "Defoliation Principles and Risks",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C156",
+      "title": "Leaf Tucking and Selective Pruning",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C157",
+      "title": "Lollipopping and Lower-Canopy Cleanup",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C158",
+      "title": "Plant Spacing and Canopy Density",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C159",
+      "title": "Transitioning From Vegetative Growth to Flower",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C160",
+      "title": "Photoperiod Change and Stretch Management",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C161",
+      "title": "Flower Initiation and Development",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C162",
+      "title": "Supporting Branches and Heavy Flowers",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C163",
+      "title": "Late-Flower Environmental Management",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C164",
+      "title": "Ripening Signals and Senescence",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C165",
+      "title": "Hermaphroditism and Stress-Related Sex Expression",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C166",
+      "title": "Autoflower Crop-Cycle Management",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C167",
+      "title": "Building a Complete Crop Calendar",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C168",
+      "title": "Canopy, Flowering, and Crop Cycle Capstone",
+      "level": 2,
+      "domainId": "THC-A08",
+      "domain": "Canopy, Flowering, and Crop Cycle",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C169",
+      "title": "The Diagnostic Mindset",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C170",
+      "title": "Establishing a Healthy Baseline",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C171",
+      "title": "Systematic Plant Inspection",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C172",
+      "title": "Reading Leaf Position, Color, and Texture",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C173",
+      "title": "New Growth Versus Old Growth Symptoms",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C174",
+      "title": "Root-Zone Versus Foliar Symptom Patterns",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C175",
+      "title": "Environmental Stress Diagnosis",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C176",
+      "title": "Light Stress and Photoinhibition",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C177",
+      "title": "Watering Errors and Oxygen Stress",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C178",
+      "title": "pH Drift and Nutrient Availability",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C179",
+      "title": "Mobile Versus Immobile Nutrient Patterns",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C180",
+      "title": "Pest Damage Pattern Recognition",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C181",
+      "title": "Disease Symptom Pattern Recognition",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C182",
+      "title": "Abiotic Versus Biotic Problems",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C183",
+      "title": "Using Hand Lenses and Microscopes",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C184",
+      "title": "Sampling, Labeling, and Photo Documentation",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C185",
+      "title": "Differential Diagnosis and Rule-Out Testing",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C186",
+      "title": "Thresholds, Severity, and Urgency",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C187",
+      "title": "Building a Diagnostic Decision Tree",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C188",
+      "title": "Communicating Findings and Uncertainty",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C189",
+      "title": "Scouting and Diagnostic Reasoning Capstone",
+      "level": 3,
+      "domainId": "THC-A09",
+      "domain": "Scouting and Diagnostic Reasoning",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C190",
+      "title": "Integrated Pest Management Principles",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C191",
+      "title": "Exclusion and Prevention",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C192",
+      "title": "Sanitation as Pest Control",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C193",
+      "title": "Quarantine and Incoming Plant Inspection",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C194",
+      "title": "Sticky Cards and Monitoring Tools",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C195",
+      "title": "Scouting Routes and Frequency",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C196",
+      "title": "Pest Identification: Spider Mites",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C197",
+      "title": "Pest Identification: Thrips",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C198",
+      "title": "Pest Identification: Aphids",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C199",
+      "title": "Pest Identification: Fungus Gnats",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C200",
+      "title": "Pest Identification: Whiteflies and Scale",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C201",
+      "title": "Beneficial Insects and Biological Control",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C202",
+      "title": "Cultural and Mechanical Controls",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C203",
+      "title": "Environmental Manipulation for Pest Suppression",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C204",
+      "title": "Product Label Literacy and Lawful Use",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C205",
+      "title": "Spray Coverage and Application Technique",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C206",
+      "title": "Resistance Management and Mode-of-Action Rotation",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C207",
+      "title": "Flower-Stage Pest Management Constraints",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C208",
+      "title": "IPM Records, Thresholds, and Decisions",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C209",
+      "title": "Building a Whole-Crop IPM Program",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C210",
+      "title": "Integrated Pest Management Capstone",
+      "level": 3,
+      "domainId": "THC-A10",
+      "domain": "Integrated Pest Management",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C211",
+      "title": "The Plant Disease Triangle",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C212",
+      "title": "Fungal, Bacterial, Viral, and Viroid Concepts",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C213",
+      "title": "Powdery Mildew Biology and Prevention",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C214",
+      "title": "Botrytis and Flower Rot",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C215",
+      "title": "Root Rot and Water-Mold Diseases",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C216",
+      "title": "Damping-Off Pathogens",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C217",
+      "title": "Leaf Spots and Stem Diseases",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C218",
+      "title": "Fusarium and Vascular Wilts",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C219",
+      "title": "Hop Latent Viroid Fundamentals",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C220",
+      "title": "HLVd Sampling and Testing Concepts",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C221",
+      "title": "Mother-Plant and Clone Biosecurity",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C222",
+      "title": "Clean Stock and Pathogen Exclusion",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C223",
+      "title": "Tool and Surface Disinfection",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C224",
+      "title": "Water-System Biosecurity",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C225",
+      "title": "Airborne Spore and Condensation Control",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C226",
+      "title": "Quarantine, Hold, Release, and Destruction",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C227",
+      "title": "Disease Sampling and Chain of Custody",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C228",
+      "title": "Outbreak Mapping and Containment",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C229",
+      "title": "Recovery, Reset, and Recommissioning",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C230",
+      "title": "Writing a Facility Biosecurity Plan",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C231",
+      "title": "Plant Disease and Biosecurity Capstone",
+      "level": 3,
+      "domainId": "THC-A11",
+      "domain": "Plant Disease and Biosecurity",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C232",
+      "title": "Corrective Action Fundamentals",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C233",
+      "title": "Stabilize First: Stop Further Damage",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C234",
+      "title": "Recovering From Overwatering",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C235",
+      "title": "Recovering From Underwatering",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C236",
+      "title": "Correcting pH Excursions",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C237",
+      "title": "Correcting Excess EC and Salt Buildup",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C238",
+      "title": "Correcting Nitrogen Imbalance",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C239",
+      "title": "Correcting Calcium and Magnesium Problems",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C240",
+      "title": "Correcting Micronutrient Deficiencies",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C241",
+      "title": "Recovering From Heat Stress",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C242",
+      "title": "Recovering From Cold Stress",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C243",
+      "title": "Recovering From Humidity Extremes",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C244",
+      "title": "Recovering From Light Stress",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C245",
+      "title": "Responding to Root Damage",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C246",
+      "title": "Responding to Pest Outbreaks",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C247",
+      "title": "Responding to Disease Outbreaks",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C248",
+      "title": "Crop Triage, Culling, and Salvage",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C249",
+      "title": "Root-Cause Analysis",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C250",
+      "title": "CAPA Documentation for Growers",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C251",
+      "title": "Post-Incident Review and Prevention",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C252",
+      "title": "Corrective Action and Crop Recovery Capstone",
+      "level": 3,
+      "domainId": "THC-A12",
+      "domain": "Corrective Action and Crop Recovery",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C253",
+      "title": "Environmental Control System Architecture",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C254",
+      "title": "Heat-Load Estimation for Grow Spaces",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C255",
+      "title": "HVAC Fundamentals for Cultivation",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C256",
+      "title": "Dehumidification Sizing and Placement",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C257",
+      "title": "Humidification and Moisture Addition",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C258",
+      "title": "Air Distribution and Dead-Zone Control",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C259",
+      "title": "Room Pressure and Airflow Direction",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C260",
+      "title": "Filtration and Indoor Air Quality",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C261",
+      "title": "CO2 Distribution and Safety Interlocks",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C262",
+      "title": "Sensor Networks and Data Integrity",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C263",
+      "title": "Controller Logic, Setpoints, and Hysteresis",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C264",
+      "title": "Alarm Design and Escalation",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C265",
+      "title": "Environmental Mapping and Qualification",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C266",
+      "title": "Commissioning Grow Rooms",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C267",
+      "title": "Seasonal Performance and Load Changes",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C268",
+      "title": "Greenhouse Climate-Control Engineering",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C269",
+      "title": "Backup Power and Failure Planning",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C270",
+      "title": "Condensation, Dew Point, and Building Surfaces",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C271",
+      "title": "Energy Efficiency Without Crop Compromise",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C272",
+      "title": "Environmental System Troubleshooting",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C273",
+      "title": "Controlled-Environment Engineering Capstone",
+      "level": 4,
+      "domainId": "THC-A13",
+      "domain": "Controlled-Environment Engineering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C274",
+      "title": "Fertigation System Design",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C275",
+      "title": "Stock Solutions and Concentrate Management",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C276",
+      "title": "Injector and Dosatron Fundamentals",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C277",
+      "title": "Reservoir Mixing Order and Compatibility",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C278",
+      "title": "Water Alkalinity and Acid Management",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C279",
+      "title": "Nutrient Solution Temperature and Oxygen",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C280",
+      "title": "Irrigation Uniformity Testing",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C281",
+      "title": "Emitter Selection, Flow, and Pressure",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C282",
+      "title": "Shot Strategy and Irrigation Windows",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C283",
+      "title": "Generative and Vegetative Steering Concepts",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C284",
+      "title": "Substrate Water Content and EC Sensors",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C285",
+      "title": "Dryback Curves and Root-Zone Control",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C286",
+      "title": "Drain Percentage and Leach Fraction",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C287",
+      "title": "Recirculating System Management",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C288",
+      "title": "Drain-to-Waste System Optimization",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C289",
+      "title": "RO System Operation and Maintenance",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C290",
+      "title": "UV, Filtration, and Water Sanitation",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C291",
+      "title": "Fertigation Alarms and Failure Response",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C292",
+      "title": "Nutrient Batch Records and Verification",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C293",
+      "title": "Designing a Cultivar-Specific Fertigation Strategy",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C294",
+      "title": "Advanced Fertigation and Crop Steering Capstone",
+      "level": 4,
+      "domainId": "THC-A14",
+      "domain": "Advanced Fertigation and Crop Steering",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C295",
+      "title": "Deep Water Culture Systems",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C296",
+      "title": "Nutrient Film Technique",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C297",
+      "title": "Ebb-and-Flow Systems",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C298",
+      "title": "Aeroponic Cultivation",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C299",
+      "title": "Automated Drip in Coco",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C300",
+      "title": "Living Soil Beds at Scale",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C301",
+      "title": "No-Till and Mulch Systems",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C302",
+      "title": "Organic Fertigation Systems",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C303",
+      "title": "Vertical Farming and Multi-Tier Layouts",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C304",
+      "title": "Sea-of-Green Production",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C305",
+      "title": "High-Density Crop Planning",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C306",
+      "title": "Crop Scheduling and Perpetual Harvests",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C307",
+      "title": "Environmental Automation Workflows",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C308",
+      "title": "Irrigation Automation and Safeguards",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C309",
+      "title": "Remote Monitoring and Notifications",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C310",
+      "title": "Computer Vision and Plant Scouting",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C311",
+      "title": "Sensors, APIs, and Grow Data Integration",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C312",
+      "title": "Automation Failure Modes and Manual Overrides",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C313",
+      "title": "Digital Twins and Predictive Control Concepts",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C314",
+      "title": "Selecting the Right Advanced System",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C315",
+      "title": "Advanced Methods and Automation Capstone",
+      "level": 4,
+      "domainId": "THC-A15",
+      "domain": "Advanced Methods and Automation",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C316",
+      "title": "Harvest Readiness and Decision Criteria",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C317",
+      "title": "Trichome Observation and Sampling",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C318",
+      "title": "Harvest Planning and Labor Flow",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C319",
+      "title": "Preharvest Irrigation Management",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C320",
+      "title": "Sanitary Harvest Tools and Handling",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C321",
+      "title": "Whole-Plant Versus Branch Harvest",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "reuse",
+      "match": {
+        "id": "THC-ENC-342",
+        "title": "Whole-Plant Versus Branch Harvest"
+      }
+    },
+    {
+      "id": "THC-C322",
+      "title": "Wet Trim, Dry Trim, and Hybrid Methods",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C323",
+      "title": "Dry-Room Design and Preparation",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C324",
+      "title": "Temperature, Humidity, and Airflow During Drying",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C325",
+      "title": "Moisture Migration and Drying Rate",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C326",
+      "title": "Water Activity Fundamentals",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C327",
+      "title": "Curing Containers and Headspace Management",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C328",
+      "title": "Burping, Equalization, and Moisture Control",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C329",
+      "title": "Aroma Preservation and Volatile Loss",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C330",
+      "title": "Mold Prevention During Drying and Curing",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C331",
+      "title": "Packaging Material and Storage Conditions",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C332",
+      "title": "Quality Grading and Defect Identification",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C333",
+      "title": "Retained Samples and Stability Review",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C334",
+      "title": "Postharvest Traceability and Batch Records",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C335",
+      "title": "Building a Complete Postharvest Quality System",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C336",
+      "title": "Harvest, Postharvest, and Quality Capstone",
+      "level": 4,
+      "domainId": "THC-A16",
+      "domain": "Harvest, Postharvest, and Quality",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C337",
+      "title": "Cannabis Genetics Fundamentals",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C338",
+      "title": "Mendelian Inheritance for Growers",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C339",
+      "title": "Quantitative Traits and Polygenic Inheritance",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "reuse",
+      "match": {
+        "id": "THC-ENC-144",
+        "title": "Quantitative Traits and Polygenic Inheritance"
+      }
+    },
+    {
+      "id": "THC-C340",
+      "title": "Genotype, Phenotype, and Environmental Interaction",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C341",
+      "title": "Dominance, Recessiveness, and Epistasis",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C342",
+      "title": "Sex Determination and Expression",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C343",
+      "title": "Photoperiod and Autoflower Genetics",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C344",
+      "title": "Landraces, Hybrids, IBLs, and Polyhybrids",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C345",
+      "title": "Parent Selection and Breeding Objectives",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C346",
+      "title": "Population Size and Selection Pressure",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C347",
+      "title": "F1 Hybrid Design",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C348",
+      "title": "F2 Segregation and Phenotype Hunting",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C349",
+      "title": "Backcrossing and Trait Recovery",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C350",
+      "title": "Inbreeding, Line Breeding, and Stabilization",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C351",
+      "title": "Selfing and Feminized Seed Concepts",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C352",
+      "title": "Test Crosses and Progeny Evaluation",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C353",
+      "title": "Heritability and Selection Response",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C354",
+      "title": "Polyploidy and Chromosome Variation",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C355",
+      "title": "Breeding Records, Pedigrees, and Naming",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C356",
+      "title": "Designing a Multi-Generation Breeding Program",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C357",
+      "title": "Genetics, Selection, and Breeding Capstone",
+      "level": 5,
+      "domainId": "THC-A17",
+      "domain": "Genetics, Selection, and Breeding",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C358",
+      "title": "Floral Reproductive Biology",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C359",
+      "title": "Pollination Timing and Technique",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C360",
+      "title": "Pollen Collection and Handling",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C361",
+      "title": "Pollen Storage and Viability",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C362",
+      "title": "Controlled Pollination and Isolation",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C363",
+      "title": "Seed Development and Maturation",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C364",
+      "title": "Seed Harvest, Cleaning, and Drying",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C365",
+      "title": "Seed Quality Testing",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C366",
+      "title": "Seed Storage Environment and Packaging",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C367",
+      "title": "Seed Inventory and Accession Management",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C368",
+      "title": "Genetic Preservation Strategies",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C369",
+      "title": "Mother-Plant Preservation",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C370",
+      "title": "Clean-Stock Programs",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C371",
+      "title": "Tissue Culture Laboratory Fundamentals",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C372",
+      "title": "Aseptic Technique and Contamination Control",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C373",
+      "title": "Explant Selection and Initiation",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C374",
+      "title": "Media Preparation and Plant Growth Regulators",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C375",
+      "title": "Multiplication, Rooting, and Acclimation",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C376",
+      "title": "Cryopreservation and Long-Term Storage Concepts",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C377",
+      "title": "Preservation Program Documentation",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C378",
+      "title": "Seed Preservation and Tissue Culture Capstone",
+      "level": 5,
+      "domainId": "THC-A18",
+      "domain": "Seed Preservation and Tissue Culture",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C379",
+      "title": "Asking Testable Cultivation Questions",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C380",
+      "title": "Literature Search and Source Evaluation",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C381",
+      "title": "Claims, Evidence, and Scientific Uncertainty",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C382",
+      "title": "Experimental Variables and Controls",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C383",
+      "title": "Replication, Randomization, and Bias",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C384",
+      "title": "Sample Size and Practical Constraints",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C385",
+      "title": "Cultivar Trial Design",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C386",
+      "title": "Nutrient Trial Design",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C387",
+      "title": "Lighting Trial Design",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C388",
+      "title": "Environmental Setpoint Trials",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C389",
+      "title": "Irrigation and Dryback Trials",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C390",
+      "title": "Media and Amendment Trials",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C391",
+      "title": "IPM and Biological-Control Trials",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C392",
+      "title": "Postharvest Stability Trials",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C393",
+      "title": "Sensory and Quality Evaluation Concepts",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C394",
+      "title": "Data Collection Plans",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C395",
+      "title": "Descriptive Statistics for Growers",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C396",
+      "title": "Graphs, Effect Size, and Interpretation",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C397",
+      "title": "Writing Research Reports",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C398",
+      "title": "Translating Evidence Into Practice",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C399",
+      "title": "Research, Trials, and Evidence Capstone",
+      "level": 5,
+      "domainId": "THC-A19",
+      "domain": "Research, Trials, and Evidence",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C400",
+      "title": "Document Control Fundamentals",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C401",
+      "title": "Writing Clear Scope and Purpose",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C402",
+      "title": "Roles, Responsibilities, and Training",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C403",
+      "title": "Materials, Equipment, and Preconditions",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C404",
+      "title": "Stepwise Procedure Writing",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C405",
+      "title": "Critical Control Points and Acceptance Criteria",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C406",
+      "title": "Records, Forms, and Traceability",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C407",
+      "title": "Deviations, Investigations, and CAPA",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C408",
+      "title": "Change Control and Revision History",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C409",
+      "title": "Source Notes and Claim Mapping",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C410",
+      "title": "Peer Review and Technical Verification",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C411",
+      "title": "Visual QA and Accessibility",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C412",
+      "title": "Training Needs Analysis",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C413",
+      "title": "Writing Learning Objectives",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C414",
+      "title": "Lesson Planning and Instructional Design",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C415",
+      "title": "Quiz, Scenario, and Practical Assessment Design",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C416",
+      "title": "Instructor Guides and Facilitation",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C417",
+      "title": "Competency Qualification and Sign-Off",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C418",
+      "title": "Mentoring Growers and Giving Feedback",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C419",
+      "title": "Building a Controlled Education Program",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    },
+    {
+      "id": "THC-C420",
+      "title": "SOPs, QA, Teaching, and Leadership Capstone",
+      "level": 5,
+      "domainId": "THC-A20",
+      "domain": "SOPs, QA, Teaching, and Leadership",
+      "status": "review",
+      "match": null
+    }
+  ]
+}
