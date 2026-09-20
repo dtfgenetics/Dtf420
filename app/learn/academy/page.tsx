@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import courses from "@/content/academy-courses.json";
 import { buildEducationMetadata } from "@/lib/education-seo";
+import ResourceCatalog from "./ResourceCatalog";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = buildEducationMetadata({
   title: "THC Academy — Teaching Healthy Cultivation",
-  description: "A 12-course, 60-unit guided curriculum connecting plant science, diagnostics, environment, plant health, breeding, outdoor cultivation, protected cultivation, and post-harvest learning.",
+  description: "A 12-course, 60-unit guided curriculum plus a searchable 420-topic educational resource catalog connecting plant science and practical cultivation learning.",
   path: "/learn/academy",
 });
 
@@ -24,6 +25,10 @@ export default function AcademyPage() {
         <p className="lede">
           A guided curriculum built on the same evidence-first references, Living Plant Atlas lessons, diagnostic workflows, and field tools used across the education system. Academy organizes the material into a learning sequence without duplicating the underlying science.
         </p>
+        <div className={styles.heroActions}>
+          <Link className="button" href="#guided-courses">Browse guided courses</Link>
+          <Link className="button secondary" href="#resource-library">Search 420 resource topics</Link>
+        </div>
       </header>
 
       <div className={styles.stats} aria-label="THC Academy summary">
@@ -32,7 +37,7 @@ export default function AcademyPage() {
         <div className={styles.stat}><strong>{referenceKinds}</strong><span>learning surfaces connected</span></div>
       </div>
 
-      <div className={styles.courseList}>
+      <div className={styles.courseList} id="guided-courses">
         {courses.map((course, courseIndex) => (
           <section className={styles.course} id={course.slug} key={course.slug}>
             <header className={styles.courseHeader}>
@@ -59,6 +64,8 @@ export default function AcademyPage() {
           </section>
         ))}
       </div>
+
+      <ResourceCatalog />
     </section>
   );
 }

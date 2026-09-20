@@ -14,6 +14,7 @@ function slugify(value) {
 
 const courses = readJson("academy-courses.json");
 const coursework = readJson("academy-coursework.json");
+const resourceCatalog = readJson("academy-resource-catalog.json");
 const atlasModules = readJson("atlas-learning-modules.json");
 const plantHealth = [...readJson("plant-health-library.json"), ...readJson("plant-health-expanded.json")];
 const cultivation = [
@@ -67,6 +68,33 @@ const courseSlugs = new Set();
 const courseworkBySlug = new Map(coursework.map((item) => [item.courseSlug, item]));
 let unitCount = 0;
 let exerciseCount = 0;
+
+if (resourceCatalog?.schemaVersion !== 1 || resourceCatalog?.id !== "legacy-420-resource-reconciliation") {
+  errors.push("Academy resource catalog has an invalid identity");
+} else if (!Array.isArray(resourceCatalog.records) || resourceCatalog.records.length !== 420) {
+  errors.push("Academy resource catalog must preserve exactly 420 records");
+} else {
+  const resourceIds = new Set();
+  const domainIds = new Set();
+  const statuses = new Set(["reuse", "upgrade", "review"]);
+  for (const [index, resource] of resourceCatalog.records.entries()) {
+    const expectedId = `THC-C${String(index + 1).padStart(3, "0")}`;
+    if (resource.id !== expectedId) errors.push(`Academy resource order/identity mismatch: expected ${expectedId}, found ${resource.id}`);
+    if (resourceIds.has(resource.id)) errors.push(`Duplicate Academy resource ID: ${resource.id}`);
+    resourceIds.add(resource.id);
+    domainIds.add(resource.domainId);
+    if (!resource.title?.trim() || !resource.domain?.trim()) errors.push(`Academy resource lacks title/domain: ${resource.id}`);
+    if (!statuses.has(resource.status)) errors.push(`Academy resource has invalid status: ${resource.id}`);
+    if ((resource.status === "reuse" || resource.status === "upgrade") && (!resource.match?.id || !resource.match?.title)) {
+      errors.push(`Confirmed Academy resource mapping is incomplete: ${resource.id}`);
+    }
+    if (resource.status === "review" && resource.match !== null) errors.push(`Review-only Academy resource must not expose an unconfirmed match: ${resource.id}`);
+  }
+  if (domainIds.size !== 20) errors.push(`Academy resource catalog must contain 20 domains, found ${domainIds.size}`);
+  const confirmed = resourceCatalog.records.filter((resource) => resource.status !== "review").length;
+  if (confirmed !== resourceCatalog.summary.confirmedReuse + resourceCatalog.summary.confirmedUpgrade) errors.push("Academy resource confirmed-summary count is inconsistent");
+  if (resourceCatalog.records.length - confirmed !== resourceCatalog.summary.candidateReview) errors.push("Academy resource review-summary count is inconsistent");
+}
 
 if (!Array.isArray(courses) || courses.length === 0) {
   errors.push("academy-courses.json must contain at least one course");
@@ -141,4 +169,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`THC Academy verified: ${courses.length} courses, ${unitCount} linked units, ${exerciseCount} exercises, ${coursework.length} capstones.`);
+console.log(`THC Academy verified: ${courses.length} courses, ${unitCount} linked units, ${exerciseCount} exercises, ${coursework.length} capstones, ${resourceCatalog.records.length} preserved resource topics.`);
