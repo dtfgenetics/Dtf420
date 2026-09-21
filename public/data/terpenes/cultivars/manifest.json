@@ -5,7 +5,7 @@
   "cultivarCount": 2658,
   "publishableCultivarCount": 1300,
   "minimumSamples": 5,
-  "generatedAt": "2026-09-21T23:11:25.746Z",
+  "generatedAt": "2026-09-21T23:18:49.293Z",
   "shardStrategy": "first-alphanumeric-character-of-cultivar-slug",
   "shards": [
     {
@@ -180,6 +180,12 @@
     }
   ],
   "status": "compiled",
+  "intelligenceIndex": {
+    "filename": "index.json",
+    "schemaVersion": 1,
+    "cultivarCount": 1300,
+    "analyteCount": 14
+  },
   "sourceUrl": "https://raw.githubusercontent.com/cjsmith015/phytochemical-diversity-cannabis/main/data/preproc_lab_data_pub_20220218.csv",
   "sourceBytes": 19687859,
   "sourceSha256": "1850b918bb3a00b903f9e254953bb695012314bd264c419efb68bc482b392182"
