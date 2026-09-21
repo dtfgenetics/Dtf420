@@ -740,7 +740,10 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                     </div>
 
                     {selected.regionStrata.length >= 2 ? (
-                      <div className={styles.regionMatrix}>
+                      <div
+                        className={styles.regionMatrix}
+                        style={{ "--region-count": selected.regionStrata.length } as CSSProperties}
+                      >
                         <div className={styles.regionMatrixHead}>
                           <strong>Analyte</strong>
                           {selected.regionStrata.map((region) => (
