@@ -27,7 +27,14 @@ export function summarizeMeasurements(values) {
   };
 }
 
-export function buildCultivarProfileSummaries(samples, { minimumSamples = 3 } = {}) {
+export function sampleDepthTier(sampleCount, labCount) {
+  if (sampleCount < 5) return "insufficient";
+  if (sampleCount < 10) return labCount >= 2 ? "limited-multi-lab" : "limited-single-lab";
+  if (sampleCount < 30) return labCount >= 2 ? "moderate-multi-lab" : "moderate-single-lab";
+  return labCount >= 2 ? "high-depth-multi-lab" : "high-depth-single-lab";
+}
+
+export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = {}) {
   const cultivars = new Map();
 
   for (const sample of samples) {
@@ -74,13 +81,16 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 3 } = 
         .filter((analyte) => analyte.n >= minimumSamples)
         .sort((a, b) => (b.median ?? 0) - (a.median ?? 0));
 
+      const sampleCount = cultivar.sampleIds.size;
+      const labCount = cultivar.labIds.size;
       return {
         cultivarSlug: cultivar.cultivarSlug,
-        sampleCount: cultivar.sampleIds.size,
-        labCount: cultivar.labIds.size,
+        sampleCount,
+        labCount,
+        sampleDepthTier: sampleDepthTier(sampleCount, labCount),
         minimumSamples,
         analytes,
-        publishable: cultivar.sampleIds.size >= minimumSamples && analytes.length > 0,
+        publishable: sampleCount >= minimumSamples && analytes.length > 0,
       };
     })
     .sort((a, b) => b.sampleCount - a.sampleCount || a.cultivarSlug.localeCompare(b.cultivarSlug));
