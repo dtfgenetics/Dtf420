@@ -180,6 +180,46 @@
       "productRole": "major",
       "substrate": "GPP",
       "cultivarOrStrain": "Purple Kush"
+    },
+    {
+      "id": "booth2017-cstps5fn-alpha-pinene",
+      "compoundSlug": "alpha-pinene",
+      "claimType": "terpene-synthase-function",
+      "statement": "CsTPS5FN from Finola produced (−)-α-pinene among its major products.",
+      "sourceId": "BOOTH-2017-TPS",
+      "sourceLocator": "Table 2",
+      "studyType": "enzyme-functional",
+      "populationOrMaterial": "Heterologously expressed Cannabis sativa Finola CsTPS5FN enzyme",
+      "analyticalMethod": "Terpene synthase enzyme assay with chromatographic product analysis",
+      "value": null,
+      "unit": null,
+      "reviewStatus": "source-verified",
+      "reviewedAt": "2026-09-21",
+      "notes": "β-Myrcene was also a major product.",
+      "geneId": "CsTPS5FN",
+      "productRole": "major",
+      "substrate": "GPP",
+      "cultivarOrStrain": "Finola"
+    },
+    {
+      "id": "booth2017-cstps33pk-gamma-terpinene",
+      "compoundSlug": "gamma-terpinene",
+      "claimType": "terpene-synthase-function",
+      "statement": "CsTPS33PK from Purple Kush was functionally characterized with α-terpinene and γ-terpinene as major products.",
+      "sourceId": "BOOTH-2017-TPS",
+      "sourceLocator": "Table 2",
+      "studyType": "enzyme-functional",
+      "populationOrMaterial": "Heterologously expressed Cannabis sativa Purple Kush CsTPS33PK enzyme",
+      "analyticalMethod": "Terpene synthase enzyme assay with chromatographic product analysis",
+      "value": null,
+      "unit": null,
+      "reviewStatus": "source-verified",
+      "reviewedAt": "2026-09-21",
+      "notes": "This evidence record is keyed to γ-terpinene; α-terpinene is retained in the gene product list.",
+      "geneId": "CsTPS33PK",
+      "productRole": "major",
+      "substrate": "GPP",
+      "cultivarOrStrain": "Purple Kush"
     }
   ]
 }
