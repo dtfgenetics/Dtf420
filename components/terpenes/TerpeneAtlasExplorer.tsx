@@ -289,6 +289,12 @@ export function TerpeneAtlasExplorer() {
         </article>
         <article>
           <span>03</span>
+          <h2>Genetics map</h2>
+          <p>Trace functionally characterized Cannabis terpene synthases to substrates, major products, minor products, strain origin, and evidence.</p>
+          <Link href="/learn/terpenes/genetics">Open TPS genetics →</Link>
+        </article>
+        <article>
+          <span>04</span>
           <h2>Research ledger</h2>
           <p>Every effect claim will carry study type, evidence strength, citation, and review status.</p>
         </article>
