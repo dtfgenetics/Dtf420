@@ -34,6 +34,22 @@ export function sampleDepthTier(sampleCount, labCount) {
   return labCount >= 2 ? "high-depth-multi-lab" : "high-depth-single-lab";
 }
 
+function addCategory(map, value) {
+  const normalized = String(value ?? "").trim();
+  if (!normalized) return;
+  map.set(normalized, (map.get(normalized) ?? 0) + 1);
+}
+
+export function summarizeCategories(map, sampleCount) {
+  return [...map.entries()]
+    .map(([value, n]) => ({
+      value,
+      n,
+      share: sampleCount > 0 ? n / sampleCount : 0,
+    }))
+    .sort((a, b) => b.n - a.n || a.value.localeCompare(b.value));
+}
+
 export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = {}) {
   const cultivars = new Map();
 
@@ -44,6 +60,12 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
         cultivarSlug: sample.cultivarSlug,
         sampleIds: new Set(),
         labIds: new Set(),
+        producerIds: new Set(),
+        totalTerpeneValues: [],
+        regions: new Map(),
+        productCategories: new Map(),
+        chemotypes: new Map(),
+        topTerpenes: new Map(),
         analytes: new Map(),
       });
     }
@@ -51,6 +73,13 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
     const cultivar = cultivars.get(sample.cultivarSlug);
     cultivar.sampleIds.add(sample.sampleId);
     if (sample.labId) cultivar.labIds.add(sample.labId);
+    if (sample.producerId) cultivar.producerIds.add(sample.producerId);
+    if (Number.isFinite(sample.totalTerpenes)) cultivar.totalTerpeneValues.push(sample.totalTerpenes);
+
+    addCategory(cultivar.regions, sample.region);
+    addCategory(cultivar.productCategories, sample.productCategory);
+    addCategory(cultivar.chemotypes, sample.chemotype);
+    addCategory(cultivar.topTerpenes, sample.topTerpeneSourceField);
 
     for (const measurement of sample.measurements ?? []) {
       if (!cultivar.analytes.has(measurement.normalizedKey)) {
@@ -87,8 +116,14 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
         cultivarSlug: cultivar.cultivarSlug,
         sampleCount,
         labCount,
+        producerCount: cultivar.producerIds.size,
         sampleDepthTier: sampleDepthTier(sampleCount, labCount),
         minimumSamples,
+        totalTerpenes: summarizeMeasurements(cultivar.totalTerpeneValues),
+        regions: summarizeCategories(cultivar.regions, sampleCount),
+        productCategories: summarizeCategories(cultivar.productCategories, sampleCount),
+        chemotypes: summarizeCategories(cultivar.chemotypes, sampleCount),
+        topTerpenes: summarizeCategories(cultivar.topTerpenes, sampleCount),
         analytes,
         publishable: sampleCount >= minimumSamples && analytes.length > 0,
       };
