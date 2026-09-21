@@ -39,6 +39,10 @@ export type TerpeneEvidenceRecord = {
   reviewStatus: EvidenceReviewStatus;
   reviewedAt: string | null;
   notes: string | null;
+  geneId?: string | null;
+  productRole?: "major" | "minor" | "coproduct" | null;
+  substrate?: string | null;
+  cultivarOrStrain?: string | null;
 };
 
 export type TerpeneEvidenceLedger = {
