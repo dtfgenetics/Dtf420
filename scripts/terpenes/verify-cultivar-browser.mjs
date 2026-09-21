@@ -10,18 +10,28 @@ const workflow = fs.readFileSync(path.join(root, ".github/workflows/refresh-terp
 const registry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"));
 
 for (const token of [
-  "Cultivar Terpene Distributions",
+  "Cultivar Chemistry Explorer",
   "Distribution, not destiny",
   "Search normalized cultivar label",
   "Measured cultivar distribution",
   "Sample depth",
   "Runtime status",
+  "Total terpene distribution",
+  "Source context",
+  "Region mix",
+  "Product categories",
+  "Chemotype labels",
+  "Reported top terpene",
+  "Analyte distributions",
+  "Identity resolution",
+  "Cultivar comparison",
+  "Median-vector similarity",
   "This source analyte does not resolve one exact isomer",
 ]) {
   if (!ui.includes(token)) throw new Error(`Cultivar browser UI missing contract: ${token}`);
 }
 
-for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote"]) {
+for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars"]) {
   if (!css.includes(token)) throw new Error(`Cultivar browser styling missing: ${token}`);
 }
 
@@ -69,6 +79,16 @@ for (const token of [
 
 const registered = registry.sources.find((source) => source.id === "SMITH-2022-COMMERCIAL-US");
 if (!registered) throw new Error("Cultivar browser source is not registered");
+
+const statistics = fs.readFileSync(path.join(root, "scripts/terpenes/lib/cultivar-statistics.mjs"), "utf8");
+for (const token of ["producerCount", "totalTerpenes", "regions", "productCategories", "chemotypes", "topTerpenes", "summarizeCategories"]) {
+  if (!statistics.includes(token)) throw new Error(`Expanded cultivar statistics missing: ${token}`);
+}
+
+const cultivarTypes = fs.readFileSync(path.join(root, "lib/terpenes/cultivar-types.ts"), "utf8");
+for (const token of ["producerCount", "CultivarCategoryStatistics", "totalTerpenes", "topTerpenes"]) {
+  if (!cultivarTypes.includes(token)) throw new Error(`Expanded cultivar runtime type missing: ${token}`);
+}
 
 for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage"]) {
   if ((ui + "\n" + page).toLowerCase().includes(phrase)) {
