@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "status": "not-generated",
+  "sourceId": "SMITH-2022-COMMERCIAL-US",
+  "sourceSampleCount": 0,
+  "cultivarCount": 0,
+  "analyteCount": 0,
+  "generatedAt": null,
+  "interpretation": "Bootstrap only. The refresh workflow replaces this file with compiled global cultivar chemistry intelligence.",
+  "analytes": [],
+  "cultivars": []
+}
