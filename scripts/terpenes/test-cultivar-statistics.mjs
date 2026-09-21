@@ -39,6 +39,18 @@ const summaries = buildCultivarProfileSummaries(samples, { minimumSamples: 3 });
 const blueSummary = summaries.find((item) => item.cultivarSlug === "blue-dream");
 if (!blueSummary?.publishable) throw new Error("Three-sample cultivar should be publishable at minimumSamples=3");
 if (blueSummary.labCount !== 2) throw new Error(`Expected Blue Dream labCount 2, got ${blueSummary.labCount}`);
+if (blueSummary.producerCount !== 3) throw new Error(`Expected Blue Dream producerCount 3, got ${blueSummary.producerCount}`);
+if (!blueSummary.totalTerpenes || blueSummary.totalTerpenes.median !== 2.2) {
+  throw new Error("Blue Dream total-terpene distribution was not preserved");
+}
+const orRegion = blueSummary.regions.find((item) => item.value === "OR");
+if (!orRegion || orRegion.n !== 2 || Math.abs(orRegion.share - (2 / 3)) > 1e-9) {
+  throw new Error("Blue Dream region distribution is incorrect");
+}
+const chemotype = blueSummary.chemotypes.find((item) => item.value === "THC-Dom");
+if (!chemotype || chemotype.n !== 3) throw new Error("Blue Dream chemotype distribution is incorrect");
+const topTerpene = blueSummary.topTerpenes.find((item) => item.value === "myrcene");
+if (!topTerpene || topTerpene.n !== 3) throw new Error("Blue Dream top-terpene frequency is incorrect");
 
 const other = summaries.find((item) => item.cultivarSlug === "other-cultivar");
 if (other?.publishable) throw new Error("Single-sample cultivar must not be publishable at minimumSamples=3");
