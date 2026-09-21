@@ -41,7 +41,8 @@ function occurrenceLabel(compound: TerpeneCompound) {
 }
 
 function ringStyle(index: number, count: number) {
-  return { "--i": index, "--n": Math.max(count, 1) } as CSSProperties;
+  const angle = (360 / Math.max(count, 1)) * index;
+  return { "--angle": `${angle}deg` } as CSSProperties;
 }
 
 export function TerpeneAtlasExplorer() {
