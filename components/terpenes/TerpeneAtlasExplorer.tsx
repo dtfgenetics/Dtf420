@@ -285,6 +285,7 @@ export function TerpeneAtlasExplorer() {
           <span>02</span>
           <h2>Breeding explorer</h2>
           <p>Connect parent chemistry, measured offspring, TPS evidence, and selection targets without pretending inheritance is deterministic.</p>
+          <Link href="/learn/terpenes/breeding">Open breeding explorer →</Link>
         </article>
         <article>
           <span>03</span>
