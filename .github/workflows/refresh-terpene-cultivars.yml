@@ -1,0 +1,141 @@
+name: Refresh Terpene Cultivar Runtime
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 1 * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-terpene-cultivars.yml"
+      - "scripts/terpenes/import-commercial-cannabis-samples.mjs"
+      - "scripts/terpenes/compile-cultivar-statistics.mjs"
+      - "scripts/terpenes/build-cultivar-runtime-shards.mjs"
+      - "scripts/terpenes/lib/commercial-cannabis-analytes.mjs"
+      - "scripts/terpenes/lib/csv-stream.mjs"
+      - "scripts/terpenes/lib/cultivar-statistics.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-terpene-cultivars
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SOURCE_URL: https://raw.githubusercontent.com/cjsmith015/phytochemical-diversity-cannabis/main/data/preproc_lab_data_pub_20220218.csv
+      OUTPUT_DIR: public/data/terpenes/cultivars
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Download registered CC0 chemistry dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="$RUNNER_TEMP/commercial-cannabis.csv"
+          curl --location --fail --retry 3 --retry-delay 2 "$SOURCE_URL" --output "$input"
+          bytes="$(wc -c < "$input")"
+          if [[ "$bytes" -lt 10000000 ]]; then
+            echo "::error::Downloaded dataset is unexpectedly small: ${bytes} bytes"
+            exit 1
+          fi
+          head -n 1 "$input" | grep -q "strain_slug" || { echo "::error::Missing strain_slug column"; exit 1; }
+          head -n 1 "$input" | grep -q "has_terps" || { echo "::error::Missing has_terps column"; exit 1; }
+          head -n 1 "$input" | grep -q "myrcene" || { echo "::error::Missing myrcene column"; exit 1; }
+          echo "SOURCE_FILE=$input" >> "$GITHUB_ENV"
+          echo "SOURCE_BYTES=$bytes" >> "$GITHUB_ENV"
+          echo "SOURCE_SHA256=$(sha256sum "$input" | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Normalize sample-level terpene records
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/terpenes/import-commercial-cannabis-samples.mjs \
+            "$SOURCE_FILE" \
+            "$RUNNER_TEMP/cultivar-samples.jsonl"
+
+      - name: Compile cultivar distribution statistics
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/terpenes/compile-cultivar-statistics.mjs \
+            "$RUNNER_TEMP/cultivar-samples.jsonl" \
+            "$RUNNER_TEMP/cultivar-statistics.json" \
+            5
+
+      - name: Build browser runtime shards
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$OUTPUT_DIR"
+          mkdir -p "$OUTPUT_DIR"
+          node scripts/terpenes/build-cultivar-runtime-shards.mjs \
+            "$RUNNER_TEMP/cultivar-statistics.json" \
+            "$OUTPUT_DIR"
+
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import path from "node:path";
+
+          const dir = process.env.OUTPUT_DIR;
+          const manifestPath = path.join(dir, "manifest.json");
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+
+          manifest.status = "compiled";
+          manifest.sourceUrl = process.env.SOURCE_URL;
+          manifest.sourceBytes = Number(process.env.SOURCE_BYTES);
+          manifest.sourceSha256 = process.env.SOURCE_SHA256;
+
+          if (!manifest.sourceSampleCount || manifest.sourceSampleCount < 10000) {
+            throw new Error(`Unexpected source sample count: ${manifest.sourceSampleCount}`);
+          }
+          if (!manifest.publishableCultivarCount || manifest.publishableCultivarCount < 100) {
+            throw new Error(`Unexpected publishable cultivar count: ${manifest.publishableCultivarCount}`);
+          }
+          if (!Array.isArray(manifest.shards) || manifest.shards.length < 10) {
+            throw new Error("Cultivar runtime did not produce enough shards");
+          }
+
+          fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
+          console.log(
+            `Compiled ${manifest.publishableCultivarCount} public cultivar summaries from ${manifest.sourceSampleCount} terpene samples.`,
+          );
+          NODE
+
+      - name: Verify generated runtime does not contain the raw dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find "$OUTPUT_DIR" -type f -size +10M | grep -q .; then
+            echo "::error::Generated runtime contains an unexpectedly large file"
+            exit 1
+          fi
+          test -s "$OUTPUT_DIR/manifest.json"
+
+      - name: Commit refreshed cultivar runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUTPUT_DIR"
+          if git diff --cached --quiet; then
+            echo "Cultivar runtime is already current." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Refresh terpene cultivar runtime data"
+          git push origin HEAD:main
+          echo "Published refreshed cultivar runtime shards." >> "$GITHUB_STEP_SUMMARY"
