@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceId": "BOOTH-2017-TPS",
+  "genes": [
+    {
+      "id": "CsTPS1FN",
+      "strainOrigin": "Finola",
+      "subfamily": "TPS-b",
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "limonene",
+          "label": "(−)-Limonene",
+          "evidenceId": "booth2017-cstps1fn-limonene"
+        }
+      ],
+      "minorProducts": [
+        {
+          "slug": "alpha-pinene",
+          "label": "(+)-α-Pinene",
+          "status": "identified"
+        },
+        {
+          "slug": "camphene",
+          "label": "Camphene",
+          "status": "identified"
+        },
+        {
+          "slug": "beta-pinene",
+          "label": "(+)-β-Pinene",
+          "status": "identified"
+        },
+        {
+          "slug": "beta-myrcene",
+          "label": "β-Myrcene",
+          "status": "identified"
+        }
+      ],
+      "sourceLocator": "Table 2; Fig. 4"
+    },
+    {
+      "id": "CsTPS2FN",
+      "strainOrigin": "Finola",
+      "subfamily": "TPS-b",
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "alpha-pinene",
+          "label": "(+)-α-Pinene",
+          "evidenceId": "booth2017-cstps2fn-alpha-pinene"
+        }
+      ],
+      "minorProducts": [
+        {
+          "slug": "beta-pinene",
+          "label": "(+)-β-Pinene",
+          "status": "identified"
+        },
+        {
+          "slug": "beta-myrcene",
+          "label": "β-Myrcene",
+          "status": "identified"
+        },
+        {
+          "slug": "limonene",
+          "label": "(−)-Limonene",
+          "status": "identified"
+        },
+        {
+          "slug": "beta-phellandrene",
+          "label": "β-Phellandrene",
+          "status": "identified"
+        },
+        {
+          "slug": "isoterpinolene",
+          "label": "Isoterpinolene",
+          "status": "tentative"
+        }
+      ],
+      "sourceLocator": "Table 2; Fig. 4"
+    },
+    {
+      "id": "CsTPS3FN",
+      "strainOrigin": "Finola",
+      "subfamily": "TPS-b",
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "beta-myrcene",
+          "label": "β-Myrcene",
+          "evidenceId": "booth2017-cstps3fn-myrcene"
+        }
+      ],
+      "minorProducts": [],
+      "sourceLocator": "Table 2"
+    },
+    {
+      "id": "CsTPS5FN",
+      "strainOrigin": "Finola",
+      "subfamily": "TPS-b",
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP",
+        "FPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "beta-myrcene",
+          "label": "β-Myrcene",
+          "evidenceId": "booth2017-cstps5fn-myrcene"
+        },
+        {
+          "slug": "alpha-pinene",
+          "label": "(−)-α-Pinene",
+          "evidenceId": "booth2017-cstps5fn-alpha-pinene"
+        }
+      ],
+      "minorProducts": [],
+      "sourceLocator": "Table 2"
+    },
+    {
+      "id": "CsTPS6FN",
+      "strainOrigin": "Finola",
+      "subfamily": "TPS-b",
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "e-beta-ocimene",
+          "label": "(E)-β-Ocimene",
+          "evidenceId": "booth2017-cstps6fn-e-beta-ocimene"
+        }
+      ],
+      "minorProducts": [],
+      "sourceLocator": "Table 2"
+    },
+    {
+      "id": "CsTPS9FN",
+      "strainOrigin": "Finola",
+      "subfamily": "TPS-a",
+      "primarySubstrate": "FPP",
+      "testedSubstrates": [
+        "GPP",
+        "FPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "beta-caryophyllene",
+          "label": "β-Caryophyllene",
+          "evidenceId": "booth2017-cstps9fn-caryophyllene"
+        },
+        {
+          "slug": "alpha-humulene",
+          "label": "α-Humulene",
+          "evidenceId": "booth2017-cstps9fn-humulene"
+        }
+      ],
+      "minorProducts": [],
+      "sourceLocator": "Table 2"
+    },
+    {
+      "id": "CsTPS13PK",
+      "strainOrigin": "Purple Kush",
+      "subfamily": null,
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP",
+        "FPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "z-beta-ocimene",
+          "label": "(Z)-β-Ocimene",
+          "evidenceId": "booth2017-cstps13pk-z-beta-ocimene"
+        }
+      ],
+      "minorProducts": [],
+      "sourceLocator": "Table 2"
+    },
+    {
+      "id": "CsTPS33PK",
+      "strainOrigin": "Purple Kush",
+      "subfamily": null,
+      "primarySubstrate": "GPP",
+      "testedSubstrates": [
+        "GPP"
+      ],
+      "majorProducts": [
+        {
+          "slug": "alpha-terpinene",
+          "label": "α-Terpinene",
+          "evidenceId": "booth2017-cstps33pk-terpinene"
+        },
+        {
+          "slug": "gamma-terpinene",
+          "label": "γ-Terpinene",
+          "evidenceId": "booth2017-cstps33pk-gamma-terpinene"
+        }
+      ],
+      "minorProducts": [],
+      "sourceLocator": "Table 2"
+    }
+  ]
+}
