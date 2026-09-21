@@ -303,3 +303,28 @@ A high source concentration does not establish poor laboratory quality, bad gene
 The public UI must present these factors separately. It must not collapse them into a universal confidence, quality, or cultivar score.
 
 The browser remains backward-compatible with prior v1/v2 shards during deployment transitions by deriving safe default diagnostics where possible. The runtime builder emits schema v3, and the refresh workflow rejects newly generated cultivar manifests that are not schema v3.
+
+
+### Cultivar runtime schema v4: regional source strata
+
+Schema v4 adds minimum-depth regional sub-distributions inside each compiled cultivar label.
+
+A regional stratum is created only when the region contains at least the configured `minimumRegionSamples`. Production defaults this threshold to the same five-sample minimum used for public cultivar summaries. Regional analytes must independently meet that subgroup sample threshold before they appear in the stratum.
+
+Each regional stratum contains only derived summary data:
+
+- source region label;
+- sample count;
+- represented laboratory count;
+- represented producer count;
+- sample-depth tier;
+- total-terpene distribution when available;
+- per-analyte minimum, Q1, median, Q3, maximum, mean, and sample count.
+
+Laboratory and producer identities remain excluded.
+
+Regional comparisons are descriptive and strongly confounded. A difference between regional subgroups does not establish that geography caused the chemistry. Potential confounders include laboratory, producer, product mix, time, genetics, cultivation practices, maturity, storage, and sampling.
+
+If fewer than two regional strata meet the minimum depth, the public UI must not manufacture a between-region comparison. It may show the qualifying subgroup and explain that no valid between-region comparison is available.
+
+The browser remains compatible with earlier runtime schemas by treating missing `regionStrata` as an empty collection until the post-merge refresh generates schema v4 data.
