@@ -120,3 +120,22 @@ Review states:
 - **rejected** — retained for audit history but excluded from public claims.
 
 Chemical occurrence evidence cannot be promoted into a biological-effect claim. Biological claims require evidence whose study type actually evaluates the biological question.
+
+
+## Cultivar sample statistics
+
+Cultivar chemistry is built from sample records, not from a single value attached to a strain name.
+
+For the published commercial U.S. dataset, the importer preserves the dataset sample ID, laboratory, normalized `strain_slug`, producer ID, region, product category, chemotype, total terpene value, source analyte names, and each available terpene measurement.
+
+Important analyte rules:
+
+- `tot_ocimene` remains an aggregate-isomer measurement. It is not silently mapped to α-, β-, cis-, or trans-ocimene.
+- `tot_nerolidol_ct` remains a cis/trans aggregate. It is not silently mapped to one nerolidol stereoisomer.
+- source fields with unspecified stereochemistry or isomer identity carry that uncertainty forward.
+
+Cultivar summary records expose sample count, lab count, minimum publication threshold, sample-depth tier, and per-analyte minimum, Q1, median, Q3, maximum, mean, and analyte-level sample/lab counts.
+
+The default public compilation threshold is 5 samples. This is a display threshold, not proof that a cultivar name represents a genetically uniform population. Sample depth and laboratory diversity are shown separately from genetic certainty.
+
+Publishable cultivar summaries are compiled into letter shards for lazy loading. The source sample dataset remains separate from the browser runtime.
