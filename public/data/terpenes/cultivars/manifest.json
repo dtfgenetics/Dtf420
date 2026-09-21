@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "SMITH-2022-COMMERCIAL-US",
+  "sourceSampleCount": 0,
+  "cultivarCount": 0,
+  "publishableCultivarCount": 0,
+  "minimumSamples": 5,
+  "generatedAt": null,
+  "shardStrategy": "first-alphanumeric-character-of-cultivar-slug",
+  "status": "not-generated",
+  "shards": []
+}
