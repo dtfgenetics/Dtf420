@@ -72,7 +72,8 @@
     "verify:terpenes:identity-evidence": "node scripts/terpenes/test-identity-evidence.mjs",
     "terpenes:cultivars:import": "node scripts/terpenes/import-commercial-cannabis-samples.mjs",
     "terpenes:cultivars:compile": "node scripts/terpenes/compile-cultivar-statistics.mjs",
-    "verify:terpenes:cultivars": "node scripts/terpenes/test-cultivar-statistics.mjs"
+    "verify:terpenes:cultivars": "node scripts/terpenes/test-cultivar-statistics.mjs",
+    "terpenes:cultivars:shards": "node scripts/terpenes/build-cultivar-runtime-shards.mjs"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
