@@ -156,3 +156,27 @@ Multiproduct enzymes remain multiproduct. For example, CsTPS9FN retains both β-
 A functional enzyme result establishes biochemical capability under the assay conditions. It does not establish a fixed terpene percentage, dominance relationship, or guaranteed offspring phenotype in a living plant. Plant abundance additionally depends on genotype, expression, tissue, developmental stage, precursor supply, environment, and post-harvest handling.
 
 Every major product displayed in the genetics UI must resolve to a source-verified or editorial-reviewed `terpene-synthase-function` record in the production evidence ledger.
+
+
+## Public research ledger
+
+The public Research Ledger is a transparency surface over reviewed evidence records. It is not a marketing bibliography.
+
+Every visible evidence record exposes:
+
+- the exact claim being supported;
+- compound or analyte identity;
+- claim type;
+- study type;
+- material or population tested;
+- analytical or experimental method when available;
+- exact source locator such as table, figure, dataset row family, or section;
+- review state;
+- genetics metadata when relevant;
+- a plain-language statement of what that evidence can and cannot establish.
+
+Reviewed public records must resolve to a registered source with a navigable locator such as a source URL, DOI, public repository, or dataset path.
+
+Study types are not collapsed into a single universal score. Chemical analysis, functional enzyme assays, genomics/expression, animal studies, in-vitro work, observational studies, and human clinical studies answer different questions. The UI explains those boundaries rather than pretending all evidence is interchangeable.
+
+Draft and rejected records may remain in the audit ledger, but public educational claims should be driven by source-verified or editorial-reviewed evidence.
