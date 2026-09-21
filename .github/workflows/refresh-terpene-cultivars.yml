@@ -100,7 +100,7 @@ jobs:
           const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
           const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
 
-          if (manifest.schemaVersion !== 2) {
+          if (manifest.schemaVersion !== 3) {
             throw new Error(`Unexpected cultivar runtime schema version: ${manifest.schemaVersion}`);
           }
 

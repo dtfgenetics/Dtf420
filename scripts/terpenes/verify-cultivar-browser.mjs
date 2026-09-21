@@ -34,12 +34,22 @@ for (const token of [
   "Global analyte prevalence",
   "Positive-median cultivar groups",
   "Load global chemistry index",
+  "Data-quality factors",
+  "Read the source breadth before reading the chemistry.",
+  "not a combined confidence score",
+  "Laboratory breadth",
+  "Producer breadth",
+  "Effective lab count",
+  "Sample coverage",
+  "IQR / median",
+  "Lab-median span",
+  "not a laboratory-performance ranking",
   "This source analyte does not resolve one exact isomer",
 ]) {
   if (!ui.includes(token)) throw new Error(`Cultivar browser UI missing contract: ${token}`);
 }
 
-for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars", ".globalGrid", ".neighbors", ".prevalenceList", ".globalGuardrail"]) {
+for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars", ".globalGrid", ".neighbors", ".prevalenceList", ".globalGuardrail", ".qualitySection", ".qualityFlags", ".qualityGrid", ".qualityGuardrail", ".analyteDiagnostics"]) {
   if (!css.includes(token)) throw new Error(`Cultivar browser styling missing: ${token}`);
 }
 
@@ -74,11 +84,11 @@ for (const token of [
   }
 }
 
-if (!runtimeBuilder.includes("schemaVersion: 2")) {
-  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 2");
+if (!runtimeBuilder.includes("schemaVersion: 3")) {
+  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 3");
 }
 
-if (![1, 2].includes(manifest.schemaVersion)) {
+if (![1, 2, 3].includes(manifest.schemaVersion)) {
   throw new Error(`Unsupported checked-in cultivar manifest schema: ${manifest.schemaVersion}`);
 }
 
@@ -115,7 +125,7 @@ for (const token of [
   "index.cultivarCount !== manifest.publishableCultivarCount",
   'rm -rf "$OUTPUT_DIR"',
   "git pull --rebase origin main",
-  "manifest.schemaVersion !== 2",
+  "manifest.schemaVersion !== 3",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Cultivar refresh workflow missing contract: ${token}`);
 }
@@ -124,12 +134,12 @@ const registered = registry.sources.find((source) => source.id === "SMITH-2022-C
 if (!registered) throw new Error("Cultivar browser source is not registered");
 
 const statistics = fs.readFileSync(path.join(root, "scripts/terpenes/lib/cultivar-statistics.mjs"), "utf8");
-for (const token of ["producerCount", "totalTerpenes", "regions", "productCategories", "chemotypes", "topTerpenes", "summarizeCategories"]) {
+for (const token of ["producerCount", "totalTerpenes", "regions", "productCategories", "chemotypes", "topTerpenes", "summarizeCategories", "summarizeConcentration", "concentrationIndex", "effectiveCount", "sampleCoverage", "relativeIqr", "labMedianDistribution", "dataQuality"]) {
   if (!statistics.includes(token)) throw new Error(`Expanded cultivar statistics missing: ${token}`);
 }
 
 const cultivarTypes = fs.readFileSync(path.join(root, "lib/terpenes/cultivar-types.ts"), "utf8");
-for (const token of ["producerCount", "CultivarCategoryStatistics", "totalTerpenes", "topTerpenes"]) {
+for (const token of ["producerCount", "CultivarCategoryStatistics", "CultivarDataQuality", "CultivarConcentrationStatistics", "totalTerpenes", "topTerpenes", "sampleCoverage", "relativeIqr", "labMedianDistribution"]) {
   if (!cultivarTypes.includes(token)) throw new Error(`Expanded cultivar runtime type missing: ${token}`);
 }
 

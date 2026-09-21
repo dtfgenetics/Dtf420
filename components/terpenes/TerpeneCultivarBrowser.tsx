@@ -117,14 +117,47 @@ function topCategory(items: CultivarCategoryStatistics[]) {
 }
 
 function normalizeCultivarSummary(record: CultivarProfileSummary): CultivarProfileSummary {
+  const producerCount = Number.isFinite(record.producerCount) ? record.producerCount : 0;
+  const fallbackConcentration = (distinctCount: number) => ({
+    knownCount: 0,
+    distinctCount,
+    largestShare: null,
+    concentrationIndex: null,
+    effectiveCount: null,
+  });
+
   return {
     ...record,
-    producerCount: Number.isFinite(record.producerCount) ? record.producerCount : 0,
+    producerCount,
     totalTerpenes: record.totalTerpenes ?? null,
     regions: Array.isArray(record.regions) ? record.regions : [],
     productCategories: Array.isArray(record.productCategories) ? record.productCategories : [],
     chemotypes: Array.isArray(record.chemotypes) ? record.chemotypes : [],
     topTerpenes: Array.isArray(record.topTerpenes) ? record.topTerpenes : [],
+    dataQuality: record.dataQuality ?? {
+      labs: fallbackConcentration(record.labCount),
+      producers: fallbackConcentration(producerCount),
+      totalTerpeneCoverage: record.totalTerpenes ? 1 : 0,
+      regionCoverage: 0,
+      productCategoryCoverage: 0,
+      chemotypeCoverage: 0,
+      largestRegionShare: null,
+      largestProductCategoryShare: null,
+      largestChemotypeShare: null,
+    },
+    analytes: record.analytes.map((analyte) => ({
+      ...analyte,
+      sampleCoverage:
+        Number.isFinite(analyte.sampleCoverage)
+          ? analyte.sampleCoverage
+          : record.sampleCount > 0
+            ? analyte.n / record.sampleCount
+            : 0,
+      relativeIqr:
+        analyte.relativeIqr ??
+        (analyte.median > 0 ? (analyte.q3 - analyte.q1) / analyte.median : null),
+      labMedianDistribution: analyte.labMedianDistribution ?? null,
+    })),
   };
 }
 
@@ -344,6 +377,19 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
   const topSignal = selected ? topCategory(selected.topTerpenes) : null;
   const topChemotype = selected ? topCategory(selected.chemotypes) : null;
 
+  const qualityFlags = useMemo(() => {
+    if (!selected) return [];
+    const flags: string[] = [];
+    if (selected.sampleCount < 10) flags.push("limited sample depth");
+    if (selected.labCount === 1) flags.push("single-lab group");
+    else if ((selected.dataQuality.labs.largestShare ?? 0) >= 0.8) flags.push("lab-concentrated");
+    if (selected.producerCount === 1) flags.push("single-producer group");
+    else if ((selected.dataQuality.producers.largestShare ?? 0) >= 0.8) flags.push("producer-concentrated");
+    if ((selected.dataQuality.largestRegionShare ?? 0) >= 0.8) flags.push("region-concentrated");
+    if (selected.dataQuality.totalTerpeneCoverage < 0.8) flags.push("partial total-terpene coverage");
+    return flags;
+  }, [selected]);
+
   const selectedMedianVector = useMemo(
     () =>
       selected
@@ -518,6 +564,72 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                 </article>
               </div>
 
+              <section className={styles.qualitySection}>
+                <div className={styles.sectionHeading}>
+                  <div>
+                    <p className="eyebrow">Data-quality factors</p>
+                    <h3>Read the source breadth before reading the chemistry.</h3>
+                  </div>
+                  <p>
+                    These are separate context factors, not a combined confidence score. Concentration can reflect
+                    how the source dataset was assembled and does not by itself indicate poor analytical quality.
+                  </p>
+                </div>
+
+                <div className={styles.qualityFlags}>
+                  {qualityFlags.length ? (
+                    qualityFlags.map((flag) => <span key={flag}>{flag}</span>)
+                  ) : (
+                    <span data-neutral="">No major concentration flags in the compiled context fields</span>
+                  )}
+                </div>
+
+                <div className={styles.qualityGrid}>
+                  <article>
+                    <span>Laboratory breadth</span>
+                    <strong>{selected.labCount} represented</strong>
+                    <dl>
+                      <div><dt>Largest lab share</dt><dd>{selected.dataQuality.labs.largestShare === null ? "—" : formatShare(selected.dataQuality.labs.largestShare)}</dd></div>
+                      <div><dt>Effective lab count</dt><dd>{selected.dataQuality.labs.effectiveCount === null ? "—" : selected.dataQuality.labs.effectiveCount.toFixed(1)}</dd></div>
+                      <div><dt>Concentration index</dt><dd>{selected.dataQuality.labs.concentrationIndex === null ? "—" : selected.dataQuality.labs.concentrationIndex.toFixed(2)}</dd></div>
+                    </dl>
+                  </article>
+                  <article>
+                    <span>Producer breadth</span>
+                    <strong>{selected.producerCount} represented</strong>
+                    <dl>
+                      <div><dt>Largest producer share</dt><dd>{selected.dataQuality.producers.largestShare === null ? "—" : formatShare(selected.dataQuality.producers.largestShare)}</dd></div>
+                      <div><dt>Effective producer count</dt><dd>{selected.dataQuality.producers.effectiveCount === null ? "—" : selected.dataQuality.producers.effectiveCount.toFixed(1)}</dd></div>
+                      <div><dt>Concentration index</dt><dd>{selected.dataQuality.producers.concentrationIndex === null ? "—" : selected.dataQuality.producers.concentrationIndex.toFixed(2)}</dd></div>
+                    </dl>
+                  </article>
+                  <article>
+                    <span>Context-field coverage</span>
+                    <strong>Source completeness</strong>
+                    <dl>
+                      <div><dt>Region</dt><dd>{formatShare(selected.dataQuality.regionCoverage)}</dd></div>
+                      <div><dt>Product category</dt><dd>{formatShare(selected.dataQuality.productCategoryCoverage)}</dd></div>
+                      <div><dt>Chemotype</dt><dd>{formatShare(selected.dataQuality.chemotypeCoverage)}</dd></div>
+                    </dl>
+                  </article>
+                  <article>
+                    <span>Chemistry coverage</span>
+                    <strong>{formatShare(selected.dataQuality.totalTerpeneCoverage)} total-terpene coverage</strong>
+                    <dl>
+                      <div><dt>Largest region share</dt><dd>{selected.dataQuality.largestRegionShare === null ? "—" : formatShare(selected.dataQuality.largestRegionShare)}</dd></div>
+                      <div><dt>Largest product share</dt><dd>{selected.dataQuality.largestProductCategoryShare === null ? "—" : formatShare(selected.dataQuality.largestProductCategoryShare)}</dd></div>
+                      <div><dt>Largest chemotype share</dt><dd>{selected.dataQuality.largestChemotypeShare === null ? "—" : formatShare(selected.dataQuality.largestChemotypeShare)}</dd></div>
+                    </dl>
+                  </article>
+                </div>
+
+                <p className={styles.qualityGuardrail}>
+                  Effective source count is derived from concentration, not a count of hidden identities. A lower
+                  effective count means more observations came from a smaller share of sources. It does not label
+                  a laboratory or producer as better or worse.
+                </p>
+              </section>
+
               {selected.totalTerpenes ? (
                 <section className={styles.totalPanel}>
                   <div>
@@ -581,7 +693,8 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                   </div>
                   <p>
                     Exact compound measurements and unresolved aggregate/isomer fields stay visibly distinct.
-                    Range width can reflect biology, sampling, laboratory methods, or all three.
+                    Range width can reflect biology, sampling, laboratory methods, or all three. Across-lab
+                    median spread is descriptive source variation, not a laboratory-performance ranking.
                   </p>
                 </div>
 
@@ -651,6 +764,22 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                           <div><dt>Max</dt><dd>{analyte.max.toFixed(3)}%</dd></div>
                           <div><dt>n / labs</dt><dd>{analyte.n} / {analyte.labCount}</dd></div>
                         </dl>
+
+                        <div className={styles.analyteDiagnostics}>
+                          <span>Sample coverage <strong>{formatShare(analyte.sampleCoverage)}</strong></span>
+                          <span>
+                            IQR / median{" "}
+                            <strong>{analyte.relativeIqr === null ? "—" : `${analyte.relativeIqr.toFixed(2)}×`}</strong>
+                          </span>
+                          <span>
+                            Lab-median span{" "}
+                            <strong>
+                              {analyte.labMedianDistribution && analyte.labMedianDistribution.n >= 2
+                                ? `${analyte.labMedianDistribution.min.toFixed(3)}–${analyte.labMedianDistribution.max.toFixed(3)}%`
+                                : "single/insufficient lab depth"}
+                            </strong>
+                          </span>
+                        </div>
 
                         {analyte.measurementKind.includes("aggregate") ||
                         analyte.measurementKind.includes("unspecified") ? (

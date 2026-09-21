@@ -271,3 +271,35 @@ The index does not contain raw laboratory rows or private identifiers.
 Nearest-profile results use cosine similarity on compiled median terpene vectors. They are descriptive chemistry neighbors only. They are not quality rankings, effect predictions, proof of shared genetics, or predictions for an individual sample.
 
 The global index is lazy-loaded on demand. Normal cultivar search continues to use alphabetical shards so visitors who do not request global analysis do not pay the index payload cost.
+
+
+### Cultivar runtime schema v3: data-quality factors
+
+Schema v3 adds source-breadth and analyte-breadth diagnostics to each compiled cultivar group. These are contextual factors, not a single confidence score.
+
+Cultivar-level diagnostics include:
+
+- laboratory sample concentration without exposing laboratory identity;
+- producer sample concentration without exposing producer identity;
+- largest represented-source share;
+- Herfindahl concentration index for represented laboratories and producers;
+- effective source count, calculated as the inverse Herfindahl concentration index;
+- total-terpene measurement coverage;
+- region-field coverage;
+- product-category-field coverage;
+- chemotype-field coverage;
+- largest region, product-category, and chemotype shares.
+
+Analyte-level diagnostics include:
+
+- sample coverage within the cultivar group;
+- relative interquartile range, calculated as `(Q3 - Q1) / median` when the median is greater than zero;
+- the distribution of laboratory-level medians when more than one laboratory contributes measurements.
+
+Laboratory and producer identifiers are not published in these diagnostics. The runtime exposes only aggregate concentration and breadth measures.
+
+A high source concentration does not establish poor laboratory quality, bad genetics, or unreliable chemistry. It means the compiled distribution is more dependent on a smaller share of represented sources. Likewise, a broad across-lab median range is descriptive variation in the source data and is not a laboratory-performance ranking.
+
+The public UI must present these factors separately. It must not collapse them into a universal confidence, quality, or cultivar score.
+
+The browser remains backward-compatible with prior v1/v2 shards during deployment transitions by deriving safe default diagnostics where possible. The runtime builder emits schema v3, and the refresh workflow rejects newly generated cultivar manifests that are not schema v3.
