@@ -44,11 +44,34 @@ export type CultivarCategoryStatistics = {
   share: number;
 };
 
+export type CultivarConcentrationStatistics = {
+  knownCount: number;
+  distinctCount: number;
+  largestShare: number | null;
+  concentrationIndex: number | null;
+  effectiveCount: number | null;
+};
+
+export type CultivarDataQuality = {
+  labs: CultivarConcentrationStatistics;
+  producers: CultivarConcentrationStatistics;
+  totalTerpeneCoverage: number;
+  regionCoverage: number;
+  productCategoryCoverage: number;
+  chemotypeCoverage: number;
+  largestRegionShare: number | null;
+  largestProductCategoryShare: number | null;
+  largestChemotypeShare: number | null;
+};
+
 export type CultivarAnalyteStatistics = CultivarDistributionStatistics & {
   normalizedKey: string;
   canonicalSlug: string | null;
   measurementKind: CultivarTerpeneMeasurement["measurementKind"];
   labCount: number;
+  sampleCoverage: number;
+  relativeIqr: number | null;
+  labMedianDistribution: CultivarDistributionStatistics | null;
 };
 
 export type CultivarProfileSummary = {
@@ -70,6 +93,7 @@ export type CultivarProfileSummary = {
   productCategories: CultivarCategoryStatistics[];
   chemotypes: CultivarCategoryStatistics[];
   topTerpenes: CultivarCategoryStatistics[];
+  dataQuality: CultivarDataQuality;
   analytes: CultivarAnalyteStatistics[];
   publishable: boolean;
 };
