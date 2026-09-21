@@ -21,10 +21,6 @@ function updateValue(
   });
 }
 
-function compoundLabel(slug: string) {
-  return compounds.find((compound) => compound.slug === slug)?.name ?? slug;
-}
-
 export function TerpeneProfileComparison() {
   const [labelA, setLabelA] = useState("Profile A");
   const [labelB, setLabelB] = useState("Profile B");
