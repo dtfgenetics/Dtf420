@@ -37,6 +37,8 @@ const requiredFiles = [
   "scripts/terpenes/compile-cultivar-statistics.mjs",
   "scripts/terpenes/fixtures/commercial-cannabis-samples.csv",
   "scripts/terpenes/test-cultivar-statistics.mjs",
+  "scripts/terpenes/build-cultivar-runtime-shards.mjs",
+  "lib/terpenes/cultivar-types.ts",
 ];
 
 for (const file of requiredFiles) {
@@ -157,8 +159,8 @@ if (evidenceLedger.schemaVersion !== "1.0.0" || !Array.isArray(evidenceLedger.re
 }
 
 const cultivarImporterSource = fs.readFileSync(path.join(root, "scripts/terpenes/import-commercial-cannabis-samples.mjs"), "utf8");
-for (const token of ["dataset-normalized-strain-slug", "aggregate-isomers", "SMITH-2022-COMMERCIAL-US"]) {
-  if (!cultivarImporterSource.includes(token) && token !== "aggregate-isomers") {
+for (const token of ["dataset-normalized-strain-slug", "SMITH-2022-COMMERCIAL-US"]) {
+  if (!cultivarImporterSource.includes(token)) {
     throw new Error(`Cultivar importer missing source-preservation contract: ${token}`);
   }
 }
@@ -166,6 +168,13 @@ const analyteSource = fs.readFileSync(path.join(root, "scripts/terpenes/lib/comm
 for (const token of ['measurementKind: "aggregate-isomers"', 'canonicalSlug: null']) {
   if (!analyteSource.includes(token)) {
     throw new Error(`Cultivar analyte mapping missing aggregate safety contract: ${token}`);
+  }
+}
+
+const cultivarStatsSource = fs.readFileSync(path.join(root, "scripts/terpenes/lib/cultivar-statistics.mjs"), "utf8");
+for (const token of ['minimumSamples = 5', '"high-depth-multi-lab"', "median", "q1", "q3"]) {
+  if (!cultivarStatsSource.includes(token)) {
+    throw new Error(`Cultivar statistics missing public-summary contract: ${token}`);
   }
 }
 
