@@ -53,7 +53,7 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
   const [loadedKey, setLoadedKey] = useState<string | null>(null);
   const [cultivars, setCultivars] = useState<CultivarProfileSummary[]>([]);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
-  const [shardState, setShardState] = useState<"idle" | "loading" | "ready" | "missing">("idle");
+  const [failedKey, setFailedKey] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -78,18 +78,12 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
   const key = shardKey(query);
 
   useEffect(() => {
-    if (!key || manifestState !== "ready" || key === loadedKey) return;
+    if (!key || manifestState !== "ready" || key === loadedKey || failedKey === key) return;
 
     const shard = manifest?.shards?.find((item) => item.key === key);
-    if (!shard) {
-      setCultivars([]);
-      setLoadedKey(key);
-      setShardState("missing");
-      return;
-    }
+    if (!shard) return;
 
     let cancelled = false;
-    setShardState("loading");
     fetch(`/data/terpenes/cultivars/${shard.filename}`, { cache: "force-cache" })
       .then(async (response) => {
         if (!response.ok) throw new Error("shard unavailable");
@@ -99,7 +93,7 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
         if (cancelled) return;
         setCultivars(records);
         setLoadedKey(key);
-        setShardState("ready");
+        setFailedKey(null);
         setSelectedSlug((current) =>
           current && records.some((item) => item.cultivarSlug === current)
             ? current
@@ -109,14 +103,29 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
       .catch(() => {
         if (cancelled) return;
         setCultivars([]);
-        setLoadedKey(key);
-        setShardState("missing");
+        setFailedKey(key);
       });
 
     return () => {
       cancelled = true;
     };
-  }, [key, loadedKey, manifest, manifestState]);
+  }, [failedKey, key, loadedKey, manifest, manifestState]);
+
+  const activeShard = manifest?.shards?.find((item) => item.key === key);
+  const shardLoading = Boolean(
+    query.trim() &&
+    manifestState === "ready" &&
+    key &&
+    activeShard &&
+    key !== loadedKey &&
+    failedKey !== key,
+  );
+  const shardMissing = Boolean(
+    query.trim() &&
+    manifestState === "ready" &&
+    key &&
+    (!activeShard || failedKey === key),
+  );
 
   const matches = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -212,8 +221,10 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
 
           {!query.trim() ? (
             <p className={styles.empty}>Enter a cultivar label to load its alphabetical runtime shard.</p>
-          ) : shardState === "loading" || key !== loadedKey ? (
+          ) : shardLoading ? (
             <p className={styles.empty}>Loading cultivar distribution shard…</p>
+          ) : shardMissing ? (
+            <p className={styles.empty}>No compiled cultivar shard is available for this search.</p>
           ) : matches.length ? (
             <div className={styles.results}>
               {matches.map((cultivar) => (
