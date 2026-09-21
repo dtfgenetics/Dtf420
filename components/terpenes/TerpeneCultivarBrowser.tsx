@@ -22,6 +22,51 @@ type Manifest = {
   status?: string;
 };
 
+type IntelligenceCultivar = {
+  cultivarSlug: string;
+  sampleCount: number;
+  labCount: number;
+  producerCount: number;
+  sampleDepthTier: CultivarProfileSummary["sampleDepthTier"];
+  totalTerpenesMedian: number | null;
+  topTerpenes: CultivarCategoryStatistics[];
+  vector: Record<string, number>;
+};
+
+type IntelligenceAnalyte = {
+  normalizedKey: string;
+  canonicalSlug: string | null;
+  measurementKind: string;
+  cultivarCount: number;
+  cultivarShare: number;
+  measuredSamples: number;
+  multiLabCultivars: number;
+  positiveMedianCultivars: number;
+  positiveMedianShare: number;
+  cultivarMedianDistribution: {
+    n: number;
+    min: number;
+    q1: number;
+    median: number;
+    q3: number;
+    max: number;
+    mean: number;
+  } | null;
+};
+
+type CultivarIntelligenceIndex = {
+  schemaVersion: number;
+  status: string;
+  sourceId: string;
+  sourceSampleCount: number;
+  cultivarCount: number;
+  analyteCount: number;
+  generatedAt: string | null;
+  interpretation: string;
+  analytes: IntelligenceAnalyte[];
+  cultivars: IntelligenceCultivar[];
+};
+
 type Props = {
   sourceName: string;
   sourceUrl: string | null;
@@ -83,6 +128,21 @@ function normalizeCultivarSummary(record: CultivarProfileSummary): CultivarProfi
   };
 }
 
+function vectorSimilarity(
+  left: Record<string, number>,
+  right: Record<string, number>,
+) {
+  const keys = [...new Set([...Object.keys(left), ...Object.keys(right)])];
+  const dot = keys.reduce((sum, key) => sum + (left[key] ?? 0) * (right[key] ?? 0), 0);
+  const normLeft = Math.sqrt(keys.reduce((sum, key) => sum + (left[key] ?? 0) ** 2, 0));
+  const normRight = Math.sqrt(keys.reduce((sum, key) => sum + (right[key] ?? 0) ** 2, 0));
+  return normLeft > 0 && normRight > 0 ? dot / (normLeft * normRight) : null;
+}
+
+function sharedVectorKeys(left: Record<string, number>, right: Record<string, number>) {
+  return Object.keys(left).filter((key) => key in right).length;
+}
+
 function medianVectorSimilarity(a: CultivarProfileSummary, b: CultivarProfileSummary) {
   const aMap = new Map(a.analytes.map((item) => [item.normalizedKey, item.median]));
   const bMap = new Map(b.analytes.map((item) => [item.normalizedKey, item.median]));
@@ -142,6 +202,10 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
   const [analyteQuery, setAnalyteQuery] = useState("");
   const [analyteFilter, setAnalyteFilter] = useState<AnalyteFilter>("all");
   const [analyteSort, setAnalyteSort] = useState<AnalyteSort>("median");
+  const [globalIndex, setGlobalIndex] = useState<CultivarIntelligenceIndex | null>(null);
+  const [globalIndexState, setGlobalIndexState] = useState<"idle" | "loading" | "ready" | "unavailable">("idle");
+  const [neighborMinimumSamples, setNeighborMinimumSamples] = useState(10);
+  const [neighborMultiLabOnly, setNeighborMultiLabOnly] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -279,6 +343,61 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
   const sharedAnalytes = comparisonRows.filter((row) => row.a && row.b).length;
   const topSignal = selected ? topCategory(selected.topTerpenes) : null;
   const topChemotype = selected ? topCategory(selected.chemotypes) : null;
+
+  const selectedMedianVector = useMemo(
+    () =>
+      selected
+        ? Object.fromEntries(selected.analytes.map((analyte) => [analyte.normalizedKey, analyte.median]))
+        : {},
+    [selected],
+  );
+
+  const nearestProfiles = useMemo(() => {
+    if (!selected || !globalIndex) return [];
+    return globalIndex.cultivars
+      .filter((cultivar) => cultivar.cultivarSlug !== selected.cultivarSlug)
+      .filter((cultivar) => cultivar.sampleCount >= neighborMinimumSamples)
+      .filter((cultivar) => !neighborMultiLabOnly || cultivar.labCount >= 2)
+      .map((cultivar) => ({
+        cultivar,
+        similarity: vectorSimilarity(selectedMedianVector, cultivar.vector),
+        sharedAnalytes: sharedVectorKeys(selectedMedianVector, cultivar.vector),
+      }))
+      .filter((item) => item.similarity !== null && item.sharedAnalytes >= 5)
+      .sort(
+        (a, b) =>
+          (b.similarity ?? 0) - (a.similarity ?? 0) ||
+          b.sharedAnalytes - a.sharedAnalytes ||
+          b.cultivar.sampleCount - a.cultivar.sampleCount,
+      )
+      .slice(0, 12);
+  }, [globalIndex, neighborMinimumSamples, neighborMultiLabOnly, selected, selectedMedianVector]);
+
+  function loadGlobalIndex() {
+    if (globalIndexState === "loading" || globalIndexState === "ready") return;
+    setGlobalIndexState("loading");
+    fetch("/data/terpenes/cultivars/index.json", { cache: "force-cache" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("global cultivar intelligence index unavailable");
+        return response.json() as Promise<CultivarIntelligenceIndex>;
+      })
+      .then((index) => {
+        if (
+          index.status !== "compiled" ||
+          !Array.isArray(index.cultivars) ||
+          !Array.isArray(index.analytes) ||
+          index.cultivarCount < 100
+        ) {
+          throw new Error("global cultivar intelligence index is not compiled");
+        }
+        setGlobalIndex(index);
+        setGlobalIndexState("ready");
+      })
+      .catch(() => {
+        setGlobalIndex(null);
+        setGlobalIndexState("unavailable");
+      });
+  }
 
   return (
     <div className={styles.shell}>
@@ -655,6 +774,141 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                     Select a second compiled cultivar to compare median terpene distributions.
                   </div>
                 )}
+              </section>
+
+              <section className={styles.globalSection}>
+                <div className={styles.sectionHeading}>
+                  <div>
+                    <p className="eyebrow">Global cultivar chemistry</p>
+                    <h3>Find chemistry neighbors and analyte prevalence.</h3>
+                  </div>
+                  <p>
+                    This layer uses a compact index of all public cultivar groups. Similarity compares median
+                    terpene-vector shape; prevalence distinguishes positive-median cultivar groups from simple
+                    measurement coverage.
+                  </p>
+                </div>
+
+                {globalIndexState !== "ready" ? (
+                  <div className={styles.globalLoad}>
+                    <div>
+                      <strong>
+                        {globalIndexState === "loading"
+                          ? "Loading the global chemistry index…"
+                          : globalIndexState === "unavailable"
+                            ? "Global chemistry index is not compiled in this deployment."
+                            : "Load the global chemistry reference on demand."}
+                      </strong>
+                      <p>
+                        The index is separate from the alphabetical shards so ordinary cultivar searches stay light.
+                        It contains compact median vectors and aggregate prevalence only—not raw laboratory rows.
+                      </p>
+                    </div>
+                    {globalIndexState === "idle" ? (
+                      <button type="button" onClick={loadGlobalIndex}>
+                        Load global chemistry index
+                      </button>
+                    ) : null}
+                  </div>
+                ) : globalIndex ? (
+                  <>
+                    <div className={styles.globalSummary}>
+                      <article><span>Public cultivar groups</span><strong>{globalIndex.cultivarCount.toLocaleString()}</strong></article>
+                      <article><span>Indexed analytes</span><strong>{globalIndex.analyteCount}</strong></article>
+                      <article><span>Source samples</span><strong>{globalIndex.sourceSampleCount.toLocaleString()}</strong></article>
+                      <article><span>Nearest profiles shown</span><strong>{nearestProfiles.length}</strong></article>
+                    </div>
+
+                    <div className={styles.globalGrid}>
+                      <section className={styles.neighborPanel}>
+                        <div className={styles.subHeading}>
+                          <div>
+                            <span>Nearest median chemistry profiles</span>
+                            <strong>{titleFromSlug(selected.cultivarSlug)}</strong>
+                          </div>
+                          <p>Cosine similarity on compiled median terpene vectors. Descriptive chemistry only.</p>
+                        </div>
+
+                        <div className={styles.neighborControls}>
+                          <label>
+                            <span>Minimum samples</span>
+                            <select
+                              value={neighborMinimumSamples}
+                              onChange={(event) => setNeighborMinimumSamples(Number(event.target.value))}
+                            >
+                              <option value={5}>5+</option>
+                              <option value={10}>10+</option>
+                              <option value={20}>20+</option>
+                              <option value={30}>30+</option>
+                            </select>
+                          </label>
+                          <label className={styles.checkLabel}>
+                            <input
+                              type="checkbox"
+                              checked={neighborMultiLabOnly}
+                              onChange={(event) => setNeighborMultiLabOnly(event.target.checked)}
+                            />
+                            <span>Multi-lab groups only</span>
+                          </label>
+                        </div>
+
+                        <div className={styles.neighbors}>
+                          {nearestProfiles.map(({ cultivar, similarity, sharedAnalytes }) => (
+                            <button
+                              type="button"
+                              key={cultivar.cultivarSlug}
+                              onClick={() => {
+                                setQuery(cultivar.cultivarSlug);
+                                setSelectedSlug(cultivar.cultivarSlug);
+                              }}
+                            >
+                              <div>
+                                <strong>{titleFromSlug(cultivar.cultivarSlug)}</strong>
+                                <span>{cultivar.sampleCount} samples · {cultivar.labCount} labs · {sharedAnalytes} shared analytes</span>
+                              </div>
+                              <b>{similarity === null ? "—" : `${(similarity * 100).toFixed(1)}%`}</b>
+                            </button>
+                          ))}
+                        </div>
+                      </section>
+
+                      <section className={styles.prevalencePanel}>
+                        <div className={styles.subHeading}>
+                          <div>
+                            <span>Global analyte prevalence</span>
+                            <strong>Positive-median cultivar groups</strong>
+                          </div>
+                          <p>Coverage and positive-median prevalence are shown separately.</p>
+                        </div>
+
+                        <div className={styles.prevalenceList}>
+                          {globalIndex.analytes.map((analyte) => (
+                            <article key={analyte.normalizedKey}>
+                              <div className={styles.prevalenceTop}>
+                                <div>
+                                  <strong>{analyteLabel(analyte.normalizedKey)}</strong>
+                                  <span>{analyte.measurementKind.replaceAll("-", " ")}</span>
+                                </div>
+                                <b>{formatShare(analyte.positiveMedianShare)}</b>
+                              </div>
+                              <div className={styles.prevalenceTrack}>
+                                <i style={{ width: `${Math.min(100, analyte.positiveMedianShare * 100)}%` }} />
+                              </div>
+                              <dl>
+                                <div><dt>Positive median</dt><dd>{analyte.positiveMedianCultivars} groups</dd></div>
+                                <div><dt>Measurement coverage</dt><dd>{analyte.cultivarCount} groups</dd></div>
+                                <div><dt>Measured samples</dt><dd>{analyte.measuredSamples.toLocaleString()}</dd></div>
+                                <div><dt>Median of cultivar medians</dt><dd>{analyte.cultivarMedianDistribution ? `${analyte.cultivarMedianDistribution.median.toFixed(3)}%` : "—"}</dd></div>
+                              </dl>
+                            </article>
+                          ))}
+                        </div>
+                      </section>
+                    </div>
+
+                    <p className={styles.globalGuardrail}>{globalIndex.interpretation}</p>
+                  </>
+                ) : null}
               </section>
             </>
           ) : (
