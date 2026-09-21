@@ -496,7 +496,7 @@
   transform:
     translate(-50%,-50%)
     rotate(var(--angle))
-    translateY(calc(var(--radius) * -1))
+    translateY(var(--radius))
     rotate(var(--counter-angle));
 }
 
@@ -512,7 +512,7 @@
 }
 
 .classNode{
-  --radius:132px;
+  --radius:-132px;
   width:92px;
   min-height:49px;
   padding:7px;
@@ -546,7 +546,7 @@
 }
 
 .compoundNode{
-  --radius:223px;
+  --radius:-223px;
   width:118px;
   min-height:50px;
   padding:7px 8px;
@@ -573,7 +573,7 @@
 }
 
 .aromaNode{
-  --radius:302px;
+  --radius:-302px;
   z-index:2;
   max-width:100px;
   padding:5px 8px;
@@ -860,9 +860,9 @@
     min-height:650px;
   }
 
-  .classNode{--radius:120px}
-  .compoundNode{--radius:202px}
-  .aromaNode{--radius:276px}
+  .classNode{--radius:-120px}
+  .compoundNode{--radius:-202px}
+  .aromaNode{--radius:-276px}
 }
 
 @media(max-width:1160px){
@@ -986,9 +986,9 @@
     scroll-snap-align:center;
   }
 
-  .classNode{--radius:111px;width:82px}
-  .compoundNode{--radius:190px;width:102px}
-  .aromaNode{--radius:258px;max-width:90px;font-size:7px}
+  .classNode{--radius:-111px;width:82px}
+  .compoundNode{--radius:-190px;width:102px}
+  .aromaNode{--radius:-258px;max-width:90px;font-size:7px}
 
   .wheelCore strong{font-size:13px}
   .wheelCore span{font-size:8px}
