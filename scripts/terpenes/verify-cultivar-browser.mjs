@@ -70,7 +70,7 @@ for (const token of [
 const registered = registry.sources.find((source) => source.id === "SMITH-2022-COMMERCIAL-US");
 if (!registered) throw new Error("Cultivar browser source is not registered");
 
-for (const phrase of ["best strain", "top strain", "guaranteed effect", "permanent terpene profile"]) {
+for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage"]) {
   if ((ui + "\n" + page).toLowerCase().includes(phrase)) {
     throw new Error(`Cultivar browser contains prohibited shortcut: ${phrase}`);
   }
