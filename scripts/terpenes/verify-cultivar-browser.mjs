@@ -74,11 +74,11 @@ for (const token of [
   }
 }
 
-if (!runtimeBuilder.includes("schemaVersion: 2")) {
-  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 2");
+if (!runtimeBuilder.includes("schemaVersion: 3")) {
+  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 3");
 }
 
-if (![1, 2].includes(manifest.schemaVersion)) {
+if (![1, 2, 3].includes(manifest.schemaVersion)) {
   throw new Error(`Unsupported checked-in cultivar manifest schema: ${manifest.schemaVersion}`);
 }
 
@@ -115,7 +115,7 @@ for (const token of [
   "index.cultivarCount !== manifest.publishableCultivarCount",
   'rm -rf "$OUTPUT_DIR"',
   "git pull --rebase origin main",
-  "manifest.schemaVersion !== 2",
+  "manifest.schemaVersion !== 3",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Cultivar refresh workflow missing contract: ${token}`);
 }
