@@ -50,6 +50,8 @@ const requiredFiles = [
   "app/learn/terpenes/research/page.tsx",
   "app/learn/terpenes/research/page.module.css",
   "scripts/terpenes/verify-research-ledger-ui.mjs",
+  "lib/terpenes/evidence-queries.ts",
+  "scripts/terpenes/verify-mockup-fidelity.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -96,7 +98,7 @@ for (const token of ["researchGuardrail", "cannabisOccurrence", "sourceIds", "vi
   }
 }
 
-for (const token of ["Cannabis mapped", "Global seed set", "Evidence guardrail", "Open full compound record"]) {
+for (const token of ["Cannabis mapped", "All known scope", "Evidence guardrail", "Open full compound record", "Terpenes &amp; Terpenoids Wheel", "Aroma ≠ effect", "classRing", "compoundRing", "aromaRing"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene explorer missing required UI contract: ${token}`);
   }
@@ -216,6 +218,13 @@ for (const token of ["Search evidence", "What this evidence establishes", "Open 
 for (const token of ['href="/learn/terpenes/research"', "Open research ledger"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing Research Ledger navigation: ${token}`);
+  }
+}
+
+const compoundPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
+for (const token of ["Source-verified genetics", "Reviewed evidence", "Open the full TPS genetics map", "Open the research ledger"]) {
+  if (!compoundPageSource.includes(token)) {
+    throw new Error(`Compound terpene record missing linked evidence UI: ${token}`);
   }
 }
 
