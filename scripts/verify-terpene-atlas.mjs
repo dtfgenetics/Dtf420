@@ -17,6 +17,12 @@ const requiredFiles = [
   "components/terpenes/TerpeneBreedingExplorer.tsx",
   "lib/terpenes/profiles.ts",
   "lib/terpenes/breeding.ts",
+  "scripts/terpenes/lib/csv-stream.mjs",
+  "scripts/terpenes/normalize-coconut.mjs",
+  "scripts/terpenes/inspect-coconut-csv.mjs",
+  "scripts/terpenes/build-runtime-shards.mjs",
+  "scripts/terpenes/fixtures/coconut-sample.csv",
+  "scripts/terpenes/test-coconut-ingestion.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -107,6 +113,13 @@ const prohibitedShortcutClaims = [
 for (const claim of prohibitedShortcutClaims) {
   if (dataSource.toLowerCase().includes(claim)) {
     throw new Error(`Unqualified effect shortcut found in terpene seed data: ${claim}`);
+  }
+}
+
+const coconutNormalizerSource = fs.readFileSync(path.join(root, "scripts/terpenes/normalize-coconut.mjs"), "utf8");
+for (const token of ["unreviewed-source-candidate", "candidateReason", "candidateConfidence", "np-pathway-terpenoids"]) {
+  if (!coconutNormalizerSource.includes(token)) {
+    throw new Error(`COCONUT normalizer missing candidate-safety contract: ${token}`);
   }
 }
 
