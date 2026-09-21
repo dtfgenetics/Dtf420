@@ -6,6 +6,8 @@ const ui = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCultivarB
 const css = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCultivarBrowser.module.css"), "utf8");
 const page = fs.readFileSync(path.join(root, "app/learn/terpenes/cultivars/page.tsx"), "utf8");
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "public/data/terpenes/cultivars/manifest.json"), "utf8"));
+const intelligenceIndex = JSON.parse(fs.readFileSync(path.join(root, "public/data/terpenes/cultivars/index.json"), "utf8"));
+const intelligenceBuilder = fs.readFileSync(path.join(root, "scripts/terpenes/build-cultivar-intelligence-index.mjs"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github/workflows/refresh-terpene-cultivars.yml"), "utf8");
 const runtimeBuilder = fs.readFileSync(path.join(root, "scripts/terpenes/build-cultivar-runtime-shards.mjs"), "utf8");
 const registry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"));
@@ -27,12 +29,17 @@ for (const token of [
   "Identity resolution",
   "Cultivar comparison",
   "Median-vector similarity",
+  "Global cultivar chemistry",
+  "Nearest median chemistry profiles",
+  "Global analyte prevalence",
+  "Positive-median cultivar groups",
+  "Load global chemistry index",
   "This source analyte does not resolve one exact isomer",
 ]) {
   if (!ui.includes(token)) throw new Error(`Cultivar browser UI missing contract: ${token}`);
 }
 
-for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars"]) {
+for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars", ".globalGrid", ".neighbors", ".prevalenceList", ".globalGuardrail"]) {
   if (!css.includes(token)) throw new Error(`Cultivar browser styling missing: ${token}`);
 }
 
@@ -42,6 +49,29 @@ if (!page.includes('path: "/learn/terpenes/cultivars"')) {
 
 if (manifest.sourceId !== "SMITH-2022-COMMERCIAL-US") {
   throw new Error("Cultivar runtime manifest uses the wrong sourceId");
+}
+
+if (intelligenceIndex.sourceId !== "SMITH-2022-COMMERCIAL-US") {
+  throw new Error("Cultivar intelligence index uses the wrong sourceId");
+}
+if (intelligenceIndex.status === "compiled") {
+  if (intelligenceIndex.cultivarCount < 100 || intelligenceIndex.analyteCount < 10) {
+    throw new Error("Compiled cultivar intelligence index is implausibly small");
+  }
+} else if (intelligenceIndex.status !== "not-generated") {
+  throw new Error("Cultivar intelligence bootstrap must explicitly say not-generated");
+}
+
+for (const token of [
+  "positiveMedianCultivars",
+  "positiveMedianShare",
+  "cultivarMedianDistribution",
+  "vector",
+  "interpretation",
+]) {
+  if (!intelligenceBuilder.includes(token)) {
+    throw new Error(`Cultivar intelligence builder missing contract: ${token}`);
+  }
 }
 
 if (!runtimeBuilder.includes("schemaVersion: 2")) {
@@ -80,6 +110,9 @@ for (const token of [
   "import-commercial-cannabis-samples.mjs",
   "compile-cultivar-statistics.mjs",
   "build-cultivar-runtime-shards.mjs",
+  "build-cultivar-intelligence-index.mjs",
+  '"$OUTPUT_DIR/index.json"',
+  "index.cultivarCount !== manifest.publishableCultivarCount",
   'rm -rf "$OUTPUT_DIR"',
   "git pull --rebase origin main",
   "manifest.schemaVersion !== 2",
@@ -100,7 +133,7 @@ for (const token of ["producerCount", "CultivarCategoryStatistics", "totalTerpen
   if (!cultivarTypes.includes(token)) throw new Error(`Expanded cultivar runtime type missing: ${token}`);
 }
 
-for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage"]) {
+for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage", "higher similarity means better", "similarity predicts effect"]) {
   if ((ui + "\n" + page).toLowerCase().includes(phrase)) {
     throw new Error(`Cultivar browser contains prohibited shortcut: ${phrase}`);
   }

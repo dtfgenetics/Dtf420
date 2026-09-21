@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { importCommercialCannabisSamples } from "./import-commercial-cannabis-samples.mjs";
 import { buildCultivarProfileSummaries, sampleDepthTier, summarizeMeasurements } from "./lib/cultivar-statistics.mjs";
+import { buildCultivarIntelligenceIndex } from "./build-cultivar-intelligence-index.mjs";
 
 const root = process.cwd();
 const fixture = path.join(root, "scripts/terpenes/fixtures/commercial-cannabis-samples.csv");
@@ -60,4 +61,27 @@ if (!myrceneStats || myrceneStats.median !== 0.7 || myrceneStats.n !== 3) {
   throw new Error("Blue Dream myrcene summary did not preserve sample distribution");
 }
 
-console.log("Cultivar sample import and statistics verification passed.");
+const intelligence = buildCultivarIntelligenceIndex({
+  sourceId: "SMITH-2022-COMMERCIAL-US",
+  sampleCount: samples.length,
+  cultivars: summaries,
+});
+if (intelligence.cultivarCount !== 1) {
+  throw new Error(`Expected one publishable fixture cultivar in intelligence index, got ${intelligence.cultivarCount}`);
+}
+const blueIndex = intelligence.cultivars.find((item) => item.cultivarSlug === "blue-dream");
+if (!blueIndex || blueIndex.vector["beta-myrcene"] !== 0.7) {
+  throw new Error("Cultivar intelligence index did not preserve Blue Dream median vector");
+}
+const myrceneIndex = intelligence.analytes.find((item) => item.normalizedKey === "beta-myrcene");
+if (
+  !myrceneIndex ||
+  myrceneIndex.cultivarCount !== 1 ||
+  myrceneIndex.measuredSamples !== 3 ||
+  myrceneIndex.positiveMedianCultivars !== 1 ||
+  myrceneIndex.positiveMedianShare !== 1
+) {
+  throw new Error("Cultivar intelligence analyte prevalence is incorrect");
+}
+
+console.log("Cultivar sample import, statistics, and global intelligence verification passed.");
