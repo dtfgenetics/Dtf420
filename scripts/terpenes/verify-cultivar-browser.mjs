@@ -15,7 +15,11 @@ for (const token of [
   "Search normalized cultivar label",
   "Measured cultivar distribution",
   "Sample depth",
-  "Runtime status",
+  "Usable labeled samples",
+  "Compiled cultivar labels",
+  "Public summaries",
+  "Source SHA-256",
+  "Generated",
   "This source analyte does not resolve one exact isomer",
 ]) {
   if (!ui.includes(token)) throw new Error(`Cultivar browser UI missing contract: ${token}`);
@@ -42,6 +46,15 @@ if (manifest.status === "compiled") {
   }
   if (!Array.isArray(manifest.shards) || manifest.shards.length < 10) {
     throw new Error("Compiled cultivar manifest has too few runtime shards");
+  }
+  if (!Number.isFinite(manifest.sourceBytes) || manifest.sourceBytes < 10000000) {
+    throw new Error("Compiled cultivar manifest is missing plausible source byte provenance");
+  }
+  if (!/^[a-f0-9]{64}$/i.test(String(manifest.sourceSha256 ?? ""))) {
+    throw new Error("Compiled cultivar manifest is missing a valid SHA-256 source fingerprint");
+  }
+  if (!manifest.generatedAt || Number.isNaN(Date.parse(manifest.generatedAt))) {
+    throw new Error("Compiled cultivar manifest is missing a valid generatedAt timestamp");
   }
 } else {
   if (manifest.status !== "not-generated") {
