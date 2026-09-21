@@ -398,13 +398,13 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                     <div
                       className={styles.totalIqr}
                       style={{
-                        left: `${(selected.totalTerpenes.q1 / selected.totalTerpenes.max) * 100}%`,
-                        width: `${((selected.totalTerpenes.q3 - selected.totalTerpenes.q1) / selected.totalTerpenes.max) * 100}%`,
+                        left: `${(selected.totalTerpenes.q1 / Math.max(selected.totalTerpenes.max, 0.001)) * 100}%`,
+                        width: `${((selected.totalTerpenes.q3 - selected.totalTerpenes.q1) / Math.max(selected.totalTerpenes.max, 0.001)) * 100}%`,
                       }}
                     />
                     <i
                       style={{
-                        left: `${(selected.totalTerpenes.median / selected.totalTerpenes.max) * 100}%`,
+                        left: `${(selected.totalTerpenes.median / Math.max(selected.totalTerpenes.max, 0.001)) * 100}%`,
                       }}
                     />
                   </div>
