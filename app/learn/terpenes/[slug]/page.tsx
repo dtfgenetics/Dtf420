@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { terpeneSeedCompounds } from "@/lib/terpenes/data";
 import { getFamilyLabel, getTerpeneBySlug } from "@/lib/terpenes/queries";
+import { getGenesForCompound, getGeneProductContext } from "@/lib/terpenes/genetics";
+import { getReviewedEvidenceForCompound } from "@/lib/terpenes/evidence-queries";
+import { evidenceScope, humanizeEvidenceTerm } from "@/lib/terpenes/research";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -36,6 +39,8 @@ export default async function TerpeneRecordPage({
   if (!compound) notFound();
 
   const family = getFamilyLabel(compound.terpeneClass);
+  const mappedGenes = getGenesForCompound(compound.slug);
+  const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
 
   return (
     <article className={styles.page}>
@@ -118,6 +123,78 @@ export default async function TerpeneRecordPage({
             </div>
           </section>
 
+          {mappedGenes.length ? (
+            <section className={styles.evidenceSection}>
+              <div className="section-heading">
+                <p className="eyebrow">Source-verified genetics</p>
+                <h2>Functionally characterized Cannabis terpene synthases mapped to this compound.</h2>
+              </div>
+              <div className={styles.geneGrid}>
+                {mappedGenes.map((gene) => {
+                  const context = getGeneProductContext(gene, compound.slug);
+                  return (
+                    <article className={styles.geneCard} key={gene.id}>
+                      <div className={styles.cardTopline}>
+                        <span>{context?.role === "major" ? "Major functional product" : "Additional reported product"}</span>
+                        <strong>{gene.id}</strong>
+                      </div>
+                      <dl>
+                        <div><dt>Origin</dt><dd>{gene.strainOrigin}</dd></div>
+                        <div><dt>Primary substrate</dt><dd>{gene.primarySubstrate}</dd></div>
+                        <div><dt>TPS group</dt><dd>{gene.subfamily ?? "Not assigned in current source record"}</dd></div>
+                        <div><dt>Source location</dt><dd>{gene.sourceLocator}</dd></div>
+                      </dl>
+                    </article>
+                  );
+                })}
+              </div>
+              <p className={styles.evidenceNote}>
+                A functional enzyme assay establishes biochemical capability under the tested conditions.
+                It does not guarantee a fixed flower concentration or inheritance outcome.
+              </p>
+              <Link className={styles.inlineLink} href="/learn/terpenes/genetics">
+                Open the full TPS genetics map →
+              </Link>
+            </section>
+          ) : null}
+
+          <section className={styles.evidenceSection}>
+            <div className="section-heading">
+              <p className="eyebrow">Reviewed evidence</p>
+              <h2>Trace the claims on this record back to the evidence ledger.</h2>
+            </div>
+            {reviewedEvidence.length ? (
+              <div className={styles.evidenceGrid}>
+                {reviewedEvidence.map(({ record, source }) => (
+                  <article className={styles.evidenceCard} key={record.id}>
+                    <div className={styles.cardTopline}>
+                      <span>{humanizeEvidenceTerm(record.claimType)}</span>
+                      <strong>{humanizeEvidenceTerm(record.reviewStatus)}</strong>
+                    </div>
+                    <h3>{record.statement}</h3>
+                    <p>{evidenceScope(record)}</p>
+                    <dl>
+                      <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                      <div><dt>Method</dt><dd>{record.analyticalMethod ?? "Not specified in this ledger entry"}</dd></div>
+                      <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                    </dl>
+                    {source?.sourceUrl ? (
+                      <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className={styles.body}>
+                No reviewed compound-specific evidence records are linked yet. The chemistry record remains available,
+                but unsupported evidence categories are not invented.
+              </p>
+            )}
+            <Link className={styles.inlineLink} href="/learn/terpenes/research">
+              Open the research ledger →
+            </Link>
+          </section>
+
           <section>
             <div className="section-heading">
               <p className="eyebrow">Natural occurrence</p>
@@ -160,6 +237,8 @@ export default async function TerpeneRecordPage({
             </a>
           ) : null}
 
+          <Link href="/learn/terpenes/genetics">Open TPS genetics →</Link>
+          <Link href="/learn/terpenes/research">Open terpene research ledger →</Link>
           <Link href="/learn/sources">Open THC evidence sources →</Link>
         </aside>
       </div>
