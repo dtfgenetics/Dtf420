@@ -1,0 +1,6 @@
+coconut_id,name,canonical_smiles,inchikey,molecular_formula,molecular_weight,np_classifier_pathway,np_classifier_class,chemical_class,chemical_sub_class,direct_parent,organisms,synonyms
+CNP0000001,Limonene,CC1=CCC(CC1)C(=C)C,XMGQYMWWDOXHJM-UHFFFAOYSA-N,C10H16,136.24,Terpenoids,Monoterpenoids,Prenol lipids,Monoterpenoids,Monoterpenoids,Citrus limon,"limonene; dipentene"
+CNP0000002,Example alkaloid,CN1CCC[C@H]1C2=CN=CC=C2,AAAA-BBBB,C10H14N2,162.23,Alkaloids,Ornithine alkaloids,Organoheterocyclic compounds,Alkaloids,Alkaloids,Example species,example
+CNP0000003,"Quoted, terpene example",CC(C)=CCCC(C)=CCCC(C)=C,BBBB-CCCC,C15H24,204.36,Terpenoids,Sesquiterpenoids,Lipids and lipid-like molecules,Prenol lipids,Sesquiterpenoids,"Plant A
+Plant B","alias one; alias two"
+CNP0000004,Beta carotene,CC1=C(C(CCC1)(C)C)C=CC(=CC=CC(=CC=CC=C(C)C=CC=C(C)C=CC2=C(CCCC2(C)C)C)C)C,CCCC-DDDD,C40H56,536.87,Lipids,Carotenoids,Lipids and lipid-like molecules,Prenol lipids,Carotenoids,Daucus carota,beta-carotene
