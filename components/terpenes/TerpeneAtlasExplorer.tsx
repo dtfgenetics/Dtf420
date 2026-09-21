@@ -8,10 +8,10 @@ import styles from "./TerpeneAtlasExplorer.module.css";
 
 const views: { id: TerpeneView; label: string; helper: string }[] = [
   { id: "aroma", label: "Aroma", helper: "Sensory language without reducing aroma to one molecule." },
-  { id: "chemistry", label: "Chemistry", helper: "Carbon class, structure family, functional chemistry, and identifiers." },
-  { id: "biosynthesis", label: "Biosynthesis", helper: "Precursors and pathway relationships." },
-  { id: "genetics", label: "Genetics", helper: "Terpene synthases, expression, and inherited variation." },
-  { id: "cultivars", label: "Cultivars", helper: "Measured profiles and chemovar-level interpretation." },
+  { id: "chemistry", label: "Chemistry", helper: "Chemical class, structure family, functional chemistry, and identifiers." },
+  { id: "biosynthesis", label: "Biosynthesis", helper: "Precursors, terpene synthases, and pathway relationships." },
+  { id: "genetics", label: "Genetics", helper: "Functionally characterized synthases, expression, and inherited variation." },
+  { id: "cultivars", label: "Cultivars", helper: "Measured sample distributions instead of fixed strain percentages." },
 ];
 
 function matchesSearch(compound: TerpeneCompound, query: string) {
@@ -40,6 +40,11 @@ function occurrenceLabel(compound: TerpeneCompound) {
   return "Global reference · cannabis not mapped";
 }
 
+function ringStyle(index: number, count: number) {
+  const angle = (360 / Math.max(count, 1)) * index;
+  return { "--angle": `${angle}deg`, "--counter-angle": `${angle * -1}deg` } as CSSProperties;
+}
+
 export function TerpeneAtlasExplorer() {
   const [view, setView] = useState<TerpeneView>("aroma");
   const [scope, setScope] = useState<"cannabis" | "all">("cannabis");
@@ -57,38 +62,62 @@ export function TerpeneAtlasExplorer() {
     [family, query, scope],
   );
 
+  const wheelCompounds = filtered.length
+    ? filtered.slice(0, 12)
+    : terpeneSeedCompounds
+        .filter((compound) => scope === "all" || compound.cannabisOccurrence !== "not-mapped")
+        .slice(0, 12);
+
   const selected =
     terpeneSeedCompounds.find((compound) => compound.slug === selectedSlug) ??
-    filtered[0] ??
+    wheelCompounds[0] ??
     terpeneSeedCompounds[0];
 
   const selectedFamily = terpeneFamilies.find((item) => item.id === selected.terpeneClass);
+  const aromaRing = selected.aromaDescriptors.length
+    ? selected.aromaDescriptors.slice(0, 8)
+    : ["reference compound"];
 
   function chooseFamily(nextFamily: TerpeneClassId) {
-    setFamily((current) => (current === nextFamily ? "all" : nextFamily));
-    const firstMatch = terpeneSeedCompounds.find(
-      (compound) =>
-        compound.terpeneClass === nextFamily &&
-        (scope === "all" || compound.cannabisOccurrence !== "not-mapped"),
-    );
-    if (firstMatch) setSelectedSlug(firstMatch.slug);
+    const willClear = family === nextFamily;
+    setFamily(willClear ? "all" : nextFamily);
+
+    if (!willClear) {
+      const firstMatch = terpeneSeedCompounds.find(
+        (compound) =>
+          compound.terpeneClass === nextFamily &&
+          (scope === "all" || compound.cannabisOccurrence !== "not-mapped"),
+      );
+      if (firstMatch) setSelectedSlug(firstMatch.slug);
+    }
+  }
+
+  function chooseScope(nextScope: "cannabis" | "all") {
+    setScope(nextScope);
+    if (nextScope === "cannabis" && selected.cannabisOccurrence === "not-mapped") {
+      const firstCannabis = terpeneSeedCompounds.find(
+        (compound) => compound.cannabisOccurrence !== "not-mapped",
+      );
+      if (firstCannabis) setSelectedSlug(firstCannabis.slug);
+    }
   }
 
   return (
     <div className={styles.shell}>
       <header className={styles.hero}>
         <div>
-          <p className="eyebrow">Teaching Healthy Cultivation · Plant chemistry</p>
-          <h1>THC Terpene Atlas</h1>
-          <p>
-            Explore terpene families, cannabis-relevant chemistry, aroma, biosynthesis, genetics,
-            cultivar context, and evidence without turning complex chemistry into marketing shortcuts.
+          <p className="eyebrow">THC · Teaching Healthy Cultivation · Plant chemistry</p>
+          <h1>Terpenes &amp; Terpenoids Wheel</h1>
+          <p className={styles.heroSubtitle}>Cannabis &amp; Hemp Aroma Chemistry</p>
+          <p className={styles.heroCopy}>
+            Explore chemical class, individual molecules, aroma associations, biosynthesis, genetics,
+            cultivar chemistry, and reviewed evidence without turning aroma into an effect prediction.
           </p>
         </div>
         <div className={styles.heroStats} aria-label="Terpene Atlas build status">
-          <span><strong>{terpeneFamilies.length}</strong> terpene classes</span>
-          <span><strong>{terpeneSeedCompounds.length}</strong> curated seed records</span>
-          <span><strong>Versioned</strong> source architecture</span>
+          <span><strong>{terpeneFamilies.length}</strong> chemical classes</span>
+          <span><strong>{terpeneSeedCompounds.length}</strong> reviewed seed records</span>
+          <span><strong>Aroma ≠ effect</strong> core teaching rule</span>
         </div>
       </header>
 
@@ -107,21 +136,22 @@ export function TerpeneAtlasExplorer() {
           <button
             type="button"
             data-active={scope === "cannabis" ? "" : undefined}
-            onClick={() => setScope("cannabis")}
+            onClick={() => chooseScope("cannabis")}
           >
             Cannabis mapped
           </button>
           <button
             type="button"
             data-active={scope === "all" ? "" : undefined}
-            onClick={() => setScope("all")}
+            onClick={() => chooseScope("all")}
           >
-            Global seed set
+            All known scope
           </button>
         </div>
       </section>
 
       <nav className={styles.viewTabs} aria-label="Terpene knowledge views">
+        <span>Explore by</span>
         {views.map((item) => (
           <button
             key={item.id}
@@ -133,12 +163,13 @@ export function TerpeneAtlasExplorer() {
             {item.label}
           </button>
         ))}
+        <Link href="/learn/terpenes/research">Evidence</Link>
       </nav>
 
       <section className={styles.workspace}>
         <aside className={styles.familyPanel}>
           <div className={styles.panelHeading}>
-            <span>Classification</span>
+            <span>Inner ring · chemical class</span>
             <button type="button" onClick={() => setFamily("all")} disabled={family === "all"}>
               Clear
             </button>
@@ -164,11 +195,17 @@ export function TerpeneAtlasExplorer() {
             })}
           </div>
 
+          <div className={styles.ringLegend}>
+            <div><i data-ring="class" /><span><strong>Inner</strong> chemical class</span></div>
+            <div><i data-ring="compound" /><span><strong>Middle</strong> individual compounds</span></div>
+            <div><i data-ring="aroma" /><span><strong>Outer</strong> aroma associations</span></div>
+          </div>
+
           <div className={styles.scopeNote}>
-            <strong>Built for full-scale ingestion</strong>
+            <strong>Aroma chemistry is broader than terpenes.</strong>
             <p>
-              This first coded release uses a reviewed seed set. The same schema is designed to accept
-              the much larger global registry and cannabis-specific evidence tables without changing the UI contract.
+              Skunk, gas, savory, and other notes can involve sulfur compounds, esters, aldehydes,
+              ketones, and additional VOCs. They are not forced into terpene families here.
             </p>
           </div>
         </aside>
@@ -176,32 +213,68 @@ export function TerpeneAtlasExplorer() {
         <div className={styles.wheelPanel}>
           <div className={styles.wheelHeader}>
             <div>
-              <span>Interactive classification wheel</span>
-              <strong>{family === "all" ? "All terpene families" : selectedFamily?.label}</strong>
+              <span>Interactive chemistry + aroma wheel</span>
+              <strong>{family === "all" ? "All chemical classes" : selectedFamily?.label}</strong>
             </div>
             <small>{views.find((item) => item.id === view)?.helper}</small>
           </div>
 
-          <div className={styles.wheelWrap}>
-            <div className={styles.wheel} role="group" aria-label="Terpene family wheel">
+          <div className={styles.wheelViewport} aria-label="Swipe horizontally on small screens to inspect the full wheel">
+            <div className={styles.wheel} role="group" aria-label="Terpenes and terpenoids concentric wheel">
               <div className={styles.wheelCore}>
-                <span>Terpenes</span>
+                <small>THC</small>
+                <strong>Terpenes</strong>
                 <b>&amp;</b>
-                <span>Terpenoids</span>
+                <strong>Terpenoids</strong>
+                <span>Aroma guide</span>
+                <em>Aroma ≠ effect prediction</em>
               </div>
-              {terpeneFamilies.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={styles.familyNode}
-                  data-active={family === item.id ? "" : undefined}
-                  onClick={() => chooseFamily(item.id)}
-                  style={{ "--i": index } as CSSProperties}
-                >
-                  <strong>{item.label}</strong>
-                  <small>{item.carbonCount}</small>
-                </button>
-              ))}
+
+              <div className={styles.classRing} aria-label="Chemical class ring">
+                {terpeneFamilies.map((item, index) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={styles.classNode}
+                    data-active={family === item.id ? "" : undefined}
+                    onClick={() => chooseFamily(item.id)}
+                    style={ringStyle(index, terpeneFamilies.length)}
+                    aria-label={`${item.label}, ${item.carbonCount}`}
+                  >
+                    <strong>{item.label.replace("terpenes", "")}</strong>
+                    <small>{item.carbonCount}</small>
+                  </button>
+                ))}
+              </div>
+
+              <div className={styles.compoundRing} aria-label="Compound ring">
+                {wheelCompounds.map((compound, index) => (
+                  <button
+                    key={compound.slug}
+                    type="button"
+                    className={styles.compoundNode}
+                    data-active={selected.slug === compound.slug ? "" : undefined}
+                    onClick={() => setSelectedSlug(compound.slug)}
+                    style={ringStyle(index, wheelCompounds.length)}
+                    aria-label={`Select ${compound.name}`}
+                  >
+                    <strong>{compound.name}</strong>
+                    <small>{compound.formula}</small>
+                  </button>
+                ))}
+              </div>
+
+              <div className={styles.aromaRing} aria-label={`Aroma associations for ${selected.name}`}>
+                {aromaRing.map((descriptor, index) => (
+                  <span
+                    key={`${selected.slug}-${descriptor}`}
+                    className={styles.aromaNode}
+                    style={ringStyle(index, aromaRing.length)}
+                  >
+                    {descriptor}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -219,7 +292,7 @@ export function TerpeneAtlasExplorer() {
                 </button>
               ))
             ) : (
-              <p>No seed records match these filters yet. Clear a filter or switch the data scope.</p>
+              <p>No records match these filters yet. Clear a filter or switch the data scope.</p>
             )}
           </div>
         </div>
@@ -237,6 +310,15 @@ export function TerpeneAtlasExplorer() {
             {selected.structureFamily} · {selected.functionalClass}
           </p>
 
+          <div className={styles.selectedAroma}>
+            <span>Outer-ring aroma</span>
+            <div className={styles.chips}>
+              {selected.aromaDescriptors.length
+                ? selected.aromaDescriptors.map((descriptor) => <span key={descriptor}>{descriptor}</span>)
+                : <span>Not assigned as an aroma driver in this seed record</span>}
+            </div>
+          </div>
+
           <dl className={styles.facts}>
             <div><dt>Formula</dt><dd>{selected.formula}</dd></div>
             <div><dt>Molecular weight</dt><dd>{selected.molecularWeight ? `${selected.molecularWeight} g/mol` : "Pending source import"}</dd></div>
@@ -250,15 +332,6 @@ export function TerpeneAtlasExplorer() {
             <p>{selected.viewNotes[view]}</p>
           </section>
 
-          {selected.aromaDescriptors.length ? (
-            <section>
-              <h3>Aroma language</h3>
-              <div className={styles.chips}>
-                {selected.aromaDescriptors.map((descriptor) => <span key={descriptor}>{descriptor}</span>)}
-              </div>
-            </section>
-          ) : null}
-
           <section>
             <h3>Cannabis context</h3>
             <p>{selected.cannabisContext}</p>
@@ -269,9 +342,13 @@ export function TerpeneAtlasExplorer() {
             <p>{selected.researchGuardrail}</p>
           </section>
 
-          <Link className={styles.fullRecord} href={`/learn/terpenes/${selected.slug}`}>
-            Open full compound record →
-          </Link>
+          <div className={styles.detailActions}>
+            <Link className={styles.fullRecord} href={`/learn/terpenes/${selected.slug}`}>
+              Open full compound record →
+            </Link>
+            <Link href="/learn/terpenes/genetics">TPS genetics</Link>
+            <Link href="/learn/terpenes/research">Research ledger</Link>
+          </div>
         </aside>
       </section>
 

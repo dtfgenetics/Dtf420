@@ -180,3 +180,23 @@ Reviewed public records must resolve to a registered source with a navigable loc
 Study types are not collapsed into a single universal score. Chemical analysis, functional enzyme assays, genomics/expression, animal studies, in-vitro work, observational studies, and human clinical studies answer different questions. The UI explains those boundaries rather than pretending all evidence is interchangeable.
 
 Draft and rejected records may remain in the audit ledger, but public educational claims should be driven by source-verified or editorial-reviewed evidence.
+
+
+## Terpene Atlas visual mockup contract
+
+The public Atlas must preserve the approved scientific-wheel hierarchy rather than reverting to a decorative circle of disconnected buttons.
+
+The wheel is organized as:
+
+- **center** — “Terpenes & Terpenoids” with the teaching rule “Aroma ≠ effect prediction”;
+- **inner ring** — chemical class / carbon-family organization;
+- **middle ring** — individual terpene or terpenoid compounds;
+- **outer ring** — aroma associations for the selected compound.
+
+Chemical class and aroma association must stay visually and semantically separate. Aroma language is not an effect score.
+
+The wheel uses botanical/scientific visual styling: near-black forest-green surfaces, botanical green chemical-class cues, warm-gold compound cues, muted warm aroma cues, fine radial separators, clear labels, and restrained decoration. Non-terpene aroma chemistry such as sulfur compounds, esters, aldehydes, ketones, and other VOCs must be identified separately rather than forced into terpene families.
+
+Desktop keeps the wheel as the primary visual with classification controls and a linked detail panel. Mobile keeps the full radial wheel available through horizontal swipe/tap interaction and moves the information panel below it as a readable drawer.
+
+Compound detail pages must remain in the same visual family and link directly to mapped TPS genetics plus reviewed evidence records when those records exist.
