@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "sourceId": "SMITH-2022-COMMERCIAL-US",
   "sourceSampleCount": 34224,
   "cultivarCount": 2658,
   "publishableCultivarCount": 1300,
   "minimumSamples": 5,
-  "generatedAt": "2026-09-21T23:27:26.360Z",
+  "generatedAt": "2026-09-21T23:34:15.860Z",
   "shardStrategy": "first-alphanumeric-character-of-cultivar-slug",
   "shards": [
     {
