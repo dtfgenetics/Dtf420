@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { importCommercialCannabisSamples } from "./import-commercial-cannabis-samples.mjs";
-import { buildCultivarProfileSummaries, sampleDepthTier, summarizeMeasurements } from "./lib/cultivar-statistics.mjs";
+import { buildCultivarProfileSummaries, sampleDepthTier, summarizeConcentration, summarizeMeasurements } from "./lib/cultivar-statistics.mjs";
 import { buildCultivarIntelligenceIndex } from "./build-cultivar-intelligence-index.mjs";
 
 const root = process.cwd();
@@ -36,6 +36,16 @@ if (stats.median !== 0.7 || stats.min !== 0.65 || stats.max !== 0.75) {
 if (sampleDepthTier(4, 2) !== "insufficient") throw new Error("Four samples should remain insufficient for default public depth");
 if (sampleDepthTier(12, 2) !== "moderate-multi-lab") throw new Error("Sample-depth tiering is incorrect");
 
+const concentration = summarizeConcentration(new Map([["lab-a", 1], ["lab-b", 2]]));
+if (
+  concentration.distinctCount !== 2 ||
+  Math.abs(concentration.largestShare - (2 / 3)) > 1e-9 ||
+  Math.abs(concentration.concentrationIndex - (5 / 9)) > 1e-9 ||
+  Math.abs(concentration.effectiveCount - 1.8) > 1e-9
+) {
+  throw new Error("Source concentration metrics are incorrect");
+}
+
 const summaries = buildCultivarProfileSummaries(samples, { minimumSamples: 3 });
 const blueSummary = summaries.find((item) => item.cultivarSlug === "blue-dream");
 if (!blueSummary?.publishable) throw new Error("Three-sample cultivar should be publishable at minimumSamples=3");
@@ -56,9 +66,30 @@ if (!topTerpene || topTerpene.n !== 3) throw new Error("Blue Dream top-terpene f
 const other = summaries.find((item) => item.cultivarSlug === "other-cultivar");
 if (other?.publishable) throw new Error("Single-sample cultivar must not be publishable at minimumSamples=3");
 
+if (
+  Math.abs(blueSummary.dataQuality.labs.largestShare - (2 / 3)) > 1e-9 ||
+  Math.abs(blueSummary.dataQuality.labs.effectiveCount - 1.8) > 1e-9 ||
+  Math.abs(blueSummary.dataQuality.producers.largestShare - (1 / 3)) > 1e-9 ||
+  Math.abs(blueSummary.dataQuality.producers.effectiveCount - 3) > 1e-9 ||
+  blueSummary.dataQuality.totalTerpeneCoverage !== 1 ||
+  Math.abs(blueSummary.dataQuality.largestRegionShare - (2 / 3)) > 1e-9
+) {
+  throw new Error("Blue Dream source-quality diagnostics are incorrect");
+}
+
 const myrceneStats = blueSummary.analytes.find((item) => item.normalizedKey === "beta-myrcene");
 if (!myrceneStats || myrceneStats.median !== 0.7 || myrceneStats.n !== 3) {
   throw new Error("Blue Dream myrcene summary did not preserve sample distribution");
+}
+if (
+  myrceneStats.sampleCoverage !== 1 ||
+  Math.abs(myrceneStats.relativeIqr - (1 / 14)) > 1e-9 ||
+  !myrceneStats.labMedianDistribution ||
+  myrceneStats.labMedianDistribution.n !== 2 ||
+  Math.abs(myrceneStats.labMedianDistribution.min - 0.7) > 1e-9 ||
+  Math.abs(myrceneStats.labMedianDistribution.max - 0.7) > 1e-9
+) {
+  throw new Error("Blue Dream analyte breadth diagnostics are incorrect");
 }
 
 const intelligence = buildCultivarIntelligenceIndex({
