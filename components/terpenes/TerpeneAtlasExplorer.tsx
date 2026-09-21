@@ -296,7 +296,8 @@ export function TerpeneAtlasExplorer() {
         <article>
           <span>04</span>
           <h2>Research ledger</h2>
-          <p>Every effect claim will carry study type, evidence strength, citation, and review status.</p>
+          <p>Inspect claim type, study type, methods, source location, review status, and what each evidence record can actually establish.</p>
+          <Link href="/learn/terpenes/research">Open research ledger →</Link>
         </article>
       </section>
     </div>
