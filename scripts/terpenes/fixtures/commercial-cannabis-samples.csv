@@ -1,0 +1,6 @@
+u_id,lab_id,strain_slug,anon_producer,region,product_category,strain_category,strain_popularity,chemotype,has_cannabs,chemotype_ratio,tot_thc,tot_cbd,tot_cbg,tot_cbc,tot_cbn,tot_thcv,has_terps,total_terps,terp_var,top_terp_f,tot_ocimene,camphene,g_terpinene,tot_nerolidol_ct,humulene,caryophyllene,limonene,linalool,myrcene,bisabolol,b_pinene,a_terpinene,terpinolene,a_pinene
+1,lab0,blue-dream,10,AK,flower,None,0,THC-Dom,True,10,20,1,0,0,0,0,True,2.2,0.02,myrcene,0.10,0.02,0.01,0.03,0.20,0.35,0.30,0.10,0.70,0.02,0.08,0.01,0.12,0.16
+2,lab1,blue-dream,11,OR,flower,None,0,THC-Dom,True,12,21,1,0,0,0,0,True,2.4,0.03,myrcene,0.12,0.03,0.02,0.04,0.22,0.38,0.32,0.11,0.75,0.03,0.09,0.02,0.13,0.17
+3,lab1,blue-dream,12,OR,flower,None,0,THC-Dom,True,11,19,1,0,0,0,0,True,2.0,0.02,myrcene,0.08,0.01,0.01,0.02,0.18,0.30,0.28,0.09,0.65,0.01,0.07,0.01,0.11,0.15
+4,lab2,other-cultivar,13,WA,flower,None,0,THC-Dom,True,15,23,1,0,0,0,0,True,1.5,0.01,limonene,0.05,0.01,0.01,0.01,0.10,0.20,0.55,0.08,0.20,0.01,0.05,0.01,0.07,0.08
+5,lab2,no-terps,14,WA,flower,None,0,THC-Dom,True,15,23,1,0,0,0,0,False,,,,,,,,,,,,,,,

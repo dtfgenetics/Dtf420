@@ -48,6 +48,17 @@
       "ingestMode": "controlled-internal-records",
       "reviewRequired": true,
       "notes": "Connect parent chemistry to measured offspring and selections. Predictions remain probabilistic until supported by offspring data."
+    },
+    {
+      "id": "SMITH-2022-COMMERCIAL-US",
+      "name": "The phytochemical diversity of commercial Cannabis in the United States — published dataset",
+      "role": "sample-level-cultivar-chemistry",
+      "ingestMode": "streaming-csv",
+      "reviewRequired": true,
+      "license": "CC0-1.0",
+      "repository": "cjsmith015/phytochemical-diversity-cannabis",
+      "datasetPath": "data/preproc_lab_data_pub_20220218.csv",
+      "notes": "Published cleaned laboratory dataset spanning multiple U.S. testing labs. Preserve sample-level records and dataset-normalized strain_slug; do not turn cultivar labels into fixed chemistry values."
     }
   ]
 }

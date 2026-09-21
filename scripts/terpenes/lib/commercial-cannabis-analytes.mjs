@@ -1,0 +1,16 @@
+export const COMMERCIAL_CANNABIS_TERPENE_ANALYTES = Object.freeze({
+  tot_ocimene: { canonicalSlug: null, normalizedKey: "ocimene-total", measurementKind: "aggregate-isomers" },
+  camphene: { canonicalSlug: "camphene", normalizedKey: "camphene", measurementKind: "compound" },
+  g_terpinene: { canonicalSlug: "gamma-terpinene", normalizedKey: "gamma-terpinene", measurementKind: "compound" },
+  tot_nerolidol_ct: { canonicalSlug: null, normalizedKey: "nerolidol-cis-trans-total", measurementKind: "aggregate-isomers" },
+  humulene: { canonicalSlug: "alpha-humulene", normalizedKey: "alpha-humulene", measurementKind: "compound" },
+  caryophyllene: { canonicalSlug: "beta-caryophyllene", normalizedKey: "beta-caryophyllene", measurementKind: "compound" },
+  limonene: { canonicalSlug: "limonene", normalizedKey: "limonene", measurementKind: "compound-stereochemistry-unspecified" },
+  linalool: { canonicalSlug: "linalool", normalizedKey: "linalool", measurementKind: "compound-stereochemistry-unspecified" },
+  myrcene: { canonicalSlug: "beta-myrcene", normalizedKey: "beta-myrcene", measurementKind: "compound" },
+  bisabolol: { canonicalSlug: null, normalizedKey: "bisabolol-unspecified", measurementKind: "compound-isomer-unspecified" },
+  b_pinene: { canonicalSlug: "beta-pinene", normalizedKey: "beta-pinene", measurementKind: "compound" },
+  a_terpinene: { canonicalSlug: "alpha-terpinene", normalizedKey: "alpha-terpinene", measurementKind: "compound" },
+  terpinolene: { canonicalSlug: "terpinolene", normalizedKey: "terpinolene", measurementKind: "compound" },
+  a_pinene: { canonicalSlug: "alpha-pinene", normalizedKey: "alpha-pinene", measurementKind: "compound" },
+});
