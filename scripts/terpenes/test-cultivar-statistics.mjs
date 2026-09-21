@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { importCommercialCannabisSamples } from "./import-commercial-cannabis-samples.mjs";
-import { buildCultivarProfileSummaries, summarizeMeasurements } from "./lib/cultivar-statistics.mjs";
+import { buildCultivarProfileSummaries, sampleDepthTier, summarizeMeasurements } from "./lib/cultivar-statistics.mjs";
 
 const root = process.cwd();
 const fixture = path.join(root, "scripts/terpenes/fixtures/commercial-cannabis-samples.csv");
@@ -31,6 +31,9 @@ const stats = summarizeMeasurements([0.7, 0.75, 0.65]);
 if (stats.median !== 0.7 || stats.min !== 0.65 || stats.max !== 0.75) {
   throw new Error("Robust measurement summary is incorrect");
 }
+
+if (sampleDepthTier(4, 2) !== "insufficient") throw new Error("Four samples should remain insufficient for default public depth");
+if (sampleDepthTier(12, 2) !== "moderate-multi-lab") throw new Error("Sample-depth tiering is incorrect");
 
 const summaries = buildCultivarProfileSummaries(samples, { minimumSamples: 3 });
 const blueSummary = summaries.find((item) => item.cultivarSlug === "blue-dream");
