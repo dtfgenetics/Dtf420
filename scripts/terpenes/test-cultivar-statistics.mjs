@@ -74,7 +74,13 @@ if (!blueIndex || blueIndex.vector["beta-myrcene"] !== 0.7) {
   throw new Error("Cultivar intelligence index did not preserve Blue Dream median vector");
 }
 const myrceneIndex = intelligence.analytes.find((item) => item.normalizedKey === "beta-myrcene");
-if (!myrceneIndex || myrceneIndex.cultivarCount !== 1 || myrceneIndex.measuredSamples !== 3) {
+if (
+  !myrceneIndex ||
+  myrceneIndex.cultivarCount !== 1 ||
+  myrceneIndex.measuredSamples !== 3 ||
+  myrceneIndex.positiveMedianCultivars !== 1 ||
+  myrceneIndex.positiveMedianShare !== 1
+) {
   throw new Error("Cultivar intelligence analyte prevalence is incorrect");
 }
 
