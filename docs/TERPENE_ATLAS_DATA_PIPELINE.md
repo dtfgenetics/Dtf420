@@ -244,3 +244,30 @@ The expanded cultivar intelligence workspace uses runtime schema v2. In addition
 The browser temporarily normalizes v1 runtime shards by supplying empty/default context fields, so a deployment cannot crash between application merge and generated-data refresh. The runtime builder now emits schema v2, and the refresh workflow rejects any newly generated manifest that is not v2.
 
 After the expansion merges, the existing data-refresh workflow is expected to regenerate the checked-in cultivar shards from the registered source dataset. The generated v2 data supersedes transitional v1 normalization.
+
+
+### Global cultivar chemistry intelligence index
+
+The cultivar runtime also compiles a compact global index at `public/data/terpenes/cultivars/index.json`. This exists so whole-corpus questions do not require loading all alphabetical cultivar shards.
+
+The index contains only derived public summary fields:
+
+- cultivar slug;
+- sample, laboratory, and producer depth;
+- sample-depth tier;
+- total-terpene median;
+- top-terpene frequency summary;
+- median terpene vector;
+- per-analyte measurement coverage;
+- per-analyte positive-median cultivar count/share;
+- per-analyte measured-sample depth;
+- per-analyte multi-laboratory cultivar count;
+- distribution of cultivar-group medians.
+
+The index does not contain raw laboratory rows or private identifiers.
+
+**Measurement coverage** and **positive-median prevalence** are separate metrics. A compound can be measured in a cultivar group while having a compiled median of zero. The UI must not call measurement coverage “prevalence.”
+
+Nearest-profile results use cosine similarity on compiled median terpene vectors. They are descriptive chemistry neighbors only. They are not quality rankings, effect predictions, proof of shared genetics, or predictions for an individual sample.
+
+The global index is lazy-loaded on demand. Normal cultivar search continues to use alphabetical shards so visitors who do not request global analysis do not pay the index payload cost.
