@@ -37,7 +37,7 @@ for (const [key, cultivars] of [...shards.entries()].sort(([a], [b]) => a.locale
 }
 
 const manifest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   sourceId: input.sourceId,
   sourceSampleCount: input.sampleCount,
   cultivarCount: input.cultivarCount,
