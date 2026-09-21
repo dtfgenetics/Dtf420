@@ -78,7 +78,8 @@
     "verify:terpenes:research": "node scripts/terpenes/verify-research-ledger-ui.mjs",
     "verify:terpenes:mockup": "node scripts/terpenes/verify-mockup-fidelity.mjs",
     "verify:terpenes:profiles": "node scripts/terpenes/verify-profile-comparison.mjs",
-    "verify:terpenes:cultivar-browser": "node scripts/terpenes/verify-cultivar-browser.mjs"
+    "verify:terpenes:cultivar-browser": "node scripts/terpenes/verify-cultivar-browser.mjs",
+    "terpenes:cultivars:index": "node scripts/terpenes/build-cultivar-intelligence-index.mjs"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
