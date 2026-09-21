@@ -31,6 +31,12 @@ const requiredFiles = [
   "scripts/terpenes/fixtures/identity-records.jsonl",
   "scripts/terpenes/fixtures/evidence-ledger.json",
   "scripts/terpenes/test-identity-evidence.mjs",
+  "scripts/terpenes/lib/commercial-cannabis-analytes.mjs",
+  "scripts/terpenes/lib/cultivar-statistics.mjs",
+  "scripts/terpenes/import-commercial-cannabis-samples.mjs",
+  "scripts/terpenes/compile-cultivar-statistics.mjs",
+  "scripts/terpenes/fixtures/commercial-cannabis-samples.csv",
+  "scripts/terpenes/test-cultivar-statistics.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -91,7 +97,7 @@ if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
-const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS"];
+const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US"];
 const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
   if (!registryIds.has(sourceId)) {
@@ -148,6 +154,19 @@ for (const token of [
 const evidenceLedger = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/evidence-ledger.json"), "utf8"));
 if (evidenceLedger.schemaVersion !== "1.0.0" || !Array.isArray(evidenceLedger.records)) {
   throw new Error("Production terpene evidence ledger has invalid schema");
+}
+
+const cultivarImporterSource = fs.readFileSync(path.join(root, "scripts/terpenes/import-commercial-cannabis-samples.mjs"), "utf8");
+for (const token of ["dataset-normalized-strain-slug", "aggregate-isomers", "SMITH-2022-COMMERCIAL-US"]) {
+  if (!cultivarImporterSource.includes(token) && token !== "aggregate-isomers") {
+    throw new Error(`Cultivar importer missing source-preservation contract: ${token}`);
+  }
+}
+const analyteSource = fs.readFileSync(path.join(root, "scripts/terpenes/lib/commercial-cannabis-analytes.mjs"), "utf8");
+for (const token of ['measurementKind: "aggregate-isomers"', 'canonicalSlug: null']) {
+  if (!analyteSource.includes(token)) {
+    throw new Error(`Cultivar analyte mapping missing aggregate safety contract: ${token}`);
+  }
 }
 
 console.log(`Terpene Atlas verification passed: ${slugs.length} seed records, ${requiredFamilies.length} family classes, ${registryIds.size} registered sources.`);
