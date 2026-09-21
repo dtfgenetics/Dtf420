@@ -356,7 +356,8 @@ export function TerpeneAtlasExplorer() {
         <article>
           <span>01</span>
           <h2>Profile comparison</h2>
-          <p>Compare terpene fingerprints compound-by-compound instead of relying on cultivar names alone.</p>
+          <p>Compare measured terpene fingerprints compound-by-compound instead of relying on cultivar names alone.</p>
+          <Link href="/learn/terpenes/profiles">Open profile comparison →</Link>
         </article>
         <article>
           <span>02</span>

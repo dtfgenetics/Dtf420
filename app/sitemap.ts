@@ -54,6 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/learn/sources", 0.82, "weekly"),
     item("/learn/atlas", 0.95, "weekly"),
     item("/learn/terpenes", 0.94, "weekly"),
+    item("/learn/terpenes/profiles", 0.89, "weekly"),
     item("/learn/terpenes/breeding", 0.86, "weekly"),
     item("/learn/terpenes/genetics", 0.88, "weekly"),
     item("/learn/terpenes/research", 0.87, "weekly"),
