@@ -38,6 +38,8 @@ const requiredFiles = [
   "scripts/terpenes/fixtures/commercial-cannabis-samples.csv",
   "scripts/terpenes/test-cultivar-statistics.mjs",
   "scripts/terpenes/build-cultivar-runtime-shards.mjs",
+  "scripts/terpenes/build-cultivar-intelligence-index.mjs",
+  "public/data/terpenes/cultivars/index.json",
   "lib/terpenes/cultivar-types.ts",
   "data/terpenes/tps-genes.json",
   "lib/terpenes/genetics.ts",
@@ -260,6 +262,9 @@ for (const token of [
   "Source context",
   "Cultivar comparison",
   "Median-vector similarity",
+  "Global cultivar chemistry",
+  "Nearest median chemistry profiles",
+  "Global analyte prevalence",
 ]) {
   if (!cultivarBrowserSource.includes(token)) {
     throw new Error(`Cultivar browser missing Atlas contract: ${token}`);
