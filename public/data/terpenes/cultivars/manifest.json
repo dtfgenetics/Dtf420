@@ -1,12 +1,186 @@
 {
   "schemaVersion": 1,
   "sourceId": "SMITH-2022-COMMERCIAL-US",
-  "sourceSampleCount": 0,
-  "cultivarCount": 0,
-  "publishableCultivarCount": 0,
+  "sourceSampleCount": 34224,
+  "cultivarCount": 2658,
+  "publishableCultivarCount": 1300,
   "minimumSamples": 5,
-  "generatedAt": null,
+  "generatedAt": "2026-09-21T22:25:43.137Z",
   "shardStrategy": "first-alphanumeric-character-of-cultivar-slug",
-  "status": "not-generated",
-  "shards": []
+  "shards": [
+    {
+      "key": "2",
+      "filename": "cultivars-2.json",
+      "count": 2
+    },
+    {
+      "key": "3",
+      "filename": "cultivars-3.json",
+      "count": 3
+    },
+    {
+      "key": "4",
+      "filename": "cultivars-4.json",
+      "count": 1
+    },
+    {
+      "key": "5",
+      "filename": "cultivars-5.json",
+      "count": 3
+    },
+    {
+      "key": "6",
+      "filename": "cultivars-6.json",
+      "count": 1
+    },
+    {
+      "key": "7",
+      "filename": "cultivars-7.json",
+      "count": 2
+    },
+    {
+      "key": "8",
+      "filename": "cultivars-8.json",
+      "count": 1
+    },
+    {
+      "key": "9",
+      "filename": "cultivars-9.json",
+      "count": 4
+    },
+    {
+      "key": "a",
+      "filename": "cultivars-a.json",
+      "count": 61
+    },
+    {
+      "key": "b",
+      "filename": "cultivars-b.json",
+      "count": 138
+    },
+    {
+      "key": "c",
+      "filename": "cultivars-c.json",
+      "count": 122
+    },
+    {
+      "key": "d",
+      "filename": "cultivars-d.json",
+      "count": 59
+    },
+    {
+      "key": "e",
+      "filename": "cultivars-e.json",
+      "count": 19
+    },
+    {
+      "key": "f",
+      "filename": "cultivars-f.json",
+      "count": 32
+    },
+    {
+      "key": "g",
+      "filename": "cultivars-g.json",
+      "count": 97
+    },
+    {
+      "key": "h",
+      "filename": "cultivars-h.json",
+      "count": 40
+    },
+    {
+      "key": "i",
+      "filename": "cultivars-i.json",
+      "count": 16
+    },
+    {
+      "key": "j",
+      "filename": "cultivars-j.json",
+      "count": 26
+    },
+    {
+      "key": "k",
+      "filename": "cultivars-k.json",
+      "count": 21
+    },
+    {
+      "key": "l",
+      "filename": "cultivars-l.json",
+      "count": 72
+    },
+    {
+      "key": "m",
+      "filename": "cultivars-m.json",
+      "count": 77
+    },
+    {
+      "key": "n",
+      "filename": "cultivars-n.json",
+      "count": 17
+    },
+    {
+      "key": "o",
+      "filename": "cultivars-o.json",
+      "count": 36
+    },
+    {
+      "key": "p",
+      "filename": "cultivars-p.json",
+      "count": 104
+    },
+    {
+      "key": "q",
+      "filename": "cultivars-q.json",
+      "count": 4
+    },
+    {
+      "key": "r",
+      "filename": "cultivars-r.json",
+      "count": 31
+    },
+    {
+      "key": "s",
+      "filename": "cultivars-s.json",
+      "count": 165
+    },
+    {
+      "key": "t",
+      "filename": "cultivars-t.json",
+      "count": 63
+    },
+    {
+      "key": "u",
+      "filename": "cultivars-u.json",
+      "count": 9
+    },
+    {
+      "key": "v",
+      "filename": "cultivars-v.json",
+      "count": 14
+    },
+    {
+      "key": "w",
+      "filename": "cultivars-w.json",
+      "count": 49
+    },
+    {
+      "key": "x",
+      "filename": "cultivars-x.json",
+      "count": 2
+    },
+    {
+      "key": "y",
+      "filename": "cultivars-y.json",
+      "count": 3
+    },
+    {
+      "key": "z",
+      "filename": "cultivars-z.json",
+      "count": 6
+    }
+  ],
+  "status": "compiled",
+  "sourceUrl": "https://raw.githubusercontent.com/cjsmith015/phytochemical-diversity-cannabis/main/data/preproc_lab_data_pub_20220218.csv",
+  "sourceBytes": 19687859,
+  "sourceSha256": "1850b918bb3a00b903f9e254953bb695012314bd264c419efb68bc482b392182"
 }
