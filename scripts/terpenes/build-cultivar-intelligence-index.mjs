@@ -20,6 +20,7 @@ export function buildCultivarIntelligenceIndex(input) {
             cultivarMedians: [],
             measuredSamples: 0,
             multiLabCultivars: 0,
+            positiveMedianCultivars: 0,
           });
         }
 
@@ -27,6 +28,7 @@ export function buildCultivarIntelligenceIndex(input) {
         aggregate.cultivarMedians.push(analyte.median);
         aggregate.measuredSamples += analyte.n;
         if (analyte.labCount >= 2) aggregate.multiLabCultivars += 1;
+        if (analyte.median > 0) aggregate.positiveMedianCultivars += 1;
       }
 
       return {
@@ -55,6 +57,10 @@ export function buildCultivarIntelligenceIndex(input) {
           : 0,
         measuredSamples: analyte.measuredSamples,
         multiLabCultivars: analyte.multiLabCultivars,
+        positiveMedianCultivars: analyte.positiveMedianCultivars,
+        positiveMedianShare: publishable.length
+          ? analyte.positiveMedianCultivars / publishable.length
+          : 0,
         cultivarMedianDistribution: distribution,
       };
     })
