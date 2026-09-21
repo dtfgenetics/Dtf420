@@ -1,7 +1,7 @@
 {"sourceId":"COCONUT","sourceRecordId":"c1","name":"Limonene A","inchiKey":"ABCDEFGHIJKLMN-ABCDEFGHIJ-A","pubchemCid":100,"canonicalSmiles":"C1"}
 {"sourceId":"PUBCHEM","sourceRecordId":"p1","name":"Limonene A synonym","inchiKey":"ABCDEFGHIJKLMN-ABCDEFGHIJ-A","pubchemCid":100,"canonicalSmiles":"C1"}
 {"sourceId":"COCONUT","sourceRecordId":"c2","name":"Limonene enantiomer","inchiKey":"ABCDEFGHIJKLMN-ZYXWVUTSRQ-B","pubchemCid":101,"canonicalSmiles":"C1@@"}
-{"sourceId":"COCONUT","sourceRecordId":"c3","name":"Same name but different structure","inchiKey":"NOPQRSTUVWXYZAB-ABCDEFGHIJ-C","pubchemCid":102,"canonicalSmiles":"C2"}
-{"sourceId":"COCONUT","sourceRecordId":"c4","name":"CID conflict left","inchiKey":"QRSTUVWXABCDEFG-HIJKLMNOPQ-D","pubchemCid":999,"canonicalSmiles":"C3"}
+{"sourceId":"COCONUT","sourceRecordId":"c3","name":"Same name but different structure","inchiKey":"NOPQRSTUVWXYZA-ABCDEFGHIJ-C","pubchemCid":102,"canonicalSmiles":"C2"}
+{"sourceId":"COCONUT","sourceRecordId":"c4","name":"CID conflict left","inchiKey":"QRSTUVWXABCDEF-HIJKLMNOPQ-D","pubchemCid":999,"canonicalSmiles":"C3"}
 {"sourceId":"PUBCHEM","sourceRecordId":"p4","name":"CID conflict right","inchiKey":"ZYXWVUTSRQPONM-LKJIHGFEDC-E","pubchemCid":999,"canonicalSmiles":"C4"}
 {"sourceId":"COCONUT","sourceRecordId":"c5","name":"Unresolved by name only"}
