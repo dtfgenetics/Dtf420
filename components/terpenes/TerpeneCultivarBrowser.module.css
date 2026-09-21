@@ -22,3 +22,22 @@
 @media(max-width:1050px){.globalGrid{grid-template-columns:1fr}.globalSummary{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.globalLoad,.subHeading{grid-template-columns:1fr}.globalLoad button{justify-self:start}.neighborControls{grid-template-columns:1fr}.checkLabel{padding-top:0}.prevalenceList dl{grid-template-columns:1fr}}
 @media(max-width:520px){.globalSummary{grid-template-columns:1fr}}
+
+.qualitySection{padding-top:20px;margin-top:20px;border-top:1px solid var(--border)}
+.qualityFlags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.qualityFlags span{padding:6px 8px;border:1px solid rgba(210,166,80,.25);border-radius:999px;background:rgba(210,166,80,.07);color:#e1c27e;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
+.qualityFlags span[data-neutral]{border-color:rgba(183,226,93,.2);background:rgba(183,226,93,.055);color:var(--accent-strong)}
+.qualityGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.qualityGrid article{display:grid;gap:10px;padding:14px;border:1px solid var(--border);border-radius:13px;background:rgba(255,255,255,.018)}
+.qualityGrid article>span{color:var(--muted);font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+.qualityGrid article>strong{font-size:14px;color:var(--accent-strong)}
+.qualityGrid dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:0;background:var(--border)}
+.qualityGrid dl div{display:grid;gap:2px;padding:8px;background:#09140d}
+.qualityGrid dt{color:var(--muted);font-size:7px;text-transform:uppercase;line-height:1.25}
+.qualityGrid dd{margin:0;font-size:9px;font-weight:850}
+.qualityGuardrail{margin:10px 0 0;padding:11px 12px;border-left:3px solid #d2a650;background:rgba(96,67,23,.075);color:var(--muted);font-size:10px;line-height:1.55}
+.analyteDiagnostics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border)}
+.analyteDiagnostics span{display:grid;gap:2px;padding:8px;background:#071009;color:var(--muted);font-size:8px;text-transform:uppercase;letter-spacing:.035em}
+.analyteDiagnostics strong{color:#dce6dd;font-size:9px;text-transform:none;letter-spacing:0}
+@media(max-width:900px){.qualityGrid{grid-template-columns:1fr}}
+@media(max-width:620px){.qualityGrid dl,.analyteDiagnostics{grid-template-columns:1fr}}
