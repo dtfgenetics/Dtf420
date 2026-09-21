@@ -235,3 +235,12 @@ Search lazy-loads one alphabetical shard at a time. The runtime manifest is allo
 The raw CSV is never committed to DTF420. Generated runtime commits do not retrigger the refresh because the workflow's push paths exclude the public runtime directory.
 
 The refresh runs when its pipeline code changes, can be dispatched manually, and is scheduled monthly. The generated manifest records source bytes and SHA-256 so a published runtime can be traced to the exact downloaded source file.
+
+
+### Cultivar runtime schema v2
+
+The expanded cultivar intelligence workspace uses runtime schema v2. In addition to analyte distributions, v2 cultivar summaries carry producer count, total-terpene distribution, region mix, product-category mix, chemotype-label mix, and reported top-terpene frequency.
+
+The browser temporarily normalizes v1 runtime shards by supplying empty/default context fields, so a deployment cannot crash between application merge and generated-data refresh. The runtime builder now emits schema v2, and the refresh workflow rejects any newly generated manifest that is not v2.
+
+After the expansion merges, the existing data-refresh workflow is expected to regenerate the checked-in cultivar shards from the registered source dataset. The generated v2 data supersedes transitional v1 normalization.
