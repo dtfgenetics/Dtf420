@@ -7,6 +7,7 @@ const css = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCultivar
 const page = fs.readFileSync(path.join(root, "app/learn/terpenes/cultivars/page.tsx"), "utf8");
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "public/data/terpenes/cultivars/manifest.json"), "utf8"));
 const workflow = fs.readFileSync(path.join(root, ".github/workflows/refresh-terpene-cultivars.yml"), "utf8");
+const runtimeBuilder = fs.readFileSync(path.join(root, "scripts/terpenes/build-cultivar-runtime-shards.mjs"), "utf8");
 const registry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"));
 
 for (const token of [
@@ -43,6 +44,14 @@ if (manifest.sourceId !== "SMITH-2022-COMMERCIAL-US") {
   throw new Error("Cultivar runtime manifest uses the wrong sourceId");
 }
 
+if (!runtimeBuilder.includes("schemaVersion: 2")) {
+  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 2");
+}
+
+if (![1, 2].includes(manifest.schemaVersion)) {
+  throw new Error(`Unsupported checked-in cultivar manifest schema: ${manifest.schemaVersion}`);
+}
+
 if (manifest.status === "compiled") {
   if (!manifest.sourceSampleCount || manifest.sourceSampleCount < 10000) {
     throw new Error("Compiled cultivar manifest has implausibly low source sample count");
@@ -73,6 +82,7 @@ for (const token of [
   "build-cultivar-runtime-shards.mjs",
   'rm -rf "$OUTPUT_DIR"',
   "git pull --rebase origin main",
+  "manifest.schemaVersion !== 2",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Cultivar refresh workflow missing contract: ${token}`);
 }
