@@ -56,6 +56,12 @@ const requiredFiles = [
   "components/terpenes/TerpeneProfileComparison.module.css",
   "app/learn/terpenes/profiles/page.tsx",
   "scripts/terpenes/verify-profile-comparison.mjs",
+  "components/terpenes/TerpeneCultivarBrowser.tsx",
+  "components/terpenes/TerpeneCultivarBrowser.module.css",
+  "app/learn/terpenes/cultivars/page.tsx",
+  "public/data/terpenes/cultivars/manifest.json",
+  ".github/workflows/refresh-terpene-cultivars.yml",
+  "scripts/terpenes/verify-cultivar-browser.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -112,7 +118,7 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
@@ -241,6 +247,18 @@ for (const token of ["Terpene Profile Comparison", "Visual fingerprint", "Vector
 for (const token of ['href="/learn/terpenes/profiles"', "Open profile comparison"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing profile comparison navigation: ${token}`);
+  }
+}
+
+const cultivarBrowserSource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCultivarBrowser.tsx"), "utf8");
+for (const token of ["Cultivar Terpene Distributions", "Distribution, not destiny", "Measured cultivar distribution", "Sample depth"]) {
+  if (!cultivarBrowserSource.includes(token)) {
+    throw new Error(`Cultivar browser missing Atlas contract: ${token}`);
+  }
+}
+for (const token of ['href="/learn/terpenes/cultivars"', "Open cultivar distributions"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing cultivar browser navigation: ${token}`);
   }
 }
 
