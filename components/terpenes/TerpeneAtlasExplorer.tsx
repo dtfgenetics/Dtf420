@@ -377,6 +377,12 @@ export function TerpeneAtlasExplorer() {
           <p>Inspect claim type, study type, methods, source location, review status, and what each evidence record can actually establish.</p>
           <Link href="/learn/terpenes/research">Open research ledger →</Link>
         </article>
+        <article>
+          <span>05</span>
+          <h2>Cultivar distributions</h2>
+          <p>Browse repeated-sample medians, quartiles, observed ranges, sample depth, and laboratory depth without assigning one permanent chemistry value to a cultivar name.</p>
+          <Link href="/learn/terpenes/cultivars">Open cultivar distributions →</Link>
+        </article>
       </section>
     </div>
   );
