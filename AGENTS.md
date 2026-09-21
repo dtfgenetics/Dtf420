@@ -24,6 +24,8 @@ Project-wide rules:
 - Add or preserve feature-specific verification and rendered Browser QA for substantive user-facing changes when practical.
 - Do not merge a moving development branch based on stale green CI; freeze a fixed release candidate and validate the exact SHA.
 - Do not bypass a failing or cancelled release gate.
+- Treat CodeRabbit as an advisory independent review layer during active development. Fix valid findings, but do not treat suggestions as proof that code works.
+- Repository verification, build/type/lint checks, exact-SHA release validation, and public live verification remain authoritative. Do not delay normal iteration for non-critical style-only CodeRabbit feedback.
 - Follow `docs/DEPLOYMENT.md` for Hostinger staging and any explicitly approved production cutover, rollback, and live-route verification.
 - Do not claim anything is live until the public production route is verified after deployment.
 
