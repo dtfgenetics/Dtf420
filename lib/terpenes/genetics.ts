@@ -32,3 +32,13 @@ export function getGenesForCompound(compoundSlug: string) {
     [...gene.majorProducts, ...gene.minorProducts].some((product) => product.slug === compoundSlug),
   );
 }
+
+export function getGeneProductContext(gene: TpsGeneRecord, compoundSlug: string) {
+  const major = gene.majorProducts.find((product) => product.slug === compoundSlug);
+  if (major) return { role: "major" as const, product: major };
+
+  const minor = gene.minorProducts.find((product) => product.slug === compoundSlug);
+  if (minor) return { role: "additional" as const, product: minor };
+
+  return null;
+}
