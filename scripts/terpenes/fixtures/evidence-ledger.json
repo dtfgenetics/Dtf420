@@ -31,7 +31,11 @@
       "unit": null,
       "reviewStatus": "draft",
       "reviewedAt": null,
-      "notes": "Test fixture; not published content."
+      "notes": "Test fixture; not published content.",
+      "geneId": "FixtureTPS1",
+      "productRole": "major",
+      "substrate": "GPP",
+      "cultivarOrStrain": "fixture"
     }
   ]
 }
