@@ -19,6 +19,7 @@ import learningTools from "@/content/learning-tools.json";
 import educationSops from "@/content/education-sops.json";
 import geneticsProjects from "@/content/genetics-projects.json";
 import communityGrowOffs from "@/content/community-growoffs.json";
+import { terpeneSeedCompounds } from "@/lib/terpenes/data";
 
 export const dynamic = "force-static";
 
@@ -52,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/learn/sops", 0.86, "weekly"),
     item("/learn/sources", 0.82, "weekly"),
     item("/learn/atlas", 0.95, "weekly"),
+    item("/learn/terpenes", 0.94, "weekly"),
     item("/learn/plant-health", 0.9, "weekly"),
     item("/learn/symptoms", 0.9, "weekly"),
     item("/learn/cultivation-science", 0.9, "weekly"),
@@ -102,6 +104,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const tools = learningTools.map((entry) => item(`/learn/tools/${entry.slug}`, 0.7, "monthly"));
   const sops = educationSops.map((entry) => item(`/learn/sops/${entry.slug}`, 0.74, "monthly"));
   const growOffs = communityGrowOffs.map((entry) => item(`/community/grow-offs/${entry.slug}`, 0.7, "monthly"));
+  const terpeneRoutes = terpeneSeedCompounds.map((entry) => item(`/learn/terpenes/${entry.slug}`, 0.76, "monthly"));
 
   const atlasRoutes = atlasModules.flatMap((atlasModule) => {
     const systemSlug = slugify(atlasModule.id);
@@ -111,7 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  const all = [...staticRoutes, ...genetics, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...sops, ...growOffs, ...atlasRoutes];
+  const all = [...staticRoutes, ...genetics, ...academy, ...plantHealth, ...cultivation, ...symptoms, ...tools, ...sops, ...growOffs, ...terpeneRoutes, ...atlasRoutes];
   const unique = new Map(all.map((entry) => [entry.url, entry]));
   return [...unique.values()];
 }
