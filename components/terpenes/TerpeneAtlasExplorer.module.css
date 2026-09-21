@@ -497,7 +497,7 @@
     translate(-50%,-50%)
     rotate(var(--angle))
     translateY(calc(var(--radius) * -1))
-    rotate(calc(var(--angle) * -1));
+    rotate(var(--counter-angle));
 }
 
 .classNode,
