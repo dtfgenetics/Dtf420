@@ -13,6 +13,10 @@ const requiredFiles = [
   "data/terpenes/source-registry.json",
   "docs/TERPENE_ATLAS_DATA_PIPELINE.md",
   "scripts/terpenes/enrich-pubchem.mjs",
+  "app/learn/terpenes/breeding/page.tsx",
+  "components/terpenes/TerpeneBreedingExplorer.tsx",
+  "lib/terpenes/profiles.ts",
+  "lib/terpenes/breeding.ts",
 ];
 
 for (const file of requiredFiles) {
@@ -69,7 +73,7 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
@@ -78,6 +82,19 @@ const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => sourc
 for (const sourceId of requiredSourceIds) {
   if (!registryIds.has(sourceId)) {
     throw new Error(`Terpene source registry missing required source: ${sourceId}`);
+  }
+}
+
+const breedingSource = fs.readFileSync(path.join(root, "lib/terpenes/breeding.ts"), "utf8");
+const breedingUiSource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneBreedingExplorer.tsx"), "utf8");
+for (const token of ["does not predict exact offspring terpene percentages", "Offspring measurements should replace parent-only assumptions"]) {
+  if (!breedingSource.includes(token)) {
+    throw new Error(`Breeding engine missing inheritance guardrail: ${token}`);
+  }
+}
+for (const token of ["Parent midpoint", "What to screen for in offspring", "It does not output guaranteed F1 percentages"]) {
+  if (!breedingUiSource.includes(token)) {
+    throw new Error(`Breeding explorer missing required UI contract: ${token}`);
   }
 }
 
