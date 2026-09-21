@@ -137,5 +137,6 @@ jobs:
             exit 0
           fi
           git commit -m "Refresh terpene cultivar runtime data"
+          git pull --rebase origin main
           git push origin HEAD:main
           echo "Published refreshed cultivar runtime shards." >> "$GITHUB_STEP_SUMMARY"
