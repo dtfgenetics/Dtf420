@@ -22,7 +22,7 @@ for (const record of ledger.records) {
 }
 
 for (const token of [
-  "chemical-analysis",
+  "cannabis-occurrence",
   "terpene-synthase-function",
   "cultivar-sample",
   "sensory-descriptor",
