@@ -133,7 +133,7 @@ for (const token of ["producerCount", "CultivarCategoryStatistics", "totalTerpen
   if (!cultivarTypes.includes(token)) throw new Error(`Expanded cultivar runtime type missing: ${token}`);
 }
 
-for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage", "quality score", "predicts your high"]) {
+for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage", "higher similarity means better", "similarity predicts effect"]) {
   if ((ui + "\n" + page).toLowerCase().includes(phrase)) {
     throw new Error(`Cultivar browser contains prohibited shortcut: ${phrase}`);
   }
