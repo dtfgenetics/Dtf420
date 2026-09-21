@@ -57,6 +57,11 @@ const diagnosticPaths = [
 
 const referencePaths = [
   {
+    title: "THC Terpene Atlas",
+    description: "Explore terpene and terpenoid chemistry, aroma, biosynthesis, cannabis occurrence, genetics, cultivar context, and evidence through an interactive reference system.",
+    href: "/learn/terpenes",
+  },
+  {
     title: "Cultivation Science",
     description: "Plant physiology, protected and outdoor cultivation, harvest biology, plant architecture, flowering, and measurement science.",
     href: "/learn/cultivation-science",
