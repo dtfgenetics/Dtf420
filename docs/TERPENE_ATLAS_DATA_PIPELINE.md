@@ -211,10 +211,20 @@ The browser exposes:
 - normalized cultivar label;
 - total sample count;
 - laboratory count;
+- producer count;
 - sample-depth tier;
+- total-terpene minimum, Q1, median, Q3, maximum, and mean when available;
+- region distribution;
+- product-category distribution;
+- chemotype-label distribution;
+- reported top-terpene frequency;
 - analyte identity and whether that identity is exact, aggregate, or stereochemically/isomerically unresolved;
 - minimum, Q1, median, Q3, maximum, analyte sample count, and analyte laboratory count;
-- a visual min-to-max range with interquartile range and median.
+- filterable/sortable analyte distributions;
+- a visual min-to-max range with interquartile range and median;
+- descriptive two-cultivar comparison using compiled median terpene vectors and shared analyte counts.
+
+Cultivar comparison is never a best/worst ranking, quality score, effect score, genetic identity test, or prediction for an individual sample. Median-vector similarity only describes the shape of the compiled median chemistry vectors.
 
 Search lazy-loads one alphabetical shard at a time. The runtime manifest is allowed to remain in the explicit `not-generated` bootstrap state until a refresh workflow has compiled real data. The UI must never fabricate placeholder cultivar chemistry.
 
