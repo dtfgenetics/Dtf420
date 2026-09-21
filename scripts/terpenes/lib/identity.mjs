@@ -1,3 +1,11 @@
+export const IDENTITY_MERGE_POLICY = Object.freeze({
+  primary: "full-inchikey",
+  secondary: "verified-pubchem-cid",
+  fallback: "exact-canonical-structure",
+  nameSimilarity: "never",
+  conflictAction: "quarantine",
+});
+
 function clean(value) {
   const normalized = String(value ?? "").trim();
   return normalized || null;
