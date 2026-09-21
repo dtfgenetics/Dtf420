@@ -71,6 +71,18 @@ function topCategory(items: CultivarCategoryStatistics[]) {
   return items[0] ?? null;
 }
 
+function normalizeCultivarSummary(record: CultivarProfileSummary): CultivarProfileSummary {
+  return {
+    ...record,
+    producerCount: Number.isFinite(record.producerCount) ? record.producerCount : 0,
+    totalTerpenes: record.totalTerpenes ?? null,
+    regions: Array.isArray(record.regions) ? record.regions : [],
+    productCategories: Array.isArray(record.productCategories) ? record.productCategories : [],
+    chemotypes: Array.isArray(record.chemotypes) ? record.chemotypes : [],
+    topTerpenes: Array.isArray(record.topTerpenes) ? record.topTerpenes : [],
+  };
+}
+
 function medianVectorSimilarity(a: CultivarProfileSummary, b: CultivarProfileSummary) {
   const aMap = new Map(a.analytes.map((item) => [item.normalizedKey, item.median]));
   const bMap = new Map(b.analytes.map((item) => [item.normalizedKey, item.median]));
@@ -171,7 +183,10 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
         })
         .then((records) => {
           inflightKeys.current.delete(key);
-          setShardCache((current) => ({ ...current, [key]: records }));
+          setShardCache((current) => ({
+            ...current,
+            [key]: records.map(normalizeCultivarSummary),
+          }));
           setFailedKeys((current) => current.filter((item) => item !== key));
         })
         .catch(() => {
