@@ -79,7 +79,7 @@ export type CultivarRegionStratum = {
   sampleCount: number;
   labCount: number;
   producerCount: number;
-  sampleDepthTier: CultivarProfileSummary["sampleDepthTier"];
+  sampleDepthTier: CultivarSampleDepthTier;
   totalTerpenes: CultivarDistributionStatistics | null;
   analytes: Array<
     CultivarDistributionStatistics & {
@@ -90,19 +90,21 @@ export type CultivarRegionStratum = {
   >;
 };
 
+export type CultivarSampleDepthTier =
+  | "insufficient"
+  | "limited-multi-lab"
+  | "limited-single-lab"
+  | "moderate-multi-lab"
+  | "moderate-single-lab"
+  | "high-depth-multi-lab"
+  | "high-depth-single-lab";
+
 export type CultivarProfileSummary = {
   cultivarSlug: string;
   sampleCount: number;
   labCount: number;
   producerCount: number;
-  sampleDepthTier:
-    | "insufficient"
-    | "limited-multi-lab"
-    | "limited-single-lab"
-    | "moderate-multi-lab"
-    | "moderate-single-lab"
-    | "high-depth-multi-lab"
-    | "high-depth-single-lab";
+  sampleDepthTier: CultivarSampleDepthTier;
   minimumSamples: number;
   totalTerpenes: CultivarDistributionStatistics | null;
   regions: CultivarCategoryStatistics[];
