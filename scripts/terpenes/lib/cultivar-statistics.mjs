@@ -86,7 +86,40 @@ function categoryCoverage(map, sampleCount) {
   return sampleCount > 0 ? known / sampleCount : 0;
 }
 
-export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = {}) {
+function createRegionalAccumulator(region) {
+  return {
+    region,
+    sampleIds: new Set(),
+    labIds: new Set(),
+    producerIds: new Set(),
+    totalTerpeneValues: [],
+    analytes: new Map(),
+  };
+}
+
+function addRegionalSample(regionGroup, sample) {
+  regionGroup.sampleIds.add(sample.sampleId);
+  if (sample.labId) regionGroup.labIds.add(sample.labId);
+  if (sample.producerId) regionGroup.producerIds.add(sample.producerId);
+  if (Number.isFinite(sample.totalTerpenes)) regionGroup.totalTerpeneValues.push(sample.totalTerpenes);
+
+  for (const measurement of sample.measurements ?? []) {
+    if (!regionGroup.analytes.has(measurement.normalizedKey)) {
+      regionGroup.analytes.set(measurement.normalizedKey, {
+        normalizedKey: measurement.normalizedKey,
+        canonicalSlug: measurement.canonicalSlug,
+        measurementKind: measurement.measurementKind,
+        values: [],
+      });
+    }
+    regionGroup.analytes.get(measurement.normalizedKey).values.push(measurement.value);
+  }
+}
+
+export function buildCultivarProfileSummaries(
+  samples,
+  { minimumSamples = 5, minimumRegionSamples = minimumSamples } = {},
+) {
   const cultivars = new Map();
 
   for (const sample of samples) {
@@ -105,6 +138,7 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
         chemotypes: new Map(),
         topTerpenes: new Map(),
         analytes: new Map(),
+        regionGroups: new Map(),
       });
     }
 
@@ -121,6 +155,14 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
     if (Number.isFinite(sample.totalTerpenes)) cultivar.totalTerpeneValues.push(sample.totalTerpenes);
 
     addCategory(cultivar.regions, sample.region);
+    const region = String(sample.region ?? "").trim();
+    if (region) {
+      if (!cultivar.regionGroups.has(region)) {
+        cultivar.regionGroups.set(region, createRegionalAccumulator(region));
+      }
+      addRegionalSample(cultivar.regionGroups.get(region), sample);
+    }
+
     addCategory(cultivar.productCategories, sample.productCategory);
     addCategory(cultivar.chemotypes, sample.chemotype);
     addCategory(cultivar.topTerpenes, sample.topTerpeneSourceField);
@@ -180,6 +222,34 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
         .filter((analyte) => analyte.n >= minimumSamples)
         .sort((a, b) => (b.median ?? 0) - (a.median ?? 0));
 
+      const regionStrata = [...cultivar.regionGroups.values()]
+        .map((regionGroup) => {
+          const regionSampleCount = regionGroup.sampleIds.size;
+          if (regionSampleCount < minimumRegionSamples) return null;
+
+          const regionAnalytes = [...regionGroup.analytes.values()]
+            .map((analyte) => ({
+              normalizedKey: analyte.normalizedKey,
+              canonicalSlug: analyte.canonicalSlug,
+              measurementKind: analyte.measurementKind,
+              ...summarizeMeasurements(analyte.values),
+            }))
+            .filter((analyte) => analyte.n >= minimumRegionSamples)
+            .sort((a, b) => (b.median ?? 0) - (a.median ?? 0));
+
+          return {
+            region: regionGroup.region,
+            sampleCount: regionSampleCount,
+            labCount: regionGroup.labIds.size,
+            producerCount: regionGroup.producerIds.size,
+            sampleDepthTier: sampleDepthTier(regionSampleCount, regionGroup.labIds.size),
+            totalTerpenes: summarizeMeasurements(regionGroup.totalTerpeneValues),
+            analytes: regionAnalytes,
+          };
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.sampleCount - a.sampleCount || a.region.localeCompare(b.region));
+
       return {
         cultivarSlug: cultivar.cultivarSlug,
         sampleCount,
@@ -192,6 +262,7 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
         productCategories: productStats,
         chemotypes: chemotypeStats,
         topTerpenes: topTerpeneStats,
+        regionStrata,
         dataQuality: {
           labs: summarizeConcentration(cultivar.labCounts),
           producers: summarizeConcentration(cultivar.producerCounts),
