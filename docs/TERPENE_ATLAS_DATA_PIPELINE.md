@@ -200,3 +200,28 @@ The wheel uses botanical/scientific visual styling: near-black forest-green surf
 Desktop keeps the wheel as the primary visual with classification controls and a linked detail panel. Mobile keeps the full radial wheel available through horizontal swipe/tap interaction and moves the information panel below it as a readable drawer.
 
 Compound detail pages must remain in the same visual family and link directly to mapped TPS genetics plus reviewed evidence records when those records exist.
+
+
+## Cultivar distribution browser
+
+The public cultivar browser consumes only compiled runtime summaries. It never downloads the raw laboratory dataset in the visitor's browser.
+
+The browser exposes:
+
+- normalized cultivar label;
+- total sample count;
+- laboratory count;
+- sample-depth tier;
+- analyte identity and whether that identity is exact, aggregate, or stereochemically/isomerically unresolved;
+- minimum, Q1, median, Q3, maximum, analyte sample count, and analyte laboratory count;
+- a visual min-to-max range with interquartile range and median.
+
+Search lazy-loads one alphabetical shard at a time. The runtime manifest is allowed to remain in the explicit `not-generated` bootstrap state until a refresh workflow has compiled real data. The UI must never fabricate placeholder cultivar chemistry.
+
+### Automated runtime refresh
+
+`.github/workflows/refresh-terpene-cultivars.yml` downloads the registered CC0 dataset into runner temporary storage, validates expected columns and minimum source size, normalizes sample-level terpene records, compiles cultivar distributions with the five-sample public threshold, and writes only compact static shards beneath `public/data/terpenes/cultivars`.
+
+The raw CSV is never committed to DTF420. Generated runtime commits do not retrigger the refresh because the workflow's push paths exclude the public runtime directory.
+
+The refresh runs when its pipeline code changes, can be dispatched manually, and is scheduled monthly. The generated manifest records source bytes and SHA-256 so a published runtime can be traced to the exact downloaded source file.
