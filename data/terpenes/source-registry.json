@@ -59,6 +59,30 @@
       "repository": "cjsmith015/phytochemical-diversity-cannabis",
       "datasetPath": "data/preproc_lab_data_pub_20220218.csv",
       "notes": "Published cleaned laboratory dataset spanning multiple U.S. testing labs. Preserve sample-level records and dataset-normalized strain_slug; do not turn cultivar labels into fixed chemistry values."
+    },
+    {
+      "id": "BOOTH-2017-TPS",
+      "name": "Booth JK, Page JE, Bohlmann J. Terpene synthases from Cannabis sativa.",
+      "role": "primary-functional-terpene-genetics",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1371/journal.pone.0173911",
+      "pmid": "28355238",
+      "pmcid": "PMC5371325",
+      "license": "CC-BY",
+      "sourceUrl": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0173911",
+      "notes": "Primary functional characterization source for multiple Cannabis sativa terpene synthases. Table 2 and Fig. 4 are key gene-product evidence locations."
+    },
+    {
+      "id": "BOOTH-2020-TPS-VARIATION",
+      "name": "Booth JK et al. Terpene Synthases and Terpene Variation in Cannabis sativa.",
+      "role": "terpene-genetics-variation",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1104/pp.20.00593",
+      "pmcid": "PMC7479917",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7479917/",
+      "notes": "Expanded terpene synthase family and terpene variation reference for future gene/cultivar evidence."
     }
   ]
 }
