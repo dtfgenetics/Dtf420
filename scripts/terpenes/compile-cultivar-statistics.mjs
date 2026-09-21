@@ -3,9 +3,9 @@ import path from "node:path";
 import readline from "node:readline";
 import { buildCultivarProfileSummaries } from "./lib/cultivar-statistics.mjs";
 
-const [, , inputArg, outputArg, minimumArg = "3"] = process.argv;
+const [, , inputArg, outputArg, minimumArg = "5"] = process.argv;
 if (!inputArg || !outputArg) {
-  console.error("Usage: node scripts/terpenes/compile-cultivar-statistics.mjs <samples.jsonl> <output.json> [minimumSamples]");
+  console.error("Usage: node scripts/terpenes/compile-cultivar-statistics.mjs <samples.jsonl> <output.json> [minimumSamples=5]");
   process.exit(1);
 }
 
@@ -18,7 +18,7 @@ for await (const line of input) {
   if (line.trim()) samples.push(JSON.parse(line));
 }
 
-const minimumSamples = Math.max(1, Number.parseInt(minimumArg, 10) || 3);
+const minimumSamples = Math.max(1, Number.parseInt(minimumArg, 10) || 5);
 const cultivars = buildCultivarProfileSummaries(samples, { minimumSamples });
 const output = {
   schemaVersion: 1,
