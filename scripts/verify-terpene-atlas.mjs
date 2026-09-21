@@ -10,6 +10,9 @@ const requiredFiles = [
   "lib/terpenes/types.ts",
   "lib/terpenes/data.ts",
   "lib/terpenes/queries.ts",
+  "data/terpenes/source-registry.json",
+  "docs/TERPENE_ATLAS_DATA_PIPELINE.md",
+  "scripts/terpenes/enrich-pubchem.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -23,6 +26,7 @@ const dataSource = fs.readFileSync(path.join(root, "lib/terpenes/data.ts"), "utf
 const explorerSource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneAtlasExplorer.tsx"), "utf8");
 const learnSource = fs.readFileSync(path.join(root, "app/learn/page.tsx"), "utf8");
 const sitemapSource = fs.readFileSync(path.join(root, "app/sitemap.ts"), "utf8");
+const sourceRegistry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"));
 
 const slugs = [...dataSource.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 if (slugs.length < 8) {
@@ -69,6 +73,14 @@ if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
+const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS"];
+const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
+for (const sourceId of requiredSourceIds) {
+  if (!registryIds.has(sourceId)) {
+    throw new Error(`Terpene source registry missing required source: ${sourceId}`);
+  }
+}
+
 const prohibitedShortcutClaims = [
   "guaranteed relaxing",
   "guaranteed uplifting",
@@ -81,4 +93,4 @@ for (const claim of prohibitedShortcutClaims) {
   }
 }
 
-console.log(`Terpene Atlas verification passed: ${slugs.length} seed records, ${requiredFamilies.length} family classes.`);
+console.log(`Terpene Atlas verification passed: ${slugs.length} seed records, ${requiredFamilies.length} family classes, ${registryIds.size} registered sources.`);
