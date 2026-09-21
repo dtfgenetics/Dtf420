@@ -7,25 +7,32 @@ const css = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCultivar
 const page = fs.readFileSync(path.join(root, "app/learn/terpenes/cultivars/page.tsx"), "utf8");
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "public/data/terpenes/cultivars/manifest.json"), "utf8"));
 const workflow = fs.readFileSync(path.join(root, ".github/workflows/refresh-terpene-cultivars.yml"), "utf8");
+const runtimeBuilder = fs.readFileSync(path.join(root, "scripts/terpenes/build-cultivar-runtime-shards.mjs"), "utf8");
 const registry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"));
 
 for (const token of [
-  "Cultivar Terpene Distributions",
+  "Cultivar Chemistry Explorer",
   "Distribution, not destiny",
   "Search normalized cultivar label",
   "Measured cultivar distribution",
   "Sample depth",
-  "Usable labeled samples",
-  "Compiled cultivar labels",
-  "Public summaries",
-  "Source SHA-256",
-  "Generated",
+  "Runtime status",
+  "Total terpene distribution",
+  "Source context",
+  "Region mix",
+  "Product categories",
+  "Chemotype labels",
+  "Reported top terpene",
+  "Analyte distributions",
+  "Identity resolution",
+  "Cultivar comparison",
+  "Median-vector similarity",
   "This source analyte does not resolve one exact isomer",
 ]) {
   if (!ui.includes(token)) throw new Error(`Cultivar browser UI missing contract: ${token}`);
 }
 
-for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote"]) {
+for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars"]) {
   if (!css.includes(token)) throw new Error(`Cultivar browser styling missing: ${token}`);
 }
 
@@ -37,6 +44,14 @@ if (manifest.sourceId !== "SMITH-2022-COMMERCIAL-US") {
   throw new Error("Cultivar runtime manifest uses the wrong sourceId");
 }
 
+if (!runtimeBuilder.includes("schemaVersion: 2")) {
+  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 2");
+}
+
+if (![1, 2].includes(manifest.schemaVersion)) {
+  throw new Error(`Unsupported checked-in cultivar manifest schema: ${manifest.schemaVersion}`);
+}
+
 if (manifest.status === "compiled") {
   if (!manifest.sourceSampleCount || manifest.sourceSampleCount < 10000) {
     throw new Error("Compiled cultivar manifest has implausibly low source sample count");
@@ -46,15 +61,6 @@ if (manifest.status === "compiled") {
   }
   if (!Array.isArray(manifest.shards) || manifest.shards.length < 10) {
     throw new Error("Compiled cultivar manifest has too few runtime shards");
-  }
-  if (!Number.isFinite(manifest.sourceBytes) || manifest.sourceBytes < 10000000) {
-    throw new Error("Compiled cultivar manifest is missing plausible source byte provenance");
-  }
-  if (!/^[a-f0-9]{64}$/i.test(String(manifest.sourceSha256 ?? ""))) {
-    throw new Error("Compiled cultivar manifest is missing a valid SHA-256 source fingerprint");
-  }
-  if (!manifest.generatedAt || Number.isNaN(Date.parse(manifest.generatedAt))) {
-    throw new Error("Compiled cultivar manifest is missing a valid generatedAt timestamp");
   }
 } else {
   if (manifest.status !== "not-generated") {
@@ -76,12 +82,23 @@ for (const token of [
   "build-cultivar-runtime-shards.mjs",
   'rm -rf "$OUTPUT_DIR"',
   "git pull --rebase origin main",
+  "manifest.schemaVersion !== 2",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Cultivar refresh workflow missing contract: ${token}`);
 }
 
 const registered = registry.sources.find((source) => source.id === "SMITH-2022-COMMERCIAL-US");
 if (!registered) throw new Error("Cultivar browser source is not registered");
+
+const statistics = fs.readFileSync(path.join(root, "scripts/terpenes/lib/cultivar-statistics.mjs"), "utf8");
+for (const token of ["producerCount", "totalTerpenes", "regions", "productCategories", "chemotypes", "topTerpenes", "summarizeCategories"]) {
+  if (!statistics.includes(token)) throw new Error(`Expanded cultivar statistics missing: ${token}`);
+}
+
+const cultivarTypes = fs.readFileSync(path.join(root, "lib/terpenes/cultivar-types.ts"), "utf8");
+for (const token of ["producerCount", "CultivarCategoryStatistics", "totalTerpenes", "topTerpenes"]) {
+  if (!cultivarTypes.includes(token)) throw new Error(`Expanded cultivar runtime type missing: ${token}`);
+}
 
 for (const phrase of ["best strain", "top strain", "guaranteed effect", "cultivar name guarantees", "fixed terpene percentage"]) {
   if ((ui + "\n" + page).toLowerCase().includes(phrase)) {

@@ -94,6 +94,10 @@ jobs:
           const manifestPath = path.join(dir, "manifest.json");
           const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 
+          if (manifest.schemaVersion !== 2) {
+            throw new Error(`Unexpected cultivar runtime schema version: ${manifest.schemaVersion}`);
+          }
+
           manifest.status = "compiled";
           manifest.sourceUrl = process.env.SOURCE_URL;
           manifest.sourceBytes = Number(process.env.SOURCE_BYTES);

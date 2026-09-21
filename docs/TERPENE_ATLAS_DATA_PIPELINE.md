@@ -211,10 +211,20 @@ The browser exposes:
 - normalized cultivar label;
 - total sample count;
 - laboratory count;
+- producer count;
 - sample-depth tier;
+- total-terpene minimum, Q1, median, Q3, maximum, and mean when available;
+- region distribution;
+- product-category distribution;
+- chemotype-label distribution;
+- reported top-terpene frequency;
 - analyte identity and whether that identity is exact, aggregate, or stereochemically/isomerically unresolved;
 - minimum, Q1, median, Q3, maximum, analyte sample count, and analyte laboratory count;
-- a visual min-to-max range with interquartile range and median.
+- filterable/sortable analyte distributions;
+- a visual min-to-max range with interquartile range and median;
+- descriptive two-cultivar comparison using compiled median terpene vectors and shared analyte counts.
+
+Cultivar comparison is never a best/worst ranking, quality score, effect score, genetic identity test, or prediction for an individual sample. Median-vector similarity only describes the shape of the compiled median chemistry vectors.
 
 Search lazy-loads one alphabetical shard at a time. The runtime manifest is allowed to remain in the explicit `not-generated` bootstrap state until a refresh workflow has compiled real data. The UI must never fabricate placeholder cultivar chemistry.
 
@@ -227,17 +237,10 @@ The raw CSV is never committed to DTF420. Generated runtime commits do not retri
 The refresh runs when its pipeline code changes, can be dispatched manually, and is scheduled monthly. The generated manifest records source bytes and SHA-256 so a published runtime can be traced to the exact downloaded source file.
 
 
-### Current compiled cultivar runtime snapshot — 2026-09-21
+### Cultivar runtime schema v2
 
-The first successful production refresh compiled the registered dataset into the following browser runtime:
+The expanded cultivar intelligence workspace uses runtime schema v2. In addition to analyte distributions, v2 cultivar summaries carry producer count, total-terpene distribution, region mix, product-category mix, chemotype-label mix, and reported top-terpene frequency.
 
-- **34,224 usable labeled samples** — records with terpene measurements and a usable normalized cultivar label;
-- **2,658 compiled cultivar labels**;
-- **1,300 public cultivar summaries** meeting the five-sample publication threshold;
-- **34 lazy-load runtime shards**;
-- source file size: **19,687,859 bytes**;
-- source SHA-256: `1850b918bb3a00b903f9e254953bb695012314bd264c419efb68bc482b392182`.
+The browser temporarily normalizes v1 runtime shards by supplying empty/default context fields, so a deployment cannot crash between application merge and generated-data refresh. The runtime builder now emits schema v2, and the refresh workflow rejects any newly generated manifest that is not v2.
 
-The 34,224 usable-labeled-sample count is intentionally not described as the total number of terpene-bearing samples in the source study. The browser compilation additionally requires a usable normalized `strain_slug`, so it is a filtered subset of the broader source dataset.
-
-These fixed numbers document this specific generated runtime snapshot. The public UI reads its current counts, generation date, source bytes, and source fingerprint from the runtime manifest so future monthly refreshes do not leave stale numbers in the interface.
+After the expansion merges, the existing data-refresh workflow is expected to regenerate the checked-in cultivar shards from the registered source dataset. The generated v2 data supersedes transitional v1 normalization.

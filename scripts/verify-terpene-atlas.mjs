@@ -195,7 +195,7 @@ for (const token of ['measurementKind: "aggregate-isomers"', 'canonicalSlug: nul
 }
 
 const cultivarStatsSource = fs.readFileSync(path.join(root, "scripts/terpenes/lib/cultivar-statistics.mjs"), "utf8");
-for (const token of ['minimumSamples = 5', '"high-depth-multi-lab"', "median", "q1", "q3"]) {
+for (const token of ['minimumSamples = 5', '"high-depth-multi-lab"', "median", "q1", "q3", "producerCount", "totalTerpenes", "topTerpenes"]) {
   if (!cultivarStatsSource.includes(token)) {
     throw new Error(`Cultivar statistics missing public-summary contract: ${token}`);
   }
@@ -251,7 +251,16 @@ for (const token of ['href="/learn/terpenes/profiles"', "Open profile comparison
 }
 
 const cultivarBrowserSource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCultivarBrowser.tsx"), "utf8");
-for (const token of ["Cultivar Terpene Distributions", "Distribution, not destiny", "Measured cultivar distribution", "Sample depth"]) {
+for (const token of [
+  "Cultivar Chemistry Explorer",
+  "Distribution, not destiny",
+  "Measured cultivar distribution",
+  "Sample depth",
+  "Total terpene distribution",
+  "Source context",
+  "Cultivar comparison",
+  "Median-vector similarity",
+]) {
   if (!cultivarBrowserSource.includes(token)) {
     throw new Error(`Cultivar browser missing Atlas contract: ${token}`);
   }
