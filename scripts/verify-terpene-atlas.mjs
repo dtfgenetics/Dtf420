@@ -132,13 +132,17 @@ for (const token of ["unreviewed-source-candidate", "candidateReason", "candidat
 }
 
 const identitySource = fs.readFileSync(path.join(root, "scripts/terpenes/lib/identity.mjs"), "utf8");
-for (const token of ["full InChIKey", "same-pubchem-cid-different-inchikey", "canonical-smiles"]) {
-  if (!identitySource.includes(token) && token !== "full InChIKey") {
+for (const token of [
+  'primary: "full-inchikey"',
+  'secondary: "verified-pubchem-cid"',
+  'fallback: "exact-canonical-structure"',
+  'nameSimilarity: "never"',
+  'conflictAction: "quarantine"',
+  "same-pubchem-cid-different-inchikey",
+]) {
+  if (!identitySource.includes(token)) {
     throw new Error(`Identity resolver missing safety contract: ${token}`);
   }
-}
-if (/name.*merge|merge.*name/i.test(identitySource)) {
-  throw new Error("Identity resolver must not merge compounds by name similarity");
 }
 
 const evidenceLedger = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/evidence-ledger.json"), "utf8"));
