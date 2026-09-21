@@ -350,10 +350,10 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
           <p className="eyebrow">Dataset provenance</p>
           <h2>{sourceName}</h2>
           <p>
-            Runtime summaries are derived from the registered published dataset. The 34,224-sample runtime
-            count represents records with terpene data and a usable normalized cultivar label; it is a filtered
-            browser subset, not the broader source-study sample count. The browser preserves sample depth and
-            laboratory depth and does not expose private raw laboratory identifiers.
+            Runtime summaries are derived from the registered published dataset. The displayed usable-sample
+            count represents records with terpene data and a normalized cultivar label; it is a filtered browser
+            subset, not the broader source-study sample count. The browser preserves sample depth and laboratory
+            depth and does not expose private raw laboratory identifiers.
           </p>
           <div className={styles.sourceMeta}>
             <span><b>Runtime</b>{manifestState === "ready" ? "compiled" : manifestState}</span>
