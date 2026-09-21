@@ -40,6 +40,13 @@ function addCategory(map, value) {
   map.set(normalized, (map.get(normalized) ?? 0) + 1);
 }
 
+function addMeasurementByKey(map, key, value) {
+  const normalized = String(key ?? "").trim();
+  if (!normalized || !Number.isFinite(value)) return;
+  if (!map.has(normalized)) map.set(normalized, []);
+  map.get(normalized).push(value);
+}
+
 export function summarizeCategories(map, sampleCount) {
   return [...map.entries()]
     .map(([value, n]) => ({
@@ -48,6 +55,35 @@ export function summarizeCategories(map, sampleCount) {
       share: sampleCount > 0 ? n / sampleCount : 0,
     }))
     .sort((a, b) => b.n - a.n || a.value.localeCompare(b.value));
+}
+
+export function summarizeConcentration(map) {
+  const counts = [...map.values()].filter((value) => Number.isFinite(value) && value > 0);
+  const knownCount = counts.reduce((sum, value) => sum + value, 0);
+  if (!knownCount) {
+    return {
+      knownCount: 0,
+      distinctCount: 0,
+      largestShare: null,
+      concentrationIndex: null,
+      effectiveCount: null,
+    };
+  }
+
+  const shares = counts.map((value) => value / knownCount);
+  const concentrationIndex = shares.reduce((sum, share) => sum + share ** 2, 0);
+  return {
+    knownCount,
+    distinctCount: counts.length,
+    largestShare: Math.max(...shares),
+    concentrationIndex,
+    effectiveCount: concentrationIndex > 0 ? 1 / concentrationIndex : null,
+  };
+}
+
+function categoryCoverage(map, sampleCount) {
+  const known = [...map.values()].reduce((sum, value) => sum + value, 0);
+  return sampleCount > 0 ? known / sampleCount : 0;
 }
 
 export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = {}) {
@@ -61,6 +97,8 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
         sampleIds: new Set(),
         labIds: new Set(),
         producerIds: new Set(),
+        labCounts: new Map(),
+        producerCounts: new Map(),
         totalTerpeneValues: [],
         regions: new Map(),
         productCategories: new Map(),
@@ -72,8 +110,14 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
 
     const cultivar = cultivars.get(sample.cultivarSlug);
     cultivar.sampleIds.add(sample.sampleId);
-    if (sample.labId) cultivar.labIds.add(sample.labId);
-    if (sample.producerId) cultivar.producerIds.add(sample.producerId);
+    if (sample.labId) {
+      cultivar.labIds.add(sample.labId);
+      addCategory(cultivar.labCounts, sample.labId);
+    }
+    if (sample.producerId) {
+      cultivar.producerIds.add(sample.producerId);
+      addCategory(cultivar.producerCounts, sample.producerId);
+    }
     if (Number.isFinite(sample.totalTerpenes)) cultivar.totalTerpeneValues.push(sample.totalTerpenes);
 
     addCategory(cultivar.regions, sample.region);
@@ -89,41 +133,77 @@ export function buildCultivarProfileSummaries(samples, { minimumSamples = 5 } = 
           measurementKind: measurement.measurementKind,
           values: [],
           labIds: new Set(),
+          labValues: new Map(),
         });
       }
       const analyte = cultivar.analytes.get(measurement.normalizedKey);
       analyte.values.push(measurement.value);
-      if (sample.labId) analyte.labIds.add(sample.labId);
+      if (sample.labId) {
+        analyte.labIds.add(sample.labId);
+        addMeasurementByKey(analyte.labValues, sample.labId, measurement.value);
+      }
     }
   }
 
   return [...cultivars.values()]
     .map((cultivar) => {
+      const sampleCount = cultivar.sampleIds.size;
+      const labCount = cultivar.labIds.size;
+      const producerCount = cultivar.producerIds.size;
+      const regionStats = summarizeCategories(cultivar.regions, sampleCount);
+      const productStats = summarizeCategories(cultivar.productCategories, sampleCount);
+      const chemotypeStats = summarizeCategories(cultivar.chemotypes, sampleCount);
+      const topTerpeneStats = summarizeCategories(cultivar.topTerpenes, sampleCount);
+      const totalTerpenes = summarizeMeasurements(cultivar.totalTerpeneValues);
+
       const analytes = [...cultivar.analytes.values()]
-        .map((analyte) => ({
-          normalizedKey: analyte.normalizedKey,
-          canonicalSlug: analyte.canonicalSlug,
-          measurementKind: analyte.measurementKind,
-          labCount: analyte.labIds.size,
-          ...summarizeMeasurements(analyte.values),
-        }))
+        .map((analyte) => {
+          const summary = summarizeMeasurements(analyte.values);
+          const labMedians = [...analyte.labValues.values()]
+            .map((values) => summarizeMeasurements(values)?.median)
+            .filter(Number.isFinite);
+
+          return {
+            normalizedKey: analyte.normalizedKey,
+            canonicalSlug: analyte.canonicalSlug,
+            measurementKind: analyte.measurementKind,
+            labCount: analyte.labIds.size,
+            ...summary,
+            sampleCoverage: summary && sampleCount > 0 ? summary.n / sampleCount : 0,
+            relativeIqr:
+              summary && summary.median > 0
+                ? (summary.q3 - summary.q1) / summary.median
+                : null,
+            labMedianDistribution: summarizeMeasurements(labMedians),
+          };
+        })
         .filter((analyte) => analyte.n >= minimumSamples)
         .sort((a, b) => (b.median ?? 0) - (a.median ?? 0));
 
-      const sampleCount = cultivar.sampleIds.size;
-      const labCount = cultivar.labIds.size;
       return {
         cultivarSlug: cultivar.cultivarSlug,
         sampleCount,
         labCount,
-        producerCount: cultivar.producerIds.size,
+        producerCount,
         sampleDepthTier: sampleDepthTier(sampleCount, labCount),
         minimumSamples,
-        totalTerpenes: summarizeMeasurements(cultivar.totalTerpeneValues),
-        regions: summarizeCategories(cultivar.regions, sampleCount),
-        productCategories: summarizeCategories(cultivar.productCategories, sampleCount),
-        chemotypes: summarizeCategories(cultivar.chemotypes, sampleCount),
-        topTerpenes: summarizeCategories(cultivar.topTerpenes, sampleCount),
+        totalTerpenes,
+        regions: regionStats,
+        productCategories: productStats,
+        chemotypes: chemotypeStats,
+        topTerpenes: topTerpeneStats,
+        dataQuality: {
+          labs: summarizeConcentration(cultivar.labCounts),
+          producers: summarizeConcentration(cultivar.producerCounts),
+          totalTerpeneCoverage:
+            sampleCount > 0 ? cultivar.totalTerpeneValues.length / sampleCount : 0,
+          regionCoverage: categoryCoverage(cultivar.regions, sampleCount),
+          productCategoryCoverage: categoryCoverage(cultivar.productCategories, sampleCount),
+          chemotypeCoverage: categoryCoverage(cultivar.chemotypes, sampleCount),
+          largestRegionShare: regionStats[0]?.share ?? null,
+          largestProductCategoryShare: productStats[0]?.share ?? null,
+          largestChemotypeShare: chemotypeStats[0]?.share ?? null,
+        },
         analytes,
         publishable: sampleCount >= minimumSamples && analytes.length > 0,
       };
