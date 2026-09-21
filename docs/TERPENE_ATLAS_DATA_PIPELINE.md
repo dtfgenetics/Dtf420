@@ -96,3 +96,27 @@ Chemical occurrence alone is never evidence of a human effect.
 SOURCE → RAW SNAPSHOT → NORMALIZE → DEDUPLICATE → CLASSIFY → LINK EVIDENCE → REVIEW → COMPILE RUNTIME → SEARCH INDEX → VERIFY → PUBLISH
 
 Every compiled record must retain enough provenance to trace a public statement back to its underlying source record.
+
+
+## Identity resolution states
+
+Normalized source records move through identity resolution before they can become canonical compounds.
+
+- **identity-cluster-unreviewed** — records share a strong exact identifier and have been clustered, but the cluster has not completed editorial/chemical review.
+- **identity conflict** — strong identifiers disagree, such as the same PubChem CID paired with different full InChIKeys. Conflicts are quarantined and never auto-published.
+- **unresolved identity** — no full InChIKey, verified PubChem CID, or exact canonical structure is available. A common name is not enough to merge the record.
+
+The resolver uses the complete InChIKey. It must not reduce the key to the connectivity block when that would erase stereochemical distinction.
+
+## Evidence ledger states
+
+Evidence is stored separately from compound identity. Each record identifies its compound, claim type, source, exact source locator, study type, material/population, analytical method when applicable, quantitative value/unit when applicable, and review state.
+
+Review states:
+
+- **draft** — entered but not source-verified.
+- **source-verified** — source and locator have been checked.
+- **editorial-reviewed** — approved for public educational use and timestamped.
+- **rejected** — retained for audit history but excluded from public claims.
+
+Chemical occurrence evidence cannot be promoted into a biological-effect claim. Biological claims require evidence whose study type actually evaluates the biological question.

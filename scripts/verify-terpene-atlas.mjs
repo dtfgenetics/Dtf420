@@ -23,6 +23,14 @@ const requiredFiles = [
   "scripts/terpenes/build-runtime-shards.mjs",
   "scripts/terpenes/fixtures/coconut-sample.csv",
   "scripts/terpenes/test-coconut-ingestion.mjs",
+  "scripts/terpenes/lib/identity.mjs",
+  "scripts/terpenes/resolve-identities.mjs",
+  "lib/terpenes/evidence.ts",
+  "data/terpenes/evidence-ledger.json",
+  "scripts/terpenes/validate-evidence-ledger.mjs",
+  "scripts/terpenes/fixtures/identity-records.jsonl",
+  "scripts/terpenes/fixtures/evidence-ledger.json",
+  "scripts/terpenes/test-identity-evidence.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -121,6 +129,25 @@ for (const token of ["unreviewed-source-candidate", "candidateReason", "candidat
   if (!coconutNormalizerSource.includes(token)) {
     throw new Error(`COCONUT normalizer missing candidate-safety contract: ${token}`);
   }
+}
+
+const identitySource = fs.readFileSync(path.join(root, "scripts/terpenes/lib/identity.mjs"), "utf8");
+for (const token of [
+  'primary: "full-inchikey"',
+  'secondary: "verified-pubchem-cid"',
+  'fallback: "exact-canonical-structure"',
+  'nameSimilarity: "never"',
+  'conflictAction: "quarantine"',
+  "same-pubchem-cid-different-inchikey",
+]) {
+  if (!identitySource.includes(token)) {
+    throw new Error(`Identity resolver missing safety contract: ${token}`);
+  }
+}
+
+const evidenceLedger = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/evidence-ledger.json"), "utf8"));
+if (evidenceLedger.schemaVersion !== "1.0.0" || !Array.isArray(evidenceLedger.records)) {
+  throw new Error("Production terpene evidence ledger has invalid schema");
 }
 
 console.log(`Terpene Atlas verification passed: ${slugs.length} seed records, ${requiredFamilies.length} family classes, ${registryIds.size} registered sources.`);

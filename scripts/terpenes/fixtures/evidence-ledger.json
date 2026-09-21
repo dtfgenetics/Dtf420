@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "records": [
+    {
+      "id": "fixture-occurrence-1",
+      "compoundSlug": "limonene",
+      "claimType": "cannabis-occurrence",
+      "statement": "Fixture occurrence record for deterministic validation only.",
+      "sourceId": "CANNABIS-LITERATURE",
+      "sourceLocator": "fixture:test",
+      "studyType": "chemical-analysis",
+      "populationOrMaterial": "fixture cannabis inflorescence",
+      "analyticalMethod": "GC-MS",
+      "value": 0.42,
+      "unit": "percent",
+      "reviewStatus": "source-verified",
+      "reviewedAt": null,
+      "notes": "Test fixture; not published content."
+    },
+    {
+      "id": "fixture-tps-1",
+      "compoundSlug": "beta-myrcene",
+      "claimType": "terpene-synthase-function",
+      "statement": "Fixture enzyme-function record for deterministic validation only.",
+      "sourceId": "CANNABIS-LITERATURE",
+      "sourceLocator": "fixture:test",
+      "studyType": "enzyme-functional",
+      "populationOrMaterial": "fixture recombinant enzyme",
+      "analyticalMethod": "enzyme assay",
+      "value": null,
+      "unit": null,
+      "reviewStatus": "draft",
+      "reviewedAt": null,
+      "notes": "Test fixture; not published content."
+    }
+  ]
+}
