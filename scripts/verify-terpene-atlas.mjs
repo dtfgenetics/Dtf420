@@ -44,6 +44,12 @@ const requiredFiles = [
   "scripts/terpenes/verify-tps-genetics.mjs",
   "app/learn/terpenes/genetics/page.tsx",
   "app/learn/terpenes/genetics/page.module.css",
+  "lib/terpenes/research.ts",
+  "components/terpenes/TerpeneResearchLedger.tsx",
+  "components/terpenes/TerpeneResearchLedger.module.css",
+  "app/learn/terpenes/research/page.tsx",
+  "app/learn/terpenes/research/page.module.css",
+  "scripts/terpenes/verify-research-ledger-ui.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -100,7 +106,7 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
@@ -192,6 +198,24 @@ for (const token of ["Cannabis Terpene Synthases", "Enzyme capability is not the
 for (const token of ['href="/learn/terpenes/genetics"', "Open TPS genetics"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing genetics navigation: ${token}`);
+  }
+}
+
+const researchPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/research/page.tsx"), "utf8");
+const researchUiSource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneResearchLedger.tsx"), "utf8");
+for (const token of ["Terpene Research Ledger", "Different study types answer different questions"]) {
+  if (!researchPageSource.includes(token)) {
+    throw new Error(`Research Ledger page missing evidence interpretation UI: ${token}`);
+  }
+}
+for (const token of ["Search evidence", "What this evidence establishes", "Open source"]) {
+  if (!researchUiSource.includes(token)) {
+    throw new Error(`Research Ledger component missing transparency UI: ${token}`);
+  }
+}
+for (const token of ['href="/learn/terpenes/research"', "Open research ledger"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing Research Ledger navigation: ${token}`);
   }
 }
 
