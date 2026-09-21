@@ -15,6 +15,9 @@ type Manifest = {
   shardStrategy?: string;
   shards?: Array<{ key: string; filename: string; count: number }>;
   status?: string;
+  sourceUrl?: string;
+  sourceBytes?: number;
+  sourceSha256?: string;
 };
 
 type Props = {
@@ -44,6 +47,18 @@ function depthLabel(tier: CultivarProfileSummary["sampleDepthTier"]) {
 function shardKey(query: string) {
   const first = query.trim().toLowerCase().replace(/[^a-z0-9]/g, "")[0];
   return first || null;
+}
+
+function formatGeneratedAt(value?: string) {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "—";
+  return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+}
+
+function shortFingerprint(value?: string) {
+  if (!value) return "—";
+  return value.length > 18 ? `${value.slice(0, 10)}…${value.slice(-8)}` : value;
 }
 
 export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
@@ -167,20 +182,20 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
 
       <section className={styles.datasetBar} aria-label="Cultivar dataset status">
         <article>
-          <span>Source samples</span>
+          <span>Usable labeled samples</span>
           <strong>{manifest?.sourceSampleCount?.toLocaleString() ?? "—"}</strong>
         </article>
         <article>
-          <span>Compiled cultivars</span>
+          <span>Compiled cultivar labels</span>
           <strong>{manifest?.cultivarCount?.toLocaleString() ?? "—"}</strong>
+        </article>
+        <article>
+          <span>Public summaries</span>
+          <strong>{manifest?.publishableCultivarCount?.toLocaleString() ?? "—"}</strong>
         </article>
         <article>
           <span>Public threshold</span>
           <strong>{manifest?.minimumSamples ? `${manifest.minimumSamples}+ samples` : "5+ samples"}</strong>
-        </article>
-        <article>
-          <span>Runtime status</span>
-          <strong>{manifestState === "ready" ? "Compiled" : manifestState === "loading" ? "Loading" : "Refresh required"}</strong>
         </article>
       </section>
 
@@ -335,9 +350,17 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
           <p className="eyebrow">Dataset provenance</p>
           <h2>{sourceName}</h2>
           <p>
-            Runtime summaries are derived from the registered published dataset. The browser preserves
-            sample depth and laboratory depth and does not expose private raw laboratory identifiers.
+            Runtime summaries are derived from the registered published dataset. The displayed usable-sample
+            count represents records with terpene data and a normalized cultivar label; it is a filtered browser
+            subset, not the broader source-study sample count. The browser preserves sample depth and laboratory
+            depth and does not expose private raw laboratory identifiers.
           </p>
+          <div className={styles.sourceMeta}>
+            <span><b>Runtime</b>{manifestState === "ready" ? "compiled" : manifestState}</span>
+            <span><b>Generated</b>{formatGeneratedAt(manifest?.generatedAt)}</span>
+            <span><b>Source bytes</b>{manifest?.sourceBytes?.toLocaleString() ?? "—"}</span>
+            <span title={manifest?.sourceSha256 ?? undefined}><b>Source SHA-256</b>{shortFingerprint(manifest?.sourceSha256)}</span>
+          </div>
         </div>
         {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">Open source dataset ↗</a> : null}
       </section>

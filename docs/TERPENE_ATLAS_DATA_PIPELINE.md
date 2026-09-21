@@ -225,3 +225,19 @@ Search lazy-loads one alphabetical shard at a time. The runtime manifest is allo
 The raw CSV is never committed to DTF420. Generated runtime commits do not retrigger the refresh because the workflow's push paths exclude the public runtime directory.
 
 The refresh runs when its pipeline code changes, can be dispatched manually, and is scheduled monthly. The generated manifest records source bytes and SHA-256 so a published runtime can be traced to the exact downloaded source file.
+
+
+### Current compiled cultivar runtime snapshot — 2026-09-21
+
+The first successful production refresh compiled the registered dataset into the following browser runtime:
+
+- **34,224 usable labeled samples** — records with terpene measurements and a usable normalized cultivar label;
+- **2,658 compiled cultivar labels**;
+- **1,300 public cultivar summaries** meeting the five-sample publication threshold;
+- **34 lazy-load runtime shards**;
+- source file size: **19,687,859 bytes**;
+- source SHA-256: `1850b918bb3a00b903f9e254953bb695012314bd264c419efb68bc482b392182`.
+
+The 34,224 usable-labeled-sample count is intentionally not described as the total number of terpene-bearing samples in the source study. The browser compilation additionally requires a usable normalized `strain_slug`, so it is a filtered subset of the broader source dataset.
+
+These fixed numbers document this specific generated runtime snapshot. The public UI reads its current counts, generation date, source bytes, and source fingerprint from the runtime manifest so future monthly refreshes do not leave stale numbers in the interface.
