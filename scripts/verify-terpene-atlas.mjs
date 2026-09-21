@@ -39,6 +39,11 @@ const requiredFiles = [
   "scripts/terpenes/test-cultivar-statistics.mjs",
   "scripts/terpenes/build-cultivar-runtime-shards.mjs",
   "lib/terpenes/cultivar-types.ts",
+  "data/terpenes/tps-genes.json",
+  "lib/terpenes/genetics.ts",
+  "scripts/terpenes/verify-tps-genetics.mjs",
+  "app/learn/terpenes/genetics/page.tsx",
+  "app/learn/terpenes/genetics/page.module.css",
 ];
 
 for (const file of requiredFiles) {
@@ -95,11 +100,11 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
-const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US"];
+const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US", "BOOTH-2017-TPS", "BOOTH-2020-TPS-VARIATION"];
 const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
   if (!registryIds.has(sourceId)) {
@@ -175,6 +180,18 @@ const cultivarStatsSource = fs.readFileSync(path.join(root, "scripts/terpenes/li
 for (const token of ['minimumSamples = 5', '"high-depth-multi-lab"', "median", "q1", "q3"]) {
   if (!cultivarStatsSource.includes(token)) {
     throw new Error(`Cultivar statistics missing public-summary contract: ${token}`);
+  }
+}
+
+const geneticsPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/genetics/page.tsx"), "utf8");
+for (const token of ["Cannabis Terpene Synthases", "Enzyme capability is not the same thing as plant abundance", "Major functional products", "Open primary study"]) {
+  if (!geneticsPageSource.includes(token)) {
+    throw new Error(`TPS genetics page missing required evidence-aware UI: ${token}`);
+  }
+}
+for (const token of ['href="/learn/terpenes/genetics"', "Open TPS genetics"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing genetics navigation: ${token}`);
   }
 }
 
