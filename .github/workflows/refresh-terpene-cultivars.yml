@@ -12,6 +12,7 @@ on:
       - "scripts/terpenes/import-commercial-cannabis-samples.mjs"
       - "scripts/terpenes/compile-cultivar-statistics.mjs"
       - "scripts/terpenes/build-cultivar-runtime-shards.mjs"
+      - "scripts/terpenes/build-cultivar-intelligence-index.mjs"
       - "scripts/terpenes/lib/commercial-cannabis-analytes.mjs"
       - "scripts/terpenes/lib/csv-stream.mjs"
       - "scripts/terpenes/lib/cultivar-statistics.mjs"
@@ -85,6 +86,9 @@ jobs:
           node scripts/terpenes/build-cultivar-runtime-shards.mjs \
             "$RUNNER_TEMP/cultivar-statistics.json" \
             "$OUTPUT_DIR"
+          node scripts/terpenes/build-cultivar-intelligence-index.mjs \
+            "$RUNNER_TEMP/cultivar-statistics.json" \
+            "$OUTPUT_DIR/index.json"
 
           node --input-type=module <<'NODE'
           import fs from "node:fs";
@@ -92,13 +96,31 @@ jobs:
 
           const dir = process.env.OUTPUT_DIR;
           const manifestPath = path.join(dir, "manifest.json");
+          const indexPath = path.join(dir, "index.json");
           const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+          const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
 
           if (manifest.schemaVersion !== 2) {
             throw new Error(`Unexpected cultivar runtime schema version: ${manifest.schemaVersion}`);
           }
 
+          if (
+            index.status !== "compiled" ||
+            index.cultivarCount !== manifest.publishableCultivarCount ||
+            index.analyteCount < 10
+          ) {
+            throw new Error(
+              `Invalid cultivar intelligence index: status=${index.status}, cultivars=${index.cultivarCount}, analytes=${index.analyteCount}`,
+            );
+          }
+
           manifest.status = "compiled";
+          manifest.intelligenceIndex = {
+            filename: "index.json",
+            schemaVersion: index.schemaVersion,
+            cultivarCount: index.cultivarCount,
+            analyteCount: index.analyteCount,
+          };
           manifest.sourceUrl = process.env.SOURCE_URL;
           manifest.sourceBytes = Number(process.env.SOURCE_BYTES);
           manifest.sourceSha256 = process.env.SOURCE_SHA256;
@@ -128,6 +150,12 @@ jobs:
             exit 1
           fi
           test -s "$OUTPUT_DIR/manifest.json"
+          test -s "$OUTPUT_DIR/index.json"
+          index_bytes="$(wc -c < "$OUTPUT_DIR/index.json")"
+          if [[ "$index_bytes" -gt 5000000 ]]; then
+            echo "::error::Cultivar intelligence index is unexpectedly large: ${index_bytes} bytes"
+            exit 1
+          fi
 
       - name: Commit refreshed cultivar runtime
         shell: bash
