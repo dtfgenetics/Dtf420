@@ -139,3 +139,20 @@ Cultivar summary records expose sample count, lab count, minimum publication thr
 The default public compilation threshold is 5 samples. This is a display threshold, not proof that a cultivar name represents a genetically uniform population. Sample depth and laboratory diversity are shown separately from genetic certainty.
 
 Publishable cultivar summaries are compiled into letter shards for lazy loading. The source sample dataset remains separate from the browser runtime.
+
+
+## Terpene synthase genetics
+
+The genetics layer distinguishes three different kinds of evidence that must not be conflated:
+
+1. **Functional enzyme evidence** — a characterized CsTPS enzyme produced identified compound(s) from a tested substrate in an enzyme assay.
+2. **Expression/correlation evidence** — transcript abundance or genotype is associated with chemistry in plant material.
+3. **Sequence annotation** — a gene is predicted or annotated as a terpene synthase from sequence/genomic context.
+
+Only functional enzyme evidence can populate the current `majorProducts` list in the public TPS genetics view. Correlation and annotation records may be displayed later, but they must retain their different evidence type.
+
+Multiproduct enzymes remain multiproduct. For example, CsTPS9FN retains both β-caryophyllene and α-humulene as major products; CsTPS5FN retains both β-myrcene and α-pinene. Minor and tentatively identified products are kept distinct from major products.
+
+A functional enzyme result establishes biochemical capability under the assay conditions. It does not establish a fixed terpene percentage, dominance relationship, or guaranteed offspring phenotype in a living plant. Plant abundance additionally depends on genotype, expression, tissue, developmental stage, precursor supply, environment, and post-harvest handling.
+
+Every major product displayed in the genetics UI must resolve to a source-verified or editorial-reviewed `terpene-synthase-function` record in the production evidence ledger.

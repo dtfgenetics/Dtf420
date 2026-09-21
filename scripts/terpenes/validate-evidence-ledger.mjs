@@ -63,6 +63,18 @@ export function validateEvidenceLedger(ledger, sourceRegistry) {
       errors.push(`${prefix} biological-effect cannot be supported only by chemical-analysis study type`);
     }
 
+    if (record.claimType === "terpene-synthase-function") {
+      if (!String(record.geneId ?? "").trim()) {
+        errors.push(`${prefix} terpene-synthase-function requires geneId`);
+      }
+      if (record.studyType !== "enzyme-functional") {
+        errors.push(`${prefix} terpene-synthase-function requires enzyme-functional evidence`);
+      }
+      if (!String(record.substrate ?? "").trim()) {
+        errors.push(`${prefix} terpene-synthase-function requires substrate`);
+      }
+    }
+
     if (record.reviewStatus === "editorial-reviewed" && !record.reviewedAt) {
       errors.push(`${prefix} editorial-reviewed requires reviewedAt`);
     }
