@@ -28,12 +28,8 @@ export type CultivarTerpeneSample = {
   measurements: CultivarTerpeneMeasurement[];
 };
 
-export type CultivarAnalyteStatistics = {
-  normalizedKey: string;
-  canonicalSlug: string | null;
-  measurementKind: CultivarTerpeneMeasurement["measurementKind"];
+export type CultivarDistributionStatistics = {
   n: number;
-  labCount: number;
   min: number;
   q1: number;
   median: number;
@@ -42,10 +38,24 @@ export type CultivarAnalyteStatistics = {
   mean: number;
 };
 
+export type CultivarCategoryStatistics = {
+  value: string;
+  n: number;
+  share: number;
+};
+
+export type CultivarAnalyteStatistics = CultivarDistributionStatistics & {
+  normalizedKey: string;
+  canonicalSlug: string | null;
+  measurementKind: CultivarTerpeneMeasurement["measurementKind"];
+  labCount: number;
+};
+
 export type CultivarProfileSummary = {
   cultivarSlug: string;
   sampleCount: number;
   labCount: number;
+  producerCount: number;
   sampleDepthTier:
     | "insufficient"
     | "limited-multi-lab"
@@ -55,6 +65,11 @@ export type CultivarProfileSummary = {
     | "high-depth-multi-lab"
     | "high-depth-single-lab";
   minimumSamples: number;
+  totalTerpenes: CultivarDistributionStatistics | null;
+  regions: CultivarCategoryStatistics[];
+  productCategories: CultivarCategoryStatistics[];
+  chemotypes: CultivarCategoryStatistics[];
+  topTerpenes: CultivarCategoryStatistics[];
   analytes: CultivarAnalyteStatistics[];
   publishable: boolean;
 };
