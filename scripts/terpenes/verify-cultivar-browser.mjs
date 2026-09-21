@@ -44,12 +44,17 @@ for (const token of [
   "IQR / median",
   "Lab-median span",
   "not a laboratory-performance ranking",
+  "Regional source strata",
+  "Same cultivar label, separated by source region.",
+  "A regional difference is descriptive, not causal.",
+  "between-region comparison is intentionally not shown",
+  "not to attribute chemistry to geography",
   "This source analyte does not resolve one exact isomer",
 ]) {
   if (!ui.includes(token)) throw new Error(`Cultivar browser UI missing contract: ${token}`);
 }
 
-for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars", ".globalGrid", ".neighbors", ".prevalenceList", ".globalGuardrail", ".qualitySection", ".qualityFlags", ".qualityGrid", ".qualityGuardrail", ".analyteDiagnostics"]) {
+for (const token of [".fullRange", ".iqr", ".median", ".depthBadge", ".identityNote", ".contextGrid", ".categoryTrack", ".totalScale", ".analyteControls", ".compareSummary", ".compareBars", ".globalGrid", ".neighbors", ".prevalenceList", ".globalGuardrail", ".qualitySection", ".qualityFlags", ".qualityGrid", ".qualityGuardrail", ".analyteDiagnostics", ".regionSection", ".regionCards", ".regionMatrix", ".regionMedianTrack", ".regionGuardrail"]) {
   if (!css.includes(token)) throw new Error(`Cultivar browser styling missing: ${token}`);
 }
 
@@ -84,11 +89,11 @@ for (const token of [
   }
 }
 
-if (!runtimeBuilder.includes("schemaVersion: 3")) {
-  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 3");
+if (!runtimeBuilder.includes("schemaVersion: 4")) {
+  throw new Error("Expanded cultivar runtime builder must emit schemaVersion 4");
 }
 
-if (![1, 2, 3].includes(manifest.schemaVersion)) {
+if (![1, 2, 3, 4].includes(manifest.schemaVersion)) {
   throw new Error(`Unsupported checked-in cultivar manifest schema: ${manifest.schemaVersion}`);
 }
 
@@ -125,7 +130,7 @@ for (const token of [
   "index.cultivarCount !== manifest.publishableCultivarCount",
   'rm -rf "$OUTPUT_DIR"',
   "git pull --rebase origin main",
-  "manifest.schemaVersion !== 3",
+  "manifest.schemaVersion !== 4",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Cultivar refresh workflow missing contract: ${token}`);
 }
@@ -134,12 +139,12 @@ const registered = registry.sources.find((source) => source.id === "SMITH-2022-C
 if (!registered) throw new Error("Cultivar browser source is not registered");
 
 const statistics = fs.readFileSync(path.join(root, "scripts/terpenes/lib/cultivar-statistics.mjs"), "utf8");
-for (const token of ["producerCount", "totalTerpenes", "regions", "productCategories", "chemotypes", "topTerpenes", "summarizeCategories", "summarizeConcentration", "concentrationIndex", "effectiveCount", "sampleCoverage", "relativeIqr", "labMedianDistribution", "dataQuality"]) {
+for (const token of ["producerCount", "totalTerpenes", "regions", "productCategories", "chemotypes", "topTerpenes", "summarizeCategories", "summarizeConcentration", "concentrationIndex", "effectiveCount", "sampleCoverage", "relativeIqr", "labMedianDistribution", "dataQuality", "minimumRegionSamples", "regionGroups", "regionStrata"]) {
   if (!statistics.includes(token)) throw new Error(`Expanded cultivar statistics missing: ${token}`);
 }
 
 const cultivarTypes = fs.readFileSync(path.join(root, "lib/terpenes/cultivar-types.ts"), "utf8");
-for (const token of ["producerCount", "CultivarCategoryStatistics", "CultivarDataQuality", "CultivarConcentrationStatistics", "totalTerpenes", "topTerpenes", "sampleCoverage", "relativeIqr", "labMedianDistribution"]) {
+for (const token of ["producerCount", "CultivarCategoryStatistics", "CultivarDataQuality", "CultivarConcentrationStatistics", "totalTerpenes", "topTerpenes", "sampleCoverage", "relativeIqr", "labMedianDistribution", "CultivarRegionStratum", "CultivarSampleDepthTier", "regionStrata"]) {
   if (!cultivarTypes.includes(token)) throw new Error(`Expanded cultivar runtime type missing: ${token}`);
 }
 

@@ -74,25 +74,44 @@ export type CultivarAnalyteStatistics = CultivarDistributionStatistics & {
   labMedianDistribution: CultivarDistributionStatistics | null;
 };
 
+export type CultivarRegionStratum = {
+  region: string;
+  sampleCount: number;
+  labCount: number;
+  producerCount: number;
+  sampleDepthTier: CultivarSampleDepthTier;
+  totalTerpenes: CultivarDistributionStatistics | null;
+  analytes: Array<
+    CultivarDistributionStatistics & {
+      normalizedKey: string;
+      canonicalSlug: string | null;
+      measurementKind: CultivarTerpeneMeasurement["measurementKind"];
+    }
+  >;
+};
+
+export type CultivarSampleDepthTier =
+  | "insufficient"
+  | "limited-multi-lab"
+  | "limited-single-lab"
+  | "moderate-multi-lab"
+  | "moderate-single-lab"
+  | "high-depth-multi-lab"
+  | "high-depth-single-lab";
+
 export type CultivarProfileSummary = {
   cultivarSlug: string;
   sampleCount: number;
   labCount: number;
   producerCount: number;
-  sampleDepthTier:
-    | "insufficient"
-    | "limited-multi-lab"
-    | "limited-single-lab"
-    | "moderate-multi-lab"
-    | "moderate-single-lab"
-    | "high-depth-multi-lab"
-    | "high-depth-single-lab";
+  sampleDepthTier: CultivarSampleDepthTier;
   minimumSamples: number;
   totalTerpenes: CultivarDistributionStatistics | null;
   regions: CultivarCategoryStatistics[];
   productCategories: CultivarCategoryStatistics[];
   chemotypes: CultivarCategoryStatistics[];
   topTerpenes: CultivarCategoryStatistics[];
+  regionStrata: CultivarRegionStratum[];
   dataQuality: CultivarDataQuality;
   analytes: CultivarAnalyteStatistics[];
   publishable: boolean;

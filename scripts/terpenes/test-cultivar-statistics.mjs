@@ -46,7 +46,10 @@ if (
   throw new Error("Source concentration metrics are incorrect");
 }
 
-const summaries = buildCultivarProfileSummaries(samples, { minimumSamples: 3 });
+const summaries = buildCultivarProfileSummaries(samples, {
+  minimumSamples: 3,
+  minimumRegionSamples: 2,
+});
 const blueSummary = summaries.find((item) => item.cultivarSlug === "blue-dream");
 if (!blueSummary?.publishable) throw new Error("Three-sample cultivar should be publishable at minimumSamples=3");
 if (blueSummary.labCount !== 2) throw new Error(`Expected Blue Dream labCount 2, got ${blueSummary.labCount}`);
@@ -62,6 +65,24 @@ const chemotype = blueSummary.chemotypes.find((item) => item.value === "THC-Dom"
 if (!chemotype || chemotype.n !== 3) throw new Error("Blue Dream chemotype distribution is incorrect");
 const topTerpene = blueSummary.topTerpenes.find((item) => item.value === "myrcene");
 if (!topTerpene || topTerpene.n !== 3) throw new Error("Blue Dream top-terpene frequency is incorrect");
+
+const orStratum = blueSummary.regionStrata.find((item) => item.region === "OR");
+if (
+  !orStratum ||
+  orStratum.sampleCount !== 2 ||
+  orStratum.labCount !== 1 ||
+  orStratum.producerCount !== 2 ||
+  orStratum.totalTerpenes?.median !== 2.2
+) {
+  throw new Error("Blue Dream Oregon regional stratum is incorrect");
+}
+const orMyrcene = orStratum.analytes.find((item) => item.normalizedKey === "beta-myrcene");
+if (!orMyrcene || orMyrcene.median !== 0.7 || orMyrcene.n !== 2) {
+  throw new Error("Blue Dream Oregon regional myrcene distribution is incorrect");
+}
+if (blueSummary.regionStrata.some((item) => item.region === "AK")) {
+  throw new Error("Single-sample Alaska region should not pass minimumRegionSamples=2");
+}
 
 const other = summaries.find((item) => item.cultivarSlug === "other-cultivar");
 if (other?.publishable) throw new Error("Single-sample cultivar must not be publishable at minimumSamples=3");

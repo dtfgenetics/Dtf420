@@ -134,6 +134,7 @@ function normalizeCultivarSummary(record: CultivarProfileSummary): CultivarProfi
     productCategories: Array.isArray(record.productCategories) ? record.productCategories : [],
     chemotypes: Array.isArray(record.chemotypes) ? record.chemotypes : [],
     topTerpenes: Array.isArray(record.topTerpenes) ? record.topTerpenes : [],
+    regionStrata: Array.isArray(record.regionStrata) ? record.regionStrata : [],
     dataQuality: record.dataQuality ?? {
       labs: fallbackConcentration(record.labCount),
       producers: fallbackConcentration(producerCount),
@@ -376,6 +377,25 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
   const sharedAnalytes = comparisonRows.filter((row) => row.a && row.b).length;
   const topSignal = selected ? topCategory(selected.topTerpenes) : null;
   const topChemotype = selected ? topCategory(selected.chemotypes) : null;
+
+  const regionalAnalytes = useMemo(() => {
+    if (!selected?.regionStrata?.length) return [];
+    return selected.analytes
+      .slice()
+      .sort((a, b) => b.median - a.median)
+      .slice(0, 10)
+      .map((analyte) => analyte.normalizedKey);
+  }, [selected]);
+
+  const regionalMaxMedian = useMemo(() => {
+    if (!selected?.regionStrata?.length) return 1;
+    return Math.max(
+      0.001,
+      ...selected.regionStrata.flatMap((region) =>
+        region.analytes.map((analyte) => analyte.median),
+      ),
+    );
+  }, [selected]);
 
   const qualityFlags = useMemo(() => {
     if (!selected) return [];
@@ -683,6 +703,92 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
                     context, not a cultivar-definition rule.
                   </p>
                 ) : null}
+              </section>
+
+              <section className={styles.regionSection}>
+                <div className={styles.sectionHeading}>
+                  <div>
+                    <p className="eyebrow">Regional source strata</p>
+                    <h3>Same cultivar label, separated by source region.</h3>
+                  </div>
+                  <p>
+                    A regional difference is descriptive, not causal. Region can be confounded with laboratory,
+                    producer, product mix, time, genetics, cultivation, maturity, storage, and other source factors.
+                  </p>
+                </div>
+
+                {selected.regionStrata.length ? (
+                  <>
+                    <div className={styles.regionCards}>
+                      {selected.regionStrata.map((region) => (
+                        <article key={region.region}>
+                          <div>
+                            <span>Region</span>
+                            <strong>{region.region}</strong>
+                          </div>
+                          <dl>
+                            <div><dt>Samples</dt><dd>{region.sampleCount}</dd></div>
+                            <div><dt>Labs</dt><dd>{region.labCount}</dd></div>
+                            <div><dt>Producers</dt><dd>{region.producerCount}</dd></div>
+                            <div>
+                              <dt>Total terpene median</dt>
+                              <dd>{region.totalTerpenes ? `${region.totalTerpenes.median.toFixed(2)}%` : "—"}</dd>
+                            </div>
+                          </dl>
+                        </article>
+                      ))}
+                    </div>
+
+                    {selected.regionStrata.length >= 2 ? (
+                      <div
+                        className={styles.regionMatrix}
+                        style={{ "--region-count": selected.regionStrata.length } as CSSProperties}
+                      >
+                        <div className={styles.regionMatrixHead}>
+                          <strong>Analyte</strong>
+                          {selected.regionStrata.map((region) => (
+                            <strong key={region.region}>{region.region}</strong>
+                          ))}
+                        </div>
+                        {regionalAnalytes.map((key) => (
+                          <div className={styles.regionMatrixRow} key={key}>
+                            <div>
+                              <strong>{analyteLabel(key)}</strong>
+                              <span>regional median</span>
+                            </div>
+                            {selected.regionStrata.map((region) => {
+                              const analyte = region.analytes.find((item) => item.normalizedKey === key);
+                              const width = analyte ? (analyte.median / regionalMaxMedian) * 100 : 0;
+                              return (
+                                <div key={region.region}>
+                                  <div className={styles.regionMedianTrack}>
+                                    <i style={{ width: `${width}%` }} />
+                                  </div>
+                                  <span>{analyte ? `${analyte.median.toFixed(3)}%` : "—"}</span>
+                                  <small>{analyte ? `n=${analyte.n}` : "not enough data"}</small>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className={styles.regionNotice}>
+                        Only one source region meets the minimum subgroup depth for this cultivar label, so a
+                        between-region comparison is intentionally not shown.
+                      </p>
+                    )}
+
+                    <p className={styles.regionGuardrail}>
+                      Regional strata require the same minimum subgroup depth used for publication. They are
+                      designed to reveal heterogeneity inside a cultivar label, not to attribute chemistry to geography.
+                    </p>
+                  </>
+                ) : (
+                  <p className={styles.regionNotice}>
+                    No regional subgroup meets the minimum depth required for a separate distribution.
+                  </p>
+                )}
               </section>
 
               <section className={styles.distributionSection}>
