@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "sources": [
+    {
+      "id": "THC-V13",
+      "name": "THC Cannabis Encyclopedia Volume 13 — Terpenes, Volatiles, and Other Secondary Metabolites",
+      "role": "controlled-editorial",
+      "ingestMode": "reviewed-extract",
+      "reviewRequired": true,
+      "notes": "Controls THC explanations, interpretation guardrails, cannabis-specific teaching language, and claims discipline."
+    },
+    {
+      "id": "PUBCHEM",
+      "name": "PubChem",
+      "role": "chemical-identity",
+      "ingestMode": "api-cached",
+      "reviewRequired": false,
+      "notes": "Primary normalization source for CIDs, names, formulae, molecular weights, InChIKeys, SMILES, synonyms, and structure identifiers."
+    },
+    {
+      "id": "COCONUT",
+      "name": "COCONUT natural products database",
+      "role": "global-natural-products-registry",
+      "ingestMode": "versioned-bulk-download",
+      "reviewRequired": false,
+      "notes": "Broad natural-products source used to expand the global terpene/terpenoid registry. Preserve upstream IDs and release version."
+    },
+    {
+      "id": "CANNABIS-LITERATURE",
+      "name": "Peer-reviewed cannabis chemistry and terpene-synthase literature",
+      "role": "cannabis-occurrence-and-genetics",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "notes": "Stores sample context, analytical method, compound occurrence, TPS evidence, and study-level provenance."
+    },
+    {
+      "id": "CULTIVAR-LABS",
+      "name": "Qualified cannabis laboratory and published sample datasets",
+      "role": "sample-level-cultivar-chemistry",
+      "ingestMode": "normalized-sample-import",
+      "reviewRequired": true,
+      "notes": "Never collapse source samples into a single permanent strain percentage. Preserve lab, date, units, method, and provenance."
+    },
+    {
+      "id": "DTF-GENETICS",
+      "name": "DTF Genetics breeding, phenotype, pedigree, and future COA records",
+      "role": "breeding-and-recombination",
+      "ingestMode": "controlled-internal-records",
+      "reviewRequired": true,
+      "notes": "Connect parent chemistry to measured offspring and selections. Predictions remain probabilistic until supported by offspring data."
+    }
+  ]
+}
