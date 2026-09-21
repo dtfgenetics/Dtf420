@@ -74,6 +74,22 @@ export type CultivarAnalyteStatistics = CultivarDistributionStatistics & {
   labMedianDistribution: CultivarDistributionStatistics | null;
 };
 
+export type CultivarRegionStratum = {
+  region: string;
+  sampleCount: number;
+  labCount: number;
+  producerCount: number;
+  sampleDepthTier: CultivarProfileSummary["sampleDepthTier"];
+  totalTerpenes: CultivarDistributionStatistics | null;
+  analytes: Array<
+    CultivarDistributionStatistics & {
+      normalizedKey: string;
+      canonicalSlug: string | null;
+      measurementKind: CultivarTerpeneMeasurement["measurementKind"];
+    }
+  >;
+};
+
 export type CultivarProfileSummary = {
   cultivarSlug: string;
   sampleCount: number;
@@ -93,6 +109,7 @@ export type CultivarProfileSummary = {
   productCategories: CultivarCategoryStatistics[];
   chemotypes: CultivarCategoryStatistics[];
   topTerpenes: CultivarCategoryStatistics[];
+  regionStrata: CultivarRegionStratum[];
   dataQuality: CultivarDataQuality;
   analytes: CultivarAnalyteStatistics[];
   publishable: boolean;
