@@ -42,6 +42,7 @@ export interface GameRuntimeDefinition {
    * Example: "/seed-ascent.html".
    */
   readonly entrypoint?: `/${string}`;
+  readonly entrypointProvision?: "repository" | "build";
 
   /**
    * Internal canonical route when this route is only a compatibility alias.
