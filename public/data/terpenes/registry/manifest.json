@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "status": "not-generated",
+  "sourceId": "COCONUT",
+  "sourceRelease": "2026-09",
+  "generatedAt": null,
+  "inputCandidateRecords": 0,
+  "resolvedIdentityRecords": 0,
+  "unresolvedIdentityCount": 0,
+  "unresolvedIdentitySampleCount": 0,
+  "familyCounts": {
+    "hemiterpene": 0,
+    "monoterpene": 0,
+    "sesquiterpene": 0,
+    "diterpene": 0,
+    "sesterterpene": 0,
+    "triterpene": 0,
+    "tetraterpene": 0,
+    "polyterpene": 0,
+    "unresolved": 0
+  },
+  "shardSize": 5000,
+  "reviewStatus": "unreviewed-source-candidates",
+  "identityPolicy": [
+    "full-inchikey",
+    "canonical-smiles",
+    "never-name-only"
+  ],
+  "familyPolicy": [
+    "explicit-classification-first",
+    "exact-carbon-count-fallback",
+    "unresolved-preserved"
+  ],
+  "shards": []
+}
