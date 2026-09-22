@@ -389,6 +389,12 @@ export function TerpeneAtlasExplorer() {
           <p>Filter the complete public cultivar reference set by terpene medians, sample depth, laboratory breadth, producer breadth, region, chemotype, and total-terpene median.</p>
           <Link href="/learn/terpenes/corpus">Open chemistry corpus →</Link>
         </article>
+        <article>
+          <span>07</span>
+          <h2>Universal registry</h2>
+          <p>Inspect the versioned all-known terpene and terpenoid candidate registry by exact identity, family assignment, source classification, confidence, review state, and provenance.</p>
+          <Link href="/learn/terpenes/registry">Open universal registry →</Link>
+        </article>
       </section>
     </div>
   );

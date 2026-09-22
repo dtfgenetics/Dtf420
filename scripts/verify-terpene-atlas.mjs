@@ -68,6 +68,14 @@ const requiredFiles = [
   "components/terpenes/TerpeneCorpusExplorer.module.css",
   "app/learn/terpenes/corpus/page.tsx",
   "scripts/terpenes/verify-corpus-explorer.mjs",
+  "scripts/terpenes/lib/universal-registry.mjs",
+  "scripts/terpenes/build-universal-registry.mjs",
+  "scripts/terpenes/verify-universal-registry.mjs",
+  "components/terpenes/TerpeneRegistryExplorer.tsx",
+  "components/terpenes/TerpeneRegistryExplorer.module.css",
+  "app/learn/terpenes/registry/page.tsx",
+  "public/data/terpenes/registry/manifest.json",
+  ".github/workflows/refresh-terpene-registry.yml",
 ];
 
 for (const file of requiredFiles) {
@@ -124,11 +132,11 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/registry"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
-const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US", "BOOTH-2017-TPS", "BOOTH-2020-TPS-VARIATION"];
+const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "LOTUS", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US", "BOOTH-2017-TPS", "BOOTH-2020-TPS-VARIATION"];
 const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
   if (!registryIds.has(sourceId)) {
@@ -287,6 +295,19 @@ for (const token of ['href="/learn/terpenes/cultivars"', "Open cultivar distribu
 for (const token of ['href="/learn/terpenes/corpus"', "Open chemistry corpus"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing chemistry corpus navigation: ${token}`);
+  }
+}
+
+for (const token of ['href="/learn/terpenes/registry"', "Open universal registry"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing universal registry navigation: ${token}`);
+  }
+}
+
+const universalRegistrySource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneRegistryExplorer.tsx"), "utf8");
+for (const token of ["All-Known Terpene Registry", "Candidate registry ≠ reviewed cannabis claim", "Exact identity", "Source provenance"]) {
+  if (!universalRegistrySource.includes(token)) {
+    throw new Error(`Universal registry missing Atlas contract: ${token}`);
   }
 }
 

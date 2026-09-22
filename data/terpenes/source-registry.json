@@ -23,7 +23,11 @@
       "role": "global-natural-products-registry",
       "ingestMode": "versioned-bulk-download",
       "reviewRequired": false,
-      "notes": "Broad natural-products source used to expand the global terpene/terpenoid registry. Preserve upstream IDs and release version."
+      "notes": "Primary bulk natural-products feed for the global terpene/terpenoid registry. September 2026 CSV-lite release is versioned and ingested as source candidates; preserve upstream IDs/release and do not auto-promote candidates to reviewed THC records.",
+      "license": "CC0-1.0",
+      "currentRelease": "2026-09",
+      "downloadPage": "https://coconut.naturalproducts.net/download",
+      "bulkDownloadUrl": "https://coconut.s3.uni-jena.de/prod/downloads/2026-09/coconut_csv_lite-09-2026.zip"
     },
     {
       "id": "CANNABIS-LITERATURE",
@@ -83,6 +87,17 @@
       "pmcid": "PMC7479917",
       "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7479917/",
       "notes": "Expanded terpene synthase family and terpene variation reference for future gene/cultivar evidence."
+    },
+    {
+      "id": "LOTUS",
+      "name": "LOTUS Initiative / Natural Products Online",
+      "role": "global-natural-product-occurrence-crosscheck",
+      "ingestMode": "future-versioned-bulk-or-api",
+      "reviewRequired": true,
+      "license": "CC0",
+      "sourceUrl": "https://lotus.nprod.net/",
+      "downloadPage": "https://lotus.naturalproducts.net/download",
+      "notes": "Secondary open natural-products occurrence source intended for cross-checking organism/occurrence evidence and expanding provenance. Do not merge identities by common name; use exact structure identifiers."
     }
   ]
 }

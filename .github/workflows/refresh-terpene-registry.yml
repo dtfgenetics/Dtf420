@@ -1,0 +1,165 @@
+name: Refresh Universal Terpene Registry
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "43 6 2 * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-terpene-registry.yml"
+      - "scripts/terpenes/normalize-coconut.mjs"
+      - "scripts/terpenes/build-universal-registry.mjs"
+      - "scripts/terpenes/lib/universal-registry.mjs"
+      - "scripts/terpenes/lib/csv-stream.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-universal-terpene-registry
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      COCONUT_RELEASE: 2026-09
+      SOURCE_URL: https://coconut.s3.uni-jena.de/prod/downloads/2026-09/coconut_csv_lite-09-2026.zip
+      OUTPUT_DIR: public/data/terpenes/registry
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Download September 2026 COCONUT CSV-lite release
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/coconut.zip"
+          curl --location --fail --retry 3 --retry-delay 3 "$SOURCE_URL" --output "$archive"
+          bytes="$(wc -c < "$archive")"
+          if [[ "$bytes" -lt 150000000 ]]; then
+            echo "::error::COCONUT archive is unexpectedly small: ${bytes} bytes"
+            exit 1
+          fi
+          mkdir -p "$RUNNER_TEMP/coconut"
+          unzip -q "$archive" -d "$RUNNER_TEMP/coconut"
+          csv="$(find "$RUNNER_TEMP/coconut" -type f -iname '*.csv' -printf '%s %p\n' | sort -nr | head -n 1 | cut -d' ' -f2-)"
+          if [[ -z "$csv" || ! -s "$csv" ]]; then
+            echo "::error::No CSV payload found in COCONUT archive"
+            exit 1
+          fi
+          csv_bytes="$(wc -c < "$csv")"
+          if [[ "$csv_bytes" -lt 100000000 ]]; then
+            echo "::error::COCONUT CSV payload is unexpectedly small: ${csv_bytes} bytes"
+            exit 1
+          fi
+          echo "COCONUT_ARCHIVE=$archive" >> "$GITHUB_ENV"
+          echo "COCONUT_CSV=$csv" >> "$GITHUB_ENV"
+          echo "SOURCE_BYTES=$bytes" >> "$GITHUB_ENV"
+          echo "SOURCE_SHA256=$(sha256sum "$archive" | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Inspect source header
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/terpenes/inspect-coconut-csv.mjs "$COCONUT_CSV" 0 > "$RUNNER_TEMP/coconut-header.json"
+          cat "$RUNNER_TEMP/coconut-header.json"
+
+      - name: Normalize terpene and terpenoid candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/terpenes/normalize-coconut.mjs \
+            "$COCONUT_CSV" \
+            "$RUNNER_TEMP/coconut-terpenoid-candidates.jsonl" \
+            "$COCONUT_RELEASE"
+          candidates="$(wc -l < "$RUNNER_TEMP/coconut-terpenoid-candidates.jsonl")"
+          if [[ "$candidates" -lt 10000 ]]; then
+            echo "::error::Too few universal registry candidates: ${candidates}"
+            exit 1
+          fi
+          echo "CANDIDATE_COUNT=$candidates" >> "$GITHUB_ENV"
+
+      - name: Compile universal terpene registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$OUTPUT_DIR"
+          mkdir -p "$OUTPUT_DIR"
+          node scripts/terpenes/build-universal-registry.mjs \
+            "$RUNNER_TEMP/coconut-terpenoid-candidates.jsonl" \
+            "$OUTPUT_DIR" \
+            "$COCONUT_RELEASE"
+
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import path from "node:path";
+
+          const dir = process.env.OUTPUT_DIR;
+          const manifestPath = path.join(dir, "manifest.json");
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+
+          manifest.status = "compiled";
+          manifest.sourceUrl = process.env.SOURCE_URL;
+          manifest.sourceBytes = Number(process.env.SOURCE_BYTES);
+          manifest.sourceSha256 = process.env.SOURCE_SHA256;
+          manifest.license = "CC0-1.0";
+
+          if (manifest.schemaVersion !== 1) throw new Error("Unexpected universal registry schema");
+          if (manifest.inputCandidateRecords < 10000) throw new Error("Universal registry candidate count is implausibly low");
+          if (manifest.resolvedIdentityRecords < 5000) throw new Error("Universal registry resolved identity count is implausibly low");
+          if (!Array.isArray(manifest.shards) || manifest.shards.length < 8) throw new Error("Universal registry produced too few family shards");
+          const classified =
+            (manifest.familyCounts.monoterpene ?? 0) +
+            (manifest.familyCounts.sesquiterpene ?? 0) +
+            (manifest.familyCounts.diterpene ?? 0) +
+            (manifest.familyCounts.triterpene ?? 0) +
+            (manifest.familyCounts.tetraterpene ?? 0);
+          if (classified < 1000) throw new Error("Universal registry classified terpene-family count is implausibly low");
+
+          fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
+          console.log(
+            `Compiled ${manifest.resolvedIdentityRecords} exact-identity universal registry records from ${manifest.inputCandidateRecords} COCONUT candidates.`,
+          );
+          NODE
+
+      - name: Verify generated runtime stays bounded
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s "$OUTPUT_DIR/manifest.json"
+          test -s "$OUTPUT_DIR/unresolved-identity-sample.json"
+          if find "$OUTPUT_DIR" -type f -size +30M | grep -q .; then
+            echo "::error::Universal registry contains an unexpectedly large runtime shard"
+            exit 1
+          fi
+          if find "$OUTPUT_DIR" -type f \( -iname '*.csv' -o -iname '*.zip' -o -iname '*.jsonl' \) | grep -q .; then
+            echo "::error::Raw universal registry source material leaked into public runtime"
+            exit 1
+          fi
+
+      - name: Commit refreshed universal registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUTPUT_DIR"
+          if git diff --cached --quiet; then
+            echo "Universal terpene registry is already current." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Refresh universal terpene registry"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Published refreshed universal terpene registry." >> "$GITHUB_STEP_SUMMARY"
