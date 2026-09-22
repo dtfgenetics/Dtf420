@@ -8,6 +8,8 @@ description: >
 
 Use this skill first for game-related work in this repository.
 
+Before routing by subsystem, load `../dtf-game-location-resolver/SKILL.md` and resolve the requested title against `dtfgenetics/Thc/data/game-location-registry.json`. This prevents Dtf420 migration/prototype copies from being mistaken for the live production owner.
+
 ## Project baseline
 
 - Preserve the repository's pinned stack unless the user explicitly requests a migration.
@@ -33,8 +35,9 @@ Multiple skills may compose. Example: a 3D multiplayer chess repair may require 
 
 ## Mandatory workflow
 
-1. Inspect the relevant existing files before creating new architecture.
-2. Search for duplicate or abandoned implementations before assuming code is missing.
+1. Resolve canonical ownership/location through `dtf-game-location-resolver` before inspecting implementation details.
+2. Inspect the relevant existing files before creating new architecture.
+3. Search for duplicate, migration, prototype, mirror, or abandoned implementations before assuming code is missing.
 3. Identify the current route, game state model, render layer, asset manifest/paths, and verification scripts.
 4. Make the smallest coherent change that moves the existing implementation forward.
 5. Never replace real game assets with placeholder rectangles, emoji, generic gradients, or invented art when the repository already contains approved assets.
