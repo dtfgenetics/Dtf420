@@ -68,7 +68,20 @@ function mergeCluster(existing, candidate) {
   return existing;
 }
 
-export async function buildUniversalRegistry({ inputPath, outputDir, release = "unknown" }) {
+function chunks(items, size) {
+  const output = [];
+  for (let index = 0; index < items.length; index += size) {
+    output.push(items.slice(index, index + size));
+  }
+  return output;
+}
+
+export async function buildUniversalRegistry({
+  inputPath,
+  outputDir,
+  release = "unknown",
+  shardSize = 5000,
+}) {
   const clusters = new Map();
   const unresolvedIdentity = [];
   let inputRecords = 0;
@@ -125,9 +138,25 @@ export async function buildUniversalRegistry({ inputPath, outputDir, release = "
       family === "unresolved" ? !record.family : record.family === family,
     );
     familyCounts[family] = matching.length;
-    const filename = `registry-${family}.json`;
-    await writeJson(path.join(outputDir, filename), matching);
-    familyFiles.push({ family, filename, count: matching.length });
+
+    const familyChunks = chunks(matching, shardSize);
+    if (!familyChunks.length) {
+      const filename = `registry-${family}-01.json`;
+      await writeJson(path.join(outputDir, filename), []);
+      familyFiles.push({ family, filename, count: 0, part: 1 });
+      continue;
+    }
+
+    for (let index = 0; index < familyChunks.length; index += 1) {
+      const filename = `registry-${family}-${String(index + 1).padStart(2, "0")}.json`;
+      await writeJson(path.join(outputDir, filename), familyChunks[index]);
+      familyFiles.push({
+        family,
+        filename,
+        count: familyChunks[index].length,
+        part: index + 1,
+      });
+    }
   }
 
   const manifest = {
@@ -140,6 +169,7 @@ export async function buildUniversalRegistry({ inputPath, outputDir, release = "
     unresolvedIdentityCount: Math.max(0, inputRecords - records.reduce((sum, record) => sum + record.sourceRefs.length, 0)),
     unresolvedIdentitySampleCount: unresolvedIdentity.length,
     familyCounts,
+    shardSize,
     reviewStatus: "unreviewed-source-candidates",
     identityPolicy: ["full-inchikey", "canonical-smiles", "never-name-only"],
     familyPolicy: ["explicit-classification-first", "exact-carbon-count-fallback", "unresolved-preserved"],
