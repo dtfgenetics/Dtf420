@@ -275,10 +275,12 @@ export const gameRuntimeRegistry = [
 
 export type GameRuntimeId = (typeof gameRuntimeRegistry)[number]["id"];
 
-export const gameRuntimeBySlug = new Map(
+export type RegisteredGameRuntime = (typeof gameRuntimeRegistry)[number];
+
+export const gameRuntimeBySlug: ReadonlyMap<string, RegisteredGameRuntime> = new Map(
   gameRuntimeRegistry.map((game) => [game.slug, game] as const),
 );
 
-export function getGameRuntime(slug: string) {
+export function getGameRuntime(slug: string): RegisteredGameRuntime | undefined {
   return gameRuntimeBySlug.get(slug);
 }
