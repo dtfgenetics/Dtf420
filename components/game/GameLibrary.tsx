@@ -26,6 +26,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
         <div className={styles.filterGroup} role="group" aria-label="Release status">
           {(["all", "playable", "preview"] as const).map((value) => (
             <button
+              aria-controls="game-library-results"
               aria-pressed={filter === value}
               className={styles.filterButton}
               data-active={filter === value}
@@ -39,16 +40,16 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
         </div>
         <label className={styles.searchField}>
           <span className="visually-hidden">Search games</span>
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search games or genres" type="search" />
+          <input aria-controls="game-library-results" aria-describedby="game-library-result-count" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search games or genres" type="search" />
         </label>
       </div>
 
-      <p className={styles.resultCount} aria-live="polite">
+      <p className={styles.resultCount} id="game-library-result-count" aria-live="polite">
         Showing {visibleGames.length} of {games.length} games
       </p>
 
       {visibleGames.length > 0 ? (
-        <div className={styles.libraryGrid}>
+        <div className={styles.libraryGrid} id="game-library-results">
           {visibleGames.map((game) => {
             const preview = game.status === "preview";
             return (
@@ -80,7 +81,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
           })}
         </div>
       ) : (
-        <div className={styles.emptyState}>
+        <div className={styles.emptyState} id="game-library-results">
           <h3>No games match that search.</h3>
           <p>Clear the search or switch the release-status filter.</p>
           <button type="button" onClick={() => { setFilter("all"); setQuery(""); }}>Show every game</button>
