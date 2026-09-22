@@ -69,7 +69,7 @@ for (const runtime of gameRuntimeRegistry) {
   if (runtime.host === "iframe") {
     if (!runtime.entrypoint) {
       fail(`iframe runtime "${runtime.slug}" must declare an entrypoint`);
-    } else {
+    } else if (runtime.entrypointProvision !== "build") {
       const entrypoint = publicPath(runtime.entrypoint);
       if (!fs.existsSync(entrypoint)) {
         fail(
