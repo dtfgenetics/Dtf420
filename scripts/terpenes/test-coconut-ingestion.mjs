@@ -69,7 +69,7 @@ if (registryManifest.familyCounts.unresolved !== 0) {
 }
 
 const mono = JSON.parse(
-  fs.readFileSync(path.join(registryRuntime, "registry-monoterpene.json"), "utf8"),
+  fs.readFileSync(path.join(registryRuntime, "registry-monoterpene-01.json"), "utf8"),
 );
 if (mono[0]?.reviewStatus !== "unreviewed-source-candidate") {
   throw new Error("Universal registry candidates must remain explicitly unreviewed");
