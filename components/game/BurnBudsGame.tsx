@@ -26,6 +26,7 @@ export function BurnBudsGame() {
       <div
         id={GAME_PARENT_ID}
         className={styles.canvas}
+        role="region"
         aria-label="Burn Buds 15 by 15 tactical fleet battle"
       />
     </div>
