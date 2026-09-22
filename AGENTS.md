@@ -2,6 +2,8 @@
 
 For any change intended to reach production, load and follow `$dtf-release-pipeline` from `.agents/skills/dtf-release-pipeline/SKILL.md`. Treat development, release verification, merge, deployment, and public live verification as separate states.
 
+For every substantive pull request before merge, load and follow `$dtf-pr-reviewer` from `.agents/skills/dtf-pr-reviewer/SKILL.md`. Review the exact PR head SHA and treat semantic review as supplemental to deterministic verification.
+
 ## Current production authority
 
 This repository owns the unified Next.js application code and future migration/cutover package. It is **not currently the whole-site production deployment authority for `dtfseeds.com`**.
@@ -24,8 +26,8 @@ Project-wide rules:
 - Add or preserve feature-specific verification and rendered Browser QA for substantive user-facing changes when practical.
 - Do not merge a moving development branch based on stale green CI; freeze a fixed release candidate and validate the exact SHA.
 - Do not bypass a failing or cancelled release gate.
-- Treat CodeRabbit as an advisory independent review layer during active development. Fix valid findings, but do not treat suggestions as proof that code works.
-- Repository verification, build/type/lint checks, exact-SHA release validation, and public live verification remain authoritative. Do not delay normal iteration for non-critical style-only CodeRabbit feedback.
+- Treat the native DTF PR reviewer as an advisory independent review layer during active development. Fix valid findings, but do not treat review comments as proof that code works.
+- Repository verification, build/type/lint checks, exact-SHA release validation, and public live verification remain authoritative. Do not delay normal iteration for non-critical style-only review feedback.
 - Follow `docs/DEPLOYMENT.md` for Hostinger staging and any explicitly approved production cutover, rollback, and live-route verification.
 - Do not claim anything is live until the public production route is verified after deployment.
 
