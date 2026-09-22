@@ -352,3 +352,69 @@ Global intelligence schema v2 adds compact context and source-breadth fields per
 The corpus is limited by the analytes present in the published source dataset. Its measured analyte channels must never be presented as the complete universe of known terpenes or terpenoids.
 
 Filtering answers descriptive corpus questions. It does not establish genetic identity, superiority, therapeutic effects, or future sample chemistry.
+
+
+## Universal terpene and terpenoid registry
+
+The route `/learn/terpenes/registry` exposes the broad source-candidate registry separately from the smaller reviewed THC teaching dataset.
+
+### Primary bulk source
+
+The first production registry feed is the versioned **COCONUT September 2026 CSV-lite release**. The monthly refresh workflow downloads the archive to runner-temporary storage, records archive size and SHA-256, extracts the CSV, inspects the source header, normalizes only terpene/terpenoid/isoprenoid candidates, and never commits the source ZIP, CSV, or normalized JSONL.
+
+LOTUS is registered as a secondary open natural-product occurrence source for future occurrence cross-checking and provenance expansion. It is not yet used as an automatic identity merge source.
+
+### Identity policy
+
+Universal registry identity is intentionally stricter than common-name matching:
+
+1. valid full InChIKey;
+2. exact canonical SMILES fallback;
+3. otherwise unresolved identity.
+
+Common names and synonym similarity never establish compound identity. Unresolved identities are retained for review rather than discarded or merged by name.
+
+### Family assignment policy
+
+Family assignment uses:
+
+1. explicit natural-product / chemical classification terms first;
+2. exact carbon-count fallback for recognized C5/C10/C15/C20/C25/C30/C40 patterns;
+3. cautious low-confidence polyterpene fallback for >C40 multiples of five;
+4. unresolved family when the evidence is insufficient.
+
+Carbon count is a fallback rather than a universal rule because modified terpenoids can deviate from idealized isoprene counts.
+
+### Runtime structure
+
+The compiler streams normalized candidate JSONL and keeps compact identity clusters in memory rather than retaining the full bulk source records. Public runtime records are sharded by terpene family in bounded chunks of 5,000 records. Each public record can retain:
+
+- stable registry ID;
+- exact identity signal;
+- canonical/source names and bounded synonyms;
+- formula and molecular weight;
+- family assignment + assignment method/confidence;
+- upstream source classifications;
+- candidate reason/confidence;
+- bounded occurrence/source-organism text;
+- exact source record references;
+- explicit review state.
+
+The public runtime also includes a manifest with source release, candidate count, resolved identity count, unresolved identity count, family counts, identity policy, family policy, source checksum, and shard inventory.
+
+### Review-state separation
+
+A COCONUT source candidate is **not automatically**:
+
+- documented in Cannabis;
+- an aroma driver;
+- a TPS product in Cannabis;
+- a cultivar marker;
+- a breeding-selection marker;
+- evidence of a human biological effect.
+
+Promotion path:
+
+`source candidate → identity reviewed → occurrence/evidence linked → THC editorial reviewed`
+
+Only reviewed records should populate definitive THC teaching claims. The universal registry exists to maximize chemical coverage while making uncertainty and review status visible.
