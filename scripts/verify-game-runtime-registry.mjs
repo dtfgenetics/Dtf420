@@ -96,12 +96,28 @@ for (const runtime of gameRuntimeRegistry) {
   if (runtime.network && !runtime.network.authoritative) {
     warn(`"${runtime.slug}" multiplayer network is not marked server-authoritative`);
   }
+  if (runtime.network?.protocolVersion !== undefined && runtime.network.protocolVersion < 1) {
+    fail(`"${runtime.slug}" network protocolVersion must be >= 1 when declared`);
+  }
 
-  if (runtime.canonicalTarget) {
+  if (runtime.host === "redirect" && !runtime.canonicalTarget) {
+    fail(`redirect runtime "${runtime.slug}" must declare canonicalTarget`);
+  }
+
+  if (runtime.canonicalSource) {
+    if (!runtime.canonicalSource.repository.includes("/")) {
+      fail(`"${runtime.slug}" canonical source repository must use owner/name form`);
+    }
+    if (!runtime.canonicalSource.sourcePath.trim()) {
+      fail(`"${runtime.slug}" canonical source path cannot be empty`);
+    }
+  }
+
+  if (runtime.canonicalTarget && !runtime.canonicalSource) {
     const target = routePath(runtime.canonicalTarget);
     if (!fs.existsSync(target)) {
       warn(
-        `alias "${runtime.slug}" points to missing canonical route ${runtime.canonicalTarget}`,
+        `alias "${runtime.slug}" points to missing local canonical route ${runtime.canonicalTarget}`,
       );
     }
   }
