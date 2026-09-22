@@ -108,8 +108,10 @@ for (const runtime of gameRuntimeRegistry) {
     if (!runtime.canonicalSource.repository.includes("/")) {
       fail(`"${runtime.slug}" canonical source repository must use owner/name form`);
     }
-    if (!runtime.canonicalSource.sourcePath.trim()) {
-      fail(`"${runtime.slug}" canonical source path cannot be empty`);
+    if (!Array.isArray(runtime.canonicalSource.sourcePaths) || runtime.canonicalSource.sourcePaths.length === 0) {
+      fail(`"${runtime.slug}" canonical source must declare at least one source path`);
+    } else if (runtime.canonicalSource.sourcePaths.some((sourcePath) => !sourcePath.trim())) {
+      fail(`"${runtime.slug}" canonical source paths cannot contain empty values`);
     }
   }
 
