@@ -44,7 +44,18 @@
   const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
   const overlap = (a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
   const horizontalOverlap = (a,b,grace=0)=>a.x+a.w-grace>b.x&&a.x+grace<b.x+b.w;
-  const rand = (a,b)=>a+Math.random()*(b-a);
+
+  function createDeterministicRandom(seed){
+    let state=0x811c9dc5;
+    for(let i=0;i<seed.length;i++){state^=seed.charCodeAt(i);state=Math.imul(state,0x01000193)>>>0}
+    if(state===0)state=1;
+    return ()=>{state=(Math.imul(1664525,state)+1013904223)>>>0;return state/0x100000000};
+  }
+
+  let simulationSeed='seed-ascent:boot';
+  let simulationRandom=createDeterministicRandom(simulationSeed);
+  const simulationRange=(a,b)=>a+simulationRandom()*(b-a);
+  const cosmeticRange=(a,b)=>a+Math.random()*(b-a);
   const setText = (element,value)=>{const text=String(value);if(element&&element.textContent!==text)element.textContent=text};
 
   const unlocked = clamp(parseInt(localStorage.getItem('seedAscentUnlocked')||'1',10)||1,1,LEVELS.length||1);
@@ -117,7 +128,7 @@
     if(game.score>game.best){game.best=game.score;localStorage.setItem('seedAscentRetroBest',String(game.best))}
   }
   function particle(x,y,color,n=8){
-    for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-3,3),vy:rand(-4,-1),life:rand(22,48),color,s:rand(2,5)});
+    for(let i=0;i<n;i++)particles.push({x,y,vx:cosmeticRange(-3,3),vy:cosmeticRange(-4,-1),life:cosmeticRange(22,48),color,s:cosmeticRange(2,5)});
   }
   function clearInput(){
     input.left=input.right=input.run=input.jumpHeld=input.jumpPressed=input.jumpReleased=input.attackPressed=false;
@@ -150,10 +161,10 @@
     solids.push(...buildGrounds(data.grounds));
     for(const [x,y,w,type='platform'] of data.platforms)solids.push({x,y,w,h:24,type});
     for(const [x,y,payload] of data.blocks)blocks.push({x,y,w:T,h:T,payload,used:false,broken:false,bump:0});
-    for(const [x,y,count,spacing=34] of data.coinLines)for(let i=0;i<count;i++)coins.push({x:x+i*spacing,y,w:20,h:20,bob:Math.random()*6.28});
+    for(const [x,y,count,spacing=34] of data.coinLines)for(let i=0;i<count;i++)coins.push({x:x+i*spacing,y,w:20,h:20,bob:cosmeticRange(0,6.28)});
     for(const [x,y,type,range] of data.enemies)addEnemy(x,y,type,range);
     for(const [x,y,w,axis,range,speed] of data.moving)movingPlatforms.push({x,y,w,h:18,type:'moving',startX:x,startY:y,axis,range,speed,phase:0,dx:0,dy:0});
-    for(const [x,y,w,h,type] of data.hazards||[])hazards.push({x,y,w,h,type,phase:Math.random()*6.28});
+    for(const [x,y,w,h,type] of data.hazards||[])hazards.push({x,y,w,h,type,phase:cosmeticRange(0,6.28)});
     for(const [x,y] of data.checkpoints)checkpoints.push({x,y,w:30,h:74,active:false});
     exitGate={x:data.exit[0],y:data.exit[1],w:data.exit[2],h:data.exit[3]};
     if(data.boss){
@@ -164,7 +175,7 @@
 
   function addEnemy(x,y,type='APHID',range=150){
     const c={APHID:[34,28,1.1,1],MITE:[28,22,1.8,1],CATERPILLAR:[48,30,.7,2],GNAT:[30,24,1.3,1],EMBER_BEETLE:[38,28,1.15,2],STORM_MOTH:[34,26,1.45,2],FROST_GRUB:[46,28,.8,2],CINDER_WARDEN:[62,44,.72,5],VOLT_WARDEN:[58,42,1.05,5],GLACIER_WARDEN:[68,46,.62,6]}[type]||[34,28,1,1];
-    enemies.push({x,y,w:c[0],h:c[1],type,s:c[2],hp:c[3],maxHp:c[3],dir:-1,startX:x,range,phase:Math.random()*6.28,vy:0,dead:false,frozen:0});
+    enemies.push({x,y,w:c[0],h:c[1],type,s:c[2],hp:c[3],maxHp:c[3],dir:-1,startX:x,range,phase:simulationRange(0,6.28),vy:0,dead:false,frozen:0});
   }
 
   function colliders(){return solids.concat(movingPlatforms,blocks.filter(b=>!b.broken))}
@@ -186,7 +197,8 @@
 
   function loadLevel(i){
     clearInput();
-    game.levelIndex=clamp(i,0,LEVELS.length-1);game.selectedLevel=game.levelIndex;game.level=LEVELS[game.levelIndex];buildLevel(game.level);
+    game.levelIndex=clamp(i,0,LEVELS.length-1);game.selectedLevel=game.levelIndex;game.level=LEVELS[game.levelIndex];
+    simulationSeed=`seed-ascent:${game.levelIndex}:${game.level.world}`;simulationRandom=createDeterministicRandom(simulationSeed);buildLevel(game.level);
     game.cameraX=0;game.power='NONE';game.powerTimer=0;game.powerDuration=0;game.shield=false;game.health=game.maxHealth;game.checkpoint=null;
     Object.assign(player,{invuln:0,surface:null,riding:null});
     snapPlayerToFloor(96,340);sync();
@@ -517,7 +529,7 @@
     if(game.shield){ctx.strokeStyle='#8ce2ff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,29,0,Math.PI*2);ctx.stroke()}ctx.restore();
   }
   function world(){
-    const ox=-game.cameraX+(game.shake?rand(-game.shake,game.shake):0),t=game.level;ctx.save();ctx.translate(ox,0);
+    const ox=-game.cameraX+(game.shake?cosmeticRange(-game.shake,game.shake):0),t=game.level;ctx.save();ctx.translate(ox,0);
     for(const pit of pitRanges){px(pit.x,pit.y,pit.w,H-pit.y,'#050709');ctx.fillStyle='#301625';for(let x=pit.x+8;x<pit.x+pit.w;x+=18){ctx.beginPath();ctx.moveTo(x,pit.y+8);ctx.lineTo(x+6,pit.y+30);ctx.lineTo(x+12,pit.y+8);ctx.fill()}}
     for(const s of solids)drawSolid(s,t);
     for(const m of movingPlatforms)drawSolid(m,t,true);
@@ -602,7 +614,7 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&game.mode==='playing'){clearInput();game.mode='paused'}});
 
   window.__seedAscentDebug={
-    snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,score:game.score,trichomes:game.trichomes,power:game.shield?'SHIELD':game.power,attackCooldown:game.attackCooldown,projectileCount:projectiles.length,assetsReady:[seedSprites,gameplaySprites,growRoom,fireEnemies,electricEnemies,iceEnemies].every(image=>image.complete&&image.naturalWidth>0),player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length,simulationHz:Math.round(1000/SIM_STEP_MS)}},
+    snapshot(){return {mode:game.mode,levelIndex:game.levelIndex,score:game.score,trichomes:game.trichomes,power:game.shield?'SHIELD':game.power,attackCooldown:game.attackCooldown,projectileCount:projectiles.length,assetsReady:[seedSprites,gameplaySprites,growRoom,fireEnemies,electricEnemies,iceEnemies].every(image=>image.complete&&image.naturalWidth>0),player:{x:player.x,y:player.y,vx:player.vx,vy:player.vy,grounded:player.grounded},maxSafePit:MAX_SAFE_PIT,pits:pitRanges.map(p=>p.w),enemyCount:enemies.length,powerupCount:powerups.length,simulationHz:Math.round(1000/SIM_STEP_MS),simulationSeed}},
     start(){startSelected()},
     setPower(type){if(['NONE','LIGHT','RUSH','FIRE','ELECTRIC','ICE'].includes(type)){game.power=type;game.powerTimer=type==='NONE'?0:1800;game.powerDuration=game.powerTimer;game.attackCooldown=0;sync()}},
   };
