@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+
+  path_filters:
+    - "!**/*.png"
+    - "!**/*.jpg"
+    - "!**/*.jpeg"
+    - "!**/*.webp"
+    - "!**/*.gif"
+    - "!**/*.mp3"
+    - "!**/*.wav"
+    - "!**/*.ogg"
+    - "!**/*.glb"
+    - "!**/*.gltf"
+    - "!package-lock.json"
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 8
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT MERGE"
+      - "[skip review]"
+    base_branches:
+      - "main"
+
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        Treat repository tests, build checks, type checks, route verification, asset verification, and release gates as authoritative. Do not suggest bypassing a failing or cancelled gate.
+        Do not introduce, recommend, or restore Playwright. Prefer deterministic Node-based verification, static route and package validation, build checks, and existing repository-specific verification scripts.
+        Inspect and repair existing implementations before proposing replacements. Preserve newer verified route, content, package-script, and deployment behavior.
+        Flag secrets, credentials, unsafe logging, swallowed errors, broken imports, dead routes, missing assets, placeholder production content, hardcoded production assumptions, and changes that weaken error handling.
+        Flag changes that claim deployment or production readiness without evidence from the repository release pipeline and live verification process.
+        Keep review comments focused on correctness, regressions, security, maintainability, and user-visible failures rather than cosmetic formatting.
+
+    - path: "app/**/*.{ts,tsx,js,jsx}"
+      instructions: |
+        Review Next.js and React changes for broken routes, server-client boundary mistakes, hydration hazards, accessibility regressions, responsive layout problems, stale links, unhandled loading and error states, and unnecessary client-side rendering.
+        Verify that user-facing routes preserve the shared site shell and do not silently replace a route owned by another production authority.
+
+    - path: "components/**/*.{ts,tsx,js,jsx}"
+      instructions: |
+        Look for reusable component regressions, accessibility problems, mobile and tablet layout breakage, invalid interactive nesting, missing keyboard behavior, fragile state coupling, and duplicated UI logic that should use existing shared components.
+
+    - path: "game/**/*.{ts,tsx,js,jsx,mjs}"
+      instructions: |
+        Review gameplay changes for deterministic state transitions, serializable canonical game state, render-state leakage, broken asset paths, input failures, mobile-control regressions, turn or lobby desynchronization, invalid win or loss transitions, and regressions to the primary gameplay loop.
+        Do not approve placeholder art or fake gameplay as a substitute for an existing implementation.
+
+    - path: "scripts/**/*.{js,mjs,ts}"
+      instructions: |
+        Treat repository verification scripts as quality infrastructure. Flag weakened assertions, skipped checks, false-success behavior, nondeterministic network dependence where avoidable, destructive file operations without safeguards, and scripts that hide failures behind zero exit codes.
+
+    - path: ".github/workflows/**/*.{yml,yaml}"
+      instructions: |
+        Review GitHub Actions for least-privilege permissions, unsafe secret exposure, unpinned or suspicious actions, stale-SHA merge risks, missing concurrency safeguards where relevant, accidental gate bypasses, and workflows that deploy artifacts that were not the exact artifacts verified by CI.
+
+    - path: "deployment/**/*"
+      instructions: |
+        Treat deployment changes as high risk. Verify explicit staging and production separation, rollback safety, ownership boundaries, exact-SHA release behavior, no dual writers, and post-deployment public verification requirements.
+
+    - path: "{content,data,docs}/**/*"
+      instructions: |
+        Preserve canonical educational and project content. Flag accidental deletions, broken internal links, unsupported factual claims presented as established, duplicate canonical records, malformed structured data, and changes that reduce source or evidence traceability.
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "AGENTS.md"
