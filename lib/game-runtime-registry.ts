@@ -51,7 +51,7 @@ export interface GameRuntimeDefinition {
   readonly canonicalTarget?: `/games/${string}`;
   readonly canonicalSource?: {
     readonly repository: `${string}/${string}`;
-    readonly sourcePath: string;
+    readonly sourcePaths: readonly string[];
     readonly runtimePath?: string;
   };
 }
@@ -75,6 +75,10 @@ export const gameRuntimeRegistry = [
       inputs: ["keyboard", "touch", "pointer"],
     },
     persistence: { saveVersion: 1, storage: "localStorage" },
+    canonicalSource: {
+      repository: "dtfgenetics/Weedopolis-strain-Edition",
+      sourcePaths: ["src", "digital", "data"],
+    },
   },
   {
     id: "bud-or-bluff",
@@ -91,6 +95,11 @@ export const gameRuntimeRegistry = [
       fullscreen: false,
       audio: false,
       inputs: ["keyboard", "touch", "pointer"],
+    },
+    canonicalSource: {
+      repository: "dtfgenetics/Thc",
+      sourcePaths: ["games/bud-or-bluff"],
+      runtimePath: "site/public-route-patch/games/bud-or-bluff",
     },
   },
   {
@@ -133,6 +142,10 @@ export const gameRuntimeRegistry = [
       inputs: ["keyboard", "touch", "pointer"],
     },
     persistence: { saveVersion: 1, storage: "localStorage" },
+    canonicalSource: {
+      repository: "dtfgenetics/Thc-guess-who",
+      sourcePaths: ["03_digital-game"],
+    },
   },
   {
     id: "seed-ascent",
@@ -172,6 +185,10 @@ export const gameRuntimeRegistry = [
       inputs: ["keyboard", "touch", "pointer"],
     },
     persistence: { saveVersion: 1, storage: "localStorage" },
+    canonicalSource: {
+      repository: "dtfgenetics/Thc-rpg",
+      sourcePaths: ["src", "public"],
+    },
   },
   {
     id: "high-iq",
@@ -190,6 +207,11 @@ export const gameRuntimeRegistry = [
       inputs: ["keyboard", "touch", "pointer"],
     },
     persistence: { saveVersion: 2, storage: "localStorage" },
+    canonicalSource: {
+      repository: "dtfgenetics/Thc",
+      sourcePaths: ["games/high-iq", "site/public-route-patch/games/high-iq"],
+      runtimePath: "site/public-route-patch/games/high-iq",
+    },
   },
   {
     id: "grower-conversations",
@@ -207,6 +229,11 @@ export const gameRuntimeRegistry = [
       audio: false,
       inputs: ["keyboard", "touch", "pointer"],
     },
+    canonicalSource: {
+      repository: "dtfgenetics/Thc",
+      sourcePaths: ["games/grower-conversations"],
+      runtimePath: "site/public-route-patch/games/grower-conversations",
+    },
   },
   {
     id: "strain-showdown",
@@ -223,6 +250,11 @@ export const gameRuntimeRegistry = [
       fullscreen: false,
       audio: false,
       inputs: ["keyboard", "touch", "pointer"],
+    },
+    canonicalSource: {
+      repository: "dtfgenetics/Thc",
+      sourcePaths: ["games/strain-showdown"],
+      runtimePath: "site/public-route-patch/games/strain-showdown",
     },
   },
   {
@@ -243,6 +275,10 @@ export const gameRuntimeRegistry = [
       inputs: ["keyboard", "touch", "pointer"],
     },
     persistence: { saveVersion: 1, storage: "localStorage" },
+    canonicalSource: {
+      repository: "dtfgenetics/Catching-phenos",
+      sourcePaths: ["src", "data", "public/games/phenoquest"],
+    },
   },
   {
     id: "burn-buds",
@@ -255,7 +291,7 @@ export const gameRuntimeRegistry = [
     canonicalTarget: "/games/protect-the-plants",
     canonicalSource: {
       repository: "dtfgenetics/Thc",
-      sourcePath: "games/protect-the-plants",
+      sourcePaths: ["games/protect-the-plants"],
       runtimePath: "site/public-route-patch/games/protect-the-plants",
     },
     capabilities: {
