@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { horizontalAxis, mergeActionSources, type GameActionState } from "../../core/input/GameActions";
 import {
   AUDIO_ASSETS,
   DUCK_SPRITE_ASSETS,
@@ -184,8 +185,15 @@ export class RaceScene extends Phaser.Scene {
       this.input.keyboard?.on("keydown-R", () => this.resetRace(this.selectedMode));
     }
 
-    this.input.on("pointerup", () => this.resetTouchState());
+    this.input.on("pointerup", this.resetTouchState, this);
+    this.input.on("gameout", this.resetTouchState, this);
+    window.addEventListener("blur", this.resetTouchState);
+    document.addEventListener("visibilitychange", this.resetTouchWhenHidden);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.input.off("pointerup", this.resetTouchState, this);
+      this.input.off("gameout", this.resetTouchState, this);
+      window.removeEventListener("blur", this.resetTouchState);
+      document.removeEventListener("visibilitychange", this.resetTouchWhenHidden);
       this.unsubscribeNetwork?.();
       for (const sound of this.ambientSounds) {
         sound.stop();
@@ -256,13 +264,26 @@ export class RaceScene extends Phaser.Scene {
 
   private readPlayerInput(): DuckInput {
     this.inputSequence += 1;
-    const keyboardSteer = (this.cursors?.left?.isDown ? -1 : 0) + (this.cursors?.right?.isDown ? 1 : 0);
-    const touchSteer = (this.touchState.left ? -1 : 0) + (this.touchState.right ? 1 : 0);
+    const keyboardActions: GameActionState = {
+      MOVE_LEFT: Boolean(this.cursors?.left?.isDown),
+      MOVE_RIGHT: Boolean(this.cursors?.right?.isDown),
+      MOVE_DOWN: Boolean(this.diveKey?.isDown),
+      BOOST: Boolean(this.boostKey?.isDown),
+      PRIMARY: Boolean(this.powerupKey?.isDown),
+    };
+    const touchActions: GameActionState = {
+      MOVE_LEFT: this.touchState.left,
+      MOVE_RIGHT: this.touchState.right,
+      MOVE_DOWN: this.touchState.dive,
+      BOOST: this.touchState.boost,
+      PRIMARY: this.touchState.usePowerup,
+    };
+    const actions = mergeActionSources(keyboardActions, touchActions);
     return {
-      steer: Phaser.Math.Clamp(keyboardSteer + touchSteer, -1, 1),
-      boost: Boolean(this.boostKey?.isDown) || this.touchState.boost,
-      dive: Boolean(this.diveKey?.isDown) || this.touchState.dive,
-      usePowerup: Boolean(this.powerupKey?.isDown) || this.touchState.usePowerup,
+      steer: horizontalAxis(actions),
+      boost: Boolean(actions.BOOST),
+      dive: Boolean(actions.MOVE_DOWN),
+      usePowerup: Boolean(actions.PRIMARY),
       sequence: this.inputSequence,
     };
   }
@@ -309,10 +330,17 @@ export class RaceScene extends Phaser.Scene {
     this.controlLayer.add(container);
     background.on("pointerdown", onDown);
     background.on("pointerup", () => this.resetTouchState());
+    background.on("pointerupoutside", () => this.resetTouchState());
     background.on("pointerout", () => this.resetTouchState());
   }
 
-  private resetTouchState(): void { this.touchState = { left: false, right: false, boost: false, dive: false, usePowerup: false }; }
+  private resetTouchState = (): void => {
+    this.touchState = { left: false, right: false, boost: false, dive: false, usePowerup: false };
+  };
+
+  private resetTouchWhenHidden = (): void => {
+    if (document.hidden) this.resetTouchState();
+  };
 
   private createSimulation(mode: RaceModeId): void {
     const config = createRaceConfig(mode, this.launchOptions.racerCount, this.launchOptions.seed, this.launchOptions.trackId);
