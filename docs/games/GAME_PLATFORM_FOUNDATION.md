@@ -154,9 +154,19 @@ The verification stack should progressively include:
 7. load tests for high-player-count games;
 8. lint, typecheck, build, and deployed route verification.
 
-## Current known registry warning
+## Cross-repository canonical ownership
 
-Burn Buds currently advertises a canonical multiplayer target at `/games/protect-the-plants`, but that target route is not present in the Dtf420 integration repository. The registry intentionally reports this as a warning so the mismatch is visible while the platform foundation lands. It must be reconciled before Burn Buds is considered release-ready.
+Some public game routes are owned by another DTF repository and should not be duplicated inside Dtf420.
+
+Burn Buds is the first explicitly modeled example:
+
+- public product: Burn Buds
+- compatibility route: `/games/protect-the-plants/`
+- canonical repository: `dtfgenetics/Thc`
+- source: `games/protect-the-plants`
+- production runtime: `site/public-route-patch/games/protect-the-plants`
+
+Dtf420 may expose a compatibility/marketing alias, but the runtime registry records the external canonical source so local route validation does not incorrectly treat the production game as missing.
 
 ## Next implementation sequence
 
