@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import vm from "node:vm";
+import { DeterministicRng } from "../game/core/random/DeterministicRng.ts";
 
 const files = {
   launcher: "public/seed-ascent.html",
@@ -76,6 +77,8 @@ for (const marker of [
   "/seed-ascent/assets/seed-man-sprites.webp", "/seed-ascent/assets/gameplay-sprites.webp", "/seed-ascent/assets/grow-room-background.webp",
   "/seed-ascent/assets/fire-enemies.webp", "/seed-ascent/assets/electric-enemies.webp", "/seed-ascent/assets/ice-enemies.webp",
   "MINOR_BOSSES.has(e.type)?2700:1800", "PHENOTYPE_UI", "--power-progress",
+  "function createDeterministicRandom(seed)", "simulationSeed", "simulationRange(0,6.28)",
+  "cosmeticRange(0,6.28)", "simulationSeed=`seed-ascent:${game.levelIndex}:${game.level.world}`",
 ]) {
   if (!engine.includes(marker)) throw new Error(`Seed Ascent engine missing mechanic: ${marker}`);
 }
@@ -87,6 +90,32 @@ for (const forbidden of [
   "function loop(){step();draw();requestAnimationFrame(loop)}",
 ]) {
   if (engine.includes(forbidden)) throw new Error(`Seed Ascent regression detected: ${forbidden}`);
+}
+
+const directRandomCalls = engine.match(/Math\.random\(\)/g) || [];
+if (directRandomCalls.length !== 1 || !engine.includes("const cosmeticRange=(a,b)=>a+Math.random()*(b-a)")) {
+  throw new Error(`Seed Ascent must isolate direct Math.random() usage to cosmeticRange; found ${directRandomCalls.length} direct calls`);
+}
+if (!engine.includes("phase:simulationRange(0,6.28)")) {
+  throw new Error("Seed Ascent flying-enemy phase must use deterministic simulation randomness");
+}
+
+const rngStart = engine.indexOf("function createDeterministicRandom(seed)");
+const rngEnd = engine.indexOf("\n  let simulationSeed", rngStart);
+if (rngStart < 0 || rngEnd <= rngStart) {
+  throw new Error("Seed Ascent deterministic RNG implementation could not be isolated for compatibility testing");
+}
+const rngSandbox = {};
+vm.createContext(rngSandbox);
+vm.runInContext(engine.slice(rngStart, rngEnd), rngSandbox);
+const canvasRandom = rngSandbox.createDeterministicRandom("seed-ascent:compatibility");
+const sharedRandom = new DeterministicRng("seed-ascent:compatibility");
+for (let index = 0; index < 32; index += 1) {
+  const canvasValue = canvasRandom();
+  const sharedValue = sharedRandom.next();
+  if (canvasValue !== sharedValue) {
+    throw new Error(`Seed Ascent RNG diverged from shared deterministic core at draw ${index}`);
+  }
 }
 
 const bumpUpdates = engine.match(/for\(const b of blocks\)if\(b\.bump>0\)b\.bump--;/g) || [];
@@ -178,4 +207,4 @@ if (!route.includes('src="/seed-ascent.html"')) throw new Error("Seed Ascent rou
 if (!library.includes('slug: "seed-ascent"')) throw new Error("Seed Ascent is missing from the Games catalog");
 if (!sitemap.includes('item("/games/seed-ascent"')) throw new Error("Seed Ascent is missing from the sitemap");
 
-console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent and interruption-safe pointer input, neutral opposing input, safe menu-state level selection, restart reward snapshots, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
+console.log(`Seed Ascent verification passed: ${levels.length} stages, swept floor collision, ${simulationHz}Hz fixed physics, deterministic gameplay RNG compatible with shared game core, isolated cosmetic randomness, ${maxSafePit}px effective pit cap, raw max ${widestRawPit}px, supported checkpoints/exits, platform approach checks, idempotent and interruption-safe pointer input, neutral opposing input, safe menu-state level selection, restart reward snapshots, fixed-step block animations, power-ups, hazards, checkpoints, and boss.`);
