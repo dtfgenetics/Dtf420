@@ -383,6 +383,12 @@ export function TerpeneAtlasExplorer() {
           <p>Browse repeated-sample medians, quartiles, observed ranges, sample depth, and laboratory depth without assigning one permanent chemistry value to a cultivar name.</p>
           <Link href="/learn/terpenes/cultivars">Open cultivar distributions →</Link>
         </article>
+        <article>
+          <span>06</span>
+          <h2>Chemistry corpus</h2>
+          <p>Filter the complete public cultivar reference set by terpene medians, sample depth, laboratory breadth, producer breadth, region, chemotype, and total-terpene median.</p>
+          <Link href="/learn/terpenes/corpus">Open chemistry corpus →</Link>
+        </article>
       </section>
     </div>
   );

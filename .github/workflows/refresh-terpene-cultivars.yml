@@ -105,12 +105,13 @@ jobs:
           }
 
           if (
+            index.schemaVersion !== 2 ||
             index.status !== "compiled" ||
             index.cultivarCount !== manifest.publishableCultivarCount ||
             index.analyteCount < 10
           ) {
             throw new Error(
-              `Invalid cultivar intelligence index: status=${index.status}, cultivars=${index.cultivarCount}, analytes=${index.analyteCount}`,
+              `Invalid cultivar intelligence index: schema=${index.schemaVersion}, status=${index.status}, cultivars=${index.cultivarCount}, analytes=${index.analyteCount}`,
             );
           }
 

@@ -328,3 +328,27 @@ Regional comparisons are descriptive and strongly confounded. A difference betwe
 If fewer than two regional strata meet the minimum depth, the public UI must not manufacture a between-region comparison. It may show the qualifying subgroup and explain that no valid between-region comparison is available.
 
 The browser remains compatible with earlier runtime schemas by treating missing `regionStrata` as an empty collection until the post-merge refresh generates schema v4 data.
+
+
+## Whole-corpus chemistry explorer
+
+The route `/learn/terpenes/corpus` uses the compact global cultivar intelligence index to filter the full public cultivar-group corpus without loading all alphabetical runtime shards.
+
+The corpus explorer can filter by:
+
+- normalized cultivar label;
+- minimum sample count;
+- minimum laboratory count;
+- minimum producer count;
+- represented source region;
+- represented source chemotype;
+- most frequently reported top-terpene field;
+- selected analyte median threshold;
+- minimum total-terpene median;
+- descriptive sort modes such as sample depth, laboratory breadth, producer breadth, total-terpene median, selected-analyte median, or name.
+
+Global intelligence schema v2 adds compact context and source-breadth fields per cultivar group: dominant region, dominant chemotype, dominant product category, top region/chemotype/product distributions, effective laboratory count, effective producer count, total-terpene coverage, region coverage, chemotype coverage, and concentration indicators.
+
+The corpus is limited by the analytes present in the published source dataset. Its measured analyte channels must never be presented as the complete universe of known terpenes or terpenoids.
+
+Filtering answers descriptive corpus questions. It does not establish genetic identity, superiority, therapeutic effects, or future sample chemistry.

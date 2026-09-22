@@ -64,6 +64,10 @@ const requiredFiles = [
   "public/data/terpenes/cultivars/manifest.json",
   ".github/workflows/refresh-terpene-cultivars.yml",
   "scripts/terpenes/verify-cultivar-browser.mjs",
+  "components/terpenes/TerpeneCorpusExplorer.tsx",
+  "components/terpenes/TerpeneCorpusExplorer.module.css",
+  "app/learn/terpenes/corpus/page.tsx",
+  "scripts/terpenes/verify-corpus-explorer.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -120,7 +124,7 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
@@ -278,6 +282,18 @@ for (const token of [
 for (const token of ['href="/learn/terpenes/cultivars"', "Open cultivar distributions"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing cultivar browser navigation: ${token}`);
+  }
+}
+for (const token of ['href="/learn/terpenes/corpus"', "Open chemistry corpus"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing chemistry corpus navigation: ${token}`);
+  }
+}
+
+const corpusSource = fs.readFileSync(path.join(root, "components/terpenes/TerpeneCorpusExplorer.tsx"), "utf8");
+for (const token of ["Cultivar Chemistry Corpus", "Minimum labs", "Analyte median filter", "Filtering chemistry is not ranking cultivars"]) {
+  if (!corpusSource.includes(token)) {
+    throw new Error(`Chemistry corpus missing Atlas contract: ${token}`);
   }
 }
 

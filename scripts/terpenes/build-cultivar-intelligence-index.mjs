@@ -39,6 +39,21 @@ export function buildCultivarIntelligenceIndex(input) {
         sampleDepthTier: cultivar.sampleDepthTier,
         totalTerpenesMedian: cultivar.totalTerpenes?.median ?? null,
         topTerpenes: (cultivar.topTerpenes ?? []).slice(0, 3),
+        dominantRegion: cultivar.regions?.[0] ?? null,
+        dominantChemotype: cultivar.chemotypes?.[0] ?? null,
+        dominantProductCategory: cultivar.productCategories?.[0] ?? null,
+        regions: (cultivar.regions ?? []).slice(0, 5),
+        chemotypes: (cultivar.chemotypes ?? []).slice(0, 5),
+        productCategories: (cultivar.productCategories ?? []).slice(0, 5),
+        quality: {
+          labEffectiveCount: cultivar.dataQuality?.labs?.effectiveCount ?? null,
+          producerEffectiveCount: cultivar.dataQuality?.producers?.effectiveCount ?? null,
+          totalTerpeneCoverage: cultivar.dataQuality?.totalTerpeneCoverage ?? 0,
+          regionCoverage: cultivar.dataQuality?.regionCoverage ?? 0,
+          chemotypeCoverage: cultivar.dataQuality?.chemotypeCoverage ?? 0,
+          largestRegionShare: cultivar.dataQuality?.largestRegionShare ?? null,
+          largestChemotypeShare: cultivar.dataQuality?.largestChemotypeShare ?? null,
+        },
         vector,
       };
     })
@@ -67,7 +82,7 @@ export function buildCultivarIntelligenceIndex(input) {
     .sort((a, b) => b.cultivarCount - a.cultivarCount || a.normalizedKey.localeCompare(b.normalizedKey));
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     status: "compiled",
     sourceId: input.sourceId,
     sourceSampleCount: input.sampleCount,
@@ -75,7 +90,7 @@ export function buildCultivarIntelligenceIndex(input) {
     analyteCount: analyteSummaries.length,
     generatedAt: new Date().toISOString(),
     interpretation:
-      "Global index values summarize compiled cultivar-group chemistry. Similarity and prevalence are descriptive chemistry measures, not effect, quality, or genetic-identity scores.",
+      "Global index values summarize compiled cultivar-group chemistry and source breadth. Similarity and filters are descriptive chemistry tools, not effect, quality, or genetic-identity scores.",
     analytes: analyteSummaries,
     cultivars,
   };
