@@ -1,4 +1,5 @@
 import { DeterministicRng } from "../game/core/random/DeterministicRng.ts";
+import { clampAxis, digitalAxis, horizontalAxis, mergeActionSources } from "../game/core/input/GameActions.ts";
 
 const errors = [];
 
@@ -53,10 +54,26 @@ assert(afterForkCheck.next() === expectedParentNext, "fork must not consume the 
 const empty = new DeterministicRng("empty");
 assert(empty.pick([]) === undefined, "pick([]) must return undefined");
 
+assert(clampAxis(-2) === -1, "clampAxis must clamp below -1");
+assert(clampAxis(2) === 1, "clampAxis must clamp above 1");
+assert(clampAxis(Number.NaN) === 0, "clampAxis must neutralize non-finite values");
+assert(digitalAxis(true, false) === -1, "negative digital input must produce -1");
+assert(digitalAxis(false, true) === 1, "positive digital input must produce 1");
+assert(digitalAxis(true, true) === 0, "opposing digital inputs must cancel");
+
+const mergedActions = mergeActionSources(
+  { MOVE_LEFT: true, BOOST: false },
+  { BOOST: true, PRIMARY: true },
+);
+assert(mergedActions.MOVE_LEFT === true, "merged actions must preserve active movement");
+assert(mergedActions.BOOST === true, "active action in any source must win over inactive source");
+assert(mergedActions.PRIMARY === true, "merged actions must include source-specific actions");
+assert(horizontalAxis(mergeActionSources({ MOVE_LEFT: true }, { MOVE_RIGHT: true })) === 0, "opposing sources must cancel on horizontal axis");
+
 if (errors.length) {
   console.error("Game core verification failed:");
   for (const error of errors) console.error(` - ${error}`);
   process.exit(1);
 }
 
-console.log("Game core verified: deterministic RNG compatibility, repeatability, non-mutating shuffle, pick, and fork isolation passed.");
+console.log("Game core verified: deterministic RNG plus shared named input/action contracts passed.");
