@@ -1,23 +1,22 @@
 {
   "schemaVersion": 1,
-  "status": "not-generated",
   "sourceId": "COCONUT",
   "sourceRelease": "2026-09",
-  "generatedAt": null,
-  "inputCandidateRecords": 0,
-  "resolvedIdentityRecords": 0,
+  "generatedAt": "2026-09-22T02:32:23.366Z",
+  "inputCandidateRecords": 224740,
+  "resolvedIdentityRecords": 224406,
   "unresolvedIdentityCount": 0,
   "unresolvedIdentitySampleCount": 0,
   "familyCounts": {
-    "hemiterpene": 0,
-    "monoterpene": 0,
-    "sesquiterpene": 0,
-    "diterpene": 0,
-    "sesterterpene": 0,
-    "triterpene": 0,
-    "tetraterpene": 0,
-    "polyterpene": 0,
-    "unresolved": 0
+    "hemiterpene": 4,
+    "monoterpene": 19853,
+    "sesquiterpene": 49674,
+    "diterpene": 48530,
+    "sesterterpene": 5122,
+    "triterpene": 49258,
+    "tetraterpene": 2599,
+    "polyterpene": 2250,
+    "unresolved": 47116
   },
   "shardSize": 5000,
   "reviewStatus": "unreviewed-source-candidates",
@@ -31,5 +30,305 @@
     "exact-carbon-count-fallback",
     "unresolved-preserved"
   ],
-  "shards": []
+  "shards": [
+    {
+      "family": "hemiterpene",
+      "filename": "registry-hemiterpene-01.json",
+      "count": 4,
+      "part": 1
+    },
+    {
+      "family": "monoterpene",
+      "filename": "registry-monoterpene-01.json",
+      "count": 5000,
+      "part": 1
+    },
+    {
+      "family": "monoterpene",
+      "filename": "registry-monoterpene-02.json",
+      "count": 5000,
+      "part": 2
+    },
+    {
+      "family": "monoterpene",
+      "filename": "registry-monoterpene-03.json",
+      "count": 5000,
+      "part": 3
+    },
+    {
+      "family": "monoterpene",
+      "filename": "registry-monoterpene-04.json",
+      "count": 4853,
+      "part": 4
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-01.json",
+      "count": 5000,
+      "part": 1
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-02.json",
+      "count": 5000,
+      "part": 2
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-03.json",
+      "count": 5000,
+      "part": 3
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-04.json",
+      "count": 5000,
+      "part": 4
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-05.json",
+      "count": 5000,
+      "part": 5
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-06.json",
+      "count": 5000,
+      "part": 6
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-07.json",
+      "count": 5000,
+      "part": 7
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-08.json",
+      "count": 5000,
+      "part": 8
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-09.json",
+      "count": 5000,
+      "part": 9
+    },
+    {
+      "family": "sesquiterpene",
+      "filename": "registry-sesquiterpene-10.json",
+      "count": 4674,
+      "part": 10
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-01.json",
+      "count": 5000,
+      "part": 1
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-02.json",
+      "count": 5000,
+      "part": 2
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-03.json",
+      "count": 5000,
+      "part": 3
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-04.json",
+      "count": 5000,
+      "part": 4
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-05.json",
+      "count": 5000,
+      "part": 5
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-06.json",
+      "count": 5000,
+      "part": 6
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-07.json",
+      "count": 5000,
+      "part": 7
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-08.json",
+      "count": 5000,
+      "part": 8
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-09.json",
+      "count": 5000,
+      "part": 9
+    },
+    {
+      "family": "diterpene",
+      "filename": "registry-diterpene-10.json",
+      "count": 3530,
+      "part": 10
+    },
+    {
+      "family": "sesterterpene",
+      "filename": "registry-sesterterpene-01.json",
+      "count": 5000,
+      "part": 1
+    },
+    {
+      "family": "sesterterpene",
+      "filename": "registry-sesterterpene-02.json",
+      "count": 122,
+      "part": 2
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-01.json",
+      "count": 5000,
+      "part": 1
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-02.json",
+      "count": 5000,
+      "part": 2
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-03.json",
+      "count": 5000,
+      "part": 3
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-04.json",
+      "count": 5000,
+      "part": 4
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-05.json",
+      "count": 5000,
+      "part": 5
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-06.json",
+      "count": 5000,
+      "part": 6
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-07.json",
+      "count": 5000,
+      "part": 7
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-08.json",
+      "count": 5000,
+      "part": 8
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-09.json",
+      "count": 5000,
+      "part": 9
+    },
+    {
+      "family": "triterpene",
+      "filename": "registry-triterpene-10.json",
+      "count": 4258,
+      "part": 10
+    },
+    {
+      "family": "tetraterpene",
+      "filename": "registry-tetraterpene-01.json",
+      "count": 2599,
+      "part": 1
+    },
+    {
+      "family": "polyterpene",
+      "filename": "registry-polyterpene-01.json",
+      "count": 2250,
+      "part": 1
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-01.json",
+      "count": 5000,
+      "part": 1
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-02.json",
+      "count": 5000,
+      "part": 2
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-03.json",
+      "count": 5000,
+      "part": 3
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-04.json",
+      "count": 5000,
+      "part": 4
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-05.json",
+      "count": 5000,
+      "part": 5
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-06.json",
+      "count": 5000,
+      "part": 6
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-07.json",
+      "count": 5000,
+      "part": 7
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-08.json",
+      "count": 5000,
+      "part": 8
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-09.json",
+      "count": 5000,
+      "part": 9
+    },
+    {
+      "family": "unresolved",
+      "filename": "registry-unresolved-10.json",
+      "count": 2116,
+      "part": 10
+    }
+  ],
+  "status": "compiled",
+  "sourceUrl": "https://coconut.s3.uni-jena.de/prod/downloads/2026-09/coconut_csv_lite-09-2026.zip",
+  "sourceBytes": 199089109,
+  "sourceSha256": "75ca12f57045c7be66d63f04238a673da1595d993e092c400bf23913ae09614e",
+  "license": "CC0-1.0"
 }
