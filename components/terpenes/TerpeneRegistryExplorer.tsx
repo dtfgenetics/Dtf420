@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./TerpeneRegistryExplorer.module.css";
 
@@ -107,8 +107,9 @@ export function TerpeneRegistryExplorer() {
   const [manifest, setManifest] = useState<RegistryManifest | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "unavailable">("loading");
   const [family, setFamily] = useState<FamilyId>("monoterpene");
-  const [records, setRecords] = useState<RegistryRecord[]>([]);
-  const [familyState, setFamilyState] = useState<"idle" | "loading" | "ready" | "unavailable">("idle");
+  const [familyCache, setFamilyCache] = useState<Partial<Record<FamilyId, RegistryRecord[]>>>({});
+  const [failedFamilies, setFailedFamilies] = useState<FamilyId[]>([]);
+  const inflightFamilies = useRef(new Set<FamilyId>());
   const [query, setQuery] = useState("");
   const [identityType, setIdentityType] = useState("all");
   const [assignmentConfidence, setAssignmentConfidence] = useState("all");
@@ -136,15 +137,14 @@ export function TerpeneRegistryExplorer() {
 
   useEffect(() => {
     if (status !== "ready" || !manifest) return;
+    if (familyCache[family] || failedFamilies.includes(family) || inflightFamilies.current.has(family)) return;
+
     const shards = manifest.shards.filter((shard) => shard.family === family);
-    if (!shards.length) {
-      setRecords([]);
-      setFamilyState("ready");
-      return;
-    }
+    if (!shards.length) return;
 
     let cancelled = false;
-    setFamilyState("loading");
+    inflightFamilies.current.add(family);
+
     Promise.all(
       shards.map(async (shard) => {
         const response = await fetch(`/data/terpenes/registry/${shard.filename}`, { cache: "force-cache" });
@@ -153,21 +153,36 @@ export function TerpeneRegistryExplorer() {
       }),
     )
       .then((parts) => {
+        inflightFamilies.current.delete(family);
         if (cancelled) return;
-        setRecords(parts.flat());
-        setFamilyState("ready");
-        setSelectedId(null);
+        setFamilyCache((current) => ({ ...current, [family]: parts.flat() }));
+        setFailedFamilies((current) => current.filter((item) => item !== family));
       })
       .catch(() => {
+        inflightFamilies.current.delete(family);
         if (cancelled) return;
-        setRecords([]);
-        setFamilyState("unavailable");
+        setFailedFamilies((current) =>
+          current.includes(family) ? current : [...current, family],
+        );
       });
 
     return () => {
       cancelled = true;
     };
-  }, [family, manifest, status]);
+  }, [failedFamilies, family, familyCache, manifest, status]);
+
+  const familyShards = manifest?.shards.filter((shard) => shard.family === family) ?? [];
+  const records = familyCache[family] ?? [];
+  const familyState: "idle" | "loading" | "ready" | "unavailable" =
+    status !== "ready"
+      ? "idle"
+      : failedFamilies.includes(family)
+        ? "unavailable"
+        : familyCache[family]
+          ? "ready"
+          : familyShards.length === 0
+            ? "ready"
+            : "loading";
 
   const filtered = useMemo(
     () =>
