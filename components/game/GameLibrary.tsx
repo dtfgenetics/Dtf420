@@ -49,7 +49,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
       </p>
 
       {visibleGames.length > 0 ? (
-        <div className={styles.libraryGrid} id="game-library-results">
+        <div className={styles.libraryGrid} id="game-library-results" role="region" aria-label="Game library results">
           {visibleGames.map((game) => {
             const preview = game.status === "preview";
             return (
@@ -81,7 +81,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
           })}
         </div>
       ) : (
-        <div className={styles.emptyState} id="game-library-results">
+        <div className={styles.emptyState} id="game-library-results" role="region" aria-label="Game library results">
           <h3>No games match that search.</h3>
           <p>Clear the search or switch the release-status filter.</p>
           <button type="button" onClick={() => { setFilter("all"); setQuery(""); }}>Show every game</button>
