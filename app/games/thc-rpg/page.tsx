@@ -18,7 +18,7 @@ export default function ThcRpgPage() {
           <p className="eyebrow">DTF Games · Cultivation RPG</p>
           <h1>THC RPG</h1>
           <p className="lede">
-            Start with Blue Mango, learn the room systems, upgrade your equipment, grow Blue Bubblegum, and hunt for a high-quality Mango Bubbles phenotype across a three-chapter progression loop.
+            Start with Blue Mango, learn the room systems, upgrade your equipment, grow Blue Bubblegum, hunt for a high-quality Mango Bubbles phenotype, preserve Keeper stock, and continue into advanced genetics trials.
           </p>
         </div>
         <Link className="button" href="/games">All games</Link>
