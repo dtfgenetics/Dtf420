@@ -12,7 +12,7 @@ Until a documented cutover replaces the current decision, `dtfgenetics/Thc` owns
 
 For a future route cutover, identify the current owner, validate equivalent or better behavior/content, preserve rollback data, eliminate dual writers, deploy through a reviewed production lane, and verify the public route before changing the ownership claim.
 
-For any browser-game task in this repository, also load and follow `$dtf-game-router` from `.agents/skills/dtf-game-router/SKILL.md` before editing game code.
+For any browser-game task in this repository, first load `$dtf-game-location-resolver` from `.agents/skills/dtf-game-location-resolver/SKILL.md`, then load and follow `$dtf-game-router` from `.agents/skills/dtf-game-router/SKILL.md` before editing game code.
 
 Use the router to compose the project skills under `.agents/skills/` for Phaser runtime work, asset recovery, mobile UI, board/card rules, multiplayer lobbies, playtesting, and game-specific deployment verification.
 
