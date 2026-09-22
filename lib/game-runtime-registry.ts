@@ -156,6 +156,7 @@ export const gameRuntimeRegistry = [
     engine: "html-dom",
     orientation: "any",
     entrypoint: "/thc-rpg/index.html",
+    entrypointProvision: "build",
     capabilities: {
       save: true,
       replay: false,
@@ -211,7 +212,7 @@ export const gameRuntimeRegistry = [
     orientation: "any",
     capabilities: {
       save: false,
-      replay: true,
+      replay: false,
       multiplayer: false,
       fullscreen: false,
       audio: false,
