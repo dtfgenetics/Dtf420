@@ -26,6 +26,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
         <div className={styles.filterGroup} role="group" aria-label="Release status">
           {(["all", "playable", "preview"] as const).map((value) => (
             <button
+              aria-pressed={filter === value}
               className={styles.filterButton}
               data-active={filter === value}
               key={value}
