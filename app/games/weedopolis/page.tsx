@@ -24,7 +24,6 @@ export default function WeedopolisPage() {
       <div
         style={{
           width: "100%",
-          minHeight: "900px",
           overflow: "hidden",
           border: "1px solid rgba(183, 226, 93, 0.16)",
           borderRadius: "24px",
@@ -34,7 +33,13 @@ export default function WeedopolisPage() {
         <iframe
           title="Weedopolis: Strain City Edition"
           src="/weedopolis/index.html"
-          style={{ width: "100%", height: "clamp(900px, 110vh, 1400px)", border: 0, display: "block" }}
+          style={{
+            width: "100%",
+            height: "clamp(680px, calc(100dvh - 72px), 1100px)",
+            minHeight: "680px",
+            border: 0,
+            display: "block",
+          }}
           allow="clipboard-write"
         />
       </div>
