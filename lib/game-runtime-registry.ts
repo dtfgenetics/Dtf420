@@ -1,6 +1,6 @@
 export type GameReleaseStatus = "playable" | "preview";
 
-export type GameHostKind = "next-react" | "iframe";
+export type GameHostKind = "next-react" | "iframe" | "redirect";
 export type GameEngineKind = "react-dom" | "phaser" | "canvas2d" | "three" | "html-dom";
 export type GameOrientation = "any" | "landscape" | "portrait";
 export type GameInputKind = "keyboard" | "touch" | "pointer" | "gamepad";
@@ -21,7 +21,7 @@ export interface GameRuntimePersistence {
 
 export interface GameRuntimeNetwork {
   readonly transport: "colyseus" | "custom";
-  readonly protocolVersion: number;
+  readonly protocolVersion?: number;
   readonly authoritative: boolean;
 }
 
@@ -49,6 +49,11 @@ export interface GameRuntimeDefinition {
    * The registry verifier reports a warning when the target is not present.
    */
   readonly canonicalTarget?: `/games/${string}`;
+  readonly canonicalSource?: {
+    readonly repository: `${string}/${string}`;
+    readonly sourcePath: string;
+    readonly runtimePath?: string;
+  };
 }
 
 export const gameRuntimeRegistry = [
@@ -244,17 +249,27 @@ export const gameRuntimeRegistry = [
     slug: "burn-buds",
     route: "/games/burn-buds",
     status: "preview",
-    host: "next-react",
-    engine: "react-dom",
+    host: "redirect",
+    engine: "html-dom",
     orientation: "landscape",
     canonicalTarget: "/games/protect-the-plants",
+    canonicalSource: {
+      repository: "dtfgenetics/Thc",
+      sourcePath: "games/protect-the-plants",
+      runtimePath: "site/public-route-patch/games/protect-the-plants",
+    },
     capabilities: {
-      save: false,
+      save: true,
       replay: false,
       multiplayer: true,
-      fullscreen: false,
-      audio: false,
+      fullscreen: true,
+      audio: true,
       inputs: ["keyboard", "touch", "pointer"],
+    },
+    persistence: { saveVersion: 3, storage: "server" },
+    network: {
+      transport: "custom",
+      authoritative: true,
     },
   },
 ] as const satisfies readonly GameRuntimeDefinition[];
