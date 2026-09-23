@@ -484,3 +484,17 @@ Chapter readiness now responds to evidence depth:
 - `linked-evidence` carries more readiness weight than `reviewed-foundation`, so adding stronger sourcing cannot reduce chapter readiness.
 
 The readiness dashboard uses the same claim-specific evidence counts as the compound pages.
+
+
+### Second compound-safety evidence wave
+
+A second reviewed safety wave expands the Safety, Stability & Exposure section for additional core reviewed terpenes:
+
+- **α-pinene** — 2026 National Toxicology Program subchronic/chronic inhalation hazard evidence in rats and mice;
+- **β-pinene** — concentration-specific dermal irritation evidence from controlled animal testing;
+- **terpinolene** — systematic-review evidence documenting limited in-vivo and clinical safety characterization;
+- **α-humulene** — acute zebrafish toxicity data from an intraperitoneal animal model.
+
+These records are deliberately heterogeneous because the underlying evidence is heterogeneous. The chapter UI must preserve route, model, concentration, and study design rather than flattening them into a single safety score.
+
+The NTP α-pinene inhalation report is animal hazard evidence, not a human cannabis-use threshold. β-Pinene dermal irritation does not establish inhalation risk. Terpinolene's review record documents an evidence gap rather than proving safety or harm. α-Humulene's zebrafish LD50 is an acute animal-model result and must not be interpreted as a human exposure limit.
