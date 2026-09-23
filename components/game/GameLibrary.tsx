@@ -15,7 +15,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
     const normalizedQuery = query.trim().toLowerCase();
     return games.filter((game) => {
       const matchesStatus = filter === "all" || game.status === filter;
-      const haystack = `${game.title} ${game.heading} ${game.description} ${game.genre} ${game.features.join(" ")}`.toLowerCase();
+      const haystack = `${game.title} ${game.heading} ${game.strapline} ${game.description} ${game.genre} ${game.format} ${game.features.join(" ")}`.toLowerCase();
       return matchesStatus && (!normalizedQuery || haystack.includes(normalizedQuery));
     });
   }, [filter, games, query]);
