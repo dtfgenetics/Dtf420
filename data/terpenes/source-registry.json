@@ -98,6 +98,76 @@
       "sourceUrl": "https://lotus.nprod.net/",
       "downloadPage": "https://lotus.naturalproducts.net/download",
       "notes": "Secondary open natural-products occurrence source intended for cross-checking organism/occurrence evidence and expanding provenance. Do not merge identities by common name; use exact structure identifiers."
+    },
+    {
+      "id": "BUENO-2020-TERPENE-STORAGE",
+      "name": "Bueno J et al. The preservation and augmentation of volatile terpenes in cannabis inflorescence.",
+      "role": "postharvest-terpene-stability",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1186/s42238-020-00035-z",
+      "pmid": "33526109",
+      "pmcid": "PMC7819294",
+      "license": "CC-BY-4.0",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7819294/",
+      "notes": "Cannabis inflorescence storage/packaging study using HS GC-MS. Preserve study-specific storage conditions and conflict-of-interest context."
+    },
+    {
+      "id": "KIM-2013-LIMONENE-SAFETY",
+      "name": "Kim YW et al. Safety evaluation and risk assessment of d-Limonene.",
+      "role": "compound-safety-review",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1080/10937404.2013.769418",
+      "pmid": "23573938",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/23573938/",
+      "notes": "Toxicology/risk review for d-limonene. Use only for the exposure routes and endpoints discussed by the source; do not generalize to cannabis inhalation."
+    },
+    {
+      "id": "SKOLD-2004-LINALOOL-OXIDATION",
+      "name": "Sköld M et al. Contact allergens formed on air exposure of linalool.",
+      "role": "compound-stability-and-sensitization",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1021/tx049831z",
+      "pmid": "15606147",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15606147/",
+      "notes": "Experimental autoxidation and sensitization work on linalool and oxidation products; includes chromatographic/NMR identification and LLNA testing."
+    },
+    {
+      "id": "API-2022-CARYOPHYLLENE-SAFETY",
+      "name": "Api AM et al. RIFM fragrance ingredient safety assessment, β-caryophyllene.",
+      "role": "compound-safety-assessment",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.fct.2021.112707",
+      "pmid": "34848252",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34848252/",
+      "notes": "Fragrance-use safety assessment covering genotoxicity, repeated dose, reproductive, respiratory, phototoxicity/photoallergenicity, sensitization, and environmental endpoints."
+    },
+    {
+      "id": "SURENDRAN-2021-MYRCENE-REVIEW",
+      "name": "Surendran S et al. Myrcene—What Are the Potential Health Benefits of This Flavouring and Aroma Agent?",
+      "role": "compound-toxicology-and-research-review",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.3389/fnut.2021.699666",
+      "pmid": "34350208",
+      "pmcid": "PMC8326332",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8326332/",
+      "notes": "Review of β-myrcene occurrence, biological research, and toxicological profile; explicitly notes limited human evidence for proposed biological effects."
+    },
+    {
+      "id": "BOTVID-2026-LIMONENE-LINALOOL",
+      "name": "Botvid S et al. Ten Years of Patch Testing to Hydroperoxides of Limonene and Linalool.",
+      "role": "human-contact-allergy-observational",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1111/cod.70102",
+      "pmid": "41638887",
+      "pmcid": "PMC13070720",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41638887/",
+      "notes": "Human patch-testing dataset focused on hydroperoxides formed by autoxidation of limonene and linalool. Applies to contact-allergy context, not general cannabis exposure."
     }
   ]
 }
