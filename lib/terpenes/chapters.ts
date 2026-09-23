@@ -11,6 +11,10 @@ function buildSections({
   compound,
   mappedGeneCount,
   reviewedEvidenceCount,
+  safetyEvidenceCount = 0,
+  stabilityEvidenceCount = 0,
+  generalPostharvestEvidenceCount = 0,
+  hasAssessment = false,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
   const cannabisSources = compound.sourceIds.filter((id) => id !== "PUBCHEM");
@@ -99,12 +103,14 @@ function buildSections({
       label: "Cultivation & post-harvest",
       summary: "How genetics, development, environment, harvest timing, drying, curing, oxidation, and storage can shape measured chemistry.",
       status:
-        /storage|handling|drying|oxidation|environment|maturity/i.test(
-          [compound.cannabisContext, compound.geneticsContext, compound.cultivarContext].join(" "),
-        )
+        generalPostharvestEvidenceCount > 0
           ? "reviewed-foundation"
-          : "needs-expansion",
-      evidenceCount: 0,
+          : /storage|handling|drying|oxidation|environment|maturity/i.test(
+              [compound.cannabisContext, compound.geneticsContext, compound.cultivarContext].join(" "),
+            )
+            ? "reviewed-foundation"
+            : "needs-expansion",
+      evidenceCount: generalPostharvestEvidenceCount,
       sourceIds: compound.sourceIds,
     },
     {
@@ -119,16 +125,16 @@ function buildSections({
       id: "safety",
       label: "Safety, stability & exposure",
       summary: "Oxidation, irritation/sensitization, exposure context, degradation products, and evidence limitations.",
-      status: "needs-expansion",
-      evidenceCount: 0,
+      status: safetyEvidenceCount + stabilityEvidenceCount > 0 ? "linked-evidence" : "needs-expansion",
+      evidenceCount: safetyEvidenceCount + stabilityEvidenceCount,
       sourceIds: compound.sourceIds,
     },
     {
       id: "assessment",
       label: "Knowledge check & applied interpretation",
       summary: "Compound identification, evidence literacy, chemistry interpretation, and cultivation/cultivar application questions.",
-      status: "needs-expansion",
-      evidenceCount: 0,
+      status: hasAssessment ? "complete" : "needs-expansion",
+      evidenceCount: hasAssessment ? 1 : 0,
       sourceIds: [],
     },
   ];
