@@ -45,7 +45,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
       </div>
 
       <p className={styles.resultCount} id="game-library-result-count" aria-live="polite" aria-atomic="true">
-        Showing {visibleGames.length} of {games.length} {games.length === 1 ? "game" : "games"}
+        Showing {visibleGames.length} of {games.length} {visibleGames.length === 1 ? "game" : "games"}
       </p>
 
       {visibleGames.length > 0 ? (
