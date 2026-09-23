@@ -6,6 +6,9 @@ import { getFamilyLabel, getTerpeneBySlug } from "@/lib/terpenes/queries";
 import { getGenesForCompound, getGeneProductContext } from "@/lib/terpenes/genetics";
 import { getReviewedEvidenceForCompound } from "@/lib/terpenes/evidence-queries";
 import { evidenceScope, humanizeEvidenceTerm } from "@/lib/terpenes/research";
+import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
+import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
+import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -23,7 +26,7 @@ export async function generateMetadata({
   if (!compound) return {};
 
   return buildEducationMetadata({
-    title: `${compound.name} Terpene Record`,
+    title: `${compound.name} Terpene Chapter`,
     description: `Explore ${compound.name}: classification, chemistry, aroma language, biosynthetic context, cannabis occurrence, genetics, cultivar interpretation, and evidence guardrails.`,
     path: `/learn/terpenes/${compound.slug}`,
   });
@@ -41,6 +44,23 @@ export default async function TerpeneRecordPage({
   const family = getFamilyLabel(compound.terpeneClass);
   const mappedGenes = getGenesForCompound(compound.slug);
   const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
+  const chapterNumber = terpeneSeedCompounds.findIndex((item) => item.slug === compound.slug) + 1;
+  const relatedCompounds = terpeneSeedCompounds
+    .filter((item) => item.slug !== compound.slug)
+    .sort((a, b) => {
+      const aScore = Number(a.terpeneClass === compound.terpeneClass) + Number(a.structureFamily === compound.structureFamily);
+      const bScore = Number(b.terpeneClass === compound.terpeneClass) + Number(b.structureFamily === compound.structureFamily);
+      return bScore - aScore || a.name.localeCompare(b.name);
+    })
+    .slice(0, 4);
+  const chapter = buildTerpeneCompoundChapter({
+    compound,
+    chapterNumber,
+    mappedGeneCount: mappedGenes.length,
+    reviewedEvidenceCount: reviewedEvidence.length,
+    relatedCompounds,
+  });
+  const quiz = buildTerpeneQuiz(compound);
 
   return (
     <article className={styles.page}>
@@ -65,7 +85,45 @@ export default async function TerpeneRecordPage({
 
       <div className={styles.grid}>
         <main className={styles.main}>
-          <section className={styles.identity}>
+          <section className={styles.chapterOverview}>
+            <div className={styles.chapterHeading}>
+              <div>
+                <p className="eyebrow">Chapter {String(chapter.chapterNumber).padStart(2, "0")}</p>
+                <h2>{chapter.title}</h2>
+                <p>{chapter.introduction}</p>
+              </div>
+              <div className={styles.completeness}>
+                <span>Chapter readiness</span>
+                <strong>{chapter.completeness.score}%</strong>
+                <small>{chapter.completeness.needsExpansionSections} of {chapter.completeness.totalSections} sections still need expansion</small>
+              </div>
+            </div>
+
+            <div className={styles.objectives}>
+              <span>Learning objectives</span>
+              <ol>
+                {chapter.learningObjectives.map((objective) => <li key={objective}>{objective}</li>)}
+              </ol>
+            </div>
+
+            <div className={styles.chapterMap}>
+              {chapter.sections.map((section, index) => (
+                <article key={section.id} data-status={section.status}>
+                  <div>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{section.label}</strong>
+                  </div>
+                  <p>{section.summary}</p>
+                  <footer>
+                    <b>{section.status.replaceAll("-", " ")}</b>
+                    <small>{section.evidenceCount} linked evidence/source signal{section.evidenceCount === 1 ? "" : "s"}</small>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className={styles.identity} id="identity">
             <div className="section-heading">
               <p className="eyebrow">Chemical identity</p>
               <h2>Know exactly which molecule the record describes.</h2>
@@ -82,7 +140,7 @@ export default async function TerpeneRecordPage({
             </dl>
           </section>
 
-          <section>
+          <section id="sensory">
             <div className="section-heading">
               <p className="eyebrow">Aroma and sensory language</p>
               <h2>Descriptors are observations, not one-compound diagnoses.</h2>
@@ -97,7 +155,7 @@ export default async function TerpeneRecordPage({
             <p className={styles.body}>{compound.viewNotes.aroma}</p>
           </section>
 
-          <section className={styles.split}>
+          <section className={styles.split} id="cannabis-occurrence">
             <div>
               <p className="eyebrow">Cannabis occurrence</p>
               <h2>Chemistry before strain-name assumptions.</h2>
@@ -110,7 +168,7 @@ export default async function TerpeneRecordPage({
             </div>
           </section>
 
-          <section className={styles.split}>
+          <section className={styles.split} id="biosynthesis">
             <div>
               <p className="eyebrow">Biosynthesis</p>
               <h2>Place the molecule in its pathway.</h2>
@@ -124,7 +182,7 @@ export default async function TerpeneRecordPage({
           </section>
 
           {mappedGenes.length ? (
-            <section className={styles.evidenceSection}>
+            <section className={styles.evidenceSection} id="genetics">
               <div className="section-heading">
                 <p className="eyebrow">Source-verified genetics</p>
                 <h2>Functionally characterized Cannabis terpene synthases mapped to this compound.</h2>
@@ -158,7 +216,7 @@ export default async function TerpeneRecordPage({
             </section>
           ) : null}
 
-          <section className={styles.evidenceSection}>
+          <section className={styles.evidenceSection} id="research">
             <div className="section-heading">
               <p className="eyebrow">Reviewed evidence</p>
               <h2>Trace the claims on this record back to the evidence ledger.</h2>
@@ -195,13 +253,54 @@ export default async function TerpeneRecordPage({
             </Link>
           </section>
 
-          <section>
+          <section id="natural-occurrence">
             <div className="section-heading">
               <p className="eyebrow">Natural occurrence</p>
               <h2>Terpenes are plant chemistry, not cannabis-only chemistry.</h2>
             </div>
             <div className={styles.chips}>
               {compound.naturalSources.map((source) => <span key={source}>{source}</span>)}
+            </div>
+          </section>
+
+          <section className={styles.expansionSection} id="cultivation-postharvest">
+            <div className="section-heading">
+              <p className="eyebrow">Cultivation &amp; post-harvest</p>
+              <h2>Connect plant conditions to measured chemistry without inventing deterministic rules.</h2>
+            </div>
+            <p>{compound.geneticsContext}</p>
+            <p>{compound.cultivarContext}</p>
+            <p className={styles.expansionNote}>
+              This chapter section is intentionally marked for expansion until compound-specific cultivation, harvest,
+              drying, curing, storage, oxidation, and analytical-method evidence is linked in the ledger.
+            </p>
+          </section>
+
+          <section className={styles.expansionSection} id="safety">
+            <div className="section-heading">
+              <p className="eyebrow">Safety, stability &amp; exposure</p>
+              <h2>Keep safety claims evidence-specific.</h2>
+            </div>
+            <p>
+              Safety, oxidation products, sensitization, irritation, exposure route, dose, and degradation chemistry
+              require compound-specific source review. This section remains visibly incomplete until those records are linked.
+            </p>
+          </section>
+
+          <TerpeneChapterQuiz quiz={quiz} />
+
+          <section className={styles.relatedSection}>
+            <div className="section-heading">
+              <p className="eyebrow">Related compounds</p>
+              <h2>Continue through structurally or chemically related reviewed chapters.</h2>
+            </div>
+            <div className={styles.relatedGrid}>
+              {relatedCompounds.map((item) => (
+                <Link href={"/learn/terpenes/" + item.slug} key={item.slug}>
+                  <strong>{item.name}</strong>
+                  <span>{getFamilyLabel(item.terpeneClass)} · {item.structureFamily} · {item.formula}</span>
+                </Link>
+              ))}
             </div>
           </section>
 
