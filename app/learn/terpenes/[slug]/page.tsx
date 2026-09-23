@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { terpeneSeedCompounds } from "@/lib/terpenes/data";
 import { getFamilyLabel, getTerpeneBySlug } from "@/lib/terpenes/queries";
 import { getGenesForCompound, getGeneProductContext } from "@/lib/terpenes/genetics";
-import { getReviewedEvidenceForCompound } from "@/lib/terpenes/evidence-queries";
+import { getReviewedEvidenceForCompound, getReviewedEvidenceClaimCountsForCompound, getReviewedGeneralEvidence } from "@/lib/terpenes/evidence-queries";
 import { evidenceScope, humanizeEvidenceTerm } from "@/lib/terpenes/research";
 import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
@@ -44,6 +44,9 @@ export default async function TerpeneRecordPage({
   const family = getFamilyLabel(compound.terpeneClass);
   const mappedGenes = getGenesForCompound(compound.slug);
   const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
+  const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
+  const generalPostharvestEvidence = getReviewedGeneralEvidence(["postharvest-change"]);
+  const safetyEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "safety-exposure" || record.claimType === "chemical-stability");
   const chapterNumber = terpeneSeedCompounds.findIndex((item) => item.slug === compound.slug) + 1;
   const relatedCompounds = terpeneSeedCompounds
     .filter((item) => item.slug !== compound.slug)
@@ -53,14 +56,18 @@ export default async function TerpeneRecordPage({
       return bScore - aScore || a.name.localeCompare(b.name);
     })
     .slice(0, 4);
+  const quiz = buildTerpeneQuiz(compound);
   const chapter = buildTerpeneCompoundChapter({
     compound,
     chapterNumber,
     mappedGeneCount: mappedGenes.length,
     reviewedEvidenceCount: reviewedEvidence.length,
+    safetyEvidenceCount: evidenceClaimCounts["safety-exposure"] ?? 0,
+    stabilityEvidenceCount: evidenceClaimCounts["chemical-stability"] ?? 0,
+    generalPostharvestEvidenceCount: generalPostharvestEvidence.length,
+    hasAssessment: quiz.questions.length > 0,
     relatedCompounds,
   });
-  const quiz = buildTerpeneQuiz(compound);
 
   return (
     <article className={styles.page}>
