@@ -168,6 +168,51 @@
       "pmcid": "PMC13070720",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41638887/",
       "notes": "Human patch-testing dataset focused on hydroperoxides formed by autoxidation of limonene and linalool. Applies to contact-allergy context, not general cannabis exposure."
+    },
+    {
+      "id": "NTP-2026-ALPHA-PINENE-INHALATION",
+      "name": "National Toxicology Program. Toxicology and Carcinogenesis Studies of α-Pinene Administered by Inhalation.",
+      "role": "compound-chronic-inhalation-toxicology",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.22427/NTP-TR-606",
+      "pmid": "42531438",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42531438/",
+      "notes": "2026 NTP chronic and subchronic inhalation toxicology/carcinogenicity report in rats and mice. Animal hazard evidence only; exposure concentrations and species must remain explicit and must not be converted into a human cannabis-use risk estimate."
+    },
+    {
+      "id": "MENEZES-2021-TERPINOLENE-REVIEW",
+      "name": "Menezes IO et al. Biological properties of terpinolene evidenced by in silico, in vitro and in vivo studies: A systematic review.",
+      "role": "compound-research-and-safety-gap-review",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.phymed.2021.153768",
+      "pmid": "34634744",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34634744/",
+      "notes": "Systematic review of terpinolene biological studies. Explicitly notes poor characterization of in-vivo efficacy and safety and limited preclinical/clinical depth."
+    },
+    {
+      "id": "WEI-2006-PINENE-DERMAL",
+      "name": "Wei Q et al. Toxicity study of the volatile constituents of Myoga utilizing acute dermal irritation assays and the Guinea-pig Maximization test.",
+      "role": "compound-dermal-irritation-and-sensitization",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1539/joh.48.480",
+      "pmid": "17179641",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/17179641/",
+      "notes": "Dermal irritation/sensitization study of myoga volatiles including α-pinene and β-pinene. Route- and concentration-specific animal evidence; not an inhalation or typical cannabis exposure study."
+    },
+    {
+      "id": "BORGES-2026-HUMULENE-ZEBRAFISH",
+      "name": "Borges AS et al. Assessment of the Acute Toxicity and Anxiolytic-Like Effect of α-Humulene in Adult Zebrafish.",
+      "role": "compound-acute-animal-toxicology",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1002/cbdv.71534",
+      "pmid": "42503214",
+      "pmcid": "PMC13401976",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42503214/",
+      "notes": "Acute intraperitoneal zebrafish toxicity/behavior study. Animal model and injection route must remain explicit; not evidence of human safety or inhaled cannabis effects."
     }
   ]
 }
