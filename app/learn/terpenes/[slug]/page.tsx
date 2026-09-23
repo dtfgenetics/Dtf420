@@ -140,7 +140,7 @@ export default async function TerpeneRecordPage({
             </dl>
           </section>
 
-          <section>
+          <section id="sensory">
             <div className="section-heading">
               <p className="eyebrow">Aroma and sensory language</p>
               <h2>Descriptors are observations, not one-compound diagnoses.</h2>
@@ -155,7 +155,7 @@ export default async function TerpeneRecordPage({
             <p className={styles.body}>{compound.viewNotes.aroma}</p>
           </section>
 
-          <section className={styles.split}>
+          <section className={styles.split} id="cannabis-occurrence">
             <div>
               <p className="eyebrow">Cannabis occurrence</p>
               <h2>Chemistry before strain-name assumptions.</h2>
@@ -168,7 +168,7 @@ export default async function TerpeneRecordPage({
             </div>
           </section>
 
-          <section className={styles.split}>
+          <section className={styles.split} id="biosynthesis">
             <div>
               <p className="eyebrow">Biosynthesis</p>
               <h2>Place the molecule in its pathway.</h2>
@@ -182,7 +182,7 @@ export default async function TerpeneRecordPage({
           </section>
 
           {mappedGenes.length ? (
-            <section className={styles.evidenceSection}>
+            <section className={styles.evidenceSection} id="genetics">
               <div className="section-heading">
                 <p className="eyebrow">Source-verified genetics</p>
                 <h2>Functionally characterized Cannabis terpene synthases mapped to this compound.</h2>
@@ -216,7 +216,7 @@ export default async function TerpeneRecordPage({
             </section>
           ) : null}
 
-          <section className={styles.evidenceSection}>
+          <section className={styles.evidenceSection} id="research">
             <div className="section-heading">
               <p className="eyebrow">Reviewed evidence</p>
               <h2>Trace the claims on this record back to the evidence ledger.</h2>
@@ -253,7 +253,7 @@ export default async function TerpeneRecordPage({
             </Link>
           </section>
 
-          <section>
+          <section id="natural-occurrence">
             <div className="section-heading">
               <p className="eyebrow">Natural occurrence</p>
               <h2>Terpenes are plant chemistry, not cannabis-only chemistry.</h2>
