@@ -442,3 +442,45 @@ Every section carries an explicit readiness state: `complete`, `reviewed-foundat
 The compound page exposes the chapter map, learning objectives, evidence/genetics-linked content, intentionally incomplete sections, related reviewed compounds, and an interactive five-question knowledge check generated only from reviewed record facts and interpretation guardrails.
 
 The route `/learn/terpenes/chapters` provides a cross-compound readiness dashboard so missing editorial work remains measurable. Safety and compound-specific cultivation/post-harvest content remain visibly incomplete until source-backed evidence is added rather than being filled with generic claims.
+
+
+## Chapter evidence-depth expansion
+
+The reviewed compound chapter model now supports evidence categories that were previously forced into generic research:
+
+- `safety-exposure` — irritation, sensitization, toxicology, risk assessment, exposure-route limitations;
+- `chemical-stability` — oxidation, degradation, transformation, and compound stability;
+- `postharvest-change` — storage, packaging, drying, curing, handling, and other post-harvest chemistry changes;
+- `cultivation-factor` — source-backed relationships between cultivation variables and measured chemistry.
+
+Additional study types include `toxicology`, `review`, and `stability-study`.
+
+### General versus compound-specific evidence
+
+System-level Cannabis storage evidence is stored under the reserved compound key `_general-terpene`. It can establish a reviewed post-harvest foundation for the chapters, but it must not be converted into a compound-specific loss rate or universal storage rule.
+
+Compound-specific safety/stability records remain attached to their exact compound slug. The compound chapter renders those records in the Safety, Stability & Exposure section rather than duplicating them in the generic Research section.
+
+### First evidence-depth wave
+
+The first reviewed evidence wave adds:
+
+- Cannabis inflorescence storage/post-harvest terpene evidence;
+- d-limonene safety/oxidation review evidence;
+- linalool autoxidation chemistry and sensitization evidence;
+- β-caryophyllene fragrance-use safety assessment evidence;
+- β-myrcene evidence-gap/toxicology review context;
+- human patch-testing evidence for hydroperoxides formed from oxidized limonene and linalool.
+
+Each record remains scoped to the population, route, material, method, and endpoints evaluated by its source. Contact allergy does not become an inhalation claim; fragrance-use risk assessment does not become blanket cannabis safety; storage studies do not become universal cultivar-specific rates.
+
+### Readiness behavior
+
+Chapter readiness now responds to evidence depth:
+
+- reviewed safety/stability records promote the Safety section from `needs-expansion` to `linked-evidence`;
+- reviewed general Cannabis post-harvest evidence establishes a `reviewed-foundation` for the cultivation/post-harvest section;
+- interactive reviewed-fact assessments mark the Assessment section `complete`;
+- `linked-evidence` carries more readiness weight than `reviewed-foundation`, so adding stronger sourcing cannot reduce chapter readiness.
+
+The readiness dashboard uses the same claim-specific evidence counts as the compound pages.
