@@ -6,6 +6,9 @@ import { getFamilyLabel, getTerpeneBySlug } from "@/lib/terpenes/queries";
 import { getGenesForCompound, getGeneProductContext } from "@/lib/terpenes/genetics";
 import { getReviewedEvidenceForCompound } from "@/lib/terpenes/evidence-queries";
 import { evidenceScope, humanizeEvidenceTerm } from "@/lib/terpenes/research";
+import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
+import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
+import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -23,7 +26,7 @@ export async function generateMetadata({
   if (!compound) return {};
 
   return buildEducationMetadata({
-    title: `${compound.name} Terpene Record`,
+    title: `${compound.name} Terpene Chapter`,
     description: `Explore ${compound.name}: classification, chemistry, aroma language, biosynthetic context, cannabis occurrence, genetics, cultivar interpretation, and evidence guardrails.`,
     path: `/learn/terpenes/${compound.slug}`,
   });
