@@ -74,6 +74,12 @@ const requiredFiles = [
   "components/terpenes/TerpeneRegistryExplorer.tsx",
   "components/terpenes/TerpeneRegistryExplorer.module.css",
   "app/learn/terpenes/registry/page.tsx",
+  "lib/terpenes/chapter-types.ts",
+  "lib/terpenes/chapters.ts",
+  "lib/terpenes/assessments.ts",
+  "components/terpenes/TerpeneChapterQuiz.tsx",
+  "app/learn/terpenes/chapters/page.tsx",
+  "scripts/terpenes/verify-deep-chapters.mjs",
   "public/data/terpenes/registry/manifest.json",
   ".github/workflows/refresh-terpene-registry.yml",
 ];
@@ -132,7 +138,7 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/registry"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/registry"') || !sitemapSource.includes('item("/learn/terpenes/chapters"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
@@ -301,6 +307,19 @@ for (const token of ['href="/learn/terpenes/corpus"', "Open chemistry corpus"]) 
 for (const token of ['href="/learn/terpenes/registry"', "Open universal registry"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing universal registry navigation: ${token}`);
+  }
+}
+
+for (const token of ['href="/learn/terpenes/chapters"', "Open chapter readiness"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing chapter readiness navigation: ${token}`);
+  }
+}
+
+const chapterPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/chapters/page.tsx"), "utf8");
+for (const token of ["Terpene Chapter Readiness", "Average readiness", "Sections needing expansion", "Open chapter"]) {
+  if (!chapterPageSource.includes(token)) {
+    throw new Error(`Chapter readiness page missing Atlas contract: ${token}`);
   }
 }
 
