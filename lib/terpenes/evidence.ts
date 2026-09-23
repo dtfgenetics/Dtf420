@@ -8,7 +8,10 @@ export type EvidenceStudyType =
   | "in-vitro"
   | "mechanistic"
   | "sensory"
-  | "traditional-anecdotal";
+  | "traditional-anecdotal"
+  | "toxicology"
+  | "review"
+  | "stability-study";
 
 export type EvidenceClaimType =
   | "cannabis-occurrence"
@@ -16,7 +19,11 @@ export type EvidenceClaimType =
   | "cultivar-sample"
   | "sensory-descriptor"
   | "biological-effect"
-  | "biosynthetic-pathway";
+  | "biosynthetic-pathway"
+  | "safety-exposure"
+  | "chemical-stability"
+  | "postharvest-change"
+  | "cultivation-factor";
 
 export type EvidenceReviewStatus =
   | "draft"
