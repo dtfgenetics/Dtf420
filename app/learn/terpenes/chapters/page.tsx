@@ -3,7 +3,7 @@ import Link from "next/link";
 import { terpeneSeedCompounds } from "@/lib/terpenes/data";
 import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { getGenesForCompound } from "@/lib/terpenes/genetics";
-import { getReviewedEvidenceCountForCompound } from "@/lib/terpenes/evidence-queries";
+import { getReviewedEvidenceCountForCompound, getReviewedEvidenceClaimCountsForCompound, getReviewedGeneralEvidence } from "@/lib/terpenes/evidence-queries";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -15,9 +15,11 @@ export const metadata: Metadata = buildEducationMetadata({
 });
 
 export default function TerpeneChapterIndexPage() {
+  const generalPostharvestEvidenceCount = getReviewedGeneralEvidence(["postharvest-change"]).length;
   const chapters = terpeneSeedCompounds.map((compound, index) => {
     const mappedGeneCount = getGenesForCompound(compound.slug).length;
     const reviewedEvidenceCount = getReviewedEvidenceCountForCompound(compound.slug);
+    const claimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
     const relatedCompounds = terpeneSeedCompounds
       .filter((item) => item.slug !== compound.slug)
       .filter((item) => item.terpeneClass === compound.terpeneClass)
@@ -28,6 +30,10 @@ export default function TerpeneChapterIndexPage() {
       chapterNumber: index + 1,
       mappedGeneCount,
       reviewedEvidenceCount,
+      safetyEvidenceCount: claimCounts["safety-exposure"] ?? 0,
+      stabilityEvidenceCount: claimCounts["chemical-stability"] ?? 0,
+      generalPostharvestEvidenceCount,
+      hasAssessment: true,
       relatedCompounds,
     });
   });

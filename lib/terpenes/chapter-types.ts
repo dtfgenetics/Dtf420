@@ -54,5 +54,9 @@ export type BuildChapterContext = {
   chapterNumber: number;
   mappedGeneCount: number;
   reviewedEvidenceCount: number;
+  safetyEvidenceCount?: number;
+  stabilityEvidenceCount?: number;
+  generalPostharvestEvidenceCount?: number;
+  hasAssessment?: boolean;
   relatedCompounds: TerpeneCompound[];
 };

@@ -44,6 +44,14 @@ export function evidenceScope(record: ResearchEvidenceRecord) {
       return "Supports the reported sensory association in the study context. Aroma perception depends on mixtures, concentrations, thresholds, and other volatile compounds.";
     case "biosynthetic-pathway":
       return "Supports a biochemical or mechanistic pathway relationship at the level tested by the source.";
+    case "safety-exposure":
+      return "Supports only the safety, exposure, irritation, sensitization, toxicology, or risk-assessment endpoint directly evaluated by the source. It does not establish safety for every route, dose, product, or population.";
+    case "chemical-stability":
+      return "Supports the reported stability, oxidation, degradation, or transformation behavior under the tested conditions. It does not establish the same rate under every storage or processing condition.";
+    case "postharvest-change":
+      return "Supports a post-harvest chemistry change observed under the tested storage, packaging, drying, curing, handling, or analytical conditions. It does not establish a universal change for every cultivar or batch.";
+    case "cultivation-factor":
+      return "Supports the relationship observed between the tested cultivation factor and chemistry under the reported conditions. It does not establish a universal causal rule across genotypes or environments.";
     case "biological-effect":
       if (record.studyType === "human-clinical") return "Supports the specific human outcome tested under the study conditions; generalization still depends on population, dose, formulation, and study design.";
       if (record.studyType === "human-observational") return "Supports an association observed in people, not proof of causation.";

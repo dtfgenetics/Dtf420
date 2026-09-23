@@ -23,3 +23,25 @@ export function getReviewedEvidenceCountForCompound(compoundSlug: string) {
     (record) => record.compoundSlug === compoundSlug && publicReviewStates.has(record.reviewStatus),
   ).length;
 }
+
+
+export function getReviewedGeneralEvidence(claimTypes?: string[]): ReviewedCompoundEvidence[] {
+  const allowed = claimTypes ? new Set(claimTypes) : null;
+  return records
+    .filter(
+      (record) =>
+        record.compoundSlug === "_general-terpene" &&
+        publicReviewStates.has(record.reviewStatus) &&
+        (!allowed || allowed.has(record.claimType)),
+    )
+    .map((record) => ({ record, source: sourceById.get(record.sourceId) ?? null }));
+}
+
+export function getReviewedEvidenceClaimCountsForCompound(compoundSlug: string) {
+  const counts: Record<string, number> = {};
+  for (const record of records) {
+    if (record.compoundSlug !== compoundSlug || !publicReviewStates.has(record.reviewStatus)) continue;
+    counts[record.claimType] = (counts[record.claimType] ?? 0) + 1;
+  }
+  return counts;
+}
