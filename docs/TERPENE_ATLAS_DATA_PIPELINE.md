@@ -418,3 +418,27 @@ Promotion path:
 `source candidate → identity reviewed → occurrence/evidence linked → THC editorial reviewed`
 
 Only reviewed records should populate definitive THC teaching claims. The universal registry exists to maximize chemical coverage while making uncertainty and review status visible.
+
+
+## Deep reviewed compound chapters
+
+Reviewed terpene records use a standardized 12-section educational chapter model:
+
+1. chemical identity;
+2. family and structural classification;
+3. sensory and aroma science;
+4. natural occurrence;
+5. Cannabis occurrence;
+6. biosynthesis and plant biology;
+7. genetics and terpene synthases;
+8. cultivar chemistry;
+9. cultivation and post-harvest;
+10. research and biological evidence;
+11. safety, stability, and exposure;
+12. knowledge check and applied interpretation.
+
+Every section carries an explicit readiness state: `complete`, `reviewed-foundation`, `linked-evidence`, or `needs-expansion`. Chapter readiness is a weighted editorial completeness measure, not a scientific confidence score.
+
+The compound page exposes the chapter map, learning objectives, evidence/genetics-linked content, intentionally incomplete sections, related reviewed compounds, and an interactive five-question knowledge check generated only from reviewed record facts and interpretation guardrails.
+
+The route `/learn/terpenes/chapters` provides a cross-compound readiness dashboard so missing editorial work remains measurable. Safety and compound-specific cultivation/post-harvest content remain visibly incomplete until source-backed evidence is added rather than being filled with generic claims.
