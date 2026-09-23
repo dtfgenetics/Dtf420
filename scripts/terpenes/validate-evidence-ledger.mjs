@@ -8,6 +8,10 @@ const validClaimTypes = new Set([
   "sensory-descriptor",
   "biological-effect",
   "biosynthetic-pathway",
+  "safety-exposure",
+  "chemical-stability",
+  "postharvest-change",
+  "cultivation-factor",
 ]);
 
 const validStudyTypes = new Set([
@@ -21,6 +25,9 @@ const validStudyTypes = new Set([
   "mechanistic",
   "sensory",
   "traditional-anecdotal",
+  "toxicology",
+  "review",
+  "stability-study",
 ]);
 
 const validReviewStatuses = new Set([
