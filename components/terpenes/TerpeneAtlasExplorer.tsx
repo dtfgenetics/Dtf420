@@ -395,6 +395,12 @@ export function TerpeneAtlasExplorer() {
           <p>Inspect the versioned all-known terpene and terpenoid candidate registry by exact identity, family assignment, source classification, confidence, review state, and provenance.</p>
           <Link href="/learn/terpenes/registry">Open universal registry →</Link>
         </article>
+        <article>
+          <span>08</span>
+          <h2>Chapter readiness</h2>
+          <p>Track the 12-part educational chapter model, linked evidence, assessments, and remaining editorial expansion work across reviewed compounds.</p>
+          <Link href="/learn/terpenes/chapters">Open chapter readiness →</Link>
+        </article>
       </section>
     </div>
   );
