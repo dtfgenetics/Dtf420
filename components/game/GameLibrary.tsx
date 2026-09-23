@@ -39,7 +39,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
           ))}
         </div>
         <label className={styles.searchField}>
-          <span className="visually-hidden">Search games</span>
+          <span className="visually-hidden">Search games, genres, or features</span>
           <input aria-controls="game-library-results" aria-describedby="game-library-result-count" aria-keyshortcuts="Escape" autoCapitalize="none" autoComplete="off" enterKeyHint="search" inputMode="search" spellCheck={false} value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Escape" && query) { event.preventDefault(); setQuery(""); } }} placeholder="Search games, genres, or features" type="search" />
         </label>
       </div>
