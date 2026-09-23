@@ -44,6 +44,23 @@ export default async function TerpeneRecordPage({
   const family = getFamilyLabel(compound.terpeneClass);
   const mappedGenes = getGenesForCompound(compound.slug);
   const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
+  const chapterNumber = terpeneSeedCompounds.findIndex((item) => item.slug === compound.slug) + 1;
+  const relatedCompounds = terpeneSeedCompounds
+    .filter((item) => item.slug !== compound.slug)
+    .sort((a, b) => {
+      const aScore = Number(a.terpeneClass === compound.terpeneClass) + Number(a.structureFamily === compound.structureFamily);
+      const bScore = Number(b.terpeneClass === compound.terpeneClass) + Number(b.structureFamily === compound.structureFamily);
+      return bScore - aScore || a.name.localeCompare(b.name);
+    })
+    .slice(0, 4);
+  const chapter = buildTerpeneCompoundChapter({
+    compound,
+    chapterNumber,
+    mappedGeneCount: mappedGenes.length,
+    reviewedEvidenceCount: reviewedEvidence.length,
+    relatedCompounds,
+  });
+  const quiz = buildTerpeneQuiz(compound);
 
   return (
     <article className={styles.page}>
