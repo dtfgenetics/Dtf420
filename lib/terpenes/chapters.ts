@@ -2,8 +2,8 @@ import type { BuildChapterContext, TerpeneChapterSection, TerpeneCompoundChapter
 
 const sectionWeights: Record<TerpeneChapterSection["status"], number> = {
   complete: 1,
-  "reviewed-foundation": 0.75,
-  "linked-evidence": 0.6,
+  "linked-evidence": 0.85,
+  "reviewed-foundation": 0.65,
   "needs-expansion": 0.25,
 };
 
