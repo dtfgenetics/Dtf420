@@ -8,7 +8,7 @@ description: >
 
 Use this skill first for game-related work in this repository.
 
-Before routing by subsystem, load `../dtf-game-location-resolver/SKILL.md` and resolve the requested title against `dtfgenetics/Thc/data/game-location-registry.json`. This prevents Dtf420 migration/prototype copies from being mistaken for the live production owner.
+Before routing by subsystem, load `../dtf-game-location-resolver/SKILL.md` and resolve the requested title against `dtfgenetics/Thc/data/game-location-registry.json`. Then load `../dtf-game-dossier-resolver/SKILL.md` and use `dtfgenetics/Thc/data/game-dossier-registry.json` to locate the exact rules/UI/data/assets/tests/network subsystem. This prevents Dtf420 migration/prototype copies from being mistaken for the live production owner and prevents repeated source rediscovery.
 
 ## Project baseline
 
