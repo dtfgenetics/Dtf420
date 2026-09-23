@@ -85,7 +85,45 @@ export default async function TerpeneRecordPage({
 
       <div className={styles.grid}>
         <main className={styles.main}>
-          <section className={styles.identity}>
+          <section className={styles.chapterOverview}>
+            <div className={styles.chapterHeading}>
+              <div>
+                <p className="eyebrow">Chapter {String(chapter.chapterNumber).padStart(2, "0")}</p>
+                <h2>{chapter.title}</h2>
+                <p>{chapter.introduction}</p>
+              </div>
+              <div className={styles.completeness}>
+                <span>Chapter readiness</span>
+                <strong>{chapter.completeness.score}%</strong>
+                <small>{chapter.completeness.needsExpansionSections} of {chapter.completeness.totalSections} sections still need expansion</small>
+              </div>
+            </div>
+
+            <div className={styles.objectives}>
+              <span>Learning objectives</span>
+              <ol>
+                {chapter.learningObjectives.map((objective) => <li key={objective}>{objective}</li>)}
+              </ol>
+            </div>
+
+            <div className={styles.chapterMap}>
+              {chapter.sections.map((section, index) => (
+                <article key={section.id} data-status={section.status}>
+                  <div>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{section.label}</strong>
+                  </div>
+                  <p>{section.summary}</p>
+                  <footer>
+                    <b>{section.status.replaceAll("-", " ")}</b>
+                    <small>{section.evidenceCount} linked evidence/source signal{section.evidenceCount === 1 ? "" : "s"}</small>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className={styles.identity} id="identity">
             <div className="section-heading">
               <p className="eyebrow">Chemical identity</p>
               <h2>Know exactly which molecule the record describes.</h2>
