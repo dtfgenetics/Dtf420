@@ -263,6 +263,47 @@ export default async function TerpeneRecordPage({
             </div>
           </section>
 
+          <section className={styles.expansionSection} id="cultivation-postharvest">
+            <div className="section-heading">
+              <p className="eyebrow">Cultivation &amp; post-harvest</p>
+              <h2>Connect plant conditions to measured chemistry without inventing deterministic rules.</h2>
+            </div>
+            <p>{compound.geneticsContext}</p>
+            <p>{compound.cultivarContext}</p>
+            <p className={styles.expansionNote}>
+              This chapter section is intentionally marked for expansion until compound-specific cultivation, harvest,
+              drying, curing, storage, oxidation, and analytical-method evidence is linked in the ledger.
+            </p>
+          </section>
+
+          <section className={styles.expansionSection} id="safety">
+            <div className="section-heading">
+              <p className="eyebrow">Safety, stability &amp; exposure</p>
+              <h2>Keep safety claims evidence-specific.</h2>
+            </div>
+            <p>
+              Safety, oxidation products, sensitization, irritation, exposure route, dose, and degradation chemistry
+              require compound-specific source review. This section remains visibly incomplete until those records are linked.
+            </p>
+          </section>
+
+          <TerpeneChapterQuiz quiz={quiz} />
+
+          <section className={styles.relatedSection}>
+            <div className="section-heading">
+              <p className="eyebrow">Related compounds</p>
+              <h2>Continue through structurally or chemically related reviewed chapters.</h2>
+            </div>
+            <div className={styles.relatedGrid}>
+              {relatedCompounds.map((item) => (
+                <Link href={"/learn/terpenes/" + item.slug} key={item.slug}>
+                  <strong>{item.name}</strong>
+                  <span>{getFamilyLabel(item.terpeneClass)} · {item.structureFamily} · {item.formula}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+
           <section className={styles.guardrail}>
             <p className="eyebrow">Research guardrail</p>
             <h2>Separate measured chemistry from effect claims.</h2>
