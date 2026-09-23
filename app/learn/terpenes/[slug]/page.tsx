@@ -277,10 +277,40 @@ export default async function TerpeneRecordPage({
             </div>
             <p>{compound.geneticsContext}</p>
             <p>{compound.cultivarContext}</p>
-            <p className={styles.expansionNote}>
-              This chapter section is intentionally marked for expansion until compound-specific cultivation, harvest,
-              drying, curing, storage, oxidation, and analytical-method evidence is linked in the ledger.
-            </p>
+
+            {generalPostharvestEvidence.length ? (
+              <>
+                <div className={styles.evidenceGrid}>
+                  {generalPostharvestEvidence.map(({ record, source }) => (
+                    <article className={styles.evidenceCard} key={record.id}>
+                      <div className={styles.cardTopline}>
+                        <span>General cannabis post-harvest evidence</span>
+                        <strong>{humanizeEvidenceTerm(record.reviewStatus)}</strong>
+                      </div>
+                      <h3>{record.statement}</h3>
+                      <p>{evidenceScope(record)}</p>
+                      <dl>
+                        <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                        <div><dt>Method</dt><dd>{record.analyticalMethod ?? "Not specified in this ledger entry"}</dd></div>
+                        <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                      </dl>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+                <p className={styles.expansionNote}>
+                  These records support system-level cannabis post-harvest interpretation. They do not establish
+                  the same loss rate or stability behavior for {compound.name} in every cultivar, package, or environment.
+                </p>
+              </>
+            ) : (
+              <p className={styles.expansionNote}>
+                Compound-specific cultivation, harvest, drying, curing, storage, oxidation, and analytical-method
+                evidence still needs to be linked for this chapter.
+              </p>
+            )}
           </section>
 
           <section className={styles.expansionSection} id="safety">
@@ -288,10 +318,34 @@ export default async function TerpeneRecordPage({
               <p className="eyebrow">Safety, stability &amp; exposure</p>
               <h2>Keep safety claims evidence-specific.</h2>
             </div>
-            <p>
-              Safety, oxidation products, sensitization, irritation, exposure route, dose, and degradation chemistry
-              require compound-specific source review. This section remains visibly incomplete until those records are linked.
-            </p>
+
+            {safetyEvidence.length ? (
+              <div className={styles.evidenceGrid}>
+                {safetyEvidence.map(({ record, source }) => (
+                  <article className={styles.evidenceCard} key={record.id}>
+                    <div className={styles.cardTopline}>
+                      <span>{humanizeEvidenceTerm(record.claimType)}</span>
+                      <strong>{humanizeEvidenceTerm(record.reviewStatus)}</strong>
+                    </div>
+                    <h3>{record.statement}</h3>
+                    <p>{evidenceScope(record)}</p>
+                    <dl>
+                      <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                      <div><dt>Material / population</dt><dd>{record.populationOrMaterial}</dd></div>
+                      <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                    </dl>
+                    {source?.sourceUrl ? (
+                      <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className={styles.expansionNote}>
+                Compound-specific safety, oxidation, sensitization, irritation, exposure-route, dose, and degradation
+                evidence has not yet been linked for this reviewed chapter.
+              </p>
+            )}
           </section>
 
           <TerpeneChapterQuiz quiz={quiz} />
