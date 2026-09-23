@@ -47,6 +47,7 @@ export default async function TerpeneRecordPage({
   const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
   const generalPostharvestEvidence = getReviewedGeneralEvidence(["postharvest-change"]);
   const safetyEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "safety-exposure" || record.claimType === "chemical-stability");
+  const researchEvidence = reviewedEvidence.filter(({ record }) => record.claimType !== "safety-exposure" && record.claimType !== "chemical-stability");
   const chapterNumber = terpeneSeedCompounds.findIndex((item) => item.slug === compound.slug) + 1;
   const relatedCompounds = terpeneSeedCompounds
     .filter((item) => item.slug !== compound.slug)
@@ -228,9 +229,9 @@ export default async function TerpeneRecordPage({
               <p className="eyebrow">Reviewed evidence</p>
               <h2>Trace the claims on this record back to the evidence ledger.</h2>
             </div>
-            {reviewedEvidence.length ? (
+            {researchEvidence.length ? (
               <div className={styles.evidenceGrid}>
-                {reviewedEvidence.map(({ record, source }) => (
+                {researchEvidence.map(({ record, source }) => (
                   <article className={styles.evidenceCard} key={record.id}>
                     <div className={styles.cardTopline}>
                       <span>{humanizeEvidenceTerm(record.claimType)}</span>
