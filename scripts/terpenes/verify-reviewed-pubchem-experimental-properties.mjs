@@ -12,6 +12,10 @@ const builder = fs.readFileSync(
   path.join(root, "scripts/terpenes/build-reviewed-pubchem-experimental-properties.mjs"),
   "utf8",
 );
+const pugViewLib = fs.readFileSync(
+  path.join(root, "scripts/terpenes/lib/pubchem-pug-view.mjs"),
+  "utf8",
+);
 const helper = fs.readFileSync(
   path.join(root, "lib/terpenes/experimental-properties.ts"),
   "utf8",
@@ -49,16 +53,16 @@ for (const heading of expectedHeadings) {
 }
 
 for (const token of [
-  "collectValueStrings",
-  "buildReferenceMap",
-  "findHeadingSections",
-  "normalizeEvidence",
+  "collectPugViewValueStrings",
+  "buildPugViewReferenceMap",
+  "findPugViewHeadingSections",
+  "normalizePugViewEvidence",
   "reportedValue",
   "references",
   "response.status === 404",
 ]) {
-  if (!builder.includes(token)) {
-    throw new Error(`Experimental-property builder missing contract: ${token}`);
+  if (!(builder + "\n" + pugViewLib).includes(token)) {
+    throw new Error(`Experimental-property parser/builder missing contract: ${token}`);
   }
 }
 

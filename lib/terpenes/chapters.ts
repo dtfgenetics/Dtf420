@@ -17,6 +17,7 @@ function buildSections({
   hasAssessment = false,
   hasPhysicalPropertyRecord = false,
   experimentalPropertyEvidenceCount = 0,
+  sensoryEvidenceCount = 0,
   stereoEvidenceCount = 0,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
@@ -69,10 +70,15 @@ function buildSections({
     {
       id: "sensory",
       label: "Sensory & aroma science",
-      summary: "Aroma descriptors, mixture context, sensory limitations, and the distinction between odor language and effect claims.",
-      status: compound.aromaDescriptors.length ? "reviewed-foundation" : "needs-expansion",
-      evidenceCount: 0,
-      sourceIds: compound.sourceIds,
+      summary: "Human-friendly descriptors plus source-preserved reported odor, odor-threshold, and taste evidence, with mixture and method limitations kept explicit.",
+      status:
+        sensoryEvidenceCount > 0
+          ? "linked-evidence"
+          : compound.aromaDescriptors.length
+            ? "reviewed-foundation"
+            : "needs-expansion",
+      evidenceCount: sensoryEvidenceCount,
+      sourceIds: ["THC-V13", "PUBCHEM-PUG-VIEW"],
     },
     {
       id: "natural-occurrence",

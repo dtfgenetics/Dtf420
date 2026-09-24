@@ -7,6 +7,7 @@ import { getReviewedEvidenceCountForCompound, getReviewedEvidenceClaimCountsForC
 import { buildEducationMetadata } from "@/lib/education-seo";
 import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
 import { countExperimentalPropertyEvidence, getReviewedExperimentalPropertyRecord } from "@/lib/terpenes/experimental-properties";
+import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/terpenes/sensory-evidence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import styles from "./page.module.css";
 
@@ -24,6 +25,8 @@ export default function TerpeneChapterIndexPage() {
     const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
     const experimentalPropertyRecord = getReviewedExperimentalPropertyRecord(compound.slug);
     const experimentalPropertyEvidenceCount = countExperimentalPropertyEvidence(experimentalPropertyRecord);
+    const sensoryEvidenceRecord = getReviewedSensoryEvidenceRecord(compound.slug);
+    const sensoryEvidenceCount = countSensoryEvidence(sensoryEvidenceRecord);
     const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
     const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
     const reviewedEvidenceCount = getReviewedEvidenceCountForCompound(compound.slug);
@@ -44,6 +47,7 @@ export default function TerpeneChapterIndexPage() {
       hasAssessment: true,
       hasPhysicalPropertyRecord: Boolean(propertyRecord),
       experimentalPropertyEvidenceCount,
+      sensoryEvidenceCount,
       stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
       relatedCompounds,
     });

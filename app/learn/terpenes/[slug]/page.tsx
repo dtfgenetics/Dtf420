@@ -11,6 +11,7 @@ import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
 import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
 import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
 import { countExperimentalPropertyEvidence, getReviewedExperimentalPropertyRecord } from "@/lib/terpenes/experimental-properties";
+import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/terpenes/sensory-evidence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
@@ -48,6 +49,8 @@ export default async function TerpeneRecordPage({
   const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
   const experimentalPropertyRecord = getReviewedExperimentalPropertyRecord(compound.slug);
   const experimentalPropertyEvidenceCount = countExperimentalPropertyEvidence(experimentalPropertyRecord);
+  const sensoryEvidenceRecord = getReviewedSensoryEvidenceRecord(compound.slug);
+  const sensoryEvidenceCount = countSensoryEvidence(sensoryEvidenceRecord);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
@@ -77,6 +80,7 @@ export default async function TerpeneRecordPage({
     hasAssessment: quiz.questions.length > 0,
     hasPhysicalPropertyRecord: Boolean(propertyRecord),
     experimentalPropertyEvidenceCount,
+    sensoryEvidenceCount,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
     relatedCompounds,
   });
@@ -324,7 +328,7 @@ export default async function TerpeneRecordPage({
             )}
           </section>
 
-          <section id="sensory">
+          <section id="sensory" className={styles.sensorySection}>
             <div className="section-heading">
               <p className="eyebrow">Aroma and sensory language</p>
               <h2>Descriptors are observations, not one-compound diagnoses.</h2>
@@ -337,6 +341,62 @@ export default async function TerpeneRecordPage({
               <p className={styles.body}>No aroma descriptors are assigned in this seed record.</p>
             )}
             <p className={styles.body}>{compound.viewNotes.aroma}</p>
+
+            {sensoryEvidenceRecord && sensoryEvidenceCount > 0 ? (
+              <>
+                <p className={styles.sensoryGuardrail}>
+                  These are source-preserved sensory reports. Odor thresholds depend on medium, method, purity,
+                  stereochemical identity, temperature, and the population tested. A lower threshold does not mean
+                  a compound is universally “stronger,” more important in cannabis, or more psychoactive.
+                </p>
+                <div className={styles.sensoryEvidenceGrid}>
+                  {Object.entries(sensoryEvidenceRecord.sensory)
+                    .filter(([, entries]) => entries.length > 0)
+                    .map(([heading, entries]) => (
+                      <article key={heading}>
+                        <div className={styles.sensoryEvidenceHeading}>
+                          <span>{heading}</span>
+                          <strong>{entries.length} report{entries.length === 1 ? "" : "s"}</strong>
+                        </div>
+                        <div className={styles.sensoryEvidenceEntries}>
+                          {entries.slice(0, 10).map((entry, index) => (
+                            <div key={heading + "-" + entry.reportedValue + "-" + index}>
+                              <strong>{entry.reportedValue}</strong>
+                              {entry.name ? <span>{entry.name}</span> : null}
+                              {entry.references.length ? (
+                                <div className={styles.propertyReferences}>
+                                  {entry.references.slice(0, 3).map((reference) =>
+                                    reference.url ? (
+                                      <a
+                                        key={String(reference.referenceNumber)}
+                                        href={reference.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        {reference.sourceName ?? reference.name ?? "Source"} ↗
+                                      </a>
+                                    ) : (
+                                      <span key={String(reference.referenceNumber)}>
+                                        {reference.sourceName ?? reference.name ?? "Source reference"}
+                                      </span>
+                                    ),
+                                  )}
+                                </div>
+                              ) : (
+                                <small>PubChem report has no resolved external reference in this cache.</small>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </article>
+                    ))}
+                </div>
+              </>
+            ) : (
+              <p className={styles.expansionNote}>
+                Source-preserved PubChem odor, odor-threshold, and taste evidence has not been generated for this deployment yet.
+              </p>
+            )}
           </section>
 
           <section className={styles.split} id="cannabis-occurrence">

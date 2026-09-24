@@ -584,3 +584,43 @@ The source ID is `PUBCHEM-PUG-VIEW`. The reviewed-property workflow refreshes bo
 A missing experimental heading is treated as “no report available” for that compound rather than a workflow failure. HTTP/API failures still stop the refresh.
 
 Chapter readiness treats normalized molecular descriptors as a **reviewed foundation**. A compound is promoted to **linked evidence** for the Physical & Molecular Properties section when source-preserved experimental-property reports are available.
+
+
+## Source-preserved sensory evidence
+
+Reviewed terpene chapters now support a source-preserved sensory evidence cache built from PubChem PUG-View using the same reviewed PubChem manifest as the molecular-property layers.
+
+Current sensory headings:
+
+- `Odor`;
+- `Odor Threshold`;
+- `Taste`.
+
+The sensory cache preserves multiple reported strings and their PubChem-resolved references. It does not normalize all descriptors into one canonical aroma label and does not average odor thresholds across incompatible methods or media.
+
+### Interpretation rules
+
+A reported odor descriptor is evidence of how a source described the compound under its context. It is not proof that the compound alone explains the aroma of a cannabis sample.
+
+A reported odor threshold is especially easy to misuse. Threshold values can depend on:
+
+- air versus water or another medium;
+- detection versus recognition endpoint;
+- purity and stereochemical identity;
+- temperature;
+- analytical or sensory protocol;
+- study population.
+
+A lower reported odor threshold does **not** automatically mean:
+
+- greater concentration in cannabis;
+- greater contribution in every cannabis aroma mixture;
+- greater biological activity;
+- greater psychoactive effect;
+- greater breeding value.
+
+The public chapter keeps curated THC descriptor chips separate from source-preserved PubChem sensory reports. When source-preserved sensory evidence is present, the Sensory & Aroma section moves from `reviewed-foundation` to `linked-evidence`.
+
+### Shared PUG-View parser
+
+Experimental physical properties and sensory evidence share `scripts/terpenes/lib/pubchem-pug-view.mjs`. The parser preserves reported strings, source references, and missing-heading states. Future PUG-View-backed evidence layers should reuse this parser rather than adding independent parsing logic.
