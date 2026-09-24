@@ -11,6 +11,7 @@ function buildSections({
   compound,
   mappedGeneCount,
   reviewedEvidenceCount,
+  biologicalEvidenceCount = 0,
   safetyEvidenceCount = 0,
   stabilityEvidenceCount = 0,
   generalPostharvestEvidenceCount = 0,
@@ -164,10 +165,10 @@ function buildSections({
     },
     {
       id: "research",
-      label: "Research & biological evidence",
-      summary: "Human, animal, in-vitro, mechanistic, analytical, and sensory evidence kept separate by study type.",
-      status: reviewedEvidenceCount > 0 ? "linked-evidence" : "needs-expansion",
-      evidenceCount: reviewedEvidenceCount,
+      label: "Biological research evidence",
+      summary: "Human, animal, in-vitro, and mechanistic biological-effect evidence kept separate by study type, route, population, dose, and endpoint.",
+      status: biologicalEvidenceCount > 0 ? "linked-evidence" : "needs-expansion",
+      evidenceCount: biologicalEvidenceCount,
       sourceIds: compound.sourceIds,
     },
     {
