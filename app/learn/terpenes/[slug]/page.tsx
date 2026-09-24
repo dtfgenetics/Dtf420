@@ -10,6 +10,7 @@ import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
 import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
 import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
+import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -45,6 +46,7 @@ export default async function TerpeneRecordPage({
   const family = getFamilyLabel(compound.terpeneClass);
   const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
+  const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
   const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
   const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
@@ -207,6 +209,42 @@ export default async function TerpeneRecordPage({
                   PubChem stereochemistry counts describe the deposited compound record. Routine cannabis laboratory
                   methods may not resolve every enantiomer or geometric isomer, so analytical method details still matter.
                 </p>
+
+                {stereoRegistryEntry ? (
+                  <div className={styles.isomerRegistry}>
+                    <div className={styles.isomerSummary}>
+                      <span>Parent identity scope</span>
+                      <strong>{stereoRegistryEntry.parentIdentityScope.replaceAll("-", " ")}</strong>
+                      <p>{stereoRegistryEntry.summary}</p>
+                    </div>
+                    <div className={styles.isomerGrid}>
+                      {stereoRegistryEntry.isomers.map((isomer) => (
+                        <a
+                          key={isomer.pubchemCid}
+                          href={"https://pubchem.ncbi.nlm.nih.gov/compound/" + isomer.pubchemCid}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <div>
+                            <strong>{isomer.label}</strong>
+                            {isomer.chapterIdentity ? <span>Chapter identity</span> : null}
+                          </div>
+                          <dl>
+                            <div><dt>Configuration</dt><dd>{isomer.configuration}</dd></div>
+                            <div><dt>Optical rotation label</dt><dd>{isomer.rotation}</dd></div>
+                            <div><dt>PubChem CID</dt><dd>{isomer.pubchemCid}</dd></div>
+                            <div><dt>CAS</dt><dd>{isomer.casNumber ?? "Not assigned"}</dd></div>
+                          </dl>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <p className={styles.expansionNote}>
+                    No curated enantiomer pair is registered for this chapter. That does not prove stereoisomers do not exist;
+                    it means the reviewed stereoisomer registry has not mapped a pair here yet.
+                  </p>
+                )}
               </>
             ) : (
               <p className={styles.expansionNote}>
