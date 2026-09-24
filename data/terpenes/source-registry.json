@@ -213,6 +213,15 @@
       "pmcid": "PMC13401976",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42503214/",
       "notes": "Acute intraperitoneal zebrafish toxicity/behavior study. Animal model and injection route must remain explicit; not evidence of human safety or inhaled cannabis effects."
+    },
+    {
+      "id": "PUBCHEM-PUG-VIEW",
+      "name": "PubChem PUG-View experimental property records",
+      "role": "reported-experimental-physical-properties",
+      "ingestMode": "api-cached-source-preserved",
+      "reviewRequired": false,
+      "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/",
+      "notes": "Caches source-preserved reported experimental physical-property strings and their PubChem-resolved references. Do not collapse multiple reports into one universal value or reinterpret boiling point as a vaping recommendation."
     }
   ]
 }
