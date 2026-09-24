@@ -85,6 +85,10 @@ const requiredFiles = [
   "data/terpenes/reviewed-pubchem-properties.json",
   "scripts/terpenes/build-reviewed-pubchem-properties.mjs",
   "scripts/terpenes/verify-reviewed-pubchem-properties.mjs",
+  "data/terpenes/reviewed-pubchem-experimental-properties.json",
+  "lib/terpenes/experimental-properties.ts",
+  "scripts/terpenes/build-reviewed-pubchem-experimental-properties.mjs",
+  "scripts/terpenes/verify-reviewed-pubchem-experimental-properties.mjs",
   "data/terpenes/stereoisomer-registry.json",
   "lib/terpenes/stereoisomers.ts",
   "scripts/terpenes/verify-stereoisomer-registry.mjs",
@@ -151,7 +155,7 @@ if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
-const requiredSourceIds = ["THC-V13", "PUBCHEM", "COCONUT", "LOTUS", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US", "BOOTH-2017-TPS", "BOOTH-2020-TPS-VARIATION"];
+const requiredSourceIds = ["THC-V13", "PUBCHEM", "PUBCHEM-PUG-VIEW", "COCONUT", "LOTUS", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US", "BOOTH-2017-TPS", "BOOTH-2020-TPS-VARIATION"];
 const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
   if (!registryIds.has(sourceId)) {

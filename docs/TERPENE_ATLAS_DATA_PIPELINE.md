@@ -547,3 +547,40 @@ A generic connectivity record with undefined stereocenters must not be presented
 The stereoisomer registry is curated identity metadata. It does not claim that every listed stereoisomer has been measured in Cannabis, nor does it claim routine cannabis laboratory methods resolve every enantiomer. Cannabis occurrence and analytical resolution remain separate evidence questions.
 
 Chapter readiness counts curated stereoisomer records when available. This prevents generic parent records with undefined stereochemistry from appearing less complete than they really are after explicit enantiomer identities have been reviewed.
+
+
+## Reported experimental physical properties
+
+The reviewed compound chapters now distinguish two chemistry layers:
+
+1. **structure-derived / normalized molecular descriptors** from the reviewed PubChem property cache;
+2. **reported experimental physical-property evidence** from PubChem PUG-View.
+
+The experimental layer currently tracks:
+
+- boiling point;
+- melting point;
+- vapor pressure;
+- density;
+- flash point;
+- refractive index.
+
+### Why reported values are preserved instead of reduced
+
+Experimental physical properties can differ across references because of pressure, temperature, purity, stereochemical identity, sample preparation, method, and source material. The compiler therefore keeps multiple reported strings with their resolved references rather than choosing one “correct” universal value.
+
+The public chapter UI must preserve that uncertainty. It must not:
+
+- average incompatible values without a defined statistical protocol;
+- silently discard conflicting reports;
+- treat one reported value as universally representative;
+- convert boiling point into an “ideal vaping temperature”;
+- imply that a physical constant predicts a human effect.
+
+### Source and refresh behavior
+
+The source ID is `PUBCHEM-PUG-VIEW`. The reviewed-property workflow refreshes both the normalized PubChem molecular-property cache and the experimental-property cache from the same reviewed 10-compound manifest.
+
+A missing experimental heading is treated as “no report available” for that compound rather than a workflow failure. HTTP/API failures still stop the refresh.
+
+Chapter readiness treats normalized molecular descriptors as a **reviewed foundation**. A compound is promoted to **linked evidence** for the Physical & Molecular Properties section when source-preserved experimental-property reports are available.
