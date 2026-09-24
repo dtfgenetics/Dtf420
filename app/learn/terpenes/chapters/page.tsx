@@ -47,6 +47,8 @@ export default function TerpeneChapterIndexPage() {
       safetyEvidenceCount: claimCounts["safety-exposure"] ?? 0,
       stabilityEvidenceCount: claimCounts["chemical-stability"] ?? 0,
       generalPostharvestEvidenceCount,
+      cultivationEvidenceCount: claimCounts["cultivation-factor"] ?? 0,
+      postharvestEvidenceCount: claimCounts["postharvest-change"] ?? 0,
       hasAssessment: true,
       hasPhysicalPropertyRecord: Boolean(propertyRecord),
       experimentalPropertyEvidenceCount,

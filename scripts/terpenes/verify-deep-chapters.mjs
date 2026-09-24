@@ -180,6 +180,10 @@ const requiredSourceIds = [
   "MENEZES-2021-TERPINOLENE-REVIEW",
   "WEI-2006-PINENE-DERMAL",
   "BORGES-2026-HUMULENE-ZEBRAFISH",
+  "MORELLO-2022-CANNABIS-LIGHT",
+  "REICHEL-2022-LIGHT-FLOWER-POSITION",
+  "HOLWEG-2024-CANNABIS-LIGHT",
+  "BIRENBOIM-2024-CANNABIS-DRYING",
 ];
 const sourceIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
@@ -201,10 +205,42 @@ const requiredEvidenceIds = [
   "menezes2021-terpinolene-safety-gap",
   "wei2006-beta-pinene-dermal-irritation",
   "borges2026-humulene-acute-zebrafish",
+  "morello2022-myrcene-light-spectrum",
+  "morello2022-limonene-light-spectrum",
+  "morello2022-beta-pinene-light-spectrum",
+  "morello2022-linalool-light-spectrum",
+  "reichel2022-alpha-pinene-light-strain-position",
+  "reichel2022-humulene-light-strain-position",
+  "reichel2022-caryophyllene-light-strain-position",
+  "reichel2022-linalool-light-strain-position",
+  "birenboim2024-myrcene-drying",
+  "birenboim2024-alpha-pinene-drying",
+  "birenboim2024-beta-pinene-drying",
+  "holweg2024-total-terpenoid-light-ppfd",
 ];
 const evidenceIds = new Set((ledger.records ?? []).map((record) => record.id));
 for (const evidenceId of requiredEvidenceIds) {
   if (!evidenceIds.has(evidenceId)) {
     throw new Error(`Chapter evidence ledger missing: ${evidenceId}`);
+  }
+}
+
+
+for (const token of [
+  "cultivationEvidence",
+  'evidenceClaimCounts["cultivation-factor"]',
+  'evidenceClaimCounts["postharvest-change"]',
+]) {
+  if (!page.includes(token)) {
+    throw new Error(`Compound cultivation evidence UI missing: ${token}`);
+  }
+}
+
+for (const token of [
+  "cultivationEvidenceCount",
+  "postharvestEvidenceCount",
+]) {
+  if (!chapterTypes.includes(token) || !chapters.includes(token) || !dashboard.includes(token)) {
+    throw new Error(`Cultivation readiness wiring missing: ${token}`);
   }
 }
