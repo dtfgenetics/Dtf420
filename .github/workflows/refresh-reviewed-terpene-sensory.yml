@@ -44,6 +44,11 @@ jobs:
           set -euo pipefail
           node --input-type=module <<'NODE'
           import fs from "node:fs";
+          const manifest = JSON.parse(
+            fs.readFileSync("data/terpenes/reviewed-pubchem-manifest.json", "utf8"),
+          );
+          const expectedCount = manifest.compounds?.length ?? 0;
+          if (!expectedCount) throw new Error("Reviewed PubChem manifest is empty");
           const cache = JSON.parse(
             fs.readFileSync("data/terpenes/reviewed-pubchem-sensory-evidence.json", "utf8"),
           );
@@ -51,8 +56,8 @@ jobs:
           if (cache.status !== "compiled") {
             throw new Error("Reviewed PubChem sensory evidence cache did not compile");
           }
-          if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-            throw new Error("Expected 10 reviewed PubChem sensory evidence records");
+          if (!Array.isArray(cache.compounds) || cache.compounds.length !== expectedCount) {
+            throw new Error(`Expected ${expectedCount} reviewed PubChem sensory evidence records`);
           }
 
           const expectedHeadings = ["Odor", "Odor Threshold", "Taste"];
