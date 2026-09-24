@@ -673,3 +673,30 @@ Added post-harvest evidence covers:
 These records preserve genotype, flower position, light treatment, chemovar, analytical method, and drying-condition context. They are evidence that cultivation and post-harvest conditions can affect measured chemistry under specific experimental conditions—not universal recipes for maximizing a terpene.
 
 Chapter readiness treats compound-specific `cultivation-factor` or `postharvest-change` records as `linked-evidence`. General Cannabis storage evidence remains a lower-level `reviewed-foundation`.
+
+
+## Compound-level cultivar distribution layer
+
+Reviewed cannabis terpene chapters can now surface measured cultivar-group distributions directly from the compiled `SMITH-2022-COMMERCIAL-US` corpus.
+
+The full intelligence index contains 34,224 source samples and 1,300 publishable cultivar groups. Compound pages do not import that entire runtime. Instead, a compact reviewed file at `data/terpenes/reviewed-cultivar-distributions.json` stores only analyte-level summaries for exact reviewed compound mappings.
+
+The compact record preserves:
+
+- exact compound slug and normalized analyte key;
+- measurement kind, including stereochemistry-unspecified flags;
+- number and share of publishable cultivar groups with the analyte;
+- measured source-sample depth;
+- number of multi-lab cultivar groups;
+- positive-median cultivar-group count and share;
+- cultivar-median distribution: minimum, Q1, median, Q3, maximum, and mean.
+
+The first reviewed distribution layer covers eight cannabis terpene chapters: α-humulene, α-pinene, β-caryophyllene, β-myrcene, β-pinene, limonene, linalool, and terpinolene. Squalene and β-carotene remain excluded because the current cultivar corpus does not provide exact reviewed mappings for those global reference compounds.
+
+### Interpretation guardrail
+
+A cultivar-group distribution is not a permanent “strain percentage.” The data summarize measured samples grouped under cultivar labels and remain subject to laboratory, producer, region, phenotype, maturity, handling, and naming variation.
+
+The Cultivar chemistry chapter section is promoted to `linked-evidence` only when an exact reviewed distribution exists. Otherwise documented cannabis compounds remain at `reviewed-foundation`, and global reference compounds remain `needs-expansion`.
+
+The compound page displays sample depth, multi-lab breadth, corpus coverage, positive-median share, and cultivar-median quartiles, then links to the full Cultivar Chemistry Explorer for sample-group exploration.
