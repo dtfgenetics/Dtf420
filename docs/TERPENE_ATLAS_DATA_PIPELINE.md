@@ -498,3 +498,22 @@ A second reviewed safety wave expands the Safety, Stability & Exposure section f
 These records are deliberately heterogeneous because the underlying evidence is heterogeneous. The chapter UI must preserve route, model, concentration, and study design rather than flattening them into a single safety score.
 
 The NTP α-pinene inhalation report is animal hazard evidence, not a human cannabis-use threshold. β-Pinene dermal irritation does not establish inhalation risk. Terpinolene's review record documents an evidence gap rather than proving safety or harm. α-Humulene's zebrafish LD50 is an acute animal-model result and must not be interpreted as a human exposure limit.
+
+
+### Cultivation-factor and drying evidence wave
+
+The chapter evidence model now includes compound-level Cannabis cultivation and post-harvest records from controlled peer-reviewed experiments.
+
+Added cultivation-factor evidence covers:
+
+- **β-myrcene, limonene, β-pinene, and linalool** under multiple controlled light spectra in the Babbas Erkle Cookies accession;
+- **α-pinene, α-humulene, β-caryophyllene, and linalool** in a three-strain greenhouse experiment showing spectrum × genotype and/or flower-position interactions;
+- a general medical-cannabis light-spectrum/PPFD record showing that total terpenoid response can depend on the tested spectrum/intensity combination.
+
+Added post-harvest evidence covers:
+
+- **β-myrcene, α-pinene, and β-pinene** under controlled-atmosphere versus traditional drying in medicinal cannabis chemovars.
+
+These records intentionally preserve genotype, flower position, light treatment, chemovar, and drying-condition context. They are evidence that cultivation and post-harvest conditions can affect measured chemistry under specific experimental conditions—not universal recipes for maximizing a terpene.
+
+Chapter readiness treats compound-specific `cultivation-factor` or `postharvest-change` records as `linked-evidence`. General Cannabis storage/light evidence remains a lower-level `reviewed-foundation`.
