@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-manifest.json"), "utf8"),
+);
 const cache = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-sensory-evidence.json"), "utf8"),
 );
@@ -118,7 +121,7 @@ for (const token of [
   "Refresh Reviewed Terpene Sensory Evidence",
   "build-reviewed-pubchem-sensory-evidence.mjs",
   "reviewed-pubchem-sensory-evidence.json",
-  "Expected 10 reviewed PubChem sensory evidence records",
+  "reviewed-pubchem-manifest.json",
 ]) {
   if (!workflow.includes(token)) {
     throw new Error(`Sensory evidence refresh workflow missing: ${token}`);
@@ -131,8 +134,8 @@ if (!source) {
 }
 
 if (cache.status === "compiled") {
-  if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-    throw new Error("Compiled sensory evidence cache must contain 10 reviewed compounds.");
+  if (!Array.isArray(cache.compounds) || cache.compounds.length === 0 || cache.compounds.length > manifest.compounds.length) {
+    throw new Error("Compiled sensory evidence cache must be a non-empty subset of the reviewed manifest.");
   }
 
   let evidenceCount = 0;

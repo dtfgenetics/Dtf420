@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-manifest.json"), "utf8"),
+);
 const cache = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-natural-occurrence.json"), "utf8"),
 );
@@ -99,7 +102,7 @@ for (const token of [
   "Refresh Reviewed Terpene Natural Occurrence",
   "build-reviewed-pubchem-natural-occurrence.mjs",
   "reviewed-pubchem-natural-occurrence.json",
-  "Expected 10 reviewed natural occurrence records",
+  "reviewed-pubchem-manifest.json",
 ]) {
   if (!workflow.includes(token)) {
     throw new Error(`Natural occurrence refresh workflow missing: ${token}`);
@@ -107,8 +110,8 @@ for (const token of [
 }
 
 if (cache.status === "compiled") {
-  if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-    throw new Error("Compiled natural occurrence cache must contain 10 compounds.");
+  if (!Array.isArray(cache.compounds) || cache.compounds.length === 0 || cache.compounds.length > manifest.compounds.length) {
+    throw new Error("Compiled natural occurrence cache must be a non-empty subset of the reviewed manifest.");
   }
 
   for (const record of cache.compounds) {

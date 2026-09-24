@@ -12,8 +12,8 @@ const chapters = fs.readFileSync(path.join(root, "lib/terpenes/chapters.ts"), "u
 const chapterPage = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
 const dashboard = fs.readFileSync(path.join(root, "app/learn/terpenes/chapters/page.tsx"), "utf8");
 
-if (!Array.isArray(manifest.compounds) || manifest.compounds.length !== 10) {
-  throw new Error("Reviewed PubChem manifest must contain exactly 10 reviewed compounds.");
+if (!Array.isArray(manifest.compounds) || manifest.compounds.length < 10) {
+  throw new Error("Reviewed PubChem manifest must contain at least 10 reviewed compounds.");
 }
 if (new Set(manifest.compounds.map((item) => item.slug)).size !== manifest.compounds.length) {
   throw new Error("Reviewed PubChem manifest contains duplicate slugs.");
@@ -76,15 +76,21 @@ for (const token of ["getReviewedPubChemPropertyRecord", "summarizeStereochemist
 for (const token of [
   "Refresh Reviewed Terpene Properties",
   "build-reviewed-pubchem-properties.mjs",
-  "Expected 10 reviewed PubChem property records",
+  "const expectedCount = manifest.compounds.length",
   "Missing stereochemistry counts",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Reviewed PubChem refresh workflow missing: ${token}`);
 }
 
 if (cache.status === "compiled") {
-  if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-    throw new Error("Compiled reviewed PubChem cache must contain 10 compounds.");
+  if (!Array.isArray(cache.compounds) || cache.compounds.length === 0 || cache.compounds.length > manifest.compounds.length) {
+    throw new Error("Compiled reviewed PubChem cache must be a non-empty subset of the reviewed manifest.");
+  }
+  const manifestBySlug = new Map(manifest.compounds.map((item) => [item.slug, item.pubchemCid]));
+  for (const record of cache.compounds) {
+    if (manifestBySlug.get(record.slug) !== record.pubchemCid) {
+      throw new Error(`Reviewed PubChem cache contains a record not matching the manifest: ${record.slug}`);
+    }
   }
   for (const record of cache.compounds) {
     if (!record.properties?.InChIKey || !record.properties?.SMILES) {

@@ -44,6 +44,8 @@ jobs:
           set -euo pipefail
           node --input-type=module <<'NODE'
           import fs from "node:fs";
+          const manifest = JSON.parse(fs.readFileSync("data/terpenes/reviewed-pubchem-manifest.json", "utf8"));
+          const expectedCount = manifest.compounds.length;
           const cache = JSON.parse(
             fs.readFileSync("data/terpenes/reviewed-pubchem-natural-occurrence.json", "utf8"),
           );
@@ -51,8 +53,8 @@ jobs:
           if (cache.status !== "compiled") {
             throw new Error("Reviewed natural occurrence cache did not compile");
           }
-          if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-            throw new Error("Expected 10 reviewed natural occurrence records");
+          if (!Array.isArray(cache.compounds) || cache.compounds.length !== expectedCount) {
+            throw new Error(`Expected ${expectedCount} reviewed natural occurrence records`);
           }
           if (!cache.headings?.includes("Natural Occurrence")) {
             throw new Error("Natural Occurrence heading is missing");

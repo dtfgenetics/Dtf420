@@ -41,6 +41,22 @@
     {
       "slug": "beta-carotene",
       "pubchemCid": 5280489
+    },
+    {
+      "slug": "e-beta-ocimene",
+      "pubchemCid": 5281553
+    },
+    {
+      "slug": "z-beta-ocimene",
+      "pubchemCid": 5320250
+    },
+    {
+      "slug": "alpha-terpinene",
+      "pubchemCid": 7462
+    },
+    {
+      "slug": "gamma-terpinene",
+      "pubchemCid": 7461
     }
   ]
 }

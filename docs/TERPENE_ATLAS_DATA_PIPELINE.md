@@ -766,3 +766,30 @@ Counts measure reviewed-record coverage, not evidence strength. A zero means the
 ### Chapter readiness correction
 
 The chapter `research` section now depends specifically on `biological-effect` evidence through `biologicalEvidenceCount`. Genetics, cultivation, post-harvest, occurrence, sensory, and safety evidence are scored only in their dedicated chapter sections and no longer inflate biological-research readiness.
+
+
+## Reviewed compound expansion wave 2
+
+The reviewed chapter set expands from 10 to 14 compounds with four monoterpenes selected because source-verified Cannabis terpene-synthase evidence already exists in the THC evidence ledger:
+
+- **(E)-β-ocimene** — PubChem CID 5281553; CsTPS6FN from Finola is functionally linked to this major product.
+- **(Z)-β-ocimene** — PubChem CID 5320250; CsTPS13PK from Purple Kush is functionally linked to this major product.
+- **α-terpinene** — PubChem CID 7462; CsTPS33PK from Purple Kush is functionally linked to α-terpinene and γ-terpinene major products.
+- **γ-terpinene** — PubChem CID 7461; the same CsTPS33PK functional evidence establishes biochemical capability.
+
+These reviewed seed records intentionally begin conservatively. Exact chemical identity and TPS capability are present, but curated aroma descriptors and broad natural-occurrence summaries are not invented in the seed data. Source-preserved PubChem sensory, experimental-property, and natural-occurrence evidence are filled by the reviewed-cache refresh pipelines.
+
+### Manifest-driven reviewed cache sizing
+
+Reviewed PubChem caches no longer assume a fixed 10-compound collection.
+
+Branch/release verification permits an existing compiled cache to be a valid non-empty subset of the reviewed manifest during the same PR that expands the manifest. Every cached slug/CID must still match the manifest.
+
+On `main`, the refresh workflows rebuild from the new manifest and require **exactly the manifest count** before publishing:
+
+- computed physical/stereochemical properties;
+- reported experimental physical properties;
+- sensory evidence;
+- natural-occurrence evidence.
+
+This staged policy prevents an old fixed-count constant from blocking reviewed-compound growth while still requiring complete refreshed production caches after merge.
