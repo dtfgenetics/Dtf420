@@ -700,3 +700,28 @@ A cultivar-group distribution is not a permanent “strain percentage.” The da
 The Cultivar chemistry chapter section is promoted to `linked-evidence` only when an exact reviewed distribution exists. Otherwise documented cannabis compounds remain at `reviewed-foundation`, and global reference compounds remain `needs-expansion`.
 
 The compound page displays sample depth, multi-lab breadth, corpus coverage, positive-median share, and cultivar-median quartiles, then links to the full Cultivar Chemistry Explorer for sample-group exploration.
+
+
+### Individual-terpene post-harvest evidence wave
+
+A 2025 two-cultivar dried-hemp study now provides compound-specific post-harvest records for the eight core reviewed Cannabis terpenes:
+
+- β-myrcene
+- limonene
+- terpinolene
+- α-pinene
+- β-pinene
+- β-caryophyllene / trans-caryophyllene context
+- linalool
+- α-humulene
+
+The study compared electron-beam treatment with non-irradiated controls and followed samples through 12 weeks of storage. Individual-terpene records preserve the qualitative direction and relative treatment sensitivity reported by the source rather than manufacturing universal shelf-life percentages.
+
+The chapter engine already distinguishes:
+- `postharvestEvidenceCount` — compound-specific storage/treatment evidence;
+- `cultivationEvidenceCount` — compound-specific cultivation-factor evidence;
+- `generalPostharvestEvidenceCount` — system-level Cannabis storage evidence.
+
+If compound-specific post-harvest or cultivation evidence exists, the Cultivation & Post-Harvest section is promoted to `linked-evidence`. General Cannabis storage evidence alone establishes only a `reviewed-foundation`.
+
+The Goffman 2025 records must remain cultivar-, treatment-, and time-specific. Lower immediate irradiation sensitivity for a sesquiterpene does not mean universal stability, and a measured loss under the tested storage conditions does not become a fixed degradation rate for every cultivar, package, moisture condition, or environment.
