@@ -14,6 +14,7 @@ import { countExperimentalPropertyEvidence, getReviewedExperimentalPropertyRecor
 import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/terpenes/sensory-evidence";
 import { countNaturalOccurrenceEvidence, getReviewedNaturalOccurrenceRecord } from "@/lib/terpenes/natural-occurrence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
+import { getReviewedCultivarDistribution } from "@/lib/terpenes/cultivar-distributions";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -54,6 +55,7 @@ export default async function TerpeneRecordPage({
   const sensoryEvidenceCount = countSensoryEvidence(sensoryEvidenceRecord);
   const naturalOccurrenceRecord = getReviewedNaturalOccurrenceRecord(compound.slug);
   const naturalOccurrenceEvidenceCount = countNaturalOccurrenceEvidence(naturalOccurrenceRecord);
+  const cultivarDistribution = getReviewedCultivarDistribution(compound.slug);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
@@ -88,6 +90,7 @@ export default async function TerpeneRecordPage({
     experimentalPropertyEvidenceCount,
     sensoryEvidenceCount,
     naturalOccurrenceEvidenceCount,
+    cultivarDistributionEvidenceCount: cultivarDistribution ? 1 : 0,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
     relatedCompounds,
   });
@@ -416,6 +419,62 @@ export default async function TerpeneRecordPage({
               <p className="eyebrow">Cultivar interpretation</p>
               <h2>Use distributions, not fixed strain numbers.</h2>
               <p>{compound.cultivarContext}</p>
+
+              {cultivarDistribution ? (
+                <article className={styles.distributionPanel}>
+                  <div className={styles.distributionHeading}>
+                    <div>
+                      <span>Measured cultivar-group distribution</span>
+                      <strong>{cultivarDistribution.cultivarCount.toLocaleString()} groups</strong>
+                    </div>
+                    <b>{Math.round(cultivarDistribution.positiveMedianShare * 100)}% positive median</b>
+                  </div>
+
+                  <div className={styles.distributionStats}>
+                    <div>
+                      <span>Measured samples</span>
+                      <strong>{cultivarDistribution.measuredSamples.toLocaleString()}</strong>
+                    </div>
+                    <div>
+                      <span>Multi-lab cultivar groups</span>
+                      <strong>{cultivarDistribution.multiLabCultivars.toLocaleString()}</strong>
+                    </div>
+                    <div>
+                      <span>Corpus coverage</span>
+                      <strong>{Math.round(cultivarDistribution.cultivarShare * 100)}%</strong>
+                    </div>
+                    <div>
+                      <span>Measurement</span>
+                      <strong>{humanizeEvidenceTerm(cultivarDistribution.measurementKind)}</strong>
+                    </div>
+                  </div>
+
+                  {cultivarDistribution.cultivarMedianDistribution ? (
+                    <div className={styles.quartilePanel}>
+                      <div className={styles.quartileHeading}>
+                        <span>Distribution of cultivar medians</span>
+                        <small>source dataset concentration units</small>
+                      </div>
+                      <div className={styles.quartileGrid}>
+                        <div><span>Q1</span><strong>{cultivarDistribution.cultivarMedianDistribution.q1.toFixed(3)}</strong></div>
+                        <div><span>Median</span><strong>{cultivarDistribution.cultivarMedianDistribution.median.toFixed(3)}</strong></div>
+                        <div><span>Q3</span><strong>{cultivarDistribution.cultivarMedianDistribution.q3.toFixed(3)}</strong></div>
+                        <div><span>Max</span><strong>{cultivarDistribution.cultivarMedianDistribution.max.toFixed(3)}</strong></div>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  <p>
+                    These are distributions across compiled cultivar groups, not a fixed value for every sample carrying
+                    a cultivar name. Lab, producer, region, phenotype, maturity, and handling can all shift measured chemistry.
+                  </p>
+                  <Link href="/learn/terpenes/cultivars">Open full cultivar chemistry explorer →</Link>
+                </article>
+              ) : (
+                <p className={styles.expansionNote}>
+                  No exact reviewed cultivar-distribution analyte is linked for this compound in the current corpus.
+                </p>
+              )}
             </div>
           </section>
 
