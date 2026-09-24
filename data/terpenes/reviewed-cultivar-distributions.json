@@ -47,6 +47,26 @@
       }
     },
     {
+      "compoundSlug": "alpha-terpinene",
+      "normalizedKey": "alpha-terpinene",
+      "measurementKind": "compound",
+      "cultivarCount": 1277,
+      "cultivarShare": 0.9823076923076923,
+      "measuredSamples": 30354,
+      "multiLabCultivars": 974,
+      "positiveMedianCultivars": 423,
+      "positiveMedianShare": 0.3253846153846154,
+      "cultivarMedianDistribution": {
+        "n": 1277,
+        "min": 0,
+        "q1": 0,
+        "median": 0,
+        "q3": 0.01,
+        "max": 0.2036,
+        "mean": 0.005336185656820677
+      }
+    },
+    {
       "compoundSlug": "beta-caryophyllene",
       "normalizedKey": "beta-caryophyllene",
       "measurementKind": "compound",
@@ -104,6 +124,26 @@
         "q3": 0.10007500000000001,
         "max": 0.499,
         "mean": 0.08602993332269535
+      }
+    },
+    {
+      "compoundSlug": "gamma-terpinene",
+      "normalizedKey": "gamma-terpinene",
+      "measurementKind": "compound",
+      "cultivarCount": 1210,
+      "cultivarShare": 0.9307692307692308,
+      "measuredSamples": 28115,
+      "multiLabCultivars": 898,
+      "positiveMedianCultivars": 509,
+      "positiveMedianShare": 0.39153846153846156,
+      "cultivarMedianDistribution": {
+        "n": 1210,
+        "min": 0,
+        "q1": 0,
+        "median": 0,
+        "q3": 0.01,
+        "max": 0.04,
+        "mean": 0.005336802446240289
       }
     },
     {

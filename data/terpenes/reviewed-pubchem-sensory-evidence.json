@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": "2026-09-24T01:43:55.952Z",
+  "generatedAt": "2026-09-24T09:45:00.000Z",
   "headings": [
     "Odor",
     "Odor Threshold",
@@ -501,6 +501,28 @@
       "pubchemCid": 5280489,
       "sourceId": "PUBCHEM-PUG-VIEW",
       "fetchedAt": "2026-09-24T01:43:55.952Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "alpha-terpinene",
+      "pubchemCid": 7462,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T09:45:00.000Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "gamma-terpinene",
+      "pubchemCid": 7461,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T09:45:00.000Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],

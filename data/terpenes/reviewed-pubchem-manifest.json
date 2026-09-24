@@ -41,6 +41,14 @@
     {
       "slug": "beta-carotene",
       "pubchemCid": 5280489
+    },
+    {
+      "slug": "alpha-terpinene",
+      "pubchemCid": 7462
+    },
+    {
+      "slug": "gamma-terpinene",
+      "pubchemCid": 7461
     }
   ]
 }
