@@ -1,0 +1,97 @@
+name: Refresh Reviewed Terpene Natural Occurrence
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 7 5 * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-reviewed-terpene-occurrence.yml"
+      - "data/terpenes/reviewed-pubchem-manifest.json"
+      - "scripts/terpenes/build-reviewed-pubchem-natural-occurrence.mjs"
+      - "scripts/terpenes/lib/pubchem-pug-view.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-reviewed-terpene-occurrence
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Compile reviewed PubChem natural occurrence evidence
+        run: node scripts/terpenes/build-reviewed-pubchem-natural-occurrence.mjs
+
+      - name: Verify reviewed natural occurrence evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const cache = JSON.parse(
+            fs.readFileSync("data/terpenes/reviewed-pubchem-natural-occurrence.json", "utf8"),
+          );
+
+          if (cache.status !== "compiled") {
+            throw new Error("Reviewed natural occurrence cache did not compile");
+          }
+          if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
+            throw new Error("Expected 10 reviewed natural occurrence records");
+          }
+          if (!cache.headings?.includes("Natural Occurrence")) {
+            throw new Error("Natural Occurrence heading is missing");
+          }
+
+          let evidenceCount = 0;
+          let compoundsWithEvidence = 0;
+          for (const record of cache.compounds) {
+            const entries = record.occurrence?.["Natural Occurrence"];
+            if (!record.slug || !record.pubchemCid || !Array.isArray(entries)) {
+              throw new Error(`Incomplete natural occurrence record: ${record.slug ?? "unknown"}`);
+            }
+            evidenceCount += entries.length;
+            if (entries.length) compoundsWithEvidence += 1;
+          }
+
+          if (evidenceCount < 3 || compoundsWithEvidence < 2) {
+            throw new Error(
+              `Natural occurrence coverage is implausibly low: ${evidenceCount} reports across ${compoundsWithEvidence} compounds`,
+            );
+          }
+
+          console.log(
+            `Verified ${evidenceCount} source-preserved natural-occurrence reports across ${compoundsWithEvidence} reviewed compounds.`,
+          );
+          NODE
+
+      - name: Commit refreshed natural occurrence evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/terpenes/reviewed-pubchem-natural-occurrence.json
+          if git diff --cached --quiet; then
+            echo "Reviewed natural occurrence evidence is already current." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Refresh reviewed terpene natural occurrence evidence"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Published reviewed natural occurrence evidence." >> "$GITHUB_STEP_SUMMARY"
