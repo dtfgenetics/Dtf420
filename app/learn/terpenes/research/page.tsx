@@ -54,7 +54,8 @@ export default function TerpeneResearchPage() {
           <article><strong>Chemical analysis</strong><p>Can establish what was detected or measured in the analyzed material. It does not establish a human effect.</p></article>
           <article><strong>Functional enzyme assay</strong><p>Can establish biochemical product capability of a tested enzyme. It does not establish a fixed terpene percentage in flower.</p></article>
           <article><strong>Genomics / expression</strong><p>Can support gene presence, sequence relationships, or expression associations. Association is not automatically functional proof.</p></article>
-          <article><strong>Biological studies</strong><p>Interpret animal, in-vitro, observational, and clinical findings at the population, dose, preparation, and endpoint actually tested.</p></article>
+          <article><strong>Controlled human experiments</strong><p>Can measure short-term responses under a defined exposure protocol. They do not automatically establish therapeutic efficacy or long-term benefit.</p></article>
+          <article><strong>Biological studies</strong><p>Interpret animal, in-vitro, observational, mechanistic, and clinical findings at the population, dose, preparation, route, and endpoint actually tested.</p></article>
         </div>
       </section>
 

@@ -64,7 +64,8 @@ export default async function TerpeneRecordPage({
   const generalPostharvestEvidence = getReviewedGeneralEvidence(["postharvest-change"]);
   const safetyEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "safety-exposure" || record.claimType === "chemical-stability");
   const cultivationEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "cultivation-factor" || record.claimType === "postharvest-change");
-  const researchEvidence = reviewedEvidence.filter(({ record }) => !["safety-exposure", "chemical-stability", "cultivation-factor", "postharvest-change"].includes(record.claimType));
+  const biologicalEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "biological-effect");
+  const researchEvidence = biologicalEvidence;
   const chapterNumber = terpeneSeedCompounds.findIndex((item) => item.slug === compound.slug) + 1;
   const relatedCompounds = terpeneSeedCompounds
     .filter((item) => item.slug !== compound.slug)
@@ -80,6 +81,7 @@ export default async function TerpeneRecordPage({
     chapterNumber,
     mappedGeneCount: mappedGenes.length,
     reviewedEvidenceCount: reviewedEvidence.length,
+    biologicalEvidenceCount: evidenceClaimCounts["biological-effect"] ?? 0,
     safetyEvidenceCount: evidenceClaimCounts["safety-exposure"] ?? 0,
     stabilityEvidenceCount: evidenceClaimCounts["chemical-stability"] ?? 0,
     generalPostharvestEvidenceCount: generalPostharvestEvidence.length,
@@ -528,8 +530,8 @@ export default async function TerpeneRecordPage({
 
           <section className={styles.evidenceSection} id="research">
             <div className="section-heading">
-              <p className="eyebrow">Reviewed evidence</p>
-              <h2>Trace the claims on this record back to the evidence ledger.</h2>
+              <p className="eyebrow">Biological research evidence</p>
+              <h2>Separate human, animal, mechanistic, and in-vitro findings by what was actually tested.</h2>
             </div>
             {researchEvidence.length ? (
               <div className={styles.evidenceGrid}>

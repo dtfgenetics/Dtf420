@@ -56,6 +56,7 @@ export type BuildChapterContext = {
   chapterNumber: number;
   mappedGeneCount: number;
   reviewedEvidenceCount: number;
+  biologicalEvidenceCount?: number;
   safetyEvidenceCount?: number;
   stabilityEvidenceCount?: number;
   generalPostharvestEvidenceCount?: number;

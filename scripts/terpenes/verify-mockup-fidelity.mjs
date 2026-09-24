@@ -42,7 +42,7 @@ for (const token of [
 for (const token of [
   "Source-verified genetics",
   "Major functional product",
-  "Reviewed evidence",
+  "Biological research evidence",
   "What this evidence",
   "Open the full TPS genetics map",
   "Open the research ledger",

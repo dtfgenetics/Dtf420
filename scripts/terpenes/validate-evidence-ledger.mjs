@@ -20,6 +20,7 @@ const validStudyTypes = new Set([
   "enzyme-functional",
   "human-clinical",
   "human-observational",
+  "human-experimental",
   "animal",
   "in-vitro",
   "mechanistic",

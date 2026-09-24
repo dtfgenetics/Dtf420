@@ -286,7 +286,7 @@ for (const token of ["getReviewedCultivarDistribution", "getReviewedCultivarDist
 }
 
 const compoundPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
-for (const token of ["Source-verified genetics", "Reviewed evidence", "Open the full TPS genetics map", "Open the research ledger", "Measured cultivar-group distribution", "Open full cultivar chemistry explorer"]) {
+for (const token of ["Source-verified genetics", "Biological research evidence", "Open the full TPS genetics map", "Open the research ledger", "Measured cultivar-group distribution", "Open full cultivar chemistry explorer"]) {
   if (!compoundPageSource.includes(token)) {
     throw new Error(`Compound terpene record missing linked evidence UI: ${token}`);
   }
