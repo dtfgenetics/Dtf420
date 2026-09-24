@@ -76,7 +76,7 @@ for (const token of ["getReviewedPubChemPropertyRecord", "summarizeStereochemist
 for (const token of [
   "Refresh Reviewed Terpene Properties",
   "build-reviewed-pubchem-properties.mjs",
-  "Expected 10 reviewed PubChem property records",
+  "const expectedCount = manifest.compounds.length",
   "Missing stereochemistry counts",
 ]) {
   if (!workflow.includes(token)) throw new Error(`Reviewed PubChem refresh workflow missing: ${token}`);
