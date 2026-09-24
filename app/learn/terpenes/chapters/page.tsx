@@ -10,6 +10,7 @@ import { countExperimentalPropertyEvidence, getReviewedExperimentalPropertyRecor
 import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/terpenes/sensory-evidence";
 import { countNaturalOccurrenceEvidence, getReviewedNaturalOccurrenceRecord } from "@/lib/terpenes/natural-occurrence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
+import { getReviewedCultivarDistribution } from "@/lib/terpenes/cultivar-distributions";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = buildEducationMetadata({
@@ -30,6 +31,7 @@ export default function TerpeneChapterIndexPage() {
     const sensoryEvidenceCount = countSensoryEvidence(sensoryEvidenceRecord);
     const naturalOccurrenceRecord = getReviewedNaturalOccurrenceRecord(compound.slug);
     const naturalOccurrenceEvidenceCount = countNaturalOccurrenceEvidence(naturalOccurrenceRecord);
+    const cultivarDistribution = getReviewedCultivarDistribution(compound.slug);
     const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
     const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
     const reviewedEvidenceCount = getReviewedEvidenceCountForCompound(compound.slug);
@@ -54,6 +56,7 @@ export default function TerpeneChapterIndexPage() {
       experimentalPropertyEvidenceCount,
       sensoryEvidenceCount,
       naturalOccurrenceEvidenceCount,
+      cultivarDistributionEvidenceCount: cultivarDistribution ? 1 : 0,
       stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
       relatedCompounds,
     });

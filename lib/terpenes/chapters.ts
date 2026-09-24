@@ -21,6 +21,7 @@ function buildSections({
   experimentalPropertyEvidenceCount = 0,
   sensoryEvidenceCount = 0,
   naturalOccurrenceEvidenceCount = 0,
+  cultivarDistributionEvidenceCount = 0,
   stereoEvidenceCount = 0,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
@@ -133,10 +134,12 @@ function buildSections({
       label: "Cultivar chemistry",
       summary: "Repeated-sample distributions, cultivar-name limitations, and measured chemistry interpretation.",
       status:
-        compound.cannabisOccurrence === "documented"
-          ? "reviewed-foundation"
-          : "needs-expansion",
-      evidenceCount: reviewedEvidenceCount,
+        cultivarDistributionEvidenceCount > 0
+          ? "linked-evidence"
+          : compound.cannabisOccurrence === "documented"
+            ? "reviewed-foundation"
+            : "needs-expansion",
+      evidenceCount: cultivarDistributionEvidenceCount,
       sourceIds: cannabisSources,
     },
     {
