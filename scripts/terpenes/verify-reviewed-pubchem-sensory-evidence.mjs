@@ -5,6 +5,10 @@ const root = process.cwd();
 const cache = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-sensory-evidence.json"), "utf8"),
 );
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-manifest.json"), "utf8"),
+);
+const expectedCount = manifest.compounds?.length ?? 0;
 const builder = fs.readFileSync(
   path.join(root, "scripts/terpenes/build-reviewed-pubchem-sensory-evidence.mjs"),
   "utf8",
@@ -118,7 +122,7 @@ for (const token of [
   "Refresh Reviewed Terpene Sensory Evidence",
   "build-reviewed-pubchem-sensory-evidence.mjs",
   "reviewed-pubchem-sensory-evidence.json",
-  "Expected 10 reviewed PubChem sensory evidence records",
+  "Expected reviewed PubChem sensory evidence records",
 ]) {
   if (!workflow.includes(token)) {
     throw new Error(`Sensory evidence refresh workflow missing: ${token}`);
@@ -131,8 +135,8 @@ if (!source) {
 }
 
 if (cache.status === "compiled") {
-  if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-    throw new Error("Compiled sensory evidence cache must contain 10 reviewed compounds.");
+  if (!Array.isArray(cache.compounds) || cache.compounds.length !== expectedCount) {
+    throw new Error(`Compiled sensory evidence cache must contain ${expectedCount} reviewed compounds.`);
   }
 
   let evidenceCount = 0;
