@@ -16,6 +16,7 @@ function buildSections({
   generalPostharvestEvidenceCount = 0,
   hasAssessment = false,
   hasPhysicalPropertyRecord = false,
+  experimentalPropertyEvidenceCount = 0,
   stereoEvidenceCount = 0,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
@@ -47,10 +48,15 @@ function buildSections({
     {
       id: "physical-properties",
       label: "Physical & molecular properties",
-      summary: "Exact mass, monoisotopic mass, XLogP, polarity, complexity, hydrogen-bonding, rotatable bonds, and heavy-atom counts from the reviewed PubChem cache.",
-      status: hasPhysicalPropertyRecord ? "linked-evidence" : "needs-expansion",
-      evidenceCount: hasPhysicalPropertyRecord ? 1 : 0,
-      sourceIds: ["PUBCHEM"],
+      summary: "Structure-derived molecular descriptors plus source-preserved reported experimental values such as boiling point, vapor pressure, density, melting point, flash point, and refractive index.",
+      status:
+        experimentalPropertyEvidenceCount > 0
+          ? "linked-evidence"
+          : hasPhysicalPropertyRecord
+            ? "reviewed-foundation"
+            : "needs-expansion",
+      evidenceCount: experimentalPropertyEvidenceCount > 0 ? experimentalPropertyEvidenceCount : Number(hasPhysicalPropertyRecord),
+      sourceIds: ["PUBCHEM", "PUBCHEM-PUG-VIEW"],
     },
     {
       id: "stereochemistry",
