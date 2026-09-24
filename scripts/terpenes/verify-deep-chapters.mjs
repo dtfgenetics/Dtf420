@@ -228,7 +228,7 @@ for (const token of [
   "cultivationEvidence",
   'evidenceClaimCounts["cultivation-factor"]',
   'evidenceClaimCounts["postharvest-change"]',
-  "compound-specific cultivation",
+  "cultivationEvidenceCount",
 ]) {
   if (!page.includes(token) && !chapters.includes(token)) {
     throw new Error(`Cultivation evidence chapter contract missing: ${token}`);
