@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": "2026-09-24T01:44:04.427Z",
+  "generatedAt": "2026-09-24T10:17:38.846Z",
   "headings": [
     "Boiling Point",
     "Melting Point",
@@ -16,7 +16,7 @@
       "slug": "beta-myrcene",
       "pubchemCid": 31253,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:42.095Z",
+      "fetchedAt": "2026-09-24T10:17:07.893Z",
       "properties": {
         "Boiling Point": [
           {
@@ -276,7 +276,7 @@
       "slug": "limonene",
       "pubchemCid": 22311,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:43.665Z",
+      "fetchedAt": "2026-09-24T10:17:10.229Z",
       "properties": {
         "Boiling Point": [
           {
@@ -536,7 +536,7 @@
       "slug": "alpha-pinene",
       "pubchemCid": 6654,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:45.305Z",
+      "fetchedAt": "2026-09-24T10:17:12.699Z",
       "properties": {
         "Boiling Point": [
           {
@@ -901,7 +901,7 @@
       "slug": "beta-pinene",
       "pubchemCid": 14896,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:47.934Z",
+      "fetchedAt": "2026-09-24T10:17:15.667Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1161,7 +1161,7 @@
       "slug": "terpinolene",
       "pubchemCid": 11463,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:50.643Z",
+      "fetchedAt": "2026-09-24T10:17:18.084Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1376,7 +1376,7 @@
       "slug": "linalool",
       "pubchemCid": 6549,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:52.292Z",
+      "fetchedAt": "2026-09-24T10:17:20.376Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1666,7 +1666,7 @@
       "slug": "beta-caryophyllene",
       "pubchemCid": 5281515,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:53.721Z",
+      "fetchedAt": "2026-09-24T10:17:23.559Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1805,7 +1805,7 @@
       "slug": "alpha-humulene",
       "pubchemCid": 5281520,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:58.207Z",
+      "fetchedAt": "2026-09-24T10:17:25.504Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1851,7 +1851,7 @@
       "slug": "squalene",
       "pubchemCid": 638072,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:44:01.713Z",
+      "fetchedAt": "2026-09-24T10:17:27.702Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2051,7 +2051,7 @@
       "slug": "beta-carotene",
       "pubchemCid": 5280489,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:44:04.427Z",
+      "fetchedAt": "2026-09-24T10:17:29.677Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2152,6 +2152,268 @@
         ],
         "Flash Point": [],
         "Refractive Index": []
+      }
+    },
+    {
+      "slug": "e-beta-ocimene",
+      "pubchemCid": 5281553,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:31.626Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "174.00 to 175.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 17,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0030089",
+                "name": "trans-Ocimene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0030089"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [],
+        "Vapor Pressure": [],
+        "Density": [],
+        "Flash Point": [],
+        "Refractive Index": []
+      }
+    },
+    {
+      "slug": "z-beta-ocimene",
+      "pubchemCid": 5320250,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:33.777Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "177.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 17,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0030088",
+                "name": "cis-Ocimene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0030088"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [],
+        "Vapor Pressure": [],
+        "Density": [],
+        "Flash Point": [],
+        "Refractive Index": []
+      }
+    },
+    {
+      "slug": "alpha-terpinene",
+      "pubchemCid": 7462,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:36.385Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "173.00 to 175.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 31,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036995",
+                "name": "alpha-Terpinene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036995"
+              }
+            ]
+          },
+          {
+            "reportedValue": "173 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 41,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1338",
+                "name": "p-Mentha-1,3-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1338/"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "< 25 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 31,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036995",
+                "name": "alpha-Terpinene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036995"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [],
+        "Density": [
+          {
+            "reportedValue": "0.833-0.838",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 41,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1338",
+                "name": "p-Mentha-1,3-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1338/"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [],
+        "Refractive Index": [
+          {
+            "reportedValue": "1.475-1.480",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 41,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1338",
+                "name": "p-Mentha-1,3-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1338/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "gamma-terpinene",
+      "pubchemCid": 7461,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:38.846Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "181.00 to 183.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 31,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0005806",
+                "name": "gamma-Terpinene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0005806"
+              }
+            ]
+          },
+          {
+            "reportedValue": "182 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1339",
+                "name": "p-Mentha-1,4-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1339/"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "-10 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 31,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0005806",
+                "name": "gamma-Terpinene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0005806"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "1.09 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 29,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz19384",
+                "name": "gamma-Terpinene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.841-0.845",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1339",
+                "name": "p-Mentha-1,4-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1339/"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [],
+        "Refractive Index": [
+          {
+            "reportedValue": "1.472-1.478",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1339",
+                "name": "p-Mentha-1,4-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1339/"
+              }
+            ]
+          }
+        ]
       }
     }
   ]
