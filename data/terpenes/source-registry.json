@@ -217,11 +217,11 @@
     {
       "id": "PUBCHEM-PUG-VIEW",
       "name": "PubChem PUG-View experimental property records",
-      "role": "reported-pug-view-physical-and-sensory-evidence",
+      "role": "reported-pug-view-physical-sensory-and-occurrence-evidence",
       "ingestMode": "api-cached-source-preserved",
       "reviewRequired": false,
       "sourceUrl": "https://pubchem.ncbi.nlm.nih.gov/",
-      "notes": "Caches source-preserved PubChem PUG-View reports for experimental physical properties and sensory evidence such as odor, odor threshold, and taste. Do not collapse multiple reports into one universal value; do not reinterpret boiling point as a vaping recommendation; do not treat a lower odor threshold as proof of greater cannabis importance or psychoactive effect."
+      "notes": "Caches source-preserved PubChem PUG-View reports for experimental physical properties, sensory evidence, and natural occurrence text. Do not collapse multiple reports into one universal value; do not reinterpret boiling point as a vaping recommendation; do not treat a lower odor threshold as proof of greater cannabis importance or psychoactive effect; do not convert reported natural occurrence into quantified abundance or Cannabis occurrence without separate evidence."
     }
   ]
 }
