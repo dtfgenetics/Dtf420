@@ -253,3 +253,15 @@ for (const token of [
     throw new Error(`Cultivation readiness wiring missing: ${token}`);
   }
 }
+
+
+for (const token of [
+  "biologicalEvidenceCount",
+  "Biological research evidence",
+  'claimCounts["biological-effect"]',
+]) {
+  const haystack = chapters + "\n" + chapterTypes + "\n" + dashboard + "\n" + page;
+  if (!haystack.includes(token)) {
+    throw new Error(`Biological chapter readiness contract missing: ${token}`);
+  }
+}
