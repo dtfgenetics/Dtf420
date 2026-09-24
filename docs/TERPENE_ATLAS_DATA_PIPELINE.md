@@ -725,3 +725,44 @@ The chapter engine already distinguishes:
 If compound-specific post-harvest or cultivation evidence exists, the Cultivation & Post-Harvest section is promoted to `linked-evidence`. General Cannabis storage evidence alone establishes only a `reviewed-foundation`.
 
 The Goffman 2025 records must remain cultivar-, treatment-, and time-specific. Lower immediate irradiation sensitivity for a sesquiterpene does not mean universal stability, and a measured loss under the tested storage conditions does not become a fixed degradation rate for every cultivar, package, moisture condition, or environment.
+
+
+## Biological research evidence coverage
+
+The Research layer now treats biological-effect evidence as a separate chapter axis instead of allowing unrelated evidence to make a chapter appear biologically complete.
+
+### Human experimental evidence
+
+The evidence schema includes `human-experimental` for controlled exposure/intervention studies in people that are not necessarily therapeutic clinical trials. This avoids forcing short controlled odor/inhalation experiments into either `human-clinical` or `human-observational`.
+
+Human-experimental evidence supports only the measured response under the tested protocol. It does not automatically establish therapeutic efficacy, long-term benefit, or the same response at another route, dose, formulation, or population.
+
+### First biological evidence wave
+
+The first structured wave adds:
+
+- **β-caryophyllene** — selective CB2 receptor binding/function in mechanistic assays;
+- **β-caryophyllene** — controlled human odor-inhalation responses in a small randomized-group experiment;
+- **linalool** — controlled human odor-inhalation physiological data, preserving the study's mixed/null anxiety outcome rather than implying the β-caryophyllene result;
+- **β-myrcene** — antinociceptive/peripheral analgesic responses in rat and mouse models;
+- **limonene** — enantiomer-specific autonomic/subjective responses in healthy volunteers;
+- **limonene** — controlled human inhalation toxicokinetic/pulmonary evidence under occupational-style exposure conditions;
+- **α-humulene** — anxiolytic-like behavior in an injected adult-zebrafish model.
+
+### Research coverage matrix
+
+The Research Ledger now displays a compound-by-study-family matrix with counts for:
+
+- human;
+- animal;
+- mechanistic / in vitro;
+- plant chemistry / genetics;
+- safety / stability;
+- reviews;
+- sensory.
+
+Counts measure reviewed-record coverage, not evidence strength. A zero means the THC ledger does not yet contain a reviewed record in that family; it is not a universal statement that no evidence exists.
+
+### Chapter readiness correction
+
+The chapter `research` section now depends specifically on `biological-effect` evidence through `biologicalEvidenceCount`. Genetics, cultivation, post-harvest, occurrence, sensory, and safety evidence are scored only in their dedicated chapter sections and no longer inflate biological-research readiness.
