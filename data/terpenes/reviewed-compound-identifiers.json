@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceId": "PUBCHEM",
+  "compounds": [
+    {
+      "slug": "beta-myrcene",
+      "pubchemCid": 31253
+    },
+    {
+      "slug": "limonene",
+      "pubchemCid": 22311
+    },
+    {
+      "slug": "alpha-pinene",
+      "pubchemCid": 6654
+    },
+    {
+      "slug": "beta-pinene",
+      "pubchemCid": 14896
+    },
+    {
+      "slug": "terpinolene",
+      "pubchemCid": 11463
+    },
+    {
+      "slug": "linalool",
+      "pubchemCid": 6549
+    },
+    {
+      "slug": "beta-caryophyllene",
+      "pubchemCid": 5281515
+    },
+    {
+      "slug": "alpha-humulene",
+      "pubchemCid": 5281520
+    },
+    {
+      "slug": "squalene",
+      "pubchemCid": 638072
+    },
+    {
+      "slug": "beta-carotene",
+      "pubchemCid": 5280489
+    }
+  ]
+}
