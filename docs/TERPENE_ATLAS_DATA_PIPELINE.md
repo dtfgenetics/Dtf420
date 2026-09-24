@@ -624,3 +624,33 @@ The public chapter keeps curated THC descriptor chips separate from source-prese
 ### Shared PUG-View parser
 
 Experimental physical properties and sensory evidence share `scripts/terpenes/lib/pubchem-pug-view.mjs`. The parser preserves reported strings, source references, and missing-heading states. Future PUG-View-backed evidence layers should reuse this parser rather than adding independent parsing logic.
+
+
+## Source-preserved natural occurrence evidence
+
+Reviewed terpene chapters now support a source-preserved `Natural Occurrence` cache from PubChem PUG-View.
+
+This layer deliberately preserves source-reported occurrence text before organism normalization. It exists alongside the shorter curated `naturalSources` teaching summaries.
+
+### Interpretation rules
+
+A reported natural occurrence record establishes only that the upstream source reported the compound in the named organism, material, food, oil, extract, or other natural context under that source's scope. It does not automatically establish:
+
+- a quantified concentration;
+- universal occurrence in every sample of that organism;
+- occurrence in Cannabis;
+- sensory importance;
+- biological activity;
+- breeding value.
+
+The chapter UI therefore keeps curated summary chips separate from source-preserved occurrence records and their references.
+
+### Structured organism normalization
+
+The next layer will normalize organism identities only after source cross-checking. LOTUS is already registered as the secondary open natural-product occurrence source. Name-only matching is not sufficient for chemical identity or organism occurrence promotion.
+
+The intended promotion path is:
+
+`source-reported occurrence → exact compound identity preserved → organism normalized → occurrence cross-checked → reviewed occurrence`
+
+A compound with source-preserved occurrence reports receives `linked-evidence` status for the Natural Occurrence chapter section. Curated summary sources alone remain `reviewed-foundation`.
