@@ -12,6 +12,7 @@ on:
       - "data/terpenes/reviewed-pubchem-manifest.json"
       - "scripts/terpenes/build-reviewed-pubchem-properties.mjs"
       - "scripts/terpenes/build-reviewed-pubchem-experimental-properties.mjs"
+      - "scripts/terpenes/lib/pubchem-pug-view.mjs"
 
 permissions:
   contents: write
