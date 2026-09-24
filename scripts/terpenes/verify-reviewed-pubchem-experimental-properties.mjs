@@ -61,8 +61,8 @@ for (const token of [
   "references",
   "response.status === 404",
 ]) {
-  if (!builder.includes(token)) {
-    throw new Error(`Experimental-property builder missing contract: ${token}`);
+  if (!(builder + "\n" + pugViewLib).includes(token)) {
+    throw new Error(`Experimental-property parser/builder missing contract: ${token}`);
   }
 }
 
