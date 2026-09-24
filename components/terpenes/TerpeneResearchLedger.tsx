@@ -14,6 +14,21 @@ function sourceMap(sources: ResearchSource[]) {
   return new Map(sources.map((source) => [source.id, source]));
 }
 
+const coverageGroups = [
+  { id: "human", label: "Human", types: ["human-experimental", "human-clinical", "human-observational"] },
+  { id: "animal", label: "Animal", types: ["animal"] },
+  { id: "mechanistic", label: "Mechanistic / in vitro", types: ["mechanistic", "in-vitro"] },
+  { id: "plant", label: "Plant chemistry / genetics", types: ["chemical-analysis", "enzyme-functional", "genomics"] },
+  { id: "safety", label: "Safety / stability", types: ["toxicology", "stability-study"] },
+  { id: "review", label: "Reviews", types: ["review"] },
+  { id: "sensory", label: "Sensory", types: ["sensory"] },
+] as const;
+
+function countGroup(records: ResearchEvidenceRecord[], types: readonly string[]) {
+  const allowed = new Set(types);
+  return records.filter((record) => allowed.has(record.studyType)).length;
+}
+
 export function TerpeneResearchLedger({ records, sources }: Props) {
   const [query, setQuery] = useState("");
   const [claimType, setClaimType] = useState("all");
@@ -24,6 +39,32 @@ export function TerpeneResearchLedger({ records, sources }: Props) {
   const claimTypes = useMemo(() => [...new Set(records.map((record) => record.claimType))].sort(), [records]);
   const studyTypes = useMemo(() => [...new Set(records.map((record) => record.studyType))].sort(), [records]);
   const reviewStates = useMemo(() => [...new Set(records.map((record) => record.reviewStatus))].sort(), [records]);
+
+  const coverage = useMemo(
+    () =>
+      coverageGroups.map((group) => ({
+        ...group,
+        count: countGroup(records, group.types),
+      })),
+    [records],
+  );
+
+  const compoundCoverage = useMemo(() => {
+    const slugs = [...new Set(records.map((record) => record.compoundSlug))]
+      .filter((slug) => slug !== "_general-terpene")
+      .sort();
+
+    return slugs.map((slug) => {
+      const compoundRecords = records.filter((record) => record.compoundSlug === slug);
+      return {
+        slug,
+        total: compoundRecords.length,
+        groups: Object.fromEntries(
+          coverageGroups.map((group) => [group.id, countGroup(compoundRecords, group.types)]),
+        ) as Record<string, number>,
+      };
+    });
+  }, [records]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -44,6 +85,59 @@ export function TerpeneResearchLedger({ records, sources }: Props) {
 
   return (
     <div className={styles.ledger}>
+      <section className={styles.landscape} aria-label="Research evidence landscape">
+        <div className={styles.landscapeHeading}>
+          <div>
+            <span>Evidence landscape</span>
+            <h2>Coverage is not the same thing as evidence strength.</h2>
+          </div>
+          <p>
+            Counts show how many reviewed records exist in each study family. A larger number does not
+            automatically mean a stronger or more clinically relevant conclusion.
+          </p>
+        </div>
+
+        <div className={styles.coverageCards}>
+          {coverage.map((group) => (
+            <article key={group.id}>
+              <span>{group.label}</span>
+              <strong>{group.count}</strong>
+              <small>{group.types.map((type) => humanizeEvidenceTerm(type)).join(" · ")}</small>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.matrixWrap}>
+          <table className={styles.matrix}>
+            <thead>
+              <tr>
+                <th>Compound</th>
+                {coverageGroups.map((group) => <th key={group.id}>{group.label}</th>)}
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {compoundCoverage.map((row) => (
+                <tr key={row.slug}>
+                  <th>{humanizeEvidenceTerm(row.slug)}</th>
+                  {coverageGroups.map((group) => (
+                    <td key={group.id} data-empty={row.groups[group.id] === 0 ? "" : undefined}>
+                      {row.groups[group.id]}
+                    </td>
+                  ))}
+                  <td><strong>{row.total}</strong></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className={styles.matrixNote}>
+          A zero means this ledger does not currently contain a reviewed record in that study family for the compound.
+          It does not prove the evidence does not exist elsewhere.
+        </p>
+      </section>
+
       <section className={styles.controls} aria-label="Research ledger filters">
         <label className={styles.search}>
           <span>Search evidence</span>
