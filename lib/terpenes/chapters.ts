@@ -14,6 +14,8 @@ function buildSections({
   safetyEvidenceCount = 0,
   stabilityEvidenceCount = 0,
   generalPostharvestEvidenceCount = 0,
+  cultivationEvidenceCount = 0,
+  postharvestEvidenceCount = 0,
   hasAssessment = false,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
@@ -103,14 +105,19 @@ function buildSections({
       label: "Cultivation & post-harvest",
       summary: "How genetics, development, environment, harvest timing, drying, curing, oxidation, and storage can shape measured chemistry.",
       status:
-        generalPostharvestEvidenceCount > 0
-          ? "reviewed-foundation"
-          : /storage|handling|drying|oxidation|environment|maturity/i.test(
-              [compound.cannabisContext, compound.geneticsContext, compound.cultivarContext].join(" "),
-            )
+        cultivationEvidenceCount + postharvestEvidenceCount > 0
+          ? "linked-evidence"
+          : generalPostharvestEvidenceCount > 0
             ? "reviewed-foundation"
-            : "needs-expansion",
-      evidenceCount: generalPostharvestEvidenceCount,
+            : /storage|handling|drying|oxidation|environment|maturity/i.test(
+                [compound.cannabisContext, compound.geneticsContext, compound.cultivarContext].join(" "),
+              )
+              ? "reviewed-foundation"
+              : "needs-expansion",
+      evidenceCount:
+        cultivationEvidenceCount +
+        postharvestEvidenceCount +
+        generalPostharvestEvidenceCount,
       sourceIds: compound.sourceIds,
     },
     {
