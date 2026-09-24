@@ -174,6 +174,10 @@ const requiredSourceIds = [
   "API-2022-CARYOPHYLLENE-SAFETY",
   "SURENDRAN-2021-MYRCENE-REVIEW",
   "BOTVID-2026-LIMONENE-LINALOOL",
+  "NTP-2026-ALPHA-PINENE-INHALATION",
+  "MENEZES-2021-TERPINOLENE-REVIEW",
+  "WEI-2006-PINENE-DERMAL",
+  "BORGES-2026-HUMULENE-ZEBRAFISH",
 ];
 const sourceIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
@@ -191,6 +195,10 @@ const requiredEvidenceIds = [
   "surendran2021-myrcene-human-evidence-limit",
   "botvid2026-limonene-hydroperoxide-contact-allergy",
   "botvid2026-linalool-hydroperoxide-contact-allergy",
+  "ntp2026-alpha-pinene-chronic-inhalation",
+  "menezes2021-terpinolene-safety-gap",
+  "wei2006-beta-pinene-dermal-irritation",
+  "borges2026-humulene-acute-zebrafish",
 ];
 const evidenceIds = new Set((ledger.records ?? []).map((record) => record.id));
 for (const evidenceId of requiredEvidenceIds) {
