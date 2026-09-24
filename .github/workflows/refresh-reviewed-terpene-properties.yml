@@ -48,13 +48,15 @@ jobs:
           set -euo pipefail
           node --input-type=module <<'NODE'
           import fs from "node:fs";
+          const manifest = JSON.parse(fs.readFileSync("data/terpenes/reviewed-pubchem-manifest.json", "utf8"));
+          const expectedCount = manifest.compounds.length;
           const cache = JSON.parse(fs.readFileSync("data/terpenes/reviewed-pubchem-properties.json", "utf8"));
           const experimental = JSON.parse(
             fs.readFileSync("data/terpenes/reviewed-pubchem-experimental-properties.json", "utf8"),
           );
 
           if (cache.status !== "compiled") throw new Error("Reviewed PubChem property cache did not compile");
-          if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) throw new Error("Expected 10 reviewed PubChem property records");
+          if (!Array.isArray(cache.compounds) || cache.compounds.length !== expectedCount) throw new Error(`Expected ${expectedCount} reviewed PubChem property records`);
           for (const record of cache.compounds) {
             if (!record.slug || !record.pubchemCid || !record.properties?.InChIKey || !record.properties?.SMILES) {
               throw new Error(`Incomplete reviewed PubChem record: ${record.slug ?? "unknown"}`);
@@ -67,8 +69,8 @@ jobs:
           if (experimental.status !== "compiled") {
             throw new Error("Reviewed PubChem experimental property cache did not compile");
           }
-          if (!Array.isArray(experimental.compounds) || experimental.compounds.length !== 10) {
-            throw new Error("Expected 10 reviewed PubChem experimental property records");
+          if (!Array.isArray(experimental.compounds) || experimental.compounds.length !== expectedCount) {
+            throw new Error(`Expected ${expectedCount} reviewed PubChem experimental property records`);
           }
 
           let experimentalEvidenceCount = 0;
