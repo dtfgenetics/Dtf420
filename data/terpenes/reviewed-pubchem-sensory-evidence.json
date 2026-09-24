@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": "2026-09-24T01:43:55.952Z",
+  "generatedAt": "2026-09-24T10:17:03.761Z",
   "headings": [
     "Odor",
     "Odor Threshold",
@@ -13,7 +13,7 @@
       "slug": "beta-myrcene",
       "pubchemCid": 31253,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:37.844Z",
+      "fetchedAt": "2026-09-24T10:16:50.844Z",
       "sensory": {
         "Odor": [
           {
@@ -71,7 +71,7 @@
       "slug": "limonene",
       "pubchemCid": 22311,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:40.022Z",
+      "fetchedAt": "2026-09-24T10:16:51.659Z",
       "sensory": {
         "Odor": [
           {
@@ -114,7 +114,7 @@
       "slug": "alpha-pinene",
       "pubchemCid": 6654,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:41.010Z",
+      "fetchedAt": "2026-09-24T10:16:52.469Z",
       "sensory": {
         "Odor": [
           {
@@ -156,7 +156,7 @@
       "slug": "beta-pinene",
       "pubchemCid": 14896,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:42.295Z",
+      "fetchedAt": "2026-09-24T10:16:53.256Z",
       "sensory": {
         "Odor": [
           {
@@ -229,7 +229,7 @@
       "slug": "terpinolene",
       "pubchemCid": 11463,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:43.416Z",
+      "fetchedAt": "2026-09-24T10:16:54.113Z",
       "sensory": {
         "Odor": [
           {
@@ -302,7 +302,7 @@
       "slug": "linalool",
       "pubchemCid": 6549,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:51.841Z",
+      "fetchedAt": "2026-09-24T10:16:54.903Z",
       "sensory": {
         "Odor": [
           {
@@ -451,7 +451,7 @@
       "slug": "beta-caryophyllene",
       "pubchemCid": 5281515,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:52.789Z",
+      "fetchedAt": "2026-09-24T10:16:55.700Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -462,7 +462,7 @@
       "slug": "alpha-humulene",
       "pubchemCid": 5281520,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:53.849Z",
+      "fetchedAt": "2026-09-24T10:16:56.439Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -473,7 +473,7 @@
       "slug": "squalene",
       "pubchemCid": 638072,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:54.864Z",
+      "fetchedAt": "2026-09-24T10:16:57.394Z",
       "sensory": {
         "Odor": [
           {
@@ -500,7 +500,51 @@
       "slug": "beta-carotene",
       "pubchemCid": 5280489,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T01:43:55.952Z",
+      "fetchedAt": "2026-09-24T10:16:58.387Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "e-beta-ocimene",
+      "pubchemCid": 5281553,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:16:59.292Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "z-beta-ocimene",
+      "pubchemCid": 5320250,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:00.274Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "alpha-terpinene",
+      "pubchemCid": 7462,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:02.756Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "gamma-terpinene",
+      "pubchemCid": 7461,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T10:17:03.761Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
