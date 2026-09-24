@@ -49,7 +49,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
       </p>
 
       {visibleGames.length > 0 ? (
-        <div className={styles.libraryGrid} id="game-library-results" role="region" aria-label="Game library results">
+        <div className={styles.libraryGrid} id="game-library-results" role="region" aria-labelledby="game-library-result-count">
           {visibleGames.map((game) => {
             const preview = game.status === "preview";
             return (
