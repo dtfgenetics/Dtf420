@@ -1,12 +1,511 @@
 {
   "schemaVersion": "1.0.0",
-  "status": "not-generated",
+  "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": null,
+  "generatedAt": "2026-09-24T01:43:55.952Z",
   "headings": [
     "Odor",
     "Odor Threshold",
     "Taste"
   ],
-  "compounds": []
+  "compounds": [
+    {
+      "slug": "beta-myrcene",
+      "pubchemCid": 31253,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:37.844Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "Pleasant",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Terpene odor",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [],
+        "Taste": [
+          {
+            "reportedValue": "SWEET, CITRUS",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "limonene",
+      "pubchemCid": 22311,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:40.022Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "Pleasant lemon-like",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [],
+        "Taste": [
+          {
+            "reportedValue": "Sweet, citrus taste",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "alpha-pinene",
+      "pubchemCid": 6654,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:41.010Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "CHARACTERISTIC ODOR OF PINE",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Odor of turpentine",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "beta-pinene",
+      "pubchemCid": 14896,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:42.295Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "CHARACTERISTIC TURPENTINE ODOR; DRY, WOODY OR RESINOUS AROMA",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "PINEY, TURPENTINE-LIKE ODOR",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Terpene odor",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [],
+        "Taste": [
+          {
+            "reportedValue": "PINEY, TURPENTINE-LIKE TASTE",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "terpinolene",
+      "pubchemCid": 11463,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:43.416Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "SWEET, PINE ODOR",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "PINE-LIKE AROMA",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [],
+        "Taste": [
+          {
+            "reportedValue": "SOMEWHAT SWEET, CITRUS FLAVOR",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "TERPENE TASTE",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "linalool",
+      "pubchemCid": 6549,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:51.841Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "Odor similar to that of bergamot oil and French lavender",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Typical floral odor free from camphoraceous and terpenic notes",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Floral, spicy, wood odor",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Flowery-fresh odor and reminiscent of Lily of the Valley",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [
+          {
+            "reportedValue": "Odor Threshold Low: 1.0 [ppm]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz5839",
+                "name": "Linalool",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "... Nasal pungency ... with a threshold of ~ 320 ppm ... Olfactory threshold ... at about 1 ppm.",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          }
+        ],
+        "Taste": [
+          {
+            "reportedValue": "Taste characteristics at 30 ppm: Floral, woody, sweet with a green, spicy tropical nuance",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Flavor characteristics: light, floral",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Spicy, citrus taste",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "beta-caryophyllene",
+      "pubchemCid": 5281515,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:52.789Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "alpha-humulene",
+      "pubchemCid": 5281520,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:53.849Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "squalene",
+      "pubchemCid": 638072,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:54.864Z",
+      "sensory": {
+        "Odor": [
+          {
+            "reportedValue": "Faint agreeable odor",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 33,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "8242",
+                "name": "Squalene",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8242"
+              }
+            ]
+          }
+        ],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    },
+    {
+      "slug": "beta-carotene",
+      "pubchemCid": 5280489,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:43:55.952Z",
+      "sensory": {
+        "Odor": [],
+        "Odor Threshold": [],
+        "Taste": []
+      }
+    }
+  ]
 }
