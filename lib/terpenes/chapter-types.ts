@@ -63,6 +63,7 @@ export type BuildChapterContext = {
   hasPhysicalPropertyRecord?: boolean;
   experimentalPropertyEvidenceCount?: number;
   sensoryEvidenceCount?: number;
+  naturalOccurrenceEvidenceCount?: number;
   stereoEvidenceCount?: number;
   relatedCompounds: TerpeneCompound[];
 };
