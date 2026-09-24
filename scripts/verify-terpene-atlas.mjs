@@ -64,6 +64,9 @@ const requiredFiles = [
   "public/data/terpenes/cultivars/manifest.json",
   ".github/workflows/refresh-terpene-cultivars.yml",
   "scripts/terpenes/verify-cultivar-browser.mjs",
+  "data/terpenes/reviewed-cultivar-distributions.json",
+  "lib/terpenes/cultivar-distributions.ts",
+  "scripts/terpenes/verify-compound-cultivar-distributions.mjs",
   "components/terpenes/TerpeneCorpusExplorer.tsx",
   "components/terpenes/TerpeneCorpusExplorer.module.css",
   "app/learn/terpenes/corpus/page.tsx",
@@ -275,8 +278,15 @@ for (const token of ['href="/learn/terpenes/research"', "Open research ledger"])
   }
 }
 
+const cultivarDistributionSource = fs.readFileSync(path.join(root, "lib/terpenes/cultivar-distributions.ts"), "utf8");
+for (const token of ["getReviewedCultivarDistribution", "getReviewedCultivarDistributionDatasetMeta"]) {
+  if (!cultivarDistributionSource.includes(token)) {
+    throw new Error(`Compound cultivar distribution helper missing: ${token}`);
+  }
+}
+
 const compoundPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
-for (const token of ["Source-verified genetics", "Reviewed evidence", "Open the full TPS genetics map", "Open the research ledger"]) {
+for (const token of ["Source-verified genetics", "Reviewed evidence", "Open the full TPS genetics map", "Open the research ledger", "Measured cultivar-group distribution", "Open full cultivar chemistry explorer"]) {
   if (!compoundPageSource.includes(token)) {
     throw new Error(`Compound terpene record missing linked evidence UI: ${token}`);
   }
