@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-24T09:38:23.340Z",
+  "policy": {
+    "nameSimilarityEstablishesIdentity": false,
+    "aggregateIsomersCountAsExactCompound": false,
+    "tentativeTpsProductsCountAsPromotionReady": false,
+    "reviewedRecordRequiresExactChemicalIdentity": true,
+    "reviewedRecordRequiresEvidenceScopedClaims": true
+  },
+  "reviewedCompoundCount": 12,
+  "candidateCount": 3,
+  "promotionReadyCount": 0,
+  "candidates": [
+    {
+      "slug": "camphene",
+      "score": 7,
+      "status": "needs-biological-identity-review",
+      "exactTpsMajorProduct": false,
+      "tpsMatches": [],
+      "exactCultivarAnalyte": true,
+      "cultivar": {
+        "measurementKind": "compound",
+        "cultivarCount": 1290,
+        "measuredSamples": 31080,
+        "multiLabCultivars": 985,
+        "positiveMedianShare": 0.8853846153846154
+      },
+      "reviewedEvidenceCount": 0,
+      "claimTypes": [],
+      "sourceIds": [],
+      "nextActions": [
+        "verify exact chemical identity",
+        "review Cannabis occurrence and genetics evidence"
+      ]
+    },
+    {
+      "slug": "e-beta-ocimene",
+      "score": 6,
+      "status": "needs-exact-cultivar-or-occurrence-review",
+      "exactTpsMajorProduct": true,
+      "tpsMatches": [
+        {
+          "geneId": "CsTPS6FN",
+          "strainOrigin": "Finola",
+          "sourceLocator": "Table 2",
+          "evidenceId": "booth2017-cstps6fn-e-beta-ocimene",
+          "label": "(E)-β-Ocimene"
+        }
+      ],
+      "exactCultivarAnalyte": false,
+      "cultivar": null,
+      "reviewedEvidenceCount": 1,
+      "claimTypes": [
+        "terpene-synthase-function"
+      ],
+      "sourceIds": [
+        "BOOTH-2017-TPS"
+      ],
+      "nextActions": [
+        "verify exact chemical identity and identifiers",
+        "resolve exact Cannabis occurrence/analyte evidence without collapsing isomers",
+        "add reviewed compound record only after exact occurrence review"
+      ]
+    },
+    {
+      "slug": "z-beta-ocimene",
+      "score": 6,
+      "status": "needs-exact-cultivar-or-occurrence-review",
+      "exactTpsMajorProduct": true,
+      "tpsMatches": [
+        {
+          "geneId": "CsTPS13PK",
+          "strainOrigin": "Purple Kush",
+          "sourceLocator": "Table 2",
+          "evidenceId": "booth2017-cstps13pk-z-beta-ocimene",
+          "label": "(Z)-β-Ocimene"
+        }
+      ],
+      "exactCultivarAnalyte": false,
+      "cultivar": null,
+      "reviewedEvidenceCount": 1,
+      "claimTypes": [
+        "terpene-synthase-function"
+      ],
+      "sourceIds": [
+        "BOOTH-2017-TPS"
+      ],
+      "nextActions": [
+        "verify exact chemical identity and identifiers",
+        "resolve exact Cannabis occurrence/analyte evidence without collapsing isomers",
+        "add reviewed compound record only after exact occurrence review"
+      ]
+    }
+  ]
+}
