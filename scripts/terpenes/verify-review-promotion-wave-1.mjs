@@ -32,6 +32,10 @@ const experimentalCache = JSON.parse(
 const sensoryCache = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-sensory-evidence.json"), "utf8"),
 );
+const promotionPage = fs.readFileSync(
+  path.join(root, "app/learn/terpenes/promotion/page.tsx"),
+  "utf8",
+);
 
 const reviewedSlugs = [...dataSource.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 if (reviewedSlugs.length !== 12) {
@@ -187,3 +191,17 @@ if (sensoryCache.compounds.length !== manifest.compounds.length) {
 console.log(
   `Review promotion wave 1 verified: 12 reviewed compounds; alpha/gamma terpinene promoted; ${queue.candidateCount} blocked candidates remain.`,
 );
+
+
+for (const token of [
+  "Terpene Review Promotion Queue",
+  "Exact evidence outranks name similarity",
+  "Promotion wave 01",
+  "New reviewed chapters",
+  "Blocked candidates",
+  "Aggregate-isomer chemistry cannot satisfy this requirement",
+]) {
+  if (!promotionPage.includes(token)) {
+    throw new Error(`Review promotion transparency page missing: ${token}`);
+  }
+}
