@@ -77,6 +77,7 @@ const requiredFiles = [
   "scripts/terpenes/build-review-promotion-queue.mjs",
   "data/terpenes/review-promotion-queue.json",
   "scripts/terpenes/verify-review-promotion-wave-1.mjs",
+  "app/learn/terpenes/promotion/page.tsx",
   "components/terpenes/TerpeneRegistryExplorer.tsx",
   "components/terpenes/TerpeneRegistryExplorer.module.css",
   "app/learn/terpenes/registry/page.tsx",
@@ -168,7 +169,7 @@ if (!learnSource.includes('href: "/learn/terpenes"')) {
   throw new Error("THC learning hub does not link to /learn/terpenes");
 }
 
-if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/registry"') || !sitemapSource.includes('item("/learn/terpenes/chapters"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
+if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes('item("/learn/terpenes/profiles"') || !sitemapSource.includes('item("/learn/terpenes/cultivars"') || !sitemapSource.includes('item("/learn/terpenes/corpus"') || !sitemapSource.includes('item("/learn/terpenes/registry"') || !sitemapSource.includes('item("/learn/terpenes/chapters"') || !sitemapSource.includes('item("/learn/terpenes/promotion"') || !sitemapSource.includes('item("/learn/terpenes/breeding"') || !sitemapSource.includes('item("/learn/terpenes/genetics"') || !sitemapSource.includes('item("/learn/terpenes/research"') || !sitemapSource.includes("terpeneRoutes")) {
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
@@ -350,6 +351,12 @@ for (const token of ['href="/learn/terpenes/registry"', "Open universal registry
 for (const token of ['href="/learn/terpenes/chapters"', "Open chapter readiness"]) {
   if (!explorerSource.includes(token)) {
     throw new Error(`Terpene Atlas missing chapter readiness navigation: ${token}`);
+  }
+}
+
+for (const token of ['href="/learn/terpenes/promotion"', "Open review promotion"]) {
+  if (!explorerSource.includes(token)) {
+    throw new Error(`Terpene Atlas missing review promotion navigation: ${token}`);
   }
 }
 
