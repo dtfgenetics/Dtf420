@@ -149,6 +149,17 @@ for (const family of requiredFamilies) {
   }
 }
 
+for (const [slug, cid] of [
+  ["e-beta-ocimene", 5281553],
+  ["z-beta-ocimene", 5320250],
+  ["alpha-terpinene", 7462],
+  ["gamma-terpinene", 7461],
+]) {
+  if (!dataSource.includes(`slug: "${slug}"`) || !dataSource.includes(`pubchemCid: ${cid}`)) {
+    throw new Error(`Reviewed terpene wave-2 record missing exact identity: ${slug} / ${cid}`);
+  }
+}
+
 for (const token of ["researchGuardrail", "cannabisOccurrence", "sourceIds", "viewNotes"]) {
   if (!dataSource.includes(token)) {
     throw new Error(`Terpene seed data missing required field: ${token}`);
