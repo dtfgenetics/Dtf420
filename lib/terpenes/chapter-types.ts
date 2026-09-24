@@ -3,6 +3,8 @@ import type { TerpeneCompound } from "./types";
 export type TerpeneChapterSectionId =
   | "identity"
   | "classification"
+  | "physical-properties"
+  | "stereochemistry"
   | "sensory"
   | "natural-occurrence"
   | "cannabis-occurrence"
@@ -58,5 +60,7 @@ export type BuildChapterContext = {
   stabilityEvidenceCount?: number;
   generalPostharvestEvidenceCount?: number;
   hasAssessment?: boolean;
+  hasPhysicalPropertyRecord?: boolean;
+  stereoEvidenceCount?: number;
   relatedCompounds: TerpeneCompound[];
 };

@@ -18,6 +18,8 @@ const sourceRegistry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes
 for (const token of [
   '"identity"',
   '"classification"',
+  '"physical-properties"',
+  '"stereochemistry"',
   '"sensory"',
   '"natural-occurrence"',
   '"cannabis-occurrence"',
@@ -96,7 +98,7 @@ for (const phrase of [
   }
 }
 
-console.log("Deep terpene compound chapters verified: 12-section model, evidence-aware readiness, reviewed safety/stability/post-harvest records, assessment completion, and scoped chapter rendering.");
+console.log("Deep terpene compound chapters verified: 14-section model, evidence-aware readiness, reviewed safety/stability/post-harvest records, physical/stereochemical coverage, assessment completion, and scoped chapter rendering.");
 
 
 for (const token of [

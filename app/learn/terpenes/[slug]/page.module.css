@@ -49,3 +49,14 @@
 .relatedGrid span{color:var(--muted);font-size:8px;line-height:1.4}
 @media(max-width:820px){.chapterHeading,.objectives{grid-template-columns:1fr}.chapterMap{grid-template-columns:repeat(2,minmax(0,1fr))}.completeness{min-width:0}.relatedGrid{grid-template-columns:1fr}}
 @media(max-width:560px){.chapterMap{grid-template-columns:1fr}}
+
+.propertySection,.stereoSection{display:grid;gap:18px}
+.propertySection dl,.stereoSection dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0;background:var(--border)}
+.propertySection dl div,.stereoSection dl div{display:grid;gap:4px;padding:11px;background:#09140d}
+.propertySection dt,.stereoSection dt{color:var(--muted);font-size:7px;text-transform:uppercase;letter-spacing:.05em}
+.propertySection dd,.stereoSection dd{margin:0;color:#e2e9df;font-size:10px;font-weight:800;overflow-wrap:anywhere}
+.structureCodes{display:grid;gap:6px}
+.structureCodes>div{display:grid;grid-template-columns:130px 1fr;gap:10px;align-items:start;padding:9px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.016)}
+.structureCodes span{color:var(--muted);font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+.structureCodes code{overflow-wrap:anywhere;white-space:normal;color:#d9e5d6;font-size:8px;line-height:1.5}
+@media(max-width:720px){.propertySection dl,.stereoSection dl{grid-template-columns:1fr}.structureCodes>div{grid-template-columns:1fr}}

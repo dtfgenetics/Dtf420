@@ -9,6 +9,7 @@ import { evidenceScope, humanizeEvidenceTerm } from "@/lib/terpenes/research";
 import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
 import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
+import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -42,6 +43,8 @@ export default async function TerpeneRecordPage({
   if (!compound) notFound();
 
   const family = getFamilyLabel(compound.terpeneClass);
+  const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
+  const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const mappedGenes = getGenesForCompound(compound.slug);
   const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
   const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
@@ -67,6 +70,8 @@ export default async function TerpeneRecordPage({
     stabilityEvidenceCount: evidenceClaimCounts["chemical-stability"] ?? 0,
     generalPostharvestEvidenceCount: generalPostharvestEvidence.length,
     hasAssessment: quiz.questions.length > 0,
+    hasPhysicalPropertyRecord: Boolean(propertyRecord),
+    stereoEvidenceCount: stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0,
     relatedCompounds,
   });
 
@@ -146,6 +151,68 @@ export default async function TerpeneRecordPage({
               <div><dt>Functional chemistry</dt><dd>{compound.functionalClass}</dd></div>
               <div><dt>Primary precursor context</dt><dd>{compound.biosyntheticPrecursor}</dd></div>
             </dl>
+          </section>
+
+          <section className={styles.propertySection} id="physical-properties">
+            <div className="section-heading">
+              <p className="eyebrow">Physical &amp; molecular properties</p>
+              <h2>Use structure-derived properties as chemistry context, not effect shortcuts.</h2>
+            </div>
+
+            {propertyRecord ? (
+              <>
+                <dl>
+                  <div><dt>IUPAC name</dt><dd>{propertyRecord.properties.IUPACName ?? "Not returned"}</dd></div>
+                  <div><dt>Exact mass</dt><dd>{propertyRecord.properties.ExactMass ?? "Not returned"}</dd></div>
+                  <div><dt>Monoisotopic mass</dt><dd>{propertyRecord.properties.MonoisotopicMass ?? "Not returned"}</dd></div>
+                  <div><dt>XLogP</dt><dd>{propertyRecord.properties.XLogP ?? "Not returned"}</dd></div>
+                  <div><dt>Topological polar surface area</dt><dd>{propertyRecord.properties.TPSA ?? "Not returned"} Å²</dd></div>
+                  <div><dt>Molecular complexity</dt><dd>{propertyRecord.properties.Complexity ?? "Not returned"}</dd></div>
+                  <div><dt>H-bond donors / acceptors</dt><dd>{propertyRecord.properties.HBondDonorCount ?? "—"} / {propertyRecord.properties.HBondAcceptorCount ?? "—"}</dd></div>
+                  <div><dt>Rotatable bonds</dt><dd>{propertyRecord.properties.RotatableBondCount ?? "Not returned"}</dd></div>
+                  <div><dt>Heavy atoms</dt><dd>{propertyRecord.properties.HeavyAtomCount ?? "Not returned"}</dd></div>
+                </dl>
+
+                <div className={styles.structureCodes}>
+                  <div><span>SMILES</span><code>{propertyRecord.properties.SMILES ?? "Not returned"}</code></div>
+                  <div><span>Connectivity SMILES</span><code>{propertyRecord.properties.ConnectivitySMILES ?? "Not returned"}</code></div>
+                  <div><span>InChI</span><code>{propertyRecord.properties.InChI ?? "Not returned"}</code></div>
+                  <div><span>InChIKey</span><code>{propertyRecord.properties.InChIKey ?? "Not returned"}</code></div>
+                </div>
+              </>
+            ) : (
+              <p className={styles.expansionNote}>
+                The reviewed PubChem property cache has not been generated for this deployment yet.
+              </p>
+            )}
+          </section>
+
+          <section className={styles.stereoSection} id="stereochemistry">
+            <div className="section-heading">
+              <p className="eyebrow">Stereochemistry &amp; isomer handling</p>
+              <h2>Distinguish connectivity from stereochemical identity.</h2>
+            </div>
+
+            {propertyRecord && stereo ? (
+              <>
+                <dl>
+                  <div><dt>Atom stereocenters</dt><dd>{stereo.atomStereoCount}</dd></div>
+                  <div><dt>Defined atom stereocenters</dt><dd>{stereo.definedAtomStereoCount}</dd></div>
+                  <div><dt>Undefined atom stereocenters</dt><dd>{stereo.undefinedAtomStereoCount}</dd></div>
+                  <div><dt>Bond stereochemistry sites</dt><dd>{stereo.bondStereoCount}</dd></div>
+                  <div><dt>Defined bond stereochemistry</dt><dd>{stereo.definedBondStereoCount}</dd></div>
+                  <div><dt>Undefined bond stereochemistry</dt><dd>{stereo.undefinedBondStereoCount}</dd></div>
+                </dl>
+                <p className={styles.expansionNote}>
+                  PubChem stereochemistry counts describe the deposited compound record. Routine cannabis laboratory
+                  methods may not resolve every enantiomer or geometric isomer, so analytical method details still matter.
+                </p>
+              </>
+            ) : (
+              <p className={styles.expansionNote}>
+                Stereochemical coverage is pending the reviewed PubChem property cache.
+              </p>
+            )}
           </section>
 
           <section id="sensory">
