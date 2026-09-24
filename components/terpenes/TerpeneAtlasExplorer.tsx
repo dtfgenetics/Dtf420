@@ -401,6 +401,12 @@ export function TerpeneAtlasExplorer() {
           <p>Track the 12-part educational chapter model, linked evidence, assessments, and remaining editorial expansion work across reviewed compounds.</p>
           <Link href="/learn/terpenes/chapters">Open chapter readiness →</Link>
         </article>
+        <article>
+          <span>09</span>
+          <h2>Review promotion</h2>
+          <p>See which registry candidates are ready for reviewed chapters, which evidence signals they already have, and the exact blockers preventing premature promotion.</p>
+          <Link href="/learn/terpenes/promotion">Open review promotion →</Link>
+        </article>
       </section>
     </div>
   );
