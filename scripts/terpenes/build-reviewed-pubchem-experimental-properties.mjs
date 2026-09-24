@@ -117,6 +117,9 @@ async function fetchHeading(cid, heading) {
   const response = await fetch(url, {
     headers: { "User-Agent": "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" },
   });
+  if (response.status === 404) {
+    return { Record: { Section: [], Reference: [] } };
+  }
   if (!response.ok) {
     throw new Error(`PubChem PUG-View request failed for CID ${cid}, ${heading}: ${response.status} ${response.statusText}`);
   }
