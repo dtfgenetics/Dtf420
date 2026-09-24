@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM",
-  "generatedAt": "2026-09-24T01:34:18.637Z",
+  "generatedAt": "2026-09-24T01:43:40.426Z",
   "propertyTags": [
     "Title",
     "MolecularFormula",
@@ -34,7 +34,7 @@
       "slug": "beta-myrcene",
       "pubchemCid": 31253,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:10.708Z",
+      "fetchedAt": "2026-09-24T01:43:31.543Z",
       "properties": {
         "CID": 31253,
         "MolecularFormula": "C10H16",
@@ -67,7 +67,7 @@
       "slug": "limonene",
       "pubchemCid": 22311,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:11.570Z",
+      "fetchedAt": "2026-09-24T01:43:32.518Z",
       "properties": {
         "CID": 22311,
         "MolecularFormula": "C10H16",
@@ -100,7 +100,7 @@
       "slug": "alpha-pinene",
       "pubchemCid": 6654,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:12.382Z",
+      "fetchedAt": "2026-09-24T01:43:33.259Z",
       "properties": {
         "CID": 6654,
         "MolecularFormula": "C10H16",
@@ -133,7 +133,7 @@
       "slug": "beta-pinene",
       "pubchemCid": 14896,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:13.229Z",
+      "fetchedAt": "2026-09-24T01:43:34.080Z",
       "properties": {
         "CID": 14896,
         "MolecularFormula": "C10H16",
@@ -166,7 +166,7 @@
       "slug": "terpinolene",
       "pubchemCid": 11463,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:14.167Z",
+      "fetchedAt": "2026-09-24T01:43:34.895Z",
       "properties": {
         "CID": 11463,
         "MolecularFormula": "C10H16",
@@ -199,7 +199,7 @@
       "slug": "linalool",
       "pubchemCid": 6549,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:14.891Z",
+      "fetchedAt": "2026-09-24T01:43:36.751Z",
       "properties": {
         "CID": 6549,
         "MolecularFormula": "C10H18O",
@@ -232,7 +232,7 @@
       "slug": "beta-caryophyllene",
       "pubchemCid": 5281515,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:15.855Z",
+      "fetchedAt": "2026-09-24T01:43:37.538Z",
       "properties": {
         "CID": 5281515,
         "MolecularFormula": "C15H24",
@@ -265,7 +265,7 @@
       "slug": "alpha-humulene",
       "pubchemCid": 5281520,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:16.724Z",
+      "fetchedAt": "2026-09-24T01:43:38.380Z",
       "properties": {
         "CID": 5281520,
         "MolecularFormula": "C15H24",
@@ -298,7 +298,7 @@
       "slug": "squalene",
       "pubchemCid": 638072,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:17.594Z",
+      "fetchedAt": "2026-09-24T01:43:39.315Z",
       "properties": {
         "CID": 638072,
         "MolecularFormula": "C30H50",
@@ -331,7 +331,7 @@
       "slug": "beta-carotene",
       "pubchemCid": 5280489,
       "sourceId": "PUBCHEM",
-      "fetchedAt": "2026-09-24T01:34:18.387Z",
+      "fetchedAt": "2026-09-24T01:43:40.177Z",
       "properties": {
         "CID": 5280489,
         "MolecularFormula": "C40H56",
