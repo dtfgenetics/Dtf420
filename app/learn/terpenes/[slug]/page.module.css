@@ -93,3 +93,16 @@
 .propertyReferences a,.propertyReferences span{padding:4px 6px;border:1px solid var(--border);border-radius:999px;color:var(--accent-strong);font-size:7px;font-weight:850}
 .propertyReferences span{color:var(--muted)}
 @media(max-width:760px){.experimentalPropertyGrid{grid-template-columns:1fr}}
+
+.sensorySection{display:grid;gap:18px}
+.sensoryGuardrail{margin:0;padding:11px;border-left:3px solid #d2a650;background:rgba(96,67,23,.08);color:var(--muted);font-size:10px;line-height:1.6}
+.sensoryEvidenceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sensoryEvidenceGrid>article{display:grid;gap:9px;padding:14px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.018)}
+.sensoryEvidenceHeading{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sensoryEvidenceHeading>span{font-size:11px;font-weight:900}
+.sensoryEvidenceHeading>strong{color:var(--accent-strong);font-size:8px;text-transform:uppercase}
+.sensoryEvidenceEntries{display:grid;gap:7px}
+.sensoryEvidenceEntries>div{display:grid;gap:4px;padding:9px;border-radius:10px;background:#09140d}
+.sensoryEvidenceEntries>div>strong{font-size:11px;line-height:1.4;overflow-wrap:anywhere}
+.sensoryEvidenceEntries>div>span,.sensoryEvidenceEntries small{color:var(--muted);font-size:8px;line-height:1.45}
+@media(max-width:900px){.sensoryEvidenceGrid{grid-template-columns:1fr}}
