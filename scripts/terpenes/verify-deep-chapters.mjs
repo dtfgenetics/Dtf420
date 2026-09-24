@@ -184,6 +184,7 @@ const requiredSourceIds = [
   "REICHEL-2022-LIGHT-FLOWER-POSITION",
   "HOLWEG-2024-CANNABIS-LIGHT",
   "BIRENBOIM-2024-CANNABIS-DRYING",
+  "GOFFMAN-2025-IRRADIATION-STORAGE",
 ];
 const sourceIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
@@ -217,6 +218,14 @@ const requiredEvidenceIds = [
   "birenboim2024-alpha-pinene-drying",
   "birenboim2024-beta-pinene-drying",
   "holweg2024-total-terpenoid-light-ppfd",
+  "goffman2025-myrcene-postharvest",
+  "goffman2025-limonene-postharvest",
+  "goffman2025-terpinolene-postharvest",
+  "goffman2025-alpha-pinene-postharvest",
+  "goffman2025-beta-pinene-postharvest",
+  "goffman2025-caryophyllene-postharvest",
+  "goffman2025-linalool-postharvest",
+  "goffman2025-humulene-postharvest",
 ];
 const evidenceIds = new Set((ledger.records ?? []).map((record) => record.id));
 for (const evidenceId of requiredEvidenceIds) {

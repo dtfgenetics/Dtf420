@@ -270,6 +270,18 @@
       "pmcid": "PMC11013261",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38611577/",
       "notes": "Controlled-atmosphere versus traditional drying study in two medicinal cannabis chemovars. Preserve cultivar and drying-condition specificity."
+    },
+    {
+      "id": "GOFFMAN-2025-IRRADIATION-STORAGE",
+      "name": "Goffman FD et al. Impact of Electron Beam Treatment and Storage Duration on Microbial Load and Chemical Stability of Dried Hemp Flowers.",
+      "role": "compound-postharvest-terpene-stability",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "pmid": "40942126",
+      "pmcid": "PMC12430370",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12430370/",
+      "license": "CC-BY",
+      "notes": "2025 two-cultivar dried-hemp study comparing electron-beam irradiation and 12-week storage. Individual terpene and class-level changes are treatment-, cultivar-, and time-specific and must not be generalized into universal storage rates."
     }
   ]
 }
