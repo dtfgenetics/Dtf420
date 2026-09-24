@@ -282,6 +282,63 @@
       "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12430370/",
       "license": "CC-BY",
       "notes": "2025 two-cultivar dried-hemp study comparing electron-beam irradiation and 12-week storage. Individual terpene and class-level changes are treatment-, cultivar-, and time-specific and must not be generalized into universal storage rates."
+    },
+    {
+      "id": "GERTSCH-2008-BCP-CB2",
+      "name": "Gertsch J et al. Beta-caryophyllene is a dietary cannabinoid.",
+      "role": "primary-mechanistic-cannabinoid-receptor-evidence",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1073/pnas.0803601105",
+      "pmid": "18574142",
+      "pmcid": "PMC2449371",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/18574142/",
+      "notes": "Primary mechanistic study reporting selective CB2 binding/function for (E)-β-caryophyllene, plus downstream signaling assays. Mechanistic evidence is not a clinical efficacy claim."
+    },
+    {
+      "id": "PEI-2024-BCP-LINALOOL-HUMAN",
+      "name": "Pei S et al. Exploring the physiological response differences of β-caryophyllene, linalool and citral inhalation and their anxiolytic potential.",
+      "role": "controlled-human-inhalation-experiment",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.heliyon.2024.e38941",
+      "pmid": "39430514",
+      "pmcid": "PMC11490826",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/39430514/",
+      "notes": "48-person controlled odor-inhalation experiment with four randomized groups and stress-task measures. Small group size and short exposure window must remain explicit; do not convert into broad therapeutic claims."
+    },
+    {
+      "id": "LORENZETTI-1991-MYRCENE-ANIMAL",
+      "name": "Lorenzetti BB et al. Myrcene mimics the peripheral analgesic activity of lemongrass tea.",
+      "role": "animal-biological-effect",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1016/0378-8741(91)90187-I",
+      "pmid": "1753786",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/1753786/",
+      "notes": "Rat and mouse nociception/hyperalgesia models using myrcene. Animal pharmacology only; not direct evidence of analgesic efficacy in humans or cannabis products."
+    },
+    {
+      "id": "HEUBERGER-2001-LIMONENE-HUMAN",
+      "name": "Heuberger E et al. Effects of chiral fragrances on human autonomic nervous system parameters and self-evaluation.",
+      "role": "controlled-human-fragrance-experiment",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1093/chemse/26.3.281",
+      "pmid": "11287388",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/11287388/",
+      "notes": "Controlled fragrance-inhalation experiment in 20 healthy volunteers comparing limonene/carvone enantiomers. Supports enantiomer- and odor-context-specific human responses, not general cannabis effects."
+    },
+    {
+      "id": "FALK-1993-LIMONENE-INHALATION",
+      "name": "Falk-Filipsson A et al. d-Limonene exposure to humans by inhalation: uptake, distribution, elimination, and effects on pulmonary function.",
+      "role": "human-inhalation-toxicokinetics",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1080/15287399309531702",
+      "pmid": "8421324",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/8421324/",
+      "notes": "Controlled human exposure-chamber study of d-limonene toxicokinetics and pulmonary endpoints at three concentrations. Occupational-style exposure context; not typical cannabis-use exposure."
     }
   ]
 }
