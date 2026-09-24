@@ -92,13 +92,48 @@ export function normalizePugViewEvidence(record, heading, limit = 25) {
   return deduped;
 }
 
-export async function fetchPugViewHeading(cid, heading, { userAgent = "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" } = {}) {
-  const url = `${PUG_VIEW_BASE}/${encodeURIComponent(cid)}/JSON?heading=${encodeURIComponent(heading)}`;
-  const response = await fetch(url, { headers: { "User-Agent": userAgent } });
+async function fetchPugViewJson(url, userAgent) {
+  return fetch(url, { headers: { "User-Agent": userAgent } });
+}
+
+export async function fetchPugViewRecord(
+  cid,
+  { userAgent = "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" } = {},
+) {
+  const url = `${PUG_VIEW_BASE}/${encodeURIComponent(cid)}/JSON`;
+  const response = await fetchPugViewJson(url, userAgent);
 
   if (response.status === 404) {
     return { Record: { Section: [], Reference: [] } };
   }
+  if (!response.ok) {
+    throw new Error(
+      `PubChem PUG-View full-record request failed for CID ${cid}: ${response.status} ${response.statusText}`,
+    );
+  }
+  return response.json();
+}
+
+export async function fetchPugViewHeading(
+  cid,
+  heading,
+  { userAgent = "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" } = {},
+) {
+  const url = `${PUG_VIEW_BASE}/${encodeURIComponent(cid)}/JSON?heading=${encodeURIComponent(heading)}`;
+  const response = await fetchPugViewJson(url, userAgent);
+
+  if (response.status === 404) {
+    return { Record: { Section: [], Reference: [] } };
+  }
+
+  // Some valid PUG-View TOC headings are not accepted by PubChem's heading
+  // query filter. A 400 from the filtered route therefore falls back to the
+  // full record, where normalizePugViewEvidence can locate the heading
+  // recursively without changing evidence semantics.
+  if (response.status === 400) {
+    return fetchPugViewRecord(cid, { userAgent });
+  }
+
   if (!response.ok) {
     throw new Error(
       `PubChem PUG-View request failed for CID ${cid}, ${heading}: ${response.status} ${response.statusText}`,
