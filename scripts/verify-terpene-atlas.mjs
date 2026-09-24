@@ -80,6 +80,12 @@ const requiredFiles = [
   "components/terpenes/TerpeneChapterQuiz.tsx",
   "app/learn/terpenes/chapters/page.tsx",
   "scripts/terpenes/verify-deep-chapters.mjs",
+  "lib/terpenes/properties.ts",
+  "data/terpenes/reviewed-pubchem-manifest.json",
+  "data/terpenes/reviewed-pubchem-properties.json",
+  "scripts/terpenes/build-reviewed-pubchem-properties.mjs",
+  "scripts/terpenes/verify-reviewed-pubchem-properties.mjs",
+  ".github/workflows/refresh-reviewed-terpene-properties.yml",
   "public/data/terpenes/registry/manifest.json",
   ".github/workflows/refresh-terpene-registry.yml",
 ];
