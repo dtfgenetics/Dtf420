@@ -34,7 +34,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
               onClick={() => setFilter(value)}
               type="button"
             >
-              {value === "all" ? "All games" : value === "playable" ? "Playable now" : "Previews"}
+              {value === "all" ? "All games" : value === "playable" ? "Playable now" : "Development previews"}
             </button>
           ))}
         </div>
