@@ -654,3 +654,22 @@ The intended promotion path is:
 `source-reported occurrence → exact compound identity preserved → organism normalized → occurrence cross-checked → reviewed occurrence`
 
 A compound with source-preserved occurrence reports receives `linked-evidence` status for the Natural Occurrence chapter section. Curated summary sources alone remain `reviewed-foundation`.
+
+
+### Cultivation-factor and drying evidence wave
+
+The reviewed chapter system now includes compound-level Cannabis cultivation and post-harvest records from controlled peer-reviewed experiments.
+
+Added cultivation-factor evidence covers:
+
+- **β-myrcene, limonene, β-pinene, and linalool** under multiple controlled light spectra in the Babbas Erkle Cookies accession;
+- **α-pinene, α-humulene, β-caryophyllene, and linalool** in a three-strain greenhouse experiment showing spectrum × genotype and/or flower-position interactions;
+- a general medical-cannabis spectrum/PPFD record showing that total terpenoid response can depend on the tested spectrum/intensity combination.
+
+Added post-harvest evidence covers:
+
+- **β-myrcene, α-pinene, and β-pinene** under controlled-atmosphere versus traditional drying in medicinal cannabis chemovars.
+
+These records preserve genotype, flower position, light treatment, chemovar, analytical method, and drying-condition context. They are evidence that cultivation and post-harvest conditions can affect measured chemistry under specific experimental conditions—not universal recipes for maximizing a terpene.
+
+Chapter readiness treats compound-specific `cultivation-factor` or `postharvest-change` records as `linked-evidence`. General Cannabis storage evidence remains a lower-level `reviewed-foundation`.
