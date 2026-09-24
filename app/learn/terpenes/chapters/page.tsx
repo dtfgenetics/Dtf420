@@ -5,6 +5,7 @@ import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { getGenesForCompound } from "@/lib/terpenes/genetics";
 import { getReviewedEvidenceCountForCompound, getReviewedEvidenceClaimCountsForCompound, getReviewedGeneralEvidence } from "@/lib/terpenes/evidence-queries";
 import { buildEducationMetadata } from "@/lib/education-seo";
+import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = buildEducationMetadata({
@@ -18,6 +19,8 @@ export default function TerpeneChapterIndexPage() {
   const generalPostharvestEvidenceCount = getReviewedGeneralEvidence(["postharvest-change"]).length;
   const chapters = terpeneSeedCompounds.map((compound, index) => {
     const mappedGeneCount = getGenesForCompound(compound.slug).length;
+    const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
+    const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
     const reviewedEvidenceCount = getReviewedEvidenceCountForCompound(compound.slug);
     const claimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
     const relatedCompounds = terpeneSeedCompounds
@@ -34,6 +37,8 @@ export default function TerpeneChapterIndexPage() {
       stabilityEvidenceCount: claimCounts["chemical-stability"] ?? 0,
       generalPostharvestEvidenceCount,
       hasAssessment: true,
+      hasPhysicalPropertyRecord: Boolean(propertyRecord),
+      stereoEvidenceCount: stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0,
       relatedCompounds,
     });
   });
