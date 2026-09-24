@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "SMITH-2022-COMMERCIAL-US",
+  "sourceSampleCount": 34224,
+  "publishableCultivarCount": 1300,
+  "generatedAt": "2026-09-22T02:17:38.912Z",
+  "interpretation": "Distributions summarize medians across publishable cultivar groups in the compiled source dataset. They are descriptive sample-group statistics, not fixed strain values, quality scores, genetic identity tests, or effect predictions.",
+  "compounds": [
+    {
+      "compoundSlug": "alpha-humulene",
+      "normalizedKey": "alpha-humulene",
+      "measurementKind": "compound",
+      "cultivarCount": 1296,
+      "cultivarShare": 0.9969230769230769,
+      "measuredSamples": 31209,
+      "multiLabCultivars": 993,
+      "positiveMedianCultivars": 1284,
+      "positiveMedianShare": 0.9876923076923076,
+      "cultivarMedianDistribution": {
+        "n": 1296,
+        "min": 0,
+        "q1": 0.06628140731579177,
+        "median": 0.09195150442623776,
+        "q3": 0.128075,
+        "max": 0.42,
+        "mean": 0.10232210899093884
+      }
+    },
+    {
+      "compoundSlug": "alpha-pinene",
+      "normalizedKey": "alpha-pinene",
+      "measurementKind": "compound",
+      "cultivarCount": 1300,
+      "cultivarShare": 1,
+      "measuredSamples": 31404,
+      "multiLabCultivars": 995,
+      "positiveMedianCultivars": 1289,
+      "positiveMedianShare": 0.9915384615384616,
+      "cultivarMedianDistribution": {
+        "n": 1300,
+        "min": 0,
+        "q1": 0.04,
+        "median": 0.06,
+        "q3": 0.10347500000000001,
+        "max": 2.092,
+        "mean": 0.09836288280527128
+      }
+    },
+    {
+      "compoundSlug": "beta-caryophyllene",
+      "normalizedKey": "beta-caryophyllene",
+      "measurementKind": "compound",
+      "cultivarCount": 1300,
+      "cultivarShare": 1,
+      "measuredSamples": 31405,
+      "multiLabCultivars": 995,
+      "positiveMedianCultivars": 1298,
+      "positiveMedianShare": 0.9984615384615385,
+      "cultivarMedianDistribution": {
+        "n": 1300,
+        "min": 0,
+        "q1": 0.18699092247301274,
+        "median": 0.26275739797810477,
+        "q3": 0.3709674637397093,
+        "max": 1.325,
+        "mean": 0.29208608690124627
+      }
+    },
+    {
+      "compoundSlug": "beta-myrcene",
+      "normalizedKey": "beta-myrcene",
+      "measurementKind": "compound",
+      "cultivarCount": 1300,
+      "cultivarShare": 1,
+      "measuredSamples": 31405,
+      "multiLabCultivars": 995,
+      "positiveMedianCultivars": 1300,
+      "positiveMedianShare": 1,
+      "cultivarMedianDistribution": {
+        "n": 1300,
+        "min": 0.0124,
+        "q1": 0.21600000000000003,
+        "median": 0.36,
+        "q3": 0.5611122548278373,
+        "max": 1.9209999999999998,
+        "mean": 0.42896072891359643
+      }
+    },
+    {
+      "compoundSlug": "beta-pinene",
+      "normalizedKey": "beta-pinene",
+      "measurementKind": "compound",
+      "cultivarCount": 1244,
+      "cultivarShare": 0.9569230769230769,
+      "measuredSamples": 28981,
+      "multiLabCultivars": 950,
+      "positiveMedianCultivars": 1239,
+      "positiveMedianShare": 0.953076923076923,
+      "cultivarMedianDistribution": {
+        "n": 1244,
+        "min": 0,
+        "q1": 0.06,
+        "median": 0.08,
+        "q3": 0.10007500000000001,
+        "max": 0.499,
+        "mean": 0.08602993332269535
+      }
+    },
+    {
+      "compoundSlug": "limonene",
+      "normalizedKey": "limonene",
+      "measurementKind": "compound-stereochemistry-unspecified",
+      "cultivarCount": 1298,
+      "cultivarShare": 0.9984615384615385,
+      "measuredSamples": 31304,
+      "multiLabCultivars": 995,
+      "positiveMedianCultivars": 1292,
+      "positiveMedianShare": 0.9938461538461538,
+      "cultivarMedianDistribution": {
+        "n": 1298,
+        "min": 0,
+        "q1": 0.1182375,
+        "median": 0.21,
+        "q3": 0.35845,
+        "max": 1.252,
+        "mean": 0.2558488429872502
+      }
+    },
+    {
+      "compoundSlug": "linalool",
+      "normalizedKey": "linalool",
+      "measurementKind": "compound-stereochemistry-unspecified",
+      "cultivarCount": 1298,
+      "cultivarShare": 0.9984615384615385,
+      "measuredSamples": 31271,
+      "multiLabCultivars": 993,
+      "positiveMedianCultivars": 1285,
+      "positiveMedianShare": 0.9884615384615385,
+      "cultivarMedianDistribution": {
+        "n": 1298,
+        "min": 0,
+        "q1": 0.04847463960144163,
+        "median": 0.07500000000000001,
+        "q3": 0.12392500000000001,
+        "max": 0.735,
+        "mean": 0.09340193228391638
+      }
+    },
+    {
+      "compoundSlug": "terpinolene",
+      "normalizedKey": "terpinolene",
+      "measurementKind": "compound",
+      "cultivarCount": 1298,
+      "cultivarShare": 0.9984615384615385,
+      "measuredSamples": 31330,
+      "multiLabCultivars": 990,
+      "positiveMedianCultivars": 984,
+      "positiveMedianShare": 0.7569230769230769,
+      "cultivarMedianDistribution": {
+        "n": 1298,
+        "min": 0,
+        "q1": 0.002,
+        "median": 0.01,
+        "q3": 0.015,
+        "max": 1.33,
+        "mean": 0.06644441825790125
+      }
+    }
+  ]
+}
