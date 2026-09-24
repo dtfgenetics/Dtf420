@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-manifest.json"), "utf8"),
+);
 const cache = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-natural-occurrence.json"), "utf8"),
 );
