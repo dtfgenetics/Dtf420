@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "status": "not-generated",
+  "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": null,
+  "generatedAt": "2026-09-24T01:34:38.011Z",
   "headings": [
     "Boiling Point",
     "Melting Point",
@@ -11,5 +11,2148 @@
     "Flash Point",
     "Refractive Index"
   ],
-  "compounds": []
+  "compounds": [
+    {
+      "slug": "beta-myrcene",
+      "pubchemCid": 31253,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:20.274Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "332.6 °F at 760 mmHg (USCG, 1999)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 11,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "17426",
+                "name": "MYRCENE, [LIQUID]",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/17426"
+              }
+            ]
+          },
+          {
+            "reportedValue": "167 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "166.00 to 167.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 39,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0038169",
+                "name": "beta-Myrcene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0038169"
+              }
+            ]
+          },
+          {
+            "reportedValue": "166-167 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 49,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1326",
+                "name": "7-Methyl-3-methyeneocta-1,6-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1326/"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "< -10 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "< -10 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 39,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0038169",
+                "name": "beta-Myrcene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0038169"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "4.61 mmHg (USCG, 1999)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 11,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "17426",
+                "name": "MYRCENE, [LIQUID]",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/17426"
+              }
+            ]
+          },
+          {
+            "reportedValue": "2.01 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz6217",
+                "name": "Myrcene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "2.09 mm Hg at 25 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.794 at 20 °C/4 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Density: 0.7959 at 25 °C/25 °C; max absorption (isooctane): 224.5 nm /alpha-Myrcene/",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.789-0.793",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 49,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1326",
+                "name": "7-Methyl-3-methyeneocta-1,6-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1326/"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "103 °F (USCG, 1999)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 11,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "17426",
+                "name": "MYRCENE, [LIQUID]",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/17426"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "Triply unsaturated aliphatic hydrocarbon; Index of refraction: 1.471 at 20 °C (81% Myrcene)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Index of refraction: 1.4709 at 20 °C; max absorption (ethanol): 226 nm (epsilon = 16,100)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1258",
+                "name": "MYRCENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1258"
+              }
+            ]
+          },
+          {
+            "reportedValue": "1.466-1.471",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 49,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1326",
+                "name": "7-Methyl-3-methyeneocta-1,6-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1326/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "limonene",
+      "pubchemCid": 22311,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:21.815Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "352 °F at 760 mmHg (USCG, 1999)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 9,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "3303",
+                "name": "DIPENTENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/3303"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Colorless liquid; lemon-like odor. Specific gravity: 0.857 at 15.5 °C/15.5 °C; BP: 175-176 °C; Refractive index: 1.473 at 20 °C. Miscible with alcohol; insoluble in water /Limonene, inactive/",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          },
+          {
+            "reportedValue": "352 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 93,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "797",
+                "name": "LIMONENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/797"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "-40 °F (USCG, 1999)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 9,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "3303",
+                "name": "DIPENTENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/3303"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-95.5 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-40 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 93,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "797",
+                "name": "LIMONENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/797"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "1.55 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 49,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz7847",
+                "name": "Limonene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "1.55 mm Hg at 25 °C /extrapolated/",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.842 at 69.8 °F (USCG, 1999) - Less dense than water; will float",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 9,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "3303",
+                "name": "DIPENTENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/3303"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.8402 at 20.85 °C/4 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.842 at 69.8 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 93,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "797",
+                "name": "LIMONENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/797"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "115 °F (USCG, 1999)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 9,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "3303",
+                "name": "DIPENTENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/3303"
+              }
+            ]
+          },
+          {
+            "reportedValue": "45 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 49,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz7847",
+                "name": "Limonene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "113 °F (45 °C) (Close cup)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          },
+          {
+            "reportedValue": "115 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 93,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "797",
+                "name": "LIMONENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/797"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "Index of refraction: 1.4744 at 25 °C/D",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 51,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "1809",
+                "name": "LIMONENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/1809"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "alpha-pinene",
+      "pubchemCid": 6654,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:23.385Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "313.2 °F at 760 mmHg (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 4,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "1343",
+                "name": "ALPHA-PINENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/1343"
+              }
+            ]
+          },
+          {
+            "reportedValue": "156 °C at 760 mm Hg",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "155 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 53,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1328",
+                "name": "2,6,6-Trimethyl-bicyclo(3.1.1)hept-2-ene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1328/"
+              }
+            ]
+          },
+          {
+            "reportedValue": "313.2 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 83,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "711",
+                "name": "α-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/711"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "-67 °F (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 4,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "1343",
+                "name": "ALPHA-PINENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/1343"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-62.5 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-67 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 83,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "711",
+                "name": "α-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/711"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "10 mmHg at 99.1 °F (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 4,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "1343",
+                "name": "ALPHA-PINENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/1343"
+              }
+            ]
+          },
+          {
+            "reportedValue": "4.75 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 40,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz3591",
+                "name": "alpha-Pinene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "4.75 mm Hg at 25 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "10 mmHg at 99.1 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 83,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "711",
+                "name": "α-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/711"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.858 (USCG, 1999) - Less dense than water; will float",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 4,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "1343",
+                "name": "ALPHA-PINENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/1343"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Density: 0.8592 at 20 °C/4 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "DENSITY: 0.8625 AT 15 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.855-0.860",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 53,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1328",
+                "name": "2,6,6-Trimethyl-bicyclo(3.1.1)hept-2-ene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1328/"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.858",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 83,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "711",
+                "name": "α-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/711"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "91 °F (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 4,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "1343",
+                "name": "ALPHA-PINENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/1343"
+              }
+            ]
+          },
+          {
+            "reportedValue": "33 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 40,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz3591",
+                "name": "alpha-Pinene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "91 °F (33 °C) (CLOSED CUP)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "91 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 83,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "711",
+                "name": "α-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/711"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "INDEX OF REFRACTION: 1.4680 @ 15 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Index of refraction: 1.4632 at 25 °C/D",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 43,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "720",
+                "name": "ALPHA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/720"
+              }
+            ]
+          },
+          {
+            "reportedValue": "1.462-1.468",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 53,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1328",
+                "name": "2,6,6-Trimethyl-bicyclo(3.1.1)hept-2-ene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1328/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "beta-pinene",
+      "pubchemCid": 14896,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:29.067Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "166 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "BP: 165-166 °C at 760 mm Hg /dl-form/",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "163-166 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 40,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1329",
+                "name": "6,6-Dimethyl-2-methylenebicyclo(3.1.1)heptane",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1329/"
+              }
+            ]
+          },
+          {
+            "reportedValue": "329 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 70,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "1021",
+                "name": "β-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/1021"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "-61.5 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-78.7 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 70,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "1021",
+                "name": "β-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/1021"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "2.93 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 34,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz3914",
+                "name": "beta-Pinene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "2.93 mm Hg at 25 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "2.93 mmHg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 70,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "1021",
+                "name": "β-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/1021"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.860 at 25 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.867-0.871",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 40,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1329",
+                "name": "6,6-Dimethyl-2-methylenebicyclo(3.1.1)heptane",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1329/"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.86",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 70,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "1021",
+                "name": "β-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/1021"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "Flash point : 88 °F",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "88 °F",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 70,
+                "sourceName": "Occupational Safety and Health Administration (OSHA)",
+                "sourceId": "1021",
+                "name": "β-PINENE",
+                "description": "The OSHA Occupational Chemical Database contains over 800 entries with information such as physical properties, exposure guidelines, etc.",
+                "url": "https://www.osha.gov/chemicaldata/1021"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "Index of refraction: 1.4768 at 25 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5615",
+                "name": "BETA-PINENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5615"
+              }
+            ]
+          },
+          {
+            "reportedValue": "1.476-1.482",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 40,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1329",
+                "name": "6,6-Dimethyl-2-methylenebicyclo(3.1.1)heptane",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1329/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "terpinolene",
+      "pubchemCid": 11463,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:30.573Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "187 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "183.00 to 185.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036994",
+                "name": "Terpinolene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036994"
+              }
+            ]
+          },
+          {
+            "reportedValue": "183-185 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 48,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1330",
+                "name": "p-Mentha-1,4(8)-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1330/"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "< 25 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036994",
+                "name": "Terpinolene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036994"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "0.74 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 35,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz1516",
+                "name": "Terpinolene",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.74 mm Hg at 25 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.8632 g/cu cm at 15 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Bulk density: wt/gal 7.2 lb at 15.5 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.872-0.882",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 48,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1330",
+                "name": "p-Mentha-1,4(8)-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1330/"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "64 °C (147 °F) - closed cup",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "99 °F (37.2 °C) (Closed cup)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "Index of refraction: 1.4883 at 20 °C/D",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 37,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "5702",
+                "name": "TERPINOLENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/5702"
+              }
+            ]
+          },
+          {
+            "reportedValue": "1.474-1.484",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 48,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1330",
+                "name": "p-Mentha-1,4(8)-diene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1330/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "linalool",
+      "pubchemCid": 6549,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:32.109Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "198 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "194.00 to 197.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 39,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036100",
+                "name": "3,7-Dimethyl-1,6-octadien-3-ol",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036100"
+              }
+            ]
+          },
+          {
+            "reportedValue": "198-200 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 46,
+                "sourceName": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+                "sourceId": "0912",
+                "name": "LINALOOL",
+                "description": "The International Chemical Safety Cards (ICSCs) are data sheets intended to provide essential safety and health information on chemicals in a clear and concise way. The primary aim of the Cards is to promote the safe use of chemicals in the workplace.",
+                "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=0912"
+              }
+            ]
+          },
+          {
+            "reportedValue": "198 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 53,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_357",
+                "name": "3,7-Dimethylocta-1,6-dien-3-ol",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/357/"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "Freezing point: below -74 °C /OECD Guideline 102 (Melting point / Melting Range)/",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "< 25 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 39,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036100",
+                "name": "3,7-Dimethyl-1,6-octadien-3-ol",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036100"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "0.16 [mmHg]",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 36,
+                "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+                "sourceId": "hz5839",
+                "name": "Linalool",
+                "description": "Haz-Map® is an occupational health database designed for health and safety professionals and for consumers seeking information about the adverse effects of workplace exposures to chemical and biological agents.",
+                "url": null
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.159 mm Hg at 23.5 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Vapor pressure, Pa at 25 °C: 21",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 46,
+                "sourceName": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+                "sourceId": "0912",
+                "name": "LINALOOL",
+                "description": "The International Chemical Safety Cards (ICSCs) are data sheets intended to provide essential safety and health information on chemicals in a clear and concise way. The primary aim of the Cards is to promote the safe use of chemicals in the workplace.",
+                "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=0912"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.865 at 15 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Density: 0.870 g/cu cm at 15 °C/4 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "Relative density (water = 1): 0.9",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 46,
+                "sourceName": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+                "sourceId": "0912",
+                "name": "LINALOOL",
+                "description": "The International Chemical Safety Cards (ICSCs) are data sheets intended to provide essential safety and health information on chemicals in a clear and concise way. The primary aim of the Cards is to promote the safe use of chemicals in the workplace.",
+                "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=0912"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.858-0.867",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 53,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_357",
+                "name": "3,7-Dimethylocta-1,6-dien-3-ol",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/357/"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "78 °C (172 °F) - closed cup",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "160 °F (71 °C) (closed cup)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "75 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 46,
+                "sourceName": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+                "sourceId": "0912",
+                "name": "LINALOOL",
+                "description": "The International Chemical Safety Cards (ICSCs) are data sheets intended to provide essential safety and health information on chemicals in a clear and concise way. The primary aim of the Cards is to promote the safe use of chemicals in the workplace.",
+                "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=0912"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "Index of refraction: 1.4627",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "645",
+                "name": "LINALOOL",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/645"
+              }
+            ]
+          },
+          {
+            "reportedValue": "1.461-1.465",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 53,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_357",
+                "name": "3,7-Dimethylocta-1,6-dien-3-ol",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/357/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "beta-caryophyllene",
+      "pubchemCid": 5281515,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:33.516Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "264 to 266 °F at 14 mmHg (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 7,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "19963",
+                "name": "BETA-CARYOPHYLLENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/19963"
+              }
+            ]
+          },
+          {
+            "reportedValue": "256.00 to 259.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036792",
+                "name": "beta-Caryophyllene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036792"
+              }
+            ]
+          },
+          {
+            "reportedValue": "256 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 44,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1323",
+                "name": "4,11,11-Trimethyl-8-methylenebicyclo(7.2.0)undec-4(trans)-ene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1323/"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "< 25 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 38,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036792",
+                "name": "beta-Caryophyllene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036792"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [],
+        "Density": [
+          {
+            "reportedValue": "0.9075 at 68 °F (NTP, 1992) - Less dense than water; will float",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 7,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "19963",
+                "name": "BETA-CARYOPHYLLENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/19963"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.899-0.908",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 44,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1323",
+                "name": "4,11,11-Trimethyl-8-methylenebicyclo(7.2.0)undec-4(trans)-ene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1323/"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "214 °F (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 7,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "19963",
+                "name": "BETA-CARYOPHYLLENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/19963"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "1.498-1.504",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 44,
+                "sourceName": "Joint FAO/WHO Expert Committee on Food Additives (JECFA)",
+                "sourceId": "f_1323",
+                "name": "4,11,11-Trimethyl-8-methylenebicyclo(7.2.0)undec-4(trans)-ene",
+                "description": "The flavoring agent databse provides the most recent specifications for flavorings evaluated by JECFA.",
+                "url": "http://www.fao.org/food/food-safety-quality/scientific-advice/jecfa/jecfa-flav/details/en/c/1323/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "alpha-humulene",
+      "pubchemCid": 5281520,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:34.986Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "99.00 to 100.00 °C. @ 3.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 20,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036467",
+                "name": "alpha-Humulene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036467"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "< 25 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 20,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0036467",
+                "name": "alpha-Humulene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0036467"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [],
+        "Density": [],
+        "Flash Point": [],
+        "Refractive Index": []
+      }
+    },
+    {
+      "slug": "squalene",
+      "pubchemCid": 638072,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:36.490Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "545 °F at 25 mmHg (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 3,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "21030",
+                "name": "TRANS-SQUALENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/21030"
+              }
+            ]
+          },
+          {
+            "reportedValue": "421.3 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 33,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "8242",
+                "name": "Squalene",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8242"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "-103 °F (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 3,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "21030",
+                "name": "TRANS-SQUALENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/21030"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-4.8 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 33,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "8242",
+                "name": "Squalene",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8242"
+              }
+            ]
+          },
+          {
+            "reportedValue": "-75 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 34,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0000256",
+                "name": "Squalene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0000256"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [
+          {
+            "reportedValue": "2 [mm Hg] @240 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 89,
+                "sourceName": "PAC Chemical Database, U.S. Department of Energy",
+                "sourceId": "111-02-4",
+                "name": "Squalene; (2,6,10,15,19,23-Hexamethyl-2,6,10,14,18,22-tetracosahexene, (all-E)-)",
+                "description": null,
+                "url": "https://emhub1.energy.gov/pacteel/search#111-02-4"
+              }
+            ]
+          }
+        ],
+        "Density": [
+          {
+            "reportedValue": "0.8584 at 68 °F (NTP, 1992) - Less dense than water; will float",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 3,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "21030",
+                "name": "TRANS-SQUALENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/21030"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.8584 g/cu cm at 20 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 33,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "8242",
+                "name": "Squalene",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8242"
+              }
+            ]
+          },
+          {
+            "reportedValue": "0.858 @25 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 89,
+                "sourceName": "PAC Chemical Database, U.S. Department of Energy",
+                "sourceId": "111-02-4",
+                "name": "Squalene; (2,6,10,15,19,23-Hexamethyl-2,6,10,14,18,22-tetracosahexene, (all-E)-)",
+                "description": null,
+                "url": "https://emhub1.energy.gov/pacteel/search#111-02-4"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [
+          {
+            "reportedValue": "greater than 235 °F (NTP, 1992)",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 3,
+                "sourceName": "CAMEO Chemicals",
+                "sourceId": "21030",
+                "name": "TRANS-SQUALENE",
+                "description": "CAMEO Chemicals is a chemical database designed for people who are involved in hazardous material incident response and planning. CAMEO Chemicals contains a library with thousands of datasheets containing response-related information and recommendations for hazardous materials that are commonly transported, used, or stored in the United States. CAMEO Chemicals was developed by the National Oceanic and Atmospheric Administration's Office of Response and Restoration in partnership with the Environmental Protection Agency's Office of Emergency Management.",
+                "url": "https://cameochemicals.noaa.gov/chemical/21030"
+              }
+            ]
+          },
+          {
+            "reportedValue": "110 °C - closed cup",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 33,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "8242",
+                "name": "Squalene",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8242"
+              }
+            ]
+          }
+        ],
+        "Refractive Index": [
+          {
+            "reportedValue": "Index of Refraction: 1.4990 at 20 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 33,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "8242",
+                "name": "Squalene",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/8242"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "slug": "beta-carotene",
+      "pubchemCid": 5280489,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T01:34:38.011Z",
+      "properties": {
+        "Boiling Point": [
+          {
+            "reportedValue": "633-577ºC",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 16,
+                "sourceName": "DrugBank",
+                "sourceId": "DB06755",
+                "name": "Beta carotene",
+                "description": "The DrugBank database is a unique bioinformatics and cheminformatics resource that combines detailed drug (i.e. chemical, pharmacological and pharmaceutical) data with comprehensive drug target (i.e. sequence, structure, and pathway) information.",
+                "url": "https://go.drugbank.com/drugs/DB06755"
+              }
+            ]
+          },
+          {
+            "reportedValue": "654.00 to 657.00 °C. @ 760.00 mm Hg",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 45,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0000561",
+                "name": "beta-Carotene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0000561"
+              }
+            ]
+          }
+        ],
+        "Melting Point": [
+          {
+            "reportedValue": "176-184ºC",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 16,
+                "sourceName": "DrugBank",
+                "sourceId": "DB06755",
+                "name": "Beta carotene",
+                "description": "The DrugBank database is a unique bioinformatics and cheminformatics resource that combines detailed drug (i.e. chemical, pharmacological and pharmaceutical) data with comprehensive drug target (i.e. sequence, structure, and pathway) information.",
+                "url": "https://go.drugbank.com/drugs/DB06755"
+              }
+            ]
+          },
+          {
+            "reportedValue": "183 °C (evacuated tube)",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 44,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "3264",
+                "name": "BETA-CAROTENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/3264"
+              }
+            ]
+          },
+          {
+            "reportedValue": "183 °C",
+            "name": null,
+            "description": null,
+            "references": [
+              {
+                "referenceNumber": 45,
+                "sourceName": "Human Metabolome Database (HMDB)",
+                "sourceId": "HMDB0000561",
+                "name": "beta-Carotene",
+                "description": "The Human Metabolome Database (HMDB) is a freely available electronic database containing detailed information about small molecule metabolites found in the human body.",
+                "url": "http://www.hmdb.ca/metabolites/HMDB0000561"
+              }
+            ]
+          }
+        ],
+        "Vapor Pressure": [],
+        "Density": [
+          {
+            "reportedValue": "1.00 at 20 °C/20 °C",
+            "name": null,
+            "description": "PEER REVIEWED",
+            "references": [
+              {
+                "referenceNumber": 44,
+                "sourceName": "Hazardous Substances Data Bank (HSDB)",
+                "sourceId": "3264",
+                "name": "BETA-CAROTENE",
+                "description": "The Hazardous Substances Data Bank (HSDB) is a toxicology database that focuses on the toxicology of potentially hazardous chemicals. It provides information on human exposure, industrial hygiene, emergency handling procedures, environmental fate, regulatory requirements, nanomaterials, and related areas. The information in HSDB has been assessed by a Scientific Review Panel.",
+                "url": "https://pubchem.ncbi.nlm.nih.gov/source/hsdb/3264"
+              }
+            ]
+          }
+        ],
+        "Flash Point": [],
+        "Refractive Index": []
+      }
+    }
+  ]
 }
