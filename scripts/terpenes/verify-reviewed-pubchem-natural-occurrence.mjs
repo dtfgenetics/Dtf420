@@ -103,7 +103,8 @@ for (const token of [
   "Refresh Reviewed Terpene Natural Occurrence",
   "build-reviewed-pubchem-natural-occurrence.mjs",
   "reviewed-pubchem-natural-occurrence.json",
-  "Expected reviewed natural occurrence records",
+  "expectedCount",
+  "reviewed natural occurrence records",
 ]) {
   if (!workflow.includes(token)) {
     throw new Error(`Natural occurrence refresh workflow missing: ${token}`);
