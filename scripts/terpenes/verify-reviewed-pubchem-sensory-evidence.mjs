@@ -122,7 +122,8 @@ for (const token of [
   "Refresh Reviewed Terpene Sensory Evidence",
   "build-reviewed-pubchem-sensory-evidence.mjs",
   "reviewed-pubchem-sensory-evidence.json",
-  "Expected reviewed PubChem sensory evidence records",
+  "expectedCount",
+  "reviewed PubChem sensory evidence records",
 ]) {
   if (!workflow.includes(token)) {
     throw new Error(`Sensory evidence refresh workflow missing: ${token}`);
