@@ -213,6 +213,54 @@
       "pmcid": "PMC13401976",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42503214/",
       "notes": "Acute intraperitoneal zebrafish toxicity/behavior study. Animal model and injection route must remain explicit; not evidence of human safety or inhaled cannabis effects."
+    },
+    {
+      "id": "MORELLO-2022-CANNABIS-LIGHT",
+      "name": "Morello V et al. Light Quality Impacts Vertical Growth Rate, Phytochemical Yield and Cannabinoid Production Efficiency in Cannabis sativa.",
+      "role": "cannabis-cultivation-light-terpene-profile",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.3390/plants11212982",
+      "pmid": "36365435",
+      "pmcid": "PMC9659141",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/36365435/",
+      "notes": "Controlled light-spectrum experiment in Babbas Erkle Cookies with terpene quantification. Treatment effects are chemotype/experiment-specific and must not be generalized as universal lighting recipes."
+    },
+    {
+      "id": "REICHEL-2022-LIGHT-FLOWER-POSITION",
+      "name": "Reichel P et al. Impacts of Different Light Spectra on CBD, CBDA and Terpene Concentrations in Relation to the Flower Positions of Different Cannabis Sativa L. Strains.",
+      "role": "cannabis-light-position-terpene-interactions",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.3390/plants11202695",
+      "pmid": "36297719",
+      "pmcid": "PMC9612076",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/36297719/",
+      "notes": "Three-strain greenhouse experiment showing terpene interactions among spectrum, strain, and flower position. Preserve genotype and position dependence."
+    },
+    {
+      "id": "HOLWEG-2024-CANNABIS-LIGHT",
+      "name": "Holweg MMSF et al. The role of red and white light in optimizing growth and accumulation of plant specialized metabolites at two light intensities in medical cannabis.",
+      "role": "cannabis-light-intensity-terpenoid-production",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.3389/fpls.2024.1393803",
+      "pmid": "38957608",
+      "pmcid": "PMC11217568",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38957608/",
+      "notes": "Medical cannabis light-spectrum and PPFD experiment. Total terpenoid effects were treatment-specific; do not convert to universal cultivation advice."
+    },
+    {
+      "id": "BIRENBOIM-2024-CANNABIS-DRYING",
+      "name": "Birenboim M et al. In Pursuit of Optimal Quality: Cultivar-Specific Drying Approaches for Medicinal Cannabis.",
+      "role": "cannabis-controlled-atmosphere-drying",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.3390/plants13071049",
+      "pmid": "38611577",
+      "pmcid": "PMC11013261",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/38611577/",
+      "notes": "Controlled-atmosphere versus traditional drying study in two medicinal cannabis chemovars. Preserve cultivar and drying-condition specificity."
     }
   ]
 }
