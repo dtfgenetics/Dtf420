@@ -1,0 +1,102 @@
+name: Refresh Reviewed Terpene Sensory Evidence
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "29 7 4 * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-reviewed-terpene-sensory.yml"
+      - "data/terpenes/reviewed-pubchem-manifest.json"
+      - "scripts/terpenes/build-reviewed-pubchem-sensory-evidence.mjs"
+      - "scripts/terpenes/lib/pubchem-pug-view.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-reviewed-terpene-sensory
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Compile reviewed PubChem sensory evidence
+        run: node scripts/terpenes/build-reviewed-pubchem-sensory-evidence.mjs
+
+      - name: Verify reviewed sensory evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const cache = JSON.parse(
+            fs.readFileSync("data/terpenes/reviewed-pubchem-sensory-evidence.json", "utf8"),
+          );
+
+          if (cache.status !== "compiled") {
+            throw new Error("Reviewed PubChem sensory evidence cache did not compile");
+          }
+          if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
+            throw new Error("Expected 10 reviewed PubChem sensory evidence records");
+          }
+
+          const expectedHeadings = ["Odor", "Odor Threshold", "Taste"];
+          for (const heading of expectedHeadings) {
+            if (!cache.headings?.includes(heading)) {
+              throw new Error(`Missing sensory heading: ${heading}`);
+            }
+          }
+
+          let evidenceCount = 0;
+          for (const record of cache.compounds) {
+            if (!record.slug || !record.pubchemCid || !record.sensory) {
+              throw new Error(`Incomplete sensory evidence record: ${record.slug ?? "unknown"}`);
+            }
+            for (const heading of expectedHeadings) {
+              const entries = record.sensory[heading];
+              if (!Array.isArray(entries)) {
+                throw new Error(`Missing sensory evidence array: ${record.slug} / ${heading}`);
+              }
+              evidenceCount += entries.length;
+            }
+          }
+
+          if (evidenceCount < 5) {
+            throw new Error(`Sensory evidence count is implausibly low: ${evidenceCount}`);
+          }
+
+          console.log(
+            `Verified ${evidenceCount} source-preserved sensory reports across ${cache.compounds.length} compounds.`,
+          );
+          NODE
+
+      - name: Commit refreshed sensory evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/terpenes/reviewed-pubchem-sensory-evidence.json
+          if git diff --cached --quiet; then
+            echo "Reviewed PubChem sensory evidence is already current." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Refresh reviewed terpene sensory evidence"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Published reviewed PubChem sensory evidence." >> "$GITHUB_STEP_SUMMARY"
