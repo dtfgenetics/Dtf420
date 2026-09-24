@@ -422,20 +422,22 @@ Only reviewed records should populate definitive THC teaching claims. The univer
 
 ## Deep reviewed compound chapters
 
-Reviewed terpene records use a standardized 12-section educational chapter model:
+Reviewed terpene records use a standardized 14-section educational chapter model:
 
 1. chemical identity;
 2. family and structural classification;
-3. sensory and aroma science;
-4. natural occurrence;
-5. Cannabis occurrence;
-6. biosynthesis and plant biology;
-7. genetics and terpene synthases;
-8. cultivar chemistry;
-9. cultivation and post-harvest;
-10. research and biological evidence;
-11. safety, stability, and exposure;
-12. knowledge check and applied interpretation.
+3. physical and molecular properties;
+4. stereochemistry and isomer handling;
+5. sensory and aroma science;
+6. natural occurrence;
+7. Cannabis occurrence;
+8. biosynthesis and plant biology;
+9. genetics and terpene synthases;
+10. cultivar chemistry;
+11. cultivation and post-harvest;
+12. research and biological evidence;
+13. safety, stability, and exposure;
+14. knowledge check and applied interpretation.
 
 Every section carries an explicit readiness state: `complete`, `reviewed-foundation`, `linked-evidence`, or `needs-expansion`. Chapter readiness is a weighted editorial completeness measure, not a scientific confidence score.
 
@@ -498,3 +500,29 @@ A second reviewed safety wave expands the Safety, Stability & Exposure section f
 These records are deliberately heterogeneous because the underlying evidence is heterogeneous. The chapter UI must preserve route, model, concentration, and study design rather than flattening them into a single safety score.
 
 The NTP α-pinene inhalation report is animal hazard evidence, not a human cannabis-use threshold. β-Pinene dermal irritation does not establish inhalation risk. Terpinolene's review record documents an evidence gap rather than proving safety or harm. α-Humulene's zebrafish LD50 is an acute animal-model result and must not be interpreted as a human exposure limit.
+
+
+## Reviewed PubChem physical and stereochemical layer
+
+The reviewed compound chapters now use a local, versioned PubChem property cache rather than making live browser requests.
+
+The reviewed compound manifest contains the ten current chapter compounds and their PubChem CIDs. A scheduled GitHub workflow requests the current PubChem PUG REST property table for each CID and commits the resulting cache.
+
+The cached property set includes:
+
+- structure-aware SMILES and connectivity-only SMILES;
+- InChI and InChIKey;
+- IUPAC name;
+- XLogP;
+- exact and monoisotopic mass;
+- topological polar surface area;
+- molecular complexity;
+- hydrogen-bond donor/acceptor counts;
+- rotatable bond and heavy-atom counts;
+- isotope count;
+- total, defined, and undefined atom stereochemistry counts;
+- total, defined, and undefined bond stereochemistry counts.
+
+These values support two first-class chapter sections: **Physical & Molecular Properties** and **Stereochemistry & Isomer Handling**. The stereochemistry section explicitly warns that a PubChem compound record's stereochemical definition does not mean routine cannabis laboratory methods resolve every enantiomer or E/Z isomer.
+
+The property cache is refreshed monthly and can also be refreshed manually. Repository verification accepts a bootstrap `not-generated` cache before the first production refresh, but once compiled it requires all ten reviewed compounds and exact structure identifiers.
