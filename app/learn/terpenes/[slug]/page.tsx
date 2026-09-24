@@ -47,7 +47,8 @@ export default async function TerpeneRecordPage({
   const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
   const generalPostharvestEvidence = getReviewedGeneralEvidence(["postharvest-change"]);
   const safetyEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "safety-exposure" || record.claimType === "chemical-stability");
-  const researchEvidence = reviewedEvidence.filter(({ record }) => record.claimType !== "safety-exposure" && record.claimType !== "chemical-stability");
+  const cultivationEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "cultivation-factor" || record.claimType === "postharvest-change");
+  const researchEvidence = reviewedEvidence.filter(({ record }) => !["safety-exposure", "chemical-stability", "cultivation-factor", "postharvest-change"].includes(record.claimType));
   const chapterNumber = terpeneSeedCompounds.findIndex((item) => item.slug === compound.slug) + 1;
   const relatedCompounds = terpeneSeedCompounds
     .filter((item) => item.slug !== compound.slug)
@@ -66,6 +67,8 @@ export default async function TerpeneRecordPage({
     safetyEvidenceCount: evidenceClaimCounts["safety-exposure"] ?? 0,
     stabilityEvidenceCount: evidenceClaimCounts["chemical-stability"] ?? 0,
     generalPostharvestEvidenceCount: generalPostharvestEvidence.length,
+    cultivationEvidenceCount: evidenceClaimCounts["cultivation-factor"] ?? 0,
+    postharvestEvidenceCount: evidenceClaimCounts["postharvest-change"] ?? 0,
     hasAssessment: quiz.questions.length > 0,
     relatedCompounds,
   });
@@ -278,6 +281,29 @@ export default async function TerpeneRecordPage({
             </div>
             <p>{compound.geneticsContext}</p>
             <p>{compound.cultivarContext}</p>
+
+            {cultivationEvidence.length ? (
+              <div className={styles.evidenceGrid}>
+                {cultivationEvidence.map(({ record, source }) => (
+                  <article className={styles.evidenceCard} key={record.id}>
+                    <div className={styles.cardTopline}>
+                      <span>{humanizeEvidenceTerm(record.claimType)}</span>
+                      <strong>{humanizeEvidenceTerm(record.reviewStatus)}</strong>
+                    </div>
+                    <h3>{record.statement}</h3>
+                    <p>{evidenceScope(record)}</p>
+                    <dl>
+                      <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                      <div><dt>Material / population</dt><dd>{record.populationOrMaterial}</dd></div>
+                      <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                    </dl>
+                    {source?.sourceUrl ? (
+                      <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            ) : null}
 
             {generalPostharvestEvidence.length ? (
               <>
