@@ -82,7 +82,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
         </div>
       ) : (
         <div className={styles.emptyState} id="game-library-results" role="region" aria-label="Game library results">
-          <h3>No games match that search.</h3>
+          <h3>No games match these filters.</h3>
           <p>Clear the search or switch the release-status filter.</p>
           <button className={styles.filterButton} type="button" aria-controls="game-library-results" onClick={() => { setFilter("all"); setQuery(""); }}>Clear filters and show every game</button>
         </div>
