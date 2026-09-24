@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceId": "PUBCHEM",
+  "compounds": [
+    {
+      "slug": "limonene",
+      "parentCid": 22311,
+      "parentIdentityScope": "stereo-unspecified",
+      "summary": "The chapter parent CID represents limonene connectivity with one atom stereocenter left undefined. PubChem maintains separate records for the two optical enantiomers.",
+      "isomers": [
+        {
+          "label": "(+)-Limonene",
+          "configuration": "(4R)",
+          "rotation": "+",
+          "pubchemCid": 440917,
+          "casNumber": "5989-27-5"
+        },
+        {
+          "label": "(-)-Limonene",
+          "configuration": "(4S)",
+          "rotation": "-",
+          "pubchemCid": 439250,
+          "casNumber": "5989-54-8"
+        }
+      ]
+    },
+    {
+      "slug": "alpha-pinene",
+      "parentCid": 6654,
+      "parentIdentityScope": "stereo-unspecified",
+      "summary": "The chapter parent CID represents alpha-pinene without fixing its two atom stereocenters. Separate PubChem records define the (+) and (-) enantiomers.",
+      "isomers": [
+        {
+          "label": "(+)-α-Pinene",
+          "configuration": "(1R,5R)",
+          "rotation": "+",
+          "pubchemCid": 82227,
+          "casNumber": "7785-70-8"
+        },
+        {
+          "label": "(-)-α-Pinene",
+          "configuration": "(1S,5S)",
+          "rotation": "-",
+          "pubchemCid": 440968,
+          "casNumber": "7785-26-4"
+        }
+      ]
+    },
+    {
+      "slug": "beta-pinene",
+      "parentCid": 14896,
+      "parentIdentityScope": "stereo-unspecified",
+      "summary": "The chapter parent CID represents beta-pinene without fixing its two atom stereocenters. Separate PubChem records define the (+) and (-) enantiomers.",
+      "isomers": [
+        {
+          "label": "(+)-β-Pinene",
+          "configuration": "(1R,5R)",
+          "rotation": "+",
+          "pubchemCid": 10290825,
+          "casNumber": "19902-08-0"
+        },
+        {
+          "label": "(-)-β-Pinene",
+          "configuration": "(1S,5S)",
+          "rotation": "-",
+          "pubchemCid": 440967,
+          "casNumber": "18172-67-3"
+        }
+      ]
+    },
+    {
+      "slug": "linalool",
+      "parentCid": 6549,
+      "parentIdentityScope": "stereo-unspecified",
+      "summary": "The chapter parent CID represents linalool with one atom stereocenter left undefined. Separate PubChem records define the (R)/(-) and (S)/(+) enantiomers.",
+      "isomers": [
+        {
+          "label": "(-)-Linalool",
+          "configuration": "(3R)",
+          "rotation": "-",
+          "pubchemCid": 443158,
+          "casNumber": "126-91-0"
+        },
+        {
+          "label": "(+)-Linalool",
+          "configuration": "(3S)",
+          "rotation": "+",
+          "pubchemCid": 67179,
+          "casNumber": "126-90-9"
+        }
+      ]
+    },
+    {
+      "slug": "beta-caryophyllene",
+      "parentCid": 5281515,
+      "parentIdentityScope": "stereospecific",
+      "summary": "The chapter PubChem CID is already the naturally common (-)-beta-caryophyllene stereoisomer rather than a stereo-unspecified parent record.",
+      "isomers": [
+        {
+          "label": "(-)-β-Caryophyllene",
+          "configuration": "(1R,4E,9S)",
+          "rotation": "-",
+          "pubchemCid": 5281515,
+          "casNumber": "87-44-5",
+          "chapterIdentity": true
+        },
+        {
+          "label": "(+)-β-Caryophyllene",
+          "configuration": "(1S,4E,9R)",
+          "rotation": "+",
+          "pubchemCid": 20831623,
+          "casNumber": "10579-93-8"
+        }
+      ]
+    }
+  ]
+}

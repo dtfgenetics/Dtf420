@@ -526,3 +526,24 @@ The cached property set includes:
 These values support two first-class chapter sections: **Physical & Molecular Properties** and **Stereochemistry & Isomer Handling**. The stereochemistry section explicitly warns that a PubChem compound record's stereochemical definition does not mean routine cannabis laboratory methods resolve every enantiomer or E/Z isomer.
 
 The property cache is refreshed monthly and can also be refreshed manually. Repository verification accepts a bootstrap `not-generated` cache before the first production refresh, but once compiled it requires all ten reviewed compounds and exact structure identifiers.
+
+
+## Curated stereoisomer identity registry
+
+The reviewed property cache shows whether the PubChem parent record contains defined or undefined stereochemistry, but parent records alone are not sufficient for teaching common terpene enantiomers.
+
+The curated stereoisomer registry currently maps five reviewed chapter compounds:
+
+- limonene: generic CID 22311 plus (+)/(4R) CID 440917 and (-)/(4S) CID 439250;
+- alpha-pinene: generic CID 6654 plus (+)/(1R,5R) CID 82227 and (-)/(1S,5S) CID 440968;
+- beta-pinene: generic CID 14896 plus (+)/(1R,5R) CID 10290825 and (-)/(1S,5S) CID 440967;
+- linalool: generic CID 6549 plus (-)/(3R) CID 443158 and (+)/(3S) CID 67179;
+- beta-caryophyllene: chapter CID 5281515 is already stereospecific (-)-beta-caryophyllene, with the (+) enantiomer at CID 20831623.
+
+### Identity rules
+
+A generic connectivity record with undefined stereocenters must not be presented as though it defines one enantiomer. The compound chapter labels the parent identity scope as either `stereo-unspecified` or `stereospecific`.
+
+The stereoisomer registry is curated identity metadata. It does not claim that every listed stereoisomer has been measured in Cannabis, nor does it claim routine cannabis laboratory methods resolve every enantiomer. Cannabis occurrence and analytical resolution remain separate evidence questions.
+
+Chapter readiness counts curated stereoisomer records when available. This prevents generic parent records with undefined stereochemistry from appearing less complete than they really are after explicit enantiomer identities have been reviewed.

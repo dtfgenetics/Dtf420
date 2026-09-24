@@ -6,6 +6,7 @@ import { getGenesForCompound } from "@/lib/terpenes/genetics";
 import { getReviewedEvidenceCountForCompound, getReviewedEvidenceClaimCountsForCompound, getReviewedGeneralEvidence } from "@/lib/terpenes/evidence-queries";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
+import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = buildEducationMetadata({
@@ -21,6 +22,7 @@ export default function TerpeneChapterIndexPage() {
     const mappedGeneCount = getGenesForCompound(compound.slug).length;
     const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
     const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
+    const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
     const reviewedEvidenceCount = getReviewedEvidenceCountForCompound(compound.slug);
     const claimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
     const relatedCompounds = terpeneSeedCompounds
@@ -38,7 +40,7 @@ export default function TerpeneChapterIndexPage() {
       generalPostharvestEvidenceCount,
       hasAssessment: true,
       hasPhysicalPropertyRecord: Boolean(propertyRecord),
-      stereoEvidenceCount: stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0,
+      stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
       relatedCompounds,
     });
   });
