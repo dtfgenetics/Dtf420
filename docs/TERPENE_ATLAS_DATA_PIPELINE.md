@@ -700,3 +700,38 @@ A cultivar-group distribution is not a permanent “strain percentage.” The da
 The Cultivar chemistry chapter section is promoted to `linked-evidence` only when an exact reviewed distribution exists. Otherwise documented cannabis compounds remain at `reviewed-foundation`, and global reference compounds remain `needs-expansion`.
 
 The compound page displays sample depth, multi-lab breadth, corpus coverage, positive-median share, and cultivar-median quartiles, then links to the full Cultivar Chemistry Explorer for sample-group exploration.
+
+
+## Evidence-ranked review promotion
+
+The universal registry and reviewed educational chapters are deliberately separate systems. Broad chemical candidates are not promoted because their names resemble known terpenes or because a source classifies them broadly as terpenoids.
+
+The review-promotion pipeline combines three high-value signals:
+
+1. **Exact Cannabis TPS evidence** — a compound is a major product of a functionally characterized Cannabis terpene synthase with a source-verified evidence record.
+2. **Exact cultivar analyte evidence** — the commercial Cannabis corpus maps an analyte directly to the compound slug with `measurementKind: "compound"`.
+3. **Reviewed evidence records** — source-verified or editorial-reviewed ledger records attached to the exact compound slug.
+
+Aggregate analytes such as `ocimene-total` never satisfy the exact-compound requirement for (E)-β-ocimene or (Z)-β-ocimene. Tentatively identified TPS products do not count as promotion-ready. Common-name similarity never establishes chemical identity.
+
+### Promotion wave 01
+
+The first evidence-ranked promotion wave adds:
+
+- **α-terpinene** — PubChem CID 7462, CAS 99-86-5, C10H16; major product of CsTPS33PK from Purple Kush; exact commercial-corpus analyte with more than 30,000 measured source samples.
+- **γ-terpinene** — PubChem CID 7461, CAS 99-85-4, C10H16; major product of CsTPS33PK from Purple Kush; exact commercial-corpus analyte with more than 28,000 measured source samples.
+
+Both compounds are added to the reviewed PubChem manifest and the compact cultivar-distribution layer. Their sensory descriptor arrays remain empty until source-preserved sensory evidence is generated; descriptors are not invented during promotion.
+
+After wave 01, the queue intentionally leaves:
+
+- **camphene** at `needs-biological-identity-review`: exact cultivar chemistry exists, but it lacks an exact major-product TPS evidence record in the current reviewed TPS set;
+- **(E)-β-ocimene** and **(Z)-β-ocimene** at `needs-exact-cultivar-or-occurrence-review`: exact TPS evidence exists, but the commercial corpus currently exposes only aggregate `ocimene-total` chemistry.
+
+The public route `/learn/terpenes/promotion` exposes these promotion states, evidence signals, and blockers.
+
+### Manifest-driven reviewed caches
+
+Reviewed PubChem properties, experimental properties, sensory evidence, and natural occurrence workflows derive their expected reviewed-compound count from `reviewed-pubchem-manifest.json` rather than a hard-coded number. This allows the reviewed chapter set to grow without weakening synchronization checks.
+
+A promoted compound must still appear in the exact-identity property cache. Experimental/sensory records may contain empty evidence arrays when PubChem has not yet supplied a report for a heading; empty arrays are preferable to fabricated evidence and are refreshed by the existing source workflows.
