@@ -15,6 +15,8 @@ function buildSections({
   stabilityEvidenceCount = 0,
   generalPostharvestEvidenceCount = 0,
   hasAssessment = false,
+  hasPhysicalPropertyRecord = false,
+  stereoEvidenceCount = 0,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
   const cannabisSources = compound.sourceIds.filter((id) => id !== "PUBCHEM");
@@ -41,6 +43,22 @@ function buildSections({
           : "reviewed-foundation",
       evidenceCount: 0,
       sourceIds: compound.sourceIds,
+    },
+    {
+      id: "physical-properties",
+      label: "Physical & molecular properties",
+      summary: "Exact mass, monoisotopic mass, XLogP, polarity, complexity, hydrogen-bonding, rotatable bonds, and heavy-atom counts from the reviewed PubChem cache.",
+      status: hasPhysicalPropertyRecord ? "linked-evidence" : "needs-expansion",
+      evidenceCount: hasPhysicalPropertyRecord ? 1 : 0,
+      sourceIds: ["PUBCHEM"],
+    },
+    {
+      id: "stereochemistry",
+      label: "Stereochemistry & isomer handling",
+      summary: "Defined and undefined atom/bond stereochemistry, structure-aware identifiers, and analytical interpretation of isomeric forms.",
+      status: hasPhysicalPropertyRecord ? "linked-evidence" : "needs-expansion",
+      evidenceCount: stereoEvidenceCount,
+      sourceIds: ["PUBCHEM"],
     },
     {
       id: "sensory",
