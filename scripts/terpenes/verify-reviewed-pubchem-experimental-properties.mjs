@@ -5,6 +5,10 @@ const root = process.cwd();
 const cache = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-experimental-properties.json"), "utf8"),
 );
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(root, "data/terpenes/reviewed-pubchem-manifest.json"), "utf8"),
+);
+const expectedCount = manifest.compounds?.length ?? 0;
 const sourceRegistry = JSON.parse(
   fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"),
 );
@@ -136,8 +140,8 @@ for (const token of [
 }
 
 if (cache.status === "compiled") {
-  if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) {
-    throw new Error("Compiled experimental-property cache must contain 10 reviewed compounds.");
+  if (!Array.isArray(cache.compounds) || cache.compounds.length !== expectedCount) {
+    throw new Error(`Compiled experimental-property cache must contain ${expectedCount} reviewed compounds.`);
   }
 
   let evidenceCount = 0;
