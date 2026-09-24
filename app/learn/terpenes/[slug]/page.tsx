@@ -73,7 +73,7 @@ export default async function TerpeneRecordPage({
     generalPostharvestEvidenceCount: generalPostharvestEvidence.length,
     hasAssessment: quiz.questions.length > 0,
     hasPhysicalPropertyRecord: Boolean(propertyRecord),
-    stereoEvidenceCount: stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0,
+    stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
     relatedCompounds,
   });
 
