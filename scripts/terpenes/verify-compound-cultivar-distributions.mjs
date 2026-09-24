@@ -22,19 +22,21 @@ if (dataset.schemaVersion !== 1) throw new Error("Reviewed cultivar distribution
 if (dataset.sourceId !== sourceIndex.sourceId) throw new Error("Cultivar distribution sourceId does not match corpus index");
 if (dataset.sourceSampleCount !== sourceIndex.sourceSampleCount) throw new Error("Cultivar distribution source sample count does not match corpus index");
 if (dataset.publishableCultivarCount !== sourceIndex.cultivarCount) throw new Error("Cultivar distribution group count does not match corpus index");
-if (!Array.isArray(dataset.compounds) || dataset.compounds.length !== 8) {
-  throw new Error(`Expected 8 reviewed cannabis terpene distributions, found ${dataset.compounds?.length ?? 0}`);
+if (!Array.isArray(dataset.compounds) || dataset.compounds.length !== 10) {
+  throw new Error(`Expected 10 reviewed cannabis terpene distributions, found ${dataset.compounds?.length ?? 0}`);
 }
 
 const expected = new Set([
   "alpha-humulene",
   "alpha-pinene",
+  "alpha-terpinene",
   "beta-caryophyllene",
   "beta-myrcene",
   "beta-pinene",
   "limonene",
   "linalool",
   "terpinolene",
+  "gamma-terpinene",
 ]);
 
 const seen = new Set();
