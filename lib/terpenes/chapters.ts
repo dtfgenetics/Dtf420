@@ -18,6 +18,7 @@ function buildSections({
   hasPhysicalPropertyRecord = false,
   experimentalPropertyEvidenceCount = 0,
   sensoryEvidenceCount = 0,
+  naturalOccurrenceEvidenceCount = 0,
   stereoEvidenceCount = 0,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
@@ -83,10 +84,18 @@ function buildSections({
     {
       id: "natural-occurrence",
       label: "Natural occurrence",
-      summary: "Occurrence in plants and other natural sources outside cannabis.",
-      status: compound.naturalSources.length >= 3 ? "reviewed-foundation" : "needs-expansion",
-      evidenceCount: compound.naturalSources.length,
-      sourceIds: compound.sourceIds,
+      summary: "Occurrence in plants and other natural sources outside cannabis, separating curated summaries from source-preserved occurrence reports.",
+      status:
+        naturalOccurrenceEvidenceCount > 0
+          ? "linked-evidence"
+          : compound.naturalSources.length >= 3
+            ? "reviewed-foundation"
+            : "needs-expansion",
+      evidenceCount:
+        naturalOccurrenceEvidenceCount > 0
+          ? naturalOccurrenceEvidenceCount
+          : compound.naturalSources.length,
+      sourceIds: ["THC-V13", "PUBCHEM-PUG-VIEW", "LOTUS"],
     },
     {
       id: "cannabis-occurrence",

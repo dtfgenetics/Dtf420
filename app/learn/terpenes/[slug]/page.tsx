@@ -12,6 +12,7 @@ import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
 import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
 import { countExperimentalPropertyEvidence, getReviewedExperimentalPropertyRecord } from "@/lib/terpenes/experimental-properties";
 import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/terpenes/sensory-evidence";
+import { countNaturalOccurrenceEvidence, getReviewedNaturalOccurrenceRecord } from "@/lib/terpenes/natural-occurrence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
@@ -51,6 +52,8 @@ export default async function TerpeneRecordPage({
   const experimentalPropertyEvidenceCount = countExperimentalPropertyEvidence(experimentalPropertyRecord);
   const sensoryEvidenceRecord = getReviewedSensoryEvidenceRecord(compound.slug);
   const sensoryEvidenceCount = countSensoryEvidence(sensoryEvidenceRecord);
+  const naturalOccurrenceRecord = getReviewedNaturalOccurrenceRecord(compound.slug);
+  const naturalOccurrenceEvidenceCount = countNaturalOccurrenceEvidence(naturalOccurrenceRecord);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
@@ -81,6 +84,7 @@ export default async function TerpeneRecordPage({
     hasPhysicalPropertyRecord: Boolean(propertyRecord),
     experimentalPropertyEvidenceCount,
     sensoryEvidenceCount,
+    naturalOccurrenceEvidenceCount,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
     relatedCompounds,
   });
@@ -497,7 +501,7 @@ export default async function TerpeneRecordPage({
             </Link>
           </section>
 
-          <section id="natural-occurrence">
+          <section id="natural-occurrence" className={styles.occurrenceSection}>
             <div className="section-heading">
               <p className="eyebrow">Natural occurrence</p>
               <h2>Terpenes are plant chemistry, not cannabis-only chemistry.</h2>
@@ -505,6 +509,53 @@ export default async function TerpeneRecordPage({
             <div className={styles.chips}>
               {compound.naturalSources.map((source) => <span key={source}>{source}</span>)}
             </div>
+            <p className={styles.occurrenceGuardrail}>
+              The chips above are curated teaching summaries. The records below preserve how source databases
+              reported natural occurrence. A reported organism or material is not automatically a quantified
+              concentration, a Cannabis occurrence claim, or proof that every sample of that organism contains the compound.
+            </p>
+
+            {naturalOccurrenceRecord && naturalOccurrenceEvidenceCount > 0 ? (
+              <div className={styles.occurrenceEvidenceGrid}>
+                {naturalOccurrenceRecord.occurrence["Natural Occurrence"].slice(0, 20).map((entry, index) => (
+                  <article key={entry.reportedValue + "-" + index}>
+                    <strong>{entry.reportedValue}</strong>
+                    {entry.name ? <span>{entry.name}</span> : null}
+                    {entry.references.length ? (
+                      <div className={styles.propertyReferences}>
+                        {entry.references.slice(0, 4).map((reference) =>
+                          reference.url ? (
+                            <a
+                              key={String(reference.referenceNumber)}
+                              href={reference.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {reference.sourceName ?? reference.name ?? "Source"} ↗
+                            </a>
+                          ) : (
+                            <span key={String(reference.referenceNumber)}>
+                              {reference.sourceName ?? reference.name ?? "Source reference"}
+                            </span>
+                          ),
+                        )}
+                      </div>
+                    ) : (
+                      <small>PubChem report has no resolved external reference in this cache.</small>
+                    )}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className={styles.expansionNote}>
+                Source-preserved natural-occurrence reports have not been generated for this deployment yet.
+              </p>
+            )}
+
+            <p className={styles.expansionNote}>
+              Structured organism normalization and occurrence cross-checking will be layered on top of these source
+              reports with LOTUS and other qualified natural-product occurrence sources rather than inferred from names alone.
+            </p>
           </section>
 
           <section className={styles.expansionSection} id="cultivation-postharvest">
