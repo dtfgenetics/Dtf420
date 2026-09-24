@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": "2026-09-24T01:44:04.427Z",
+  "generatedAt": "2026-09-24T09:45:00.000Z",
   "headings": [
     "Boiling Point",
     "Melting Point",
@@ -2150,6 +2150,34 @@
             ]
           }
         ],
+        "Flash Point": [],
+        "Refractive Index": []
+      }
+    },
+    {
+      "slug": "alpha-terpinene",
+      "pubchemCid": 7462,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T09:45:00.000Z",
+      "properties": {
+        "Boiling Point": [],
+        "Melting Point": [],
+        "Vapor Pressure": [],
+        "Density": [],
+        "Flash Point": [],
+        "Refractive Index": []
+      }
+    },
+    {
+      "slug": "gamma-terpinene",
+      "pubchemCid": 7461,
+      "sourceId": "PUBCHEM-PUG-VIEW",
+      "fetchedAt": "2026-09-24T09:45:00.000Z",
+      "properties": {
+        "Boiling Point": [],
+        "Melting Point": [],
+        "Vapor Pressure": [],
+        "Density": [],
         "Flash Point": [],
         "Refractive Index": []
       }
