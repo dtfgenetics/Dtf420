@@ -1,0 +1,74 @@
+name: Refresh Reviewed Terpene Properties
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 7 3 * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-reviewed-terpene-properties.yml"
+      - "data/terpenes/reviewed-pubchem-manifest.json"
+      - "scripts/terpenes/build-reviewed-pubchem-properties.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-reviewed-terpene-properties
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Compile reviewed PubChem property cache
+        run: node scripts/terpenes/build-reviewed-pubchem-properties.mjs
+
+      - name: Verify reviewed property cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const cache = JSON.parse(fs.readFileSync("data/terpenes/reviewed-pubchem-properties.json", "utf8"));
+          if (cache.status !== "compiled") throw new Error("Reviewed PubChem property cache did not compile");
+          if (!Array.isArray(cache.compounds) || cache.compounds.length !== 10) throw new Error("Expected 10 reviewed PubChem property records");
+          for (const record of cache.compounds) {
+            if (!record.slug || !record.pubchemCid || !record.properties?.InChIKey || !record.properties?.SMILES) {
+              throw new Error(`Incomplete reviewed PubChem record: ${record.slug ?? "unknown"}`);
+            }
+            if (record.properties.DefinedAtomStereoCount === undefined || record.properties.DefinedBondStereoCount === undefined) {
+              throw new Error(`Missing stereochemistry counts: ${record.slug}`);
+            }
+          }
+          console.log(`Verified ${cache.compounds.length} reviewed PubChem property records.`);
+          NODE
+
+      - name: Commit refreshed reviewed properties
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/terpenes/reviewed-pubchem-properties.json
+          if git diff --cached --quiet; then
+            echo "Reviewed PubChem property cache is already current." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Refresh reviewed terpene PubChem properties"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Published reviewed PubChem property cache." >> "$GITHUB_STEP_SUMMARY"
