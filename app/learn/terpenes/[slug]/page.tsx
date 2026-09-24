@@ -10,6 +10,7 @@ import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
 import { TerpeneChapterQuiz } from "@/components/terpenes/TerpeneChapterQuiz";
 import { getReviewedPubChemPropertyRecord, summarizeStereochemistry } from "@/lib/terpenes/properties";
+import { countExperimentalPropertyEvidence, getReviewedExperimentalPropertyRecord } from "@/lib/terpenes/experimental-properties";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
@@ -45,6 +46,8 @@ export default async function TerpeneRecordPage({
 
   const family = getFamilyLabel(compound.terpeneClass);
   const propertyRecord = getReviewedPubChemPropertyRecord(compound.slug);
+  const experimentalPropertyRecord = getReviewedExperimentalPropertyRecord(compound.slug);
+  const experimentalPropertyEvidenceCount = countExperimentalPropertyEvidence(experimentalPropertyRecord);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
@@ -73,6 +76,7 @@ export default async function TerpeneRecordPage({
     generalPostharvestEvidenceCount: generalPostharvestEvidence.length,
     hasAssessment: quiz.questions.length > 0,
     hasPhysicalPropertyRecord: Boolean(propertyRecord),
+    experimentalPropertyEvidenceCount,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
     relatedCompounds,
   });
@@ -185,6 +189,73 @@ export default async function TerpeneRecordPage({
             ) : (
               <p className={styles.expansionNote}>
                 The reviewed PubChem property cache has not been generated for this deployment yet.
+              </p>
+            )}
+          </section>
+
+          <section className={styles.experimentalPropertySection} id="experimental-properties">
+            <div className="section-heading">
+              <p className="eyebrow">Reported experimental properties</p>
+              <h2>Keep reported values attached to their source and conditions.</h2>
+            </div>
+
+            {experimentalPropertyRecord && experimentalPropertyEvidenceCount > 0 ? (
+              <>
+                <p className={styles.propertyGuardrail}>
+                  PubChem aggregates reported experimental values from multiple references. Different methods,
+                  pressures, temperatures, purities, stereochemical forms, and source materials can yield different
+                  values, so this Atlas preserves the reports instead of choosing one universal number.
+                </p>
+                <div className={styles.experimentalPropertyGrid}>
+                  {Object.entries(experimentalPropertyRecord.properties)
+                    .filter(([, entries]) => entries.length > 0)
+                    .map(([heading, entries]) => (
+                      <article key={heading}>
+                        <div className={styles.experimentalPropertyHeading}>
+                          <span>{heading}</span>
+                          <strong>{entries.length} report{entries.length === 1 ? "" : "s"}</strong>
+                        </div>
+                        <div className={styles.experimentalPropertyEntries}>
+                          {entries.slice(0, 8).map((entry, index) => (
+                            <div key={heading + "-" + entry.reportedValue + "-" + index}>
+                              <strong>{entry.reportedValue}</strong>
+                              {entry.name ? <span>{entry.name}</span> : null}
+                              {entry.references.length ? (
+                                <div className={styles.propertyReferences}>
+                                  {entry.references.slice(0, 3).map((reference) =>
+                                    reference.url ? (
+                                      <a
+                                        key={String(reference.referenceNumber)}
+                                        href={reference.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        {reference.sourceName ?? reference.name ?? "Source"} ↗
+                                      </a>
+                                    ) : (
+                                      <span key={String(reference.referenceNumber)}>
+                                        {reference.sourceName ?? reference.name ?? "Source reference"}
+                                      </span>
+                                    ),
+                                  )}
+                                </div>
+                              ) : (
+                                <small>PubChem report has no resolved external reference in this cache.</small>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </article>
+                    ))}
+                </div>
+                <p className={styles.expansionNote}>
+                  These are reported experimental-property records, not recommended processing temperatures.
+                  A reported boiling point must not be presented as an “ideal vaping temperature.”
+                </p>
+              </>
+            ) : (
+              <p className={styles.expansionNote}>
+                The reviewed PubChem experimental-property cache has not been generated for this deployment yet.
               </p>
             )}
           </section>
