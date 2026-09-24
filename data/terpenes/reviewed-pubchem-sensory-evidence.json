@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "not-generated",
+  "sourceId": "PUBCHEM-PUG-VIEW",
+  "generatedAt": null,
+  "headings": [
+    "Odor",
+    "Odor Threshold",
+    "Taste"
+  ],
+  "compounds": []
+}
