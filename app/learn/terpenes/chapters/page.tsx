@@ -46,6 +46,7 @@ export default function TerpeneChapterIndexPage() {
       chapterNumber: index + 1,
       mappedGeneCount,
       reviewedEvidenceCount,
+      biologicalEvidenceCount: claimCounts["biological-effect"] ?? 0,
       safetyEvidenceCount: claimCounts["safety-exposure"] ?? 0,
       stabilityEvidenceCount: claimCounts["chemical-stability"] ?? 0,
       generalPostharvestEvidenceCount,
