@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "records": [
+    {
+      "id": "ibrahim2019-cannabis-gcms-core-terpenes",
+      "sourceId": "IBRAHIM-2019-CANNABIS-GCMS",
+      "title": "Validated GC-MS quantification of selected Cannabis terpenes",
+      "matrix": "Cannabis sativa plant material",
+      "technique": "Gas chromatography-mass spectrometry (GC-MS)",
+      "extraction": "Ethyl acetate extraction with n-tridecane internal standard",
+      "validationFramework": "Method optimized and validated against reference standards with AOAC-oriented validation",
+      "quantificationContext": "Quantification of selected terpenes in cannabis plant material",
+      "compoundSlugs": [
+        "alpha-pinene",
+        "beta-pinene",
+        "beta-myrcene",
+        "limonene",
+        "terpinolene",
+        "linalool",
+        "beta-caryophyllene",
+        "alpha-humulene"
+      ],
+      "identityResolution": "named-reference-standard",
+      "reviewStatus": "source-verified",
+      "notes": "Validated for the named analytes in the study. Do not extend validation automatically to terpene identities not included in the reference-standard panel."
+    },
+    {
+      "id": "micalizzi2021-cannabis-terpene-analytics-review",
+      "sourceId": "MICALIZZI-2021-CANNABIS-ANALYTICS",
+      "title": "Review of cannabis cannabinoid and terpene analytical methodologies",
+      "matrix": "Cannabis sativa and derived analytical matrices",
+      "technique": "GC, HPLC, GC×GC and associated extraction/sample-preparation approaches",
+      "extraction": "Multiple published extraction protocols reviewed",
+      "validationFramework": "Methodology review describing advantages, drawbacks, and matrix effects",
+      "quantificationContext": "General analytical-method context rather than one validated compound panel",
+      "compoundSlugs": [],
+      "identityResolution": "general-method-review",
+      "reviewStatus": "source-verified",
+      "notes": "Used as system-level analytical context only. It does not provide compound-specific method validation by itself."
+    }
+  ]
+}
