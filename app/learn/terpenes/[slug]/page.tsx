@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { terpeneSeedCompounds } from "@/lib/terpenes/data";
 import { getFamilyLabel, getTerpeneBySlug } from "@/lib/terpenes/queries";
 import { getGenesForCompound, getGeneProductContext } from "@/lib/terpenes/genetics";
-import { getReviewedEvidenceForCompound, getReviewedEvidenceClaimCountsForCompound, getReviewedGeneralEvidence } from "@/lib/terpenes/evidence-queries";
+import { getReviewedAggregateIdentityEvidenceForCompound, getReviewedEvidenceForCompound, getReviewedEvidenceClaimCountsForCompound, getReviewedGeneralEvidence } from "@/lib/terpenes/evidence-queries";
 import { evidenceScope, humanizeEvidenceTerm } from "@/lib/terpenes/research";
 import { buildTerpeneCompoundChapter } from "@/lib/terpenes/chapters";
 import { buildTerpeneQuiz } from "@/lib/terpenes/assessments";
@@ -63,6 +63,7 @@ export default async function TerpeneRecordPage({
   const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
   const generalPostharvestEvidence = getReviewedGeneralEvidence(["postharvest-change"]);
   const safetyEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "safety-exposure" || record.claimType === "chemical-stability");
+  const aggregateIdentityEvidence = getReviewedAggregateIdentityEvidenceForCompound(compound.slug);
   const cultivationEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "cultivation-factor" || record.claimType === "postharvest-change");
   const biologicalEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "biological-effect");
   const researchEvidence = biologicalEvidence;
@@ -722,6 +723,32 @@ export default async function TerpeneRecordPage({
                 evidence has not yet been linked for this reviewed chapter.
               </p>
             )}
+
+            {aggregateIdentityEvidence.length ? (
+              <div className={styles.aggregateEvidence}>
+                <div className={styles.aggregateEvidenceHeading}>
+                  <span>Identity-unresolved related evidence</span>
+                  <strong>Not counted as isomer-specific readiness</strong>
+                </div>
+                {aggregateIdentityEvidence.map(({ record, source }) => (
+                  <article key={record.id}>
+                    <h3>{record.statement}</h3>
+                    <p>
+                      This source is linked to a broader or unresolved chemical identity. It is shown for context,
+                      but it does not prove that the same endpoint applies equally to this exact chapter identity.
+                    </p>
+                    <dl>
+                      <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                      <div><dt>Evidence identity</dt><dd>{record.compoundSlug}</dd></div>
+                      <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                    </dl>
+                    {source?.sourceUrl ? (
+                      <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            ) : null}
           </section>
 
           <TerpeneChapterQuiz quiz={quiz} />
