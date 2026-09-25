@@ -587,6 +587,49 @@
       "pmid": "12804650",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12804650/",
       "notes": "Fragrance-material review establishing linalool's fragrance-ingredient application context; safety conclusions remain separate in the evidence ledger."
+    },
+    {
+      "id": "DEICAS-2021-CANNABIS-HSGCTOF",
+      "name": "Dei Cas M et al. Characterization of chemotype-dependent terpenoids profile in cannabis by headspace gas-chromatography coupled to time-of-flight mass spectrometry.",
+      "role": "validated-cannabis-headspace-terpene-method",
+      "ingestMode": "curated-analytical-method-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.jpba.2021.114180",
+      "pmid": "34111731",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34111731/",
+      "notes": "Cannabis inflorescence FET-HS-GC/MS-TOF method using 35 terpenoid standards. The abstract explicitly reports cis-β-ocimene among quantified major terpenoids and states >90% accuracy and 5 ppm LOD for all analytes."
+    },
+    {
+      "id": "MUDGE-2019-CANNABIS-TERPENE-METABOLOMICS",
+      "name": "Mudge EM et al. The Terroir of Cannabis: Terpene Metabolomics as a Tool to Understand Cannabis sativa Selections.",
+      "role": "cannabis-terpene-reference-standard-identification",
+      "ingestMode": "curated-analytical-method-records",
+      "reviewRequired": true,
+      "doi": "10.1055/a-0915-2550",
+      "pmid": "31096276",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/31096276/",
+      "notes": "Targeted cannabis terpene metabolomics across 33 chemovars. Full methods identify α-terpinene and γ-terpinene using purchased Cannabis Terpene Mix A standards and confirm peaks by external-standard retention index under the same GC conditions."
+    },
+    {
+      "id": "LIU-1976-SQUALENE-GLC",
+      "name": "Liu GC et al. Measurement of squalene in human tissues and plasma: validation and application.",
+      "role": "validated-squalene-analytical-method",
+      "ingestMode": "curated-analytical-method-records",
+      "reviewRequired": true,
+      "pmid": "1255019",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/1255019/",
+      "notes": "Validated squalene isolation after mild saponification/alumina chromatography with gas-liquid chromatographic measurement in plasma, feces, urine, bile, and tissue. Non-cannabis matrix."
+    },
+    {
+      "id": "SCHIERLE-2004-BETA-CAROTENE-LC",
+      "name": "Schierle J et al. Method for the determination of beta-carotene in supplements and raw materials by reversed-phase liquid chromatography: single laboratory validation.",
+      "role": "validated-beta-carotene-analytical-method",
+      "ingestMode": "curated-analytical-method-records",
+      "reviewRequired": true,
+      "pmid": "15493663",
+      "pmcid": "PMC2586117",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15493663/",
+      "notes": "Single-laboratory validation of reversed-phase LC for total and all-trans β-carotene in dietary supplements and raw materials, including separation of major geometric isomers. Non-cannabis matrix."
     }
   ]
 }
