@@ -14,14 +14,23 @@ const research = fs.readFileSync(path.join(root, "lib/terpenes/research.ts"), "u
 const dashboard = fs.readFileSync(path.join(root, "app/learn/terpenes/chapters/page.tsx"), "utf8");
 const ledger = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/evidence-ledger.json"), "utf8"));
 const sourceRegistry = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/source-registry.json"), "utf8"));
+const analyticalMethods = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/analytical-methods.json"), "utf8"));
+const ecologicalRoles = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/ecological-roles.json"), "utf8"));
+const applications = JSON.parse(fs.readFileSync(path.join(root, "data/terpenes/applications.json"), "utf8"));
+const analyticalQueries = fs.readFileSync(path.join(root, "lib/terpenes/analytical-methods.ts"), "utf8");
+const ecologyQueries = fs.readFileSync(path.join(root, "lib/terpenes/ecology.ts"), "utf8");
+const applicationQueries = fs.readFileSync(path.join(root, "lib/terpenes/applications.ts"), "utf8");
+const sourceQueries = fs.readFileSync(path.join(root, "lib/terpenes/source-queries.ts"), "utf8");
 
 for (const token of [
   '"identity"',
   '"classification"',
   '"physical-properties"',
   '"stereochemistry"',
+  '"analytical-methods"',
   '"sensory"',
   '"natural-occurrence"',
+  '"ecological-role"',
   '"cannabis-occurrence"',
   '"biosynthesis"',
   '"genetics"',
@@ -29,6 +38,7 @@ for (const token of [
   '"cultivation-postharvest"',
   '"research"',
   '"safety"',
+  '"applications"',
   '"assessment"',
 ]) {
   if (!chapterTypes.includes(token)) throw new Error(`Chapter section model missing: ${token}`);
@@ -98,7 +108,7 @@ for (const phrase of [
   }
 }
 
-console.log("Deep terpene compound chapters verified: 14-section model, evidence-aware readiness, reviewed safety/stability/post-harvest records, physical/stereochemical coverage, assessment completion, and scoped chapter rendering.");
+console.log("Deep terpene compound chapters verified: 17-section model with analytical, ecological, application, evidence-aware readiness, assessment, and scoped rendering.");
 
 
 for (const token of [
@@ -185,6 +195,11 @@ const requiredSourceIds = [
   "HOLWEG-2024-CANNABIS-LIGHT",
   "BIRENBOIM-2024-CANNABIS-DRYING",
   "GOFFMAN-2025-IRRADIATION-STORAGE",
+  "IBRAHIM-2019-CANNABIS-GCMS",
+  "MICALIZZI-2021-CANNABIS-ANALYTICS",
+  "FARRE-2017-BETA-OCIMENE-ECOLOGY",
+  "SHALU-2024-SQUALENE-INDUSTRY",
+  "KLÄUI-1982-CAROTENOID-COLORANTS",
   "WOJTUNIK-2022-ALPHA-TERPINENE-TOX",
   "ALVES-2025-GAMMA-TERPINENE-TOX",
   "CHO-2009-SQUALENE-HIGH-DOSE",
@@ -310,4 +325,105 @@ const unresolvedOcimene = (ledger.records ?? []).find(
 );
 if (!unresolvedOcimene || unresolvedOcimene.compoundSlug !== "_beta-ocimene-unresolved") {
   throw new Error("β-ocimene safety evidence must remain attached to the unresolved identity scope");
+}
+
+
+for (const token of [
+  "analyticalMethodEvidenceCount",
+  "exactEcologyEvidenceCount",
+  "aggregateEcologyEvidenceCount",
+  "applicationEvidenceCount",
+]) {
+  if (!chapterTypes.includes(token) || !chapters.includes(token) || !dashboard.includes(token)) {
+    throw new Error(`Structured context readiness wiring missing: ${token}`);
+  }
+}
+
+for (const token of [
+  "Analytical methods &amp; identification",
+  "Ecological role &amp; plant interactions",
+  "Industrial &amp; application context",
+  "generalAnalyticalMethods",
+  "ecologyRecords",
+  "applicationRecords",
+]) {
+  if (!page.includes(token)) {
+    throw new Error(`Structured chapter context UI missing: ${token}`);
+  }
+}
+
+for (const token of [
+  ".contextSection",
+  ".contextGrid",
+  ".contextCard",
+  ".generalContext",
+  ".roleChips",
+]) {
+  if (!pageCss.includes(token)) {
+    throw new Error(`Structured chapter context styling missing: ${token}`);
+  }
+}
+
+for (const [name, dataset] of [
+  ["analytical methods", analyticalMethods],
+  ["ecological roles", ecologicalRoles],
+  ["applications", applications],
+]) {
+  if (dataset.schemaVersion !== "1.0.0" || !Array.isArray(dataset.records)) {
+    throw new Error(`Invalid structured ${name} dataset`);
+  }
+  if (!dataset.records.length) {
+    throw new Error(`Structured ${name} dataset is empty`);
+  }
+}
+
+for (const token of [
+  "getReviewedAnalyticalMethodsForCompound",
+  "getReviewedGeneralAnalyticalMethods",
+]) {
+  if (!analyticalQueries.includes(token)) throw new Error(`Analytical method query missing: ${token}`);
+}
+
+for (const token of [
+  "getReviewedEcologyForCompound",
+  "countExactEcologyEvidence",
+  "countAggregateEcologyEvidence",
+]) {
+  if (!ecologyQueries.includes(token)) throw new Error(`Ecology query missing: ${token}`);
+}
+
+if (!applicationQueries.includes("getReviewedApplicationsForCompound")) {
+  throw new Error("Application query missing");
+}
+if (!sourceQueries.includes("getTerpeneSourceById")) {
+  throw new Error("Shared terpene source resolver missing");
+}
+
+const ocimeneEcology = (ecologicalRoles.records ?? []).find(
+  (record) => record.id === "farre2017-beta-ocimene-plant-ecology",
+);
+if (
+  !ocimeneEcology ||
+  ocimeneEcology.identityResolution !== "isomer-unresolved" ||
+  !ocimeneEcology.compoundSlugs.includes("e-beta-ocimene") ||
+  !ocimeneEcology.compoundSlugs.includes("z-beta-ocimene")
+) {
+  throw new Error("β-ocimene ecological evidence must remain aggregate/isomer-unresolved");
+}
+
+const validatedMethod = (analyticalMethods.records ?? []).find(
+  (record) => record.id === "ibrahim2019-cannabis-gcms-core-terpenes",
+);
+if (!validatedMethod || !validatedMethod.compoundSlugs.includes("beta-myrcene")) {
+  throw new Error("Validated cannabis GC-MS method coverage is missing core analytes");
+}
+
+const squaleneApplication = (applications.records ?? []).find(
+  (record) => record.id === "shalu2024-squalene-industrial-applications",
+);
+const caroteneApplication = (applications.records ?? []).find(
+  (record) => record.id === "klaui1982-beta-carotene-food-colorant",
+);
+if (!squaleneApplication || !caroteneApplication) {
+  throw new Error("Structured application coverage missing squalene or β-carotene");
 }

@@ -15,6 +15,10 @@ import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/te
 import { countNaturalOccurrenceEvidence, getReviewedNaturalOccurrenceRecord } from "@/lib/terpenes/natural-occurrence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import { getReviewedCultivarDistribution } from "@/lib/terpenes/cultivar-distributions";
+import { getReviewedAnalyticalMethodsForCompound, getReviewedGeneralAnalyticalMethods } from "@/lib/terpenes/analytical-methods";
+import { countAggregateEcologyEvidence, countExactEcologyEvidence, getReviewedEcologyForCompound } from "@/lib/terpenes/ecology";
+import { getReviewedApplicationsForCompound } from "@/lib/terpenes/applications";
+import { getTerpeneSourceById } from "@/lib/terpenes/source-queries";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -56,6 +60,12 @@ export default async function TerpeneRecordPage({
   const naturalOccurrenceRecord = getReviewedNaturalOccurrenceRecord(compound.slug);
   const naturalOccurrenceEvidenceCount = countNaturalOccurrenceEvidence(naturalOccurrenceRecord);
   const cultivarDistribution = getReviewedCultivarDistribution(compound.slug);
+  const analyticalMethods = getReviewedAnalyticalMethodsForCompound(compound.slug);
+  const generalAnalyticalMethods = getReviewedGeneralAnalyticalMethods();
+  const ecologyRecords = getReviewedEcologyForCompound(compound.slug);
+  const applicationRecords = getReviewedApplicationsForCompound(compound.slug);
+  const exactEcologyEvidenceCount = countExactEcologyEvidence(compound.slug);
+  const aggregateEcologyEvidenceCount = countAggregateEcologyEvidence(compound.slug);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
@@ -95,6 +105,10 @@ export default async function TerpeneRecordPage({
     naturalOccurrenceEvidenceCount,
     cultivarDistributionEvidenceCount: cultivarDistribution ? 1 : 0,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
+    analyticalMethodEvidenceCount: analyticalMethods.length,
+    exactEcologyEvidenceCount,
+    aggregateEcologyEvidenceCount,
+    applicationEvidenceCount: applicationRecords.length,
     relatedCompounds,
   });
 
@@ -339,6 +353,62 @@ export default async function TerpeneRecordPage({
                 Stereochemical coverage is pending the reviewed PubChem property cache.
               </p>
             )}
+          </section>
+
+          <section className={styles.contextSection} id="analytical-methods">
+            <div className="section-heading">
+              <p className="eyebrow">Analytical methods &amp; identification</p>
+              <h2>Know how the compound was actually measured.</h2>
+            </div>
+
+            {analyticalMethods.length ? (
+              <div className={styles.contextGrid}>
+                {analyticalMethods.map((record) => {
+                  const source = getTerpeneSourceById(record.sourceId);
+                  return (
+                    <article className={styles.contextCard} key={record.id}>
+                      <div className={styles.contextTopline}>
+                        <span>Validated compound-specific method</span>
+                        <strong>{record.identityResolution.replaceAll("-", " ")}</strong>
+                      </div>
+                      <h3>{record.title}</h3>
+                      <dl>
+                        <div><dt>Matrix</dt><dd>{record.matrix}</dd></div>
+                        <div><dt>Technique</dt><dd>{record.technique}</dd></div>
+                        <div><dt>Extraction</dt><dd>{record.extraction}</dd></div>
+                        <div><dt>Validation</dt><dd>{record.validationFramework}</dd></div>
+                      </dl>
+                      <p>{record.notes}</p>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                      ) : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className={styles.expansionNote}>
+                No compound-specific validated analytical method is linked to this chapter yet.
+              </p>
+            )}
+
+            {generalAnalyticalMethods.length ? (
+              <div className={styles.generalContext}>
+                <span>System-level analytical context</span>
+                {generalAnalyticalMethods.map((record) => {
+                  const source = getTerpeneSourceById(record.sourceId);
+                  return (
+                    <article key={record.id}>
+                      <strong>{record.title}</strong>
+                      <p>{record.quantificationContext}. {record.notes}</p>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open review ↗</a>
+                      ) : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : null}
           </section>
 
           <section id="sensory" className={styles.sensorySection}>
@@ -623,6 +693,46 @@ export default async function TerpeneRecordPage({
             </p>
           </section>
 
+          <section className={styles.contextSection} id="ecological-role">
+            <div className="section-heading">
+              <p className="eyebrow">Ecological role &amp; plant interactions</p>
+              <h2>Separate plant ecological function from human-effect claims.</h2>
+            </div>
+
+            {ecologyRecords.length ? (
+              <div className={styles.contextGrid}>
+                {ecologyRecords.map((record) => {
+                  const source = getTerpeneSourceById(record.sourceId);
+                  return (
+                    <article className={styles.contextCard} key={record.id}>
+                      <div className={styles.contextTopline}>
+                        <span>{record.identityResolution.replaceAll("-", " ")}</span>
+                        <strong>{record.identityScope.replaceAll("-", " ")}</strong>
+                      </div>
+                      <h3>{record.title}</h3>
+                      <p>{record.statement}</p>
+                      <div className={styles.roleChips}>
+                        {record.roleTypes.map((role) => <span key={role}>{role.replaceAll("-", " ")}</span>)}
+                      </div>
+                      <dl>
+                        <div><dt>Organism context</dt><dd>{record.organismContext}</dd></div>
+                        <div><dt>Evidence basis</dt><dd>{record.evidenceBasis}</dd></div>
+                      </dl>
+                      <p className={styles.contextGuardrail}>{record.notes}</p>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                      ) : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className={styles.expansionNote}>
+                Reviewed ecological-role evidence has not yet been linked for this exact chapter identity.
+              </p>
+            )}
+          </section>
+
           <section className={styles.expansionSection} id="cultivation-postharvest">
             <div className="section-heading">
               <p className="eyebrow">Cultivation &amp; post-harvest</p>
@@ -749,6 +859,41 @@ export default async function TerpeneRecordPage({
                 ))}
               </div>
             ) : null}
+          </section>
+
+          <section className={styles.contextSection} id="applications">
+            <div className="section-heading">
+              <p className="eyebrow">Industrial &amp; application context</p>
+              <h2>Document how the molecule is used without turning use into a therapeutic claim.</h2>
+            </div>
+
+            {applicationRecords.length ? (
+              <div className={styles.contextGrid}>
+                {applicationRecords.map((record) => {
+                  const source = getTerpeneSourceById(record.sourceId);
+                  return (
+                    <article className={styles.contextCard} key={record.id}>
+                      <div className={styles.contextTopline}>
+                        <span>Reviewed application record</span>
+                        <strong>{record.sectors.join(" · ")}</strong>
+                      </div>
+                      <h3>{record.statement}</h3>
+                      <div className={styles.roleChips}>
+                        {record.applications.map((item) => <span key={item}>{item}</span>)}
+                      </div>
+                      <p className={styles.contextGuardrail}>{record.notes}</p>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                      ) : null}
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className={styles.expansionNote}>
+                Reviewed industrial or commercial application evidence has not yet been linked for this compound.
+              </p>
+            )}
           </section>
 
           <TerpeneChapterQuiz quiz={quiz} />

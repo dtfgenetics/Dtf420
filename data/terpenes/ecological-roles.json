@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "records": [
+    {
+      "id": "farre2017-beta-ocimene-plant-ecology",
+      "sourceId": "FARRE-2017-BETA-OCIMENE-ECOLOGY",
+      "title": "β-Ocimene in plant ecological interactions",
+      "compoundSlugs": [
+        "e-beta-ocimene",
+        "z-beta-ocimene"
+      ],
+      "identityScope": "aggregate-beta-ocimene",
+      "identityResolution": "isomer-unresolved",
+      "roleTypes": [
+        "floral-visitor-interaction",
+        "pollination-context",
+        "herbivory-response",
+        "tritrophic-interaction"
+      ],
+      "statement": "β-Ocimene is widely emitted from flowers and leaves and has been associated with floral visitor interactions and herbivory-induced plant defense signaling across many plant species.",
+      "organismContext": "Multiple plant families, floral visitors, herbivores, and higher-trophic-level organisms reviewed across published studies",
+      "evidenceBasis": "Review of published floral and foliar volatile ecology studies",
+      "reviewStatus": "source-verified",
+      "notes": "The review discusses β-ocimene broadly and does not establish that every reported ecological role is attributable separately to the E or Z isomer."
+    }
+  ]
+}

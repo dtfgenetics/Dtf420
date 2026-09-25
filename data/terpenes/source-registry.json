@@ -398,6 +398,63 @@
       "pmid": "33465460",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33465460/",
       "notes": "Safety assessment is registered against CAS 13877-91-3 / 3,7-dimethyl-1,3,6-octatriene and is not treated here as E/Z-isomer-resolved evidence."
+    },
+    {
+      "id": "IBRAHIM-2019-CANNABIS-GCMS",
+      "name": "Ibrahim EA et al. Analysis of Terpenes in Cannabis sativa L. Using GC/MS: Method Development, Validation, and Application.",
+      "role": "validated-cannabis-terpene-analytical-method",
+      "ingestMode": "curated-analytical-method-records",
+      "reviewRequired": true,
+      "doi": "10.1055/a-0828-8387",
+      "pmid": "30646402",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/30646402/",
+      "notes": "Validated GC-MS method for selected cannabis terpenes using ethyl-acetate extraction, n-tridecane internal standard, reference standards, and AOAC-oriented validation."
+    },
+    {
+      "id": "MICALIZZI-2021-CANNABIS-ANALYTICS",
+      "name": "Micalizzi G et al. Cannabis Sativa L.: a comprehensive review on the analytical methodologies for cannabinoids and terpenes characterization.",
+      "role": "cannabis-terpene-analytical-method-review",
+      "ingestMode": "curated-analytical-method-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.chroma.2020.461864",
+      "pmid": "33422797",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/33422797/",
+      "notes": "Review of extraction, GC, HPLC, and GC×GC approaches for cannabinoid and terpene characterization in cannabis matrices."
+    },
+    {
+      "id": "FARRE-2017-BETA-OCIMENE-ECOLOGY",
+      "name": "Farré-Armengol G et al. β-Ocimene, a Key Floral and Foliar Volatile Involved in Multiple Interactions between Plants and Other Organisms.",
+      "role": "beta-ocimene-plant-ecology-review",
+      "ingestMode": "curated-ecology-records",
+      "reviewRequired": true,
+      "doi": "10.3390/molecules22071148",
+      "pmid": "28703755",
+      "pmcid": "PMC6152128",
+      "license": "CC-BY-4.0",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6152128/",
+      "notes": "Plant-ecology review covering floral emission, pollinator context, herbivory-induced emissions, and tritrophic interactions. Keep E/Z identity scope explicit."
+    },
+    {
+      "id": "SHALU-2024-SQUALENE-INDUSTRY",
+      "name": "Shalu S et al. Microbial Squalene: A Sustainable Alternative for the Cosmetics and Pharmaceutical Industry - A Review.",
+      "role": "squalene-industrial-application-review",
+      "ingestMode": "curated-application-records",
+      "reviewRequired": true,
+      "doi": "10.1002/elsc.202400003",
+      "pmid": "39391272",
+      "pmcid": "PMC11464149",
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11464149/",
+      "notes": "Review of squalene production, metabolic engineering, and cosmetic/pharmaceutical applications with emphasis on sustainable non-shark sources."
+    },
+    {
+      "id": "KLÄUI-1982-CAROTENOID-COLORANTS",
+      "name": "Kläui H, Bauernfeind JC. Carotenoids as food colorants.",
+      "role": "beta-carotene-industrial-food-colorant-review",
+      "ingestMode": "curated-application-records",
+      "reviewRequired": true,
+      "pmid": "6817968",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/6817968/",
+      "notes": "Review of commercial carotenoid synthesis and food-colorant applications including β-carotene."
     }
   ]
 }

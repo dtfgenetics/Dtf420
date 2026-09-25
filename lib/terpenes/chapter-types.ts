@@ -5,8 +5,10 @@ export type TerpeneChapterSectionId =
   | "classification"
   | "physical-properties"
   | "stereochemistry"
+  | "analytical-methods"
   | "sensory"
   | "natural-occurrence"
+  | "ecological-role"
   | "cannabis-occurrence"
   | "biosynthesis"
   | "genetics"
@@ -14,6 +16,7 @@ export type TerpeneChapterSectionId =
   | "cultivation-postharvest"
   | "research"
   | "safety"
+  | "applications"
   | "assessment";
 
 export type TerpeneChapterSectionStatus =
@@ -69,5 +72,9 @@ export type BuildChapterContext = {
   naturalOccurrenceEvidenceCount?: number;
   cultivarDistributionEvidenceCount?: number;
   stereoEvidenceCount?: number;
+  analyticalMethodEvidenceCount?: number;
+  exactEcologyEvidenceCount?: number;
+  aggregateEcologyEvidenceCount?: number;
+  applicationEvidenceCount?: number;
   relatedCompounds: TerpeneCompound[];
 };

@@ -109,6 +109,14 @@ const requiredFiles = [
   ".github/workflows/refresh-reviewed-terpene-properties.yml",
   "public/data/terpenes/registry/manifest.json",
   ".github/workflows/refresh-terpene-registry.yml",
+  "data/terpenes/analytical-methods.json",
+  "data/terpenes/ecological-roles.json",
+  "data/terpenes/applications.json",
+  "lib/terpenes/analytical-methods.ts",
+  "lib/terpenes/ecology.ts",
+  "lib/terpenes/applications.ts",
+  "lib/terpenes/source-queries.ts",
+  "scripts/terpenes/validate-structured-context.mjs",
 ];
 
 for (const file of requiredFiles) {
@@ -180,7 +188,24 @@ if (!sitemapSource.includes('item("/learn/terpenes"') || !sitemapSource.includes
   throw new Error("Terpene Atlas routes are not wired into the sitemap");
 }
 
-const requiredSourceIds = ["THC-V13", "PUBCHEM", "PUBCHEM-PUG-VIEW", "COCONUT", "LOTUS", "CANNABIS-LITERATURE", "CULTIVAR-LABS", "DTF-GENETICS", "SMITH-2022-COMMERCIAL-US", "BOOTH-2017-TPS", "BOOTH-2020-TPS-VARIATION"];
+const requiredSourceIds = [
+  "THC-V13",
+  "PUBCHEM",
+  "PUBCHEM-PUG-VIEW",
+  "COCONUT",
+  "LOTUS",
+  "CANNABIS-LITERATURE",
+  "CULTIVAR-LABS",
+  "DTF-GENETICS",
+  "SMITH-2022-COMMERCIAL-US",
+  "BOOTH-2017-TPS",
+  "BOOTH-2020-TPS-VARIATION",
+  "IBRAHIM-2019-CANNABIS-GCMS",
+  "MICALIZZI-2021-CANNABIS-ANALYTICS",
+  "FARRE-2017-BETA-OCIMENE-ECOLOGY",
+  "SHALU-2024-SQUALENE-INDUSTRY",
+  "KLÄUI-1982-CAROTENOID-COLORANTS",
+];
 const registryIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
   if (!registryIds.has(sourceId)) {
@@ -297,7 +322,17 @@ for (const token of ["getReviewedCultivarDistribution", "getReviewedCultivarDist
 }
 
 const compoundPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
-for (const token of ["Source-verified genetics", "Biological research evidence", "Open the full TPS genetics map", "Open the research ledger", "Measured cultivar-group distribution", "Open full cultivar chemistry explorer"]) {
+for (const token of [
+  "Source-verified genetics",
+  "Biological research evidence",
+  "Open the full TPS genetics map",
+  "Open the research ledger",
+  "Measured cultivar-group distribution",
+  "Open full cultivar chemistry explorer",
+  "Analytical methods &amp; identification",
+  "Ecological role &amp; plant interactions",
+  "Industrial &amp; application context",
+]) {
   if (!compoundPageSource.includes(token)) {
     throw new Error(`Compound terpene record missing linked evidence UI: ${token}`);
   }
@@ -365,6 +400,28 @@ const chapterPageSource = fs.readFileSync(path.join(root, "app/learn/terpenes/ch
 for (const token of ["Terpene Chapter Readiness", "Average readiness", "Sections needing expansion", "Open chapter"]) {
   if (!chapterPageSource.includes(token)) {
     throw new Error(`Chapter readiness page missing Atlas contract: ${token}`);
+  }
+}
+
+const chapterTypesSource = fs.readFileSync(path.join(root, "lib/terpenes/chapter-types.ts"), "utf8");
+for (const token of ['"analytical-methods"', '"ecological-role"', '"applications"']) {
+  if (!chapterTypesSource.includes(token)) {
+    throw new Error(`Deep chapter model missing structured section: ${token}`);
+  }
+}
+
+const structuredContextValidator = fs.readFileSync(
+  path.join(root, "scripts/terpenes/validate-structured-context.mjs"),
+  "utf8",
+);
+for (const token of [
+  "validateStructuredContext",
+  "isomer-unresolved",
+  "compoundSlugs",
+  "sourceId",
+]) {
+  if (!structuredContextValidator.includes(token)) {
+    throw new Error(`Structured context validator missing contract: ${token}`);
   }
 }
 
