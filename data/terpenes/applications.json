@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "records": [
+    {
+      "id": "shalu2024-squalene-industrial-applications",
+      "sourceId": "SHALU-2024-SQUALENE-INDUSTRY",
+      "compoundSlug": "squalene",
+      "sectors": [
+        "cosmetics",
+        "pharmaceuticals",
+        "biotechnology"
+      ],
+      "applications": [
+        "cosmetic and skin-care formulations",
+        "pharmaceutical formulation contexts",
+        "biotechnological production from microbial sources"
+      ],
+      "statement": "Squalene is commercially relevant in cosmetic and pharmaceutical sectors, and recent work emphasizes sustainable microbial production as an alternative to shark-derived sourcing.",
+      "reviewStatus": "source-verified",
+      "notes": "Industry/application context does not establish therapeutic efficacy of a consumer product."
+    },
+    {
+      "id": "klaui1982-beta-carotene-food-colorant",
+      "sourceId": "KLÄUI-1982-CAROTENOID-COLORANTS",
+      "compoundSlug": "beta-carotene",
+      "sectors": [
+        "food",
+        "colorants"
+      ],
+      "applications": [
+        "food coloring",
+        "commercially synthesized carotenoid colorant formulations"
+      ],
+      "statement": "β-Carotene has long-standing commercial use as a food colorant and is available in multiple market forms for coloring food products.",
+      "reviewStatus": "source-verified",
+      "notes": "Industrial use is distinct from nutritional or therapeutic benefit."
+    }
+  ]
+}
