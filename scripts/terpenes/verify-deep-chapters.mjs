@@ -185,6 +185,11 @@ const requiredSourceIds = [
   "HOLWEG-2024-CANNABIS-LIGHT",
   "BIRENBOIM-2024-CANNABIS-DRYING",
   "GOFFMAN-2025-IRRADIATION-STORAGE",
+  "WOJTUNIK-2022-ALPHA-TERPINENE-TOX",
+  "ALVES-2025-GAMMA-TERPINENE-TOX",
+  "CHO-2009-SQUALENE-HIGH-DOSE",
+  "EFSA-2024-BETA-CAROTENE-UL",
+  "RIFM-2021-BETA-OCIMENE-UNRESOLVED",
 ];
 const sourceIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
 for (const sourceId of requiredSourceIds) {
@@ -226,6 +231,11 @@ const requiredEvidenceIds = [
   "goffman2025-caryophyllene-postharvest",
   "goffman2025-linalool-postharvest",
   "goffman2025-humulene-postharvest",
+  "wojtunik2022-alpha-terpinene-toxicity-review",
+  "alves2025-gamma-terpinene-toxicogenetic",
+  "cho2009-squalene-high-dose-adverse-effects",
+  "efsa2024-beta-carotene-supplement-risk",
+  "rifm2021-beta-ocimene-unresolved-safety",
 ];
 const evidenceIds = new Set((ledger.records ?? []).map((record) => record.id));
 for (const evidenceId of requiredEvidenceIds) {
@@ -264,4 +274,40 @@ for (const token of [
   if (!haystack.includes(token)) {
     throw new Error(`Biological chapter readiness contract missing: ${token}`);
   }
+}
+
+
+for (const token of [
+  "getReviewedAggregateIdentityEvidenceForCompound",
+  "_beta-ocimene-unresolved",
+]) {
+  if (!evidenceQueries.includes(token)) {
+    throw new Error(`Aggregate identity evidence query missing: ${token}`);
+  }
+}
+
+for (const token of [
+  "Identity-unresolved related evidence",
+  "Not counted as isomer-specific readiness",
+  "aggregateIdentityEvidence",
+]) {
+  if (!page.includes(token)) {
+    throw new Error(`Aggregate identity evidence UI missing: ${token}`);
+  }
+}
+
+for (const token of [
+  ".aggregateEvidence",
+  ".aggregateEvidenceHeading",
+]) {
+  if (!pageCss.includes(token)) {
+    throw new Error(`Aggregate identity evidence styling missing: ${token}`);
+  }
+}
+
+const unresolvedOcimene = (ledger.records ?? []).find(
+  (record) => record.id === "rifm2021-beta-ocimene-unresolved-safety",
+);
+if (!unresolvedOcimene || unresolvedOcimene.compoundSlug !== "_beta-ocimene-unresolved") {
+  throw new Error("β-ocimene safety evidence must remain attached to the unresolved identity scope");
 }

@@ -45,3 +45,24 @@ export function getReviewedEvidenceClaimCountsForCompound(compoundSlug: string) 
   }
   return counts;
 }
+
+
+const aggregateIdentityScopes: Record<string, string[]> = {
+  "e-beta-ocimene": ["_beta-ocimene-unresolved"],
+  "z-beta-ocimene": ["_beta-ocimene-unresolved"],
+};
+
+export function getReviewedAggregateIdentityEvidenceForCompound(
+  compoundSlug: string,
+): ReviewedCompoundEvidence[] {
+  const aggregateKeys = new Set(aggregateIdentityScopes[compoundSlug] ?? []);
+  if (!aggregateKeys.size) return [];
+
+  return records
+    .filter(
+      (record) =>
+        aggregateKeys.has(record.compoundSlug) &&
+        publicReviewStates.has(record.reviewStatus),
+    )
+    .map((record) => ({ record, source: sourceById.get(record.sourceId) ?? null }));
+}

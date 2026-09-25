@@ -793,3 +793,26 @@ On `main`, the refresh workflows rebuild from the new manifest and require **exa
 - natural-occurrence evidence.
 
 This staged policy prevents an old fixed-count constant from blocking reviewed-compound growth while still requiring complete refreshed production caches after merge.
+
+
+### Third compound-safety evidence wave
+
+A third evidence wave targets the reviewed chapters that remained thin after the core cannabis-terpene safety passes:
+
+- **α-terpinene** — review-level toxicology evidence with dose/model/context limitations;
+- **γ-terpinene** — mixed toxicogenetic evidence spanning invertebrate, plant-cell, in-vitro, and rat models;
+- **squalene** — human high-dose oral supplementation data with transient adverse effects at the studied regimens;
+- **β-carotene** — EFSA human dietary/supplement risk assessment, keeping background diet separate from supplemental exposure.
+
+### Identity-unresolved β-ocimene evidence
+
+The RIFM safety assessment for 3,7-dimethyl-1,3,6-octatriene (CAS 13877-91-3) is stored under the reserved ledger key `_beta-ocimene-unresolved`.
+
+Both `e-beta-ocimene` and `z-beta-ocimene` chapters may display this record as **identity-unresolved related evidence**, but:
+
+- it does not increment either isomer's safety-evidence count;
+- it does not promote either isomer's Safety section readiness;
+- the UI explicitly states that the source identity is broader/unresolved;
+- future isomer-resolved evidence can supersede this limitation without deleting the aggregate source.
+
+This pattern should be reused whenever a safety, sensory, occurrence, or property source reports an aggregate/isomer-unresolved analyte that overlaps multiple exact THC chapter identities.
