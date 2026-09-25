@@ -34,6 +34,93 @@
       "statement": "β-Carotene has long-standing commercial use as a food colorant and is available in multiple market forms for coloring food products.",
       "reviewStatus": "source-verified",
       "notes": "Industrial use is distinct from nutritional or therapeutic benefit."
+    },
+    {
+      "id": "behr2009-myrcene-sustainable-chemistry",
+      "sourceId": "BEHR-2009-MYRCENE-SUSTAINABLE-CHEMISTRY",
+      "compoundSlug": "beta-myrcene",
+      "sectors": [
+        "fine-chemicals",
+        "green-chemistry",
+        "chemical-feedstocks"
+      ],
+      "applications": [
+        "renewable base chemical",
+        "fine-chemical synthesis feedstock",
+        "platform for functionalized terpene-derived products"
+      ],
+      "statement": "Myrcene is an industrially available renewable terpene feedstock whose unsaturated hydrocarbon chemistry supports diverse fine-chemical transformations and product classes.",
+      "reviewStatus": "source-verified",
+      "notes": "Industrial versatility is a chemistry/application claim, not evidence of a human health benefit."
+    },
+    {
+      "id": "ciriminna2014-limonene-bioeconomy",
+      "sourceId": "CIRIMINNA-2014-LIMONENE-BIOECONOMY",
+      "compoundSlug": "limonene",
+      "sectors": [
+        "flavor",
+        "fragrance",
+        "solvents",
+        "green-chemistry",
+        "chemical-feedstocks"
+      ],
+      "applications": [
+        "flavor and fragrance",
+        "green solvent",
+        "natural-product extraction solvent",
+        "renewable platform chemical",
+        "functionalized-product feedstock"
+      ],
+      "statement": "Limonene is a renewable bioeconomy chemical used in flavor, fragrance and solvent applications and as a platform/feedstock for higher-value products.",
+      "reviewStatus": "source-verified",
+      "notes": "Industrial use and renewability do not establish therapeutic efficacy or universal environmental superiority."
+    },
+    {
+      "id": "allenspach2021-alpha-pinene-applications",
+      "sourceId": "ALLENSPACH-2021-ALPHA-PINENE",
+      "compoundSlug": "alpha-pinene",
+      "sectors": [
+        "flavor",
+        "fragrance",
+        "chemical-synthesis",
+        "authenticity-control"
+      ],
+      "applications": [
+        "flavor and fragrance chemistry",
+        "chemical scaffold/feedstock for synthesized derivatives",
+        "essential-oil authenticity and enantiomeric-profile analysis"
+      ],
+      "statement": "α-Pinene has established flavor/fragrance relevance and is used as a renewable chemical scaffold for derivative synthesis and as an analytical target in essential-oil authenticity work.",
+      "reviewStatus": "source-verified",
+      "notes": "Application context does not convert historical use or derivative research into a therapeutic claim for α-pinene itself."
+    },
+    {
+      "id": "letizia2003-linalool-fragrance",
+      "sourceId": "LETIZIA-2003-LINALOOL-FRAGRANCE",
+      "compoundSlug": "linalool",
+      "sectors": [
+        "fragrance"
+      ],
+      "applications": [
+        "fragrance ingredient"
+      ],
+      "statement": "Linalool is an established fragrance material with a dedicated fragrance-ingredient safety review.",
+      "reviewStatus": "source-verified",
+      "notes": "Fragrance use is documented here separately from sensory perception, biological research, and safety conclusions."
+    },
+    {
+      "id": "api2022-beta-caryophyllene-fragrance",
+      "sourceId": "API-2022-CARYOPHYLLENE-SAFETY",
+      "compoundSlug": "beta-caryophyllene",
+      "sectors": [
+        "fragrance"
+      ],
+      "applications": [
+        "fragrance ingredient"
+      ],
+      "statement": "β-Caryophyllene is used in fragrance applications and has been evaluated within the RIFM fragrance-ingredient safety framework.",
+      "reviewStatus": "source-verified",
+      "notes": "Fragrance application is distinct from receptor pharmacology, therapeutic use, or cannabis-effect claims."
     }
   ]
 }
