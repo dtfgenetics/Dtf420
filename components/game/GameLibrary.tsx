@@ -7,6 +7,8 @@ import styles from "@/app/games/page.module.css";
 
 type Filter = "all" | GameReleaseStatus;
 
+const touchActionStyle = { touchAction: "manipulation" } as const;
+
 export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
@@ -32,6 +34,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
               data-active={filter === value}
               key={value}
               onClick={() => setFilter(value)}
+              style={touchActionStyle}
               type="button"
             >
               {value === "all" ? "All games" : value === "playable" ? "Playable now" : "Development previews"}
@@ -71,7 +74,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
                     {game.features.map((feature) => <span className={styles.tag} key={feature}>{feature}</span>)}
                   </div>
                   <div className={styles.cardAction}>
-                    <Link aria-label={game.actionAriaLabel} className={preview ? styles.secondaryAction : styles.primaryAction} href={`/games/${game.slug}`}>
+                    <Link aria-label={game.actionAriaLabel} className={preview ? styles.secondaryAction : styles.primaryAction} href={`/games/${game.slug}`} style={touchActionStyle}>
                       {game.actionLabel}<span className={styles.actionArrow} aria-hidden="true">→</span>
                     </Link>
                   </div>
@@ -84,7 +87,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
         <div className={styles.emptyState} id="game-library-results" role="region" aria-labelledby="game-library-empty-heading">
           <h3 id="game-library-empty-heading">No games match these filters.</h3>
           <p>Clear the search and release-status filter to show every game.</p>
-          <button className={styles.filterButton} type="button" aria-controls="game-library-results" onClick={() => { setFilter("all"); setQuery(""); }}>Clear filters and show every game</button>
+          <button className={styles.filterButton} type="button" aria-controls="game-library-results" onClick={() => { setFilter("all"); setQuery(""); }} style={touchActionStyle}>Clear filters and show every game</button>
         </div>
       )}
     </>
