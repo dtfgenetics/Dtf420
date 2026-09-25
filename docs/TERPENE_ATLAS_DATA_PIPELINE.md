@@ -938,3 +938,25 @@ Reviewed application records now cover:
 These records join the existing squalene and β-carotene application records.
 
 Application context remains categorically separate from therapeutic efficacy. A molecule's use as a fragrance, solvent, chemical feedstock, food colorant, cosmetic ingredient, or pharmaceutical formulation component does not prove a human biological benefit.
+
+
+### Second analytical-method coverage wave
+
+Compound-specific analytical-method coverage now extends beyond the original eight core volatile terpenes.
+
+Added reviewed method records:
+
+- **Z/cis-β-ocimene** — Cannabis inflorescence FET-HS-GC/MS-TOF using a 35-terpenoid standard panel; the source explicitly reports cis-β-ocimene among quantified major terpenoids, with method accuracy above 90% and 5 ppm LOD for all analytes in the validated panel;
+- **α-terpinene and γ-terpinene** — Cannabis GC-MS targeted metabolomics using purchased Cannabis Terpene Mix A reference standards and external-standard retention-index confirmation;
+- **squalene** — validated gas-liquid chromatographic measurement after mild saponification/alumina isolation in human biological matrices;
+- **β-carotene** — single-laboratory validated reversed-phase LC in supplements/raw materials with separation of major geometric isomers.
+
+### Matrix and identity boundaries
+
+A reviewed analytical method does not automatically imply Cannabis-matrix validation.
+
+Squalene and β-carotene records improve the analytical-method chapter because they establish validated analytical approaches for the exact compound identities, but their matrix fields and notes explicitly state that the methods were validated outside Cannabis.
+
+Cis-β-ocimene is mapped to the reviewed Z-β-ocimene chapter because PubChem identifies cis-β-ocimene as the (3Z) identity. The Dei Cas method record is not used to upgrade E/trans-β-ocimene.
+
+After this wave, 13 of the 14 exact reviewed chapter identities have compound-specific reviewed analytical-method context. **E/trans-β-ocimene remains intentionally incomplete** until an identity-appropriate method record is reviewed.
