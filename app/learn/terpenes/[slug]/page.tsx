@@ -15,6 +15,10 @@ import { countSensoryEvidence, getReviewedSensoryEvidenceRecord } from "@/lib/te
 import { countNaturalOccurrenceEvidence, getReviewedNaturalOccurrenceRecord } from "@/lib/terpenes/natural-occurrence";
 import { getTerpeneStereoRegistryEntry } from "@/lib/terpenes/stereoisomers";
 import { getReviewedCultivarDistribution } from "@/lib/terpenes/cultivar-distributions";
+import { getReviewedAnalyticalMethodsForCompound, getReviewedGeneralAnalyticalMethods } from "@/lib/terpenes/analytical-methods";
+import { countAggregateEcologyEvidence, countExactEcologyEvidence, getReviewedEcologyForCompound } from "@/lib/terpenes/ecology";
+import { getReviewedApplicationsForCompound } from "@/lib/terpenes/applications";
+import { getTerpeneSourceById } from "@/lib/terpenes/source-queries";
 import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
@@ -56,6 +60,12 @@ export default async function TerpeneRecordPage({
   const naturalOccurrenceRecord = getReviewedNaturalOccurrenceRecord(compound.slug);
   const naturalOccurrenceEvidenceCount = countNaturalOccurrenceEvidence(naturalOccurrenceRecord);
   const cultivarDistribution = getReviewedCultivarDistribution(compound.slug);
+  const analyticalMethods = getReviewedAnalyticalMethodsForCompound(compound.slug);
+  const generalAnalyticalMethods = getReviewedGeneralAnalyticalMethods();
+  const ecologyRecords = getReviewedEcologyForCompound(compound.slug);
+  const applicationRecords = getReviewedApplicationsForCompound(compound.slug);
+  const exactEcologyEvidenceCount = countExactEcologyEvidence(compound.slug);
+  const aggregateEcologyEvidenceCount = countAggregateEcologyEvidence(compound.slug);
   const stereo = propertyRecord ? summarizeStereochemistry(propertyRecord.properties) : null;
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
@@ -95,6 +105,10 @@ export default async function TerpeneRecordPage({
     naturalOccurrenceEvidenceCount,
     cultivarDistributionEvidenceCount: cultivarDistribution ? 1 : 0,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
+    analyticalMethodEvidenceCount: analyticalMethods.length,
+    exactEcologyEvidenceCount,
+    aggregateEcologyEvidenceCount,
+    applicationEvidenceCount: applicationRecords.length,
     relatedCompounds,
   });
 
