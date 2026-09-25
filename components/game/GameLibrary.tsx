@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { GameCatalogEntry, GameReleaseStatus } from "@/lib/game-catalog";
 import styles from "@/app/games/page.module.css";
+import focusStyles from "./GameLibraryFocus.module.css";
 
 type Filter = "all" | GameReleaseStatus;
 
@@ -74,7 +75,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
                     {game.features.map((feature) => <span className={styles.tag} key={feature}>{feature}</span>)}
                   </div>
                   <div className={styles.cardAction}>
-                    <Link aria-label={game.actionAriaLabel} className={preview ? styles.secondaryAction : styles.primaryAction} href={`/games/${game.slug}`} style={touchActionStyle}>
+                    <Link aria-label={game.actionAriaLabel} className={`${preview ? styles.secondaryAction : styles.primaryAction} ${focusStyles.action}`} href={`/games/${game.slug}`} style={touchActionStyle}>
                       {game.actionLabel}<span className={styles.actionArrow} aria-hidden="true">→</span>
                     </Link>
                   </div>
