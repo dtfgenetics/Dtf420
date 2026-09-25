@@ -24,6 +24,10 @@ function buildSections({
   naturalOccurrenceEvidenceCount = 0,
   cultivarDistributionEvidenceCount = 0,
   stereoEvidenceCount = 0,
+  analyticalMethodEvidenceCount = 0,
+  exactEcologyEvidenceCount = 0,
+  aggregateEcologyEvidenceCount = 0,
+  applicationEvidenceCount = 0,
 }: BuildChapterContext): TerpeneChapterSection[] {
   const chemistrySources = compound.sourceIds.filter((id) => id === "PUBCHEM" || id === "THC-V13");
   const cannabisSources = compound.sourceIds.filter((id) => id !== "PUBCHEM");
@@ -73,6 +77,14 @@ function buildSections({
       sourceIds: ["PUBCHEM"],
     },
     {
+      id: "analytical-methods",
+      label: "Analytical methods & identification",
+      summary: "Validated extraction, chromatography, reference-standard, and identification methods used to measure the compound in relevant matrices.",
+      status: analyticalMethodEvidenceCount > 0 ? "linked-evidence" : "needs-expansion",
+      evidenceCount: analyticalMethodEvidenceCount,
+      sourceIds: ["IBRAHIM-2019-CANNABIS-GCMS", "MICALIZZI-2021-CANNABIS-ANALYTICS"],
+    },
+    {
       id: "sensory",
       label: "Sensory & aroma science",
       summary: "Human-friendly descriptors plus source-preserved reported odor, odor-threshold, and taste evidence, with mixture and method limitations kept explicit.",
@@ -100,6 +112,19 @@ function buildSections({
           ? naturalOccurrenceEvidenceCount
           : compound.naturalSources.length,
       sourceIds: ["THC-V13", "PUBCHEM-PUG-VIEW", "LOTUS"],
+    },
+    {
+      id: "ecological-role",
+      label: "Ecological role & plant interactions",
+      summary: "Pollination, herbivory, signaling, defense, and other organism interactions, with exact versus aggregate identity kept explicit.",
+      status:
+        exactEcologyEvidenceCount > 0
+          ? "linked-evidence"
+          : aggregateEcologyEvidenceCount > 0
+            ? "reviewed-foundation"
+            : "needs-expansion",
+      evidenceCount: exactEcologyEvidenceCount + aggregateEcologyEvidenceCount,
+      sourceIds: ["FARRE-2017-BETA-OCIMENE-ECOLOGY"],
     },
     {
       id: "cannabis-occurrence",
@@ -178,6 +203,14 @@ function buildSections({
       status: safetyEvidenceCount + stabilityEvidenceCount > 0 ? "linked-evidence" : "needs-expansion",
       evidenceCount: safetyEvidenceCount + stabilityEvidenceCount,
       sourceIds: compound.sourceIds,
+    },
+    {
+      id: "applications",
+      label: "Industrial & application context",
+      summary: "Documented commercial, food, cosmetic, pharmaceutical, materials, or biotechnology uses kept separate from therapeutic claims.",
+      status: applicationEvidenceCount > 0 ? "linked-evidence" : "needs-expansion",
+      evidenceCount: applicationEvidenceCount,
+      sourceIds: ["SHALU-2024-SQUALENE-INDUSTRY", "KLÄUI-1982-CAROTENOID-COLORANTS"],
     },
     {
       id: "assessment",
