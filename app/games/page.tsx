@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const principles = [
   { number: "01", title: "Play first", copy: "Playable releases open into the game quickly, with the main action obvious and setup kept lightweight." },
-  { number: "02", title: "Built for screens", copy: "Game UI is tested at desktop and phone widths so controls stay readable without burying the play area." },
+  { number: "02", title: "Built for screens", copy: "Game UI is tested at desktop, tablet, and phone widths so controls stay readable without burying the play area." },
   { number: "03", title: "Clear release status", copy: "Finished play routes and development previews are labeled differently so you always know what you are opening." },
 ] as const;
 
