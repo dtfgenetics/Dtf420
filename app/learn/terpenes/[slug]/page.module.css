@@ -147,3 +147,27 @@
 .aggregateEvidence dd{margin:0;font-size:8px;font-weight:800;overflow-wrap:anywhere}
 .aggregateEvidence a{width:fit-content;color:var(--accent-strong);font-size:8px;font-weight:900}
 @media(max-width:720px){.aggregateEvidenceHeading{align-items:flex-start;flex-direction:column}.aggregateEvidence dl{grid-template-columns:1fr}}
+
+.contextSection{display:grid;gap:14px}
+.contextGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.contextCard{display:grid;gap:10px;padding:14px;border:1px solid var(--border);border-radius:13px;background:rgba(255,255,255,.018)}
+.contextTopline{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.contextTopline span{color:var(--muted);font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.contextTopline strong{color:#dec37e;font-size:8px;text-align:right}
+.contextCard h3{margin:0;font-size:14px;line-height:1.35}
+.contextCard>p{margin:0;color:var(--muted);font-size:9px;line-height:1.55}
+.contextCard dl{display:grid;gap:1px;margin:0;background:var(--border)}
+.contextCard dl div{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:8px;background:#09140d}
+.contextCard dt{color:var(--muted);font-size:7px;text-transform:uppercase}
+.contextCard dd{margin:0;font-size:8px;font-weight:800;line-height:1.4}
+.contextCard a{width:fit-content;color:var(--accent-strong);font-size:8px;font-weight:900}
+.roleChips{display:flex;flex-wrap:wrap;gap:5px}
+.roleChips span{padding:5px 7px;border:1px solid rgba(183,226,93,.2);border-radius:999px;background:rgba(183,226,93,.045);color:#dce7d8;font-size:7px}
+.contextGuardrail{padding:9px;border-left:3px solid #d2a650;background:rgba(96,67,23,.07)}
+.generalContext{display:grid;gap:7px;padding:12px;border:1px dashed rgba(97,156,188,.3);border-radius:11px;background:rgba(97,156,188,.035)}
+.generalContext>span{color:#acd1e3;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.generalContext article{display:grid;gap:5px}
+.generalContext strong{font-size:10px}
+.generalContext p{margin:0;color:var(--muted);font-size:9px;line-height:1.5}
+.generalContext a{width:fit-content;color:var(--accent-strong);font-size:8px;font-weight:900}
+@media(max-width:760px){.contextGrid{grid-template-columns:1fr}.contextCard dl div{grid-template-columns:1fr}.contextTopline{align-items:flex-start;flex-direction:column}.contextTopline strong{text-align:left}}
