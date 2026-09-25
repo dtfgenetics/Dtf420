@@ -885,3 +885,30 @@ It rejects:
 - empty ecological role, application, or required method fields.
 
 The deep chapter verifier additionally checks that all three structured datasets are visible in chapter rendering and contribute to readiness using their appropriate identity scope.
+
+
+## Second biological-research evidence wave
+
+The biological-research chapter now has reviewed evidence coverage for additional compounds that previously had no biological-effect records.
+
+Added records:
+
+- **α-pinene** — LPS-stimulated mouse peritoneal macrophage evidence reporting changes in inflammatory mediators and MAPK/NF-κB signaling;
+- **β-pinene** — in-vitro antimicrobial vapor evidence against tested bacterial isolates;
+- **terpinolene** — systematic-review evidence summarizing antioxidant, larvicidal, insecticidal, and other reported activities while preserving the review's warnings about limited mechanistic, preclinical, and clinical depth;
+- **α-terpinene** — ex-vivo isolated rat tracheal smooth-muscle relaxation evidence;
+- **γ-terpinene** — in-vitro/in-silico Leishmania major and murine-macrophage evidence with explicit need for further in-vivo/clinical study;
+- **squalene** — systematic-review evidence spanning heterogeneous in-vitro, animal, bioavailability, and human research;
+- **β-carotene** — human stable-isotope evidence demonstrating oral β-carotene conversion to retinol with substantial inter-individual variability.
+
+### Ex-vivo evidence type
+
+The evidence taxonomy now includes `ex-vivo` so isolated tissue and organ preparations are not mislabeled as cell-culture `in-vitro` studies or intact-animal evidence.
+
+The biological-effect scope for `ex-vivo` records states that the result applies to isolated tissue/organ preparations under the experimental conditions and is not direct evidence of the same response in an intact organism or in humans.
+
+### Identity discipline
+
+E-β-ocimene and Z-β-ocimene remain without chapter-specific biological-effect evidence in this wave. Aggregate β-ocimene ecological or safety evidence is not borrowed to fill those biological sections.
+
+After this wave, 12 of the 14 exact reviewed chapter identities have at least one reviewed biological-effect record. The two ocimene isomer chapters remain intentionally incomplete until identity-appropriate biological evidence is reviewed.

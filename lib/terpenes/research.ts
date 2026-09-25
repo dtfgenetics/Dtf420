@@ -57,6 +57,7 @@ export function evidenceScope(record: ResearchEvidenceRecord) {
       if (record.studyType === "human-observational") return "Supports an association observed in people, not proof of causation.";
       if (record.studyType === "human-experimental") return "Supports the measured human response observed under the controlled experimental conditions. It does not by itself establish therapeutic efficacy, long-term benefit, or the same result at other doses, routes, or populations.";
       if (record.studyType === "animal") return "Supports an outcome in the tested animal model; it is not direct evidence of the same effect in humans.";
+      if (record.studyType === "ex-vivo") return "Supports a response in isolated tissue or organ preparations under experimental conditions; it is not direct evidence of the same effect in an intact organism or in humans.";
       if (record.studyType === "in-vitro" || record.studyType === "mechanistic") return "Supports a laboratory or mechanistic finding; it is not direct evidence of a clinical effect in humans.";
       return "Supports only the outcome and context directly tested by the source.";
     default:

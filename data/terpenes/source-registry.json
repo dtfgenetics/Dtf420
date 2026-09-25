@@ -455,6 +455,72 @@
       "pmid": "6817968",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/6817968/",
       "notes": "Review of commercial carotenoid synthesis and food-colorant applications including β-carotene."
+    },
+    {
+      "id": "KIM-2015-ALPHA-PINENE-MACROPHAGE",
+      "name": "Kim DS et al. Alpha-Pinene Exhibits Anti-Inflammatory Activity Through the Suppression of MAPKs and the NF-κB Pathway in Mouse Peritoneal Macrophages.",
+      "role": "alpha-pinene-in-vitro-biological-effect",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1142/S0192415X15500457",
+      "pmid": "26119957",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/26119957/",
+      "notes": "LPS-stimulated mouse peritoneal macrophage study. In-vitro/mechanistic evidence only; not a human therapeutic outcome."
+    },
+    {
+      "id": "PHILLIPS-2012-BETA-PINENE-VAPOR",
+      "name": "Phillips CA et al. Identification and Quantification of the Antimicrobial Components of a Citrus Essential Oil Vapor.",
+      "role": "beta-pinene-in-vitro-antimicrobial",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1177/1934578X1200700135",
+      "pmid": "22428260",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/22428260/",
+      "notes": "In-vitro antimicrobial vapor study testing β-pinene separately and in mixtures. Does not establish clinical antimicrobial efficacy or cannabis inhalation effects."
+    },
+    {
+      "id": "PEREIRA-2020-ALPHA-TERPINENE-TRACHEA",
+      "name": "Pereira-de-Morais L et al. Myorelaxant action of Dysphania ambrosioides essential oil and its major constituent α-terpinene in isolated rat trachea.",
+      "role": "alpha-terpinene-ex-vivo-biological-effect",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.foodchem.2020.126923",
+      "pmid": "32387952",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32387952/",
+      "notes": "Ex-vivo isolated rat tracheal smooth-muscle study. Mechanistic organ-bath evidence only; not a human respiratory treatment claim."
+    },
+    {
+      "id": "LOU-BONAFONTE-2018-SQUALENE-BIOLOGY",
+      "name": "Lou-Bonafonte JM et al. Current Insights into the Biological Action of Squalene.",
+      "role": "squalene-biological-action-review",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1002/mnfr.201800136",
+      "pmid": "29883523",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/29883523/",
+      "notes": "Systematic review spanning in-vitro, animal, and human/bioavailability evidence. Review summaries must not be converted into a universal therapeutic claim."
+    },
+    {
+      "id": "TANG-2003-BETA-CAROTENE-RETINOL",
+      "name": "Tang G et al. Short-term and long-term conversion of beta-carotene to retinol in adults as assessed by a stable-isotope reference method.",
+      "role": "beta-carotene-human-metabolism",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1093/ajcn/78.2.259",
+      "pmid": "12885706",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12885706/",
+      "notes": "Human stable-isotope feeding study of β-carotene conversion to retinol. Metabolic conversion evidence, not a general supplement-benefit claim."
+    },
+    {
+      "id": "NOOSHADOKHT-2022-GAMMA-TERPINENE",
+      "name": "Nooshadokht M et al. In silico and in vitro antileishmanial effects of gamma-terpinene: Multifunctional modes of action.",
+      "role": "gamma-terpinene-in-vitro-biological-effect",
+      "ingestMode": "curated-evidence-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.cbi.2022.109957",
+      "pmid": "35472413",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35472413/",
+      "notes": "In-silico and in-vitro Leishmania major / murine macrophage study. The authors explicitly call for further in-vivo and clinical research."
     }
   ]
 }

@@ -200,6 +200,12 @@ const requiredSourceIds = [
   "FARRE-2017-BETA-OCIMENE-ECOLOGY",
   "SHALU-2024-SQUALENE-INDUSTRY",
   "KLÄUI-1982-CAROTENOID-COLORANTS",
+  "KIM-2015-ALPHA-PINENE-MACROPHAGE",
+  "PHILLIPS-2012-BETA-PINENE-VAPOR",
+  "PEREIRA-2020-ALPHA-TERPINENE-TRACHEA",
+  "LOU-BONAFONTE-2018-SQUALENE-BIOLOGY",
+  "TANG-2003-BETA-CAROTENE-RETINOL",
+  "NOOSHADOKHT-2022-GAMMA-TERPINENE",
   "WOJTUNIK-2022-ALPHA-TERPINENE-TOX",
   "ALVES-2025-GAMMA-TERPINENE-TOX",
   "CHO-2009-SQUALENE-HIGH-DOSE",
@@ -251,6 +257,13 @@ const requiredEvidenceIds = [
   "cho2009-squalene-high-dose-adverse-effects",
   "efsa2024-beta-carotene-supplement-risk",
   "rifm2021-beta-ocimene-unresolved-safety",
+  "kim2015-alpha-pinene-macrophage-inflammation",
+  "phillips2012-beta-pinene-antimicrobial-vapor",
+  "menezes2021-terpinolene-biological-review",
+  "pereira2020-alpha-terpinene-tracheal-relaxation",
+  "nooshadokht2022-gamma-terpinene-antileishmanial",
+  "lou2018-squalene-biological-review",
+  "tang2003-beta-carotene-retinol-conversion",
 ];
 const evidenceIds = new Set((ledger.records ?? []).map((record) => record.id));
 for (const evidenceId of requiredEvidenceIds) {
@@ -426,4 +439,42 @@ const caroteneApplication = (applications.records ?? []).find(
 );
 if (!squaleneApplication || !caroteneApplication) {
   throw new Error("Structured application coverage missing squalene or β-carotene");
+}
+
+
+if (!research.includes('record.studyType === "ex-vivo"')) {
+  throw new Error("Biological evidence scope must distinguish ex-vivo isolated-tissue studies");
+}
+
+const biologicalCoverageSlugs = [
+  "alpha-pinene",
+  "beta-pinene",
+  "terpinolene",
+  "alpha-terpinene",
+  "gamma-terpinene",
+  "squalene",
+  "beta-carotene",
+];
+for (const slug of biologicalCoverageSlugs) {
+  const hasBiological = (ledger.records ?? []).some(
+    (record) =>
+      record.compoundSlug === slug &&
+      record.claimType === "biological-effect" &&
+      ["source-verified", "editorial-reviewed"].includes(record.reviewStatus),
+  );
+  if (!hasBiological) {
+    throw new Error(`Second-wave biological evidence missing for ${slug}`);
+  }
+}
+
+for (const ocimeneSlug of ["e-beta-ocimene", "z-beta-ocimene"]) {
+  const hasBiological = (ledger.records ?? []).some(
+    (record) =>
+      record.compoundSlug === ocimeneSlug &&
+      record.claimType === "biological-effect" &&
+      ["source-verified", "editorial-reviewed"].includes(record.reviewStatus),
+  );
+  if (hasBiological) {
+    throw new Error(`${ocimeneSlug} must remain without borrowed aggregate biological-effect evidence`);
+  }
 }

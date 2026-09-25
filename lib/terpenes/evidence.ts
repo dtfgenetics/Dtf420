@@ -6,6 +6,7 @@ export type EvidenceStudyType =
   | "human-observational"
   | "human-experimental"
   | "animal"
+  | "ex-vivo"
   | "in-vitro"
   | "mechanistic"
   | "sensory"
