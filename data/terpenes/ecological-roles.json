@@ -22,6 +22,48 @@
       "evidenceBasis": "Review of published floral and foliar volatile ecology studies",
       "reviewStatus": "source-verified",
       "notes": "The review discusses β-ocimene broadly and does not establish that every reported ecological role is attributable separately to the E or Z isomer."
+    },
+    {
+      "id": "rasmann2005-beta-caryophyllene-root-defense",
+      "sourceId": "RASMANN-2005-CARYOPHYLLENE-ECOLOGY",
+      "title": "(E)-β-Caryophyllene as an herbivore-induced belowground defense signal",
+      "compoundSlugs": [
+        "beta-caryophyllene"
+      ],
+      "identityScope": "beta-caryophyllene",
+      "identityResolution": "exact",
+      "roleTypes": [
+        "herbivory-response",
+        "tritrophic-interaction",
+        "indirect-defense",
+        "natural-enemy-recruitment"
+      ],
+      "statement": "Maize roots damaged by western corn rootworm larvae released (E)-β-caryophyllene, which attracted entomopathogenic nematodes; field manipulation of the signal altered nematode infection and adult beetle emergence under the reported conditions.",
+      "organismContext": "Maize roots, Diabrotica virgifera virgifera larvae, and entomopathogenic nematodes in laboratory and field experiments",
+      "evidenceBasis": "Compound identification, behavioral/attraction experiments, field comparisons, and authentic-compound soil manipulation",
+      "reviewStatus": "source-verified",
+      "notes": "Ecological plant-defense evidence in maize. It does not imply the same ecological function or emission pattern in Cannabis."
+    },
+    {
+      "id": "raguso2016-linalool-plant-ecology",
+      "sourceId": "RAGUSO-2016-LINALOOL-ECOLOGY",
+      "title": "Linalool across floral attraction and plant-defense interactions",
+      "compoundSlugs": [
+        "linalool"
+      ],
+      "identityScope": "linalool including enantiomer-specific contexts",
+      "identityResolution": "exact",
+      "roleTypes": [
+        "pollinator-interaction",
+        "floral-signal",
+        "plant-defense",
+        "herbivore-interaction"
+      ],
+      "statement": "A plant-ecology review describes linalool and its enantiomers/metabolites as participating in a broad range of plant-pollinator and plant-defense interactions, with behavioral responses depending on enantiomer, mixture, ratio, species and ecological context.",
+      "organismContext": "Multiple plant species and floral visitors/herbivores reviewed across published ecological studies",
+      "evidenceBasis": "Review of floral volatile ecology, sensory discrimination, pollinator behavior, and plant-defense studies",
+      "reviewStatus": "source-verified",
+      "notes": "The chapter identity is non-enantiomer-specific linalool. Individual ecological outcomes may be enantiomer-specific and should not be generalized across all linalool forms."
     }
   ]
 }

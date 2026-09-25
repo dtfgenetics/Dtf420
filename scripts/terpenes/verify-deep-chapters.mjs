@@ -200,6 +200,12 @@ const requiredSourceIds = [
   "FARRE-2017-BETA-OCIMENE-ECOLOGY",
   "SHALU-2024-SQUALENE-INDUSTRY",
   "KLÄUI-1982-CAROTENOID-COLORANTS",
+  "RASMANN-2005-CARYOPHYLLENE-ECOLOGY",
+  "RAGUSO-2016-LINALOOL-ECOLOGY",
+  "BEHR-2009-MYRCENE-SUSTAINABLE-CHEMISTRY",
+  "CIRIMINNA-2014-LIMONENE-BIOECONOMY",
+  "ALLENSPACH-2021-ALPHA-PINENE",
+  "LETIZIA-2003-LINALOOL-FRAGRANCE",
   "KIM-2015-ALPHA-PINENE-MACROPHAGE",
   "PHILLIPS-2012-BETA-PINENE-VAPOR",
   "PEREIRA-2020-ALPHA-TERPINENE-TRACHEA",
@@ -476,5 +482,62 @@ for (const ocimeneSlug of ["e-beta-ocimene", "z-beta-ocimene"]) {
   );
   if (hasBiological) {
     throw new Error(`${ocimeneSlug} must remain without borrowed aggregate biological-effect evidence`);
+  }
+}
+
+
+const requiredEcologyIds = [
+  "rasmann2005-beta-caryophyllene-root-defense",
+  "raguso2016-linalool-plant-ecology",
+];
+const ecologyIds = new Set((ecologicalRoles.records ?? []).map((record) => record.id));
+for (const recordId of requiredEcologyIds) {
+  if (!ecologyIds.has(recordId)) {
+    throw new Error(`Expanded ecology record missing: ${recordId}`);
+  }
+}
+
+const caryophylleneEcology = (ecologicalRoles.records ?? []).find(
+  (record) => record.id === "rasmann2005-beta-caryophyllene-root-defense",
+);
+if (
+  !caryophylleneEcology ||
+  caryophylleneEcology.identityResolution !== "exact" ||
+  !caryophylleneEcology.compoundSlugs.includes("beta-caryophyllene")
+) {
+  throw new Error("β-caryophyllene ecology must remain exact reviewed chapter evidence");
+}
+
+const linaloolEcology = (ecologicalRoles.records ?? []).find(
+  (record) => record.id === "raguso2016-linalool-plant-ecology",
+);
+if (
+  !linaloolEcology ||
+  linaloolEcology.identityResolution !== "exact" ||
+  !linaloolEcology.compoundSlugs.includes("linalool")
+) {
+  throw new Error("Linalool ecology record is missing exact chapter mapping");
+}
+
+const requiredApplicationIds = [
+  "behr2009-myrcene-sustainable-chemistry",
+  "ciriminna2014-limonene-bioeconomy",
+  "allenspach2021-alpha-pinene-applications",
+  "letizia2003-linalool-fragrance",
+  "api2022-beta-caryophyllene-fragrance",
+];
+const applicationIds = new Set((applications.records ?? []).map((record) => record.id));
+for (const recordId of requiredApplicationIds) {
+  if (!applicationIds.has(recordId)) {
+    throw new Error(`Expanded application record missing: ${recordId}`);
+  }
+}
+
+for (const slug of ["beta-myrcene", "limonene", "alpha-pinene", "linalool", "beta-caryophyllene"]) {
+  const hasApplication = (applications.records ?? []).some(
+    (record) => record.compoundSlug === slug && record.reviewStatus === "source-verified",
+  );
+  if (!hasApplication) {
+    throw new Error(`Expanded application coverage missing for ${slug}`);
   }
 }

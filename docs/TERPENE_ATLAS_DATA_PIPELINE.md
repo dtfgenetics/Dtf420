@@ -912,3 +912,29 @@ The biological-effect scope for `ex-vivo` records states that the result applies
 E-β-ocimene and Z-β-ocimene remain without chapter-specific biological-effect evidence in this wave. Aggregate β-ocimene ecological or safety evidence is not borrowed to fill those biological sections.
 
 After this wave, 12 of the 14 exact reviewed chapter identities have at least one reviewed biological-effect record. The two ocimene isomer chapters remain intentionally incomplete until identity-appropriate biological evidence is reviewed.
+
+
+### Second structured ecology/application wave
+
+The ecology/application chapter layers now include broader reviewed coverage.
+
+#### Ecological roles
+
+- **β-caryophyllene** — exact chapter-level evidence from maize root-herbivore experiments in which (E)-β-caryophyllene acted as an induced belowground signal associated with recruitment of entomopathogenic nematodes.
+- **linalool** — reviewed floral-volatile ecology spanning pollinator attraction, plant defense, herbivore interactions, and enantiomer-sensitive behavior.
+
+The β-caryophyllene record is treated as exact chapter evidence for the current β-caryophyllene identity. The linalool chapter remains non-enantiomer-specific, so its ecology record explicitly notes that individual ecological outcomes may differ by linalool enantiomer and mixture context.
+
+#### Industrial/application context
+
+Reviewed application records now cover:
+
+- **β-myrcene** — renewable base chemical and fine-chemical feedstock;
+- **limonene** — flavor, fragrance, green-solvent, extraction-solvent, platform-chemical, and functionalized-product contexts;
+- **α-pinene** — flavor/fragrance chemistry, derivative synthesis, and essential-oil authenticity analysis;
+- **linalool** — fragrance-ingredient use;
+- **β-caryophyllene** — fragrance-ingredient use.
+
+These records join the existing squalene and β-carotene application records.
+
+Application context remains categorically separate from therapeutic efficacy. A molecule's use as a fragrance, solvent, chemical feedstock, food colorant, cosmetic ingredient, or pharmaceutical formulation component does not prove a human biological benefit.
