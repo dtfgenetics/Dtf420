@@ -521,6 +521,72 @@
       "pmid": "35472413",
       "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35472413/",
       "notes": "In-silico and in-vitro Leishmania major / murine macrophage study. The authors explicitly call for further in-vivo and clinical research."
+    },
+    {
+      "id": "RASMANN-2005-CARYOPHYLLENE-ECOLOGY",
+      "name": "Rasmann S et al. Recruitment of entomopathogenic nematodes by insect-damaged maize roots.",
+      "role": "beta-caryophyllene-ecological-function",
+      "ingestMode": "curated-ecology-records",
+      "reviewRequired": true,
+      "doi": "10.1038/nature03451",
+      "pmid": "15815622",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/15815622/",
+      "notes": "Field and laboratory evidence for (E)-β-caryophyllene as an herbivore-induced belowground maize signal that attracts entomopathogenic nematodes."
+    },
+    {
+      "id": "RAGUSO-2016-LINALOOL-ECOLOGY",
+      "name": "Raguso RA. More lessons from linalool: insights gained from a ubiquitous floral volatile.",
+      "role": "linalool-plant-ecology-review",
+      "ingestMode": "curated-ecology-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.pbi.2016.05.007",
+      "pmid": "27286000",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/27286000/",
+      "notes": "Plant-ecology review of linalool enantiomers and metabolites across pollinator attraction and plant-defense contexts."
+    },
+    {
+      "id": "BEHR-2009-MYRCENE-SUSTAINABLE-CHEMISTRY",
+      "name": "Behr A, Johnen L. Myrcene as a natural base chemical in sustainable chemistry: a critical review.",
+      "role": "myrcene-industrial-application-review",
+      "ingestMode": "curated-application-records",
+      "reviewRequired": true,
+      "doi": "10.1002/cssc.200900186",
+      "pmid": "20013989",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/20013989/",
+      "notes": "Review of myrcene as a renewable base chemical and fine-chemical feedstock."
+    },
+    {
+      "id": "CIRIMINNA-2014-LIMONENE-BIOECONOMY",
+      "name": "Ciriminna R et al. Limonene: a versatile chemical of the bioeconomy.",
+      "role": "limonene-industrial-application-review",
+      "ingestMode": "curated-application-records",
+      "reviewRequired": true,
+      "doi": "10.1039/c4cc06147k",
+      "pmid": "25341412",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/25341412/",
+      "notes": "Review of limonene uses as flavor, fragrance, green solvent, platform chemical, natural-product extraction solvent, and functionalized-product feedstock."
+    },
+    {
+      "id": "ALLENSPACH-2021-ALPHA-PINENE",
+      "name": "Allenspach M, Steuer C. α-Pinene: A never-ending story.",
+      "role": "alpha-pinene-application-review",
+      "ingestMode": "curated-application-records",
+      "reviewRequired": true,
+      "doi": "10.1016/j.phytochem.2021.112857",
+      "pmid": "34365295",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/34365295/",
+      "notes": "Review covering α-pinene flavor/fragrance roles, chemical transformations, authenticity control, and new chemical-entity development."
+    },
+    {
+      "id": "LETIZIA-2003-LINALOOL-FRAGRANCE",
+      "name": "Letizia CS et al. Fragrance material review on linalool.",
+      "role": "linalool-fragrance-application-review",
+      "ingestMode": "curated-application-records",
+      "reviewRequired": true,
+      "doi": "10.1016/S0278-6915(03)00015-2",
+      "pmid": "12804650",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12804650/",
+      "notes": "Fragrance-material review establishing linalool's fragrance-ingredient application context; safety conclusions remain separate in the evidence ledger."
     }
   ]
 }
