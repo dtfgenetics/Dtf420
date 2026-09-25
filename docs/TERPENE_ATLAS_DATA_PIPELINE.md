@@ -816,3 +816,72 @@ Both `e-beta-ocimene` and `z-beta-ocimene` chapters may display this record as *
 - future isomer-resolved evidence can supersede this limitation without deleting the aggregate source.
 
 This pattern should be reused whenever a safety, sensory, occurrence, or property source reports an aggregate/isomer-unresolved analyte that overlaps multiple exact THC chapter identities.
+
+
+## Structured chapter context: analytical methods, ecology, and applications
+
+The reviewed compound chapter model now contains **17 sections**. Three structured sections were added because they answer different questions from the biological-effect evidence ledger and should not be flattened into generic prose.
+
+### Analytical methods & identification
+
+Structured records live in `data/terpenes/analytical-methods.json`.
+
+A compound-specific method record must preserve:
+
+- matrix;
+- extraction/sample-preparation method;
+- analytical technique;
+- validation framework;
+- quantification context;
+- reviewed compound identities covered by the method;
+- identity-resolution state;
+- registered source provenance.
+
+A general analytical-method review can appear as system-level context, but it cannot increase compound-specific method readiness. A record labeled `general-method-review` therefore has an empty `compoundSlugs` array.
+
+The first compound-specific method record uses the validated Cannabis GC-MS method from Ibrahim et al. and currently covers the named reference-standard panel mapped to the reviewed THC chapters: α-pinene, β-pinene, β-myrcene, limonene, terpinolene, linalool, β-caryophyllene, and α-humulene.
+
+### Ecological role & plant interactions
+
+Structured records live in `data/terpenes/ecological-roles.json`.
+
+Ecological evidence preserves:
+
+- exact or aggregate identity scope;
+- identity resolution;
+- ecological role categories;
+- organism context;
+- evidence basis;
+- source provenance;
+- review state and limitations.
+
+Exact ecological evidence can produce `linked-evidence` readiness. Aggregate or isomer-unresolved ecological evidence can produce only `reviewed-foundation`.
+
+The first record maps the reviewed β-ocimene ecological literature to both E- and Z-β-ocimene chapters while keeping `identityResolution: isomer-unresolved`. It must not be interpreted as proof that every ecological role in the source belongs separately and equally to each geometric isomer.
+
+### Industrial & application context
+
+Structured records live in `data/terpenes/applications.json`.
+
+Application records preserve commercial sectors, documented uses, source provenance, and interpretation notes. An industrial, food, cosmetic, pharmaceutical, or biotechnology use is not evidence of therapeutic efficacy.
+
+The first application records cover:
+
+- squalene in cosmetic, pharmaceutical, and biotechnological production contexts;
+- β-carotene as a commercial food colorant.
+
+### Validation
+
+`scripts/terpenes/validate-structured-context.mjs` is part of the full Verify gate.
+
+It rejects:
+
+- unregistered source IDs;
+- orphan compound slugs;
+- invalid review states;
+- invalid analytical or ecology identity-resolution states;
+- compound-specific validation claims attached to general method reviews;
+- unresolved-isomer ecology mapped to fewer than the affected reviewed identities;
+- empty ecological role, application, or required method fields.
+
+The deep chapter verifier additionally checks that all three structured datasets are visible in chapter rendering and contribute to readiness using their appropriate identity scope.
