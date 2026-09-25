@@ -16,11 +16,11 @@ const principles = [
 
 export default function GamesPage() {
   return (
-    <section className={`shell ${styles.gamesPage}`}>
+    <section className={`shell ${styles.gamesPage}`} aria-labelledby="games-heading">
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
           <p className="eyebrow">DTF Games</p>
-          <h1>Pick a game. Get into it.</h1>
+          <h1 id="games-heading">Pick a game. Get into it.</h1>
           <p className={styles.heroText}>
             Original cannabis-themed browser games built for quick rounds, party play, and community competition. Play finished releases now and help test the next builds as they take shape.
           </p>
