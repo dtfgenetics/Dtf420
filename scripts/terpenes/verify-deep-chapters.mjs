@@ -3,6 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const page = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
+const dataSource = fs.readFileSync(path.join(root, "lib/terpenes/data.ts"), "utf8");
 const pageCss = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.module.css"), "utf8");
 const chapters = fs.readFileSync(path.join(root, "lib/terpenes/chapters.ts"), "utf8");
 const chapterTypes = fs.readFileSync(path.join(root, "lib/terpenes/chapter-types.ts"), "utf8");
