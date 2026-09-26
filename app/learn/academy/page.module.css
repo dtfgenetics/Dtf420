@@ -328,7 +328,8 @@
   text-align: center;
 }
 
-@media (max-width: 760px) {
+/* Canonical phone band. */
+@media (max-width: 700px) {
   .stats {
     grid-template-columns: 1fr;
   }
@@ -352,7 +353,8 @@
   }
 }
 
-@media (min-width: 761px) and (max-width: 1050px) {
+/* Canonical tablet/compact band. */
+@media (min-width: 701px) and (max-width: 1120px) {
   .resourceGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
