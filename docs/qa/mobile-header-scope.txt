@@ -1,0 +1,1 @@
+Scope: mobile header/search/menu only; no desktop navigation or gameplay changes.
