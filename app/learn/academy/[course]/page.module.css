@@ -187,11 +187,135 @@
 }
 
 @media (max-width: 620px) {
+  .breadcrumb {
+    gap: 6px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .hero {
+    gap: 10px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 10vw, 42px);
+    line-height: 1.06;
+    overflow-wrap: anywhere;
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .grid {
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .stack {
+    gap: 16px;
+  }
+
+  .panel {
+    border-radius: 18px;
+  }
+
+  .panelHeader {
+    padding: 16px;
+  }
+
+  .panelHeader h2 {
+    font-size: clamp(20px, 6vw, 26px);
+    line-height: 1.15;
+  }
+
+  .outcomes {
+    gap: 10px;
+    padding: 16px 16px 18px 36px;
+  }
+
   .unit {
     grid-template-columns: 34px minmax(0, 1fr);
+    gap: 10px 12px;
+    padding: 16px;
+    min-height: 72px;
+    touch-action: manipulation;
+  }
+
+  .unitText span {
+    line-height: 1.45;
   }
 
   .open {
     grid-column: 2;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .exerciseList {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .exercise {
+    padding: 14px;
+  }
+
+  .exercise a {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding-block: 8px;
+  }
+
+  .capstone {
+    padding: 16px;
+  }
+
+  .capstoneLinks {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .capstoneLinks a {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+  }
+
+  .footerActions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .footerActions a {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .panelHeader,
+  .unit,
+  .capstone {
+    padding-inline: 14px;
+  }
+
+  .outcomes {
+    padding-inline: 34px 14px;
   }
 }
