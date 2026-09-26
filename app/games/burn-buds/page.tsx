@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const CANONICAL_BURN_BUDS_ROUTE = "/games/protect-the-plants/";
-
 export const metadata: Metadata = {
   title: "Burn Buds | DTF Games",
-  description: "Open the canonical Burn Buds 15 × 15 multiplayer hidden-fleet strategy game.",
-  alternates: {
-    canonical: CANONICAL_BURN_BUDS_ROUTE,
-  },
+  description: "Burn Buds multiplayer strategy game release status and Game Hub navigation.",
   robots: {
     index: false,
     follow: true,
   },
 };
 
-export default function BurnBudsAliasPage() {
+export default function BurnBudsPage() {
   return (
     <main
       className="shell page-section"
-      data-burn-buds-alias="canonical-multiplayer"
       style={{
         minHeight: "70svh",
         display: "grid",
@@ -27,14 +21,8 @@ export default function BurnBudsAliasPage() {
         paddingBlock: "clamp(3rem, 10vw, 8rem)",
       }}
     >
-      <meta httpEquiv="refresh" content={`0;url=${CANONICAL_BURN_BUDS_ROUTE}`} />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.location.replace(${JSON.stringify(CANONICAL_BURN_BUDS_ROUTE)});`,
-        }}
-      />
       <section
-        aria-labelledby="burn-buds-alias-title"
+        aria-labelledby="burn-buds-title"
         style={{
           width: "min(680px, 100%)",
           padding: "clamp(1.25rem, 4vw, 2.2rem)",
@@ -46,13 +34,14 @@ export default function BurnBudsAliasPage() {
         }}
       >
         <p className="eyebrow">DTF Games · Burn Buds</p>
-        <h1 id="burn-buds-alias-title">Opening multiplayer Burn Buds…</h1>
+        <h1 id="burn-buds-title">Burn Buds is being prepared for release.</h1>
         <p className="lede">
-          Burn Buds now uses one canonical multiplayer game so room codes, reconnects,
-          recovery links, rematches, and future updates stay compatible.
+          The multiplayer build is not currently mounted at its intended production route.
+          Instead of sending players to a missing page, this screen keeps them inside the
+          Game Hub until the canonical build is available.
         </p>
-        <Link className="button" href={CANONICAL_BURN_BUDS_ROUTE}>
-          Continue to Burn Buds
+        <Link className="button" href="/games/">
+          Back to Game Hub
         </Link>
       </section>
     </main>
