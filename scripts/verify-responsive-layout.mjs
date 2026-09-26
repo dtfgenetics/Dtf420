@@ -150,6 +150,7 @@ need(
 need(docs,/360\s*[×x]\s*800/,"Responsive standard must retain the phone QA matrix.");
 need(docs,/768\s*[×x]\s*1024/,"Responsive standard must retain the tablet QA matrix.");
 need(docs,/1440\s*[×x]\s*900/,"Responsive standard must retain the desktop QA matrix.");
+need(docs,/844\s*[×x]\s*390/,"Responsive standard must retain the landscape-phone QA case.");
 
 if(failures.length){
   console.error("Responsive layout verification failed:");
