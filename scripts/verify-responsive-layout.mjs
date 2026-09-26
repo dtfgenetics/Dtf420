@@ -49,6 +49,26 @@ if (!/max-height:\s*min\(470px,\s*calc\(100dvh - 210px\)\)/.test(livingAtlas)) {
   failures.push("Living Plant Atlas mobile inspector must remain bounded by dynamic viewport height.");
 }
 
+const budOrBluffCss = read("app/games/bud-or-bluff/page.module.css");
+const growerConversationsCss = read("app/games/grower-conversations/page.module.css");
+const duckRaceCss = read("components/game/StonerDuckRaceGame.module.css");
+
+for (const [label, source, patterns] of [
+  ["Bud or Bluff", budOrBluffCss, [/\.quitConfirm button[^}]*min-height:\s*(?:3\d|4[0-3])px/, /\.textButton[^}]*min-height:\s*(?:3\d|4[0-3])px/]],
+  ["Grower Conversations", growerConversationsCss, [/\.removeButton[^}]*min-height:\s*(?:3\d|4[0-3])px/]],
+  ["Stoner Duck Race", duckRaceCss, [
+    /\.sourceSwitch button[^}]*min-height:\s*(?:3\d|4[0-3])px/,
+    /\.field input[^}]*min-height:\s*(?:3\d|4[0-3])px/,
+    /\.startButton[^}]*min-height:\s*(?:3\d|4[0-3])px/,
+    /\.backButton[^}]*min-height:\s*(?:3\d|4[0-3])px/,
+    /\.inviteBar input[^}]*min-height:\s*(?:3\d|4[0-3])px/,
+  ]],
+]) {
+  for (const pattern of patterns) {
+    if (pattern.test(source)) failures.push(`${label} contains an interactive control below the 44px touch-target floor.`);
+  }
+}
+
 const routeCss = {
   learn: read("app/learn/page.module.css"),
   tools: read("app/tools/page.module.css"),
