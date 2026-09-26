@@ -1,1 +1,0 @@
-Search and Menu must remain keyboard focusable and retain visible focus indication.
