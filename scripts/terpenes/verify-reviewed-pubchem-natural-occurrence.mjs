@@ -23,7 +23,7 @@ const workflow = fs.readFileSync(
   "utf8",
 );
 
-if (cache.schemaVersion !== "1.0.0" || cache.sourceId !== "PUBCHEM-PUG-VIEW") {
+if (cache.schemaVersion !== "1.1.0" || cache.sourceId !== "PUBCHEM-PUG-VIEW") {
   throw new Error("Invalid reviewed natural occurrence cache header.");
 }
 if (!cache.headings?.includes("Natural Occurrence")) {
@@ -43,6 +43,7 @@ for (const token of [
 for (const token of [
   "getReviewedNaturalOccurrenceRecord",
   "countNaturalOccurrenceEvidence",
+  "countReferencedNaturalOccurrenceEvidence",
   "getReviewedNaturalOccurrenceCacheStatus",
 ]) {
   if (!helper.includes(token)) {
@@ -109,20 +110,67 @@ for (const token of [
   }
 }
 
+if (!cache.coverage || cache.coverage.manifestCompoundCount !== manifest.compounds.length) {
+  throw new Error("Natural occurrence cache coverage metadata is missing or out of sync with the reviewed manifest.");
+}
+
 if (cache.status === "compiled") {
-  if (!Array.isArray(cache.compounds) || cache.compounds.length === 0 || cache.compounds.length > manifest.compounds.length) {
-    throw new Error("Compiled natural occurrence cache must be a non-empty subset of the reviewed manifest.");
+  if (!Array.isArray(cache.compounds) || cache.compounds.length !== manifest.compounds.length) {
+    throw new Error("Compiled natural occurrence cache must include every reviewed manifest compound.");
   }
 
+  let evidenceCount = 0;
+  let referencedEvidenceCount = 0;
+  let compoundsWithEvidence = 0;
+  let compoundsWithReferencedEvidence = 0;
+
   for (const record of cache.compounds) {
-    if (!record.slug || !record.pubchemCid || !Array.isArray(record.occurrence?.["Natural Occurrence"])) {
+    const entries = record.occurrence?.["Natural Occurrence"];
+    if (!record.slug || !record.pubchemCid || !Array.isArray(entries)) {
       throw new Error(`Incomplete natural occurrence cache record: ${record.slug ?? "unknown"}`);
     }
+    if (record.evidenceCount !== entries.length) {
+      throw new Error(`Natural occurrence evidenceCount mismatch for ${record.slug}`);
+    }
+    const referenced = entries.filter((entry) => (entry.references ?? []).length > 0).length;
+    if (record.referencedEvidenceCount !== referenced) {
+      throw new Error(`Natural occurrence referencedEvidenceCount mismatch for ${record.slug}`);
+    }
+
+    evidenceCount += entries.length;
+    referencedEvidenceCount += referenced;
+    if (entries.length) compoundsWithEvidence += 1;
+    if (referenced) compoundsWithReferencedEvidence += 1;
   }
-} else if (cache.status !== "not-generated") {
+
+  const expectedCoverage = {
+    evidenceCount,
+    referencedEvidenceCount,
+    compoundsWithEvidence,
+    compoundsWithReferencedEvidence,
+  };
+  for (const [key, value] of Object.entries(expectedCoverage)) {
+    if (cache.coverage[key] !== value) {
+      throw new Error(`Natural occurrence coverage mismatch for ${key}: ${cache.coverage[key]} !== ${value}`);
+    }
+  }
+
+  if (evidenceCount < 3 || referencedEvidenceCount < 1 || compoundsWithEvidence < 2) {
+    throw new Error(
+      `Compiled natural occurrence coverage is implausibly low: ${evidenceCount} reports, ${referencedEvidenceCount} referenced, ${compoundsWithEvidence} compounds`,
+    );
+  }
+} else if (cache.status === "not-generated") {
+  if ((cache.compounds ?? []).length !== 0) {
+    throw new Error("Natural occurrence bootstrap must not contain fabricated compound records.");
+  }
+  if (cache.coverage.evidenceCount !== 0 || cache.coverage.referencedEvidenceCount !== 0) {
+    throw new Error("Natural occurrence bootstrap coverage must remain zero.");
+  }
+} else {
   throw new Error("Natural occurrence cache status must be compiled or not-generated.");
 }
 
 console.log(
-  `Reviewed natural occurrence evidence verified: cache status=${cache.status}.`,
+  `Reviewed natural occurrence evidence verified: cache status=${cache.status}, reports=${cache.coverage.evidenceCount}, referenced=${cache.coverage.referencedEvidenceCount}.`,
 );
