@@ -92,13 +92,48 @@ export function normalizePugViewEvidence(record, heading, limit = 25) {
   return deduped;
 }
 
-export async function fetchPugViewHeading(cid, heading, { userAgent = "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" } = {}) {
-  const url = `${PUG_VIEW_BASE}/${encodeURIComponent(cid)}/JSON?heading=${encodeURIComponent(heading)}`;
-  const response = await fetch(url, { headers: { "User-Agent": userAgent } });
+async function fetchPugViewJson(url, userAgent) {
+  return fetch(url, { headers: { "User-Agent": userAgent } });
+}
+
+export async function fetchPugViewRecord(
+  cid,
+  { userAgent = "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" } = {},
+) {
+  const url = `${PUG_VIEW_BASE}/${encodeURIComponent(cid)}/JSON`;
+  const response = await fetchPugViewJson(url, userAgent);
 
   if (response.status === 404) {
     return { Record: { Section: [], Reference: [] } };
   }
+  if (!response.ok) {
+    throw new Error(
+      `PubChem PUG-View full-record request failed for CID ${cid}: ${response.status} ${response.statusText}`,
+    );
+  }
+  return response.json();
+}
+
+export async function fetchPugViewHeading(
+  cid,
+  heading,
+  { userAgent = "DTF-Terpene-Atlas/2.0 (+https://dtfseeds.com)" } = {},
+) {
+  const url = `${PUG_VIEW_BASE}/${encodeURIComponent(cid)}/JSON?heading=${encodeURIComponent(heading)}`;
+  const response = await fetchPugViewJson(url, userAgent);
+
+  if (response.status === 404) {
+    return { Record: { Section: [], Reference: [] } };
+  }
+
+  // PubChem can expose a valid TOC heading in the full record while rejecting
+  // that same text in the heading-filter query. Preserve the evidence
+  // semantics by falling back to the full record on a filtered 400 response;
+  // normalizePugViewEvidence will locate the requested heading recursively.
+  if (response.status === 400) {
+    return fetchPugViewRecord(cid, { userAgent });
+  }
+
   if (!response.ok) {
     throw new Error(
       `PubChem PUG-View request failed for CID ${cid}, ${heading}: ${response.status} ${response.statusText}`,

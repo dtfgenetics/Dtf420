@@ -13,6 +13,10 @@ const builder = fs.readFileSync(
   "utf8",
 );
 const helper = fs.readFileSync(path.join(root, "lib/terpenes/natural-occurrence.ts"), "utf8");
+const pugViewHelper = fs.readFileSync(
+  path.join(root, "scripts/terpenes/lib/pubchem-pug-view.mjs"),
+  "utf8",
+);
 const chapterTypes = fs.readFileSync(path.join(root, "lib/terpenes/chapter-types.ts"), "utf8");
 const chapters = fs.readFileSync(path.join(root, "lib/terpenes/chapters.ts"), "utf8");
 const page = fs.readFileSync(path.join(root, "app/learn/terpenes/[slug]/page.tsx"), "utf8");
@@ -41,6 +45,17 @@ for (const token of [
 ]) {
   if (!builder.includes(token)) {
     throw new Error(`Natural occurrence builder missing: ${token}`);
+  }
+}
+
+for (const token of [
+  "fetchPugViewRecord",
+  "response.status === 400",
+  "return fetchPugViewRecord",
+  "normalizePugViewEvidence will locate the requested heading recursively",
+]) {
+  if (!pugViewHelper.includes(token)) {
+    throw new Error(`PubChem occurrence fallback missing: ${token}`);
   }
 }
 

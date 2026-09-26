@@ -1028,3 +1028,18 @@ A PubChem natural-occurrence report is evidence that an upstream source reports 
 Cannabis occurrence remains in its own evidence layer. Exact E/Z, enantiomer, and other identity boundaries remain governed by the reviewed compound identity rather than being inferred from similar common names.
 
 The generated cache is intended to replace hand-maintained broad plant-source lists with traceable source-preserved occurrence evidence. LOTUS remains registered as a future cross-check/normalization layer rather than an automatic identity merge source.
+
+
+### PubChem PUG-View heading-filter fallback
+
+Production generation showed that PubChem can return HTTP 400 `PUGVIEW.BadRequest` for a heading-filter request such as `?heading=Natural%20Occurrence` even though the same `Natural Occurrence` section is present in the full compound PUG-View record.
+
+The shared PUG-View helper therefore uses this retrieval policy:
+
+1. request the filtered heading route first;
+2. treat 404 as no available record for that request;
+3. on filtered HTTP 400, request the full compound PUG-View JSON;
+4. pass that full record through the existing recursive heading extractor;
+5. keep all evidence normalization, reference resolution, deduplication, and coverage rules unchanged.
+
+This fallback changes only retrieval, not evidence semantics. It must not broaden a request to unrelated headings at the presentation layer; only entries under the requested recursive `TOCHeading` are normalized into the natural-occurrence cache.
