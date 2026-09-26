@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": "2026-09-24T10:17:38.846Z",
+  "generatedAt": "2026-09-26T03:39:21.158Z",
   "headings": [
     "Boiling Point",
     "Melting Point",
@@ -16,7 +16,7 @@
       "slug": "beta-myrcene",
       "pubchemCid": 31253,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:07.893Z",
+      "fetchedAt": "2026-09-26T03:38:49.573Z",
       "properties": {
         "Boiling Point": [
           {
@@ -276,7 +276,7 @@
       "slug": "limonene",
       "pubchemCid": 22311,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:10.229Z",
+      "fetchedAt": "2026-09-26T03:38:55.880Z",
       "properties": {
         "Boiling Point": [
           {
@@ -536,7 +536,7 @@
       "slug": "alpha-pinene",
       "pubchemCid": 6654,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:12.699Z",
+      "fetchedAt": "2026-09-26T03:38:57.575Z",
       "properties": {
         "Boiling Point": [
           {
@@ -901,7 +901,7 @@
       "slug": "beta-pinene",
       "pubchemCid": 14896,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:15.667Z",
+      "fetchedAt": "2026-09-26T03:38:59.264Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1161,7 +1161,7 @@
       "slug": "terpinolene",
       "pubchemCid": 11463,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:18.084Z",
+      "fetchedAt": "2026-09-26T03:39:01.002Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1376,7 +1376,7 @@
       "slug": "linalool",
       "pubchemCid": 6549,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:20.376Z",
+      "fetchedAt": "2026-09-26T03:39:02.775Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1666,7 +1666,7 @@
       "slug": "beta-caryophyllene",
       "pubchemCid": 5281515,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:23.559Z",
+      "fetchedAt": "2026-09-26T03:39:04.394Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1805,7 +1805,7 @@
       "slug": "alpha-humulene",
       "pubchemCid": 5281520,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:25.504Z",
+      "fetchedAt": "2026-09-26T03:39:06.012Z",
       "properties": {
         "Boiling Point": [
           {
@@ -1851,7 +1851,7 @@
       "slug": "squalene",
       "pubchemCid": 638072,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:27.702Z",
+      "fetchedAt": "2026-09-26T03:39:10.935Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2051,7 +2051,7 @@
       "slug": "beta-carotene",
       "pubchemCid": 5280489,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:29.677Z",
+      "fetchedAt": "2026-09-26T03:39:13.735Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2158,7 +2158,7 @@
       "slug": "e-beta-ocimene",
       "pubchemCid": 5281553,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:31.626Z",
+      "fetchedAt": "2026-09-26T03:39:16.420Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2188,7 +2188,7 @@
       "slug": "z-beta-ocimene",
       "pubchemCid": 5320250,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:33.777Z",
+      "fetchedAt": "2026-09-26T03:39:17.977Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2218,7 +2218,7 @@
       "slug": "alpha-terpinene",
       "pubchemCid": 7462,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:36.385Z",
+      "fetchedAt": "2026-09-26T03:39:19.584Z",
       "properties": {
         "Boiling Point": [
           {
@@ -2311,7 +2311,7 @@
       "slug": "gamma-terpinene",
       "pubchemCid": 7461,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-09-24T10:17:38.846Z",
+      "fetchedAt": "2026-09-26T03:39:21.158Z",
       "properties": {
         "Boiling Point": [
           {
