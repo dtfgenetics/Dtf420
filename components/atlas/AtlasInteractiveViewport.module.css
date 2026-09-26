@@ -145,7 +145,7 @@
 
 .layerPanel { position: absolute; z-index: 9; right: 13px; bottom: 13px; display: flex; align-items: center; gap: 0.18rem; max-width: calc(100% - 26px); padding: 0.32rem; overflow-x: auto; border: 1px solid var(--viewer-line); border-radius: 13px; background: rgba(5,12,8,0.69); backdrop-filter: blur(18px); box-shadow: 0 10px 28px rgba(0,0,0,0.13); }
 .layerPanel > span { padding: 0 0.5rem; color: rgba(224,231,194,0.44); font-size: 0.48rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; white-space: nowrap; }
-.layerPanel button { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 34px; border: 1px solid transparent; border-radius: 9px; padding: 0 0.48rem; background: transparent; color: rgba(230,236,207,0.52); cursor: pointer; font-size: 0.57rem; text-align: left; white-space: nowrap; }
+.layerPanel button { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 44px; border: 1px solid transparent; border-radius: 9px; padding: 0 0.48rem; background: transparent; color: rgba(230,236,207,0.52); cursor: pointer; font-size: 0.57rem; text-align: left; white-space: nowrap; }
 .layerPanel button:hover, .layerPanel button:focus-visible, .layerPanel .layerActive { border-color: rgba(170,204,102,0.12); background: rgba(113,153,63,0.16); color: #edf2c7; outline: none; }
 .layerPanel i { color: var(--atlas-accent); font-style: normal; font-size: 0.5rem; }
 
