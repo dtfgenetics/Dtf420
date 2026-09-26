@@ -32,8 +32,12 @@ if (!cache.headings?.includes("Natural Occurrence")) {
 
 for (const token of [
   "fetchPugViewHeading",
+  "fetchHeadingWithRetry",
   "normalizePugViewEvidence",
   '"Natural Occurrence"',
+  "referencedEvidenceCount",
+  "compoundCoverageShare",
+  'schemaVersion: "1.1.0"',
 ]) {
   if (!builder.includes(token)) {
     throw new Error(`Natural occurrence builder missing: ${token}`);
@@ -104,6 +108,9 @@ for (const token of [
   "build-reviewed-pubchem-natural-occurrence.mjs",
   "reviewed-pubchem-natural-occurrence.json",
   "reviewed-pubchem-manifest.json",
+  'cache.schemaVersion !== "1.1.0"',
+  "coverage.referencedEvidenceCount < 1",
+  "verify-reviewed-pubchem-natural-occurrence.mjs",
 ]) {
   if (!workflow.includes(token)) {
     throw new Error(`Natural occurrence refresh workflow missing: ${token}`);
