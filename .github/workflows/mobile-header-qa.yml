@@ -1,0 +1,27 @@
+name: Mobile Header QA
+
+on:
+  pull_request:
+    paths:
+      - 'app/home-mobile.css'
+      - 'app/globals.css'
+      - 'components/SiteHeader.tsx'
+      - 'scripts/verify-mobile-header.mjs'
+      - '.github/workflows/mobile-header-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/home-mobile.css'
+      - 'app/globals.css'
+      - 'components/SiteHeader.tsx'
+      - 'scripts/verify-mobile-header.mjs'
+
+jobs:
+  verify-mobile-header:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/verify-mobile-header.mjs
