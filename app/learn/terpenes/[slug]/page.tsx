@@ -70,6 +70,8 @@ export default async function TerpeneRecordPage({
   const stereoRegistryEntry = getTerpeneStereoRegistryEntry(compound.slug);
   const mappedGenes = getGenesForCompound(compound.slug);
   const reviewedEvidence = getReviewedEvidenceForCompound(compound.slug);
+  const curatedSensoryEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "sensory-descriptor");
+  const occurrenceEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "cannabis-occurrence");
   const evidenceClaimCounts = getReviewedEvidenceClaimCountsForCompound(compound.slug);
   const generalPostharvestEvidence = getReviewedGeneralEvidence(["postharvest-change"]);
   const safetyEvidence = reviewedEvidence.filter(({ record }) => record.claimType === "safety-exposure" || record.claimType === "chemical-stability");
@@ -101,7 +103,7 @@ export default async function TerpeneRecordPage({
     hasAssessment: quiz.questions.length > 0,
     hasPhysicalPropertyRecord: Boolean(propertyRecord),
     experimentalPropertyEvidenceCount,
-    sensoryEvidenceCount,
+    sensoryEvidenceCount: sensoryEvidenceCount + curatedSensoryEvidence.length,
     naturalOccurrenceEvidenceCount,
     cultivarDistributionEvidenceCount: cultivarDistribution ? 1 : 0,
     stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
@@ -425,6 +427,34 @@ export default async function TerpeneRecordPage({
             )}
             <p className={styles.body}>{compound.viewNotes.aroma}</p>
 
+            {curatedSensoryEvidence.length ? (
+              <>
+                <p className={styles.sensoryGuardrail}>
+                  Curated literature descriptors are shown separately from the PubChem sensory cache so the source,
+                  identity scope, and wording stay traceable. They describe sensory language, not a whole-flower diagnosis.
+                </p>
+                <div className={styles.evidenceGrid}>
+                  {curatedSensoryEvidence.map(({ record, source }) => (
+                    <article className={styles.evidenceCard} key={record.id}>
+                      <div className={styles.cardTopline}>
+                        <span>Curated sensory evidence</span>
+                        <strong>{humanizeEvidenceTerm(record.reviewStatus)}</strong>
+                      </div>
+                      <h3>{record.statement}</h3>
+                      <p>{evidenceScope(record)}</p>
+                      <dl>
+                        <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                        <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                      </dl>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+              </>
+            ) : null}
+
             {sensoryEvidenceRecord && sensoryEvidenceCount > 0 ? (
               <>
                 <p className={styles.sensoryGuardrail}>
@@ -487,6 +517,30 @@ export default async function TerpeneRecordPage({
               <p className="eyebrow">Cannabis occurrence</p>
               <h2>Chemistry before strain-name assumptions.</h2>
               <p>{compound.cannabisContext}</p>
+
+              {occurrenceEvidence.length ? (
+                <div className={styles.evidenceGrid}>
+                  {occurrenceEvidence.map(({ record, source }) => (
+                    <article className={styles.evidenceCard} key={record.id}>
+                      <div className={styles.cardTopline}>
+                        <span>Reviewed Cannabis occurrence</span>
+                        <strong>{humanizeEvidenceTerm(record.reviewStatus)}</strong>
+                      </div>
+                      <h3>{record.statement}</h3>
+                      <p>{evidenceScope(record)}</p>
+                      <dl>
+                        <div><dt>Study type</dt><dd>{humanizeEvidenceTerm(record.studyType)}</dd></div>
+                        <div><dt>Material</dt><dd>{record.populationOrMaterial}</dd></div>
+                        <div><dt>Method</dt><dd>{record.analyticalMethod ?? "Not specified in ledger"}</dd></div>
+                        <div><dt>Source locator</dt><dd>{record.sourceLocator}</dd></div>
+                      </dl>
+                      {source?.sourceUrl ? (
+                        <a href={source.sourceUrl} target="_blank" rel="noreferrer">Open source ↗</a>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+              ) : null}
             </div>
             <div>
               <p className="eyebrow">Cultivar interpretation</p>
