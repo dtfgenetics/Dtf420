@@ -30,7 +30,6 @@ Incomplete or experimental features should remain clearly separated from public 
 - React 19
 - TypeScript
 - Phaser 4 for Phaser-based browser games
-- Playwright for desktop/mobile browser QA
 
 ## Local commands
 
@@ -42,7 +41,7 @@ npm run verify
 
 `npm run verify` runs the repository's content and data-integrity checks, game/Atlas/education verification, ESLint, TypeScript checking, and a production Next.js build.
 
-Browser QA is maintained separately through the Playwright workflow and must also pass before any production cutover.
+Responsive and production QA must use deterministic repository-based checks, static route/package validation, build checks, component/unit tests, and targeted manual review where necessary. Do not make Playwright part of the routine production validation path.
 
 ## Architecture boundaries
 
@@ -51,5 +50,7 @@ Browser QA is maintained separately through the Playwright workflow and must als
 - The canonical target origin is `https://dtfseeds.com`.
 - Authoritative real-time multiplayer infrastructure must follow the currently approved backend decision for the affected game rather than introducing a second room authority from this app.
 - Secrets and hosting credentials must not be committed to the repository.
+
+The current production authority is `dtfgenetics/Thc`, including the mandatory `docs/PRODUCTION_STANDARDS.md` quality contract. This repository must remain compatible with that standard during migration/cutover work.
 
 See `docs/ARCHITECTURE.md`, `docs/DEPLOYMENT.md`, and `docs/UPDATE-POLICY.md` for operational details.
