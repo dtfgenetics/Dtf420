@@ -17,6 +17,30 @@ function need(content,re,msg){ if(!re.test(content)) failures.push(msg); }
 const globals=read("app/globals.css");
 const mobile=read("app/home-mobile.css");
 const docs=read("docs/RESPONSIVE_LAYOUT_STANDARD.md");
+const routeCss = {
+  learn: read("app/learn/page.module.css"),
+  tools: read("app/tools/page.module.css"),
+  academy: read("app/learn/academy/page.module.css"),
+  course: read("app/learn/academy/[course]/page.module.css"),
+  atlasSystem: read("app/learn/atlas/[system]/page.module.css"),
+};
+
+const forbiddenLegacyBreakpoints = [
+  ["learn", /max-width:\s*720px/],
+  ["tools", /max-width:\s*720px/],
+  ["academy", /max-width:\s*760px/],
+  ["academy", /min-width:\s*761px/],
+  ["academy", /max-width:\s*1050px/],
+  ["course", /max-width:\s*860px/],
+  ["course", /max-width:\s*620px/],
+  ["atlasSystem", /max-width:\s*980px/],
+  ["atlasSystem", /max-width:\s*680px/],
+];
+for (const [name, re] of forbiddenLegacyBreakpoints) {
+  if (re.test(routeCss[name])) {
+    failures.push(`Route CSS ${name} reintroduced a legacy breakpoint outside the canonical shared bands.`);
+  }
+}
 
 need(globals,/--page-gutter\s*:\s*clamp\(/,"globals.css must keep a fluid page gutter token.");
 need(globals,/--touch-target\s*:\s*44px/,"globals.css must keep a 44px touch-target token.");
