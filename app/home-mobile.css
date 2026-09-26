@@ -1,0 +1,118 @@
+/* Mobile-first homepage refinement. Kept separate so the pass is bounded and easy to audit. */
+@media (max-width: 720px) {
+  .home-hero {
+    padding-block: 42px 20px;
+  }
+
+  .home-hero h1 {
+    max-width: 15ch;
+    margin: 10px 0 18px;
+    font-size: clamp(38px, 11.5vw, 48px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .home-hero__copy > p:not(.eyebrow) {
+    max-width: 38rem;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .home-hero .hero__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .home-hero .hero__actions .button {
+    width: 100%;
+    min-height: 50px;
+    padding-inline: 14px;
+    text-align: center;
+  }
+
+  .home-discovery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 30px;
+    border-radius: 16px;
+  }
+
+  .home-discovery__item {
+    min-height: 112px;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .home-discovery__item strong {
+    font-size: 19px;
+  }
+
+  .home-discovery__item small {
+    display: none;
+  }
+
+  .home-band {
+    margin-top: 28px;
+    padding-block: 52px;
+  }
+
+  .home-feature-pair {
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .home-feature {
+    min-height: 0;
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .home-feature h3 {
+    margin: 28px 0 10px;
+    font-size: clamp(29px, 8.5vw, 38px);
+    line-height: 1;
+  }
+
+  .home-feature span {
+    margin-top: 20px;
+  }
+
+  .home-action-grid {
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .home-action {
+    min-height: 0;
+    padding: 22px 0;
+  }
+
+  .home-action h3 {
+    font-size: 24px;
+  }
+
+  .home-action span {
+    padding-top: 16px;
+  }
+
+  .home-secondary-list {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-hero .hero__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .home-discovery__item {
+    min-height: 104px;
+    padding: 14px;
+  }
+
+  .home-discovery__item strong {
+    font-size: 18px;
+  }
+}

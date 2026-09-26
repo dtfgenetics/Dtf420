@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
+import "./home-mobile.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dtfseeds.com"),
