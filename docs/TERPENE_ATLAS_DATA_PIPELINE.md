@@ -960,3 +960,25 @@ Squalene and β-carotene records improve the analytical-method chapter because t
 Cis-β-ocimene is mapped to the reviewed Z-β-ocimene chapter because PubChem identifies cis-β-ocimene as the (3Z) identity. The Dei Cas method record is not used to upgrade E/trans-β-ocimene.
 
 After this wave, 13 of the 14 exact reviewed chapter identities have compound-specific reviewed analytical-method context. **E/trans-β-ocimene remains intentionally incomplete** until an identity-appropriate method record is reviewed.
+
+
+### Third reviewed depth wave: documented occurrence and curated sensory evidence
+
+The reviewed chapter seed now separates three evidence layers that were previously easy to conflate:
+
+- **TPS capability** — a functionally characterized Cannabis terpene synthase can produce the compound;
+- **measured Cannabis occurrence** — the compound was analytically detected in Cannabis material;
+- **sensory descriptors** — source-linked odor/scent language associated with the compound.
+
+The third depth wave adds source-verified occurrence and curated sensory evidence for:
+
+- (E)-β-ocimene / trans-β-ocimene;
+- (Z)-β-ocimene / cis-β-ocimene;
+- α-terpinene;
+- γ-terpinene.
+
+Mudge et al. 2019 provides the direct Cannabis metabolomics occurrence and sensory context for trans-β-ocimene and α/γ-terpinene. Dei Cas et al. 2021 provides validated cis-β-ocimene occurrence in analyzed Cannabis chemotypes. The reviewed seed records are promoted from `reported` to `documented` Cannabis occurrence only after those analytical records are linked.
+
+Curated literature sensory records remain separate from the generated PubChem sensory cache. The chapter readiness score counts both, but the page identifies which evidence came from literature versus PubChem so provenance is not flattened.
+
+β-Ocimene unresolved-isomer safety evidence remains attached to the aggregate `_beta-ocimene-unresolved` scope and is not reassigned to the E or Z isomer. Exact occurrence evidence and aggregate safety evidence therefore remain separate by design.

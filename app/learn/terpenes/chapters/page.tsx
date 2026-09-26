@@ -62,7 +62,7 @@ export default function TerpeneChapterIndexPage() {
       hasAssessment: true,
       hasPhysicalPropertyRecord: Boolean(propertyRecord),
       experimentalPropertyEvidenceCount,
-      sensoryEvidenceCount,
+      sensoryEvidenceCount: sensoryEvidenceCount + (claimCounts["sensory-descriptor"] ?? 0),
       naturalOccurrenceEvidenceCount,
       cultivarDistributionEvidenceCount: cultivarDistribution ? 1 : 0,
       stereoEvidenceCount: stereoRegistryEntry?.isomers.length ?? (stereo ? stereo.definedAtomStereoCount + stereo.definedBondStereoCount : 0),
