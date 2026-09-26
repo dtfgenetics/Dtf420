@@ -683,6 +683,70 @@
   }
 }
 
+@media (orientation: landscape) and (max-height: 560px) {
+  .page {
+    padding-block: 12px 36px;
+  }
+
+  .topline,
+  .hero,
+  .ruleStatus,
+  .gameShell {
+    margin-bottom: 10px;
+  }
+
+  .hero > div:first-child {
+    padding: 18px 22px;
+  }
+
+  .hero h1 {
+    margin: 4px 0 8px;
+    font-size: clamp(40px, 7vw, 62px);
+  }
+
+  .lede {
+    line-height: 1.45;
+  }
+
+  .heroMetric {
+    padding: 16px 18px;
+  }
+
+  .heroMetric strong {
+    font-size: clamp(46px, 7vw, 68px);
+  }
+
+  .heroMetric span {
+    margin-top: 8px;
+  }
+
+  .ruleStatus article,
+  .controlDeck,
+  .eventPanel,
+  .disclosure {
+    padding: 14px 16px;
+  }
+
+  .controlHeading {
+    margin-bottom: 12px;
+  }
+
+  .centerConsole {
+    min-height: min(300px, calc(100dvh - 120px));
+    padding: 12px;
+  }
+
+  .vs {
+    width: 54px;
+    height: 54px;
+    font-size: 18px;
+  }
+
+  .battleActions {
+    margin-top: 12px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vigorTrack span {
     transition: none;
