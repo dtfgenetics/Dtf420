@@ -20,9 +20,8 @@ function assert(condition, message) {
   if (!condition) throw new Error(`Burn Buds verification failed: ${message}`);
 }
 
-// Keep deterministic checks for the retained local engine while the public route
-// honestly reports release status. This protects reusable game logic without
-// redirecting players to a route that is not mounted in the current application.
+// Keep deterministic checks for the retained local engine while the public alias
+// routes players to the authoritative multiplayer runtime.
 assert(BOARD_SIZE === 15, "legacy tactical model must remain 15 × 15 while retained");
 assert(FLEET.length === 5, "legacy tactical model must retain five pieces while retained");
 assert(
@@ -86,16 +85,16 @@ assert(aiTarget, "legacy AI must return a legal target while unknown cells remai
 assert(aiDamaged[aiTarget.row][aiTarget.column].shot === "none", "legacy AI must never retarget a fired coordinate");
 
 const page = read("app/games/burn-buds/page.tsx");
-const missingRoute = "/games/protect-the-plants/";
+const canonicalRoute = "/games/protect-the-plants/";
 
-assert(page.includes('href="/games/"'), "release-status route must provide a working return path to the Game Hub");
-assert(page.includes("not currently mounted"), "release-status route must explain why gameplay is unavailable");
-assert(page.includes("robots:"), "release-status route must carry explicit robot metadata");
-assert(page.includes("index: false"), "release-status route must stay out of search until gameplay is mounted");
-assert(!page.includes(missingRoute), "release-status route must not send players to the missing canonical path");
-assert(!page.includes('httpEquiv="refresh"'), "release-status route must not use a forced meta redirect");
-assert(!page.includes("window.location.replace"), "release-status route must not force browser navigation");
-assert(!page.includes("BurnBudsLoader"), "release-status route must not boot the legacy solo runtime");
-assert(!page.includes("Solo battle"), "release-status route must not advertise a conflicting solo Burn Buds product");
+assert(page.includes('redirect("/games/protect-the-plants/")'), "Burn Buds alias must server-redirect to the canonical multiplayer runtime");
+assert(page.includes(`canonical: "${canonicalRoute}"`), "Burn Buds alias must declare the canonical multiplayer route");
+assert(page.includes("robots:"), "alias route must carry explicit robot metadata");
+assert(page.includes("index: false"), "alias route must stay out of search to avoid duplicate indexing");
+assert(page.includes("follow: true"), "alias route must allow crawlers to follow the canonical runtime");
+assert(!page.includes('httpEquiv="refresh"'), "alias route must not use a forced meta redirect");
+assert(!page.includes("window.location.replace"), "alias route must not use a client-only redirect");
+assert(!page.includes("BurnBudsLoader"), "alias route must not boot the legacy solo runtime");
+assert(!page.includes("Solo battle"), "alias route must not advertise a conflicting solo Burn Buds product");
 
-console.log("Burn Buds verified: release-status route avoids the missing gameplay path; retained local model remains deterministic.");
+console.log("Burn Buds verified: alias routes to the canonical multiplayer runtime; retained local model remains deterministic.");
