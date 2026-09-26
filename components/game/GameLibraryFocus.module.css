@@ -1,4 +1,12 @@
-.action:focus-visible {
+.action:focus-visible,
+.control:focus-visible {
   outline: 3px solid var(--accent-strong);
   outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+  .action:focus-visible,
+  .control:focus-visible {
+    outline-color: Highlight;
+  }
 }
