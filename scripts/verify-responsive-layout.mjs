@@ -18,6 +18,8 @@ const globals=read("app/globals.css");
 const mobile=read("app/home-mobile.css");
 const docs=read("docs/RESPONSIVE_LAYOUT_STANDARD.md");
 const atlasViewport = read("components/atlas/AtlasInteractiveViewport.module.css");
+const livingAtlas = read("components/atlas/LivingPlantAtlas.module.css");
+const terpeneAtlas = read("components/terpenes/TerpeneAtlasExplorer.module.css");
 const terpeneCultivar = read("components/terpenes/TerpeneCultivarBrowser.module.css");
 if (/100vh/.test(atlasViewport)) {
   failures.push("Atlas interactive fullscreen must use 100dvh so mobile browser chrome cannot clip the viewport.");
@@ -30,6 +32,21 @@ if (/\.neighborControls select\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(ter
 }
 if (/\.source a\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(terpeneCultivar)) {
   failures.push("Terpene browser source actions must keep a minimum 44px touch target.");
+}
+if (/(?:\.segmented button|\.viewTabs button)[\s\S]{0,180}min-height:\s*(?:3\d|4[0-3])px/.test(terpeneAtlas)) {
+  failures.push("Terpene Atlas view controls must keep a minimum 44px touch target.");
+}
+if (/\.detailActions a\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(terpeneAtlas)) {
+  failures.push("Terpene Atlas detail actions must keep a minimum 44px touch target.");
+}
+if (!/max-height:min\(780px,calc\(100dvh - 64px\)\)/.test(terpeneCultivar)) {
+  failures.push("Terpene result panel must remain bounded by dynamic viewport height.");
+}
+if (!/max-height:min\(680px,calc\(100dvh - 180px\)\)/.test(terpeneCultivar)) {
+  failures.push("Terpene prevalence panel must remain bounded by dynamic viewport height.");
+}
+if (!/max-height:\s*min\(470px,\s*calc\(100dvh - 210px\)\)/.test(livingAtlas)) {
+  failures.push("Living Plant Atlas mobile inspector must remain bounded by dynamic viewport height.");
 }
 
 const routeCss = {
