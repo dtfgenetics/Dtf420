@@ -271,6 +271,14 @@ const requiredEvidenceIds = [
   "cho2009-squalene-high-dose-adverse-effects",
   "efsa2024-beta-carotene-supplement-risk",
   "rifm2021-beta-ocimene-unresolved-safety",
+  "mudge2019-e-beta-ocimene-cannabis-occurrence",
+  "deicas2021-z-beta-ocimene-cannabis-occurrence",
+  "mudge2019-alpha-terpinene-cannabis-occurrence",
+  "mudge2019-gamma-terpinene-cannabis-occurrence",
+  "mudge2019-e-beta-ocimene-sensory",
+  "mudge2019-z-beta-ocimene-sensory",
+  "mudge2019-alpha-terpinene-sensory",
+  "mudge2019-gamma-terpinene-sensory",
   "kim2015-alpha-pinene-macrophage-inflammation",
   "phillips2012-beta-pinene-antimicrobial-vapor",
   "menezes2021-terpinolene-biological-review",
@@ -619,5 +627,64 @@ for (const [recordId, requiredNote] of nonCannabisMethods) {
   const record = (analyticalMethods.records ?? []).find((item) => item.id === recordId);
   if (!record || !record.notes.includes(requiredNote)) {
     throw new Error(`Non-cannabis analytical method must declare matrix limitation: ${recordId}`);
+  }
+}
+
+
+for (const token of [
+  "curatedSensoryEvidence",
+  "occurrenceEvidence",
+  "Curated literature descriptors",
+  "Reviewed Cannabis occurrence",
+]) {
+  if (!page.includes(token)) {
+    throw new Error(`Curated occurrence/sensory rendering missing: ${token}`);
+  }
+}
+
+for (const token of [
+  'claimCounts["sensory-descriptor"]',
+]) {
+  if (!dashboard.includes(token)) {
+    throw new Error(`Chapter readiness missing curated sensory count: ${token}`);
+  }
+}
+
+const occurrenceSensoryExpectations = [
+  ["e-beta-ocimene", "documented", ["citrus", "tropical"]],
+  ["z-beta-ocimene", "documented", ["citrus", "tropical"]],
+  ["alpha-terpinene", "documented", ["woody"]],
+  ["gamma-terpinene", "documented", ["citrus"]],
+];
+for (const [slug, occurrence, descriptors] of occurrenceSensoryExpectations) {
+  const start = dataSource.indexOf(`slug: "${slug}"`);
+  if (start < 0) throw new Error(`Reviewed terpene seed missing: ${slug}`);
+  const end = dataSource.indexOf("\n  },", start);
+  const block = dataSource.slice(start, end);
+  if (!block.includes(`cannabisOccurrence: "${occurrence}"`)) {
+    throw new Error(`${slug} must be promoted to documented Cannabis occurrence`);
+  }
+  for (const descriptor of descriptors) {
+    if (!block.includes(`"${descriptor}"`)) {
+      throw new Error(`${slug} missing curated sensory descriptor: ${descriptor}`);
+    }
+  }
+}
+
+for (const slug of ["e-beta-ocimene", "z-beta-ocimene", "alpha-terpinene", "gamma-terpinene"]) {
+  const hasOccurrence = (ledger.records ?? []).some(
+    (record) =>
+      record.compoundSlug === slug &&
+      record.claimType === "cannabis-occurrence" &&
+      ["source-verified", "editorial-reviewed"].includes(record.reviewStatus),
+  );
+  const hasSensory = (ledger.records ?? []).some(
+    (record) =>
+      record.compoundSlug === slug &&
+      record.claimType === "sensory-descriptor" &&
+      ["source-verified", "editorial-reviewed"].includes(record.reviewStatus),
+  );
+  if (!hasOccurrence || !hasSensory) {
+    throw new Error(`Reviewed occurrence/sensory evidence incomplete for ${slug}`);
   }
 }
