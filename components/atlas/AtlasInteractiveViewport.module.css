@@ -179,7 +179,7 @@
   .layerPanel { top: 10px; right: 10px; bottom: auto; left: 10px; max-width: none; border-radius: 12px; scrollbar-width: none; }
   .layerPanel::-webkit-scrollbar { display: none; }
   .layerPanel > span { display: none; }
-  .layerPanel button { flex: 0 0 auto; min-height: 38px; padding-inline: 0.52rem; font-size: 0.53rem; }
+  .layerPanel button { flex: 0 0 auto; min-height: 44px; padding-inline: 0.52rem; font-size: 0.53rem; }
   .viewerTools { bottom: 10px; left: 10px; }
   .viewerTools button { width: 44px; min-height: 44px; }
 }
