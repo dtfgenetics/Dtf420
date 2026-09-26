@@ -376,7 +376,9 @@
   z-index: 40;
   display: grid;
   place-items: center;
-  padding: 1rem;
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: rgba(4, 10, 6, 0.8);
   backdrop-filter: blur(12px);
 }
@@ -384,6 +386,8 @@
 .result > div,
 .ageCard {
   width: min(36rem, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
   display: grid;
   gap: 0.9rem;
   padding: clamp(1.3rem, 4vw, 2.2rem);
@@ -411,7 +415,8 @@
   border-color: rgba(255, 137, 120, 0.55);
 }
 
-@media (max-width: 1050px) {
+/* Canonical compact/tablet band. */
+@media (max-width: 1120px) {
   .playArea {
     grid-template-columns: 1fr;
   }
@@ -429,7 +434,8 @@
   }
 }
 
-@media (max-width: 640px) {
+/* Canonical phone band. */
+@media (max-width: 700px) {
   .gameShell {
     gap: 0.7rem;
   }
