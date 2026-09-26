@@ -102,6 +102,12 @@
   }
 }
 
+@media (max-width: 520px) {
+  .home-discovery {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 420px) {
   .home-hero .hero__actions {
     grid-template-columns: 1fr;
