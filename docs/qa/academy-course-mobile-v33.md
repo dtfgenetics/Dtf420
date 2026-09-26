@@ -1,0 +1,3 @@
+# Ready
+
+Automated checks next.
