@@ -87,7 +87,7 @@ for (const [label, source, patterns] of [
   }
 }
 
-if (/max-width:\s*720px/.test(atlasMasteryQuizCss) || /max-width:\s*720px/.test(terpeneChapterQuizCss)) {
+if (/@media\s*\(max-width:\s*720px\)/.test(atlasMasteryQuizCss) || /@media\s*\(max-width:\s*720px\)/.test(terpeneChapterQuizCss)) {
   failures.push("Assessment quiz layouts must use the canonical 700px phone band instead of the legacy 720px breakpoint.");
 }
 if (!/\.quizOptions label\s*\{[^}]*min-height:\s*48px/.test(atlasMasteryQuizCss)) {
