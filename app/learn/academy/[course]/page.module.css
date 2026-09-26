@@ -180,13 +180,15 @@
   margin-top: 34px;
 }
 
-@media (max-width: 860px) {
+/* Canonical tablet composition band. */
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 620px) {
+/* Canonical phone band. */
+@media (max-width: 700px) {
   .unit {
     grid-template-columns: 34px minmax(0, 1fr);
   }
