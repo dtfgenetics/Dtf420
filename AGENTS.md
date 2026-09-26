@@ -4,6 +4,8 @@ For any change intended to reach production, load and follow `$dtf-release-pipel
 
 For every substantive pull request before merge, load and follow `$dtf-pr-reviewer` from `.agents/skills/dtf-pr-reviewer/SKILL.md`. Review the exact PR head SHA and treat semantic review as supplemental to deterministic verification.
 
+For any visitor-facing layout, CSS, navigation, responsive, viewport, mobile/tablet, grid, overflow, sticky UI, or device-formatting change, first load and follow `$dtf-responsive-layout` from `.agents/skills/dtf-responsive-layout/SKILL.md` and run `npm run verify:responsive` before release QA.
+
 ## Current production authority
 
 This repository owns the unified Next.js application code and future migration/cutover package. It is **not currently the whole-site production deployment authority for `dtfseeds.com`**.
