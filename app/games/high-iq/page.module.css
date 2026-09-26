@@ -265,7 +265,7 @@
 }
 
 .playStage {
-  min-height: 620px;
+  min-height: min(620px, calc(100dvh - 120px));
 }
 
 .hud {
