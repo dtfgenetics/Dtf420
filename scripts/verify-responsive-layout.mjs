@@ -49,9 +49,25 @@ if (!/max-height:\s*min\(470px,\s*calc\(100dvh - 210px\)\)/.test(livingAtlas)) {
   failures.push("Living Plant Atlas mobile inspector must remain bounded by dynamic viewport height.");
 }
 
+const whoTookItCss = read("app/games/who-took-it/page.module.css");
+const highIqCss = read("app/games/high-iq/page.module.css");
+const strainShowdownCss = read("app/games/strain-showdown/page.module.css");
 const budOrBluffCss = read("app/games/bud-or-bluff/page.module.css");
 const growerConversationsCss = read("app/games/grower-conversations/page.module.css");
 const duckRaceCss = read("components/game/StonerDuckRaceGame.module.css");
+
+if (/@media\s*\(max-width:\s*(?:1050|640)px\)/.test(whoTookItCss)) {
+  failures.push("Who Took It must use the canonical 1120/700 responsive bands instead of legacy 1050/640 breakpoints.");
+}
+if (!/max-height:\s*calc\(100dvh - 2rem\)/.test(whoTookItCss) || !/overscroll-behavior:\s*contain/.test(whoTookItCss)) {
+  failures.push("Who Took It fixed result/age overlays must remain bounded and scrollable within 100dvh.");
+}
+if (!/min-height:\s*min\(620px,\s*calc\(100dvh - 120px\)\)/.test(highIqCss)) {
+  failures.push("High IQ play stage must remain bounded to the dynamic viewport height.");
+}
+if (!/min-height:\s*min\(440px,\s*calc\(100dvh - 180px\)\)/.test(strainShowdownCss)) {
+  failures.push("Strain Showdown arena cards/console must remain bounded to the dynamic viewport height.");
+}
 
 for (const [label, source, patterns] of [
   ["Bud or Bluff", budOrBluffCss, [/\.quitConfirm button[^}]*min-height:\s*(?:3\d|4[0-3])px/, /\.textButton[^}]*min-height:\s*(?:3\d|4[0-3])px/]],
