@@ -915,7 +915,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.8rem;
-    max-height: 470px;
+    max-height: min(470px, calc(100dvh - 210px));
     padding: 1rem 1rem 1.3rem;
     overflow-y: auto;
   }
