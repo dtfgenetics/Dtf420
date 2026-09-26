@@ -543,7 +543,7 @@
 }
 
 .quitConfirm p { margin: 0 0 10px; color: var(--text); font-size: 13px; font-weight: 800; }
-.quitConfirm button { width: 100%; min-height: 42px; border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: var(--text); }
+.quitConfirm button { width: 100%; min-height: 44px; border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: var(--text); }
 .quitConfirm button + button { margin-top: 7px; }
 
 .handoffPanel {
@@ -587,7 +587,7 @@
 
 .finishActions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .lifetimeNote { margin: 24px 0 8px; color: var(--muted); font-size: 13px; }
-.textButton { min-height: 42px; background: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.textButton { min-height: 44px; background: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 900px) {
   .setupGrid,

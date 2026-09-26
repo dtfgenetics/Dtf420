@@ -276,7 +276,7 @@
   position: relative;
   display: grid;
   grid-template-rows: auto auto auto auto 1fr auto;
-  min-height: 440px;
+  min-height: min(440px, calc(100dvh - 180px));
   padding: 16px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--family-accent) 45%, transparent);
@@ -444,7 +444,7 @@
   display: grid;
   align-content: center;
   justify-items: center;
-  min-height: 440px;
+  min-height: min(440px, calc(100dvh - 180px));
   padding: 20px 16px;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 26px;
@@ -653,7 +653,7 @@
   }
 
   .strainCard {
-    min-height: 400px;
+    min-height: min(400px, calc(100dvh - 160px));
   }
 
   .ruleToggles {
@@ -680,6 +680,70 @@
 
   .battleActions {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  .page {
+    padding-block: 12px 36px;
+  }
+
+  .topline,
+  .hero,
+  .ruleStatus,
+  .gameShell {
+    margin-bottom: 10px;
+  }
+
+  .hero > div:first-child {
+    padding: 18px 22px;
+  }
+
+  .hero h1 {
+    margin: 4px 0 8px;
+    font-size: clamp(40px, 7vw, 62px);
+  }
+
+  .lede {
+    line-height: 1.45;
+  }
+
+  .heroMetric {
+    padding: 16px 18px;
+  }
+
+  .heroMetric strong {
+    font-size: clamp(46px, 7vw, 68px);
+  }
+
+  .heroMetric span {
+    margin-top: 8px;
+  }
+
+  .ruleStatus article,
+  .controlDeck,
+  .eventPanel,
+  .disclosure {
+    padding: 14px 16px;
+  }
+
+  .controlHeading {
+    margin-bottom: 12px;
+  }
+
+  .centerConsole {
+    min-height: min(300px, calc(100dvh - 120px));
+    padding: 12px;
+  }
+
+  .vs {
+    width: 54px;
+    height: 54px;
+    font-size: 18px;
+  }
+
+  .battleActions {
+    margin-top: 12px;
   }
 }
 
@@ -740,7 +804,7 @@
     min-height: 48px;
   }
   .strainCard {
-    min-height: 360px;
+    min-height: min(360px, calc(100dvh - 140px));
   }
 }
 @media (forced-colors: active) {

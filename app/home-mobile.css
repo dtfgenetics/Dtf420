@@ -167,3 +167,10 @@
     display: none;
   }
 }
+
+
+@media (max-width: 520px) {
+  .home-discovery {
+    grid-template-columns: 1fr;
+  }
+}

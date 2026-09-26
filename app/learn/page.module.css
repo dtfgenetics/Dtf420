@@ -233,7 +233,8 @@
   }
 }
 
-@media (max-width: 720px) {
+/* Canonical phone band. */
+@media (max-width: 700px) {
   .hero {
     min-height: 430px;
     align-items: center;
