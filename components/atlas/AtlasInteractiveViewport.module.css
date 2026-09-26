@@ -37,7 +37,7 @@
   mask-image: linear-gradient(to bottom, #000, transparent 44%);
 }
 
-.viewport:fullscreen { min-height: 100vh; border-radius: 0; }
+.viewport:fullscreen { min-height: 100dvh; border-radius: 0; }
 .dragging { cursor: grabbing; }
 
 .environmentGlow {
