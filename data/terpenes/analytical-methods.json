@@ -37,6 +37,71 @@
       "identityResolution": "general-method-review",
       "reviewStatus": "source-verified",
       "notes": "Used as system-level analytical context only. It does not provide compound-specific method validation by itself."
+    },
+    {
+      "id": "deicas2021-z-beta-ocimene-hsgctof",
+      "sourceId": "DEICAS-2021-CANNABIS-HSGCTOF",
+      "title": "Cannabis FET-HS-GC/MS-TOF quantification including cis-(Z)-β-ocimene",
+      "matrix": "Cannabis sativa inflorescences",
+      "technique": "Full evaporation technique headspace gas chromatography with time-of-flight mass spectrometry (FET-HS-GC/MS-TOF)",
+      "extraction": "Headspace full evaporation technique with high equilibration temperature and no conventional solvent extraction",
+      "validationFramework": "35-terpenoid standard panel; reported method accuracy >90% and 5 ppm limit of detection for all analytes",
+      "quantificationContext": "Quantitative cannabis volatile profiling across THC-dominant and CBD-dominant chemotypes; cis-β-ocimene explicitly reported among quantified major terpenoids",
+      "compoundSlugs": [
+        "z-beta-ocimene"
+      ],
+      "identityResolution": "named-reference-standard",
+      "reviewStatus": "source-verified",
+      "notes": "PubChem identifies cis-β-ocimene as the (3Z)-β-ocimene identity used by this reviewed chapter. This record does not establish E/trans-β-ocimene method coverage."
+    },
+    {
+      "id": "mudge2019-alpha-gamma-terpinene-gcms",
+      "sourceId": "MUDGE-2019-CANNABIS-TERPENE-METABOLOMICS",
+      "title": "Cannabis GC-MS reference-standard identification of α-terpinene and γ-terpinene",
+      "matrix": "Cannabis sativa whole or milled flowers from 33 chemovars",
+      "technique": "Gas chromatography-mass spectrometry (GC-MS) targeted terpene metabolomics",
+      "extraction": "Cannabis volatile-profile sample preparation used in the study's targeted metabolomics workflow",
+      "validationFramework": "Purchased Cannabis Terpene Mix A reference standards; peak confirmation using external standards analyzed under the same GC conditions and retention-index comparison",
+      "quantificationContext": "Targeted profiling and identification of cannabis monoterpenes and sesquiterpenes across 33 chemovars",
+      "compoundSlugs": [
+        "alpha-terpinene",
+        "gamma-terpinene"
+      ],
+      "identityResolution": "named-reference-standard",
+      "reviewStatus": "source-verified",
+      "notes": "Supports reviewed analytical identification context for α- and γ-terpinene. It is not represented here as a universal cannabis laboratory validation for every quantitative matrix or instrument configuration."
+    },
+    {
+      "id": "liu1976-squalene-glc-validation",
+      "sourceId": "LIU-1976-SQUALENE-GLC",
+      "title": "Validated gas-liquid chromatographic measurement of squalene in human biological matrices",
+      "matrix": "Human plasma, feces, urine, bile, and tissue",
+      "technique": "Gas-liquid chromatography after chromatographic isolation",
+      "extraction": "Mild saponification followed by alumina column chromatography; recovery standard used to correct losses",
+      "validationFramework": "Accurate and reproducible method with reported recoveries above 80% in tissues and 96% in plasma",
+      "quantificationContext": "Quantitative squalene measurement in biological matrices",
+      "compoundSlugs": [
+        "squalene"
+      ],
+      "identityResolution": "named-reference-standard",
+      "reviewStatus": "source-verified",
+      "notes": "Validated for human biological matrices, not Cannabis. It establishes a reviewed squalene analytical method but does not imply cannabis-matrix validation."
+    },
+    {
+      "id": "schierle2004-beta-carotene-lc-validation",
+      "sourceId": "SCHIERLE-2004-BETA-CAROTENE-LC",
+      "title": "Single-laboratory validated reversed-phase LC determination of total and all-trans β-carotene",
+      "matrix": "Dietary supplements and β-carotene raw materials",
+      "technique": "Reversed-phase liquid chromatography using C18 or C30 columns",
+      "extraction": "Matrix-dependent protease digestion and dichloromethane-ethanol extraction or direct dissolution of oily suspensions",
+      "validationFramework": "Single-laboratory validation with linearity, precision, recovery, and separation of all-trans, 9-cis, 13-cis, and 15-cis β-carotene",
+      "quantificationContext": "Quantitative total and all-trans β-carotene analysis across supplement and raw-material matrices",
+      "compoundSlugs": [
+        "beta-carotene"
+      ],
+      "identityResolution": "named-reference-standard",
+      "reviewStatus": "source-verified",
+      "notes": "Validated for supplement/raw-material matrices, not Cannabis. The method is useful analytical context and demonstrates geometric-isomer separation without implying cannabis-matrix validation."
     }
   ]
 }

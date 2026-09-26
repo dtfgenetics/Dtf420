@@ -200,6 +200,14 @@ const requiredSourceIds = [
   "FARRE-2017-BETA-OCIMENE-ECOLOGY",
   "SHALU-2024-SQUALENE-INDUSTRY",
   "KLÄUI-1982-CAROTENOID-COLORANTS",
+  "DEICAS-2021-CANNABIS-HSGCTOF",
+  "MUDGE-2019-CANNABIS-TERPENE-METABOLOMICS",
+  "LIU-1976-SQUALENE-GLC",
+  "SCHIERLE-2004-BETA-CAROTENE-LC",
+  "DEICAS-2021-CANNABIS-HSGCTOF",
+  "MUDGE-2019-CANNABIS-TERPENE-METABOLOMICS",
+  "LIU-1976-SQUALENE-GLC",
+  "SCHIERLE-2004-BETA-CAROTENE-LC",
   "RASMANN-2005-CARYOPHYLLENE-ECOLOGY",
   "RAGUSO-2016-LINALOOL-ECOLOGY",
   "BEHR-2009-MYRCENE-SUSTAINABLE-CHEMISTRY",
@@ -539,5 +547,77 @@ for (const slug of ["beta-myrcene", "limonene", "alpha-pinene", "linalool", "bet
   );
   if (!hasApplication) {
     throw new Error(`Expanded application coverage missing for ${slug}`);
+  }
+}
+
+
+const requiredAnalyticalIds = [
+  "deicas2021-z-beta-ocimene-hsgctof",
+  "mudge2019-alpha-gamma-terpinene-gcms",
+  "liu1976-squalene-glc-validation",
+  "schierle2004-beta-carotene-lc-validation",
+];
+const analyticalIds = new Set((analyticalMethods.records ?? []).map((record) => record.id));
+for (const recordId of requiredAnalyticalIds) {
+  if (!analyticalIds.has(recordId)) {
+    throw new Error(`Expanded analytical method record missing: ${recordId}`);
+  }
+}
+
+const expectedAnalyticalCoverage = [
+  "beta-myrcene",
+  "limonene",
+  "alpha-pinene",
+  "beta-pinene",
+  "terpinolene",
+  "linalool",
+  "beta-caryophyllene",
+  "alpha-humulene",
+  "z-beta-ocimene",
+  "alpha-terpinene",
+  "gamma-terpinene",
+  "squalene",
+  "beta-carotene",
+];
+
+for (const slug of expectedAnalyticalCoverage) {
+  const covered = (analyticalMethods.records ?? []).some(
+    (record) =>
+      record.reviewStatus === "source-verified" &&
+      (record.compoundSlugs ?? []).includes(slug),
+  );
+  if (!covered) {
+    throw new Error(`Expected reviewed analytical method coverage missing for ${slug}`);
+  }
+}
+
+const eOcimeneMethod = (analyticalMethods.records ?? []).some(
+  (record) =>
+    record.reviewStatus === "source-verified" &&
+    (record.compoundSlugs ?? []).includes("e-beta-ocimene"),
+);
+if (eOcimeneMethod) {
+  throw new Error("E-β-ocimene must remain without borrowed compound-specific analytical method coverage");
+}
+
+const zOcimeneMethod = (analyticalMethods.records ?? []).find(
+  (record) => record.id === "deicas2021-z-beta-ocimene-hsgctof",
+);
+if (
+  !zOcimeneMethod ||
+  zOcimeneMethod.identityResolution !== "named-reference-standard" ||
+  !zOcimeneMethod.notes.includes("does not establish E/trans-β-ocimene")
+) {
+  throw new Error("Z-β-ocimene analytical method must preserve cis/Z identity scope");
+}
+
+const nonCannabisMethods = [
+  ["liu1976-squalene-glc-validation", "not Cannabis"],
+  ["schierle2004-beta-carotene-lc-validation", "not Cannabis"],
+];
+for (const [recordId, requiredNote] of nonCannabisMethods) {
+  const record = (analyticalMethods.records ?? []).find((item) => item.id === recordId);
+  if (!record || !record.notes.includes(requiredNote)) {
+    throw new Error(`Non-cannabis analytical method must declare matrix limitation: ${recordId}`);
   }
 }
