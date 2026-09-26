@@ -1,5 +1,35 @@
 /* Mobile-first homepage refinement. Kept separate so the pass is bounded and easy to audit. */
 @media (max-width: 720px) {
+  .site-header__inner {
+    min-height: 60px;
+  }
+
+  .mobile-nav-actions {
+    gap: 6px;
+  }
+
+  .mobile-search,
+  .mobile-menu summary {
+    min-width: 54px;
+    min-height: 46px;
+    padding-inline: 11px;
+    touch-action: manipulation;
+  }
+
+  .mobile-menu__panel {
+    position: fixed;
+    top: 68px;
+    right: 14px;
+    width: min(calc(100vw - 28px), 360px);
+    max-height: calc(100dvh - 82px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-menu__links a {
+    min-height: 50px;
+  }
+
   .home-hero {
     padding-block: 42px 20px;
   }
@@ -102,13 +132,22 @@
   }
 }
 
-@media (max-width: 520px) {
-  .home-discovery {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 420px) {
+  .brand__identity strong {
+    font-size: 11px;
+  }
+
+  .mobile-search {
+    display: inline-flex;
+    min-width: 50px;
+    padding-inline: 9px;
+  }
+
+  .mobile-menu summary {
+    min-width: 50px;
+    padding-inline: 9px;
+  }
+
   .home-hero .hero__actions {
     grid-template-columns: 1fr;
   }
@@ -120,5 +159,18 @@
 
   .home-discovery__item strong {
     font-size: 18px;
+  }
+}
+
+@media (max-width: 350px) {
+  .brand__identity {
+    display: none;
+  }
+}
+
+
+@media (max-width: 520px) {
+  .home-discovery {
+    grid-template-columns: 1fr;
   }
 }
