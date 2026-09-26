@@ -31,7 +31,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
             <button
               aria-controls="game-library-results"
               aria-pressed={filter === value}
-              className={styles.filterButton}
+              className={`${styles.filterButton} ${focusStyles.control}`}
               data-active={filter === value}
               key={value}
               onClick={() => setFilter(value)}
@@ -88,7 +88,7 @@ export function GameLibrary({ games }: { games: readonly GameCatalogEntry[] }) {
         <div className={styles.emptyState} id="game-library-results" role="region" aria-labelledby="game-library-empty-heading">
           <h3 id="game-library-empty-heading">No games match these filters.</h3>
           <p>Clear the search and release-status filter to show every game.</p>
-          <button className={styles.filterButton} type="button" aria-controls="game-library-results" onClick={() => { setFilter("all"); setQuery(""); }} style={touchActionStyle}>Clear filters and show every game</button>
+          <button className={`${styles.filterButton} ${focusStyles.control}`} type="button" aria-controls="game-library-results" onClick={() => { setFilter("all"); setQuery(""); }} style={touchActionStyle}>Clear filters and show every game</button>
         </div>
       )}
     </>
