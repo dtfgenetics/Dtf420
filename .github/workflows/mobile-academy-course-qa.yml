@@ -1,0 +1,25 @@
+name: Mobile Academy Course QA
+
+on:
+  pull_request:
+    paths:
+      - 'app/learn/academy/[course]/page.module.css'
+      - 'app/learn/academy/[course]/page.tsx'
+      - 'scripts/verify-mobile-academy-course.mjs'
+      - '.github/workflows/mobile-academy-course-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/learn/academy/[course]/page.module.css'
+      - 'app/learn/academy/[course]/page.tsx'
+      - 'scripts/verify-mobile-academy-course.mjs'
+
+jobs:
+  verify-mobile-academy-course:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/verify-mobile-academy-course.mjs
