@@ -9,6 +9,8 @@ export type ReviewedNaturalOccurrenceRecord = {
   sourceId: "PUBCHEM-PUG-VIEW";
   fetchedAt: string;
   occurrence: Record<NaturalOccurrenceHeading, ExperimentalPropertyEvidence[]>;
+  evidenceCount: number;
+  referencedEvidenceCount: number;
 };
 
 type CacheShape = {
@@ -17,6 +19,14 @@ type CacheShape = {
   sourceId: string;
   generatedAt: string | null;
   headings: NaturalOccurrenceHeading[];
+  coverage: {
+    manifestCompoundCount: number;
+    compoundsWithEvidence: number;
+    compoundsWithReferencedEvidence: number;
+    evidenceCount: number;
+    referencedEvidenceCount: number;
+    compoundCoverageShare: number;
+  };
   compounds: ReviewedNaturalOccurrenceRecord[];
 };
 
@@ -29,7 +39,21 @@ export function getReviewedNaturalOccurrenceRecord(slug: string) {
 
 export function countNaturalOccurrenceEvidence(record: ReviewedNaturalOccurrenceRecord | null) {
   if (!record) return 0;
-  return Object.values(record.occurrence).reduce((sum, entries) => sum + entries.length, 0);
+  return Number.isFinite(record.evidenceCount)
+    ? record.evidenceCount
+    : Object.values(record.occurrence).reduce((sum, entries) => sum + entries.length, 0);
+}
+
+export function countReferencedNaturalOccurrenceEvidence(
+  record: ReviewedNaturalOccurrenceRecord | null,
+) {
+  if (!record) return 0;
+  return Number.isFinite(record.referencedEvidenceCount)
+    ? record.referencedEvidenceCount
+    : Object.values(record.occurrence).reduce(
+        (sum, entries) => sum + entries.filter((entry) => entry.references.length > 0).length,
+        0,
+      );
 }
 
 export function getReviewedNaturalOccurrenceCacheStatus() {
@@ -38,5 +62,6 @@ export function getReviewedNaturalOccurrenceCacheStatus() {
     generatedAt: cache.generatedAt,
     compoundCount: cache.compounds.length,
     headings: cache.headings,
+    coverage: cache.coverage,
   };
 }

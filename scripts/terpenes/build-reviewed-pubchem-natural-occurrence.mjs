@@ -16,16 +16,36 @@ if (!Array.isArray(manifest.compounds) || manifest.compounds.length === 0) {
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function fetchHeadingWithRetry(pubchemCid, heading, attempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await fetchPugViewHeading(pubchemCid, heading);
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts) break;
+      await sleep(350 * attempt);
+    }
+  }
+
+  throw lastError;
+}
+
 const compounds = [];
 
 for (const item of manifest.compounds) {
   const occurrence = {};
 
   for (const heading of headings) {
-    const payload = await fetchPugViewHeading(item.pubchemCid, heading);
-    occurrence[heading] = normalizePugViewEvidence(payload?.Record, heading, 50);
+    const payload = await fetchHeadingWithRetry(item.pubchemCid, heading);
+    occurrence[heading] = normalizePugViewEvidence(payload?.Record, heading, 75);
     await sleep(180);
   }
+
+  const naturalEntries = occurrence["Natural Occurrence"] ?? [];
+  const referencedEntries = naturalEntries.filter((entry) => (entry.references ?? []).length > 0);
 
   compounds.push({
     slug: item.slug,
@@ -33,27 +53,43 @@ for (const item of manifest.compounds) {
     sourceId: "PUBCHEM-PUG-VIEW",
     fetchedAt: new Date().toISOString(),
     occurrence,
+    evidenceCount: naturalEntries.length,
+    referencedEvidenceCount: referencedEntries.length,
   });
 }
 
+const evidenceCount = compounds.reduce((sum, compound) => sum + compound.evidenceCount, 0);
+const referencedEvidenceCount = compounds.reduce(
+  (sum, compound) => sum + compound.referencedEvidenceCount,
+  0,
+);
+const compoundsWithEvidence = compounds.filter((compound) => compound.evidenceCount > 0).length;
+const compoundsWithReferencedEvidence = compounds.filter(
+  (compound) => compound.referencedEvidenceCount > 0,
+).length;
+
 const output = {
-  schemaVersion: "1.0.0",
+  schemaVersion: "1.1.0",
   status: "compiled",
   sourceId: "PUBCHEM-PUG-VIEW",
   generatedAt: new Date().toISOString(),
   headings,
+  coverage: {
+    manifestCompoundCount: manifest.compounds.length,
+    compoundsWithEvidence,
+    compoundsWithReferencedEvidence,
+    evidenceCount,
+    referencedEvidenceCount,
+    compoundCoverageShare: manifest.compounds.length
+      ? compoundsWithEvidence / manifest.compounds.length
+      : 0,
+  },
   compounds,
 };
 
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
 await fs.writeFile(outputPath, JSON.stringify(output, null, 2) + "\n", "utf8");
 
-const evidenceCount = compounds.reduce(
-  (sum, compound) =>
-    sum + Object.values(compound.occurrence).reduce((inner, entries) => inner + entries.length, 0),
-  0,
-);
-
 console.log(
-  `Compiled ${evidenceCount} source-preserved natural-occurrence reports across ${compounds.length} reviewed compounds.`,
+  `Compiled ${evidenceCount} natural-occurrence reports (${referencedEvidenceCount} referenced) across ${compoundsWithEvidence}/${manifest.compounds.length} reviewed compounds.`,
 );

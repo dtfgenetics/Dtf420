@@ -982,3 +982,49 @@ Mudge et al. 2019 provides the direct Cannabis metabolomics occurrence and senso
 Curated literature sensory records remain separate from the generated PubChem sensory cache. The chapter readiness score counts both, but the page identifies which evidence came from literature versus PubChem so provenance is not flattened.
 
 β-Ocimene unresolved-isomer safety evidence remains attached to the aggregate `_beta-ocimene-unresolved` scope and is not reassigned to the E or Z isomer. Exact occurrence evidence and aggregate safety evidence therefore remain separate by design.
+
+
+## Reviewed PubChem natural-occurrence cache v1.1
+
+The reviewed natural-occurrence layer uses PubChem PUG-View's `Natural Occurrence` section as a source-preserved evidence feed for the 14 reviewed chapter identities.
+
+The cache at `data/terpenes/reviewed-pubchem-natural-occurrence.json` uses schema `1.1.0` and has two valid states:
+
+- `not-generated` — explicit bootstrap state with zero evidence and no compound records;
+- `compiled` — one record for every reviewed PubChem-manifest compound plus auditable coverage metadata.
+
+### Generation contract
+
+The builder:
+
+1. loads the reviewed PubChem compound manifest;
+2. requests the `Natural Occurrence` PUG-View heading for each exact PubChem CID;
+3. retries transient request failures up to three times;
+4. preserves reported source text and resolved reference metadata;
+5. records per-compound total and referenced evidence counts;
+6. publishes aggregate coverage metadata.
+
+Coverage fields are:
+
+- `manifestCompoundCount`;
+- `compoundsWithEvidence`;
+- `compoundsWithReferencedEvidence`;
+- `evidenceCount`;
+- `referencedEvidenceCount`;
+- `compoundCoverageShare`.
+
+The monthly/push refresh workflow refuses to publish a compiled cache unless the result contains all reviewed manifest compounds, at least three natural-occurrence reports across at least two compounds, and at least one report with resolved source-reference metadata. The repository verifier independently recomputes the totals from the generated records.
+
+### Interpretation
+
+A PubChem natural-occurrence report is evidence that an upstream source reports the compound in a natural material. It is **not automatically**:
+
+- a Cannabis occurrence record;
+- a quantified abundance;
+- evidence that every member of a species contains the compound;
+- an aroma-importance ranking;
+- a biological-effect claim.
+
+Cannabis occurrence remains in its own evidence layer. Exact E/Z, enantiomer, and other identity boundaries remain governed by the reviewed compound identity rather than being inferred from similar common names.
+
+The generated cache is intended to replace hand-maintained broad plant-source lists with traceable source-preserved occurrence evidence. LOTUS remains registered as a future cross-check/normalization layer rather than an automatic identity merge source.
