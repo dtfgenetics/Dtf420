@@ -18,8 +18,18 @@ const globals=read("app/globals.css");
 const mobile=read("app/home-mobile.css");
 const docs=read("docs/RESPONSIVE_LAYOUT_STANDARD.md");
 const atlasViewport = read("components/atlas/AtlasInteractiveViewport.module.css");
+const terpeneCultivar = read("components/terpenes/TerpeneCultivarBrowser.module.css");
 if (/100vh/.test(atlasViewport)) {
   failures.push("Atlas interactive fullscreen must use 100dvh so mobile browser chrome cannot clip the viewport.");
+}
+if (/\.layerPanel button\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(atlasViewport)) {
+  failures.push("Atlas mobile layer controls must keep a minimum 44px touch target.");
+}
+if (/\.neighborControls select\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(terpeneCultivar)) {
+  failures.push("Terpene browser selects must keep a minimum 44px touch target.");
+}
+if (/\.source a\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(terpeneCultivar)) {
+  failures.push("Terpene browser source actions must keep a minimum 44px touch target.");
 }
 
 const routeCss = {
