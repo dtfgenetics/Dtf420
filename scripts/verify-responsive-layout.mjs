@@ -52,6 +52,10 @@ if (!/max-height:\s*min\(470px,\s*calc\(100dvh - 210px\)\)/.test(livingAtlas)) {
 const whoTookItCss = read("app/games/who-took-it/page.module.css");
 const highIqCss = read("app/games/high-iq/page.module.css");
 const strainShowdownCss = read("app/games/strain-showdown/page.module.css");
+const atlasMasteryQuizCss = read("components/atlas/AtlasPathMasteryQuiz.module.css");
+const terpeneChapterQuizCss = read("components/terpenes/TerpeneChapterQuiz.module.css");
+const highIqCss = read("app/games/high-iq/page.module.css");
+const strainShowdownCss = read("app/games/strain-showdown/page.module.css");
 const budOrBluffCss = read("app/games/bud-or-bluff/page.module.css");
 const growerConversationsCss = read("app/games/grower-conversations/page.module.css");
 const duckRaceCss = read("components/game/StonerDuckRaceGame.module.css");
@@ -83,6 +87,22 @@ for (const [label, source, patterns] of [
   for (const pattern of patterns) {
     if (pattern.test(source)) failures.push(`${label} contains an interactive control below the 44px touch-target floor.`);
   }
+}
+
+if (/max-width:\s*720px/.test(atlasMasteryQuizCss) || /max-width:\s*720px/.test(terpeneChapterQuizCss)) {
+  failures.push("Assessment quiz layouts must use the canonical 700px phone band instead of the legacy 720px breakpoint.");
+}
+if (!/\.quizOptions label\s*\{[^}]*min-height:\s*48px/.test(atlasMasteryQuizCss)) {
+  failures.push("Atlas mastery answer choices must keep an explicit 48px hit area.");
+}
+if (!/\.options button\s*\{[^}]*min-height:44px/.test(terpeneChapterQuizCss)) {
+  failures.push("Terpene knowledge-check answer buttons must keep a minimum 44px touch target.");
+}
+if (!/@media\s*\(orientation:\s*landscape\)\s*and\s*\(max-height:\s*560px\)/.test(highIqCss)) {
+  failures.push("High IQ must keep a constrained-height landscape layout.");
+}
+if (!/@media\s*\(orientation:\s*landscape\)\s*and\s*\(max-height:\s*560px\)/.test(strainShowdownCss)) {
+  failures.push("Strain Showdown must keep a constrained-height landscape layout.");
 }
 
 const routeCss = {
