@@ -17,6 +17,11 @@ function need(content,re,msg){ if(!re.test(content)) failures.push(msg); }
 const globals=read("app/globals.css");
 const mobile=read("app/home-mobile.css");
 const docs=read("docs/RESPONSIVE_LAYOUT_STANDARD.md");
+const atlasViewport = read("components/atlas/AtlasInteractiveViewport.module.css");
+if (/100vh/.test(atlasViewport)) {
+  failures.push("Atlas interactive fullscreen must use 100dvh so mobile browser chrome cannot clip the viewport.");
+}
+
 const routeCss = {
   learn: read("app/learn/page.module.css"),
   tools: read("app/tools/page.module.css"),
