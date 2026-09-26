@@ -50,8 +50,8 @@ jobs:
             fs.readFileSync("data/terpenes/reviewed-pubchem-natural-occurrence.json", "utf8"),
           );
 
-          if (cache.status !== "compiled") {
-            throw new Error("Reviewed natural occurrence cache did not compile");
+          if (cache.schemaVersion !== "1.1.0" || cache.status !== "compiled") {
+            throw new Error("Reviewed natural occurrence cache did not compile as schema 1.1.0");
           }
           if (!Array.isArray(cache.compounds) || cache.compounds.length !== expectedCount) {
             throw new Error(`Expected ${expectedCount} reviewed natural occurrence records`);
@@ -60,27 +60,38 @@ jobs:
             throw new Error("Natural Occurrence heading is missing");
           }
 
-          let evidenceCount = 0;
-          let compoundsWithEvidence = 0;
+          const coverage = cache.coverage;
+          if (!coverage || coverage.manifestCompoundCount !== expectedCount) {
+            throw new Error("Natural occurrence coverage metadata is missing or out of sync");
+          }
+
+          if (
+            coverage.evidenceCount < 3 ||
+            coverage.referencedEvidenceCount < 1 ||
+            coverage.compoundsWithEvidence < 2
+          ) {
+            throw new Error(
+              `Natural occurrence coverage is implausibly low: ${coverage.evidenceCount} reports, ${coverage.referencedEvidenceCount} referenced, across ${coverage.compoundsWithEvidence} compounds`,
+            );
+          }
+
           for (const record of cache.compounds) {
             const entries = record.occurrence?.["Natural Occurrence"];
             if (!record.slug || !record.pubchemCid || !Array.isArray(entries)) {
               throw new Error(`Incomplete natural occurrence record: ${record.slug ?? "unknown"}`);
             }
-            evidenceCount += entries.length;
-            if (entries.length) compoundsWithEvidence += 1;
-          }
-
-          if (evidenceCount < 3 || compoundsWithEvidence < 2) {
-            throw new Error(
-              `Natural occurrence coverage is implausibly low: ${evidenceCount} reports across ${compoundsWithEvidence} compounds`,
-            );
+            if (record.evidenceCount !== entries.length) {
+              throw new Error(`Natural occurrence count mismatch for ${record.slug}`);
+            }
           }
 
           console.log(
-            `Verified ${evidenceCount} source-preserved natural-occurrence reports across ${compoundsWithEvidence} reviewed compounds.`,
+            `Verified ${coverage.evidenceCount} source-preserved natural-occurrence reports (${coverage.referencedEvidenceCount} referenced) across ${coverage.compoundsWithEvidence} reviewed compounds.`,
           );
           NODE
+
+      - name: Run repository natural occurrence verifier
+        run: node scripts/terpenes/verify-reviewed-pubchem-natural-occurrence.mjs
 
       - name: Commit refreshed natural occurrence evidence
         shell: bash
