@@ -216,7 +216,7 @@ const learnResponsiveFiles = {
   "Terpene research": read("app/learn/terpenes/research/page.module.css"),
 };
 for (const [label, source] of Object.entries(learnResponsiveFiles)) {
-  if (/max-width:\s*(?:560|600|620|680|720|760|820|850)px/.test(source)) {
+  if (/@media\s*\([^)]*max-width:\s*(?:560|600|620|680|720|760|820|850)px/.test(source)) {
     failures.push(`${label} reintroduced a legacy breakpoint outside the shared 700/900 responsive bands.`);
   }
 }
@@ -233,7 +233,7 @@ const atlasResponsiveFiles = {
   "Atlas review lab": read("components/atlas/AtlasReviewLab.module.css"),
 };
 for (const [label, source] of Object.entries(atlasResponsiveFiles)) {
-  if (/max-width:\s*(?:560|620|820|980)px/.test(source)) {
+  if (/@media\s*\([^)]*max-width:\s*(?:560|620|820|980)px/.test(source)) {
     failures.push(`${label} reintroduced a legacy breakpoint outside the shared responsive bands.`);
   }
 }
@@ -241,7 +241,7 @@ if (/\.caseRail button\s*\{[^}]*min-height:\s*auto/.test(atlasResponsiveFiles["A
   failures.push("Atlas diagnostic case buttons must keep an explicit mobile touch-target height.");
 }
 const atlasMasteryCss = read("components/atlas/AtlasMastery.module.css");
-if (/max-width:\s*720px/.test(atlasMasteryCss)) failures.push("Atlas mastery UI must use the shared 700px phone breakpoint.");
+if (/@media\s*\([^)]*max-width:\s*720px/.test(atlasMasteryCss)) failures.push("Atlas mastery UI must use the shared 700px phone breakpoint.");
 if (!/\.options button\s*\{[^}]*min-height:\s*var\(--touch-target\)/.test(atlasMasteryCss)) {
   failures.push("Atlas knowledge-check answer buttons must retain the shared touch-target floor.");
 }
