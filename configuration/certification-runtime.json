@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "runtime": "next-node",
+  "database": {
+    "engine": "mysql",
+    "driver": "mysql2",
+    "orm": "drizzle",
+    "authoritative": true
+  },
+  "auth": {
+    "provider": "better-auth",
+    "userReferenceField": "auth_user_id"
+  },
+  "environment": {
+    "requiredForProtectedRuntime": [
+      "DATABASE_URL",
+      "BETTER_AUTH_SECRET",
+      "BETTER_AUTH_URL",
+      "CERTIFICATE_VERIFY_ORIGIN"
+    ],
+    "canonicalValues": {
+      "BETTER_AUTH_URL": "https://dtfseeds.com",
+      "CERTIFICATE_VERIFY_ORIGIN": "https://dtfseeds.com"
+    }
+  },
+  "domainTables": [
+    "learner_profiles",
+    "course_progress",
+    "assessment_versions",
+    "assessment_attempts",
+    "assessment_answers",
+    "assessment_results",
+    "credentials",
+    "credential_verification_events"
+  ],
+  "assessmentStates": [
+    "created",
+    "active",
+    "submitted",
+    "graded",
+    "expired",
+    "abandoned",
+    "invalidated"
+  ],
+  "credentialStates": [
+    "valid",
+    "revoked",
+    "expired"
+  ],
+  "publicVerificationPath": "/verify/:publicCredentialId"
+}
