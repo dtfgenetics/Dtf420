@@ -98,7 +98,10 @@
     "verify:terpenes:compound-cultivar-distributions": "node scripts/terpenes/verify-compound-cultivar-distributions.mjs",
     "verify:terpenes:structured-context": "node scripts/terpenes/validate-structured-context.mjs",
     "verify:responsive": "node scripts/verify-responsive-layout.mjs",
-    "verify:route-ownership": "node scripts/verify-route-ownership.mjs"
+    "verify:route-ownership": "node scripts/verify-route-ownership.mjs",
+    "build:search-index": "node scripts/build-pagefind-index.mjs",
+    "verify:search-index": "node scripts/verify-search-index.mjs",
+    "build:static-overlay:search": "npm run build:static-overlay && npm run build:search-index"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
