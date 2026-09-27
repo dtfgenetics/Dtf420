@@ -5,13 +5,14 @@ const root = process.cwd();
 const schemaPath = path.join(root, "lib", "learning", "auth", "schema.ts");
 const serverPath = path.join(root, "lib", "learning", "auth", "server.ts");
 const migrationPath = path.join(root, "db", "migrations", "0002_better_auth_core.sql");
+const sessionPath = path.join(root, "lib", "learning", "auth", "session.ts");
 
 const fail = (message) => {
   console.error(`Better Auth core verification failed: ${message}`);
   process.exitCode = 1;
 };
 
-for (const file of [schemaPath, serverPath, migrationPath]) {
+for (const file of [schemaPath, serverPath, sessionPath, migrationPath]) {
   if (!fs.existsSync(file) || fs.statSync(file).size === 0) {
     fail(`missing ${path.relative(root, file)}`);
   }
@@ -48,6 +49,15 @@ if (fs.existsSync(serverPath)) {
   if (/toNextJsHandler|app\/api\/auth/.test(source)) {
     fail("auth API route must not be exposed in the core-schema change");
   }
+}
+
+if (fs.existsSync(sessionPath)) {
+  const source = fs.readFileSync(sessionPath, "utf8");
+  if (!source.includes('import "server-only"')) fail("session helper must be server-only");
+  if (!source.includes("getLearningAuth().api.getSession")) fail("session helper must use Better Auth server API");
+  if (!source.includes("headers: requestHeaders")) fail("session helper must forward request headers");
+  if (!source.includes("LEARNING_AUTHENTICATION_REQUIRED")) fail("protected session helper needs a stable auth-required error code");
+  if (/cookie\.split|document\.cookie/i.test(source)) fail("session helper must not parse cookies manually");
 }
 
 if (fs.existsSync(migrationPath)) {
