@@ -147,6 +147,8 @@ for (const [name, re] of forbiddenLegacyBreakpoints) {
 
 need(globals,/--page-gutter\s*:\s*clamp\(/,"globals.css must keep a fluid page gutter token.");
 need(globals,/--touch-target\s*:\s*44px/,"globals.css must keep a 44px touch-target token.");
+need(globals,/\.site-footer__column a\s*\{[^}]*min-height:\s*var\(--touch-target\)/,"Footer links must retain the shared touch-target floor.");
+need(globals,/:where\(h1, h2, h3, h4, p, li, a, button, label, summary\)\s*\{[^}]*overflow-wrap:\s*break-word/,"Shared typography must retain safe wrapping for long labels and content.");
 need(globals,/@media\s*\(min-width:\s*701px\)\s*and\s*\(max-width:\s*900px\)/,"globals.css must keep the deliberate 701–900px tablet band.");
 need(globals,/@media\s*\(max-width:\s*700px\)/,"globals.css must keep the canonical phone breakpoint.");
 need(globals,/@media\s*\(max-width:\s*520px\)/,"globals.css must keep the narrow-phone composition breakpoint.");
