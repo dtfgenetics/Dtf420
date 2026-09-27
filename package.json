@@ -109,7 +109,8 @@
     "verify:better-auth-core": "node scripts/verify-better-auth-core.mjs",
     "start:learning-api": "tsx server/learning-api/server.ts",
     "verify:learning-api-host": "node scripts/verify-learning-api-host.mjs",
-    "test:learning-api-smoke": "node scripts/test-learning-api-smoke.mjs"
+    "test:learning-api-smoke": "node scripts/test-learning-api-smoke.mjs",
+    "verify:learning-session-endpoint": "node scripts/verify-learning-session-endpoint.mjs"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
