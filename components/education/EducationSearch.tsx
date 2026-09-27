@@ -1,202 +1,205 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import academyCourses from "@/content/academy-courses.json";
-import atlasModules from "@/content/atlas-learning-modules.json";
-import plantHealthCore from "@/content/plant-health-library.json";
-import plantHealthExpanded from "@/content/plant-health-expanded.json";
-import plantHealthAbiotic from "@/content/plant-health-abiotic-expanded.json";
-import plantHealthIpmExpanded from "@/content/plant-health-ipm-expanded.json";
-import cultivationCore from "@/content/cultivation-science-library.json";
-import protectedCultivation from "@/content/protected-cultivation-library.json";
-import protectedLighting from "@/content/protected-cultivation-lighting.json";
-import outdoorExpanded from "@/content/outdoor-cultivation-expanded.json";
-import postharvestExpanded from "@/content/postharvest-science-expanded.json";
-import advancedExpanded from "@/content/advanced-cultivation-science-expanded.json";
-import plantPhysiologyExpanded from "@/content/plant-physiology-expanded.json";
-import propagationNutritionGenetics from "@/content/propagation-nutrition-genetics-expanded.json";
-import symptomCore from "@/content/symptom-differential-library.json";
-import symptomExpanded from "@/content/symptom-differential-expanded.json";
-import learningTools from "@/content/learning-tools.json";
-import coreEvidenceSources from "@/content/education-sources.json";
-import abioticEvidenceSources from "@/content/education-sources-abiotic.json";
-import plantHealthIpmEvidenceSources from "@/content/education-sources-plant-health-ipm.json";
-import glossary from "@/content/education-glossary.json";
-import sops from "@/content/education-sops.json";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import styles from "./EducationSearch.module.css";
 
-type SearchKind = "Academy course" | "Atlas lesson" | "Plant health" | "Cultivation science" | "Symptom differential" | "Printable tool" | "Evidence source" | "Glossary term" | "SOP";
+type SearchKind =
+  | "Academy course"
+  | "Atlas lesson"
+  | "Plant health"
+  | "Cultivation science"
+  | "Symptom differential"
+  | "Printable tool"
+  | "Evidence source"
+  | "Glossary term"
+  | "SOP"
+  | "Other";
 
-type SearchItem = {
+type PagefindData = {
+  url: string;
+  excerpt?: string;
+  meta?: Record<string, string>;
+};
+
+type PagefindResult = {
+  id: string;
+  score: number;
+  data: () => Promise<PagefindData>;
+};
+
+type PagefindModule = {
+  search: (
+    term: string,
+    options?: { filters?: Record<string, string | string[]> },
+  ) => Promise<{ results: PagefindResult[] }>;
+};
+
+type SearchResult = {
+  id: string;
   kind: SearchKind;
   title: string;
   context: string;
   summary: string;
   href: string;
-  terms: string;
+  score: number;
 };
 
-type RankedItem = SearchItem & { score: number };
+const LegacyEducationSearch = lazy(() =>
+  import("./EducationSearchLegacy").then((module) => ({ default: module.EducationSearchLegacy })),
+);
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replaceAll("&", "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
+const kinds: Array<"All" | SearchKind> = [
+  "All",
+  "Academy course",
+  "Atlas lesson",
+  "Plant health",
+  "Cultivation science",
+  "Symptom differential",
+  "Printable tool",
+  "Evidence source",
+  "Glossary term",
+  "SOP",
+];
+
+const examples = [
+  "VPD",
+  "root-zone hypoxia",
+  "edema",
+  "pH meter",
+  "PPFD",
+  "breeding",
+  "yellow lower leaves",
+  "water activity",
+  "HLVd research",
+  "rhizosphere",
+];
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
-const academyItems: SearchItem[] = academyCourses.map((course) => ({
-  kind: "Academy course" as const,
-  title: course.title,
-  context: `${course.units.length} guided units`,
-  summary: course.summary,
-  href: `/learn/academy/${course.slug}`,
-  terms: course.units.map((unit) => `${unit.title} ${unit.description}`).join(" "),
-}));
+function plainText(value = "") {
+  return value
+    .replace(/<mark[^>]*>/gi, "")
+    .replace(/<\/mark>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-const atlasItems: SearchItem[] = atlasModules.flatMap((atlasModule) =>
-  atlasModule.lessons.map((lesson) => ({
-    kind: "Atlas lesson" as const,
-    title: lesson.title,
-    context: atlasModule.label,
-    summary: lesson.summary,
-    href: `/learn/atlas/${slugify(atlasModule.id)}/${slugify(lesson.title)}`,
-    terms: `${lesson.visual} ${atlasModule.learningGoals.join(" ")}`,
-  })),
-);
+function inferKind(url: string): SearchKind {
+  if (url.startsWith("/learn/academy/")) return "Academy course";
+  if (url.startsWith("/learn/atlas/")) return "Atlas lesson";
+  if (url.startsWith("/learn/plant-health/")) return "Plant health";
+  if (url.startsWith("/learn/cultivation-science/")) return "Cultivation science";
+  if (url.startsWith("/learn/symptoms/")) return "Symptom differential";
+  if (url.startsWith("/learn/tools/")) return "Printable tool";
+  if (url.startsWith("/learn/sources/")) return "Evidence source";
+  if (url.startsWith("/learn/glossary/")) return "Glossary term";
+  if (url.startsWith("/learn/sops/")) return "SOP";
+  return "Other";
+}
 
-const plantHealthItems: SearchItem[] = [
-  ...plantHealthCore,
-  ...plantHealthExpanded,
-  ...plantHealthAbiotic,
-  ...plantHealthIpmExpanded,
-].map((item) => ({
-  kind: "Plant health" as const,
-  title: item.title,
-  context: item.category,
-  summary: item.summary,
-  href: `/learn/plant-health/${item.slug}`,
-  terms: [
-    ...item.whatToLookFor,
-    ...item.lookAlikes,
-    ...item.confirmWith,
-    ...item.managementPrinciples,
-    ...item.prevention,
-  ].join(" "),
-}));
+function contextFor(kind: SearchKind, url: string) {
+  if (kind !== "Other") return kind;
+  const segment = url.split("/").filter(Boolean).at(1);
+  return segment ? segment.replaceAll("-", " ") : "Teaching Healthy Cultivation";
+}
 
-const cultivationItems: SearchItem[] = [
-  ...cultivationCore,
-  ...protectedCultivation,
-  ...protectedLighting,
-  ...outdoorExpanded,
-  ...postharvestExpanded,
-  ...advancedExpanded,
-  ...plantPhysiologyExpanded,
-  ...propagationNutritionGenetics,
-].map((item) => ({
-  kind: "Cultivation science" as const,
-  title: item.title,
-  context: item.category,
-  summary: item.summary,
-  href: `/learn/cultivation-science/${item.slug}`,
-  terms: [...item.keyConcepts, ...item.measureObserve, ...item.commonMistakes].join(" "),
-}));
-
-const symptomItems: SearchItem[] = [...symptomCore, ...symptomExpanded].map((item) => ({
-  kind: "Symptom differential" as const,
-  title: item.title,
-  context: "Observation-first differential",
-  summary: item.summary,
-  href: `/learn/symptoms/${item.slug}`,
-  terms: [...item.patternQuestions, ...item.possibleCategories, ...item.discriminatingChecks, ...item.redFlags].join(" "),
-}));
-
-const toolItems: SearchItem[] = learningTools.map((item) => ({
-  kind: "Printable tool" as const,
-  title: item.title,
-  context: item.category,
-  summary: item.purpose,
-  href: `/learn/tools/${item.slug}`,
-  terms: item.sections.flatMap((section) => [section.title, ...section.fields]).join(" "),
-}));
-
-const evidenceSources = [...coreEvidenceSources, ...abioticEvidenceSources, ...plantHealthIpmEvidenceSources];
-const evidenceItems: SearchItem[] = evidenceSources.map((source) => ({
-  kind: "Evidence source" as const,
-  title: source.title,
-  context: `${source.sourceType} · ${source.publisher}`,
-  summary: source.scope,
-  href: "/learn/sources",
-  terms: `${source.publisher} ${source.sourceType} ${source.scope} ${"year" in source && source.year ? source.year : ""}`,
-}));
-
-const glossaryItems: SearchItem[] = glossary.map((entry) => ({
-  kind: "Glossary term" as const,
-  title: entry.term,
-  context: entry.category,
-  summary: entry.definition,
-  href: `/learn/glossary#${entry.slug}`,
-  terms: entry.aliases.join(" "),
-}));
-
-const sopItems: SearchItem[] = sops.map((sop) => ({
-  kind: "SOP" as const,
-  title: sop.title,
-  context: sop.category,
-  summary: sop.purpose,
-  href: `/learn/sops/${sop.slug}`,
-  terms: [sop.scope, sop.frequency, ...sop.tools, ...sop.preconditions, ...sop.steps.flatMap((step) => [step.title, step.action, step.record]), ...sop.verification, ...sop.records, ...sop.limitations].join(" "),
-}));
-
-const searchItems = [...academyItems, ...atlasItems, ...plantHealthItems, ...cultivationItems, ...symptomItems, ...toolItems, ...evidenceItems, ...glossaryItems, ...sopItems];
-const kinds: Array<"All" | SearchKind> = ["All", "Academy course", "Atlas lesson", "Plant health", "Cultivation science", "Symptom differential", "Printable tool", "Evidence source", "Glossary term", "SOP"];
-const examples = ["VPD", "root-zone hypoxia", "edema", "pH meter", "PPFD", "breeding", "yellow lower leaves", "water activity", "HLVd research", "rhizosphere"];
-
-function rankItem(item: SearchItem, rawQuery: string): RankedItem | null {
-  const query = normalize(rawQuery);
-  if (query.length < 2) return null;
-
-  const title = normalize(item.title);
-  const context = normalize(item.context);
-  const summary = normalize(item.summary);
-  const haystack = normalize(`${item.title} ${item.context} ${item.summary} ${item.terms}`);
-  const tokens = query.split(" ").filter(Boolean);
-
-  let score = 0;
-  if (title === query) score += 120;
-  else if (title.startsWith(query)) score += 80;
-  else if (title.includes(query)) score += 55;
-  if (context.includes(query)) score += 30;
-  if (summary.includes(query)) score += 24;
-
-  const matchedTokens = tokens.filter((token) => haystack.includes(token));
-  if (matchedTokens.length === tokens.length) score += 35 + matchedTokens.length * 8;
-  else score += matchedTokens.length * 5;
-
-  return score > 0 ? { ...item, score } : null;
+async function loadPagefind(): Promise<PagefindModule> {
+  const modulePath = "/pagefind/pagefind.js";
+  return (await import(/* webpackIgnore: true */ modulePath)) as PagefindModule;
 }
 
 export function EducationSearch() {
+  const [engine, setEngine] = useState<"checking" | "pagefind" | "legacy">("checking");
+  const [pagefind, setPagefind] = useState<PagefindModule | null>(null);
   const [query, setQuery] = useState("");
   const [kind, setKind] = useState<"All" | SearchKind>("All");
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [busy, setBusy] = useState(false);
 
-  const results = useMemo(() => {
-    const ranked = searchItems
-      .filter((item) => kind === "All" || item.kind === kind)
-      .map((item) => rankItem(item, query))
-      .filter((item): item is RankedItem => item !== null)
-      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
-    return ranked.slice(0, 24);
-  }, [query, kind]);
+  useEffect(() => {
+    let cancelled = false;
+    loadPagefind()
+      .then((module) => {
+        if (cancelled) return;
+        setPagefind(module);
+        setEngine("pagefind");
+      })
+      .catch(() => {
+        if (!cancelled) setEngine("legacy");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const searching = normalize(query).length >= 2;
+
+  useEffect(() => {
+    if (engine !== "pagefind" || !pagefind || !searching) {
+      setResults([]);
+      return;
+    }
+
+    let cancelled = false;
+    const timer = window.setTimeout(async () => {
+      setBusy(true);
+      try {
+        const response = await pagefind.search(query);
+        const loaded = await Promise.all(
+          response.results.slice(0, 72).map(async (result) => {
+            const data = await result.data();
+            const resultKind = inferKind(data.url);
+            return {
+              id: result.id,
+              kind: resultKind,
+              title: data.meta?.title || "Teaching Healthy Cultivation",
+              context: data.meta?.description || contextFor(resultKind, data.url),
+              summary: plainText(data.excerpt || data.meta?.description || ""),
+              href: data.url,
+              score: result.score,
+            } satisfies SearchResult;
+          }),
+        );
+
+        if (!cancelled) {
+          setResults(
+            loaded
+              .filter((result) => result.kind !== "Other")
+              .filter((result) => kind === "All" || result.kind === kind)
+              .slice(0, 24),
+          );
+        }
+      } catch {
+        if (!cancelled) setEngine("legacy");
+      } finally {
+        if (!cancelled) setBusy(false);
+      }
+    }, 120);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [engine, pagefind, query, kind, searching]);
+
+  const resultLabel = useMemo(() => {
+    if (busy) return "Searching…";
+    return `${results.length} result${results.length === 1 ? "" : "s"}`;
+  }, [busy, results.length]);
+
+  if (engine === "legacy") {
+    return (
+      <Suspense fallback={<div className={styles.empty}>Loading education search…</div>}>
+        <LegacyEducationSearch />
+      </Suspense>
+    );
+  }
 
   return (
     <div className={styles.shell}>
@@ -204,7 +207,11 @@ export function EducationSearch() {
         <div>
           <p className="eyebrow">Teaching Healthy Cultivation</p>
           <h1>Search Education</h1>
-          <p>Search Academy courses, Atlas lessons, plant-health references, abiotic disorders, symptom differentials, cultivation science, glossary definitions, SOPs, printable field tools, and evidence sources from one place.</p>
+          <p>
+            Search Academy courses, Atlas lessons, plant-health references, symptom differentials,
+            cultivation science, glossary definitions, SOPs, printable tools, and evidence sources
+            from one place.
+          </p>
         </div>
         <Link href="/learn">Back to Learn</Link>
       </section>
@@ -220,29 +227,48 @@ export function EducationSearch() {
             placeholder="Try root-zone hypoxia, VPD, pH meter, rhizosphere…"
             autoComplete="off"
           />
-          <select aria-label="Filter education search" value={kind} onChange={(event) => setKind(event.target.value as "All" | SearchKind)}>
-            {kinds.map((option) => <option key={option} value={option}>{option}</option>)}
+          <select
+            aria-label="Filter education search"
+            value={kind}
+            onChange={(event) => setKind(event.target.value as "All" | SearchKind)}
+          >
+            {kinds.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
         <div className={styles.examples}>
-          {examples.map((example) => <button type="button" key={example} onClick={() => setQuery(example)}>{example}</button>)}
+          {examples.map((example) => (
+            <button type="button" key={example} onClick={() => setQuery(example)}>
+              {example}
+            </button>
+          ))}
         </div>
       </section>
 
-      <section aria-live="polite">
-        {!searching ? (
-          <div className={styles.empty}>Enter at least two characters to search across {searchItems.length} indexed learning resources.</div>
-        ) : results.length === 0 ? (
-          <div className={styles.empty}>No matches yet. Try a broader course, plant structure, physiology, propagation, nutrition, breeding, symptom, pest, abiotic stress, measurement, SOP, environment, glossary, research, or post-harvest term.</div>
+      <section aria-live="polite" aria-busy={busy}>
+        {engine === "checking" ? (
+          <div className={styles.empty}>Preparing the education search index…</div>
+        ) : !searching ? (
+          <div className={styles.empty}>
+            Enter at least two characters to search the indexed Teaching Healthy Cultivation library.
+          </div>
+        ) : !busy && results.length === 0 ? (
+          <div className={styles.empty}>
+            No matches yet. Try a broader plant structure, physiology, propagation, nutrition,
+            breeding, symptom, pest, measurement, SOP, environment, glossary, or post-harvest term.
+          </div>
         ) : (
           <>
             <header className={styles.resultHeader}>
-              <strong>{results.length} result{results.length === 1 ? "" : "s"}</strong>
-              <span>Best matches first</span>
+              <strong>{resultLabel}</strong>
+              <span>Best indexed matches first</span>
             </header>
             <div className={styles.resultList}>
               {results.map((result) => (
-                <Link className={styles.resultCard} href={result.href} key={`${result.kind}-${result.title}-${result.href}`}>
+                <Link className={styles.resultCard} href={result.href} key={result.id}>
                   <div className={styles.resultMeta}>
                     <strong>{result.kind}</strong>
                     <span>{result.context}</span>
@@ -258,7 +284,8 @@ export function EducationSearch() {
       </section>
 
       <aside className={styles.scope}>
-        <strong>Search is for discovery, not diagnosis.</strong> Symptom terms can surface relevant references, but a search match does not establish a biological cause.
+        <strong>Search is for discovery, not diagnosis.</strong> Symptom terms can surface relevant
+        references, but a search match does not establish a biological cause.
       </aside>
     </div>
   );
