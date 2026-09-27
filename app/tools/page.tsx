@@ -47,6 +47,39 @@ const workflow = [
   },
 ];
 
+const toolSuite = [
+  {
+    group: "Explore",
+    title: "Living Plant Atlas",
+    description: "Explore cannabis anatomy, physiology, growth stages, environmental context, diagnostic patterns, and connected lessons.",
+    href: "/learn/atlas",
+  },
+  {
+    group: "Explore",
+    title: "Terpene Atlas",
+    description: "Explore terpene chemistry, cultivar profiles, evidence context, sensory relationships, and educational reference material.",
+    href: "/learn/terpenes",
+  },
+  {
+    group: "Measure",
+    title: "PPFD canopy mapping",
+    description: "Use the printable PPFD mapping workflow to record a canopy grid, summarize distribution, and document fixture adjustments.",
+    href: "/learn/tools/ppfd-mapping-grid",
+  },
+  {
+    group: "Measure",
+    title: "Temperature, RH & VPD log",
+    description: "Record atmospheric and leaf-temperature context instead of treating a single VPD value as a universal target.",
+    href: "/learn/tools/vpd-environment-log",
+  },
+  {
+    group: "Measure",
+    title: "pH & EC calibration",
+    description: "Keep meter identity, buffers, calibration checks, maintenance, and failures traceable before relying on measurements.",
+    href: "/learn/tools/ph-ec-calibration-log",
+  },
+] as const;
+
 const supportingTools = [
   {
     title: "Printable field tools",
@@ -105,6 +138,27 @@ export default function ToolsPage() {
                 <p>{tool.description}</p>
                 <strong>{tool.action} →</strong>
               </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell section" aria-labelledby="tool-suite">
+        <div className="section-heading">
+          <p className="eyebrow">THC tool suite</p>
+          <h2 id="tool-suite">Explore, measure, diagnose, and record.</h2>
+          <p className="lede">
+            Use the interactive references and field tools as one connected system instead of hunting through separate education pages.
+          </p>
+        </div>
+
+        <div className={styles.suiteGrid}>
+          {toolSuite.map((tool) => (
+            <Link className={styles.suiteCard} href={tool.href} key={tool.href}>
+              <span>{tool.group}</span>
+              <h3>{tool.title}</h3>
+              <p>{tool.description}</p>
+              <strong>Open tool →</strong>
             </Link>
           ))}
         </div>
