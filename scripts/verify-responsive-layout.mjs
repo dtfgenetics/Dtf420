@@ -15,7 +15,7 @@ function read(rel){
 function need(content,re,msg){ if(!re.test(content)) failures.push(msg); }
 
 const globals=read("app/globals.css");
-const mobile=read("app/home-mobile.css");
+const layout=read("app/layout.tsx");
 const docs=read("docs/RESPONSIVE_LAYOUT_STANDARD.md");
 const atlasViewport = read("components/atlas/AtlasInteractiveViewport.module.css");
 const livingAtlas = read("components/atlas/LivingPlantAtlas.module.css");
@@ -130,17 +130,23 @@ for (const [name, re] of forbiddenLegacyBreakpoints) {
 
 need(globals,/--page-gutter\s*:\s*clamp\(/,"globals.css must keep a fluid page gutter token.");
 need(globals,/--touch-target\s*:\s*44px/,"globals.css must keep a 44px touch-target token.");
-need(globals,/@media\s*\(min-width:\s*721px\)\s*and\s*\(max-width:\s*900px\)/,"globals.css must keep the deliberate 721–900px tablet band.");
-need(globals,/@media\s*\(max-width:\s*720px\)/,"globals.css must keep the phone breakpoint.");
+need(globals,/@media\s*\(min-width:\s*701px\)\s*and\s*\(max-width:\s*900px\)/,"globals.css must keep the deliberate 701–900px tablet band.");
+need(globals,/@media\s*\(max-width:\s*700px\)/,"globals.css must keep the canonical phone breakpoint.");
 need(globals,/@media\s*\(max-width:\s*520px\)/,"globals.css must keep the narrow-phone composition breakpoint.");
 need(globals,/minmax\(0\s*,\s*1fr\)/,"globals.css must retain shrink-safe grid columns.");
 need(globals,/min-width\s*:\s*0/,"globals.css must retain min-width:0 overflow protection.");
 need(globals,/overflow-x\s*:\s*auto/,"globals.css must retain local horizontal scrolling.");
 need(globals,/100dvh/,"globals.css must account for dynamic mobile viewport height.");
 
-const smallPhoneBlocks=[globals,mobile].join("\n");
+if (/home-mobile\.css/.test(layout)) {
+  failures.push("Root layout must not load a second global mobile stylesheet; responsive shell rules belong in globals.css.");
+}
+need(globals,/--content-readable\s*:\s*760px/,"globals.css must retain a dedicated readable-content width.");
+need(globals,/--content-workspace\s*:\s*1440px/,"globals.css must retain a wider application workspace width.");
+need(globals,/--space-9\s*:\s*96px/,"globals.css must retain the shared spacing scale.");
+
 need(
-  smallPhoneBlocks,
+  globals,
   /@media\s*\(max-width:\s*520px\)[\s\S]*?\.home-discovery\s*\{[\s\S]*?grid-template-columns\s*:\s*1fr/,
   "Small-phone homepage discovery must collapse to one column."
 );
