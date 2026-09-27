@@ -205,13 +205,6 @@ need(docs,/768\s*[×x]\s*1024/,"Responsive standard must retain the tablet QA ma
 need(docs,/1440\s*[×x]\s*900/,"Responsive standard must retain the desktop QA matrix.");
 need(docs,/844\s*[×x]\s*390/,"Responsive standard must retain the landscape-phone QA case.");
 
-if(failures.length){
-  console.error("Responsive layout verification failed:");
-  failures.forEach(x=>console.error(`- ${x}`));
-  process.exit(1);
-}
-console.log("Responsive layout contract verified.");
-
 const atlasResponsiveFiles = {
   "Atlas lesson": read("app/learn/atlas/[system]/[lesson]/page.module.css"),
   "Atlas interactive lab": read("components/atlas/AtlasInteractiveLab.module.css"),
@@ -228,3 +221,10 @@ for (const [label, source] of Object.entries(atlasResponsiveFiles)) {
 if (/\.caseRail button\s*\{[^}]*min-height:\s*auto/.test(atlasResponsiveFiles["Atlas diagnostic case lab"])) {
   failures.push("Atlas diagnostic case buttons must keep an explicit mobile touch-target height.");
 }
+
+if(failures.length){
+  console.error("Responsive layout verification failed:");
+  failures.forEach(x=>console.error(`- ${x}`));
+  process.exit(1);
+}
+console.log("Responsive layout contract verified.");
