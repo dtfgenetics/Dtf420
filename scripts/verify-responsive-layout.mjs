@@ -211,3 +211,20 @@ if(failures.length){
   process.exit(1);
 }
 console.log("Responsive layout contract verified.");
+
+const atlasResponsiveFiles = {
+  "Atlas lesson": read("app/learn/atlas/[system]/[lesson]/page.module.css"),
+  "Atlas interactive lab": read("components/atlas/AtlasInteractiveLab.module.css"),
+  "Atlas core lab": read("components/atlas/AtlasCoreInteractiveLab.module.css"),
+  "Atlas compare lab": read("components/atlas/AtlasCompareLab.module.css"),
+  "Atlas diagnostic case lab": read("components/atlas/AtlasDiagnosticCaseLab.module.css"),
+  "Atlas review lab": read("components/atlas/AtlasReviewLab.module.css"),
+};
+for (const [label, source] of Object.entries(atlasResponsiveFiles)) {
+  if (/max-width:\s*(?:560|620|820|980)px/.test(source)) {
+    failures.push(`${label} reintroduced a legacy breakpoint outside the shared responsive bands.`);
+  }
+}
+if (/\.caseRail button\s*\{[^}]*min-height:\s*auto/.test(atlasResponsiveFiles["Atlas diagnostic case lab"])) {
+  failures.push("Atlas diagnostic case buttons must keep an explicit mobile touch-target height.");
+}
