@@ -4,13 +4,14 @@ import path from "node:path";
 const root = process.cwd();
 const schemaPath = path.join(root, "lib", "learning", "auth", "schema.ts");
 const serverPath = path.join(root, "lib", "learning", "auth", "server.ts");
+const migrationPath = path.join(root, "db", "migrations", "0002_better_auth_core.sql");
 
 const fail = (message) => {
   console.error(`Better Auth core verification failed: ${message}`);
   process.exitCode = 1;
 };
 
-for (const file of [schemaPath, serverPath]) {
+for (const file of [schemaPath, serverPath, migrationPath]) {
   if (!fs.existsSync(file) || fs.statSync(file).size === 0) {
     fail(`missing ${path.relative(root, file)}`);
   }
@@ -46,6 +47,18 @@ if (fs.existsSync(serverPath)) {
   if (!source.includes("enabled: false")) fail("email/password must remain disabled until explicitly enabled");
   if (/toNextJsHandler|app\/api\/auth/.test(source)) {
     fail("auth API route must not be exposed in the core-schema change");
+  }
+}
+
+if (fs.existsSync(migrationPath)) {
+  const sql = fs.readFileSync(migrationPath, "utf8");
+  for (const table of ["user", "session", "account", "verification"]) {
+    if (!new RegExp(`CREATE TABLE ${table}\\s*\\(`, "i").test(sql)) {
+      fail(`auth migration missing table ${table}`);
+    }
+  }
+  for (const marker of ["uq_auth_user_email", "uq_auth_session_token", "session_userId_idx", "account_userId_idx", "verification_identifier_idx"]) {
+    if (!sql.includes(marker)) fail(`auth migration missing index/constraint ${marker}`);
   }
 }
 
