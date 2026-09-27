@@ -33,6 +33,8 @@ on:
       - deployment/static-overlay.json
       - scripts/verify-static-overlay.mjs
       - scripts/package-static-overlay.mjs
+      - scripts/build-pagefind-index.mjs
+      - scripts/verify-search-index.mjs
       - next.config.ts
       - package.json
       - package-lock.json
