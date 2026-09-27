@@ -1,4 +1,4 @@
-import "server-only";
+import "../server-runtime-only";
 
 import { and, eq } from "drizzle-orm";
 import type {
