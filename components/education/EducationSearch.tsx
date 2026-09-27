@@ -141,10 +141,7 @@ export function EducationSearch() {
   const searching = normalize(query).length >= 2;
 
   useEffect(() => {
-    if (engine !== "pagefind" || !pagefind || !searching) {
-      setResults([]);
-      return;
-    }
+    if (engine !== "pagefind" || !pagefind || !searching) return;
 
     let cancelled = false;
     const timer = window.setTimeout(async () => {
