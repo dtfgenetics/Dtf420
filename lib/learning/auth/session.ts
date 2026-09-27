@@ -1,4 +1,4 @@
-import "server-only";
+import "../server-runtime-only";
 
 import { getLearningAuth } from "./server";
 
