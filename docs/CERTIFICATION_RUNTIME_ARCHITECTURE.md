@@ -4,7 +4,7 @@ Status: approved implementation direction
 
 ## Decision
 
-Use the existing Dtf420 Next.js Node runtime with Hostinger-managed **MySQL** as the authoritative persistence layer for authenticated learner progress, assessment attempts, grading results, credentials, and verification.
+Use a dedicated Dtf420/THC **Node runtime at `learn-api.dtfseeds.com`** with Hostinger-managed **MySQL** as the authoritative persistence layer for authenticated learner progress, assessment attempts, grading results, credentials, and verification. Keep the public WordPress/static-overlay site on `dtfseeds.com`.
 
 Preferred stack:
 - Better Auth for learner identity, sessions, and authorization.
@@ -29,10 +29,16 @@ Required runtime variables:
 
 - DATABASE_URL
 - BETTER_AUTH_SECRET
-- BETTER_AUTH_URL=https://dtfseeds.com
+- BETTER_AUTH_URL=https://learn-api.dtfseeds.com
 - CERTIFICATE_VERIFY_ORIGIN=https://dtfseeds.com
 
-The application should fail closed if credential/assessment routes are invoked without required server configuration. Public education pages must remain available.
+The learning API must fail closed if protected routes are invoked without required server configuration. Public education pages on `dtfseeds.com` must remain available independently of the Node runtime.
+
+## Deployment boundary
+
+Hostinger managed Node apps are deployed as separate websites/domains. While `dtfseeds.com` remains the WordPress/static-overlay production site, the authenticated learning runtime uses the dedicated subdomain `learn-api.dtfseeds.com`. Browser requests from `https://dtfseeds.com` must use credentialed requests and the auth runtime must trust only approved DTF origins. Public credential verification remains on `https://dtfseeds.com/verify/...`.
+
+Do not add `/api/auth` to the static-overlay build unless the root site is migrated to a Node deployment that no longer requires `output: "export"`.
 
 ## Data ownership
 
