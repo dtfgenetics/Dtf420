@@ -152,14 +152,14 @@ export function EducationSearch() {
       try {
         const response = await pagefind.search(query);
         const loaded = await Promise.all(
-          response.results.slice(0, 72).map(async (result) => {
+          response.results.slice(0, 256).map(async (result) => {
             const data = await result.data();
             const resultKind = inferKind(data.url);
             return {
               id: result.id,
               kind: resultKind,
               title: data.meta?.title || "Teaching Healthy Cultivation",
-              context: data.meta?.description || contextFor(resultKind, data.url),
+              context: contextFor(resultKind, data.url),
               summary: plainText(data.excerpt || data.meta?.description || ""),
               href: data.url,
               score: result.score,
