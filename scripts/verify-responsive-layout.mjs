@@ -23,6 +23,9 @@ const terpeneAtlas = read("components/terpenes/TerpeneAtlasExplorer.module.css")
 const terpeneCultivar = read("components/terpenes/TerpeneCultivarBrowser.module.css");
 const atlasInteractive = read("components/atlas/AtlasInteractiveViewport.module.css");
 const livingPlantAtlas = read("components/atlas/LivingPlantAtlas.module.css");
+if (/\.titleBlock p\s*\{[^}]*font-size:\s*0\.4\drem/.test(livingAtlas) || /\.titleBlock > span\s*\{[^}]*font-size:\s*0\.6\drem/.test(livingAtlas)) {
+  failures.push("Living Plant Atlas mobile title copy must remain readable and must not regress to micro-text.");
+}
 if (/100vh/.test(atlasViewport)) {
   failures.push("Atlas interactive fullscreen must use 100dvh so mobile browser chrome cannot clip the viewport.");
 }
