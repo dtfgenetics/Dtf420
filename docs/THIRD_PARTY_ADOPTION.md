@@ -10,7 +10,8 @@ Prefer a maintained package or narrowly adapted documented pattern over copying 
 
 | Problem | Candidate | License | Use |
 | --- | --- | --- | --- |
-| Unified local full-text search | MiniSearch (lucaong/minisearch) | MIT | Courses, encyclopedia, glossary, Atlas, tools, SOPs and troubleshooting search. Prefix/fuzzy search, field boosting and suggestions without a search server. |
+| Static whole-site search | Pagefind (Pagefind/pagefind) | MIT | **Preferred primary search** for the growing THC corpus. Index the generated static HTML after export so courses, encyclopedia pages, glossary, Atlas, SOPs, tools and troubleshooting do not need their source JSON bundled into the search page. Low-bandwidth segmented indexes, ranking, filters/metadata and Web Worker search fit the static-overlay deployment model. |
+| In-memory application search | MiniSearch (lucaong/minisearch) | MIT | Keep as a fallback for small dynamic datasets or app-local search where documents already exist in memory. Do not use it as the primary whole-education index while the search page would need to import the entire content corpus. |
 | Performance/accessibility regression budgets | Lighthouse CI (GoogleChrome/lighthouse-ci) | Apache-2.0 | PR/release regression reporting and performance budgets. Keep this supplemental to deterministic repository checks; it must not replace them. |
 | Authoritative multiplayer rooms | Colyseus (colyseus/colyseus) | MIT | Only for games that truly require server-authoritative realtime rooms, reconnects and state synchronization. Do not create a second authority for a title that already has a canonical backend. |
 | Authentication / authorization | Better Auth (better-auth/better-auth) | MIT | Preferred candidate for new learner identity, sessions, account security and certification authorization work. Evaluate database adapter and migration plan before adoption. |
@@ -27,7 +28,7 @@ Prefer a maintained package or narrowly adapted documented pattern over copying 
 
 ## Next evaluation order
 
-1. MiniSearch for unified THC search.
+1. Pagefind for unified THC search; retain the existing custom search UI and feed it Pagefind results rather than replacing the UI wholesale.
 2. Better Auth + database adapter for learner identity.
 3. Zod for assessment/API/data contracts.
 4. Drizzle after the database target is selected.
