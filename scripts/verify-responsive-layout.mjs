@@ -106,6 +106,13 @@ if (!/\.quizOptions label\s*\{[^}]*min-height:\s*48px/.test(atlasMasteryQuizCss)
 if (!/\.options button\s*\{[^}]*min-height:44px/.test(terpeneChapterQuizCss)) {
   failures.push("Terpene knowledge-check answer buttons must keep a minimum 44px touch target.");
 }
+const terpeneChapterQuizTsx = read("components/terpenes/TerpeneChapterQuiz.tsx");
+if (!/const \[submitted, setSubmitted\]/.test(terpeneChapterQuizTsx) || !/submitted && answeredQuestion/.test(terpeneChapterQuizTsx)) {
+  failures.push("Terpene knowledge check must grade and reveal explanations only after explicit submission.");
+}
+if (/correct so far/.test(terpeneChapterQuizTsx)) {
+  failures.push("Terpene knowledge check must not expose running correctness during an active assessment.");
+}
 if (!/@media\s*\(orientation:\s*landscape\)\s*and\s*\(max-height:\s*560px\)/.test(highIqCss)) {
   failures.push("High IQ must keep a constrained-height landscape layout.");
 }
