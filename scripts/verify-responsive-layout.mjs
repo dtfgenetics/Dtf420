@@ -120,6 +120,11 @@ if (!/@media\s*\(orientation:\s*landscape\)\s*and\s*\(max-height:\s*560px\)/.tes
   failures.push("Strain Showdown must keep a constrained-height landscape layout.");
 }
 
+const toolsPageTsx = read("app/tools/page.tsx");
+for (const requiredHref of ["/learn/atlas", "/learn/terpenes", "/learn/tools/ppfd-mapping-grid", "/learn/tools/vpd-environment-log", "/learn/tools/ph-ec-calibration-log"]) {
+  if (!toolsPageTsx.includes(requiredHref)) failures.push(`Tools hub is missing required connected tool route: ${requiredHref}`);
+}
+
 const routeCss = {
   learn: read("app/learn/page.module.css"),
   tools: read("app/tools/page.module.css"),
