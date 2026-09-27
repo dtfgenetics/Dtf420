@@ -11,7 +11,8 @@ export type LearningRuntimeStatus =
   | { ready: true; missing: []; canonical: true }
   | { ready: false; missing: ProtectedLearningEnvName[]; canonical: boolean };
 
-const CANONICAL_ORIGIN = "https://dtfseeds.com";
+const CANONICAL_AUTH_ORIGIN = "https://learn-api.dtfseeds.com";
+const CANONICAL_PUBLIC_ORIGIN = "https://dtfseeds.com";
 
 function clean(value: string | undefined) {
   return typeof value === "string" ? value.trim() : "";
@@ -25,8 +26,8 @@ export function getLearningRuntimeStatus(
   const authUrl = clean(env.BETTER_AUTH_URL);
   const verifyOrigin = clean(env.CERTIFICATE_VERIFY_ORIGIN);
   const canonical =
-    (!authUrl || authUrl === CANONICAL_ORIGIN) &&
-    (!verifyOrigin || verifyOrigin === CANONICAL_ORIGIN);
+    (!authUrl || authUrl === CANONICAL_AUTH_ORIGIN) &&
+    (!verifyOrigin || verifyOrigin === CANONICAL_PUBLIC_ORIGIN);
 
   if (missing.length === 0 && canonical) {
     return { ready: true, missing: [], canonical: true };
@@ -59,5 +60,6 @@ export function requireLearningRuntime(
 
 export const learningRuntimeContract = {
   requiredEnv: REQUIRED_PROTECTED_ENV,
-  canonicalOrigin: CANONICAL_ORIGIN,
+  canonicalAuthOrigin: CANONICAL_AUTH_ORIGIN,
+  canonicalPublicOrigin: CANONICAL_PUBLIC_ORIGIN,
 } as const;
