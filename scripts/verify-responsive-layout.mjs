@@ -221,6 +221,14 @@ for (const [label, source] of Object.entries(atlasResponsiveFiles)) {
 if (/\.caseRail button\s*\{[^}]*min-height:\s*auto/.test(atlasResponsiveFiles["Atlas diagnostic case lab"])) {
   failures.push("Atlas diagnostic case buttons must keep an explicit mobile touch-target height.");
 }
+const atlasMasteryCss = read("components/atlas/AtlasMastery.module.css");
+if (/max-width:\s*720px/.test(atlasMasteryCss)) failures.push("Atlas mastery UI must use the shared 700px phone breakpoint.");
+if (!/\.options button\s*\{[^}]*min-height:\s*var\(--touch-target\)/.test(atlasMasteryCss)) {
+  failures.push("Atlas knowledge-check answer buttons must retain the shared touch-target floor.");
+}
+if (!/\.breadcrumb a\s*\{[^}]*min-height:\s*var\(--touch-target\)/.test(atlasResponsiveFiles["Atlas lesson"])) {
+  failures.push("Atlas lesson breadcrumb links must retain the shared touch-target floor.");
+}
 
 if(failures.length){
   console.error("Responsive layout verification failed:");
