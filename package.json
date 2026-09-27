@@ -103,7 +103,8 @@
     "verify:search-index": "node scripts/verify-search-index.mjs",
     "build:static-overlay:search": "npm run build:static-overlay && npm run build:search-index",
     "verify:learning-runtime-config": "node scripts/verify-learning-runtime-config.mjs",
-    "verify:learning-persistence-contract": "node scripts/verify-learning-persistence-contract.mjs"
+    "verify:learning-persistence-contract": "node scripts/verify-learning-persistence-contract.mjs",
+    "verify:drizzle-learning-schema": "node scripts/verify-drizzle-learning-schema.mjs"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
