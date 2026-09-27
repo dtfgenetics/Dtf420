@@ -101,7 +101,8 @@
     "verify:route-ownership": "node scripts/verify-route-ownership.mjs",
     "build:search-index": "node scripts/build-pagefind-index.mjs",
     "verify:search-index": "node scripts/verify-search-index.mjs",
-    "build:static-overlay:search": "npm run build:static-overlay && npm run build:search-index"
+    "build:static-overlay:search": "npm run build:static-overlay && npm run build:search-index",
+    "verify:learning-runtime-config": "node scripts/verify-learning-runtime-config.mjs"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
