@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import projects from "@/content/genetics-projects.json";
+import styles from "./genetics.module.css";
 
 export const metadata: Metadata = {
   title: "Genetics",
@@ -17,12 +18,12 @@ export default function GeneticsPage() {
         Permanent breeding records for DTF genetics projects. Open a project to review its parentage, generation history, documented selection direction, related DTF families, and dated milestones where those records are established.
       </p>
 
-      <div className="card-grid" style={{ marginTop: 34 }}>
+      <div className={`card-grid ${styles.recordGrid}`}>
         {projects.map((project) => (
-          <Link className="feature-card" href={`/seeds/${project.slug}`} key={project.slug}>
+          <Link className={`feature-card ${styles.recordCard}`} href={`/seeds/${project.slug}`} key={project.slug}>
             <p className="eyebrow">{project.status}</p>
             <h3>{project.name}</h3>
-            <p><strong>Lineage:</strong> {project.lineage}</p>
+            <p className={styles.lineage}><strong>Lineage:</strong> {project.lineage}</p>
             <p>{project.summary}</p>
             <span>Open breeding record →</span>
           </Link>
