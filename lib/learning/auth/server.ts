@@ -16,7 +16,10 @@ function buildLearningAuth() {
       provider: "mysql",
       schema: authSchema,
     }),
-    trustedOrigins: [process.env.BETTER_AUTH_URL!],
+    trustedOrigins: [
+      process.env.BETTER_AUTH_URL!,
+      process.env.CERTIFICATE_VERIFY_ORIGIN!,
+    ],
     emailAndPassword: {
       enabled: false,
     },
