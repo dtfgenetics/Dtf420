@@ -108,7 +108,8 @@
     "verify:learner-progress-store": "node scripts/verify-learner-progress-store.mjs",
     "verify:better-auth-core": "node scripts/verify-better-auth-core.mjs",
     "start:learning-api": "tsx server/learning-api/server.ts",
-    "verify:learning-api-host": "node scripts/verify-learning-api-host.mjs"
+    "verify:learning-api-host": "node scripts/verify-learning-api-host.mjs",
+    "test:learning-api-smoke": "node scripts/test-learning-api-smoke.mjs"
   },
   "dependencies": {
     "@colyseus/sdk": "0.18.2",
