@@ -1,7 +1,7 @@
 .pageShell {
   display: grid;
-  gap: 1.2rem;
-  padding-bottom: 4rem;
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
 }
 
 .breadcrumb {
@@ -26,17 +26,17 @@
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 1rem;
+  gap: var(--space-4);
   align-items: stretch;
 }
 
 .heroCopy {
   display: grid;
   align-content: start;
-  gap: 1rem;
-  padding: 1.6rem;
+  gap: var(--space-4);
+  padding: var(--space-5);
   border: 1px solid rgba(115, 158, 127, 0.22);
-  border-radius: 22px;
+  border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at 84% 15%, rgba(62, 117, 79, 0.16), transparent 35%),
     rgba(13, 27, 20, 0.92);
@@ -94,9 +94,9 @@
 .lessonsSection,
 .topicIndex,
 .related {
-  padding: 1.6rem;
+  padding: var(--space-5);
   border: 1px solid rgba(115, 158, 127, 0.2);
-  border-radius: 22px;
+  border-radius: var(--radius-lg);
   background: rgba(13, 27, 20, 0.88);
 }
 
@@ -120,8 +120,8 @@
 .goals {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.6rem;
-  margin-top: 1rem;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 .goals article {
@@ -129,8 +129,8 @@
   grid-template-columns: 42px 1fr;
   gap: 0.7rem;
   align-items: start;
-  padding: 0.8rem;
-  border-radius: 14px;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
   background: rgba(102, 159, 119, 0.08);
 }
 
@@ -171,14 +171,14 @@
 .lessons {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin-top: 1rem;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 .lessons article {
   display: grid;
-  min-height: 260px;
-  padding: 1rem;
+  min-height: 230px;
+  padding: var(--space-4);
   border: 1px solid rgba(120, 162, 132, 0.16);
   border-radius: 16px;
   background: linear-gradient(145deg, rgba(28, 52, 38, 0.68), rgba(16, 29, 22, 0.82));
@@ -226,7 +226,7 @@
 .topicIndex {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 1rem;
+  gap: var(--space-4);
   align-items: start;
 }
 
@@ -246,7 +246,7 @@
 
 .related {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .relatedGrid {
@@ -289,9 +289,16 @@
 }
 
 /* Canonical tablet composition band. */
-@media (max-width: 900px) {
-  .hero,
+@media (min-width: 701px) and (max-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  }
+
   .topicIndex {
+    grid-template-columns: 1fr;
+  }
+
+  .lessons {
     grid-template-columns: 1fr;
   }
 
@@ -307,7 +314,7 @@
   .lessonsSection,
   .topicIndex,
   .related {
-    padding: 1.05rem;
+    padding: var(--space-4);
   }
 
   .stats,
@@ -316,6 +323,10 @@
   .relatedGrid {
     grid-template-columns: 1fr;
   }
+
+  .lessons article { min-height: 0; }
+
+  .relatedGrid a { min-height: 72px; }
 
   .lessonsSection header {
     grid-template-columns: 1fr;
