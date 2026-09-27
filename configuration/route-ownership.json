@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "canonicalOrigin": "https://dtfseeds.com",
+  "targetAuthority": "dtfgenetics/Dtf420",
+  "currentProductionAuthority": "dtfgenetics/Thc",
+  "routes": [
+    {
+      "pattern": "/",
+      "family": "home",
+      "currentOwner": "wordpress",
+      "targetOwner": "Dtf420",
+      "deployment": "wordpress",
+      "status": "migration-pending"
+    },
+    {
+      "pattern": "/seeds/**",
+      "family": "genetics",
+      "currentOwner": "wordpress",
+      "targetOwner": "Dtf420",
+      "deployment": "wordpress",
+      "status": "migration-pending"
+    },
+    {
+      "pattern": "/learn/",
+      "family": "education-hub",
+      "currentOwner": "wordpress",
+      "targetOwner": "Dtf420",
+      "deployment": "wordpress",
+      "status": "migration-pending"
+    },
+    {
+      "pattern": "/learn/academy/**",
+      "family": "academy",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/atlas/**",
+      "family": "plant-atlas",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/cultivation-science/**",
+      "family": "encyclopedia",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/glossary/**",
+      "family": "glossary",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/plant-health/**",
+      "family": "plant-health",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/search/**",
+      "family": "search",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/sops/**",
+      "family": "sops",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/sources/**",
+      "family": "sources",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/symptoms/**",
+      "family": "symptoms",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/learn/tools/**",
+      "family": "learning-tools",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/tools/",
+      "family": "tools-hub",
+      "currentOwner": "wordpress",
+      "targetOwner": "Dtf420",
+      "deployment": "wordpress",
+      "status": "migration-pending"
+    },
+    {
+      "pattern": "/games/",
+      "family": "games-hub",
+      "currentOwner": "wordpress",
+      "targetOwner": "Dtf420",
+      "deployment": "wordpress",
+      "status": "migration-pending"
+    },
+    {
+      "pattern": "/games/seed-ascent/**",
+      "family": "seed-ascent",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/community/",
+      "family": "community-hub",
+      "currentOwner": "wordpress",
+      "targetOwner": "Dtf420",
+      "deployment": "wordpress",
+      "status": "migration-pending"
+    },
+    {
+      "pattern": "/community/grow-offs/**",
+      "family": "grow-offs",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
+      "pattern": "/shop/**",
+      "family": "commerce",
+      "currentOwner": "wordpress",
+      "targetOwner": "wordpress",
+      "deployment": "wordpress",
+      "status": "intentionally-external"
+    }
+  ]
+}
