@@ -134,6 +134,14 @@ for (const requiredHref of ["/learn/atlas", "/learn/terpenes", "/learn/tools/ppf
   if (!toolsPageTsx.includes(requiredHref)) failures.push(`Tools hub is missing required connected tool route: ${requiredHref}`);
 }
 
+const geneticsCss = read("app/seeds/genetics.module.css");
+if (!/\.breadcrumb a\s*\{[^}]*min-height:\s*var\(--touch-target\)/.test(geneticsCss)) {
+  failures.push("Genetics breadcrumb links must retain the shared touch-target floor.");
+}
+if (!/\.lineage\s*\{[^}]*overflow-wrap:\s*anywhere/.test(geneticsCss)) {
+  failures.push("Genetics lineage strings must remain overflow-safe on narrow screens.");
+}
+
 const learnToolsCss = read("app/learn/tools/page.module.css");
 if (!/@media\s*\(min-width:\s*701px\)\s*and\s*\(max-width:\s*900px\)[\s\S]*?\.grid\s*\{\s*grid-template-columns:\s*repeat\(2/.test(learnToolsCss)) {
   failures.push("Printable learning tools must retain a deliberate two-column tablet layout.");
