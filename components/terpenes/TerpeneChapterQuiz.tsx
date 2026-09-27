@@ -27,7 +27,7 @@ export function TerpeneChapterQuiz({ quiz }: { quiz: TerpeneQuiz }) {
           <p className="eyebrow">Knowledge check</p>
           <h2>{quiz.title}</h2>
           <p>
-            Answer every question before submitting. Grading and explanations appear only after submission.
+            Answer every question before submitting. Grading and explanations appear only after submission. They do not test unsupported effect claims.
           </p>
         </div>
         <div className={styles.score}>
