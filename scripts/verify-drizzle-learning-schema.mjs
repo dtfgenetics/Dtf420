@@ -52,7 +52,7 @@ if (fs.existsSync(clientPath)) {
   if (!source.includes('import "server-only"')) fail("database client must be server-only");
   if (!source.includes("requireLearningRuntime()")) fail("database pool must fail closed through runtime guard");
   if (!source.includes("mysql.createPool")) fail("query client must use a mysql2 pool");
-  if (!source.includes("drizzle({")) fail("Drizzle client initialization is missing");
+  if (!source.includes("drizzle(getPool(), {")) fail("Stable Drizzle mysql2 client initialization is missing");
   if (/console\.(log|debug|info)\s*\(/.test(source)) fail("database client must not log secrets or connection strings");
 }
 
