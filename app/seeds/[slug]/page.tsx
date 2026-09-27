@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import projects from "@/content/genetics-projects.json";
+import styles from "../genetics.module.css";
 
 function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
@@ -40,7 +41,7 @@ export default async function GeneticsProjectPage({ params }: { params: Promise<
 
   return (
     <section className="shell page-section">
-      <nav aria-label="Breadcrumb" style={{ marginBottom: 28 }}>
+      <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
         <Link href="/">Home</Link> / <Link href="/seeds">Genetics</Link> / <strong>{project.name}</strong>
       </nav>
 
@@ -48,10 +49,10 @@ export default async function GeneticsProjectPage({ params }: { params: Promise<
       <h1>{project.name}</h1>
       <p className="lede">{project.summary}</p>
 
-      <div className="card-grid" style={{ marginTop: 34 }}>
+      <div className={`card-grid ${styles.recordGrid}`}>
         <article className="feature-card">
           <p className="eyebrow">Lineage</p>
-          <h3>{project.lineage}</h3>
+          <h3 className={styles.lineage}>{project.lineage}</h3>
           <p>Parentage is preserved as part of the permanent breeding record rather than being tied only to a current product listing.</p>
         </article>
 
