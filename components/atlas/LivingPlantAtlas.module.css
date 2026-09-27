@@ -778,7 +778,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 700px) {
   .atlasShell {
     gap: 0.65rem;
   }
