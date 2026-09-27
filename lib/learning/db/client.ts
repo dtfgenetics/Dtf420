@@ -1,4 +1,4 @@
-import "server-only";
+import "../server-runtime-only";
 
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql, { type Pool } from "mysql2/promise";
