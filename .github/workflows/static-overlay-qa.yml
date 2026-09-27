@@ -14,6 +14,8 @@ on:
       - deployment/static-overlay.json
       - scripts/verify-static-overlay.mjs
       - scripts/package-static-overlay.mjs
+      - scripts/build-pagefind-index.mjs
+      - scripts/verify-search-index.mjs
       - next.config.ts
       - package.json
       - package-lock.json
@@ -31,6 +33,8 @@ on:
       - deployment/static-overlay.json
       - scripts/verify-static-overlay.mjs
       - scripts/package-static-overlay.mjs
+      - scripts/build-pagefind-index.mjs
+      - scripts/verify-search-index.mjs
       - next.config.ts
       - package.json
       - package-lock.json
@@ -61,6 +65,12 @@ jobs:
 
       - name: Build DTFSeeds static overlay
         run: npm run build:static-overlay
+
+      - name: Build owned education search index
+        run: npm run build:search-index
+
+      - name: Verify generated search index
+        run: npm run verify:search-index
 
       - name: Verify child-route ownership and export
         run: npm run verify:static-overlay
