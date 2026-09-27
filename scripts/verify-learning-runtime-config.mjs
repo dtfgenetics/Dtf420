@@ -1,7 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import vm from "node:vm";
-
 const root = process.cwd();
 const file = path.join(root, "lib", "learning", "runtime-config.ts");
 
@@ -21,6 +19,7 @@ if (!fs.existsSync(file)) {
     "BETTER_AUTH_URL",
     "CERTIFICATE_VERIFY_ORIGIN",
     "LEARNING_RUNTIME_UNAVAILABLE",
+    "https://learn-api.dtfseeds.com",
     "https://dtfseeds.com",
   ]) {
     if (!source.includes(marker)) fail(`required runtime marker missing: ${marker}`);
@@ -41,6 +40,12 @@ if (!fs.existsSync(file)) {
   }
   if (!source.includes("getLearningRuntimeStatus")) {
     fail("runtime must expose a non-secret readiness status");
+  }
+  if (!source.includes("CANONICAL_AUTH_ORIGIN")) {
+    fail("runtime must keep a dedicated canonical auth origin");
+  }
+  if (!source.includes("CANONICAL_PUBLIC_ORIGIN")) {
+    fail("runtime must keep a dedicated canonical public origin");
   }
 }
 
