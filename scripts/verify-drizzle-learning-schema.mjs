@@ -53,6 +53,7 @@ if (fs.existsSync(clientPath)) {
   if (!source.includes("requireLearningRuntime()")) fail("database pool must fail closed through runtime guard");
   if (!source.includes("mysql.createPool")) fail("query client must use a mysql2 pool");
   if (!source.includes("drizzle(getPool(), {")) fail("Stable Drizzle mysql2 client initialization is missing");
+  if (!source.includes('mode: "default"')) fail("Drizzle schema mode must be explicit default MySQL mode");
   if (/console\.(log|debug|info)\s*\(/.test(source)) fail("database client must not log secrets or connection strings");
 }
 
