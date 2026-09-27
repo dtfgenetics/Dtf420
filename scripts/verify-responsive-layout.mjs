@@ -134,6 +134,14 @@ for (const requiredHref of ["/learn/atlas", "/learn/terpenes", "/learn/tools/ppf
   if (!toolsPageTsx.includes(requiredHref)) failures.push(`Tools hub is missing required connected tool route: ${requiredHref}`);
 }
 
+const learnToolsCss = read("app/learn/tools/page.module.css");
+if (!/@media\s*\(min-width:\s*701px\)\s*and\s*\(max-width:\s*900px\)[\s\S]*?\.grid\s*\{\s*grid-template-columns:\s*repeat\(2/.test(learnToolsCss)) {
+  failures.push("Printable learning tools must retain a deliberate two-column tablet layout.");
+}
+if (!/\.relatedLinks a\s*\{[^}]*min-height:\s*var\(--touch-target\)/.test(learnToolsCss)) {
+  failures.push("Printable learning-tool related links must retain the shared touch-target floor.");
+}
+
 const routeCss = {
   learn: read("app/learn/page.module.css"),
   tools: read("app/tools/page.module.css"),
