@@ -43,6 +43,12 @@ if (/\.neighborControls select\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(ter
 if (/\.source a\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(terpeneCultivar)) {
   failures.push("Terpene browser source actions must keep a minimum 44px touch target.");
 }
+if (/max-width:\s*1160px/.test(terpeneAtlas)) {
+  failures.push("Terpene Atlas must use the shared 1120px compact-desktop boundary instead of 1160px.");
+}
+if (/calc\(100% - 28px\)/.test(terpeneAtlas)) {
+  failures.push("Terpene Atlas shell must use the shared page-gutter token instead of a hard-coded 28px width deduction.");
+}
 if (/(?:\.segmented button|\.viewTabs button)[\s\S]{0,180}min-height:\s*(?:3\d|4[0-3])px/.test(terpeneAtlas)) {
   failures.push("Terpene Atlas view controls must keep a minimum 44px touch target.");
 }
