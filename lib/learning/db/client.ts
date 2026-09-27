@@ -23,8 +23,7 @@ function getPool(): Pool {
 }
 
 export function getLearningDb() {
-  return drizzle({
-    client: getPool(),
+  return drizzle(getPool(), {
     schema: learningSchema,
   });
 }
