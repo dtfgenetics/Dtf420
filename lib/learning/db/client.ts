@@ -29,9 +29,11 @@ export function getLearningDb() {
   });
 }
 
-export async function closeLearningDbPoolForTests(): Promise<void> {
+export async function closeLearningDbPool(): Promise<void> {
   if (!pool) return;
   const current = pool;
   pool = undefined;
   await current.end();
 }
+
+export const closeLearningDbPoolForTests = closeLearningDbPool;
