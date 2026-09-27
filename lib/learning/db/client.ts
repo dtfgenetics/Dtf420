@@ -25,6 +25,7 @@ function getPool(): Pool {
 export function getLearningDb() {
   return drizzle(getPool(), {
     schema: learningSchema,
+    mode: "default",
   });
 }
 
