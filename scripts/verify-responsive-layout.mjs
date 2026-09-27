@@ -21,12 +21,22 @@ const atlasViewport = read("components/atlas/AtlasInteractiveViewport.module.css
 const livingAtlas = read("components/atlas/LivingPlantAtlas.module.css");
 const terpeneAtlas = read("components/terpenes/TerpeneAtlasExplorer.module.css");
 const terpeneCultivar = read("components/terpenes/TerpeneCultivarBrowser.module.css");
+const atlasInteractive = read("components/atlas/AtlasInteractiveViewport.module.css");
+const livingPlantAtlas = read("components/atlas/LivingPlantAtlas.module.css");
 if (/100vh/.test(atlasViewport)) {
   failures.push("Atlas interactive fullscreen must use 100dvh so mobile browser chrome cannot clip the viewport.");
 }
 if (/\.layerPanel button\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(atlasViewport)) {
   failures.push("Atlas mobile layer controls must keep a minimum 44px touch target.");
 }
+for (const [label, source, legacy] of [
+  ["Atlas interactive viewport", atlasInteractive, /max-width:\s*(?:620|1240)px/],
+  ["Living Plant Atlas", livingPlantAtlas, /max-width:\s*760px/],
+  ["Terpene cultivar browser", terpeneCultivar, /max-width:\s*(?:620|720|760|980|1050|1180)px/],
+]) {
+  if (legacy.test(source)) failures.push(`${label} reintroduced a legacy responsive breakpoint outside the shared 700/900/1120 bands.`);
+}
+
 if (/\.neighborControls select\s*\{[^}]*min-height:\s*(?:3\d|4[0-3])px/.test(terpeneCultivar)) {
   failures.push("Terpene browser selects must keep a minimum 44px touch target.");
 }
