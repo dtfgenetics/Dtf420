@@ -44,6 +44,7 @@ if (fs.existsSync(serverPath)) {
   if (!source.includes('better-auth/minimal')) fail("auth server should use Better Auth minimal build");
   if (!source.includes('better-auth/adapters/drizzle')) fail("official Better Auth Drizzle adapter import missing");
   if (!source.includes('provider: "mysql"')) fail("auth adapter must remain MySQL");
+  if (!source.includes("CERTIFICATE_VERIFY_ORIGIN")) fail("auth server must trust the public DTF origin");
   if (!source.includes("requireLearningRuntime()")) fail("auth construction must fail closed");
   if (!source.includes("enabled: false")) fail("email/password must remain disabled until explicitly enabled");
   if (/toNextJsHandler|app\/api\/auth/.test(source)) {
