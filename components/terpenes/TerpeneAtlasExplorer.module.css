@@ -865,7 +865,7 @@
   .aromaNode{--radius:-276px}
 }
 
-@media(max-width:1160px){
+@media(max-width:1120px){
   .workspace{
     grid-template-columns:minmax(0,1fr) 350px;
   }
@@ -885,7 +885,7 @@
 
 @media(max-width:900px){
   .shell{
-    width:min(calc(100% - 28px),1480px);
+    width:min(calc(100% - (var(--page-gutter) * 2)),1480px);
     padding-top:28px;
   }
 
@@ -952,13 +952,13 @@
   }
 
   .viewTabs{
-    margin-inline:-14px;
-    padding-inline:14px;
+    margin-inline:calc(var(--page-gutter) * -1);
+    padding-inline:var(--page-gutter);
   }
 
   .wheelPanel{
-    margin-inline:-14px;
-    padding:14px;
+    margin-inline:calc(var(--page-gutter) * -1);
+    padding:var(--space-4);
     border-radius:0;
   }
 
