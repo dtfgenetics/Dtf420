@@ -511,9 +511,9 @@
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 700px) {
   .labShell {
-    padding: 1rem;
+    padding: var(--space-4);
   }
 
   .labHeader {
