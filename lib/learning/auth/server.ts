@@ -1,4 +1,4 @@
-import "server-only";
+import "../server-runtime-only";
 
 import { betterAuth } from "better-auth/minimal";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
