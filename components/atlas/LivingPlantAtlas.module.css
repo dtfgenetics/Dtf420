@@ -780,7 +780,7 @@
 
 @media (max-width: 700px) {
   .atlasShell {
-    gap: 0.65rem;
+    gap: var(--space-3);
   }
 
   .appFrame {
@@ -792,7 +792,7 @@
 
   .leftRail {
     display: grid;
-    grid-template-columns: 70px minmax(0, 1fr);
+    grid-template-columns: 68px minmax(0, 1fr);
     grid-template-rows: auto;
     overflow: hidden;
     border-right: 0;
@@ -801,7 +801,7 @@
   }
 
   .brandMark {
-    min-height: 66px;
+    min-height: 60px;
     border-right: 1px solid var(--atlas-line);
     border-bottom: 0;
   }
@@ -818,14 +818,14 @@
 
   .primaryNav {
     grid-auto-flow: column;
-    grid-auto-columns: minmax(62px, 1fr);
+    grid-auto-columns: minmax(64px, 1fr);
     gap: 0;
     padding: 0;
     overflow-x: auto;
   }
 
   .primaryNav button {
-    min-height: 66px;
+    min-height: 60px;
     border: 0;
     border-right: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 0;
@@ -841,18 +841,18 @@
   }
 
   .centerStage {
-    padding: 0.42rem;
+    padding: var(--space-2);
   }
 
   .titleBlock {
-    top: 0.95rem;
-    left: 0.95rem;
-    max-width: min(76%, 340px);
-    padding: 0.4rem 0.5rem;
+    top: var(--space-4);
+    left: var(--space-4);
+    max-width: min(84%, 360px);
+    padding: var(--space-2) var(--space-3);
   }
 
   .titleBlock p {
-    font-size: 0.46rem;
+    font-size: 0.62rem;
     letter-spacing: 0.14em;
   }
 
@@ -861,9 +861,10 @@
   }
 
   .titleBlock > span {
-    max-width: 265px;
-    margin-top: 0.42rem;
-    font-size: 0.61rem;
+    max-width: 300px;
+    margin-top: var(--space-2);
+    font-size: 0.75rem;
+    line-height: 1.45;
   }
 
   .scopeLine,
@@ -907,16 +908,16 @@
   }
 
   .inspectorTabs button {
-    min-height: 52px;
+    min-height: 56px;
   }
 
   .inspectorBody {
     grid-row: 3;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.8rem;
+    gap: var(--space-3);
     max-height: min(470px, calc(100dvh - 210px));
-    padding: 1rem 1rem 1.3rem;
+    padding: var(--space-4) var(--space-4) var(--space-5);
     overflow-y: auto;
   }
 
@@ -934,7 +935,7 @@
   }
 
   .systemStrip {
-    grid-template-columns: repeat(10, 132px);
+    grid-template-columns: repeat(10, minmax(136px, 1fr));
     border-radius: 13px;
     scroll-snap-type: x proximity;
   }
@@ -946,7 +947,7 @@
 
 @media (max-width: 430px) {
   .primaryNav {
-    grid-auto-columns: 60px;
+    grid-auto-columns: 64px;
   }
 
   .inspectorTabs span {
@@ -958,7 +959,7 @@
   }
 
   .systemStrip {
-    grid-template-columns: repeat(10, 124px);
+    grid-template-columns: repeat(10, 132px);
   }
 }
 
