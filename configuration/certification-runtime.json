@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "runtime": "next-node",
+  "runtime": "next-node-api-subdomain",
   "database": {
     "engine": "mysql",
     "driver": "mysql2",
@@ -9,7 +9,9 @@
   },
   "auth": {
     "provider": "better-auth",
-    "userReferenceField": "auth_user_id"
+    "userReferenceField": "auth_user_id",
+    "runtimeOrigin": "https://learn-api.dtfseeds.com",
+    "publicSiteOrigin": "https://dtfseeds.com"
   },
   "environment": {
     "requiredForProtectedRuntime": [
@@ -19,7 +21,7 @@
       "CERTIFICATE_VERIFY_ORIGIN"
     ],
     "canonicalValues": {
-      "BETTER_AUTH_URL": "https://dtfseeds.com",
+      "BETTER_AUTH_URL": "https://learn-api.dtfseeds.com",
       "CERTIFICATE_VERIFY_ORIGIN": "https://dtfseeds.com"
     }
   },
