@@ -205,6 +205,25 @@ need(docs,/768\s*[×x]\s*1024/,"Responsive standard must retain the tablet QA ma
 need(docs,/1440\s*[×x]\s*900/,"Responsive standard must retain the desktop QA matrix.");
 need(docs,/844\s*[×x]\s*390/,"Responsive standard must retain the landscape-phone QA case.");
 
+const learnResponsiveFiles = {
+  "Atlas landing": read("app/learn/atlas/AtlasPage.module.css"),
+  "Atlas practice": read("app/learn/atlas/practice/page.module.css"),
+  "Glossary": read("app/learn/glossary/page.module.css"),
+  "Plant health": read("app/learn/plant-health/page.module.css"),
+  "Terpene detail": read("app/learn/terpenes/[slug]/page.module.css"),
+  "Terpene chapters": read("app/learn/terpenes/chapters/page.module.css"),
+  "Terpene genetics": read("app/learn/terpenes/genetics/page.module.css"),
+  "Terpene research": read("app/learn/terpenes/research/page.module.css"),
+};
+for (const [label, source] of Object.entries(learnResponsiveFiles)) {
+  if (/max-width:\s*(?:560|600|620|680|720|760|820|850)px/.test(source)) {
+    failures.push(`${label} reintroduced a legacy breakpoint outside the shared 700/900 responsive bands.`);
+  }
+}
+if (/calc\(100% - 28px\)/.test(learnResponsiveFiles["Terpene detail"])) {
+  failures.push("Terpene detail page must use the shared page-gutter token instead of a hard-coded 28px width deduction.");
+}
+
 const atlasResponsiveFiles = {
   "Atlas lesson": read("app/learn/atlas/[system]/[lesson]/page.module.css"),
   "Atlas interactive lab": read("components/atlas/AtlasInteractiveLab.module.css"),
