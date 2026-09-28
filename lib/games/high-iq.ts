@@ -52,15 +52,56 @@ export function buildHighIqDeck(
   const filtered = questions.filter(
     (question) => difficulty === "All" || question.difficulty === difficulty,
   );
-  const random = mulberry32(hashSeed(seed));
-  const shuffled = [...filtered];
+  const limit = Math.max(0, Math.min(count, filtered.length));
+  if (limit === 0) return [];
 
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const target = Math.floor(random() * (index + 1));
-    [shuffled[index], shuffled[target]] = [shuffled[target], shuffled[index]];
+  const random = mulberry32(hashSeed(seed));
+  const byCategory = new Map<string, HighIqQuestion[]>();
+
+  for (const question of filtered) {
+    const bucket = byCategory.get(question.category) ?? [];
+    bucket.push(question);
+    byCategory.set(question.category, bucket);
   }
 
-  return shuffled.slice(0, Math.max(0, Math.min(count, shuffled.length)));
+  const shuffle = <T,>(values: T[]) => {
+    for (let index = values.length - 1; index > 0; index -= 1) {
+      const target = Math.floor(random() * (index + 1));
+      [values[index], values[target]] = [values[target], values[index]];
+    }
+    return values;
+  };
+
+  const categoryOrder = shuffle([...byCategory.keys()]);
+  for (const bucket of byCategory.values()) shuffle(bucket);
+
+  const deck: HighIqQuestion[] = [];
+  let pass = 0;
+
+  while (deck.length < limit) {
+    let addedThisPass = 0;
+
+    for (const category of categoryOrder) {
+      const bucket = byCategory.get(category);
+      const question = bucket?.[pass];
+      if (!question) continue;
+
+      deck.push(question);
+      addedThisPass += 1;
+      if (deck.length >= limit) break;
+    }
+
+    if (addedThisPass === 0) break;
+    pass += 1;
+
+    // Rotate which category starts the next pass so larger decks do not
+    // repeatedly favor the same category when the requested count truncates a pass.
+    if (categoryOrder.length > 1) {
+      categoryOrder.push(categoryOrder.shift()!);
+    }
+  }
+
+  return deck;
 }
 
 export function scoreHighIqAnswer(
