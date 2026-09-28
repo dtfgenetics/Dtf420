@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "dtfgenetics/Dtf420",
+  "status": "merge-candidate",
+  "rule": "No overlapping product area in this repository is canonical unless explicitly promoted by a reviewed cutover.",
+  "lanes": [
+    {
+      "id": "tools-and-atlas",
+      "sourcePrefixes": [
+        "app/tools/",
+        "app/learn/tools/",
+        "app/learn/atlas/",
+        "components/atlas/",
+        "components/terpenes/",
+        "lib/terpenes/",
+        "public/data/terpenes/"
+      ],
+      "canonicalRepository": "dtfgenetics/Tools",
+      "disposition": "review-and-port-unique",
+      "priority": 1,
+      "notes": "Port uniquely useful UI, interactions, datasets, and UX patterns into Tools. Do not preserve as a second canonical implementation."
+    },
+    {
+      "id": "education",
+      "sourcePrefixes": [
+        "app/learn/cultivation-science/",
+        "app/learn/glossary/",
+        "app/learn/plant-health/",
+        "app/learn/sops/",
+        "app/learn/sources/",
+        "app/learn/symptoms/",
+        "components/education/"
+      ],
+      "canonicalRepository": "dtfgenetics/thc-grow-hub",
+      "disposition": "review-and-port-unique",
+      "priority": 2
+    },
+    {
+      "id": "academy-certification",
+      "sourcePrefixes": [
+        "app/learn/academy/",
+        "content/academy-courses.json",
+        "content/academy-coursework.json",
+        "content/academy-resource-catalog.json",
+        "configuration/certification-runtime.json",
+        "db/migrations/0001_learning_certification_domain.sql",
+        "docs/CERTIFICATION_RUNTIME_ARCHITECTURE.md",
+        "scripts/verify-certification-persistence.mjs"
+      ],
+      "canonicalRepository": "dtfgenetics/Thc-learning-courses-",
+      "disposition": "review-and-port-unique",
+      "priority": 2
+    },
+    {
+      "id": "diagnostics",
+      "sourcePrefixes": [
+        "app/tools/grow-doc/",
+        "content/diagnostic-framework.json",
+        "content/symptom-differential-expanded.json",
+        "content/symptom-differential-library.json",
+        "content/atlas-diagnostic-cases.json",
+        "content/atlas-diagnostic-cases-expanded.json"
+      ],
+      "canonicalRepository": "dtfgenetics/Thc-dataset",
+      "disposition": "review-and-port-unique",
+      "priority": 2
+    },
+    {
+      "id": "games",
+      "sourcePrefixes": [
+        "app/games/",
+        "components/game/",
+        "game/",
+        "data/games/",
+        "public/phenoquest/",
+        "public/seed-ascent",
+        "lib/games/"
+      ],
+      "canonicalRepository": "resolve-via-dtfgenetics/Thc:data/project-registry.json",
+      "disposition": "review-and-port-unique",
+      "priority": 3,
+      "notes": "Each game must go to its registered canonical standalone repo or the Thc monorepo-owned game path."
+    }
+  ],
+  "safeRemovalsCompleted": [
+    "deployment/static-overlay.json",
+    "public/data/terpenes/registry/unresolved-identity-sample.json"
+  ]
+}
