@@ -1,5 +1,21 @@
 # DTF Genetics Web Platform
 
+
+## Repository consolidation status
+
+**Status: merge/cutover candidate.** Do not create new canonical implementations of tools, education, certification, diagnostics, or games in this repository. Port unique improvements to the owning canonical repository. This repository may continue to serve controlled future-cutover experiments.
+
+Canonical product ownership:
+
+- Cultivation tools / Plant Atlas / Terpene Atlas: `dtfgenetics/Tools`
+- THC education / encyclopedia: `dtfgenetics/thc-grow-hub`
+- THC Academy certification: `dtfgenetics/Thc-learning-courses-`
+- Grow Doc / diagnostics / diagnostic datasets: `dtfgenetics/Thc-dataset`
+- Production integration and deployment: `dtfgenetics/Thc`
+- Games: the owner recorded by the DTF project registry or the owning standalone game repository
+
+This repo is transitional. Overlapping code here is migration material, not a second source of truth.
+
 Unified Next.js application candidate for the DTF Genetics / Dream the Future web ecosystem intended for a future controlled cutover under `dtfseeds.com`.
 
 ## Current production status
