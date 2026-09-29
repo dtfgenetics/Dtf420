@@ -128,3 +128,38 @@ export function multiplayerStatusLabel(
   if (phase === "finished") return "Finished";
   return "Lobby";
 }
+
+/**
+ * Transport choice stays outside the game rules. Colyseus is preferred for
+ * authoritative simulation/state-sync games; Socket.IO is retained for
+ * event-driven lobby/card/board games that already have stable transports.
+ */
+export type MultiplayerTransportKind = "colyseus" | "socket-io";
+
+export interface MultiplayerTransportCapabilities {
+  readonly kind: MultiplayerTransportKind;
+  readonly authoritativeState: boolean;
+  readonly automaticReconnect: boolean;
+  readonly manualSessionResume: boolean;
+}
+
+export const MULTIPLAYER_TRANSPORT_CAPABILITIES: Readonly<
+  Record<MultiplayerTransportKind, MultiplayerTransportCapabilities>
+> = Object.freeze({
+  colyseus: Object.freeze({
+    kind: "colyseus",
+    authoritativeState: true,
+    automaticReconnect: true,
+    manualSessionResume: true,
+  }),
+  "socket-io": Object.freeze({
+    kind: "socket-io",
+    authoritativeState: true,
+    automaticReconnect: true,
+    manualSessionResume: false,
+  }),
+});
+
+export function transportSupportsManualResume(kind: MultiplayerTransportKind): boolean {
+  return MULTIPLAYER_TRANSPORT_CAPABILITIES[kind].manualSessionResume;
+}
