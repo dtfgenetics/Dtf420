@@ -100,16 +100,28 @@ for (const runtime of gameRuntimeRegistry) {
     fail(`"${runtime.slug}" network protocolVersion must be >= 1 when declared`);
   }
 
-  if (runtime.host === "redirect" && !runtime.canonicalTarget) {
-    fail(`redirect runtime "${runtime.slug}" must declare canonicalTarget`);
+  if (runtime.host === "redirect" && !runtime.canonicalTarget && !runtime.canonicalUrl) {
+    fail(`redirect runtime "${runtime.slug}" must declare canonicalTarget or canonicalUrl`);
   }
 
-  if (runtime.externalCanonicalTarget && runtime.host !== "redirect") {
-    fail(`"${runtime.slug}" externalCanonicalTarget is only valid for redirect runtimes`);
+  if (runtime.canonicalUrl && runtime.host !== "redirect") {
+    fail(`"${runtime.slug}" canonicalUrl is only valid for redirect runtimes`);
   }
 
-  if (runtime.externalCanonicalTarget && !runtime.canonicalSource) {
+  if (runtime.canonicalUrl && !runtime.canonicalSource) {
     fail(`external redirect runtime "${runtime.slug}" must declare canonicalSource ownership`);
+  }
+
+  if (runtime.canonicalUrl) {
+    let parsed;
+    try {
+      parsed = new URL(runtime.canonicalUrl);
+    } catch {
+      fail(`"${runtime.slug}" canonicalUrl is not a valid URL: ${runtime.canonicalUrl}`);
+    }
+    if (parsed && parsed.protocol !== "https:") {
+      fail(`"${runtime.slug}" canonicalUrl must use https`);
+    }
   }
 
   if (runtime.canonicalSource) {
@@ -123,11 +135,11 @@ for (const runtime of gameRuntimeRegistry) {
     }
   }
 
-  if (runtime.canonicalTarget && !runtime.externalCanonicalTarget) {
+  if (runtime.canonicalTarget && !runtime.canonicalUrl) {
     const target = routePath(runtime.canonicalTarget);
     if (!fs.existsSync(target)) {
       fail(
-        `alias "${runtime.slug}" points to missing local canonical route ${runtime.canonicalTarget}; mark it externalCanonicalTarget only when another deployment surface owns the route`,
+        `alias "${runtime.slug}" points to missing local canonical route ${runtime.canonicalTarget}; use canonicalUrl only when another deployment surface owns the route`,
       );
     }
   }
