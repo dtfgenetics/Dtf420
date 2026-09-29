@@ -71,3 +71,45 @@ export function connectionStateAfterDrop(
 ): MultiplayerConnectionState {
   return reconnectEnabled && retriesRemaining > 0 ? "reconnecting" : "disconnected";
 }
+
+export type MultiplayerRoomPhase =
+  | "lobby"
+  | "starting"
+  | "playing"
+  | "finished";
+
+export interface MultiplayerRoomLifecycle {
+  readonly phase: MultiplayerRoomPhase;
+  readonly playerCount: number;
+  readonly minPlayers: number;
+  readonly maxPlayers: number;
+  readonly isHost: boolean;
+}
+
+export function canStartMultiplayerRoom(room: MultiplayerRoomLifecycle): boolean {
+  return (
+    room.phase === "lobby"
+    && room.isHost
+    && room.playerCount >= room.minPlayers
+    && room.playerCount <= room.maxPlayers
+  );
+}
+
+export function roomCapacityRemaining(room: Pick<MultiplayerRoomLifecycle, "playerCount" | "maxPlayers">): number {
+  return Math.max(0, room.maxPlayers - room.playerCount);
+}
+
+export function multiplayerStatusLabel(
+  state: MultiplayerConnectionState,
+  phase: MultiplayerRoomPhase = "lobby",
+): string {
+  if (state === "connecting") return "Connecting…";
+  if (state === "reconnecting") return "Reconnecting…";
+  if (state === "disconnected") return "Disconnected";
+  if (state === "failed") return "Connection failed";
+  if (state !== "connected") return "Offline";
+  if (phase === "starting") return "Starting…";
+  if (phase === "playing") return "Playing";
+  if (phase === "finished") return "Finished";
+  return "Lobby";
+}
