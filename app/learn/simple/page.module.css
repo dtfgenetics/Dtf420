@@ -179,6 +179,25 @@
   line-height: 1.45;
 }
 
+.note {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(116, 173, 130, .12);
+}
+
+.note strong {
+  color: #b7e25d;
+  font-size: 12px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.note p {
+  margin: 5px 0 0;
+  color: #d5ddd4;
+}
+
 .avoid {
   margin-top: 14px;
   padding: 16px 18px;
