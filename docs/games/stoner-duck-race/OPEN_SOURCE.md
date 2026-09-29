@@ -34,9 +34,10 @@ Reference projects may inform algorithms or architecture, but their bundled medi
 ### Colyseus Phaser tutorial
 
 - Source: https://github.com/colyseus/tutorial-phaser
-- Source license: repository/tutorial code should be verified at the exact imported revision before copying.
-- Use: multiplayer interpolation, client prediction, fixed-step networking research.
-- Policy: prefer adapting concepts to the shared DTF simulation rather than importing the tutorial wholesale.
+- License: MIT for source code; CC0 1.0 for the tutorial assets (verified against the repository README during the 2026-09-29 intake review).
+- Use: room lifecycle, client/server separation, state synchronization, interpolation/reconnection research.
+- Intake decision: reference/adapt the architecture only. Do **not** vendor the tutorial project because DTF420 already owns its Next.js + Phaser build and shared multiplayer adapter; copying the whole client/server scaffold would duplicate infrastructure.
+- Policy: game rules stay in the shared DTF deterministic simulation and the server remains authoritative.
 
 ### Phaser3-Road
 
@@ -89,3 +90,13 @@ Before any external source file or asset is committed:
 6. record modifications,
 7. separately verify media licensing,
 8. reject sources with no usable license unless we only study the behavior and independently implement our own solution.
+
+## 2026-09-29 consolidation decision
+
+The portfolio now centralizes endpoint normalization, room-code validation, and bounded Colyseus reconnection behavior in `game/core/network/MultiplayerRuntime.ts`. Stoner Duck Race consumes that adapter instead of owning a second reconnection policy.
+
+The canonical cross-game browser utilities remain in `dtfgenetics/Thc/games/shared-platform` (settings/accessibility, input, audio, replay, deterministic RNG, loading, state machine, validation, experience helpers). DTF420 must not import that repository through an undeclared filesystem path. Cross-repo consolidation must use an explicit synchronized/vendor package with revision and license provenance before replacing the remaining local RNG/input compatibility surfaces.
+
+### External code intake rule
+
+Prefer mature MIT/CC0 building blocks that remove infrastructure we would otherwise maintain. Do not clone entire starters merely to gain boilerplate already provided by Next.js, Phaser, TypeScript, or the DTF shared platform. Any future copied source must record exact upstream revision, SPDX license, imported files, modifications, and required notices in this document before merge.
