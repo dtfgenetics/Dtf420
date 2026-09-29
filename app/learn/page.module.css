@@ -33,7 +33,7 @@
 
 .primaryGrid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -46,6 +46,12 @@
   border: 1px solid #263c2c;
   border-radius: 28px;
   overflow: hidden;
+}
+
+.primaryCardSimple {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(216, 255, 117, 0.16), transparent 14rem),
+    linear-gradient(155deg, #1c341f, #0d1b10 72%);
 }
 
 .primaryCardAcademy {
@@ -68,7 +74,7 @@
 .primaryCard h3 {
   max-width: 520px;
   margin: 0 0 14px;
-  font-size: clamp(34px, 4.5vw, 56px);
+  font-size: clamp(32px, 3.8vw, 52px);
   line-height: 0.98;
   letter-spacing: -0.04em;
 }
