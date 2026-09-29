@@ -85,9 +85,12 @@ assert(aiTarget, "legacy AI must return a legal target while unknown cells remai
 assert(aiDamaged[aiTarget.row][aiTarget.column].shot === "none", "legacy AI must never retarget a fired coordinate");
 
 const page = read("app/games/burn-buds/page.tsx");
+const runtimeRegistry = read("lib/game-runtime-registry.ts");
 const canonicalRoute = "/games/protect-the-plants/";
 
 assert(page.includes('redirect("/games/protect-the-plants/")'), "Burn Buds alias must server-redirect to the canonical multiplayer runtime");
+assert(runtimeRegistry.includes('externalCanonicalTarget: true'), "Burn Buds must explicitly declare that its canonical target is owned by the external production surface");
+assert(runtimeRegistry.includes('runtimePath: "site/public-route-patch/games/protect-the-plants"'), "Burn Buds must preserve the canonical THC production runtime path");
 assert(page.includes(`canonical: "${canonicalRoute}"`), "Burn Buds alias must declare the canonical multiplayer route");
 assert(page.includes("robots:"), "alias route must carry explicit robot metadata");
 assert(page.includes("index: false"), "alias route must stay out of search to avoid duplicate indexing");
