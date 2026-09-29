@@ -88,8 +88,8 @@ const page = read("app/games/burn-buds/page.tsx");
 const runtimeRegistry = read("lib/game-runtime-registry.ts");
 const canonicalRoute = "/games/protect-the-plants/";
 
-assert(page.includes('redirect("/games/protect-the-plants/")'), "Burn Buds alias must server-redirect to the canonical multiplayer runtime");
-assert(runtimeRegistry.includes('externalCanonicalTarget: true'), "Burn Buds must explicitly declare that its canonical target is owned by the external production surface");
+assert(page.includes('redirect("https://dtfseeds.com/games/protect-the-plants/")'), "Burn Buds alias must server-redirect to the absolute canonical production runtime");
+assert(runtimeRegistry.includes('canonicalUrl: "https://dtfseeds.com/games/protect-the-plants/"'), "Burn Buds must explicitly declare the externally owned canonical production URL");
 assert(runtimeRegistry.includes('runtimePath: "site/public-route-patch/games/protect-the-plants"'), "Burn Buds must preserve the canonical THC production runtime path");
 assert(page.includes(`canonical: "${canonicalRoute}"`), "Burn Buds alias must declare the canonical multiplayer route");
 assert(page.includes("robots:"), "alias route must carry explicit robot metadata");
