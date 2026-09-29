@@ -49,6 +49,11 @@ export interface GameRuntimeDefinition {
    * The registry verifier reports a warning when the target is not present.
    */
   readonly canonicalTarget?: `/games/${string}`;
+  /**
+   * Absolute canonical URL when the implementation is owned by another deployed app.
+   * Redirect aliases with this field do not require the canonical route to exist in Dtf420.
+   */
+  readonly canonicalUrl?: `https://${string}`;
   readonly canonicalSource?: {
     readonly repository: `${string}/${string}`;
     readonly sourcePaths: readonly string[];
@@ -289,6 +294,7 @@ export const gameRuntimeRegistry = [
     engine: "html-dom",
     orientation: "landscape",
     canonicalTarget: "/games/protect-the-plants",
+    canonicalUrl: "https://dtfseeds.com/games/protect-the-plants/",
     canonicalSource: {
       repository: "dtfgenetics/Thc",
       sourcePaths: ["games/protect-the-plants"],
