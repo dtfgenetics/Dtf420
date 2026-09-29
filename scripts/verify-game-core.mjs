@@ -4,6 +4,8 @@ import {
   DEFAULT_RECONNECT_POLICY,
   applyColyseusReconnectPolicy,
   normalizeGameServerEndpoint,
+  createFriendlyInviteCode,
+  FRIENDLY_INVITE_ALPHABET,
   normalizeInviteCode,
   normalizeRoomCode,
   connectionStateAfterDrop,
@@ -91,6 +93,14 @@ try {
 assert(endpointRejected, "blank game server endpoints must be rejected");
 assert(normalizeRoomCode(" ABC123 ", "room code") === "ABC123", "room codes must be trimmed");
 assert(normalizeInviteCode(" ab-c_12 ") === "AB-C_12", "invite codes must normalize to a stable shareable format");
+const inviteSamples = [0, 0.25, 0.5, 0.75, 0.999999];
+let inviteSampleIndex = 0;
+const friendlyInvite = createFriendlyInviteCode(6, () => inviteSamples[(inviteSampleIndex++) % inviteSamples.length]);
+assert(friendlyInvite.length === 6, "friendly invite codes must use the requested safe length");
+assert([...friendlyInvite].every((character) => FRIENDLY_INVITE_ALPHABET.includes(character)), "friendly invite codes must only use the ambiguity-resistant alphabet");
+assert(!/[01IO]/.test(friendlyInvite), "friendly invite codes must exclude ambiguous 0/1/I/O characters");
+assert(createFriendlyInviteCode(1, () => 0).length === 4, "friendly invite codes must enforce the minimum safe length");
+assert(createFriendlyInviteCode(99, () => 0).length === 12, "friendly invite codes must enforce the maximum safe length");
 assert(connectionStateAfterDrop(true, 3) === "reconnecting", "recoverable drops must expose reconnecting state");
 assert(connectionStateAfterDrop(true, 0) === "disconnected", "exhausted reconnect attempts must expose disconnected state");
 assert(connectionStateAfterDrop(false, 3) === "disconnected", "disabled reconnect must expose disconnected state");
