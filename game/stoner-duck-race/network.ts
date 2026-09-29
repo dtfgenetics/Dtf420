@@ -1,4 +1,9 @@
 import { Client } from "@colyseus/sdk";
+import {
+  applyColyseusReconnectPolicy,
+  normalizeGameServerEndpoint,
+  normalizeRoomCode,
+} from "../core/network/MultiplayerRuntime";
 import type { DuckInput, RaceModeId, TrackId } from "./types";
 
 const ROOM_NAME = "stoner_duck_race";
@@ -86,12 +91,6 @@ function isForEachCollection(value: unknown): value is ForEachCollection {
   return typeof candidate.forEach === "function";
 }
 
-function normalizeEndpoint(endpoint: string): string {
-  const trimmed = endpoint.trim();
-  if (!trimmed) throw new Error("Duck Race server endpoint is not configured.");
-  return trimmed.replace(/\/$/, "");
-}
-
 function normalizeMode(value: unknown): RaceModeId {
   return value === "rally" || value === "chaos" ? value : "derby";
 }
@@ -148,7 +147,7 @@ function snapshotFromState(state: unknown): DuckRaceRoomSnapshot {
 }
 
 export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise<DuckRaceRoomConnection> {
-  const endpoint = normalizeEndpoint(options.endpoint);
+  const endpoint = normalizeGameServerEndpoint(options.endpoint, "Duck Race server");
   const client = new Client(endpoint);
   const joinOptions = {
     mode: options.mode,
@@ -160,18 +159,15 @@ export async function connectDuckRaceRoom(options: DuckRaceRoomOptions): Promise
     spectator: Boolean(options.spectator),
   };
 
-  if (options.intent === "join" && !options.roomId?.trim()) {
-    throw new Error("Enter a room ID to join an online race.");
-  }
+  const joinRoomId = options.intent === "join"
+    ? normalizeRoomCode(options.roomId, "room ID")
+    : null;
 
   const room = options.intent === "create"
     ? await client.create(ROOM_NAME, joinOptions)
-    : await client.joinById(options.roomId!.trim(), joinOptions);
+    : await client.joinById(joinRoomId!, joinOptions);
 
-  room.reconnection.enabled = true;
-  room.reconnection.maxRetries = 12;
-  room.reconnection.maxDelay = 3_000;
-  room.reconnection.maxEnqueuedMessages = 20;
+  applyColyseusReconnectPolicy(room);
 
   let latest = snapshotFromState(room.state);
   const listeners = new Set<(snapshot: DuckRaceRoomSnapshot) => void>();
