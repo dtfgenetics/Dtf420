@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function BurnBudsPage() {
-  redirect("/games/protect-the-plants/");
+  redirect("https://dtfseeds.com/games/protect-the-plants/");
 }
