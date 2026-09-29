@@ -13,6 +13,15 @@ export const metadata: Metadata = buildEducationMetadata({
 const primaryLearning = [
   {
     number: "01",
+    title: "THC Simple User Guide",
+    description:
+      "Start with the visual beginner path: setup, seeds, seedlings, veg, flower, harvest, dry, cure, pests, and the core habits that keep a first grow understandable.",
+    href: "/learn/simple",
+    action: "Start simple",
+    variant: "simple",
+  },
+  {
+    number: "02",
     title: "THC Academy",
     description:
       "Follow 12 structured courses and 60 connected units when you want a learning sequence instead of searching one topic at a time.",
@@ -21,7 +30,7 @@ const primaryLearning = [
     variant: "academy",
   },
   {
-    number: "02",
+    number: "03",
     title: "Living Plant Atlas",
     description:
       "Explore anatomy, physiology, environment, reproductive biology, trichomes, diagnostics, and whole-plant relationships through connected visual lessons.",
@@ -123,16 +132,16 @@ export default function LearnPage() {
       <section className="shell section" aria-labelledby="learn-start">
         <div className="section-heading">
           <p className="eyebrow">Start here</p>
-          <h2 id="learn-start">Two ways to build real plant knowledge.</h2>
+          <h2 id="learn-start">Start simple, then go as deep as you need.</h2>
           <p className="lede">
-            Use the Academy when you want sequence and structure. Use the Living Plant Atlas when you want to explore systems, relationships, and visual plant science.
+            Use the Simple User Guide for a clear first-grow path. Move into the Academy for structured courses or the Living Plant Atlas for visual plant science and connected systems.
           </p>
         </div>
 
         <div className={styles.primaryGrid}>
           {primaryLearning.map((item) => (
             <Link
-              className={`${styles.primaryCard} ${item.variant === "academy" ? styles.primaryCardAcademy : styles.primaryCardAtlas}`}
+              className={`${styles.primaryCard} ${item.variant === "simple" ? styles.primaryCardSimple : item.variant === "academy" ? styles.primaryCardAcademy : styles.primaryCardAtlas}`}
               href={item.href}
               key={item.href}
             >
