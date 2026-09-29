@@ -104,6 +104,14 @@ for (const runtime of gameRuntimeRegistry) {
     fail(`redirect runtime "${runtime.slug}" must declare canonicalTarget`);
   }
 
+  if (runtime.externalCanonicalTarget && runtime.host !== "redirect") {
+    fail(`"${runtime.slug}" externalCanonicalTarget is only valid for redirect runtimes`);
+  }
+
+  if (runtime.externalCanonicalTarget && !runtime.canonicalSource) {
+    fail(`external redirect runtime "${runtime.slug}" must declare canonicalSource ownership`);
+  }
+
   if (runtime.canonicalSource) {
     if (!runtime.canonicalSource.repository.includes("/")) {
       fail(`"${runtime.slug}" canonical source repository must use owner/name form`);
@@ -115,11 +123,11 @@ for (const runtime of gameRuntimeRegistry) {
     }
   }
 
-  if (runtime.canonicalTarget && !runtime.canonicalSource) {
+  if (runtime.canonicalTarget && !runtime.externalCanonicalTarget) {
     const target = routePath(runtime.canonicalTarget);
     if (!fs.existsSync(target)) {
-      warn(
-        `alias "${runtime.slug}" points to missing local canonical route ${runtime.canonicalTarget}`,
+      fail(
+        `alias "${runtime.slug}" points to missing local canonical route ${runtime.canonicalTarget}; mark it externalCanonicalTarget only when another deployment surface owns the route`,
       );
     }
   }
