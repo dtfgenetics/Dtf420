@@ -1,5 +1,11 @@
 import { DeterministicRng } from "../game/core/random/DeterministicRng.ts";
 import { clampAxis, digitalAxis, horizontalAxis, mergeActionSources } from "../game/core/input/GameActions.ts";
+import {
+  DEFAULT_RECONNECT_POLICY,
+  applyColyseusReconnectPolicy,
+  normalizeGameServerEndpoint,
+  normalizeRoomCode,
+} from "../game/core/network/MultiplayerRuntime.ts";
 
 const errors = [];
 
@@ -70,10 +76,34 @@ assert(mergedActions.BOOST === true, "active action in any source must win over 
 assert(mergedActions.PRIMARY === true, "merged actions must include source-specific actions");
 assert(horizontalAxis(mergeActionSources({ MOVE_LEFT: true }, { MOVE_RIGHT: true })) === 0, "opposing sources must cancel on horizontal axis");
 
+assert(normalizeGameServerEndpoint(" https://games.example.test/ ", "Test") === "https://games.example.test", "game server endpoint must trim whitespace and trailing slashes");
+let endpointRejected = false;
+try {
+  normalizeGameServerEndpoint("   ", "Test");
+} catch {
+  endpointRejected = true;
+}
+assert(endpointRejected, "blank game server endpoints must be rejected");
+assert(normalizeRoomCode(" ABC123 ", "room code") === "ABC123", "room codes must be trimmed");
+
+const mockRoom = {
+  reconnection: {
+    enabled: false,
+    maxRetries: 0,
+    maxDelay: 0,
+    maxEnqueuedMessages: 0,
+  },
+};
+applyColyseusReconnectPolicy(mockRoom);
+assert(mockRoom.reconnection.enabled === true, "shared reconnect policy must enable reconnection");
+assert(mockRoom.reconnection.maxRetries === DEFAULT_RECONNECT_POLICY.maxRetries, "shared reconnect retries must stay centralized");
+assert(mockRoom.reconnection.maxDelay === DEFAULT_RECONNECT_POLICY.maxDelayMs, "shared reconnect delay must stay centralized");
+assert(mockRoom.reconnection.maxEnqueuedMessages === DEFAULT_RECONNECT_POLICY.maxEnqueuedMessages, "shared queued-message limit must stay centralized");
+
 if (errors.length) {
   console.error("Game core verification failed:");
   for (const error of errors) console.error(` - ${error}`);
   process.exit(1);
 }
 
-console.log("Game core verified: deterministic RNG plus shared named input/action contracts passed.");
+console.log("Game core verified: deterministic RNG, named input/actions, and shared multiplayer runtime contracts passed.");
