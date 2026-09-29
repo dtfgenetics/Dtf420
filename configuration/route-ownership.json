@@ -133,6 +133,14 @@
       "status": "overlay-live"
     },
     {
+      "pattern": "/games/stoner-duck-race/**",
+      "family": "stoner-duck-race",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
       "pattern": "/community/",
       "family": "community-hub",
       "currentOwner": "wordpress",
