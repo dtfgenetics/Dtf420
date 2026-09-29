@@ -56,6 +56,21 @@ export interface RoomInvite {
   readonly playerName?: string;
 }
 
+export const FRIENDLY_INVITE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+export function createFriendlyInviteCode(
+  length = 6,
+  random: () => number = Math.random,
+): string {
+  const safeLength = Math.max(4, Math.min(12, Math.floor(length)));
+  let code = "";
+  for (let index = 0; index < safeLength; index += 1) {
+    const sample = Math.max(0, Math.min(0.999999999999, random()));
+    code += FRIENDLY_INVITE_ALPHABET[Math.floor(sample * FRIENDLY_INVITE_ALPHABET.length)];
+  }
+  return code;
+}
+
 export function normalizeInviteCode(value: string | undefined, label = "room code"): string {
   const normalized = normalizeRoomCode(value, label)
     .toUpperCase()
