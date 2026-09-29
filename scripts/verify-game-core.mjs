@@ -7,6 +7,9 @@ import {
   normalizeInviteCode,
   normalizeRoomCode,
   connectionStateAfterDrop,
+  canStartMultiplayerRoom,
+  roomCapacityRemaining,
+  multiplayerStatusLabel,
 } from "../game/core/network/MultiplayerRuntime.ts";
 
 const errors = [];
@@ -92,6 +95,16 @@ assert(connectionStateAfterDrop(true, 3) === "reconnecting", "recoverable drops 
 assert(connectionStateAfterDrop(true, 0) === "disconnected", "exhausted reconnect attempts must expose disconnected state");
 assert(connectionStateAfterDrop(false, 3) === "disconnected", "disabled reconnect must expose disconnected state");
 
+const hostLobby = { phase: "lobby", playerCount: 2, minPlayers: 2, maxPlayers: 8, isHost: true };
+assert(canStartMultiplayerRoom(hostLobby) === true, "host must be able to start a full-enough lobby");
+assert(canStartMultiplayerRoom({ ...hostLobby, isHost: false }) === false, "non-host must not start a shared room");
+assert(canStartMultiplayerRoom({ ...hostLobby, playerCount: 1 }) === false, "rooms below minimum player count must not start");
+assert(canStartMultiplayerRoom({ ...hostLobby, phase: "playing" }) === false, "active rooms must not re-enter start transition");
+assert(roomCapacityRemaining(hostLobby) === 6, "shared room capacity must report remaining seats");
+assert(roomCapacityRemaining({ playerCount: 9, maxPlayers: 8 }) === 0, "room capacity must never become negative");
+assert(multiplayerStatusLabel("reconnecting") === "Reconnecting…", "shared reconnecting UI label must remain stable");
+assert(multiplayerStatusLabel("connected", "playing") === "Playing", "connected room phase must drive shared status label");
+
 const mockRoom = {
   reconnection: {
     enabled: false,
@@ -112,4 +125,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("Game core verified: deterministic RNG, named input/actions, and shared multiplayer runtime contracts passed.");
+console.log("Game core verified: deterministic RNG, named input/actions, shared connection/reconnect, invite, and room-lifecycle contracts passed.");
