@@ -40,6 +40,7 @@ const assets = readFileSync(resolve(root, "game/stoner-duck-race/assets.ts"), "u
 const tracks = readFileSync(resolve(root, "game/stoner-duck-race/tracks.ts"), "utf8");
 const simulation = readFileSync(resolve(root, "game/stoner-duck-race/simulation.ts"), "utf8");
 const network = readFileSync(resolve(root, "game/stoner-duck-race/network.ts"), "utf8");
+const multiplayerRuntime = readFileSync(resolve(root, "game/core/network/MultiplayerRuntime.ts"), "utf8");
 const progression = readFileSync(resolve(root, "game/stoner-duck-race/progression.ts"), "utf8");
 const main = readFileSync(resolve(root, "game/stoner-duck-race/main.ts"), "utf8");
 const scene = readFileSync(resolve(root, "game/stoner-duck-race/scenes/RaceScene.ts"), "utf8");
@@ -162,7 +163,8 @@ if (!serverIndex.includes('app.get("/healthz"')) failures.push("multiplayer serv
 if (!network.includes("client.create") || !network.includes("client.joinById")) failures.push("room adapter must support create and join-by-id");
 if (!network.includes("room.onStateChange")) failures.push("room adapter must subscribe to authoritative state");
 if (!network.includes("characterId")) failures.push("room adapter must send selected character identity");
-if (!network.includes("room.reconnection.enabled = true") || !network.includes("maxRetries") || !network.includes("maxEnqueuedMessages")) failures.push("browser room adapter must configure bounded automatic reconnection");
+if (!network.includes("applyColyseusReconnectPolicy(room)")) failures.push("browser room adapter must consume the shared bounded reconnect policy");
+if (!multiplayerRuntime.includes("maxRetries: 12") || !multiplayerRuntime.includes("maxDelayMs: 3_000") || !multiplayerRuntime.includes("maxEnqueuedMessages: 20")) failures.push("shared multiplayer runtime must preserve the bounded Duck Race reconnect policy");
 if (!server.includes('this.onMessage("start-race"')) failures.push("server must gate race start through host action");
 if (!server.includes("hostSessionId")) failures.push("server must track room host ownership");
 if (!server.includes("trackId")) failures.push("server must synchronize selected track");
