@@ -4,7 +4,9 @@ import {
   DEFAULT_RECONNECT_POLICY,
   applyColyseusReconnectPolicy,
   normalizeGameServerEndpoint,
+  normalizeInviteCode,
   normalizeRoomCode,
+  connectionStateAfterDrop,
 } from "../game/core/network/MultiplayerRuntime.ts";
 
 const errors = [];
@@ -85,6 +87,10 @@ try {
 }
 assert(endpointRejected, "blank game server endpoints must be rejected");
 assert(normalizeRoomCode(" ABC123 ", "room code") === "ABC123", "room codes must be trimmed");
+assert(normalizeInviteCode(" ab-c_12 ") === "AB-C_12", "invite codes must normalize to a stable shareable format");
+assert(connectionStateAfterDrop(true, 3) === "reconnecting", "recoverable drops must expose reconnecting state");
+assert(connectionStateAfterDrop(true, 0) === "disconnected", "exhausted reconnect attempts must expose disconnected state");
+assert(connectionStateAfterDrop(false, 3) === "disconnected", "disabled reconnect must expose disconnected state");
 
 const mockRoom = {
   reconnection: {
