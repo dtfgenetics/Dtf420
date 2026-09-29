@@ -42,3 +42,32 @@ export function applyColyseusReconnectPolicy(
   room.reconnection.maxDelay = Math.max(0, Math.floor(policy.maxDelayMs));
   room.reconnection.maxEnqueuedMessages = Math.max(0, Math.floor(policy.maxEnqueuedMessages));
 }
+
+export type MultiplayerConnectionState =
+  | "idle"
+  | "connecting"
+  | "connected"
+  | "reconnecting"
+  | "disconnected"
+  | "failed";
+
+export interface RoomInvite {
+  readonly roomCode: string;
+  readonly playerName?: string;
+}
+
+export function normalizeInviteCode(value: string | undefined, label = "room code"): string {
+  const normalized = normalizeRoomCode(value, label)
+    .toUpperCase()
+    .replace(/[^A-Z0-9_-]/g, "");
+  if (!normalized) throw new Error(`Enter a valid ${label}.`);
+  if (normalized.length > 64) throw new Error(`${label} is too long.`);
+  return normalized;
+}
+
+export function connectionStateAfterDrop(
+  reconnectEnabled: boolean,
+  retriesRemaining: number,
+): MultiplayerConnectionState {
+  return reconnectEnabled && retriesRemaining > 0 ? "reconnecting" : "disconnected";
+}
