@@ -47,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     item("/", 1, "weekly"),
     item("/seeds", 0.95, "weekly"),
     item("/learn", 0.95, "weekly"),
+    item("/learn/simple", 0.93, "weekly"),
     item("/learn/academy", 0.92, "weekly"),
     item("/learn/search", 0.85, "weekly"),
     item("/learn/glossary", 0.84, "weekly"),
