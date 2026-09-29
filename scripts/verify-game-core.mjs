@@ -12,6 +12,8 @@ import {
   canStartMultiplayerRoom,
   roomCapacityRemaining,
   multiplayerStatusLabel,
+  MULTIPLAYER_TRANSPORT_CAPABILITIES,
+  transportSupportsManualResume,
 } from "../game/core/network/MultiplayerRuntime.ts";
 
 const errors = [];
@@ -114,6 +116,10 @@ assert(roomCapacityRemaining(hostLobby) === 6, "shared room capacity must report
 assert(roomCapacityRemaining({ playerCount: 9, maxPlayers: 8 }) === 0, "room capacity must never become negative");
 assert(multiplayerStatusLabel("reconnecting") === "Reconnecting…", "shared reconnecting UI label must remain stable");
 assert(multiplayerStatusLabel("connected", "playing") === "Playing", "connected room phase must drive shared status label");
+assert(MULTIPLAYER_TRANSPORT_CAPABILITIES.colyseus.authoritativeState === true, "Colyseus adapter must remain server-authoritative");
+assert(MULTIPLAYER_TRANSPORT_CAPABILITIES["socket-io"].authoritativeState === true, "Socket.IO adapter contract must remain server-authoritative");
+assert(transportSupportsManualResume("colyseus") === true, "Colyseus must expose reload/session resume capability");
+assert(transportSupportsManualResume("socket-io") === false, "Socket.IO manual resume must not be claimed until a DTF session-token adapter implements it");
 
 const mockRoom = {
   reconnection: {
