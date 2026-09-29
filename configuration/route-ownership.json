@@ -77,6 +77,14 @@
       "status": "overlay-live"
     },
     {
+      "pattern": "/learn/simple/**",
+      "family": "simple-user-guide",
+      "currentOwner": "Dtf420",
+      "targetOwner": "Dtf420",
+      "deployment": "static-overlay",
+      "status": "overlay-live"
+    },
+    {
       "pattern": "/learn/sops/**",
       "family": "sops",
       "currentOwner": "Dtf420",
