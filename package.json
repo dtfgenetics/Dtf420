@@ -110,6 +110,7 @@
     "start:learning-api": "tsx server/learning-api/server.ts",
     "verify:learning-api-host": "node scripts/verify-learning-api-host.mjs",
     "test:learning-api-smoke": "node scripts/test-learning-api-smoke.mjs",
+    "verify:learning-session-endpoint": "node scripts/verify-learning-session-endpoint.mjs",
     "verify:consolidation": "node scripts/validate-consolidation-boundaries.mjs"
   },
   "dependencies": {
