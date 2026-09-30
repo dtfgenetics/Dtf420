@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./EducationSearch.module.css";
 
 type SearchKind =
@@ -44,10 +44,6 @@ type SearchResult = {
   href: string;
   score: number;
 };
-
-const LegacyEducationSearch = lazy(() =>
-  import("./EducationSearchLegacy").then((module) => ({ default: module.EducationSearchLegacy })),
-);
 
 const kinds: Array<"All" | SearchKind> = [
   "All",
@@ -115,7 +111,7 @@ async function loadPagefind(): Promise<PagefindModule> {
 }
 
 export function EducationSearch() {
-  const [engine, setEngine] = useState<"checking" | "pagefind" | "legacy">("checking");
+  const [engine, setEngine] = useState<"checking" | "pagefind" | "unavailable">("checking");
   const [pagefind, setPagefind] = useState<PagefindModule | null>(null);
   const [query, setQuery] = useState("");
   const [kind, setKind] = useState<"All" | SearchKind>("All");
@@ -131,7 +127,7 @@ export function EducationSearch() {
         setEngine("pagefind");
       })
       .catch(() => {
-        if (!cancelled) setEngine("legacy");
+        if (!cancelled) setEngine("unavailable");
       });
     return () => {
       cancelled = true;
@@ -173,7 +169,7 @@ export function EducationSearch() {
           );
         }
       } catch {
-        if (!cancelled) setEngine("legacy");
+        if (!cancelled) setEngine("unavailable");
       } finally {
         if (!cancelled) setBusy(false);
       }
@@ -189,14 +185,6 @@ export function EducationSearch() {
     if (busy) return "Searching…";
     return `${results.length} result${results.length === 1 ? "" : "s"}`;
   }, [busy, results.length]);
-
-  if (engine === "legacy") {
-    return (
-      <Suspense fallback={<div className={styles.empty}>Loading education search…</div>}>
-        <LegacyEducationSearch />
-      </Suspense>
-    );
-  }
 
   return (
     <div className={styles.shell}>
@@ -248,6 +236,11 @@ export function EducationSearch() {
       <section aria-live="polite" aria-busy={busy}>
         {engine === "checking" ? (
           <div className={styles.empty}>Preparing the education search index…</div>
+        ) : engine === "unavailable" ? (
+          <div className={styles.empty}>
+            The education search index is unavailable. Return to the Learn hub and browse the
+            published learning sections while the index is repaired.
+          </div>
         ) : !searching ? (
           <div className={styles.empty}>
             Enter at least two characters to search the indexed Teaching Healthy Cultivation library.

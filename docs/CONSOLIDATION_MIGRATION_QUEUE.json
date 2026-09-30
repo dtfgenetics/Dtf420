@@ -85,6 +85,7 @@
   "safeRemovalsCompleted": [
     "deployment/static-overlay.json",
     "public/data/terpenes/registry/unresolved-identity-sample.json",
-    "legacy/atlas-static/"
+    "legacy/atlas-static/",
+    "components/education/EducationSearchLegacy.tsx"
   ]
 }
