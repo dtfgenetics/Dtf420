@@ -15,7 +15,7 @@ if (!fs.existsSync(file) || fs.statSync(file).size === 0) {
   const source = fs.readFileSync(file, "utf8");
 
   for (const marker of [
-    'import "server-only"',
+    'import "../server-runtime-only"',
     "findLearnerByAuthUserId",
     "createLearnerProfile",
     "getCourseProgress",
