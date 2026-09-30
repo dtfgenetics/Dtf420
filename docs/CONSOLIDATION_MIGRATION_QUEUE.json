@@ -86,6 +86,7 @@
     "deployment/static-overlay.json",
     "public/data/terpenes/registry/unresolved-identity-sample.json",
     "legacy/atlas-static/",
-    "components/education/EducationSearchLegacy.tsx"
+    "components/education/EducationSearchLegacy.tsx",
+    "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md"
   ]
 }
