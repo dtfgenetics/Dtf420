@@ -18,6 +18,25 @@ if (manifest.canonicalOrigin !== "https://dtfseeds.com") {
   throw new Error(`Wrong canonical origin: ${manifest.canonicalOrigin}`);
 }
 
+if (manifest.routePrefixes.includes("learn/search")) {
+  throw new Error("learn/search is WordPress-owned and must not be staged by Dtf420.");
+}
+if (!manifest.wordpressOwnedRoutes.includes("/learn/search/")) {
+  throw new Error("WordPress-owned route list must include /learn/search/.");
+}
+const academyCompatibility = (manifest.legacyCompatibilityRoutes || []).find((item) => item.prefix === "learn/academy");
+if (!academyCompatibility
+    || academyCompatibility.canonicalReplacement !== "/courses/"
+    || academyCompatibility.structuredLearningReplacement !== "/learn/learning-hub/") {
+  throw new Error("learn/academy must remain an explicit compatibility route pointing to Courses and Learning Hub.");
+}
+if (manifest.routePrefixes.includes("games/stoner-duck-race")) {
+  throw new Error("Stoner Duck Race is deferred and must not be staged in the production overlay.");
+}
+if (!(manifest.deferredRoutes || []).some((item) => item.prefix === "games/stoner-duck-race")) {
+  throw new Error("Stoner Duck Race deferral metadata is missing.");
+}
+
 function slugify(value) {
   return value
     .toLowerCase()
