@@ -1,5 +1,6 @@
 import "../server-runtime-only";
 
+import { randomBytes } from "node:crypto";
 import { and, eq } from "drizzle-orm";
 import type {
   CourseProgressRecord,
@@ -120,4 +121,34 @@ export async function upsertCourseProgress(
   );
   if (!saved) throw new Error("Course progress upsert did not produce a readable record.");
   return saved;
+}
+
+
+export async function ensureLearnerProfile(
+  authUserId: string,
+  displayName: string,
+): Promise<LearnerProfileRecord> {
+  const normalizedName = displayName.trim() || "Learner";
+  const now = new Date();
+  const db = getLearningDb();
+
+  await db
+    .insert(learnerProfiles)
+    .values({
+      id: randomBytes(16).toString("hex"),
+      authUserId,
+      displayName: normalizedName,
+      createdAt: now,
+      updatedAt: now,
+    })
+    .onDuplicateKeyUpdate({
+      set: {
+        displayName: normalizedName,
+        updatedAt: now,
+      },
+    });
+
+  const learner = await findLearnerByAuthUserId(authUserId);
+  if (!learner) throw new Error("Learner profile upsert did not produce a readable record.");
+  return learner;
 }
