@@ -69,12 +69,12 @@
       "status": "overlay-live"
     },
     {
-      "pattern": "/learn/search/**",
+      "pattern": "/learn/search/",
       "family": "search",
-      "currentOwner": "Dtf420",
-      "targetOwner": "Dtf420",
-      "deployment": "static-overlay",
-      "status": "overlay-live"
+      "currentOwner": "wordpress",
+      "targetOwner": "wordpress",
+      "deployment": "wordpress",
+      "status": "intentionally-external"
     },
     {
       "pattern": "/learn/sops/**",
