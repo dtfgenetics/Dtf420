@@ -268,7 +268,7 @@
   function updateMoving(){
     for(const p of movingPlatforms){
       const ox=p.x,oy=p.y;p.phase+=p.speed*.022;const d=Math.sin(p.phase)*p.range;
-      p.axis==='x'?p.x=p.startX+d:p.y=p.startY+d;p.dx=p.x-ox;p.dy=p.y-oy;
+      if(p.axis==='x')p.x=p.startX+d;else p.y=p.startY+d;p.dx=p.x-ox;p.dy=p.y-oy;
     }
   }
 

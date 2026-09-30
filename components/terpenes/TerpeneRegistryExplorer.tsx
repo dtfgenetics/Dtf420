@@ -172,7 +172,7 @@ export function TerpeneRegistryExplorer() {
   }, [failedFamilies, family, familyCache, manifest, status]);
 
   const familyShards = manifest?.shards.filter((shard) => shard.family === family) ?? [];
-  const records = familyCache[family] ?? [];
+  const records = useMemo(() => familyCache[family] ?? [], [family, familyCache]);
   const familyState: "idle" | "loading" | "ready" | "unavailable" =
     status !== "ready"
       ? "idle"

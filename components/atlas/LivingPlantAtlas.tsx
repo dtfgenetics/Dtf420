@@ -18,7 +18,6 @@ type AtlasSection = (typeof atlasSections)[number];
 type PanelTab = "info" | "micro" | "data" | "notes";
 type SystemState = "notStarted" | "inProgress" | "complete" | "mastered";
 
-const lessonCount = learningModules.reduce((total, module) => total + module.lessons.length, 0);
 
 function slugify(value: string) {
   return value.toLowerCase().replaceAll("&", "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");

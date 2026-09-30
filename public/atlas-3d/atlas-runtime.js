@@ -342,7 +342,6 @@ export function startAtlasRuntime(THREE, OrbitControls) {
   const pointer = new THREE.Vector2();
   let pointerDown = null;
   let activeEntityId = "trichomes_resin";
-  let activeLayer = "overview";
   let lightOn = true;
   let flyFrames = 0;
   const cameraGoal = new THREE.Vector3();
@@ -365,7 +364,6 @@ export function startAtlasRuntime(THREE, OrbitControls) {
   }
 
   function updateLayerVisibility(layer) {
-    activeLayer = layer;
     anatomyGroup.visible = layer === "anatomy" || layer === "physiology" || layer === "micro";
     physiologyGroup.visible = layer === "physiology";
     microGroup.visible = layer === "micro";

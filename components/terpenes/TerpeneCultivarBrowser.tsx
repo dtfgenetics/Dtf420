@@ -294,12 +294,13 @@ export function TerpeneCultivarBrowser({ sourceName, sourceUrl }: Props) {
     }
   }, [compareKey, failedKeys, manifest, manifestState, primaryKey, shardCache]);
 
-  const primaryRecords = primaryKey ? shardCache[primaryKey] ?? [] : [];
-  const compareRecords = compareKey ? shardCache[compareKey] ?? [] : [];
-  const matches = useMemo(() => matchesCultivar(primaryRecords, query), [primaryRecords, query]);
+  const matches = useMemo(
+    () => matchesCultivar(primaryKey ? shardCache[primaryKey] ?? [] : [], query),
+    [primaryKey, query, shardCache],
+  );
   const compareMatches = useMemo(
-    () => matchesCultivar(compareRecords, compareQuery),
-    [compareQuery, compareRecords],
+    () => matchesCultivar(compareKey ? shardCache[compareKey] ?? [] : [], compareQuery),
+    [compareKey, compareQuery, shardCache],
   );
 
   const allCached = useMemo(() => Object.values(shardCache).flat(), [shardCache]);
