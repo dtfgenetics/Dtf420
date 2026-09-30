@@ -10,7 +10,19 @@ export const metadata: Metadata = buildEducationMetadata({
   path: "/learn/simple",
 });
 
-const steps = [
+type SimpleStep = {
+  slug: string;
+  number: string;
+  title: string;
+  intro: string;
+  points: string[];
+  avoid?: string;
+  noteLabel?: string;
+  note?: string;
+  rule: string;
+};
+
+const steps: SimpleStep[] = [
   {
     slug: "setup",
     number: "01",
@@ -27,6 +39,8 @@ const steps = [
     intro: "A seed wakes up with moisture and warmth.",
     points: ["Moisture", "Warmth", "Gentle handling", "Time"],
     avoid: "Drowning it or checking too much.",
+    noteLabel: "Move on when",
+    note: "The first white root appears.",
     rule: "Moist. Warm. Gentle. Patient.",
   },
   {
@@ -36,6 +50,8 @@ const steps = [
     intro: "A seedling is a baby plant.",
     points: ["Gentle light", "Light watering", "Clean air", "Time to grow roots"],
     avoid: "Too much water, food, or strong light.",
+    noteLabel: "Move on when",
+    note: "It has several healthy leaves.",
     rule: "Baby plants need gentle care.",
   },
   {
@@ -44,6 +60,8 @@ const steps = [
     title: "Veg",
     intro: "Veg is when the plant grows bigger.",
     points: ["Roots", "Stems", "Leaves", "Branches"],
+    noteLabel: "Do",
+    note: "Water when the pot starts to dry.",
     avoid: "Overwatering and overfeeding.",
     rule: "Veg builds the plant’s body.",
   },
@@ -54,6 +72,8 @@ const steps = [
     intro: "Flower is when buds begin to form.",
     points: ["Steady light schedule", "Good airflow", "Careful watering", "Patience"],
     avoid: "Wet, stale air around buds.",
+    noteLabel: "Watch for",
+    note: "Buds getting bigger and smell getting stronger.",
     rule: "Patience protects quality.",
   },
   {
@@ -62,6 +82,8 @@ const steps = [
     title: "Harvest",
     intro: "Harvest means cutting the plant when buds are ready.",
     points: ["Full buds", "Strong smell", "Darker curled hairs", "Mature trichomes"],
+    noteLabel: "Do",
+    note: "Use clean tools.",
     avoid: "Cutting early because you are excited.",
     rule: "Harvest when the plant is ready.",
   },
@@ -72,6 +94,8 @@ const steps = [
     intro: "Drying slowly removes moisture after harvest.",
     points: ["Darkness", "Gentle airflow", "Moderate temperature", "Time"],
     avoid: "Heat, bright light, and direct fan blast.",
+    noteLabel: "Move on when",
+    note: "Buds feel dry outside and small stems bend or snap.",
     rule: "Fast drying can ruin good flower.",
   },
   {
@@ -80,6 +104,8 @@ const steps = [
     title: "Cure",
     intro: "Curing is the final step after drying.",
     points: ["Clean jars or containers", "Cool storage", "Darkness", "Mold checks"],
+    noteLabel: "Do",
+    note: "Open containers early if moisture builds up.",
     avoid: "Jarring wet buds.",
     rule: "Dry first. Cure second.",
   },
@@ -89,6 +115,8 @@ const steps = [
     title: "Pests",
     intro: "Pests are problems that can damage plants.",
     points: ["Tiny bugs", "Eggs", "Webbing", "Leaf spots", "Chewed leaves"],
+    noteLabel: "Do",
+    note: "Look under leaves often.",
     avoid: "Spraying random products on buds.",
     rule: "Catch pests early.",
   },
@@ -98,7 +126,6 @@ const steps = [
     title: "Tips",
     intro: "Beginner rules that matter most.",
     points: ["Start small", "Check before watering", "Feed lightly", "Keep air moving", "Keep it clean", "Change one thing at a time", "Take pictures", "Be patient"],
-    avoid: "Changing several things at once.",
     rule: "Healthy basics beat complicated tricks.",
   },
 ] as const;
@@ -167,10 +194,19 @@ export default function SimpleGuidePage() {
                 </ul>
               </div>
 
-              <div className={styles.avoid}>
-                <strong>Avoid</strong>
-                <p>{step.avoid}</p>
-              </div>
+              {step.note && step.noteLabel ? (
+                <div className={styles.note}>
+                  <strong>{step.noteLabel}</strong>
+                  <p>{step.note}</p>
+                </div>
+              ) : null}
+
+              {step.avoid ? (
+                <div className={styles.avoid}>
+                  <strong>Avoid</strong>
+                  <p>{step.avoid}</p>
+                </div>
+              ) : null}
 
               <div className={styles.rule}>
                 <span>Simple rule</span>
