@@ -13,12 +13,42 @@
         "components/atlas/",
         "components/terpenes/",
         "lib/terpenes/",
-        "public/data/terpenes/"
+        "public/data/terpenes/",
+        "app/learn/terpenes/",
+        "content/atlas-",
+        "content/education-source-map-atlas-",
+        "content/education-sources-atlas-",
+        "data/terpenes/",
+        "scripts/terpenes/",
+        "public/atlas-3d/",
+        ".github/workflows/refresh-terpene-"
       ],
       "canonicalRepository": "dtfgenetics/Tools",
       "disposition": "review-and-port-unique",
       "priority": 1,
-      "notes": "Port uniquely useful UI, interactions, datasets, and UX patterns into Tools. Do not preserve as a second canonical implementation."
+      "notes": "Expanded 2026-10-01 to cover all known Atlas/Terpene/tool implementation, data, model, refresh-workflow, and runtime prefixes. Port uniquely useful UI, interactions, datasets, models, and UX patterns into Tools. Do not preserve as a second canonical implementation.",
+      "inventory": {
+        "capturedAt": "2026-10-01",
+        "matchedFileCount": 356,
+        "prefixCounts": {
+          "app/tools/": 4,
+          "app/learn/tools/": 4,
+          "app/learn/atlas/": 20,
+          "app/learn/terpenes/": 14,
+          "components/atlas/": 70,
+          "components/terpenes/": 16,
+          "lib/terpenes/": 23,
+          "public/data/terpenes/": 86,
+          "content/atlas-": 42,
+          "content/education-source-map-atlas-": 6,
+          "content/education-sources-atlas-": 6,
+          "data/terpenes/": 13,
+          "scripts/terpenes/": 43,
+          "public/atlas-3d/": 7,
+          ".github/workflows/refresh-terpene-": 2
+        },
+        "note": "These files are migration material, not a second canonical tool implementation. Review for unique value, port useful behavior/data/assets to dtfgenetics/Tools, then retire the duplicate source."
+      }
     },
     {
       "id": "education",

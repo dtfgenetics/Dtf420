@@ -54,6 +54,34 @@ for(const [id,owner] of expectedOwners){
   }
 }
 
+
+const toolsLane=lanes.find((entry)=>entry.id==="tools-and-atlas");
+const requiredToolsPrefixes=[
+  "app/tools/",
+  "app/learn/tools/",
+  "app/learn/atlas/",
+  "app/learn/terpenes/",
+  "components/atlas/",
+  "components/terpenes/",
+  "lib/terpenes/",
+  "public/data/terpenes/",
+  "content/atlas-",
+  "content/education-source-map-atlas-",
+  "content/education-sources-atlas-",
+  "data/terpenes/",
+  "scripts/terpenes/",
+  "public/atlas-3d/",
+  ".github/workflows/refresh-terpene-"
+];
+if(toolsLane){
+  for(const prefix of requiredToolsPrefixes){
+    if(!toolsLane.sourcePrefixes.includes(prefix)) fail("tools-and-atlas migration lane missing known duplicate prefix: "+prefix);
+  }
+  if(!toolsLane.inventory||toolsLane.inventory.matchedFileCount<300){
+    fail("tools-and-atlas migration inventory must document the current duplicate footprint");
+  }
+}
+
 if(!lanes.some((lane)=>lane.id==="games")){
   fail("missing required migration lane: games");
 }
