@@ -420,6 +420,34 @@ export function StonerDuckRaceGame() {
   const selectedTrackName = TRACK_LIST.find((track) => track.id === launchOptions.trackId)?.name ?? launchOptions.trackId;
   const cupComplete = source === "local" && localFormat === "cup" && cupIndex === CUP_TRACKS.length - 1 && Boolean(lastResult);
   const timeTrialResult = source === "local" && localFormat === "time-trial" && lastResult ? resultDurationSeconds(lastResult) : null;
+  const onlineRoomStatus = roomConnection && roomSnapshot
+    ? (() => {
+        const role = roomConnection.getOwnedDuck()
+          ? (roomConnection.isHost() ? "Host racer" : "Racer")
+          : "Spectator";
+        const phase = roomSnapshot.phase === "lobby"
+          ? "Lobby"
+          : roomSnapshot.phase === "countdown"
+            ? "Starting"
+            : roomSnapshot.phase === "racing"
+              ? "Race live"
+              : roomSnapshot.phase === "finished"
+                ? "Finished"
+                : roomSnapshot.phase;
+        const message = roomSnapshot.phase === "lobby"
+          ? (roomConnection.isHost()
+              ? "Invite players, then start the race when the room is ready."
+              : "Connected and waiting for the host to start the race.")
+          : roomSnapshot.phase === "countdown"
+            ? "The authoritative server countdown has started."
+            : roomSnapshot.phase === "racing"
+              ? "The room is synchronized to the authoritative server race."
+              : roomSnapshot.phase === "finished"
+                ? "The authoritative race has finished for every connected client."
+                : "Room state is synchronized with the multiplayer server.";
+        return { role, phase, message };
+      })()
+    : null;
 
   return (
     <div className={styles.shell}>
@@ -441,6 +469,20 @@ export function StonerDuckRaceGame() {
           <button className={styles.backButton} onClick={() => void returnToLobby()} type="button">Race setup</button>
         </div>
       </div>
+      {onlineRoomStatus && roomSnapshot && (
+        <section className={styles.roomPanel} aria-live="polite" aria-label="Online race room status">
+          <div>
+            <span>{onlineRoomStatus.phase}</span>
+            <strong>{onlineRoomStatus.role} · Room {roomConnection?.roomId}</strong>
+            <small>{onlineRoomStatus.message}</small>
+          </div>
+          <div className={styles.roomMetrics}>
+            <span><b>{roomSnapshot.connectedRacers}</b> connected racers</span>
+            <span><b>{roomSnapshot.reconnectingRacers}</b> reconnecting</span>
+            <span><b>{roomSnapshot.spectatorCount}</b> spectators</span>
+          </div>
+        </section>
+      )}
       {roomConnection && inviteUrl && (
         <div className={styles.inviteBar}>
           <span>{inviteMessage || "Share this room"}</span>
