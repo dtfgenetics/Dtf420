@@ -38,3 +38,15 @@ Game-specific architecture rules:
 - Keep canonical gameplay state serializable and separate from Phaser/React rendering state.
 - Reuse approved game assets before generating placeholders or replacement art.
 - Verify the primary gameplay loop and phone-sized controls before release.
+
+## Parallel chat/session contract
+
+New concurrent work in this migration repository must use a unique branch:
+
+`work/dtf420-migration/<task>/<session-id>`
+
+Do not reuse another chat's mutable branch. One session equals one PR.
+
+This remains a migration/cutover workspace. Parallel sessions must not create a second canonical implementation for Tools/Plant Atlas/Terpene Atlas, Grow Doc, Encyclopedia, Academy/certification, or an already-registered game. Port unique value to the owning canonical repository first, then reduce the duplicate here.
+
+Run `npm run verify:consolidation` plus the focused verifier for the migrated surface before integration. Do not claim a route is production-owned here unless the documented cutover has actually changed.
