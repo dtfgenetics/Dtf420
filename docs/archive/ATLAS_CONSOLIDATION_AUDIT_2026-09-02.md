@@ -1,3 +1,15 @@
+# Historical audit — superseded Plant Atlas ownership decision
+
+> **Status: historical / superseded. Do not use this file as current repository ownership guidance.**
+>
+> This September 2, 2026 audit recorded an earlier architecture decision in which `dtfgenetics/Dtf420` was treated as the long-term Plant Atlas owner. That decision has since been superseded.
+>
+> **Current ownership:** `dtfgenetics/Tools` is the canonical repository for Plant Atlas and cultivation tools. `dtfgenetics/Dtf420` is a controlled migration/cutover candidate and must not become a second canonical Atlas implementation. Current ownership is governed by `docs/CONSOLIDATION_MIGRATION_QUEUE.json` in this repository and `dtfgenetics/Thc:data/repository-registry.json`.
+>
+> The material below is retained only as historical implementation/provenance context. Any imperative language in the original audit is historical and must be interpreted through the current ownership rules above.
+
+---
+
 # THC Living Plant Atlas — Consolidation Audit
 
 Date: 2026-09-02

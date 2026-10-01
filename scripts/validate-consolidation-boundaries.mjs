@@ -16,7 +16,8 @@ if(queue.status!=="merge-candidate") fail("Dtf420 must remain merge-candidate un
 for(const p of [
   "deployment/static-overlay.json",
   "public/data/terpenes/registry/unresolved-identity-sample.json",
-  "components/education/EducationSearchLegacy.tsx"
+  "components/education/EducationSearchLegacy.tsx",
+  "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md"
 ]){
   if(fs.existsSync(path.join(root,p))) fail("retired exact duplicate returned: "+p);
 }
