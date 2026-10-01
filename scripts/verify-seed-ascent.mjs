@@ -36,7 +36,7 @@ for (const path of Object.values(files)) {
 }
 
 for (const marker of [
-  'id="game"', 'id="jumpBtn"', 'id="runBtn"', 'id="attackBtn"', 'id="phenotypePanel"',
+  'id="game"', 'id="jumpBtn"', 'id="runBtn"', 'id="attackBtn"', 'id="phenotypePanel"', 'id="progressLabel"', 'id="checkpointLabel"',
   '/seed-ascent/phenotype-ui.css',
   '/seed-ascent/levels.js', '/seed-ascent/engine.js',
 ]) {
@@ -62,6 +62,9 @@ for (const marker of [
   "const move=(input.right?1:0)-(input.left?1:0)",
   "for(const b of blocks)if(b.bump>0)b.bump--;",
   "function canSelectLevel(){return game.mode==='title'||game.mode==='gameOver'}",
+  "stageProgress=game.mode==='levelComplete'?100",
+  "setText(ui.checkpoint,game.checkpoint?'SECURED':'OPEN')",
+  "Stage progress 100% · checkpoint",
   "if(!canSelectLevel())return;game.selectedLevel=",
   "levelStartScore", "levelStartTrichomes", "function beginLevel(i)", "function restartLevel()",
   "game.score=game.levelStartScore;game.trichomes=game.levelStartTrichomes",

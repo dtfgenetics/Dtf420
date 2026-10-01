@@ -28,6 +28,8 @@
 
   const ui = {
     level: document.getElementById('levelLabel'),
+    progress: document.getElementById('progressLabel'),
+    checkpoint: document.getElementById('checkpointLabel'),
     score: document.getElementById('scoreLabel'),
     tri: document.getElementById('trichomeLabel'),
     health: document.getElementById('healthLabel'),
@@ -114,6 +116,10 @@
   function sync(){
     const form=game.shield?'SHIELD':game.power;
     setText(ui.level,game.level?game.level.world:LEVELS[game.selectedLevel]?.world||'1-1');
+    const stageWidth=game.level?.width||LEVELS[game.selectedLevel]?.width||1;
+    const stageProgress=game.mode==='levelComplete'?100:Math.round(clamp((player.x/Math.max(1,stageWidth-player.w))*100,0,100));
+    setText(ui.progress,`${stageProgress}%`);
+    setText(ui.checkpoint,game.checkpoint?'SECURED':'OPEN');
     setText(ui.score,String(game.score).padStart(6,'0'));
     setText(ui.tri,game.trichomes);setText(ui.health,game.health);
     setText(ui.power,form==='NONE'?'NONE':form==='SHIELD'?'SHIELD':`${form} ${Math.ceil(game.powerTimer/60)}s`);
@@ -551,7 +557,7 @@
     background();if(game.level)world();
     if(game.mode==='title'){const l=LEVELS[game.selectedLevel];overlay('SEED ASCENT','Retro side-scrolling platform adventure',[`${l.world} · ${l.name}`,`Unlocked worlds: ${game.unlocked}/${LEVELS.length}`,'Run, stomp pests, find power-ups, hit checkpoints, reach the grow gate.','Press START or Space'])}
     else if(game.mode==='paused')overlay('PAUSED',`${game.level.world} · ${game.level.name}`,['Press P or PAUSE to resume']);
-    else if(game.mode==='levelComplete'){const last=game.levelIndex===LEVELS.length-1;overlay(last?'HARVEST COMPLETE!':'LEVEL CLEAR!',`${game.level.world} · ${game.level.name}`,last?['You cleared all 12 stages across six grow worlds.','More secrets, bosses and worlds can build on this engine.','Press START to replay.']:[`Next: ${LEVELS[game.levelIndex+1].world} · ${LEVELS[game.levelIndex+1].name}`,'Press START to continue.'])}
+    else if(game.mode==='levelComplete'){const last=game.levelIndex===LEVELS.length-1;const clearStats=[`Stage progress 100% · checkpoint ${game.checkpoint?'secured':'missed'}`,`Score ${String(game.score).padStart(6,'0')} · Trichomes ${game.trichomes}`];overlay(last?'HARVEST COMPLETE!':'LEVEL CLEAR!',`${game.level.world} · ${game.level.name}`,last?[...clearStats,'You cleared all 12 stages across six grow worlds.','Press START to replay.']:[...clearStats,`Next: ${LEVELS[game.levelIndex+1].world} · ${LEVELS[game.levelIndex+1].name}`,'Press START to continue.'])}
     else if(game.mode==='gameOver')overlay('GAME OVER','The pests won this run.',[`Score ${String(game.score).padStart(6,'0')}`,`Best ${String(game.best).padStart(6,'0')}`,'Press START to begin a new run.']);
   }
   function loop(now){
