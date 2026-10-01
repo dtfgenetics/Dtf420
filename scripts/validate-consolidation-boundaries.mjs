@@ -58,7 +58,6 @@ for(const [id,owner] of expectedOwners){
 const toolsLane=lanes.find((entry)=>entry.id==="tools-and-atlas");
 const requiredToolsPrefixes=[
   "app/tools/",
-  "app/learn/tools/",
   "app/learn/atlas/",
   "app/learn/terpenes/",
   "components/atlas/",
@@ -73,6 +72,13 @@ const requiredToolsPrefixes=[
   "public/atlas-3d/",
   ".github/workflows/refresh-terpene-"
 ];
+const educationLane=lanes.find((entry)=>entry.id==="education");
+if(educationLane){
+  for(const prefix of ["app/learn/tools/","content/learning-tools.json"]){
+    if(!educationLane.sourcePrefixes.includes(prefix)) fail("education migration lane missing printable-learning prefix: "+prefix);
+  }
+}
+
 if(toolsLane){
   for(const prefix of requiredToolsPrefixes){
     if(!toolsLane.sourcePrefixes.includes(prefix)) fail("tools-and-atlas migration lane missing known duplicate prefix: "+prefix);

@@ -8,7 +8,6 @@
       "id": "tools-and-atlas",
       "sourcePrefixes": [
         "app/tools/",
-        "app/learn/tools/",
         "app/learn/atlas/",
         "components/atlas/",
         "components/terpenes/",
@@ -29,10 +28,9 @@
       "notes": "Expanded 2026-10-01 to cover all known Atlas/Terpene/tool implementation, data, model, refresh-workflow, and runtime prefixes. Port uniquely useful UI, interactions, datasets, models, and UX patterns into Tools. Do not preserve as a second canonical implementation.",
       "inventory": {
         "capturedAt": "2026-10-01",
-        "matchedFileCount": 356,
+        "matchedFileCount": 352,
         "prefixCounts": {
           "app/tools/": 4,
-          "app/learn/tools/": 4,
           "app/learn/atlas/": 20,
           "app/learn/terpenes/": 14,
           "components/atlas/": 70,
@@ -59,11 +57,14 @@
         "app/learn/sops/",
         "app/learn/sources/",
         "app/learn/symptoms/",
-        "components/education/"
+        "components/education/",
+        "app/learn/tools/",
+        "content/learning-tools.json"
       ],
       "canonicalRepository": "dtfgenetics/thc-grow-hub",
       "disposition": "review-and-port-unique",
-      "priority": 2
+      "priority": 2,
+      "notes": "Includes printable learning worksheets/resources. These are education content and field-practice materials, not canonical interactive cultivation-tool implementations."
     },
     {
       "id": "academy-certification",
