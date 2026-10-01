@@ -440,7 +440,7 @@
   }
 
   function updateCheckpoints(){
-    for(const cp of checkpoints)if(!cp.active&&overlap(player,cp)){checkpoints.forEach(c=>c.active=false);cp.active=true;game.checkpoint={x:cp.x,y:cp.y-player.h};score(250);sounds.power();sync()}
+    for(const cp of checkpoints)if(!cp.active&&overlap(player,cp)){checkpoints.forEach(c=>c.active=false);cp.active=true;game.checkpoint={x:cp.x,y:cp.y-player.h};score(250);sounds.power()}
   }
   function updateBoss(){
     if(!boss||boss.dead){bossShots=[];return}
