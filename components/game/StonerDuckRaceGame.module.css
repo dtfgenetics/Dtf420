@@ -97,6 +97,15 @@
 .gameBar span { overflow: hidden; color: var(--duck-muted); font-size: 0.75rem; text-overflow: ellipsis; white-space: nowrap; }
 .gameActions { margin-left: auto; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; flex-wrap: wrap; }
 .roomStatus { padding: 0.35rem 0.55rem; border: 1px solid var(--duck-border); border-radius: 9px; background: rgba(16, 51, 56, 0.72); }
+.roomPanel { padding: 0.65rem 0.75rem; display: flex; align-items: center; justify-content: space-between; gap: 0.85rem; border-bottom: 1px solid var(--duck-border); background: rgba(11, 38, 45, 0.96); }
+.roomPanel > div:first-child { min-width: 0; display: grid; gap: 0.16rem; }
+.roomPanel span, .roomPanel small { color: var(--duck-muted); }
+.roomPanel > div:first-child > span { color: var(--duck-accent); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.roomPanel strong { color: var(--duck-text); }
+.roomPanel small { line-height: 1.35; }
+.roomMetrics { display: flex; align-items: center; justify-content: flex-end; gap: 0.45rem; flex-wrap: wrap; }
+.roomMetrics span { padding: 0.32rem 0.48rem; border: 1px solid var(--duck-border); border-radius: 8px; background: rgba(7, 23, 29, 0.72); font-size: 0.7rem; white-space: nowrap; }
+.roomMetrics b { color: var(--duck-text); }
 .startButton { min-height: 44px; padding: 0 0.85rem; background: var(--duck-accent); color: #17201b; white-space: nowrap; }
 .backButton { min-height: 44px; padding: 0 0.85rem; border: 1px solid var(--duck-border); background: #16343a; color: var(--duck-text); white-space: nowrap; }
 .inviteBar { padding: 0.5rem 0.75rem; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.65rem; border-bottom: 1px solid var(--duck-border); background: rgba(10, 42, 50, 0.92); }
@@ -133,7 +142,7 @@
   .shell { min-height: 280px; border-radius: 14px; }
   .lobbyShell { min-height: 520px; }
   .lobby { padding: 1rem; gap: 1rem; }
-  .lobbyHeader, .lobbyFooter, .gameBar, .resultsPanel, .timeTrialNote { align-items: stretch; flex-direction: column; }
+  .lobbyHeader, .lobbyFooter, .gameBar, .resultsPanel, .timeTrialNote, .roomPanel { align-items: stretch; flex-direction: column; }
   .capacityBadge { width: 100%; grid-template-columns: auto auto; justify-content: start; gap: 0.6rem; }
   .capacityBadge span { margin-top: 0; align-self: center; }
   .sourceRow { align-items: stretch; flex-direction: column; }
