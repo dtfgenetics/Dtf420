@@ -28,12 +28,12 @@
       "notes": "Expanded 2026-10-01 to cover all known Atlas/Terpene/tool implementation, data, model, refresh-workflow, and runtime prefixes. Port uniquely useful UI, interactions, datasets, models, and UX patterns into Tools. Do not preserve as a second canonical implementation.",
       "inventory": {
         "capturedAt": "2026-10-01",
-        "matchedFileCount": 352,
+        "matchedFileCount": 348,
         "prefixCounts": {
           "app/tools/": 4,
           "app/learn/atlas/": 20,
           "app/learn/terpenes/": 14,
-          "components/atlas/": 70,
+          "components/atlas/": 66,
           "components/terpenes/": 16,
           "lib/terpenes/": 23,
           "public/data/terpenes/": 86,
@@ -45,7 +45,7 @@
           "public/atlas-3d/": 7,
           ".github/workflows/refresh-terpene-": 2
         },
-        "note": "These files are migration material, not a second canonical tool implementation. Review for unique value, port useful behavior/data/assets to dtfgenetics/Tools, then retire the duplicate source."
+        "note": "Atlas observation notebook/comparison source was ported to canonical dtfgenetics/Tools and retired here; remaining files are migration material requiring unique-value review before retirement."
       }
     },
     {
@@ -118,6 +118,8 @@
     "public/data/terpenes/registry/unresolved-identity-sample.json",
     "legacy/atlas-static/",
     "components/education/EducationSearchLegacy.tsx",
-    "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md"
+    "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md",
+    "components/atlas/AtlasObservationNotebook.tsx + .module.css (ported to dtfgenetics/Tools /atlas/notebook/)",
+    "components/atlas/AtlasObservationCompare.tsx + .module.css (ported to dtfgenetics/Tools /atlas/notebook/compare/)"
   ]
 }

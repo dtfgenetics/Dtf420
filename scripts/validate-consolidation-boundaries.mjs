@@ -17,7 +17,11 @@ for(const p of [
   "deployment/static-overlay.json",
   "public/data/terpenes/registry/unresolved-identity-sample.json",
   "components/education/EducationSearchLegacy.tsx",
-  "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md"
+  "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md",
+  "components/atlas/AtlasObservationNotebook.tsx",
+  "components/atlas/AtlasObservationNotebook.module.css",
+  "components/atlas/AtlasObservationCompare.tsx",
+  "components/atlas/AtlasObservationCompare.module.css"
 ]){
   if(fs.existsSync(path.join(root,p))) fail("retired exact duplicate returned: "+p);
 }
@@ -87,6 +91,13 @@ if(toolsLane){
     fail("tools-and-atlas migration inventory must document the current duplicate footprint");
   }
 }
+
+
+const notebookCompat=fs.readFileSync(path.join(root,"app/learn/atlas/notebook/page.tsx"),"utf8");
+if(!notebookCompat.includes('redirect("/atlas/notebook/")')) fail("legacy Atlas notebook route must redirect to canonical Tools route");
+
+const compareCompat=fs.readFileSync(path.join(root,"app/learn/atlas/notebook/compare/page.tsx"),"utf8");
+if(!compareCompat.includes('redirect("/atlas/notebook/compare/")')) fail("legacy Atlas observation compare route must redirect to canonical Tools route");
 
 if(!lanes.some((lane)=>lane.id==="games")){
   fail("missing required migration lane: games");
