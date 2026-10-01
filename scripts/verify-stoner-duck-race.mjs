@@ -140,6 +140,7 @@ if (!wrapper.includes("Create room") || !wrapper.includes("Join room") || !wrapp
 if (!wrapper.includes("4-race Cup") || !wrapper.includes("CUP_TRACKS")) failures.push("four-race championship flow is missing");
 if (!wrapper.includes("time-trial") || !wrapper.includes("Start Time Trial") || !wrapper.includes("resultDurationSeconds")) failures.push("Time Trial flow is incomplete");
 if (!wrapper.includes("duckRoom") || !wrapper.includes("Copy invite")) failures.push("online invite deep links are missing");
+if (!wrapper.includes("onlineRoomStatus") || !wrapper.includes("Host racer") || !wrapper.includes("reconnectingRacers") || !wrapper.includes('aria-label="Online race room status"')) failures.push("online room status and reconnect presentation are incomplete");
 if (!wrapper.includes("togglePause") || !wrapper.includes('game.scene.pause("StonerDuckRace")') || !wrapper.includes('game.scene.resume("StonerDuckRace")')) failures.push("local pause/resume controls are missing");
 if (!wrapper.includes("toggleMute") || !wrapper.includes("sound.mute")) failures.push("client audio mute control is missing");
 if (!wrapper.includes("DUCK_CHARACTERS")) failures.push("character selection UI is missing");
