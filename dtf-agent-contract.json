@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "repository": "dtfgenetics/Dtf420",
+  "controlRepository": "dtfgenetics/Thc",
+  "defaultBranch": "main",
+  "canonicalDomains": [
+    "future shell migration",
+    "cutover packaging",
+    "migration reconciliation"
+  ],
+  "sourceRoots": [
+    "app/",
+    "components/",
+    "content/",
+    "data/",
+    "deployment/",
+    "docs/",
+    "scripts/",
+    "package.json",
+    "AGENTS.md"
+  ],
+  "protectedPaths": [
+    ".github/workflows/**",
+    ".env*",
+    "deployment/**"
+  ],
+  "verificationProfiles": {
+    "default": {
+      "commands": [
+        "npm run verify:consolidation",
+        "npm run lint",
+        "npm run typecheck"
+      ],
+      "ciAuthoritative": true
+    },
+    "static-overlay": {
+      "commands": [
+        "npm run verify:consolidation",
+        "npm run verify:static-overlay",
+        "npm run verify:site-shell"
+      ],
+      "ciAuthoritative": true
+    },
+    "cutover": {
+      "commands": [
+        "npm run verify:consolidation",
+        "npm run verify:static-overlay",
+        "npm run verify:site-shell",
+        "npm run verify:route-ownership",
+        "npm run verify:responsive",
+        "npm run build"
+      ],
+      "ciAuthoritative": true
+    }
+  },
+  "production": {
+    "directMutation": false,
+    "integrationOwner": "dtfgenetics/Thc",
+    "cutoverRequired": true,
+    "notes": "Migration/cutover workspace only. Do not create new canonical implementations here for Tools, Plant Atlas, Terpene Atlas, Grow Doc, Encyclopedia, Academy/certification, or registered games. Port unique value to the owning canonical repository and integrate through dtfgenetics/Thc."
+  }
+}
