@@ -1,6 +1,13 @@
 import { createRaceConfig } from "../../../game/stoner-duck-race/config.js";
 import { RaceSimulation } from "../../../game/stoner-duck-race/simulation.js";
 import type { TrackId } from "../../../game/stoner-duck-race/types.js";
+import {
+  DUCK_RACE_PROTOCOL_VERSION,
+  duckRaceLiveOpsState,
+  duckRaceOperationalMetrics,
+  recordDuckRaceOperation,
+  requireDuckRaceAvailable,
+} from "./liveops.js";
 
 const TRACK_IDS: readonly TrackId[] = [
   "kush-creek",
@@ -60,4 +67,28 @@ for (const trackId of TRACK_IDS) {
   console.log(`${trackId}: deterministic ${RACERS}-duck finish verified (${first[0]?.id} won).`);
 }
 
-console.log(`Duck Race smoke passed: ${TRACK_IDS.length} tracks × ${RACERS} racers × 2 deterministic runs.`);
+if (DUCK_RACE_PROTOCOL_VERSION !== 1) throw new Error("Duck Race protocol version drifted.");
+if (duckRaceLiveOpsState().maintenance || !duckRaceLiveOpsState().multiplayerEnabled) {
+  throw new Error("Duck Race live-ops defaults must allow multiplayer.");
+}
+recordDuckRaceOperation("roomsCreated");
+if (duckRaceOperationalMetrics().roomsCreated < 1) throw new Error("Duck Race operational metrics did not increment.");
+process.env.DUCK_RACE_MAINTENANCE_MODE = "true";
+try {
+  requireDuckRaceAvailable();
+  throw new Error("Duck Race maintenance mode failed open.");
+} catch (error) {
+  if (!String(error).includes("maintenance")) throw error;
+}
+delete process.env.DUCK_RACE_MAINTENANCE_MODE;
+process.env.DUCK_RACE_MULTIPLAYER_ENABLED = "false";
+try {
+  requireDuckRaceAvailable();
+  throw new Error("Duck Race multiplayer kill switch failed open.");
+} catch (error) {
+  if (!String(error).includes("disabled")) throw error;
+}
+delete process.env.DUCK_RACE_MULTIPLAYER_ENABLED;
+requireDuckRaceAvailable();
+
+console.log(`Duck Race smoke passed: ${TRACK_IDS.length} tracks × ${RACERS} racers × 2 deterministic runs plus live-ops contract.`);
