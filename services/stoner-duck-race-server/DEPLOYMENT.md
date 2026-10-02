@@ -35,6 +35,15 @@ The smoke suite executes the compiled production simulation across all eight tra
 
 `PORT` is optional and defaults to `2567`.
 
+Live-ops controls:
+
+```text
+DUCK_RACE_MAINTENANCE_MODE=true
+DUCK_RACE_MULTIPLAYER_ENABLED=false
+```
+
+Maintenance rejects new room creation/join/reconnect activity. The multiplayer flag is an emergency online kill switch. Both default to normal online availability when unset.
+
 Example:
 
 ```bash
@@ -57,7 +66,7 @@ The service exposes:
 GET /healthz
 ```
 
-A healthy response is HTTP 200 JSON containing `ok: true`, service identity, racer capacity, spectator target, and process uptime.
+A healthy response is HTTP 200 JSON containing `ok: true`, service identity, protocol version, maintenance state, multiplayer availability, racer capacity, spectator target, process uptime, and operational room lifecycle metrics (`roomsCreated`, `joins`, `drops`, `reconnects`, `leaves`).
 
 Recommended platform health-check path: `/healthz`.
 
@@ -97,4 +106,6 @@ Each race room supports up to 50 active racer slots plus the configured spectato
 6. Create Room succeeds from the production site.
 7. A second browser can join by room ID or `?duckRoom=` invite URL.
 8. Host start, racer input, spectators, temporary disconnect-to-AI, reconnect-to-same-duck, permanent leave, host migration, and finish state are verified.
-9. Set `NEXT_PUBLIC_DUCK_RACE_SERVER_URL` only after steps 1–8 pass.
+9. Verify `DUCK_RACE_MAINTENANCE_MODE=true` and `DUCK_RACE_MULTIPLAYER_ENABLED=false` fail closed while `/healthz` remains diagnostic.
+10. Confirm `/healthz` reports protocol v1 and operational metrics.
+11. Set `NEXT_PUBLIC_DUCK_RACE_SERVER_URL` only after steps 1–10 pass.

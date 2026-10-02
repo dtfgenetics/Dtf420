@@ -4,6 +4,7 @@ import { DUCK_CHARACTERS } from "../../../../game/stoner-duck-race/characters.js
 import { createRaceConfig, DUCK_RACE_LIMITS } from "../../../../game/stoner-duck-race/config.js";
 import { RaceSimulation } from "../../../../game/stoner-duck-race/simulation.js";
 import type { DuckInput, RaceModeId, TrackId } from "../../../../game/stoner-duck-race/types.js";
+import { recordDuckRaceOperation, requireDuckRaceAvailable } from "../liveops.js";
 
 const TRACK_IDS: readonly TrackId[] = [
   "kush-creek",
@@ -103,6 +104,8 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   private readonly droppedSessions = new Set<string>();
 
   onCreate(options: RaceRoomOptions): void {
+    requireDuckRaceAvailable();
+    recordDuckRaceOperation("roomsCreated");
     const mode = normalizeMode(options.mode);
     const trackId = normalizeTrack(options.trackId);
     const racerCount = Math.max(
@@ -142,6 +145,8 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   }
 
   onJoin(client: Client, options: JoinOptions): void {
+    requireDuckRaceAvailable();
+    recordDuckRaceOperation("joins");
     if (Boolean(options.spectator)) {
       this.spectatorSessions.add(client.sessionId);
       this.syncState();
@@ -163,6 +168,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   }
 
   onDrop(client: Client): void {
+    recordDuckRaceOperation("drops");
     const knownRacer = this.duckBySession.has(client.sessionId);
     const knownSpectator = this.spectatorSessions.has(client.sessionId);
     if (!knownRacer && !knownSpectator) return;
@@ -176,6 +182,8 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   }
 
   onReconnect(client: Client): void {
+    requireDuckRaceAvailable();
+    recordDuckRaceOperation("reconnects");
     this.droppedSessions.delete(client.sessionId);
     const duckId = this.duckBySession.get(client.sessionId);
     const duck = duckId ? this.simulation.state.ducks.find((candidate) => candidate.id === duckId) : undefined;
@@ -187,6 +195,7 @@ export class RaceRoom extends Room<{ state: DuckRaceRoomState }> {
   }
 
   onLeave(client: Client): void {
+    recordDuckRaceOperation("leaves");
     this.droppedSessions.delete(client.sessionId);
     this.spectatorSessions.delete(client.sessionId);
     const duckId = this.duckBySession.get(client.sessionId);
