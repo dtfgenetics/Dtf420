@@ -146,7 +146,7 @@
       "currentOwner": "Dtf420",
       "targetOwner": "Dtf420",
       "deployment": "static-overlay",
-      "status": "overlay-live"
+      "status": "overlay-deferred"
     },
     {
       "pattern": "/community/",
