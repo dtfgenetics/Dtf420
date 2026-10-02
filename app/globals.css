@@ -432,13 +432,14 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 520px) {
   .mobile-menu__panel {
     position: fixed;
-    top: 72px;
+    top: calc(64px + env(safe-area-inset-top, 0px));
     right: var(--page-gutter);
     left: var(--page-gutter);
     width: auto;
-    max-height: calc(100dvh - 88px);
+    max-height: calc(100dvh - 80px - env(safe-area-inset-top, 0px));
     overflow-y: auto;
     overscroll-behavior: contain;
+    scrollbar-gutter: stable;
   }
 
   .home-discovery { grid-template-columns: 1fr; }
