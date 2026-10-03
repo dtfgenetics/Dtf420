@@ -2,15 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import courses from "@/content/academy-courses.json";
-import coursework from "@/content/academy-coursework.json";
-import { LearningResourceJsonLd } from "@/components/education/LearningResourceJsonLd";
-import { buildEducationMetadata, buildLearningResourceJsonLd } from "@/lib/education-seo";
+import { buildEducationMetadata } from "@/lib/education-seo";
 import styles from "./page.module.css";
 
-function getCourse(slug: string) {
-  const course = courses.find((item) => item.slug === slug);
-  const work = coursework.find((item) => item.courseSlug === slug);
-  return course && work ? { course, work } : null;
+function getLegacyGuide(slug: string) {
+  return courses.find((item) => item.slug === slug) ?? null;
 }
 
 export function generateStaticParams() {
@@ -19,122 +15,47 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ course: string }> }): Promise<Metadata> {
   const { course: slug } = await params;
-  const record = getCourse(slug);
-  if (!record) return { title: "THC Academy Course" };
-
-  return buildEducationMetadata({
-    title: `${record.course.title} — THC Academy`,
-    description: record.course.summary,
+  const record = getLegacyGuide(slug);
+  if (!record) return { title: "Legacy THC Academy compatibility route" };
+  const base = buildEducationMetadata({
+    title: `${record.title} — legacy THC Academy route`,
+    description: "This historical guided path is preserved for compatibility only. Current professional courses live under Courses and the Learning Hub.",
     path: `/learn/academy/${slug}`,
   });
+  return {
+    ...base,
+    robots: { index: false, follow: true },
+    alternates: { canonical: "https://dtfseeds.com/courses/" },
+  };
 }
 
-export default async function AcademyCoursePage({ params }: { params: Promise<{ course: string }> }) {
+export default async function LegacyAcademyCourseCompatibilityPage({ params }: { params: Promise<{ course: string }> }) {
   const { course: slug } = await params;
-  const record = getCourse(slug);
+  const record = getLegacyGuide(slug);
   if (!record) notFound();
 
-  const { course, work } = record;
-  const path = `/learn/academy/${slug}`;
-  const jsonLd = buildLearningResourceJsonLd({
-    name: `${course.title} — THC Academy`,
-    description: course.summary,
-    path,
-    learningResourceType: "Course",
-    about: course.title,
-  });
-
   return (
-    <section className="shell page-section">
-      <LearningResourceJsonLd data={jsonLd} />
-
+    <section className="shell page-section" data-dtf-academy-compatibility="legacy-guide">
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/learn">Learn</Link>
         <span>/</span>
-        <Link href="/learn/academy">THC Academy</Link>
+        <Link href="/learn/academy">Legacy Academy</Link>
         <span>/</span>
-        <strong>{course.title}</strong>
+        <strong>{record.title}</strong>
       </nav>
 
       <header className={styles.hero}>
-        <p className="eyebrow">THC Academy course</p>
-        <h1>{course.title}</h1>
-        <p>{course.summary}</p>
+        <p className="eyebrow">Legacy THC Academy compatibility</p>
+        <h1>{record.title}</h1>
+        <p>
+          This historical guided path is no longer an active course. Its source record is retained for migration and provenance, while current certification curriculum is published only through the canonical Courses and Learning Hub systems.
+        </p>
       </header>
 
-      <div className={styles.grid}>
-        <div className={styles.stack}>
-          <section className={styles.panel}>
-            <header className={styles.panelHeader}>
-              <p className="eyebrow">Course outcomes</p>
-              <h2>What you should be able to do</h2>
-            </header>
-            <ul className={styles.outcomes}>
-              {work.outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}
-            </ul>
-          </section>
-
-          <section className={styles.panel}>
-            <header className={styles.panelHeader}>
-              <p className="eyebrow">Guided sequence</p>
-              <h2>{course.units.length} connected units</h2>
-            </header>
-            <div className={styles.units}>
-              {course.units.map((unit, index) => (
-                <Link className={styles.unit} href={unit.href} key={unit.href}>
-                  <span className={styles.unitNumber}>{index + 1}</span>
-                  <span className={styles.unitText}>
-                    <strong>{unit.title}</strong>
-                    <span>{unit.description}</span>
-                  </span>
-                  <span className={styles.open}>Open →</span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <aside className={styles.stack}>
-          <section className={styles.panel}>
-            <header className={styles.panelHeader}>
-              <p className="eyebrow">Practice</p>
-              <h2>Applied exercises</h2>
-            </header>
-            <div className={styles.exerciseList}>
-              {work.exercises.map((exercise) => (
-                <article className={styles.exercise} key={exercise.title}>
-                  <h3>{exercise.title}</h3>
-                  <p>{exercise.task}</p>
-                  <p><strong>Deliverable:</strong> {exercise.deliverable}</p>
-                  <Link href={exercise.relatedHref}>Open related learning tool →</Link>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className={styles.panel}>
-            <header className={styles.panelHeader}>
-              <p className="eyebrow">Capstone</p>
-              <h2>{work.capstone.title}</h2>
-            </header>
-            <div className={styles.capstone}>
-              <p>{work.capstone.brief}</p>
-              <strong>Evidence to include</strong>
-              <ul>
-                {work.capstone.evidence.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <div className={styles.capstoneLinks}>
-                {work.capstone.relatedHrefs.map((href) => <Link href={href} key={href}>Related resource →</Link>)}
-              </div>
-            </div>
-          </section>
-        </aside>
-      </div>
-
       <div className={styles.footerActions}>
-        <Link className="button button--primary" href={course.units[0].href}>Begin first unit</Link>
-        <Link className="button" href="/learn/academy">Back to Academy</Link>
-        <Link className="button" href="/learn/search">Search all education</Link>
+        <Link className="button button--primary" href="/courses/">Open professional courses</Link>
+        <Link className="button" href="/learn/learning-hub/">Open Learning Hub</Link>
+        <Link className="button" href="/learn/encyclopedia/">Open Encyclopedia</Link>
       </div>
     </section>
   );
