@@ -92,11 +92,16 @@ for (const token of [
 for (const token of [
   "Knowledge check",
   "They do not test unsupported effect claims",
-  "correct so far",
+  "Submit answers",
+  "setSubmitted",
+  "submitted && answeredQuestion",
   "data-correct",
   "data-wrong",
 ]) {
   if (!quiz.includes(token)) throw new Error(`Interactive chapter quiz missing: ${token}`);
+}
+if (quiz.includes("correct so far")) {
+  throw new Error("Interactive chapter quiz must not reveal running correctness before submission");
 }
 
 for (const phrase of [
