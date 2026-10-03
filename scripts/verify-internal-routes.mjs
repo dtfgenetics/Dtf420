@@ -72,6 +72,12 @@ if (fs.existsSync(publicDir)) {
 
 const sourceFiles = scanRoots.flatMap(walk).filter((file) => /\.(?:tsx|ts|jsx|js)$/.test(file));
 const hrefPattern = /\bhref\s*(?::|=)\s*["'`]([^"'`]+)["'`]/g;
+const externalOwnedRoutes = new Set([
+  "/courses/",
+  "/learn/learning-hub/",
+  "/learn/encyclopedia/",
+]);
+
 const failures = [];
 let checked = 0;
 
@@ -86,7 +92,9 @@ for (const file of sourceFiles) {
     checked += 1;
 
     const resolves =
-      publicPaths.has(pathname) || routePatterns.some((pattern) => pattern.test(pathname));
+      externalOwnedRoutes.has(pathname) ||
+      publicPaths.has(pathname) ||
+      routePatterns.some((pattern) => pattern.test(pathname));
 
     if (!resolves) {
       failures.push({

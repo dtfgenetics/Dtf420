@@ -5,35 +5,23 @@ async function expectNoHorizontalOverflow(page) {
   expect(overflow, `horizontal overflow was ${overflow}px`).toBeLessThanOrEqual(2);
 }
 
-test("THC Academy exposes guided courses and course detail routes", async ({ page }) => {
+test("legacy Academy root points to canonical course systems", async ({ page }) => {
   await page.goto("/learn/academy", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { name: "THC Academy", exact: true })).toBeVisible();
-  await expect(page.getByText("12", { exact: true }).first()).toBeVisible();
-  await expect(page.getByText("60", { exact: true }).first()).toBeVisible();
-
-  const firstCourse = page.getByRole("link", { name: "Open course →" }).first();
-  await expect(firstCourse).toHaveAttribute("href", "/learn/academy/evidence-observation-diagnosis");
-  await firstCourse.click();
-
-  await expect(page).toHaveURL(/\/learn\/academy\/evidence-observation-diagnosis$/);
-  await expect(page.getByRole("heading", { name: "Evidence, Observation & Diagnosis" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "What you should be able to do" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Applied exercises" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Evidence packet and ranked differential" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "THC Academy has moved." })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open professional courses" })).toHaveAttribute("href", "/courses/");
+  await expect(page.getByRole("link", { name: "Open the Learning Hub" })).toHaveAttribute("href", "/learn/learning-hub/");
+  await expect(page.getByRole("link", { name: "Open the 420-entry Encyclopedia" })).toHaveAttribute("href", "/learn/encyclopedia/");
+  await expect(page.getByText(/12-guide Academy and THC-C001–THC-C420 catalog/)).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open course →" })).toHaveCount(0);
   await expectNoHorizontalOverflow(page);
 });
 
-test("Academy course connects to real learning resources", async ({ page }) => {
+test("legacy Academy child routes no longer present archived guides as courses", async ({ page }) => {
   await page.goto("/learn/academy/environment-light-vpd", { waitUntil: "networkidle" });
-
-  await expect(page.getByRole("link", { name: /VPD & transpiration/i }).first()).toHaveAttribute(
-    "href",
-    "/learn/atlas/environment-overlay/vpd-and-transpiration",
-  );
-  await expect(page.getByRole("link", { name: /Open related learning tool/i }).first()).toHaveAttribute(
-    "href",
-    "/learn/tools/vpd-environment-log",
-  );
-  await expect(page.getByRole("link", { name: /Search all education/i })).toHaveAttribute("href", "/learn/search");
+  await expect(page.getByText("Legacy THC Academy compatibility")).toBeVisible();
+  await expect(page.getByText(/no longer an active course/)).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open professional courses" })).toHaveAttribute("href", "/courses/");
+  await expect(page.getByRole("link", { name: "Open Learning Hub" })).toHaveAttribute("href", "/learn/learning-hub/");
+  await expect(page.getByRole("heading", { name: "Applied exercises" })).toHaveCount(0);
   await expectNoHorizontalOverflow(page);
 });

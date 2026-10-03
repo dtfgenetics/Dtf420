@@ -64,6 +64,22 @@ for (const atlasModule of atlasModules) {
 }
 
 const errors = [];
+const academyRootSource = fs.readFileSync(path.join(process.cwd(), "app/learn/academy/page.tsx"), "utf8");
+const academyChildSource = fs.readFileSync(path.join(process.cwd(), "app/learn/academy/[course]/page.tsx"), "utf8");
+for (const required of ['data-dtf-academy-compatibility="true"', 'href="/courses/"', 'href="/learn/learning-hub/"', 'THC-C001–THC-C420']) {
+  if (!academyRootSource.includes(required)) errors.push(`Academy compatibility root missing required boundary marker/link: ${required}`);
+}
+for (const forbidden of ["AcademyCourseList", "ResourceCatalog"]) {
+  if (academyRootSource.includes(forbidden)) errors.push(`Academy compatibility root must not render retired public-course component: ${forbidden}`);
+}
+if (!academyChildSource.includes('data-dtf-academy-compatibility="legacy-guide"')) errors.push("Academy child compatibility marker missing");
+if (academyChildSource.includes("LearningResourceJsonLd") || academyChildSource.includes('learningResourceType: "Course"')) {
+  errors.push("Legacy Academy child routes must not emit Course structured data");
+}
+if (!academyChildSource.includes('href="/courses/"') || !academyChildSource.includes('href="/learn/learning-hub/"')) {
+  errors.push("Legacy Academy child route must point to canonical Courses and Learning Hub");
+}
+
 const courseSlugs = new Set();
 const courseworkBySlug = new Map(coursework.map((item) => [item.courseSlug, item]));
 let unitCount = 0;
@@ -169,4 +185,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`THC Academy verified: ${courses.length} courses, ${unitCount} linked units, ${exerciseCount} exercises, ${coursework.length} capstones, ${resourceCatalog.records.length} preserved resource topics.`);
+console.log(`Legacy Academy archive verified: ${courses.length} preserved guide records, ${unitCount} linked legacy units, ${exerciseCount} preserved exercises, ${coursework.length} preserved capstones, ${resourceCatalog.records.length} preserved resource topics; public Academy routes are compatibility-only.`);
