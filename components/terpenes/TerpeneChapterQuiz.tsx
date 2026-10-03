@@ -6,6 +6,7 @@ import styles from "./TerpeneChapterQuiz.module.css";
 
 export function TerpeneChapterQuiz({ quiz }: { quiz: TerpeneQuiz }) {
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [submitted, setSubmitted] = useState(false);
   const answered = Object.keys(answers).length;
   const correct = quiz.questions.reduce(
     (total, question) => total + (answers[question.id] === question.correctIndex ? 1 : 0),
@@ -25,7 +26,7 @@ export function TerpeneChapterQuiz({ quiz }: { quiz: TerpeneQuiz }) {
         <div className={styles.score}>
           <span>Answered</span>
           <strong>{answered}/{quiz.questions.length}</strong>
-          <small>{answered ? `${correct} correct so far` : "Begin when ready"}</small>
+          <small>{submitted ? `${correct}/${quiz.questions.length} correct` : answered ? `${answered} selected` : "Begin when ready"}</small>
         </div>
       </div>
 
@@ -41,8 +42,9 @@ export function TerpeneChapterQuiz({ quiz }: { quiz: TerpeneQuiz }) {
                 <h3>{question.prompt}</h3>
                 <div className={styles.options}>
                   {question.options.map((option, optionIndex) => {
-                    const isCorrect = answeredQuestion && optionIndex === question.correctIndex;
+                    const isCorrect = submitted && answeredQuestion && optionIndex === question.correctIndex;
                     const isWrongSelected =
+                      submitted &&
                       answeredQuestion &&
                       optionIndex === selected &&
                       selected !== question.correctIndex;
@@ -53,9 +55,10 @@ export function TerpeneChapterQuiz({ quiz }: { quiz: TerpeneQuiz }) {
                         key={`${question.id}-${optionIndex}`}
                         data-correct={isCorrect ? "" : undefined}
                         data-wrong={isWrongSelected ? "" : undefined}
-                        onClick={() =>
-                          setAnswers((current) => ({ ...current, [question.id]: optionIndex }))
-                        }
+                        onClick={() => {
+                          setSubmitted(false);
+                          setAnswers((current) => ({ ...current, [question.id]: optionIndex }));
+                        }}
                       >
                         <span>{String.fromCharCode(65 + optionIndex)}</span>
                         <strong>{option}</strong>
@@ -63,13 +66,24 @@ export function TerpeneChapterQuiz({ quiz }: { quiz: TerpeneQuiz }) {
                     );
                   })}
                 </div>
-                {answeredQuestion ? (
+                {submitted && answeredQuestion ? (
                   <p className={styles.explanation}>{question.explanation}</p>
                 ) : null}
               </div>
             </article>
           );
         })}
+      </div>
+      <div className={styles.submitRow}>
+        <button
+          className={styles.submitButton}
+          type="button"
+          disabled={answered !== quiz.questions.length}
+          onClick={() => setSubmitted(true)}
+        >
+          {submitted ? "Regrade answers" : "Submit answers"}
+        </button>
+        <span>{answered}/{quiz.questions.length} answered</span>
       </div>
     </section>
   );
