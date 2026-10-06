@@ -16,8 +16,10 @@ const siteFooter = read("components/SiteFooter.tsx");
 const overlay = JSON.parse(read("deployment/static-overlay.json"));
 
 const expectedPrimary = [
-  ["/seeds", "Genetics"],
+  ["/", "Home"],
+  ["/seeds", "Seeds"],
   ["/learn", "Learn"],
+  ["/courses", "Courses"],
   ["/tools", "Tools"],
   ["/games", "Games"],
   ["/community", "Community"],
@@ -55,6 +57,7 @@ const requiredWordPressRoutes = [
   "/checkout/",
   "/community/",
   "/contact/",
+  "/courses/",
   "/gallery/",
   "/games/",
   "/growlens/",

@@ -6,23 +6,70 @@
     "homeHref": "/"
   },
   "primaryNavigation": [
-    { "href": "/seeds", "label": "Genetics" },
-    { "href": "/learn", "label": "Learn" },
-    { "href": "/tools", "label": "Tools" },
-    { "href": "/games", "label": "Games" },
-    { "href": "/community", "label": "Community" },
-    { "href": "/shop", "label": "Shop" }
+    {
+      "href": "/",
+      "label": "Home"
+    },
+    {
+      "href": "/seeds",
+      "label": "Seeds"
+    },
+    {
+      "href": "/learn",
+      "label": "Learn"
+    },
+    {
+      "href": "/courses",
+      "label": "Courses"
+    },
+    {
+      "href": "/tools",
+      "label": "Tools"
+    },
+    {
+      "href": "/games",
+      "label": "Games"
+    },
+    {
+      "href": "/community",
+      "label": "Community"
+    },
+    {
+      "href": "/shop",
+      "label": "Shop"
+    }
   ],
   "utilityNavigation": [
-    { "href": "/learn/search", "label": "Search THC" }
+    {
+      "href": "/learn/search",
+      "label": "Search THC"
+    }
   ],
   "secondaryNavigation": [
-    { "href": "/journal", "label": "Journal" },
-    { "href": "/about", "label": "About" },
-    { "href": "/contact", "label": "Contact" }
+    {
+      "href": "/journal",
+      "label": "Journal"
+    },
+    {
+      "href": "/about",
+      "label": "About"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact"
+    }
   ],
   "wordpressContract": {
     "purpose": "Keep WordPress-owned top-level routes visually and structurally aligned with the Next.js static overlay.",
-    "requiredPrimaryLabels": ["Genetics", "Learn", "Tools", "Games", "Community", "Shop"]
+    "requiredPrimaryLabels": [
+      "Home",
+      "Seeds",
+      "Learn",
+      "Courses",
+      "Tools",
+      "Games",
+      "Community",
+      "Shop"
+    ]
   }
 }
