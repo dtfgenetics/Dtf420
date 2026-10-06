@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { connectedReferenceCount, liveToolCount, primaryTools, supportingTools } from "@/lib/tool-catalog";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -8,84 +9,12 @@ export const metadata: Metadata = {
     "DTF Genetics grow tools for structured records, differential diagnosis, measurement, calculators, and printable field workflows.",
 };
 
-const primaryTools = [
-  {
-    eyebrow: "Grow records workspace",
-    title: "GrowLens",
-    description:
-      "Organize plants, spaces, environmental readings, irrigation, feeding, canopy observations, photos, and harvest records around a repeatable grow log.",
-    href: "/tools/growlens",
-    action: "Open GrowLens guide",
-    variant: "records",
-  },
-  {
-    eyebrow: "Observation-first diagnostics",
-    title: "Grow Doc",
-    description:
-      "Work from symptom location, progression, environment, root-zone context, and visible evidence toward a ranked differential instead of a one-photo certainty claim.",
-    href: "/tools/grow-doc",
-    action: "Open Grow Doc guide",
-    variant: "diagnostic",
-  },
-] as const;
-
-const workflow = [
-  {
-    number: "01",
-    title: "Observe",
-    description: "Record what changed, where it appears, how it is progressing, and the context around the plant.",
-  },
-  {
-    number: "02",
-    title: "Measure",
-    description: "Add environmental and root-zone data that can support or weaken competing explanations.",
-  },
-  {
-    number: "03",
-    title: "Compare",
-    description: "Use THC references and diagnostics to rank possibilities and choose the next useful check.",
-  },
-];
-
-const supportingTools = [
-  {
-    title: "Printable field tools",
-    description: "Calibration logs, scouting maps, propagation records, environmental logs, observation sheets, and other downloadable records.",
-    href: "/learn/tools",
-  },
-  {
-    title: "Diagnostic case lab",
-    description: "Practice combining measurements and observations into evidence for and against multiple plausible causes.",
-    href: "/learn/atlas/cases",
-  },
-  {
-    title: "Symptom differentials",
-    description: "Compare yellowing, spotting, curling, wilting, bleaching, pigmentation, root decline, stem lesions, and flower damage.",
-    href: "/learn/symptoms",
-  },
-  {
-    title: "Evidence & sources",
-    description: "Check the peer-reviewed research, extension material, and technical references connected to the education system.",
-    href: "/learn/sources",
-  },
-  {
-    title: "Living Plant Atlas",
-    description: "Move from a measurement or symptom into the underlying anatomy, physiology, environment, and diagnostic context.",
-    href: "/learn/atlas",
-  },
-  {
-    title: "Search THC",
-    description: "Search the connected education system when you know the question but not which library contains the answer.",
-    href: "/learn/search",
-  },
-];
-
 export default function ToolsPage() {
   return (
     <>
       <section className={`${styles.hero} shell page-section`}>
         <div className={styles.heroCopy}>
-          <p className="eyebrow">DTF Genetics · Field systems</p>
+          <p className="eyebrow">DTF Genetics · {liveToolCount} live workspaces · {connectedReferenceCount} connected references</p>
           <h1>Better evidence makes better grow decisions.</h1>
           <p className="lede">
             DTF tools connect structured grow records, observation-first diagnostics, measurements, and Teaching Healthy Cultivation references so useful evidence stays attached to the decisions it supports.
