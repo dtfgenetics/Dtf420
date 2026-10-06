@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "dtfgenetics/Dtf420",
-  "status": "merge-candidate",
+  "status": "migration-active",
   "rule": "No overlapping product area in this repository is canonical unless explicitly promoted by a reviewed cutover.",
   "lanes": [
     {
@@ -121,5 +121,19 @@
     "docs/ATLAS_CONSOLIDATION_AUDIT_2026-09-02.md",
     "components/atlas/AtlasObservationNotebook.tsx + .module.css (ported to dtfgenetics/Tools /atlas/notebook/)",
     "components/atlas/AtlasObservationCompare.tsx + .module.css (ported to dtfgenetics/Tools /atlas/notebook/compare/)"
+  ],
+  "archiveExitCriteria": [
+    "all migration lanes reviewed",
+    "unique useful value ported to canonical owners",
+    "no route in configuration/route-ownership.json remains migration-pending",
+    "no route in configuration/route-ownership.json requires Dtf420 as current production owner unless explicitly retained as a compatibility overlay",
+    "production integration in dtfgenetics/Thc no longer requires Dtf420 overlay bytes",
+    "no canonical product domain points to Dtf420 as its authoring source"
+  ],
+  "archiveBlockers": [
+    "configuration/route-ownership.json still contains migration-pending routes",
+    "configuration/route-ownership.json still contains Dtf420-owned overlay-live routes",
+    "tools-and-atlas migration inventory still contains 300+ files requiring unique-value review",
+    "education, academy-certification, diagnostics, and games migration lanes remain review-and-port-unique"
   ]
 }
