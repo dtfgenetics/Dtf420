@@ -11,7 +11,9 @@ let queue={};
 try{queue=JSON.parse(fs.readFileSync(queuePath,"utf8"));}catch(e){fail("invalid migration queue: "+e.message);}
 
 if(queue.repository!=="dtfgenetics/Dtf420") fail("migration queue repository mismatch");
-if(queue.status!=="merge-candidate") fail("Dtf420 must remain merge-candidate until reviewed cutover");
+if(queue.status!=="migration-active") fail("Dtf420 must remain migration-active until reviewed cutover and archive exit criteria are satisfied");
+if(!Array.isArray(queue.archiveExitCriteria)||queue.archiveExitCriteria.length<5) fail("migration queue must define archive exit criteria");
+if(!Array.isArray(queue.archiveBlockers)||queue.archiveBlockers.length===0) fail("migration queue must define active archive blockers while migration is incomplete");
 
 for(const p of [
   "deployment/static-overlay.json",
