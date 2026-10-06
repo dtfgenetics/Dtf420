@@ -9,6 +9,24 @@ export const metadata: Metadata = {
     "DTF Genetics grow tools for structured records, differential diagnosis, measurement, calculators, and printable field workflows.",
 };
 
+const workflow = [
+  {
+    number: "01",
+    title: "Observe",
+    description: "Record what changed, where it appears, how it is progressing, and the context around the plant.",
+  },
+  {
+    number: "02",
+    title: "Measure",
+    description: "Add environmental and root-zone data that can support or weaken competing explanations.",
+  },
+  {
+    number: "03",
+    title: "Compare",
+    description: "Use THC references and diagnostics to rank possibilities and choose the next useful check.",
+  },
+] as const;
+
 export default function ToolsPage() {
   return (
     <>
