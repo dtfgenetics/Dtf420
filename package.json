@@ -116,11 +116,11 @@
     "verify:tool-catalog": "node scripts/verify-tool-catalog.mjs"
   },
   "dependencies": {
-    "@colyseus/sdk": "0.18.4",
+    "@colyseus/sdk": "0.18.5",
     "better-auth": "1.7.7",
-    "drizzle-orm": "0.45.3",
+    "drizzle-orm": "0.45.4",
     "mysql2": "3.24.5",
-    "next": "16.3.8",
+    "next": "16.4.0",
     "phaser": "4.2.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
