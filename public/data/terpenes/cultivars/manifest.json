@@ -5,7 +5,7 @@
   "cultivarCount": 2658,
   "publishableCultivarCount": 1300,
   "minimumSamples": 5,
-  "generatedAt": "2026-10-01T11:40:20.865Z",
+  "generatedAt": "2026-11-01T11:53:57.406Z",
   "shardStrategy": "first-alphanumeric-character-of-cultivar-slug",
   "shards": [
     {
