@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "status": "compiled",
   "sourceId": "PUBCHEM-PUG-VIEW",
-  "generatedAt": "2026-10-04T13:23:46.243Z",
+  "generatedAt": "2026-11-04T15:41:21.158Z",
   "headings": [
     "Odor",
     "Odor Threshold",
@@ -13,7 +13,7 @@
       "slug": "beta-myrcene",
       "pubchemCid": 31253,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:31.471Z",
+      "fetchedAt": "2026-11-04T15:41:11.321Z",
       "sensory": {
         "Odor": [
           {
@@ -22,7 +22,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 38,
+                "referenceNumber": 39,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "1258",
                 "name": "MYRCENE",
@@ -37,7 +37,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 38,
+                "referenceNumber": 39,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "1258",
                 "name": "MYRCENE",
@@ -55,7 +55,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 38,
+                "referenceNumber": 39,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "1258",
                 "name": "MYRCENE",
@@ -71,7 +71,7 @@
       "slug": "limonene",
       "pubchemCid": 22311,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:32.536Z",
+      "fetchedAt": "2026-11-04T15:41:12.383Z",
       "sensory": {
         "Odor": [
           {
@@ -80,7 +80,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 52,
+                "referenceNumber": 54,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "1809",
                 "name": "LIMONENE",
@@ -98,7 +98,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 52,
+                "referenceNumber": 54,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "1809",
                 "name": "LIMONENE",
@@ -114,7 +114,7 @@
       "slug": "alpha-pinene",
       "pubchemCid": 6654,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:33.610Z",
+      "fetchedAt": "2026-11-04T15:41:13.151Z",
       "sensory": {
         "Odor": [
           {
@@ -123,7 +123,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 43,
+                "referenceNumber": 45,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "720",
                 "name": "ALPHA-PINENE",
@@ -138,7 +138,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 43,
+                "referenceNumber": 45,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "720",
                 "name": "ALPHA-PINENE",
@@ -156,7 +156,7 @@
       "slug": "beta-pinene",
       "pubchemCid": 14896,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:35.287Z",
+      "fetchedAt": "2026-11-04T15:41:13.907Z",
       "sensory": {
         "Odor": [
           {
@@ -165,7 +165,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5615",
                 "name": "BETA-PINENE",
@@ -180,7 +180,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5615",
                 "name": "BETA-PINENE",
@@ -195,7 +195,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5615",
                 "name": "BETA-PINENE",
@@ -213,7 +213,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5615",
                 "name": "BETA-PINENE",
@@ -229,7 +229,7 @@
       "slug": "terpinolene",
       "pubchemCid": 11463,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:36.628Z",
+      "fetchedAt": "2026-11-04T15:41:14.682Z",
       "sensory": {
         "Odor": [
           {
@@ -238,7 +238,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5702",
                 "name": "TERPINOLENE",
@@ -253,7 +253,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5702",
                 "name": "TERPINOLENE",
@@ -271,7 +271,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5702",
                 "name": "TERPINOLENE",
@@ -286,7 +286,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "5702",
                 "name": "TERPINOLENE",
@@ -302,7 +302,7 @@
       "slug": "linalool",
       "pubchemCid": 6549,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:37.509Z",
+      "fetchedAt": "2026-11-04T15:41:15.487Z",
       "sensory": {
         "Odor": [
           {
@@ -311,7 +311,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -326,7 +326,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -341,7 +341,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -356,7 +356,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -373,7 +373,7 @@
             "description": null,
             "references": [
               {
-                "referenceNumber": 37,
+                "referenceNumber": 38,
                 "sourceName": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
                 "sourceId": "hz5839",
                 "name": "Linalool",
@@ -388,7 +388,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -405,7 +405,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -420,7 +420,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -435,7 +435,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 39,
+                "referenceNumber": 40,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "645",
                 "name": "LINALOOL",
@@ -451,7 +451,7 @@
       "slug": "beta-caryophyllene",
       "pubchemCid": 5281515,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:39.363Z",
+      "fetchedAt": "2026-11-04T15:41:16.193Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -462,7 +462,7 @@
       "slug": "alpha-humulene",
       "pubchemCid": 5281520,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:41.205Z",
+      "fetchedAt": "2026-11-04T15:41:16.874Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -473,7 +473,7 @@
       "slug": "squalene",
       "pubchemCid": 638072,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:42.116Z",
+      "fetchedAt": "2026-11-04T15:41:17.622Z",
       "sensory": {
         "Odor": [
           {
@@ -482,7 +482,7 @@
             "description": "PEER REVIEWED",
             "references": [
               {
-                "referenceNumber": 34,
+                "referenceNumber": 36,
                 "sourceName": "Hazardous Substances Data Bank (HSDB)",
                 "sourceId": "8242",
                 "name": "Squalene",
@@ -500,7 +500,7 @@
       "slug": "beta-carotene",
       "pubchemCid": 5280489,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:42.999Z",
+      "fetchedAt": "2026-11-04T15:41:18.385Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -511,7 +511,7 @@
       "slug": "e-beta-ocimene",
       "pubchemCid": 5281553,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:43.795Z",
+      "fetchedAt": "2026-11-04T15:41:19.086Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -522,7 +522,7 @@
       "slug": "z-beta-ocimene",
       "pubchemCid": 5320250,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:44.604Z",
+      "fetchedAt": "2026-11-04T15:41:19.779Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -533,7 +533,7 @@
       "slug": "alpha-terpinene",
       "pubchemCid": 7462,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:45.436Z",
+      "fetchedAt": "2026-11-04T15:41:20.474Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
@@ -544,7 +544,7 @@
       "slug": "gamma-terpinene",
       "pubchemCid": 7461,
       "sourceId": "PUBCHEM-PUG-VIEW",
-      "fetchedAt": "2026-10-04T13:23:46.243Z",
+      "fetchedAt": "2026-11-04T15:41:21.158Z",
       "sensory": {
         "Odor": [],
         "Odor Threshold": [],
